@@ -1,0 +1,235 @@
+/* Polar_Brawl */
+/* 12/25/22 */
+/* Originally A ScriptChat Lesson */
+/* Created by TechChariot */
+
+<PLAYER_SETUP>
+#const NNGB 81
+#const GRAVEL 70
+#const SNOW_STRONG 74
+#const SNOW_LIGHT 73
+#const MUD 76
+
+/* Removing Visual Effect of Dead Gaia Fish Trap */
+#const ON_GRID 278
+effect_amount GAIA_SET_ATTRIBUTE ON_GRID ATTR_STORAGE_VALUE 0
+
+/* Upgrading Monument to Trade Workshop */
+#const SPECIAL_BUILDING 826
+#const BATTLE_WORKSHOP 1647
+
+effect_amount GAIA_SET_ATTRIBUTE SPECIAL_BUILDING ATTR_LINE_OF_SIGHT 1
+effect_amount GAIA_SET_ATTRIBUTE SPECIAL_BUILDING ATTR_SEARCH_RADIUS 1
+
+
+effect_amount GAIA_UPGRADE_UNIT SPECIAL_BUILDING BATTLE_WORKSHOP 0
+
+/* Standardize the resource income of the trade workshops to one dark age villager, on wood */
+effect_percent MOD_RESOURCE AMOUNT_WORKSHOP_TRICKLE_WOOD  ATTR_ADD -32
+effect_amount  MOD_RESOURCE AMOUNT_WORKSHOP_TRICKLE_FOOD  ATTR_SET  0
+effect_amount  MOD_RESOURCE AMOUNT_WORKSHOP_TRICKLE_GOLD  ATTR_SET  0
+effect_amount  MOD_RESOURCE AMOUNT_WORKSHOP_TRICKLE_STONE ATTR_SET  0
+
+/* Adjusting the resource income to 12 wood/min (3/8 of a villager) */
+effect_percent MOD_RESOURCE AMOUNT_WORKSHOP_TRICKLE_WOOD ATTR_ADD -59
+/* Scale the resource exchange depending on map size */
+if TINY_MAP
+/* Setting 1.5 villager gold drain (note there should about 4 workshops total) */
+guard_state SPECIAL_BUILDING AMOUNT_GOLD -57 2
+elseif SMALL_MAP
+/* Setting 2 villager gold drain (note there should about 5 workshops total) */
+guard_state SPECIAL_BUILDING AMOUNT_GOLD -76 2
+elseif MEDIUM_MAP
+/* Setting 2.5 villager gold drain (note there should about 6 workshops total) */
+guard_state SPECIAL_BUILDING AMOUNT_GOLD -95 2
+elseif LARGE_MAP
+/* Setting 3 villager gold drain (note there should about 7 workshops total) */
+guard_state SPECIAL_BUILDING AMOUNT_GOLD -114 2
+elseif HUGE_MAP
+/* Setting 3.5 villager gold drain (note there should about 8 workshops total) */
+guard_state SPECIAL_BUILDING AMOUNT_GOLD -133 2
+else
+/* Setting 4 villager gold drain (note there should about 10 workshops total) */
+guard_state SPECIAL_BUILDING AMOUNT_GOLD -152 2
+endif 
+
+/* Disabling Trade Carts and Cogs for Multi-team Games */
+if 2_TEAM_GAME
+else
+  #const TRADE_CART_ENABLER 161
+  #const TRADE_COG_ENABLER 180
+  #const TRADE_CARAVAN_ENABLER 48
+  #const HINDU_CARAVANSERAI_ENABLER 518
+  #const PERSIAN_CARAVANSERAI_ENABLER 552  
+  #const SILK_ROAD 499
+  effect_amount DISABLE_TECH TRADE_COG_ENABLER ATTR_DISABLE 180
+  effect_amount DISABLE_TECH TRADE_CART_ENABLER ATTR_DISABLE 161
+  effect_amount DISABLE_TECH TRADE_CARAVAN_ENABLER ATTR_DISABLE 48
+  effect_amount DISABLE_TECH HINDU_CARAVANSERAI_ENABLER ATTR_DISABLE 518
+  effect_amount DISABLE_TECH PERSIAN_CARAVANSERAI_ENABLER ATTR_DISABLE 552
+  effect_amount DISABLE_TECH SILK_ROAD ATTR_DISABLE 499    
+endif
+
+<LAND_GENERATION>
+base_terrain NNGB
+base_layer ICE
+
+create_land { terrain_type ROAD2 base_elevation 2 land_position 50 50 top_border 38 bottom_border 38 right_border 38 left_border 38 land_percent 20 zone 1 clumping_factor 30 if TINY_MAP base_size 8 elseif SMALL_MAP base_size 10 elseif MEDIUM_MAP base_size 12 elseif LARGE_MAP base_size 14 elseif HUGE_MAP base_size 16 else base_size 18 endif }
+/* create_player_lands { terrain_type GRAVEL base_elevation 4 base_size 2 circle_radius 16 0 top_border 30 bottom_border 30 right_border 30 left_border 30 land_percent 100 zone 1 } */
+create_player_lands { terrain_type GRAVEL base_elevation 4 base_size 6 circle_radius 16 0 top_border 30 bottom_border 30 right_border 30 left_border 30 land_percent 100 zone 1 }
+
+create_land { terrain_type SNOW base_elevation 1 land_position 20 50 base_size 0 top_border 12 bottom_border 12 right_border 12 left_border 12 land_percent 100 zone 2 border_fuzziness 3 other_zone_avoidance_distance 1 }
+create_land { terrain_type SNOW base_elevation 1 land_position 50 20 base_size 0 top_border 12 bottom_border 12 right_border 12 left_border 12 land_percent 100 zone 2 border_fuzziness 3 other_zone_avoidance_distance 1 }
+create_land { terrain_type SNOW base_elevation 1 land_position 80 50 base_size 0 top_border 12 bottom_border 12 right_border 12 left_border 12 land_percent 100 zone 2 border_fuzziness 3 other_zone_avoidance_distance 1 }
+create_land { terrain_type SNOW base_elevation 1 land_position 50 80 base_size 0 top_border 12 bottom_border 12 right_border 12 left_border 12 land_percent 100 zone 2 border_fuzziness 3 other_zone_avoidance_distance 1 }
+
+<ELEVATION_GENERATION>
+create_elevation 7 { base_terrain GRAVEL number_of_clumps 9320 number_of_tiles 1000000 set_scale_by_size enable_balanced_elevation }
+create_elevation 3 { base_terrain SNOW number_of_clumps 30 set_scale_by_groups if TINY_MAP number_of_tiles 2975 elseif SMALL_MAP number_of_tiles 4284 elseif MEDIUM_MAP number_of_tiles 5831 elseif LARGE_MAP number_of_tiles 8265 else number_of_tiles 10000 endif enable_balanced_elevation }
+
+<TERRAIN_GENERATION>
+
+#define CLEAN_UP
+
+if CLEAN_UP
+    /* Removing Non-Navigable Gravel Beach at Elevation 4 */
+    create_terrain GRAVEL { base_terrain NNGB number_of_clumps 9320 land_percent 100 set_scale_by_groups height_limits 2 6 }
+    create_terrain GRAVEL { base_terrain NNGB number_of_clumps 9320 land_percent 100 set_scale_by_groups height_limits 2 6 }
+    create_terrain GRAVEL { base_terrain NNGB number_of_clumps 9320 land_percent 100 set_scale_by_groups height_limits 2 6 }
+    create_terrain GRAVEL { base_terrain NNGB number_of_clumps 9320 land_percent 100 set_scale_by_groups height_limits 2 6 }
+endif
+
+#define COASTAL_LAYERS
+if COASTAL_LAYERS
+    /* Creating Beach and Waters */
+    create_terrain DLC_WETROCKBEACH { base_terrain NNGB number_of_clumps 9320 land_percent 100 set_scale_by_groups height_limits 0 0 spacing_to_other_terrain_types 1 set_flat_terrain_only  }
+    create_terrain DLC_NEWSHALLOW   { base_terrain DLC_WETROCKBEACH number_of_clumps 9320 land_percent 100 set_scale_by_groups spacing_to_other_terrain_types 1 }
+    create_terrain DLC_WATER5       { base_terrain DLC_NEWSHALLOW number_of_clumps 9320 land_percent 100 set_scale_by_groups spacing_to_other_terrain_types 1 }
+    /* Gravel Beach Remnants */
+    create_terrain SNOW_STRONG { base_terrain NNGB number_of_clumps 9320 land_percent 3 set_scale_by_groups }
+    create_terrain SNOW_STRONG { base_terrain NNGB number_of_clumps 9320 land_percent 3 set_scale_by_groups terrain_mask 1 }
+    create_terrain ICE { base_terrain NNGB number_of_clumps 9320 land_percent 3 set_scale_by_groups terrain_mask 1 }
+    /* Floating Sea Ice */
+    create_terrain ICE { base_terrain DLC_NEWSHALLOW number_of_clumps 9320 land_percent 2 set_scale_by_groups terrain_mask 1 }
+    create_terrain ICE { base_terrain DLC_WATER5 number_of_clumps 9320 land_percent 2 set_scale_by_groups terrain_mask 1 }
+    create_terrain ICE { base_terrain DLC_WATER5 number_of_clumps 16 land_percent 2 set_scale_by_groups }
+endif  
+
+  
+#define MOUNTAIN_LAYERS
+if MOUNTAIN_LAYERS
+    /* Layering Ring of Snowy Forest */
+    create_terrain GRAVEL { base_terrain ROAD2 number_of_clumps 9320 land_percent 100 set_scale_by_groups }
+    create_terrain GRAVEL { base_terrain ROAD2 number_of_clumps 9320 land_percent 100 set_scale_by_groups }
+    create_terrain GRAVEL { base_terrain ROAD2 number_of_clumps 9320 land_percent 100 set_scale_by_groups }
+    create_terrain GRAVEL { base_terrain ROAD2 number_of_clumps 9320 land_percent 100 set_scale_by_groups }
+    create_terrain SNOW_FOREST { base_terrain GRAVEL number_of_clumps 9320 land_percent 100 set_scale_by_groups }
+    create_terrain GRAVEL { base_terrain SNOW_FOREST number_of_clumps 9320 land_percent 100 set_scale_by_groups spacing_to_other_terrain_types 1 }   
+    /* Restoring and Cleaning Up Santa's Workshop Area */
+    create_terrain ROAD2 { base_terrain GRAVEL number_of_clumps 9320 land_percent 100 set_scale_by_groups height_limits 2 2  if TINY_MAP  set_avoid_player_start_areas 12 elseif SMALL_MAP set_avoid_player_start_areas 14 elseif MEDIUM_MAP set_avoid_player_start_areas 16  elseif LARGE_MAP set_avoid_player_start_areas 18 elseif HUGE_MAP set_avoid_player_start_areas 20 else  set_avoid_player_start_areas 22 endif  }
+    create_terrain GRAVEL     { base_terrain ROAD2 number_of_clumps 9320 land_percent 100 set_scale_by_groups height_limits 3 7 }
+    create_terrain MUD        { base_terrain ROAD2 number_of_clumps 9320 land_percent 1   set_scale_by_groups terrain_mask 2  }
+    create_terrain SNOW_LIGHT { base_terrain ROAD2 number_of_clumps 9320 land_percent 1 set_scale_by_groups terrain_mask 1 }
+    create_terrain ICE { base_terrain ROAD2 number_of_clumps 9320 land_percent 1 set_scale_by_groups terrain_mask 1 }
+    /* Mountain Pass and Summit */
+    create_terrain DIRT        { base_terrain GRAVEL number_of_clumps 9320 land_percent 1 set_scale_by_groups height_limits 2 4 terrain_mask 1 }
+    create_terrain SNOW_LIGHT  { base_terrain GRAVEL number_of_clumps 9320 land_percent 2 set_scale_by_groups height_limits 2 5 terrain_mask 1 }
+    create_terrain ICE         { base_terrain GRAVEL number_of_clumps 9320 land_percent 2 set_scale_by_groups height_limits 2 5 terrain_mask 1 }
+    create_terrain SNOW_STRONG { base_terrain GRAVEL number_of_clumps 9320 land_percent 100 set_scale_by_groups height_limits 6 7 }
+    create_terrain SNOW_LIGHT { base_terrain SNOW_STRONG number_of_clumps 9320 land_percent 100 set_scale_by_groups height_limits 7 7 }
+endif
+
+
+#define WASTELAND_LAYERS
+if WASTELAND_LAYERS
+    /* Applying Desired Forest Structure */
+    create_terrain PINE_FOREST { base_terrain SNOW number_of_clumps 24 land_percent 1 set_scale_by_groups height_limits 1 3 spacing_to_other_terrain_types 8 }
+    /* Converting to Snow Pine Forest */
+    create_terrain SNOW_FOREST { base_terrain PINE_FOREST number_of_clumps 9320 land_percent 100 set_scale_by_groups }
+    create_terrain SNOW_FOREST { base_terrain PINE_FOREST number_of_clumps 9320 land_percent 100 set_scale_by_groups }
+    create_terrain SNOW_FOREST { base_terrain PINE_FOREST number_of_clumps 9320 land_percent 100 set_scale_by_groups }
+    create_terrain SNOW_FOREST { base_terrain PINE_FOREST number_of_clumps 9320 land_percent 100 set_scale_by_groups }
+    create_terrain SNOW_FOREST { base_terrain PINE_FOREST number_of_clumps 9320 land_percent 100 set_scale_by_groups }
+    create_terrain SNOW_FOREST { base_terrain PINE_FOREST number_of_clumps 9320 land_percent 100 set_scale_by_groups }
+    create_terrain SNOW_FOREST { base_terrain PINE_FOREST number_of_clumps 9320 land_percent 100 set_scale_by_groups }
+    create_terrain SNOW_FOREST { base_terrain PINE_FOREST number_of_clumps 9320 land_percent 100 set_scale_by_groups }
+    /* A Touch of Cosmetic Intervention */
+    create_terrain ICE    { base_terrain SNOW number_of_clumps 9320 land_percent 10 set_scale_by_groups terrain_mask 1 }
+    create_terrain GRAVEL { base_terrain SNOW number_of_clumps 9320 land_percent 6 set_scale_by_groups terrain_mask 1 height_limits 1 3 }
+endif
+
+<CONNECTION_GENERATION>
+
+<OBJECTS_GENERATION>
+
+#define SANTA_WORKSHOP_AREA
+if SANTA_WORKSHOP_AREA
+    /* Create Santa's Sprawling Complex */
+    #const SMOKE 1308
+    create_object SPECIAL_BUILDING { set_gaia_object_only terrain_to_place_on ROAD2 temp_min_distance_group_placement 8 min_distance_group_placement 3 number_of_groups 9320 set_scale_by_groups second_object SMOKE }
+    create_object STABLE_C     { set_gaia_object_only set_gaia_unconvertible make_indestructible terrain_to_place_on ROAD2 temp_min_distance_group_placement 12 min_distance_group_placement 3 number_of_groups 9320 set_scale_by_groups second_object SMOKE }
+    create_object BLACKSMITH_C { set_gaia_object_only set_gaia_unconvertible make_indestructible terrain_to_place_on ROAD2 temp_min_distance_group_placement 12 min_distance_group_placement 3 number_of_groups 9320 set_scale_by_groups second_object SMOKE }
+    create_object HOUSE_C      { set_gaia_object_only set_gaia_unconvertible make_indestructible terrain_to_place_on ROAD2 number_of_groups 9320 set_scale_by_groups second_object SMOKE }
+
+endif
+
+#define SEA_AND_COASTAL_OBJECTS
+if SEA_AND_COASTAL_OBJECTS
+    /* Fish Creation */
+    create_object ON_GRID { set_gaia_object_only terrain_to_place_on DLC_NEWSHALLOW temp_min_distance_group_placement 5 number_of_groups 9320 set_scale_by_groups actor_area 1 actor_area_radius 4 avoid_actor_area 1 second_object SHORE_FISH }
+    create_object FISH    { set_gaia_object_only terrain_to_place_on DLC_WATER5 temp_min_distance_group_placement 8 number_of_groups 9320 set_scale_by_groups avoid_actor_area 1 }
+    /* Rocky Coastline Creation */
+    #const ROCK2 1323
+    create_object ON_GRID { set_gaia_object_only terrain_to_place_on DLC_WETROCKBEACH temp_min_distance_group_placement 8 min_distance_group_placement 1 number_of_groups 9320 set_scale_by_groups second_object ROCK2 }
+    create_object ON_GRID { set_gaia_object_only terrain_to_place_on NNGB temp_min_distance_group_placement 8 number_of_groups 9320 set_scale_by_groups second_object ROCK2 }
+
+    create_object ON_GRID { set_gaia_object_only terrain_to_place_on DLC_NEWSHALLOW temp_min_distance_group_placement 9 min_distance_group_placement 2 number_of_groups 9320 set_scale_by_groups second_object SEA_ROCKS_1 }
+    create_object ON_GRID { set_gaia_object_only terrain_to_place_on DLC_WETROCKBEACH temp_min_distance_group_placement 9 min_distance_group_placement 2 number_of_groups 9320 set_scale_by_groups second_object SEA_ROCKS_1 }
+
+    create_object ON_GRID { set_gaia_object_only terrain_to_place_on DLC_NEWSHALLOW temp_min_distance_group_placement 9 min_distance_group_placement 2 number_of_groups 9320 set_scale_by_groups second_object SEA_ROCKS_2 }
+    create_object ON_GRID { set_gaia_object_only terrain_to_place_on DLC_WETROCKBEACH temp_min_distance_group_placement 9 min_distance_group_placement 2 number_of_groups 9320 set_scale_by_groups second_object SEA_ROCKS_2 }
+    #const TREE_REED 1350
+    create_object ON_GRID { set_gaia_object_only terrain_to_place_on DLC_NEWSHALLOW temp_min_distance_group_placement 9 min_distance_group_placement 2 number_of_groups 9320 set_scale_by_groups second_object TREE_REED }
+    create_object ON_GRID { set_gaia_object_only terrain_to_place_on DLC_WETROCKBEACH temp_min_distance_group_placement 9 min_distance_group_placement 2 number_of_groups 9320 set_scale_by_groups second_object TREE_REED }
+    /* Stone Creation */
+    create_object STONE  { set_gaia_object_only number_of_groups 10000 set_scaling_to_map_size number_of_objects 4 group_placement_radius 1 set_tight_grouping temp_min_distance_group_placement 16 min_distance_group_placement 4 terrain_to_place_on NNGB }
+endif
+
+#define FRONTIER_OBJECTS
+if FRONTIER_OBJECTS
+    /* Gold Creation */
+    create_object GOLD  { set_gaia_object_only number_of_groups 10000 set_scaling_to_map_size number_of_objects 12 set_tight_grouping temp_min_distance_group_placement 12 min_distance_group_placement 4 terrain_to_place_on SNOW avoid_forest_zone 4 }
+    /* Relic Creation */
+    create_object RELIC { set_gaia_object_only number_of_groups 4 set_scaling_to_map_size number_of_objects 1 set_tight_grouping temp_min_distance_group_placement 30 min_distance_group_placement 4 terrain_to_place_on SNOW avoid_forest_zone 4 min_distance_to_players 24 }
+    /* Deer Creation */
+    create_object DEER { set_gaia_object_only number_of_groups 10000 set_scaling_to_map_size number_of_objects 4 set_loose_grouping temp_min_distance_group_placement 12 min_distance_group_placement 4 terrain_to_place_on SNOW avoid_forest_zone 4 min_distance_to_players 24 }
+    /* Wolf Creation */
+    create_object DLC_SNOWLEOPARD { set_gaia_object_only number_of_groups 10000 set_scaling_to_map_size number_of_objects 1 set_loose_grouping temp_min_distance_group_placement 18 min_distance_group_placement 4 terrain_to_place_on SNOW avoid_forest_zone 4 }
+endif
+
+
+#define MOUNTAINOUS_OBJECTS
+if MOUNTAINOUS_OBJECTS
+    
+    create_object DLC_AFRICANBUSH_2 { set_gaia_object_only number_of_groups 10000 set_scaling_to_map_size set_tight_grouping temp_min_distance_group_placement 2 terrain_to_place_on SNOW_LIGHT }
+    create_object DLC_MOUNTAIN_9    { set_gaia_object_only number_of_groups 10000 set_scaling_to_map_size set_tight_grouping temp_min_distance_group_placement 12 min_distance_group_placement 3 terrain_to_place_on SNOW_LIGHT }
+    create_object DLC_MOUNTAIN_10   { set_gaia_object_only number_of_groups 10000 set_scaling_to_map_size set_tight_grouping temp_min_distance_group_placement 12 min_distance_group_placement 3 terrain_to_place_on SNOW_LIGHT }
+    create_object DLC_MOUNTAIN_11   { set_gaia_object_only number_of_groups 10000 set_scaling_to_map_size set_tight_grouping temp_min_distance_group_placement 12 min_distance_group_placement 3 terrain_to_place_on SNOW_LIGHT }
+endif
+
+
+#define PLAYER_OBJECTS_GENERATION
+if PLAYER_OBJECTS_GENERATION
+    /* Player-Controlled Starting Objects */
+    create_object TOWN_CENTER  { set_place_for_every_player find_closest }
+    create_object VILLAGER     { set_place_for_every_player min_distance_to_players 5 max_distance_to_players 6 avoid_forest_zone 2 }
+    create_object SCOUT { set_place_for_every_player min_distance_to_players 8 max_distance_to_players 9 avoid_forest_zone 2 }
+    create_object SHEEP        { set_place_for_every_player set_circular_placement min_distance_to_players 7 max_distance_to_players 8 terrain_to_place_on GRAVEL number_of_groups 1 number_of_objects 4 set_loose_grouping resource_delta 100 } 
+    if REGICIDE create_object KING { set_place_for_every_player find_closest } else endif
+    /* Player-Assigned-Resources */
+    create_object DLC_AFRICANBUSH_2 { set_place_for_every_player set_gaia_object_only set_circular_placement min_distance_to_players 3 max_distance_to_players 7 number_of_groups 5 temp_min_distance_group_placement 3 } 
+    create_object GOLD   { set_place_for_every_player set_gaia_object_only set_circular_placement min_distance_to_players 6 max_distance_to_players 8 number_of_groups 1 number_of_objects 7 set_tight_grouping group_placement_radius 1 avoid_forest_zone 3 min_distance_group_placement 6 } 
+    create_object DEER   { set_place_for_every_player set_gaia_object_only set_circular_placement min_distance_to_players 8 max_distance_to_players 16 number_of_groups 1 number_of_objects rnd(5,6) set_loose_grouping avoid_forest_zone 3 min_distance_group_placement 3 resource_delta 50 } 
+endif
+
+

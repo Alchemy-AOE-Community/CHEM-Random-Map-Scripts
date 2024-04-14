@@ -1,0 +1,2298 @@
+/* Isolated Lakes */
+/* 7/12/22 */
+/* A Random Map Concept by C-Zu */
+/* Scripted by TechChariot */
+<PLAYER_SETUP>
+#const L 32
+#const GRAVEL 70
+#const MUD 76
+#const NNGB 81
+#const REED_FOREST 92
+#const GB 108
+/* Remove Visual Effect of Dead Fish Trap */
+#const ON_GRID 278
+effect_amount GAIA_SET_ATTRIBUTE ON_GRID ATTR_STORAGE_VALUE 0
+/* Upgrading Mangrove Tree to Reeds */
+#const MT 1144
+#const DT 1250
+effect_amount GAIA_UPGRADE_UNIT MT DT 0
+/* Setting Dead Tree Wood Storage to 350  */
+effect_amount GAIA_SET_ATTRIBUTE MT ATTR_STORAGE_VALUE 10000
+/* Setting Fish Food Storage to 10000  */
+effect_amount GAIA_SET_ATTRIBUTE FISH ATTR_STORAGE_VALUE 10000
+/* Configuring Building Blocker */
+#const BLOCKER 1654
+effect_percent GAIA_SET_ATTRIBUTE BLOCKER ATTR_RADIUS_1 50
+effect_percent GAIA_SET_ATTRIBUTE BLOCKER ATTR_RADIUS_2 50
+/* Disabling Trade Carts and Cogs for Multi-team Games */
+if 2_TEAM_GAME
+else
+  #const TRADE_CART_ENABLER 161
+  #const TRADE_COG_ENABLER 180
+  #const TRADE_CARAVAN_ENABLER 48
+  #const HINDU_CARAVANSERAI_ENABLER 518
+  #const PERSIAN_CARAVANSERAI_ENABLER 552  
+  #const SILK_ROAD 499
+  effect_amount DISABLE_TECH TRADE_COG_ENABLER ATTR_DISABLE 180
+  effect_amount DISABLE_TECH TRADE_CART_ENABLER ATTR_DISABLE 161
+  effect_amount DISABLE_TECH TRADE_CARAVAN_ENABLER ATTR_DISABLE 48
+  effect_amount DISABLE_TECH HINDU_CARAVANSERAI_ENABLER ATTR_DISABLE 518
+  effect_amount DISABLE_TECH PERSIAN_CARAVANSERAI_ENABLER ATTR_DISABLE 552
+  effect_amount DISABLE_TECH SILK_ROAD ATTR_DISABLE 499    
+endif
+/* Other Settings */
+nomad_resources
+random_placement
+behavior_version 2
+<ELEVATION_GENERATION>
+create_elevation 2 { base_terrain NNGB number_of_tiles 100000 number_of_clumps 9320 set_scaling_by_group sset_balanced_elevation }
+create_elevation 2 { base_terrain NNGB number_of_tiles 9320 number_of_clumps 100000 set_scaling_by_size set_balanced_elevation }
+create_elevation 3 { base_terrain NNGB number_of_tiles 400 number_of_clumps 40 set_scaling_by_groups set_balanced_elevation } 
+create_elevation 3 { base_terrain NNGB number_of_tiles 400 number_of_clumps 40 set_scaling_by_size set_balanced_elevation }
+create_elevation 4 { base_terrain NNGB number_of_tiles 200 number_of_clumps 20 set_scaling_by_groups set_balanced_elevation } 
+create_elevation 4 { base_terrain NNGB number_of_tiles 200  number_of_clumps 20  set_scaling_by_size set_balanced_elevation }
+create_elevation 5 { base_terrain NNGB number_of_tiles 100 number_of_clumps 10 set_scaling_by_groups set_balanced_elevation }
+create_elevation 5 { base_terrain NNGB number_of_tiles 100 number_of_clumps 10 set_scaling_by_size set_balanced_elevation }
+<TERRAIN_GENERATION>
+#define CENTRAL_LAKE_LAYERING
+if CENTRAL_LAKE_LAYERING
+	/* Creating Shallows from Gravelbeach */
+	create_terrain DLC_NEWSHALLOW { base_terrain GB land_percent 100 number_of_clumps 9320 set_scaling_by_groups spacing_to_other_terrain_types 1 }
+	create_terrain DLC_NEWSHALLOW { base_terrain GB land_percent 100 number_of_clumps 9320 set_scaling_by_groups spacing_to_other_terrain_types 1 }
+	create_terrain DLC_NEWSHALLOW { base_terrain GB land_percent 100 number_of_clumps 9320 set_scaling_by_groups spacing_to_other_terrain_types 1 }
+	create_terrain DLC_NEWSHALLOW { base_terrain GB land_percent 100 number_of_clumps 9320 set_scaling_by_groups spacing_to_other_terrain_types 1 }
+	create_terrain DLC_NEWSHALLOW { base_terrain GB land_percent 100 number_of_clumps 9320 set_scaling_by_groups spacing_to_other_terrain_types 1 }
+	create_terrain DLC_NEWSHALLOW { base_terrain GB land_percent 100 number_of_clumps 9320 set_scaling_by_groups spacing_to_other_terrain_types 1 }
+	create_terrain DLC_NEWSHALLOW { base_terrain GB land_percent 100 number_of_clumps 9320 set_scaling_by_groups spacing_to_other_terrain_types 1 }
+	create_terrain DLC_NEWSHALLOW { base_terrain GB land_percent 100 number_of_clumps 9320 set_scaling_by_groups spacing_to_other_terrain_types 1 }
+	create_terrain DLC_NEWSHALLOW { base_terrain GB land_percent 100 number_of_clumps 9320 set_scaling_by_groups spacing_to_other_terrain_types 1 }
+	create_terrain DLC_NEWSHALLOW { base_terrain GB land_percent 100 number_of_clumps 9320 set_scaling_by_groups spacing_to_other_terrain_types 1 }
+	create_terrain DLC_NEWSHALLOW { base_terrain GB land_percent 100 number_of_clumps 9320 set_scaling_by_groups spacing_to_other_terrain_types 1 }
+	create_terrain DLC_NEWSHALLOW { base_terrain GB land_percent 100 number_of_clumps 9320 set_scaling_by_groups spacing_to_other_terrain_types 1 }
+	/* Cleaning up Water5 Layering on Circular Deep Spots */
+	create_terrain DLC_WATER5 { base_terrain GB land_percent 100 number_of_clumps 9320 set_scaling_by_groups spacing_to_other_terrain_types 1 }
+	create_terrain DLC_WATER5 { base_terrain GB land_percent 100 number_of_clumps 9320 set_scaling_by_groups spacing_to_other_terrain_types 1 }
+	create_terrain DLC_WATER5 { base_terrain GB land_percent 100 number_of_clumps 9320 set_scaling_by_groups spacing_to_other_terrain_types 1 }
+	create_terrain DLC_WATER5 { base_terrain GB land_percent 100 number_of_clumps 9320 set_scaling_by_groups spacing_to_other_terrain_types 1 }
+	create_terrain DLC_WATER5 { base_terrain GB land_percent 100 number_of_clumps 9320 set_scaling_by_groups spacing_to_other_terrain_types 1 }
+	create_terrain DLC_WATER5 { base_terrain GB land_percent 100 number_of_clumps 9320 set_scaling_by_groups spacing_to_other_terrain_types 1 }
+	create_terrain DLC_WATER5 { base_terrain GB land_percent 100 number_of_clumps 9320 set_scaling_by_groups spacing_to_other_terrain_types 1 }
+	create_terrain DLC_WATER5 { base_terrain GB land_percent 100 number_of_clumps 9320 set_scaling_by_groups spacing_to_other_terrain_types 1 }
+	create_terrain DLC_WATER5 { base_terrain GB land_percent 100 number_of_clumps 9320 set_scaling_by_groups spacing_to_other_terrain_types 1 }
+	create_terrain DLC_WATER5 { base_terrain GB land_percent 100 number_of_clumps 9320 set_scaling_by_groups spacing_to_other_terrain_types 1 }
+	create_terrain DLC_WATER5 { base_terrain GB land_percent 100 number_of_clumps 9320 set_scaling_by_groups spacing_to_other_terrain_types 1 }
+	create_terrain DLC_WATER5 { base_terrain GB land_percent 100 number_of_clumps 9320 set_scaling_by_groups spacing_to_other_terrain_types 1 }
+	/* Creation of Mangrove Shallows on Regular Shallows */
+	create_terrain DLC_MANGROVESHALLOW { base_terrain DLC_NEWSHALLOW land_percent 100 spacing_to_other_terrain_types 1 }
+	/* Mangrove Forest Creation */
+	create_terrain DLC_MANGROVEFOREST { base_terrain DLC_MANGROVESHALLOW land_percent 1 number_of_clumps 9320 set_scaling_by_groups spacing_to_other_terrain_types 2 }
+	/* Creating Reed Beach */
+	create_terrain DLC_REEDSBEACH 
+	 { 
+		base_terrain DLC_MANGROVESHALLOW 
+		number_of_clumps 9320 
+		set_scaling_by_groups 
+		spacing_to_other_terrain_types 1
+		if TINY_MAP
+		number_of_tiles 72
+		elseif SMALL_MAP
+		number_of_tiles 103
+		elseif MEDIUM_MAP
+		number_of_tiles 141
+		elseif LARGE_MAP
+		number_of_tiles 200
+		elseif HUGE_MAP
+		number_of_tiles 242
+		elseif GIGANTIC_MAP
+		number_of_tiles 288
+		else
+		endif
+	 }	
+	/* Layering White Gravel Mask on Dark Gravel */
+	create_terrain GRAVEL { base_terrain NNGB land_percent 100 number_of_clumps 9320 set_scaling_by_groups height_limits 0 1 spacing_to_other_terrain_types 1 terrain_mask 2 }
+	/* Masking Leaves Over Mangrove Shallows  */
+	create_terrain LEAVES { base_terrain DLC_MANGROVESHALLOW land_percent 5 number_of_clumps 9320 set_scaling_by_groups terrain_mask 1 }
+	/* Masking Remaining Mangrove Shallows With Water5 */
+	create_terrain DLC_WATER5 { base_terrain DLC_MANGROVESHALLOW land_percent 100 number_of_clumps 9320 set_scaling_by_groups terrain_mask 1 }	
+	/* Masking Mangrove Shallows Over Shallows */
+	create_terrain DLC_MANGROVESHALLOW { base_terrain DLC_NEWSHALLOW land_percent 100 number_of_clumps 9320 set_scaling_by_groups terrain_mask 1 }
+	create_terrain DLC_MANGROVESHALLOW { base_terrain DLC_NEWSHALLOW land_percent 100 number_of_clumps 9320 set_scaling_by_groups terrain_mask 1 }
+	create_terrain DLC_MANGROVESHALLOW { base_terrain DLC_NEWSHALLOW land_percent 100 number_of_clumps 9320 set_scaling_by_groups terrain_mask 1 }
+	create_terrain DLC_MANGROVESHALLOW { base_terrain DLC_NEWSHALLOW land_percent 100 number_of_clumps 9320 set_scaling_by_groups terrain_mask 1 }
+	/* Masking Mangrove Shallows Over Water5 (Fish Pools) */
+	create_terrain DLC_MANGROVESHALLOW { base_terrain DLC_WATER5 land_percent 100 number_of_clumps 9320 set_scaling_by_groups terrain_mask 1 }
+endif
+#define PLAYER_LAKE_COLLAPSE
+if PLAYER_LAKE_COLLAPSE
+	/* Converting the Wetrockbeach to Gravelbeach */
+	create_terrain GB { base_terrain DLC_WETROCKBEACH land_percent 100 number_of_clumps 9320 set_scaling_by_groups }
+	/* Layering Water Atop the Gravel Beach */
+	create_terrain WATER { base_terrain GB land_percent 100 number_of_clumps 9320 set_scaling_by_groups spacing_to_other_terrain_types 1 }
+	/* Layering Shallow Atop Water (For Player Starting Units) */
+	create_terrain DLC_NEWSHALLOW
+	 { 
+		base_terrain WATER 
+		land_percent 100
+		number_of_clumps 9320
+		set_scaling_by_groups
+		if TINY_MAP
+		spacing_to_other_terrain_types 3
+		elseif SMALL_MAP
+		spacing_to_other_terrain_types 4
+		elseif MEDIUM_MAP
+		spacing_to_other_terrain_types 5
+		elseif LARGE_MAP
+		spacing_to_other_terrain_types 6
+		elseif HUGE_MAP
+		spacing_to_other_terrain_types 7
+		elseif GIGANTIC_MAP
+		spacing_to_other_terrain_types 7
+		else
+		endif
+	 }
+	
+	/* Masking Water in Player Lakes */
+	create_terrain WATER { base_terrain DLC_NEWSHALLOW land_percent 100 number_of_clumps 9320 set_scaling_by_groups terrain_mask 1 }
+	create_terrain DLC_WATER5 { base_terrain WATER land_percent 100 number_of_clumps 9320 set_scaling_by_groups terrain_mask 1 }
+endif
+/* Layering Mud on Top of Non-Navigable Wet Gravel Beach */
+create_terrain MUD { base_terrain NNGB land_percent 100 number_of_clumps 9320 set_scaling_by_groups height_limits 1 7 terrain_mask 2 }
+/* Layering Moorland on Top of Mud */
+create_terrain DLC_MOORLAND { base_terrain MUD land_percent 100 number_of_clumps 9320 set_scaling_by_groups spacing_to_other_terrain_types 1 }
+/* Layering Grass on Top of Moorland */
+create_terrain GRASS { base_terrain DLC_MOORLAND  land_percent 100 number_of_clumps 9320 set_scaling_by_groups spacing_to_other_terrain_types 6 }
+create_terrain GRASS { base_terrain DLC_MOORLAND land_percent 10 number_of_clumps 9320 set_scaling_by_groups spacing_to_other_terrain_types 1 }
+/* Layering Leaves on Grass */
+create_terrain LEAVES { base_terrain GRASS land_percent 36 number_of_clumps 120 set_scaling_by_groups spacing_to_other_terrain_types 2 }
+/* Adding Reed Forest to Edges Near Water */
+create_terrain REED_FOREST { base_terrain DLC_MOORLAND land_percent 2 number_of_clumps 60 set_scaling_by_groups } 
+/* Adding Forest */
+create_terrain DLC_FORESTAUTUMN { base_terrain LEAVES  land_percent 4 number_of_clumps 120 clumping_factor 30 set_scaling_by_groups spacing_to_other_terrain_types 2 }
+/* Reverting Some Leaves Back to Grass */
+create_terrain GRASS { base_terrain LEAVES land_percent 100 number_of_clumps 9320 set_scaling_by_groups spacing_to_other_terrain_types 1 terrain_mask 1 }
+create_terrain GRASS { base_terrain LEAVES land_percent 100 number_of_clumps 9320 set_scaling_by_groups spacing_to_other_terrain_types 4 }
+<OBJECTS_GENERATION>
+/* BEGIN_OBJECTS_AUTOSCRIBE */
+#const BUSH_GREEN 1360
+#const BUTTERFLIES_A 1608
+#const BUTTERFLIES_B 1609
+#const BUTTERFLIES_C 1610
+#const GRASS_PATCH 301
+#const OFF_GRID 647
+#const PLANT 818
+#const PLANT_DEAD 1365
+#const SHRUB_GREEN 1362
+#const WEEDS 1364
+if TINY_MAP
+elseif SMALL_MAP
+elseif MEDIUM_MAP
+elseif LARGE_MAP
+elseif HUGE_MAP
+elseif GIGANTIC_MAP
+endif
+create_object OFF_GRID
+{
+set_place_for_every_player
+second_object YURT
+find_closest
+actor_area 1
+actor_area_radius 0
+}
+#const PH1_1 647
+create_object PH1_1
+{
+set_place_for_every_player
+actor_area 2
+actor_area_radius 4
+actor_area_to_place_in 1
+force_placement
+find_closest
+}
+#const PH2_1 647
+create_object PH2_1
+{
+set_place_for_every_player
+actor_area 3
+actor_area_radius 2
+actor_area_to_place_in 1
+force_placement
+find_closest
+}
+#const PH3_1 647
+create_object PH3_1
+{
+set_place_for_every_player
+actor_area 4
+actor_area_radius 12
+actor_area_to_place_in 1
+force_placement
+find_closest
+}
+#const PH4_1 647
+create_object PH4_1
+{
+set_place_for_every_player
+actor_area 5
+actor_area_radius 32
+actor_area_to_place_in 1
+force_placement
+find_closest
+}
+#const PH5_1 647
+create_object PH5_1
+{
+set_place_for_every_player
+actor_area 6
+actor_area_radius 16
+actor_area_to_place_in 1
+force_placement
+find_closest
+}
+create_object VILLAGER_BASE_F
+{
+set_place_for_every_player
+number_of_groups 3
+terrain_to_place_on DLC_NEWSHALLOW
+actor_area_to_place_in 2
+}
+create_object HORSE
+{
+set_place_for_every_player
+terrain_to_place_on DLC_NEWSHALLOW
+actor_area_to_place_in 2
+}
+create_object DLC_COW
+{
+set_place_for_every_player
+resource_delta 250
+terrain_to_place_on DLC_NEWSHALLOW
+actor_area_to_place_in 2
+}
+create_object TRANSPORT_SHIP
+{
+set_place_for_every_player
+actor_area_to_place_in 2
+}
+create_object ON_GRID
+{
+set_gaia_object_only
+number_of_groups 9320
+set_scaling_to_map_size
+terrain_to_place_on DLC_WATER5
+temp_min_distance_group_placement 1
+actor_area 7
+actor_area_radius 4
+}
+create_object ON_GRID
+{
+set_gaia_object_only
+number_of_groups 9320
+set_scaling_to_map_size
+terrain_to_place_on WATER
+temp_min_distance_group_placement 1
+actor_area 8
+actor_area_radius 0
+}
+#const PH8_2 647
+create_object PH8_2
+{
+number_of_groups 9320
+set_scaling_to_map_size
+actor_area 9
+actor_area_radius 4
+actor_area_to_place_in 8
+force_placement
+find_closest
+}
+#const PH9_2 647
+create_object PH9_2
+{
+number_of_groups 9320
+set_scaling_to_map_size
+actor_area 10
+actor_area_radius 12
+actor_area_to_place_in 8
+force_placement
+find_closest
+}
+create_object ON_GRID
+{
+set_gaia_object_only
+number_of_groups 9320
+set_scaling_to_map_size
+terrain_to_place_on DLC_GRAVELBEACH
+temp_min_distance_group_placement 3
+actor_area 11
+actor_area_radius 0
+avoid_actor_area 7
+avoid_actor_area 9
+find_closest
+}
+#const PH11_3 647
+create_object PH11_3
+{
+number_of_groups 9320
+set_scaling_to_map_size
+actor_area 12
+actor_area_radius 4
+actor_area_to_place_in 11
+force_placement
+find_closest
+}
+#const PH12_3 647
+create_object PH12_3
+{
+number_of_groups 9320
+set_scaling_to_map_size
+actor_area 13
+actor_area_radius 8
+actor_area_to_place_in 11
+force_placement
+find_closest
+}
+create_object BLOCKER
+{
+set_gaia_object_only
+set_gaia_unconvertible
+number_of_groups 9320
+set_scaling_to_map_size
+terrain_to_place_on DLC_GRAVELBEACH
+actor_area 14
+actor_area_radius 1
+avoid_actor_area 10
+avoid_actor_area 12
+find_closest
+}
+create_object ON_GRID
+{
+set_gaia_object_only
+resource_delta rnd(1000,4000)
+number_of_groups 9320
+set_scaling_to_map_size
+terrain_to_place_on DLC_WATER5
+temp_min_distance_group_placement 8
+second_object FISH
+avoid_actor_area 13
+avoid_actor_area 14
+find_closest
+}
+create_object ON_GRID
+{
+set_gaia_object_only
+number_of_groups 9320
+set_scaling_to_map_size
+terrain_to_place_on DLC_GRAVELBEACH
+temp_min_distance_group_placement 1
+actor_area 15
+actor_area_radius 2
+avoid_actor_area 7
+avoid_actor_area 12
+find_closest
+}
+create_object ON_GRID
+{
+set_place_for_every_player
+set_gaia_object_only
+resource_delta -125
+number_of_groups 10
+terrain_to_place_on WATER
+temp_min_distance_group_placement 2
+second_object SHORE_FISH
+actor_area_to_place_in 4
+avoid_actor_area 3
+avoid_actor_area 15
+}
+create_object ON_GRID
+{
+set_gaia_object_only
+number_of_groups 9320
+set_scaling_to_map_size
+terrain_to_place_on DLC_MANGROVESHALLOW
+temp_min_distance_group_placement 2
+actor_area 16
+actor_area_radius 0
+}
+#const PH16_4 647
+create_object PH16_4
+{
+number_of_groups 9320
+set_scaling_to_map_size
+actor_area 17
+actor_area_radius 6
+actor_area_to_place_in 16
+force_placement
+find_closest
+}
+#const PH17_4 647
+create_object PH17_4
+{
+number_of_groups 9320
+set_scaling_to_map_size
+actor_area 18
+actor_area_radius 3
+actor_area_to_place_in 16
+force_placement
+find_closest
+}
+create_object RELIC
+{
+set_gaia_object_only
+number_of_groups 4
+set_scaling_to_map_size
+avoid_forest_zone 2
+temp_min_distance_group_placement 22
+actor_area 19
+actor_area_radius 8
+avoid_actor_area 5
+avoid_actor_area 17
+find_closest
+}
+create_object FORAGE
+{
+set_gaia_object_only
+number_of_objects 4
+number_of_groups 9320
+set_tight_grouping
+set_scaling_to_map_size
+avoid_forest_zone 2
+temp_min_distance_group_placement 24
+actor_area 20
+actor_area_radius 8
+avoid_actor_area 6
+avoid_actor_area 18
+avoid_actor_area 19
+find_closest
+}
+create_object GOLD
+{
+set_gaia_object_only
+number_of_objects 3
+number_of_groups 9320
+set_tight_grouping
+set_scaling_to_map_size
+avoid_forest_zone 2
+temp_min_distance_group_placement 24
+actor_area 21
+actor_area_radius 8
+avoid_actor_area 6
+avoid_actor_area 18
+avoid_actor_area 19
+avoid_actor_area 20
+find_closest
+}
+create_object STONE
+{
+set_gaia_object_only
+number_of_objects 3
+number_of_groups 9320
+set_tight_grouping
+set_scaling_to_map_size
+avoid_forest_zone 2
+temp_min_distance_group_placement 24
+avoid_actor_area 6
+avoid_actor_area 18
+avoid_actor_area 19
+avoid_actor_area 20
+avoid_actor_area 21
+find_closest
+}
+create_object DLC_GOOSE
+{
+set_gaia_object_only
+number_of_groups 9320
+set_scaling_to_map_size
+avoid_forest_zone 2
+temp_min_distance_group_placement 24
+actor_area 22
+actor_area_radius 8
+avoid_actor_area 6
+avoid_actor_area 18
+find_closest
+}
+create_object DEER
+{
+set_gaia_object_only
+number_of_groups 9320
+set_scaling_to_map_size
+avoid_forest_zone 2
+temp_min_distance_group_placement 24
+actor_area 23
+actor_area_radius 8
+avoid_actor_area 6
+avoid_actor_area 18
+avoid_actor_area 22
+find_closest
+}
+create_object BOAR
+{
+set_gaia_object_only
+resource_delta -120
+number_of_groups 9320
+set_scaling_to_map_size
+avoid_forest_zone 2
+temp_min_distance_group_placement 30
+avoid_actor_area 6
+avoid_actor_area 18
+avoid_actor_area 22
+avoid_actor_area 23
+find_closest
+}
+create_object HAWK
+{
+set_gaia_object_only
+number_of_groups 4
+set_scaling_to_map_size
+temp_min_distance_group_placement 30
+force_placement
+}
+create_object SEA_ROCKS_1
+{
+set_gaia_object_only
+number_of_groups 9320
+set_scaling_to_map_size
+terrain_to_place_on DLC_GRAVELBEACH
+temp_min_distance_group_placement 8
+actor_area 24
+actor_area_radius 4
+}
+create_object SEA_ROCKS_2
+{
+set_gaia_object_only
+number_of_groups 9320
+set_scaling_to_map_size
+terrain_to_place_on DLC_GRAVELBEACH
+temp_min_distance_group_placement 8
+actor_area 25
+actor_area_radius 4
+avoid_actor_area 24
+find_closest
+}
+create_object SEA_ROCKS_1
+{
+set_gaia_object_only
+number_of_groups 9320
+set_scaling_to_map_size
+terrain_to_place_on DLC_NEWSHALLOW
+temp_min_distance_group_placement 8
+actor_area 26
+actor_area_radius 4
+avoid_actor_area 24
+avoid_actor_area 25
+find_closest
+}
+create_object SEA_ROCKS_2
+{
+set_gaia_object_only
+number_of_groups 9320
+set_scaling_to_map_size
+terrain_to_place_on DLC_NEWSHALLOW
+temp_min_distance_group_placement 8
+avoid_actor_area 24
+avoid_actor_area 25
+avoid_actor_area 26
+find_closest
+}
+create_object GRASS_PATCH
+{
+set_gaia_object_only
+number_of_groups 9320
+set_scaling_to_map_size
+terrain_to_place_on GRASS
+temp_min_distance_group_placement 8
+actor_area 27
+actor_area_radius 2
+}
+create_object FLOWER_BED
+{
+set_gaia_object_only
+number_of_groups 9320
+set_scaling_to_map_size
+terrain_to_place_on GRASS
+temp_min_distance_group_placement 8
+actor_area 28
+actor_area_radius 2
+avoid_actor_area 27
+find_closest
+}
+create_object WEEDS
+{
+set_gaia_object_only
+number_of_groups 9320
+set_scaling_to_map_size
+terrain_to_place_on GRASS
+temp_min_distance_group_placement 8
+actor_area 29
+actor_area_radius 2
+avoid_actor_area 27
+avoid_actor_area 28
+find_closest
+}
+create_object BUSH_GREEN
+{
+set_gaia_object_only
+number_of_groups 9320
+set_scaling_to_map_size
+terrain_to_place_on GRASS
+temp_min_distance_group_placement 8
+actor_area 30
+actor_area_radius 2
+avoid_actor_area 27
+avoid_actor_area 28
+avoid_actor_area 29
+find_closest
+}
+create_object SHRUB_GREEN
+{
+set_gaia_object_only
+number_of_groups 9320
+set_scaling_to_map_size
+terrain_to_place_on GRASS
+temp_min_distance_group_placement 8
+actor_area 31
+actor_area_radius 2
+avoid_actor_area 27
+avoid_actor_area 28
+avoid_actor_area 29
+avoid_actor_area 30
+find_closest
+}
+create_object PLANT
+{
+set_gaia_object_only
+number_of_groups 9320
+set_scaling_to_map_size
+terrain_to_place_on GRASS
+temp_min_distance_group_placement 8
+avoid_actor_area 27
+avoid_actor_area 28
+avoid_actor_area 29
+avoid_actor_area 30
+avoid_actor_area 31
+find_closest
+}
+create_object DLC_FERN_PATCH
+{
+set_gaia_object_only
+number_of_groups 9320
+set_scaling_to_map_size
+terrain_to_place_on LEAVES
+temp_min_distance_group_placement 8
+actor_area 32
+actor_area_radius 4
+}
+create_object GRASS_PATCH
+{
+set_gaia_object_only
+number_of_groups 9320
+set_scaling_to_map_size
+terrain_to_place_on LEAVES
+temp_min_distance_group_placement 8
+avoid_actor_area 32
+find_closest
+}
+create_object DLC_SAVANNAHPATCH
+{
+set_gaia_object_only
+number_of_groups 9320
+set_scaling_to_map_size
+terrain_to_place_on NNGB
+temp_min_distance_group_placement 8
+actor_area 33
+actor_area_radius 4
+}
+create_object PLANT_DEAD
+{
+set_gaia_object_only
+number_of_groups 9320
+set_scaling_to_map_size
+terrain_to_place_on NNGB
+temp_min_distance_group_placement 4
+avoid_actor_area 33
+find_closest
+}
+create_object DLC_SAVANNAHPATCH
+{
+set_gaia_object_only
+number_of_groups 9320
+set_scaling_to_map_size
+terrain_to_place_on DLC_MANGROVEFOREST
+temp_min_distance_group_placement 4
+}
+create_object BUTTERFLIES_A
+{
+set_gaia_object_only
+number_of_groups 9320
+set_scaling_to_map_size
+temp_min_distance_group_placement 48
+actor_area 34
+actor_area_radius 16
+avoid_actor_area 6
+find_closest
+}
+create_object BUTTERFLIES_B
+{
+set_gaia_object_only
+number_of_groups 9320
+set_scaling_to_map_size
+temp_min_distance_group_placement 48
+actor_area 35
+actor_area_radius 16
+avoid_actor_area 6
+avoid_actor_area 34
+find_closest
+}
+create_object BUTTERFLIES_C
+{
+set_gaia_object_only
+number_of_groups 9320
+set_scaling_to_map_size
+temp_min_distance_group_placement 48
+avoid_actor_area 6
+avoid_actor_area 34
+avoid_actor_area 35
+find_closest
+}
+/* END_OBJECTS_AUTOSCRIBE */
+if REGICIDE
+create_object KING
+{
+	set_place_for_every_player
+	find_closest
+}
+endif
+<LAND_GENERATION>
+base_terrain NNGB
+/* LAND_AUTOSCRIBE */
+create_player_lands
+{
+terrain_type DLC_WETROCKBEACH
+circle_radius 40 0
+base_elevation 1
+other_zone_avoidance_distance 10
+clumping_factor 30
+if TINY_MAP
+base_size 6
+land_percent 4
+elseif SMALL_MAP
+base_size 7
+land_percent 8
+elseif MEDIUM_MAP
+base_size 9
+land_percent 8
+elseif LARGE_MAP
+base_size 9
+land_percent 10
+elseif HUGE_MAP
+base_size 10
+land_percent 11
+elseif GIGANTIC_MAP
+base_size 10
+land_percent 11
+else
+endif
+}
+start_random
+percent_chance 100  #define C1
+end_random
+if C1
+L { terrain_type GB land_percent 0 land_position rnd(50,54) rnd(32,36) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(50,54) rnd(33,37) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(57,61) rnd(31,35) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(46,50) rnd(65,69) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(32,36) rnd(44,48) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(47,51) rnd(68,72) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(36,40) rnd(63,67) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(45,49) rnd(30,34) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(40,44) rnd(33,37) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(32,36) rnd(42,46) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(64,68) rnd(47,51) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(53,57) rnd(67,71) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(62,66) rnd(63,67) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(31,35) rnd(44,48) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(36,40) rnd(38,42) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(54,58) rnd(66,70) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(41,45) rnd(66,70) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(56,60) rnd(31,35) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(29,33) rnd(49,53) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(50,54) rnd(66,70) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(43,47) rnd(64,68) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(62,66) rnd(57,61) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(37,41) rnd(36,40) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(40,44) rnd(31,35) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(44,48) rnd(31,35) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(33,37) rnd(35,39) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(32,36) rnd(41,45) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(57,61) rnd(36,40) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(31,35) rnd(58,62) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(52,56) rnd(29,33) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(61,65) rnd(63,67) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(60,64) rnd(61,65) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(42,46) rnd(67,71) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(55,59) rnd(29,33) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(62,66) rnd(37,41) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(55,59) rnd(64,68) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(38,42) rnd(60,64) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(60,64) rnd(32,36) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(57,61) rnd(34,38) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(63,67) rnd(57,61) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(29,33) rnd(52,56) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(34,38) rnd(36,40) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(63,67) rnd(43,47) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(35,39) rnd(39,43) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(48,52) rnd(29,33) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(59,63) rnd(33,37) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(56,60) rnd(66,70) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(66,70) rnd(55,59) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(61,65) rnd(36,40) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(64,68) rnd(36,40) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(68,72) rnd(47,51) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(45,49) rnd(65,69) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(34,38) rnd(57,61) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(64,68) rnd(49,53) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(45,49) rnd(68,72) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(67,71) rnd(48,52) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(42,46) rnd(63,67) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(37,41) rnd(35,39) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(52,56) rnd(67,71) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(28,32) rnd(46,50) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(61,65) rnd(35,39) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(36,40) rnd(59,63) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(62,66) rnd(36,40) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(53,57) rnd(33,37) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(44,48) rnd(64,68) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(44,48) rnd(67,71) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(48,52) rnd(31,35) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(65,69) rnd(44,48) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(56,60) rnd(32,36) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(45,49) rnd(31,35) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(32,36) rnd(57,61) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(35,39) rnd(63,67) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(51,55) rnd(65,69) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(32,36) rnd(47,51) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(30,34) rnd(57,61) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(33,37) rnd(59,63) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(41,45) rnd(34,38) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(66,70) rnd(42,46) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(55,59) rnd(67,71) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(35,39) rnd(61,65) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(59,63) rnd(34,38) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(28,32) rnd(50,54) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(33,37) rnd(40,44) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(39,43) rnd(33,37) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(49,53) rnd(28,32) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(47,51) rnd(30,34) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(40,44) rnd(63,67) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(64,68) rnd(56,60) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(65,69) rnd(49,53) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(32,36) rnd(38,42) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(61,65) rnd(59,63) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(55,59) rnd(34,38) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(35,39) rnd(57,61) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(65,69) rnd(41,45) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(60,64) rnd(60,64) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(65,69) rnd(43,47) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(50,54) rnd(65,69) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(31,35) rnd(38,42) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(56,60) rnd(65,69) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(59,63) rnd(31,35) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(39,43) rnd(35,39) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(64,68) rnd(40,44) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(44,48) rnd(30,34) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(51,55) rnd(31,35) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(52,56) rnd(64,68) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(32,36) rnd(48,52) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(32,36) rnd(43,47) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(56,60) rnd(30,34) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(30,34) rnd(52,56) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(30,34) rnd(50,54) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(31,35) rnd(41,45) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(63,67) rnd(62,66) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(38,42) rnd(61,65) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(33,37) rnd(41,45) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(46,50) rnd(64,68) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(38,42) rnd(64,68) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(60,64) rnd(64,68) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(36,40) rnd(61,65) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(28,32) rnd(47,51) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(31,35) rnd(59,63) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(67,71) rnd(53,57) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(62,66) rnd(59,63) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(50,54) rnd(68,72) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(65,69) rnd(38,42) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(35,39) rnd(38,42) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(30,34) rnd(46,50) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(68,72) rnd(46,50) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(65,69) rnd(56,60) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(58,62) rnd(34,38) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(48,52) rnd(69,73) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(47,51) rnd(31,35) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(34,38) rnd(59,63) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(41,45) rnd(65,69) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(51,55) rnd(67,71) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(53,57) rnd(68,72) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(38,42) rnd(65,69) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(38,42) rnd(33,37) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(65,69) rnd(54,58) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(35,39) rnd(34,38) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(43,47) rnd(33,37) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(60,64) rnd(35,39) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(63,67) rnd(61,65) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(37,41) rnd(60,64) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(34,38) rnd(56,60) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(57,61) rnd(30,34) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(52,56) rnd(65,69) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(45,49) rnd(33,37) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(34,38) rnd(35,39) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(30,34) rnd(56,60) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(36,40) rnd(60,64) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(62,66) rnd(41,45) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(62,66) rnd(56,60) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(50,54) rnd(30,34) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(34,38) rnd(37,41) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(65,69) rnd(48,52) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(35,39) rnd(37,41) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(45,49) rnd(29,33) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(35,39) rnd(36,40) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(64,68) rnd(42,46) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(43,47) rnd(66,70) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(61,65) rnd(62,66) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(39,43) rnd(62,66) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(30,34) rnd(53,57) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(46,50) rnd(31,35) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(66,70) rnd(46,50) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(31,35) rnd(51,55) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(66,70) rnd(51,55) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(65,69) rnd(52,56) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(67,71) rnd(43,47) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(35,39) rnd(59,63) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(63,67) rnd(60,64) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(29,33) rnd(46,50) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(42,46) rnd(32,36) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(65,69) rnd(42,46) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(58,62) rnd(63,67) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(31,35) rnd(52,56) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(33,37) rnd(43,47) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(31,35) rnd(49,53) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(31,35) rnd(50,54) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(39,43) rnd(34,38) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(34,38) rnd(63,67) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(44,48) rnd(65,69) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(62,66) rnd(38,42) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(63,67) rnd(41,45) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(63,67) rnd(54,58) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(58,62) rnd(33,37) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(53,57) rnd(29,33) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(29,33) rnd(43,47) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(40,44) rnd(67,71) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(67,71) rnd(51,55) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(53,57) rnd(64,68) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(40,44) rnd(66,70) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(30,34) rnd(45,49) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(64,68) rnd(41,45) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(52,56) rnd(66,70) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(48,52) rnd(67,71) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(64,68) rnd(45,49) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(48,52) rnd(28,32) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(50,54) rnd(31,35) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(64,68) rnd(59,63) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(30,34) rnd(48,52) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(55,59) rnd(66,70) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(55,59) rnd(30,34) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(43,47) rnd(67,71) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(61,65) rnd(38,42) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(39,43) rnd(31,35) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(56,60) rnd(63,67) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(59,63) rnd(64,68) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(35,39) rnd(62,66) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(64,68) rnd(48,52) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(58,62) rnd(61,65) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(41,45) rnd(62,66) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(63,67) rnd(37,41) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(30,34) rnd(40,44) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(61,65) rnd(33,37) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(41,45) rnd(68,72) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(65,69) rnd(59,63) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(57,61) rnd(33,37) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(41,45) rnd(30,34) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(62,66) rnd(61,65) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(66,70) rnd(52,56) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(46,50) rnd(66,70) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(55,59) rnd(31,35) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(32,36) rnd(59,63) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(38,42) rnd(66,70) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(67,71) rnd(54,58) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(47,51) rnd(66,70) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(45,49) rnd(66,70) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(40,44) rnd(34,38) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(36,40) rnd(34,38) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(64,68) rnd(57,61) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(50,54) rnd(67,71) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(29,33) rnd(45,49) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(47,51) rnd(29,33) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(61,65) rnd(58,62) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(57,61) rnd(66,70) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(64,68) rnd(58,62) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(28,32) rnd(51,55) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(52,56) rnd(31,35) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(62,66) rnd(35,39) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(39,43) rnd(61,65) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(32,36) rnd(52,56) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(29,33) rnd(48,52) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(29,33) rnd(55,59) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(44,48) rnd(29,33) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(28,32) rnd(48,52) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(38,42) rnd(63,67) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(47,51) rnd(33,37) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(61,65) rnd(61,65) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(32,36) rnd(49,53) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(41,45) rnd(32,36) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(34,38) rnd(60,64) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(56,60) rnd(33,37) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(36,40) rnd(65,69) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(31,35) rnd(47,51) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(34,38) rnd(40,44) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(63,67) rnd(40,44) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(63,67) rnd(35,39) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(62,66) rnd(58,62) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(51,55) rnd(64,68) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(38,42) rnd(34,38) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(49,53) rnd(32,36) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(66,70) rnd(45,49) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(55,59) rnd(63,67) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(41,45) rnd(64,68) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(66,70) rnd(56,60) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(60,64) rnd(34,38) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(63,67) rnd(39,43) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(39,43) rnd(63,67) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(41,45) rnd(63,67) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(65,69) rnd(39,43) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(33,37) rnd(36,40) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(30,34) rnd(55,59) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(58,62) rnd(36,40) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(59,63) rnd(35,39) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(29,33) rnd(42,46) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(54,58) rnd(64,68) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(64,68) rnd(60,64) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(39,43) rnd(65,69) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(33,37) rnd(61,65) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(60,64) rnd(37,41) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(44,48) rnd(66,70) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(58,62) rnd(32,36) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(52,56) rnd(30,34) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(55,59) rnd(33,37) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(66,70) rnd(41,45) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(66,70) rnd(48,52) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(28,32) rnd(49,53) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(33,37) rnd(37,41) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(38,42) rnd(36,40) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(49,53) rnd(68,72) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(32,36) rnd(56,60) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(34,38) rnd(62,66) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(31,35) rnd(46,50) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(47,51) rnd(67,71) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(51,55) rnd(29,33) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(51,55) rnd(32,36) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(58,62) rnd(31,35) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(60,64) rnd(36,40) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(38,42) rnd(32,36) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(32,36) rnd(39,43) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(46,50) rnd(32,36) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(66,70) rnd(53,57) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(30,34) rnd(43,47) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(66,70) rnd(57,61) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(43,47) rnd(29,33) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(33,37) rnd(54,58) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(58,62) rnd(65,69) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(64,68) rnd(54,58) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(37,41) rnd(33,37) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(66,70) rnd(43,47) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(37,41) rnd(62,66) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(40,44) rnd(64,68) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(63,67) rnd(55,59) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(51,55) rnd(33,37) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(45,49) rnd(32,36) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(30,34) rnd(54,58) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(62,66) rnd(62,66) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(46,50) rnd(67,71) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(33,37) rnd(58,62) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(31,35) rnd(56,60) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(57,61) rnd(64,68) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(49,53) rnd(33,37) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(64,68) rnd(52,56) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(60,64) rnd(62,66) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(30,34) rnd(51,55) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(65,69) rnd(40,44) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(44,48) rnd(33,37) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(32,36) rnd(58,62) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(33,37) rnd(38,42) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(42,46) rnd(66,70) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(64,68) rnd(50,54) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(46,50) rnd(68,72) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(30,34) rnd(42,46) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(47,51) rnd(69,73) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(37,41) rnd(32,36) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(67,71) rnd(49,53) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(61,65) rnd(39,43) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(61,65) rnd(40,44) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(36,40) rnd(35,39) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(36,40) rnd(64,68) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(65,69) rnd(46,50) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(63,67) rnd(56,60) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(54,58) rnd(29,33) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(29,33) rnd(44,48) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(34,38) rnd(38,42) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(66,70) rnd(44,48) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(30,34) rnd(47,51) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(29,33) rnd(54,58) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(32,36) rnd(55,59) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(62,66) rnd(60,64) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(33,37) rnd(42,46) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(64,68) rnd(51,55) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(60,64) rnd(38,42) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(65,69) rnd(50,54) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(42,46) rnd(64,68) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(33,37) rnd(57,61) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(59,63) rnd(65,69) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(36,40) rnd(36,40) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(66,70) rnd(40,44) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(42,46) rnd(30,34) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(34,38) rnd(39,43) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(62,66) rnd(34,38) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(31,35) rnd(39,43) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(43,47) rnd(63,67) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(60,64) rnd(59,63) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(44,48) rnd(32,36) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(50,54) rnd(29,33) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(30,34) rnd(49,53) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(63,67) rnd(36,40) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(68,72) rnd(48,52) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(56,60) rnd(34,38) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(59,63) rnd(32,36) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(43,47) rnd(32,36) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(31,35) rnd(57,61) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(37,41) rnd(64,68) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(36,40) rnd(37,41) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(67,71) rnd(46,50) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(35,39) rnd(35,39) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(40,44) rnd(32,36) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(63,67) rnd(59,63) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(60,64) rnd(33,37) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(67,71) rnd(45,49) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(29,33) rnd(50,54) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(47,51) rnd(32,36) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(59,63) rnd(63,67) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(48,52) rnd(65,69) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(32,36) rnd(51,55) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(54,58) rnd(67,71) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(65,69) rnd(51,55) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(64,68) rnd(46,50) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(37,41) rnd(37,41) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(52,56) rnd(32,36) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(40,44) rnd(62,66) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(32,36) rnd(37,41) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(49,53) rnd(66,70) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(45,49) rnd(64,68) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(36,40) rnd(62,66) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(41,45) rnd(31,35) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(53,57) rnd(66,70) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(64,68) rnd(38,42) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(49,53) rnd(64,68) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(64,68) rnd(43,47) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(51,55) rnd(66,70) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(41,45) rnd(67,71) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(37,41) rnd(65,69) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(62,66) rnd(39,43) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(35,39) rnd(64,68) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(31,35) rnd(42,46) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(49,53) rnd(31,35) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(58,62) rnd(62,66) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(48,52) rnd(64,68) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(59,63) rnd(36,40) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(58,62) rnd(64,68) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(66,70) rnd(49,53) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(54,58) rnd(34,38) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(63,67) rnd(42,46) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(65,69) rnd(45,49) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(55,59) rnd(35,39) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(67,71) rnd(42,46) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(61,65) rnd(34,38) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(31,35) rnd(48,52) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(54,58) rnd(30,34) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(58,62) rnd(35,39) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(64,68) rnd(44,48) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(57,61) rnd(63,67) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(39,43) rnd(64,68) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(62,66) rnd(40,44) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(40,44) rnd(65,69) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(43,47) rnd(30,34) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(65,69) rnd(47,51) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(67,71) rnd(47,51) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(57,61) rnd(62,66) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(52,56) rnd(68,72) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(59,63) rnd(62,66) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(33,37) rnd(55,59) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(64,68) rnd(37,41) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(32,36) rnd(50,54) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(37,41) rnd(34,38) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(67,71) rnd(50,54) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(65,69) rnd(55,59) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(48,52) rnd(66,70) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(67,71) rnd(44,48) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(57,61) rnd(35,39) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(51,55) rnd(68,72) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(43,47) rnd(65,69) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(32,36) rnd(54,58) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(61,65) rnd(60,64) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(42,46) rnd(31,35) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(37,41) rnd(66,70) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(29,33) rnd(47,51) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(56,60) rnd(35,39) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(49,53) rnd(65,69) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(53,57) rnd(30,34) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(38,42) rnd(35,39) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(33,37) rnd(60,64) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(66,70) rnd(50,54) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(39,43) rnd(67,71) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(53,57) rnd(31,35) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(63,67) rnd(38,42) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(67,71) rnd(55,59) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(31,35) rnd(43,47) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(46,50) rnd(30,34) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(34,38) rnd(61,65) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(47,51) rnd(64,68) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(53,57) rnd(32,36) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(29,33) rnd(53,57) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(54,58) rnd(33,37) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(33,37) rnd(39,43) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(35,39) rnd(60,64) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(34,38) rnd(34,38) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(53,57) rnd(65,69) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(34,38) rnd(41,45) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(66,70) rnd(47,51) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(31,35) rnd(55,59) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(31,35) rnd(40,44) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(42,46) rnd(68,72) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(59,63) rnd(37,41) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(37,41) rnd(61,65) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(55,59) rnd(32,36) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(33,37) rnd(62,66) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(32,36) rnd(61,65) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(32,36) rnd(60,64) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(57,61) rnd(32,36) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(38,42) rnd(62,66) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(64,68) rnd(53,57) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(49,53) rnd(30,34) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(32,36) rnd(46,50) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(55,59) rnd(65,69) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(67,71) rnd(52,56) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(57,61) rnd(65,69) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(39,43) rnd(32,36) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(54,58) rnd(32,36) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(56,60) rnd(64,68) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(35,39) rnd(58,62) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(48,52) rnd(33,37) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(41,45) rnd(33,37) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(54,58) rnd(65,69) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(46,50) rnd(29,33) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(32,36) rnd(45,49) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(47,51) rnd(65,69) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(30,34) rnd(41,45) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(37,41) rnd(63,67) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(65,69) rnd(57,61) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(48,52) rnd(68,72) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(34,38) rnd(58,62) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(68,72) rnd(50,54) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(49,53) rnd(67,71) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(48,52) rnd(30,34) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(58,62) rnd(37,41) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(60,64) rnd(63,67) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(42,46) rnd(65,69) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(54,58) rnd(31,35) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(53,57) rnd(34,38) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(43,47) rnd(31,35) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(59,63) rnd(61,65) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(49,53) rnd(29,33) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(36,40) rnd(33,37) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(30,34) rnd(44,48) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(64,68) rnd(39,43) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(63,67) rnd(58,62) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(44,48) rnd(68,72) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(32,36) rnd(53,57) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(48,52) rnd(32,36) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(66,70) rnd(54,58) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(33,37) rnd(56,60) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(31,35) rnd(54,58) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(42,46) rnd(33,37) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(51,55) rnd(30,34) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(49,53) rnd(69,73) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(29,33) rnd(51,55) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(65,69) rnd(53,57) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(52,56) rnd(33,37) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(59,63) rnd(60,64) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(65,69) rnd(58,62) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(31,35) rnd(45,49) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(39,43) rnd(66,70) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(64,68) rnd(55,59) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(45,49) rnd(67,71) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(68,72) rnd(49,53) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(61,65) rnd(37,41) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(32,36) rnd(40,44) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(43,47) rnd(68,72) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(31,35) rnd(53,57) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(61,63) rnd(61,63) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(66,68) rnd(51,53) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(36,38) rnd(38,40) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(53,55) rnd(34,36) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(33,35) rnd(54,56) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(35,37) rnd(42,44) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(61,63) rnd(36,38) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(56,58) rnd(33,35) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(65,67) rnd(54,56) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(56,58) rnd(66,68) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(51,53) rnd(35,37) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(33,35) rnd(51,53) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(60,62) rnd(39,41) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(66,68) rnd(56,58) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(62,64) rnd(59,61) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(63,65) rnd(52,54) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(57,59) rnd(62,64) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(67,69) rnd(48,50) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(38,40) rnd(41,43) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(52,54) rnd(34,36) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(43,45) rnd(62,64) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(56,58) rnd(64,66) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(47,49) rnd(35,37) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(58,60) rnd(38,40) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(52,54) rnd(32,34) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(43,45) rnd(36,38) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(35,37) rnd(46,48) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(34,36) rnd(47,49) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(63,65) rnd(38,40) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(44,46) rnd(36,38) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(55,57) rnd(35,37) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(34,36) rnd(44,46) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(64,66) rnd(45,47) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(42,44) rnd(62,64) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(35,37) rnd(47,49) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(34,36) rnd(42,44) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(62,64) rnd(44,46) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(42,44) rnd(64,66) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(36,38) rnd(61,63) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(64,66) rnd(43,45) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(42,44) rnd(36,38) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(45,47) rnd(63,65) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(53,55) rnd(35,37) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(37,39) rnd(40,42) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(59,61) rnd(59,61) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(63,65) rnd(49,51) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(35,37) rnd(53,55) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(50,52) rnd(63,65) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(67,69) rnd(49,51) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(35,37) rnd(58,60) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(40,42) rnd(37,39) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(59,61) rnd(62,64) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(36,38) rnd(60,62) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(61,63) rnd(42,44) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(66,68) rnd(55,57) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(63,65) rnd(43,45) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(63,65) rnd(46,48) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(34,36) rnd(59,61) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(54,56) rnd(65,67) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(49,51) rnd(66,68) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(46,48) rnd(34,36) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(66,68) rnd(52,54) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(50,52) rnd(35,37) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(45,47) rnd(67,69) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(37,39) rnd(56,58) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(45,47) rnd(33,35) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(58,60) rnd(39,41) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(57,59) rnd(33,35) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(58,60) rnd(35,37) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(35,37) rnd(39,41) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(33,35) rnd(45,47) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(62,64) rnd(56,58) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(37,39) rnd(38,40) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(33,35) rnd(41,43) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(32,34) rnd(45,47) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(51,53) rnd(36,38) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(42,44) rnd(63,65) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(32,34) rnd(49,51) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(45,47) rnd(66,68) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(65,67) rnd(58,60) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(65,67) rnd(55,57) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(64,66) rnd(55,57) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(31,33) rnd(52,54) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(33,35) rnd(57,59) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(42,44) rnd(34,36) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(52,54) rnd(33,35) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(40,42) rnd(34,36) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(54,56) rnd(35,37) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(64,66) rnd(57,59) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(32,34) rnd(56,58) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(38,40) rnd(38,40) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(35,37) rnd(49,51) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(62,64) rnd(55,57) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(60,62) rnd(59,61) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(42,44) rnd(37,39) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(50,52) rnd(36,38) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(39,41) rnd(40,42) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(44,46) rnd(62,64) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(63,65) rnd(54,56) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(42,44) rnd(65,67) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(38,40) rnd(62,64) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(54,56) rnd(34,36) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(40,42) rnd(62,64) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(36,38) rnd(55,57) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(52,54) rnd(64,66) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(33,35) rnd(53,55) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(43,45) rnd(66,68) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(63,65) rnd(44,46) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(48,50) rnd(65,67) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(35,37) rnd(60,62) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(46,48) rnd(65,67) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(37,39) rnd(59,61) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(37,39) rnd(39,41) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(38,40) rnd(36,38) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(37,39) rnd(37,39) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(65,67) rnd(47,49) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(48,50) rnd(36,38) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(48,50) rnd(63,65) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(66,68) rnd(53,55) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(60,62) rnd(35,37) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(31,33) rnd(48,50) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(62,64) rnd(58,60) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(37,39) rnd(58,60) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(63,65) rnd(50,52) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(64,66) rnd(56,58) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(37,39) rnd(63,65) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(59,61) rnd(37,39) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(35,37) rnd(40,42) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(42,44) rnd(33,35) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(34,36) rnd(41,43) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(56,58) rnd(36,38) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(63,65) rnd(61,63) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(49,51) rnd(31,33) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(60,62) rnd(41,43) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(51,53) rnd(64,66) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(65,67) rnd(48,50) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(50,52) rnd(67,69) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(41,43) rnd(34,36) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(34,36) rnd(57,59) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(63,65) rnd(60,62) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(44,46) rnd(64,66) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(66,68) rnd(54,56) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(31,33) rnd(50,52) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(62,64) rnd(57,59) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(64,66) rnd(51,53) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(59,61) rnd(39,41) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(55,57) rnd(64,66) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(35,37) rnd(41,43) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(65,67) rnd(44,46) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(49,51) rnd(33,35) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(64,66) rnd(59,61) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(37,39) rnd(36,38) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(40,42) rnd(36,38) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(40,42) rnd(61,63) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(36,38) rnd(57,59) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(65,67) rnd(41,43) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(61,63) rnd(63,65) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(36,38) rnd(37,39) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(32,34) rnd(47,49) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(36,38) rnd(58,60) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(47,49) rnd(64,66) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(43,45) rnd(34,36) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(39,41) rnd(39,41) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(63,65) rnd(55,57) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(48,50) rnd(67,69) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(33,35) rnd(50,52) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(49,51) rnd(35,37) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(47,49) rnd(34,36) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(35,37) rnd(57,59) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(34,36) rnd(49,51) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(38,40) rnd(63,65) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(55,57) rnd(65,67) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(57,59) rnd(39,41) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(33,35) rnd(44,46) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(50,52) rnd(32,34) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(55,57) rnd(36,38) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(53,55) rnd(32,34) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(33,35) rnd(43,45) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(63,65) rnd(47,49) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(43,45) rnd(35,37) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(60,62) rnd(60,62) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(34,36) rnd(52,54) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(35,37) rnd(52,54) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(45,47) rnd(34,36) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(52,54) rnd(35,37) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(61,63) rnd(37,39) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(65,67) rnd(53,55) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(37,39) rnd(60,62) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(43,45) rnd(33,35) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(35,37) rnd(50,52) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(35,37) rnd(51,53) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(60,62) rnd(61,63) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(46,48) rnd(36,38) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(38,40) rnd(40,42) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(63,65) rnd(42,44) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(35,37) rnd(48,50) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(50,52) rnd(64,66) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(48,50) rnd(33,35) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(61,63) rnd(57,59) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(64,66) rnd(49,51) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(59,61) rnd(34,36) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(38,40) rnd(58,60) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(49,51) rnd(68,70) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(41,43) rnd(60,62) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(36,38) rnd(45,47) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(64,66) rnd(46,48) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(60,62) rnd(58,60) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(42,44) rnd(35,37) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(51,53) rnd(65,67) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(37,39) rnd(42,44) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(62,64) rnd(41,43) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(65,67) rnd(56,58) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(45,47) rnd(35,37) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(34,36) rnd(60,62) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(34,36) rnd(55,57) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(31,33) rnd(47,49) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(55,57) rnd(32,34) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(63,65) rnd(48,50) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(60,62) rnd(36,38) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(67,69) rnd(47,49) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(50,52) rnd(66,68) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(59,61) rnd(61,63) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(43,45) rnd(65,67) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(46,48) rnd(32,34) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(58,60) rnd(65,67) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(50,52) rnd(34,36) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(44,46) rnd(63,65) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(39,41) rnd(36,38) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(49,51) rnd(65,67) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(36,38) rnd(54,56) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(59,61) rnd(40,42) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(51,53) rnd(66,68) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(65,67) rnd(50,52) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(41,43) rnd(62,64) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(42,44) rnd(66,68) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(62,64) rnd(60,62) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(38,40) rnd(59,61) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(58,60) rnd(62,64) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(65,67) rnd(45,47) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(39,41) rnd(35,37) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(43,45) rnd(67,69) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(44,46) rnd(65,67) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(62,64) rnd(45,47) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(57,59) rnd(61,63) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(51,53) rnd(67,69) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(64,66) rnd(54,56) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(34,36) rnd(53,55) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(37,39) rnd(62,64) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(61,63) rnd(38,40) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(34,36) rnd(58,60) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(49,51) rnd(64,66) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(42,44) rnd(61,63) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(41,43) rnd(37,39) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(49,51) rnd(63,65) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(44,46) rnd(33,35) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(53,55) rnd(64,66) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(61,63) rnd(58,60) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(53,55) rnd(63,65) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(63,65) rnd(53,55) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(48,50) rnd(35,37) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(35,37) rnd(56,58) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(33,35) rnd(58,60) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(34,36) rnd(48,50) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(37,39) rnd(61,63) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(45,47) rnd(65,67) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(62,64) rnd(54,56) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(32,34) rnd(53,55) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(34,36) rnd(50,52) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(64,66) rnd(44,46) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(60,62) rnd(63,65) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(53,55) rnd(66,68) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(58,60) rnd(61,63) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(66,68) rnd(44,46) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(40,42) rnd(63,65) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(55,57) rnd(34,36) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(64,66) rnd(47,49) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(65,67) rnd(51,53) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(53,55) rnd(36,38) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(33,35) rnd(52,54) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(64,66) rnd(58,60) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(61,63) rnd(40,42) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(62,64) rnd(39,41) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(33,35) rnd(42,44) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(48,50) rnd(66,68) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(35,37) rnd(44,46) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(59,61) rnd(36,38) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(44,46) rnd(66,68) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(41,43) rnd(66,68) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(66,68) rnd(43,45) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(47,49) rnd(66,68) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(54,56) rnd(64,66) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(34,36) rnd(46,48) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(39,41) rnd(37,39) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(63,65) rnd(56,58) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(59,61) rnd(38,40) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(31,33) rnd(51,53) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(40,42) rnd(39,41) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(57,59) rnd(63,65) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(59,61) rnd(60,62) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(50,52) rnd(68,70) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(41,43) rnd(38,40) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(61,63) rnd(39,41) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(39,41) rnd(63,65) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(65,67) rnd(42,44) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(59,61) rnd(63,65) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(63,65) rnd(45,47) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(61,63) rnd(59,61) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(64,66) rnd(41,43) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(66,68) rnd(50,52) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(46,48) rnd(33,35) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(32,34) rnd(51,53) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(34,36) rnd(45,47) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(33,35) rnd(47,49) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(56,58) rnd(65,67) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(58,60) rnd(36,38) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(57,59) rnd(37,39) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(36,38) rnd(42,44) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(47,49) rnd(32,34) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(33,35) rnd(49,51) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(65,67) rnd(52,54) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(46,48) rnd(63,65) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(58,60) rnd(33,35) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(51,53) rnd(33,35) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(63,65) rnd(58,60) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(62,64) rnd(61,63) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(32,34) rnd(43,45) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(62,64) rnd(62,64) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(34,36) rnd(51,53) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(62,64) rnd(38,40) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(45,47) rnd(64,66) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(48,50) rnd(68,70) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(35,37) rnd(45,47) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(58,60) rnd(64,66) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(39,41) rnd(64,66) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(53,55) rnd(67,69) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(63,65) rnd(59,61) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(64,66) rnd(48,50) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(36,38) rnd(39,41) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(64,66) rnd(39,41) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(54,56) rnd(37,39) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(66,68) rnd(45,47) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(45,47) rnd(32,34) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(52,54) rnd(36,38) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(36,38) rnd(56,58) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(54,56) rnd(32,34) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(52,54) rnd(66,68) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(45,47) rnd(36,38) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(33,35) rnd(55,57) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(59,61) rnd(64,66) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(66,68) rnd(48,50) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(39,41) rnd(65,67) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(61,63) rnd(60,62) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(54,56) rnd(33,35) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(44,46) rnd(34,36) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(63,65) rnd(57,59) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(43,45) rnd(64,66) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(66,68) rnd(49,51) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(52,54) rnd(65,67) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(56,58) rnd(34,36) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(54,56) rnd(36,38) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(41,43) rnd(64,66) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(58,60) rnd(60,62) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(49,51) rnd(36,38) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(50,52) rnd(31,33) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(32,34) rnd(44,46) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(34,36) rnd(54,56) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(34,36) rnd(56,58) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(54,56) rnd(63,65) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(35,37) rnd(38,40) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(61,63) rnd(62,64) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(41,43) rnd(63,65) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(55,57) rnd(33,35) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(36,38) rnd(41,43) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(33,35) rnd(46,48) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(39,41) rnd(38,40) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(60,62) rnd(40,42) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(41,43) rnd(65,67) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(65,67) rnd(46,48) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(61,63) rnd(41,43) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(37,39) rnd(41,43) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(38,40) rnd(37,39) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(40,42) rnd(64,66) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(48,50) rnd(34,36) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(58,60) rnd(63,65) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(65,67) rnd(43,45) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(53,55) rnd(33,35) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(55,57) rnd(63,65) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(40,42) rnd(60,62) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(53,55) rnd(65,67) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(38,40) rnd(39,41) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(51,53) rnd(34,36) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(36,38) rnd(43,45) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(40,42) rnd(65,67) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(47,49) rnd(33,35) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(64,66) rnd(52,54) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(33,35) rnd(56,58) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(35,37) rnd(43,45) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(41,43) rnd(61,63) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(58,60) rnd(34,36) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(57,59) rnd(65,67) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(38,40) rnd(61,63) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(67,69) rnd(50,52) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(49,51) rnd(34,36) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(51,53) rnd(32,34) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(57,59) rnd(35,37) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(49,51) rnd(32,34) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(47,49) rnd(63,65) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(32,34) rnd(46,48) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(32,34) rnd(48,50) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(59,61) rnd(35,37) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(41,43) rnd(35,37) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(36,38) rnd(40,42) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(50,52) rnd(33,35) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(46,48) rnd(66,68) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(32,34) rnd(52,54) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(56,58) rnd(37,39) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(38,40) rnd(64,66) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(62,64) rnd(37,39) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(57,59) rnd(38,40) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(57,59) rnd(34,36) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(34,36) rnd(43,45) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(64,66) rnd(40,42) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(65,67) rnd(49,51) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(35,37) rnd(54,56) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(66,68) rnd(46,48) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(40,42) rnd(66,68) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(52,54) rnd(63,65) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(47,49) rnd(65,67) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(47,49) rnd(67,69) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(46,48) rnd(67,69) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(52,54) rnd(67,69) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(35,37) rnd(59,61) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(56,58) rnd(35,37) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(64,66) rnd(42,44) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(46,48) rnd(64,66) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(44,46) rnd(35,37) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(48,50) rnd(32,34) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(56,58) rnd(38,40) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(63,65) rnd(41,43) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(49,51) rnd(67,69) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(36,38) rnd(44,46) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(32,34) rnd(54,56) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(36,38) rnd(62,64) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(39,41) rnd(59,61) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(61,63) rnd(43,45) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(31,33) rnd(49,51) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(32,34) rnd(55,57) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(48,50) rnd(64,66) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(50,52) rnd(65,67) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(55,57) rnd(37,39) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(57,59) rnd(36,38) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(56,58) rnd(63,65) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(63,65) rnd(40,42) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(32,34) rnd(50,52) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(60,62) rnd(38,40) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(39,41) rnd(62,64) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(60,62) rnd(62,64) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(41,43) rnd(36,38) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(39,41) rnd(60,62) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(35,37) rnd(61,63) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(35,37) rnd(55,57) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(57,59) rnd(64,66) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(62,64) rnd(43,45) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(40,42) rnd(35,37) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(58,60) rnd(37,39) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(66,68) rnd(47,49) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(46,48) rnd(35,37) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(64,66) rnd(50,52) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(67,69) rnd(51,53) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(62,64) rnd(42,44) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(43,45) rnd(63,65) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(38,40) rnd(60,62) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(63,65) rnd(39,41) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(64,66) rnd(53,55) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(36,38) rnd(59,61) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(62,64) rnd(40,42) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(39,41) rnd(61,63) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(55,57) rnd(66,68) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(34,36) rnd(40,42) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(37,39) rnd(57,59) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(54,56) rnd(66,68) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(40,42) rnd(38,40) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(65,67) rnd(57,59) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(44,46) rnd(67,69) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(33,35) rnd(48,50) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(56,58) rnd(62,64) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(63,65) rnd(51,53) base_size 1 }
+L { terrain_type GB land_percent 0 land_position rnd(60,62) rnd(37,39) base_size 1 }
+L { terrain_type GB land_percent 0 land_position 55 62 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 46 62 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 51 67 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 34 52 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 57 41 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 54 66 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 42 62 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 39 45 base_size 1 }
+L { terrain_type DLC_WATER5 land_percent 0 land_position 54 41 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 42 38 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 61 44 base_size 1 }
+L { terrain_type DLC_WATER5 land_percent 0 land_position 54 42 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 54 35 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 54 36 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 48 64 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 64 58 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 34 53 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 62 39 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 50 35 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 59 41 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 49 37 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 50 39 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 44 39 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 59 43 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 40 39 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 40 59 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 41 38 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 52 37 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 34 48 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 54 63 base_size 1 }
+L { terrain_type DLC_WATER5 land_percent 0 land_position 41 49 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 42 63 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 60 38 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 63 52 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 42 61 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 63 53 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 63 47 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 47 62 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 65 52 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 37 43 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 52 64 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 64 46 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 36 43 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 61 58 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 63 59 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 56 38 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 39 40 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 51 64 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 39 43 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 56 39 base_size 1 }
+L { terrain_type DLC_WATER5 land_percent 0 land_position 59 49 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 49 64 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 46 37 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 62 48 base_size 1 }
+L { terrain_type DLC_WATER5 land_percent 0 land_position 45 42 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 49 63 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 59 42 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 46 66 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 66 52 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 38 51 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 63 56 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 37 55 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 49 38 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 46 64 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 57 39 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 36 52 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 41 64 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 51 65 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 55 65 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 37 53 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 62 47 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 49 67 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 37 56 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 65 56 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 53 62 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 48 65 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 43 38 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 53 39 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 61 45 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 43 37 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 44 61 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 34 51 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 37 57 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 39 56 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 59 39 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 43 60 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 37 51 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 41 61 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 54 38 base_size 1 }
+L { terrain_type DLC_WATER5 land_percent 0 land_position 40 51 base_size 1 }
+L { terrain_type DLC_WATER5 land_percent 0 land_position 44 42 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 44 40 base_size 1 }
+L { terrain_type DLC_WATER5 land_percent 0 land_position 46 41 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 60 41 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 62 44 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 44 65 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 57 60 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 49 62 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 41 63 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 64 49 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 61 59 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 57 64 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 55 64 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 53 66 base_size 1 }
+L { terrain_type DLC_WATER5 land_percent 0 land_position 40 49 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 41 59 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 35 55 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 63 43 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 57 61 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 58 38 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 56 36 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 50 38 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 37 49 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 35 49 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 50 62 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 62 45 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 51 38 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 65 45 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 41 58 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 50 64 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 60 58 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 40 58 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 62 58 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 37 52 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 51 36 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 43 62 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 53 63 base_size 1 }
+L { terrain_type DLC_WATER5 land_percent 0 land_position 45 41 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 61 62 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 57 36 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 57 37 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 44 66 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 38 50 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 47 38 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 58 37 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 43 41 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 47 63 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 38 41 base_size 1 }
+L { terrain_type DLC_WATER5 land_percent 0 land_position 59 51 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 63 57 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 56 61 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 43 63 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 51 37 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 64 47 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 40 40 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 54 64 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 59 60 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 36 50 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 64 55 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 40 63 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 62 52 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 58 64 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 36 57 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 38 45 base_size 1 }
+L { terrain_type DLC_WATER5 land_percent 0 land_position 55 58 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 56 41 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 57 62 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 39 60 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 63 50 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 55 63 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 36 48 base_size 1 }
+L { terrain_type DLC_WATER5 land_percent 0 land_position 44 58 base_size 1 }
+L { terrain_type DLC_WATER5 land_percent 0 land_position 40 50 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 38 44 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 63 44 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 42 41 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 66 50 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 59 59 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 62 51 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 39 42 base_size 1 }
+L { terrain_type DLC_WATER5 land_percent 0 land_position 54 58 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 35 52 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 48 36 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 40 41 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 38 53 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 39 59 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 37 44 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 56 63 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 59 61 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 39 57 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 64 54 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 56 37 base_size 1 }
+L { terrain_type DLC_WATER5 land_percent 0 land_position 60 50 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 47 65 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 49 39 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 38 46 base_size 1 }
+L { terrain_type DLC_WATER5 land_percent 0 land_position 45 58 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 36 46 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 46 63 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 52 39 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 64 48 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 54 62 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 39 63 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 50 66 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 51 39 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 42 40 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 62 50 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 58 62 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 65 48 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 37 46 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 60 44 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 36 44 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 41 62 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 61 57 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 45 61 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 65 53 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 38 61 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 62 41 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 64 50 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 45 64 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 41 40 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 59 40 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 42 60 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 65 49 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 35 47 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 60 40 base_size 1 }
+L { terrain_type DLC_WATER5 land_percent 0 land_position 41 51 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 62 57 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 45 63 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 58 60 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 61 39 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 46 38 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 61 60 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 54 65 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 57 38 base_size 1 }
+L { terrain_type DLC_WATER5 land_percent 0 land_position 59 50 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 58 42 base_size 1 }
+L { terrain_type DLC_WATER5 land_percent 0 land_position 46 59 base_size 1 }
+L { terrain_type DLC_WATER5 land_percent 0 land_position 46 58 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 52 36 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 45 62 base_size 1 }
+L { terrain_type DLC_WATER5 land_percent 0 land_position 60 49 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 60 39 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 59 37 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 52 66 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 38 56 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 62 61 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 45 65 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 40 42 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 38 62 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 44 38 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 65 46 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 36 53 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 63 41 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 55 39 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 55 36 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 39 61 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 38 54 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 57 40 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 38 40 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 65 51 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 56 65 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 37 47 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 35 56 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 36 47 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 38 52 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 65 50 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 34 50 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 40 60 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 46 36 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 54 39 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 50 37 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 41 39 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 60 61 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 64 52 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 62 53 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 60 62 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 61 61 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 36 58 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 47 64 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 55 40 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 41 41 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 43 40 base_size 1 }
+L { terrain_type DLC_WATER5 land_percent 0 land_position 55 57 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 47 36 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 38 47 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 48 63 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 49 36 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 50 36 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 37 45 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 52 65 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 35 51 base_size 1 }
+L { terrain_type DLC_WATER5 land_percent 0 land_position 41 50 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 44 36 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 36 56 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 38 55 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 63 58 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 55 35 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 40 38 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 63 46 base_size 1 }
+L { terrain_type DLC_WATER5 land_percent 0 land_position 45 43 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 35 45 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 34 49 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 55 37 base_size 1 }
+L { terrain_type DLC_WATER5 land_percent 0 land_position 55 42 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 58 61 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 51 63 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 52 38 base_size 1 }
+L { terrain_type DLC_WATER5 land_percent 0 land_position 45 57 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 48 62 base_size 1 }
+L { terrain_type DLC_WATER5 land_percent 0 land_position 55 41 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 66 49 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 60 57 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 44 37 base_size 1 }
+L { terrain_type DLC_WATER5 land_percent 0 land_position 55 43 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 41 60 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 36 54 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 45 38 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 36 45 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 45 37 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 44 62 base_size 1 }
+L { terrain_type DLC_WATER5 land_percent 0 land_position 46 42 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 35 50 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 52 63 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 42 39 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 35 48 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 65 55 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 43 64 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 46 61 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 64 53 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 42 37 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 65 54 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 58 39 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 50 63 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 62 56 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 47 66 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 56 40 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 39 41 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 59 38 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 38 59 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 39 58 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 40 57 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 43 39 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 46 35 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 64 44 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 39 39 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 54 40 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 64 51 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 37 41 base_size 1 }
+L { terrain_type DLC_WATER5 land_percent 0 land_position 60 51 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 61 56 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 62 55 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 64 43 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 61 41 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 53 36 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 49 65 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 63 48 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 56 64 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 57 63 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 53 38 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 51 34 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 61 42 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 65 47 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 66 48 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 62 42 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 45 66 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 58 63 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 46 65 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 50 67 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 63 54 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 51 66 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 38 43 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 63 55 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 59 63 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 41 42 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 48 37 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 62 54 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 39 44 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 61 46 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 53 65 base_size 1 }
+L { terrain_type DLC_WATER5 land_percent 0 land_position 55 59 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 48 38 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 63 60 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 36 51 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 42 65 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 60 60 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 60 59 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 55 38 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 61 55 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 61 43 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 40 44 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 59 62 base_size 1 }
+L { terrain_type DLC_WATER5 land_percent 0 land_position 54 59 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 58 41 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 62 60 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 56 62 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 35 53 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 50 34 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 61 38 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 37 58 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 62 59 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 40 61 base_size 1 }
+L { terrain_type DLC_WATER5 land_percent 0 land_position 56 42 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 36 55 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 38 48 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 58 36 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 66 51 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 38 49 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 38 60 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 37 42 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 38 57 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 47 39 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 62 49 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 35 54 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 53 37 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 58 40 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 47 35 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 44 64 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 49 35 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 37 54 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 63 49 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 62 43 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 51 62 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 53 35 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 49 66 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 56 35 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 38 58 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 53 64 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 60 42 base_size 1 }
+L { terrain_type DLC_WATER5 land_percent 0 land_position 45 59 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 62 40 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 64 45 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 63 45 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 37 48 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 45 39 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 42 59 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 62 46 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 50 65 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 36 49 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 35 46 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 47 37 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 64 57 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 52 35 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 46 39 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 63 42 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 64 56 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 44 63 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 39 55 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 40 62 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 39 62 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 37 59 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 40 43 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 51 35 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 60 63 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 43 65 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 38 42 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 48 66 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 44 60 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 42 64 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 61 40 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 60 43 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 37 60 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 63 51 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 43 61 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 39 46 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 45 36 base_size 1 }
+L { terrain_type DLC_WATER5 land_percent 0 land_position 56 58 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 37 50 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 54 37 base_size 1 }
+L { terrain_type GB land_percent 0 land_position 48 35 base_size 1 }
+endif
+create_land
+{
+terrain_type GB
+land_position 50 50
+base_elevation 0
+clumping_factor 30
+land_percent 100
+}

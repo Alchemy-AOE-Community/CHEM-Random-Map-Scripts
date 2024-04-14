@@ -32,10 +32,10 @@ At this time, you can create other folders in this location. For example, here i
 
 5) Select URL tab (furthest right):
 ![image](https://user-images.githubusercontent.com/115369420/194991629-52762be0-5041-495f-934e-f9ff5f8d6bb2.png)
-Type in the following URL: https://github.com/Alchemy-AOE-Community/Random-Map-Scripts-AOE2
-Make sure that your Local path is set to: C:\Program Files (x86)\Steam\steamapps\common\AoE2DE\resources\_common\random-map-scripts 
+Type in the following URL: https://github.com/Alchemy-AOE-Community/CHEM-Random-Map-Scripts
+Make sure that your Local path is typed in exactly as follows: C:\Program Files (x86)\Steam\steamapps\common\AoE2DE\resources\_common\random-map-scripts\Alchemy-AOE-Community-Random-Map-Scripts. 
 Hit “Clone”:
-![image](https://github.com/Alchemy-AOE-Community/Random-Map-Scripts-AOE2/assets/167009733/2473ba82-f4d0-42b6-bd1e-3715f229c16a)
+![image](https://github.com/Alchemy-AOE-Community/CHEM-Random-Map-Scripts/assets/167009733/1b0efd4f-af01-4ba8-9921-6b0b88ad0a65)
 
 
 6) A few loading screens will process, and when completed, you should be able to visit:  C:\Program Files (x86)\Steam\steamapps\common\AoE2DE\resources\_common\random-map-scripts and confirm that an additional folder called “Random-Map-Scripts-AOE2” has been added:

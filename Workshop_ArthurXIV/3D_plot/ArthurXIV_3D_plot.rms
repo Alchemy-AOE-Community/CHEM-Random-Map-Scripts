@@ -1,0 +1,1383 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        /* 20230805 3D_plot by Arnaud_les_biscotos aka ArthurXIV aka arthurlegrosdur */
+
+
+
+/* 
+Comment those define commands if you want a normal start:
+  - MILITARY_STARTER gives a random amount (theoretically up to 14 but generally 2-4) of selected starter units instead of the usual scout.
+  - NINE_VILLS is self-explanatory
+  - SCAMS_EVERYWHERE adds 1-resource-only resource piles and fake Relics (50%).
+*/
+ 
+/* #define MILITARY_STARTER */
+* #define NINE_VILLS */
+/* #define SCAMS_EVERYWHERE */
+
+#const GRASS_JUNGLE 60
+
+<PLAYER_SETUP>
+random_placement
+/* ai_info_map_type BLACK_FOREST 0 0 0 */
+/* weather_type -3 16 0 -1 */
+
+<LAND_GENERATION>
+base_terrain GRASS_JUNGLE
+/* enable_waves 0 */
+if     TINY_MAP     override_map_size 120 /* 2players */
+elseif SMALL_MAP    override_map_size 146 /* 3players */
+elseif MEDIUM_MAP   override_map_size 168 /* 4players */
+elseif LARGE_MAP    override_map_size 188 /* Normal 6players */
+elseif HUGE_MAP     override_map_size 206 /* Large 8players */
+elseif GIGANTIC_MAP override_map_size 240
+elseif LUDIKRIS_MAP override_map_size 300
+endif
+/* 
+create_land {
+terrain_type 
+assign_to_player
+zone 
+land_id 
+land_percent 
+number_of_tiles 
+base_size 
+land_position 1 1
+other_zone_avoidance_distance 
+top_border (NW)
+bottom_border (SE)
+left_border (SW)
+right_border (NE)
+base_elevation 1
+border_fuzziness 10
+clumping_factor 100
+} */
+create_player_lands { base_size 0 terrain_type GRASS_JUNGLE land_percent 2 border_fuzziness 80 clumping_factor 20 circle_radius 38 0 }
+
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 2 2 base_elevation 15 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 2 5 base_elevation 15 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 2 8 base_elevation 15 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 2 11 base_elevation 16 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 2 14 base_elevation 16 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 2 17 base_elevation 16 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 2 20 base_elevation 16 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 2 23 base_elevation 16 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 2 27 base_elevation 16 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 2 30 base_elevation 16 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 2 33 base_elevation 17 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 2 36 base_elevation 17 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 2 39 base_elevation 16 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 2 42 base_elevation 16 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 2 45 base_elevation 16 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 2 48 base_elevation 16 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 2 52 base_elevation 15 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 2 55 base_elevation 15 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 2 58 base_elevation 15 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 2 61 base_elevation 14 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 2 64 base_elevation 14 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 2 67 base_elevation 14 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 2 70 base_elevation 14 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 2 73 base_elevation 14 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 2 77 base_elevation 14 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 2 80 base_elevation 14 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 2 83 base_elevation 14 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 2 86 base_elevation 15 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 2 89 base_elevation 15 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 2 92 base_elevation 15 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 2 95 base_elevation 15 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 2 98 base_elevation 15 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 5 2 base_elevation 15 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 5 5 base_elevation 15 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 5 8 base_elevation 16 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 5 11 base_elevation 16 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 5 14 base_elevation 16 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 5 17 base_elevation 16 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 5 20 base_elevation 16 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 5 23 base_elevation 17 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 5 27 base_elevation 17 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 5 30 base_elevation 17 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 5 33 base_elevation 17 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 5 36 base_elevation 17 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 5 39 base_elevation 17 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 5 42 base_elevation 17 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 5 45 base_elevation 16 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 5 48 base_elevation 16 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 5 52 base_elevation 15 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 5 55 base_elevation 15 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 5 58 base_elevation 14 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 5 61 base_elevation 14 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 5 64 base_elevation 13 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 5 67 base_elevation 13 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 5 70 base_elevation 13 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 5 73 base_elevation 13 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 5 77 base_elevation 14 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 5 80 base_elevation 14 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 5 83 base_elevation 14 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 5 86 base_elevation 14 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 5 89 base_elevation 14 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 5 92 base_elevation 15 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 5 95 base_elevation 15 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 5 98 base_elevation 15 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 8 2 base_elevation 15 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 8 5 base_elevation 16 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 8 8 base_elevation 16 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 8 11 base_elevation 16 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 8 14 base_elevation 16 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 8 17 base_elevation 17 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 8 20 base_elevation 17 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 8 23 base_elevation 17 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 8 27 base_elevation 18 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 8 30 base_elevation 18 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 8 33 base_elevation 18 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 8 36 base_elevation 18 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 8 39 base_elevation 18 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 8 42 base_elevation 17 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 8 45 base_elevation 17 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 8 48 base_elevation 16 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 8 52 base_elevation 15 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 8 55 base_elevation 14 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 8 58 base_elevation 14 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 8 61 base_elevation 13 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 8 64 base_elevation 13 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 8 67 base_elevation 12 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 8 70 base_elevation 12 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 8 73 base_elevation 12 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 8 77 base_elevation 13 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 8 80 base_elevation 13 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 8 83 base_elevation 13 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 8 86 base_elevation 14 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 8 89 base_elevation 14 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 8 92 base_elevation 14 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 8 95 base_elevation 15 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 8 98 base_elevation 15 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 11 2 base_elevation 16 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 11 5 base_elevation 16 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 11 8 base_elevation 16 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 11 11 base_elevation 16 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 11 14 base_elevation 17 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 11 17 base_elevation 17 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 11 20 base_elevation 18 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 11 23 base_elevation 18 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 11 27 base_elevation 19 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 11 30 base_elevation 19 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 11 33 base_elevation 19 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 11 36 base_elevation 19 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 11 39 base_elevation 19 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 11 42 base_elevation 18 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 11 45 base_elevation 17 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 11 48 base_elevation 16 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 11 52 base_elevation 15 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 11 55 base_elevation 14 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 11 58 base_elevation 13 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 11 61 base_elevation 12 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 11 64 base_elevation 11 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 11 67 base_elevation 11 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 11 70 base_elevation 11 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 11 73 base_elevation 11 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 11 77 base_elevation 12 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 11 80 base_elevation 12 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 11 83 base_elevation 13 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 11 86 base_elevation 13 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 11 89 base_elevation 14 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 11 92 base_elevation 14 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 11 95 base_elevation 14 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 11 98 base_elevation 15 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 14 2 base_elevation 16 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 14 5 base_elevation 16 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 14 8 base_elevation 16 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 14 11 base_elevation 17 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 14 14 base_elevation 17 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 14 17 base_elevation 18 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 14 20 base_elevation 19 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 14 23 base_elevation 19 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 14 27 base_elevation 20 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 14 30 base_elevation 21 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 14 33 base_elevation 21 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 14 36 base_elevation 21 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 14 39 base_elevation 20 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 14 42 base_elevation 20 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 14 45 base_elevation 18 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 14 48 base_elevation 17 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 14 52 base_elevation 15 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 14 55 base_elevation 14 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 14 58 base_elevation 12 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 14 61 base_elevation 11 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 14 64 base_elevation 10 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 14 67 base_elevation 10 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 14 70 base_elevation 10 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 14 73 base_elevation 10 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 14 77 base_elevation 10 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 14 80 base_elevation 11 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 14 83 base_elevation 12 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 14 86 base_elevation 12 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 14 89 base_elevation 13 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 14 92 base_elevation 14 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 14 95 base_elevation 14 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 14 98 base_elevation 14 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 17 2 base_elevation 16 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 17 5 base_elevation 16 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 17 8 base_elevation 17 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 17 11 base_elevation 17 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 17 14 base_elevation 18 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 17 17 base_elevation 19 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 17 20 base_elevation 20 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 17 23 base_elevation 21 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 17 27 base_elevation 22 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 17 30 base_elevation 22 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 17 33 base_elevation 23 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 17 36 base_elevation 23 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 17 39 base_elevation 22 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 17 42 base_elevation 21 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 17 45 base_elevation 19 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 17 48 base_elevation 17 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 17 52 base_elevation 15 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 17 55 base_elevation 13 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 17 58 base_elevation 11 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 17 61 base_elevation 10 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 17 64 base_elevation 8 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 17 67 base_elevation 8 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 17 70 base_elevation 8 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 17 73 base_elevation 8 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 17 77 base_elevation 9 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 17 80 base_elevation 10 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 17 83 base_elevation 11 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 17 86 base_elevation 12 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 17 89 base_elevation 12 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 17 92 base_elevation 13 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 17 95 base_elevation 14 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 17 98 base_elevation 14 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 20 2 base_elevation 16 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 20 5 base_elevation 16 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 20 8 base_elevation 17 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 20 11 base_elevation 18 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 20 14 base_elevation 19 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 20 17 base_elevation 20 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 20 20 base_elevation 21 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 20 23 base_elevation 22 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 20 27 base_elevation 23 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 20 30 base_elevation 24 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 20 33 base_elevation 25 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 20 36 base_elevation 24 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 20 39 base_elevation 24 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 20 42 base_elevation 22 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 20 45 base_elevation 20 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 20 48 base_elevation 18 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 20 52 base_elevation 15 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 20 55 base_elevation 13 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 20 58 base_elevation 10 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 20 61 base_elevation 8 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 20 64 base_elevation 7 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 20 67 base_elevation 6 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 20 70 base_elevation 6 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 20 73 base_elevation 6 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 20 77 base_elevation 7 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 20 80 base_elevation 8 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 20 83 base_elevation 9 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 20 86 base_elevation 11 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 20 89 base_elevation 12 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 20 92 base_elevation 13 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 20 95 base_elevation 13 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 20 98 base_elevation 14 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 23 2 base_elevation 16 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 23 5 base_elevation 17 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 23 8 base_elevation 17 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 23 11 base_elevation 18 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 23 14 base_elevation 19 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 23 17 base_elevation 21 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 23 20 base_elevation 22 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 23 23 base_elevation 24 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 23 27 base_elevation 25 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 23 30 base_elevation 26 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 23 33 base_elevation 27 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 23 36 base_elevation 26 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 23 39 base_elevation 26 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 23 42 base_elevation 24 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 23 45 base_elevation 21 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 23 48 base_elevation 18 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 23 52 base_elevation 15 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 23 55 base_elevation 12 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 23 58 base_elevation 9 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 23 61 base_elevation 7 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 23 64 base_elevation 5 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 23 67 base_elevation 4 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 23 70 base_elevation 4 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 23 73 base_elevation 4 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 23 77 base_elevation 5 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 23 80 base_elevation 7 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 23 83 base_elevation 8 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 23 86 base_elevation 10 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 23 89 base_elevation 11 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 23 92 base_elevation 12 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 23 95 base_elevation 13 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 23 98 base_elevation 14 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 27 2 base_elevation 16 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 27 5 base_elevation 17 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 27 8 base_elevation 18 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 27 11 base_elevation 19 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 27 14 base_elevation 20 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 27 17 base_elevation 22 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 27 20 base_elevation 23 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 27 23 base_elevation 25 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 27 27 base_elevation 26 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 27 30 base_elevation 28 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 27 33 base_elevation 28 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 27 36 base_elevation 28 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 27 39 base_elevation 27 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 27 42 base_elevation 25 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 27 45 base_elevation 22 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 27 48 base_elevation 19 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 27 52 base_elevation 15 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 27 55 base_elevation 11 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 27 58 base_elevation 8 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 27 61 base_elevation 5 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 27 64 base_elevation 3 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 27 67 base_elevation 2 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 27 70 base_elevation 2 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 27 73 base_elevation 3 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 27 77 base_elevation 4 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 27 80 base_elevation 5 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 27 83 base_elevation 7 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 27 86 base_elevation 9 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 27 89 base_elevation 10 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 27 92 base_elevation 12 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 27 95 base_elevation 13 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 27 98 base_elevation 14 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 30 2 base_elevation 16 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 30 5 base_elevation 17 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 30 8 base_elevation 18 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 30 11 base_elevation 19 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 30 14 base_elevation 21 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 30 17 base_elevation 22 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 30 20 base_elevation 24 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 30 23 base_elevation 26 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 30 27 base_elevation 28 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 30 30 base_elevation 29 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 30 33 base_elevation 30 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 30 36 base_elevation 30 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 30 39 base_elevation 28 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 30 42 base_elevation 26 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 30 45 base_elevation 23 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 30 48 base_elevation 19 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 30 52 base_elevation 15 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 30 55 base_elevation 11 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 30 58 base_elevation 7 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 30 61 base_elevation 4 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 30 64 base_elevation 2 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 30 67 base_elevation 1 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 30 70 base_elevation 1 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 30 73 base_elevation 1 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 30 77 base_elevation 3 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 30 80 base_elevation 4 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 30 83 base_elevation 6 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 30 86 base_elevation 8 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 30 89 base_elevation 10 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 30 92 base_elevation 11 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 30 95 base_elevation 12 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 30 98 base_elevation 13 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 33 2 base_elevation 17 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 33 5 base_elevation 17 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 33 8 base_elevation 18 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 33 11 base_elevation 19 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 33 14 base_elevation 21 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 33 17 base_elevation 23 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 33 20 base_elevation 25 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 33 23 base_elevation 27 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 33 27 base_elevation 28 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 33 30 base_elevation 30 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 33 33 base_elevation 30 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 33 36 base_elevation 30 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 33 39 base_elevation 29 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 33 42 base_elevation 27 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 33 45 base_elevation 24 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 33 48 base_elevation 20 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 33 52 base_elevation 15 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 33 55 base_elevation 11 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 33 58 base_elevation 7 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 33 61 base_elevation 4 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 33 64 base_elevation 1 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 33 67 base_elevation 0 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 33 70 base_elevation 0 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 33 73 base_elevation 1 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 33 77 base_elevation 2 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 33 80 base_elevation 4 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 33 83 base_elevation 6 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 33 86 base_elevation 8 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 33 89 base_elevation 10 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 33 92 base_elevation 11 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 33 95 base_elevation 12 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 33 98 base_elevation 13 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 36 2 base_elevation 17 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 36 5 base_elevation 17 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 36 8 base_elevation 18 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 36 11 base_elevation 19 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 36 14 base_elevation 21 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 36 17 base_elevation 23 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 36 20 base_elevation 24 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 36 23 base_elevation 26 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 36 27 base_elevation 28 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 36 30 base_elevation 30 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 36 33 base_elevation 30 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 36 36 base_elevation 30 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 36 39 base_elevation 29 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 36 42 base_elevation 27 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 36 45 base_elevation 23 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 36 48 base_elevation 20 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 36 52 base_elevation 15 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 36 55 base_elevation 11 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 36 58 base_elevation 7 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 36 61 base_elevation 4 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 36 64 base_elevation 1 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 36 67 base_elevation 0 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 36 70 base_elevation 0 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 36 73 base_elevation 1 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 36 77 base_elevation 2 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 36 80 base_elevation 4 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 36 83 base_elevation 6 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 36 86 base_elevation 8 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 36 89 base_elevation 10 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 36 92 base_elevation 11 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 36 95 base_elevation 12 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 36 98 base_elevation 13 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 39 2 base_elevation 16 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 39 5 base_elevation 17 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 39 8 base_elevation 18 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 39 11 base_elevation 19 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 39 14 base_elevation 20 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 39 17 base_elevation 22 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 39 20 base_elevation 24 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 39 23 base_elevation 26 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 39 27 base_elevation 27 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 39 30 base_elevation 28 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 39 33 base_elevation 29 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 39 36 base_elevation 29 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 39 39 base_elevation 28 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 39 42 base_elevation 26 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 39 45 base_elevation 23 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 39 48 base_elevation 19 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 39 52 base_elevation 15 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 39 55 base_elevation 11 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 39 58 base_elevation 8 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 39 61 base_elevation 5 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 39 64 base_elevation 3 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 39 67 base_elevation 1 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 39 70 base_elevation 1 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 39 73 base_elevation 2 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 39 77 base_elevation 3 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 39 80 base_elevation 5 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 39 83 base_elevation 7 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 39 86 base_elevation 8 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 39 89 base_elevation 10 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 39 92 base_elevation 11 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 39 95 base_elevation 13 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 39 98 base_elevation 13 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 42 2 base_elevation 16 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 42 5 base_elevation 17 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 42 8 base_elevation 17 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 42 11 base_elevation 18 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 42 14 base_elevation 20 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 42 17 base_elevation 21 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 42 20 base_elevation 22 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 42 23 base_elevation 24 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 42 27 base_elevation 25 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 42 30 base_elevation 26 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 42 33 base_elevation 27 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 42 36 base_elevation 27 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 42 39 base_elevation 26 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 42 42 base_elevation 24 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 42 45 base_elevation 22 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 42 48 base_elevation 19 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 42 52 base_elevation 15 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 42 55 base_elevation 12 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 42 58 base_elevation 9 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 42 61 base_elevation 6 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 42 64 base_elevation 5 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 42 67 base_elevation 4 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 42 70 base_elevation 4 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 42 73 base_elevation 4 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 42 77 base_elevation 5 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 42 80 base_elevation 7 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 42 83 base_elevation 8 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 42 86 base_elevation 10 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 42 89 base_elevation 11 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 42 92 base_elevation 12 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 42 95 base_elevation 13 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 42 98 base_elevation 14 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 45 2 base_elevation 16 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 45 5 base_elevation 16 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 45 8 base_elevation 17 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 45 11 base_elevation 17 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 45 14 base_elevation 18 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 45 17 base_elevation 19 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 45 20 base_elevation 20 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 45 23 base_elevation 21 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 45 27 base_elevation 22 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 45 30 base_elevation 23 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 45 33 base_elevation 24 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 45 36 base_elevation 23 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 45 39 base_elevation 23 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 45 42 base_elevation 22 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 45 45 base_elevation 20 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 45 48 base_elevation 18 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 45 52 base_elevation 15 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 45 55 base_elevation 13 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 45 58 base_elevation 11 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 45 61 base_elevation 9 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 45 64 base_elevation 8 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 45 67 base_elevation 7 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 45 70 base_elevation 7 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 45 73 base_elevation 7 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 45 77 base_elevation 8 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 45 80 base_elevation 9 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 45 83 base_elevation 10 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 45 86 base_elevation 11 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 45 89 base_elevation 12 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 45 92 base_elevation 13 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 45 95 base_elevation 14 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 45 98 base_elevation 14 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 48 2 base_elevation 16 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 48 5 base_elevation 16 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 48 8 base_elevation 16 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 48 11 base_elevation 16 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 48 14 base_elevation 17 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 48 17 base_elevation 17 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 48 20 base_elevation 18 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 48 23 base_elevation 18 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 48 27 base_elevation 19 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 48 30 base_elevation 19 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 48 33 base_elevation 20 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 48 36 base_elevation 20 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 48 39 base_elevation 19 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 48 42 base_elevation 19 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 48 45 base_elevation 18 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 48 48 base_elevation 16 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 48 52 base_elevation 15 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 48 55 base_elevation 14 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 48 58 base_elevation 13 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 48 61 base_elevation 12 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 48 64 base_elevation 11 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 48 67 base_elevation 11 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 48 70 base_elevation 11 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 48 73 base_elevation 11 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 48 77 base_elevation 11 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 48 80 base_elevation 12 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 48 83 base_elevation 13 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 48 86 base_elevation 13 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 48 89 base_elevation 14 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 48 92 base_elevation 14 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 48 95 base_elevation 14 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 48 98 base_elevation 15 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 52 2 base_elevation 15 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 52 5 base_elevation 15 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 52 8 base_elevation 15 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 52 11 base_elevation 15 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 52 14 base_elevation 15 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 52 17 base_elevation 15 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 52 20 base_elevation 15 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 52 23 base_elevation 15 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 52 27 base_elevation 15 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 52 30 base_elevation 15 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 52 33 base_elevation 15 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 52 36 base_elevation 15 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 52 39 base_elevation 15 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 52 42 base_elevation 15 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 52 45 base_elevation 15 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 52 48 base_elevation 15 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 52 52 base_elevation 15 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 52 55 base_elevation 15 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 52 58 base_elevation 15 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 52 61 base_elevation 15 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 52 64 base_elevation 15 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 52 67 base_elevation 15 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 52 70 base_elevation 15 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 52 73 base_elevation 15 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 52 77 base_elevation 15 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 52 80 base_elevation 15 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 52 83 base_elevation 15 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 52 86 base_elevation 15 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 52 89 base_elevation 15 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 52 92 base_elevation 15 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 52 95 base_elevation 15 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 52 98 base_elevation 15 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 55 2 base_elevation 15 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 55 5 base_elevation 15 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 55 8 base_elevation 14 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 55 11 base_elevation 14 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 55 14 base_elevation 14 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 55 17 base_elevation 13 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 55 20 base_elevation 13 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 55 23 base_elevation 12 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 55 27 base_elevation 11 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 55 30 base_elevation 11 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 55 33 base_elevation 11 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 55 36 base_elevation 11 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 55 39 base_elevation 11 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 55 42 base_elevation 12 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 55 45 base_elevation 13 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 55 48 base_elevation 14 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 55 52 base_elevation 15 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 55 55 base_elevation 16 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 55 58 base_elevation 18 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 55 61 base_elevation 19 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 55 64 base_elevation 19 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 55 67 base_elevation 20 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 55 70 base_elevation 20 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 55 73 base_elevation 19 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 55 77 base_elevation 19 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 55 80 base_elevation 18 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 55 83 base_elevation 18 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 55 86 base_elevation 17 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 55 89 base_elevation 17 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 55 92 base_elevation 16 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 55 95 base_elevation 16 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 55 98 base_elevation 16 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 58 2 base_elevation 15 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 58 5 base_elevation 14 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 58 8 base_elevation 14 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 58 11 base_elevation 13 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 58 14 base_elevation 12 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 58 17 base_elevation 11 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 58 20 base_elevation 10 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 58 23 base_elevation 9 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 58 27 base_elevation 8 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 58 30 base_elevation 7 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 58 33 base_elevation 7 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 58 36 base_elevation 7 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 58 39 base_elevation 8 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 58 42 base_elevation 9 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 58 45 base_elevation 11 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 58 48 base_elevation 13 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 58 52 base_elevation 15 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 58 55 base_elevation 18 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 58 58 base_elevation 20 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 58 61 base_elevation 22 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 58 64 base_elevation 23 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 58 67 base_elevation 23 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 58 70 base_elevation 24 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 58 73 base_elevation 23 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 58 77 base_elevation 22 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 58 80 base_elevation 21 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 58 83 base_elevation 20 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 58 86 base_elevation 19 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 58 89 base_elevation 18 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 58 92 base_elevation 17 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 58 95 base_elevation 17 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 58 98 base_elevation 16 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 61 2 base_elevation 14 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 61 5 base_elevation 14 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 61 8 base_elevation 13 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 61 11 base_elevation 12 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 61 14 base_elevation 11 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 61 17 base_elevation 10 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 61 20 base_elevation 8 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 61 23 base_elevation 7 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 61 27 base_elevation 5 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 61 30 base_elevation 4 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 61 33 base_elevation 4 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 61 36 base_elevation 4 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 61 39 base_elevation 5 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 61 42 base_elevation 6 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 61 45 base_elevation 9 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 61 48 base_elevation 12 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 61 52 base_elevation 15 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 61 55 base_elevation 19 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 61 58 base_elevation 22 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 61 61 base_elevation 24 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 61 64 base_elevation 26 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 61 67 base_elevation 27 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 61 70 base_elevation 27 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 61 73 base_elevation 26 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 61 77 base_elevation 25 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 61 80 base_elevation 24 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 61 83 base_elevation 22 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 61 86 base_elevation 21 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 61 89 base_elevation 20 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 61 92 base_elevation 18 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 61 95 base_elevation 17 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 61 98 base_elevation 17 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 64 2 base_elevation 14 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 64 5 base_elevation 13 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 64 8 base_elevation 13 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 64 11 base_elevation 11 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 64 14 base_elevation 10 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 64 17 base_elevation 8 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 64 20 base_elevation 7 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 64 23 base_elevation 5 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 64 27 base_elevation 3 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 64 30 base_elevation 2 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 64 33 base_elevation 1 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 64 36 base_elevation 1 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 64 39 base_elevation 3 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 64 42 base_elevation 5 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 64 45 base_elevation 8 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 64 48 base_elevation 11 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 64 52 base_elevation 15 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 64 55 base_elevation 19 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 64 58 base_elevation 23 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 64 61 base_elevation 26 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 64 64 base_elevation 28 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 64 67 base_elevation 29 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 64 70 base_elevation 29 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 64 73 base_elevation 28 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 64 77 base_elevation 27 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 64 80 base_elevation 26 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 64 83 base_elevation 24 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 64 86 base_elevation 22 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 64 89 base_elevation 20 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 64 92 base_elevation 19 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 64 95 base_elevation 18 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 64 98 base_elevation 17 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 67 2 base_elevation 14 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 67 5 base_elevation 13 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 67 8 base_elevation 12 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 67 11 base_elevation 11 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 67 14 base_elevation 10 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 67 17 base_elevation 8 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 67 20 base_elevation 6 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 67 23 base_elevation 4 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 67 27 base_elevation 2 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 67 30 base_elevation 1 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 67 33 base_elevation 0 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 67 36 base_elevation 0 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 67 39 base_elevation 1 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 67 42 base_elevation 4 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 67 45 base_elevation 7 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 67 48 base_elevation 11 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 67 52 base_elevation 15 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 67 55 base_elevation 20 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 67 58 base_elevation 23 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 67 61 base_elevation 27 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 67 64 base_elevation 29 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 67 67 base_elevation 30 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 67 70 base_elevation 30 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 67 73 base_elevation 30 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 67 77 base_elevation 28 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 67 80 base_elevation 26 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 67 83 base_elevation 24 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 67 86 base_elevation 23 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 67 89 base_elevation 21 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 67 92 base_elevation 19 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 67 95 base_elevation 18 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 67 98 base_elevation 17 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 70 2 base_elevation 14 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 70 5 base_elevation 13 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 70 8 base_elevation 12 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 70 11 base_elevation 11 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 70 14 base_elevation 10 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 70 17 base_elevation 8 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 70 20 base_elevation 6 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 70 23 base_elevation 4 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 70 27 base_elevation 2 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 70 30 base_elevation 1 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 70 33 base_elevation 0 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 70 36 base_elevation 0 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 70 39 base_elevation 1 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 70 42 base_elevation 4 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 70 45 base_elevation 7 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 70 48 base_elevation 11 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 70 52 base_elevation 15 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 70 55 base_elevation 20 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 70 58 base_elevation 24 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 70 61 base_elevation 27 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 70 64 base_elevation 29 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 70 67 base_elevation 30 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 70 70 base_elevation 30 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 70 73 base_elevation 30 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 70 77 base_elevation 28 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 70 80 base_elevation 27 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 70 83 base_elevation 25 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 70 86 base_elevation 23 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 70 89 base_elevation 21 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 70 92 base_elevation 19 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 70 95 base_elevation 18 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 70 98 base_elevation 17 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 73 2 base_elevation 14 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 73 5 base_elevation 13 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 73 8 base_elevation 12 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 73 11 base_elevation 11 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 73 14 base_elevation 10 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 73 17 base_elevation 8 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 73 20 base_elevation 6 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 73 23 base_elevation 4 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 73 27 base_elevation 3 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 73 30 base_elevation 1 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 73 33 base_elevation 1 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 73 36 base_elevation 1 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 73 39 base_elevation 2 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 73 42 base_elevation 4 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 73 45 base_elevation 7 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 73 48 base_elevation 11 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 73 52 base_elevation 15 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 73 55 base_elevation 19 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 73 58 base_elevation 23 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 73 61 base_elevation 26 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 73 64 base_elevation 28 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 73 67 base_elevation 30 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 73 70 base_elevation 30 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 73 73 base_elevation 29 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 73 77 base_elevation 28 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 73 80 base_elevation 26 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 73 83 base_elevation 24 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 73 86 base_elevation 22 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 73 89 base_elevation 21 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 73 92 base_elevation 19 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 73 95 base_elevation 18 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 73 98 base_elevation 17 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 77 2 base_elevation 14 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 77 5 base_elevation 14 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 77 8 base_elevation 13 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 77 11 base_elevation 12 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 77 14 base_elevation 10 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 77 17 base_elevation 9 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 77 20 base_elevation 7 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 77 23 base_elevation 5 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 77 27 base_elevation 4 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 77 30 base_elevation 3 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 77 33 base_elevation 2 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 77 36 base_elevation 2 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 77 39 base_elevation 3 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 77 42 base_elevation 5 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 77 45 base_elevation 8 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 77 48 base_elevation 11 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 77 52 base_elevation 15 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 77 55 base_elevation 19 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 77 58 base_elevation 22 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 77 61 base_elevation 25 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 77 64 base_elevation 27 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 77 67 base_elevation 28 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 77 70 base_elevation 28 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 77 73 base_elevation 28 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 77 77 base_elevation 26 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 77 80 base_elevation 25 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 77 83 base_elevation 23 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 77 86 base_elevation 22 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 77 89 base_elevation 20 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 77 92 base_elevation 19 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 77 95 base_elevation 18 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 77 98 base_elevation 17 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 80 2 base_elevation 14 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 80 5 base_elevation 14 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 80 8 base_elevation 13 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 80 11 base_elevation 12 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 80 14 base_elevation 11 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 80 17 base_elevation 10 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 80 20 base_elevation 8 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 80 23 base_elevation 7 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 80 27 base_elevation 5 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 80 30 base_elevation 4 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 80 33 base_elevation 4 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 80 36 base_elevation 4 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 80 39 base_elevation 5 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 80 42 base_elevation 7 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 80 45 base_elevation 9 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 80 48 base_elevation 12 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 80 52 base_elevation 15 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 80 55 base_elevation 18 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 80 58 base_elevation 21 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 80 61 base_elevation 24 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 80 64 base_elevation 26 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 80 67 base_elevation 26 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 80 70 base_elevation 27 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 80 73 base_elevation 26 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 80 77 base_elevation 25 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 80 80 base_elevation 24 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 80 83 base_elevation 22 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 80 86 base_elevation 21 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 80 89 base_elevation 19 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 80 92 base_elevation 18 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 80 95 base_elevation 17 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 80 98 base_elevation 17 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 83 2 base_elevation 14 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 83 5 base_elevation 14 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 83 8 base_elevation 13 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 83 11 base_elevation 13 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 83 14 base_elevation 12 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 83 17 base_elevation 11 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 83 20 base_elevation 9 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 83 23 base_elevation 8 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 83 27 base_elevation 7 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 83 30 base_elevation 6 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 83 33 base_elevation 6 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 83 36 base_elevation 6 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 83 39 base_elevation 7 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 83 42 base_elevation 8 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 83 45 base_elevation 10 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 83 48 base_elevation 13 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 83 52 base_elevation 15 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 83 55 base_elevation 18 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 83 58 base_elevation 20 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 83 61 base_elevation 22 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 83 64 base_elevation 24 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 83 67 base_elevation 24 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 83 70 base_elevation 25 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 83 73 base_elevation 24 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 83 77 base_elevation 23 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 83 80 base_elevation 22 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 83 83 base_elevation 21 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 83 86 base_elevation 20 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 83 89 base_elevation 19 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 83 92 base_elevation 18 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 83 95 base_elevation 17 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 83 98 base_elevation 16 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 86 2 base_elevation 15 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 86 5 base_elevation 14 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 86 8 base_elevation 14 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 86 11 base_elevation 13 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 86 14 base_elevation 12 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 86 17 base_elevation 12 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 86 20 base_elevation 11 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 86 23 base_elevation 10 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 86 27 base_elevation 9 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 86 30 base_elevation 8 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 86 33 base_elevation 8 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 86 36 base_elevation 8 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 86 39 base_elevation 8 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 86 42 base_elevation 10 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 86 45 base_elevation 11 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 86 48 base_elevation 13 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 86 52 base_elevation 15 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 86 55 base_elevation 17 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 86 58 base_elevation 19 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 86 61 base_elevation 21 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 86 64 base_elevation 22 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 86 67 base_elevation 23 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 86 70 base_elevation 23 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 86 73 base_elevation 22 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 86 77 base_elevation 22 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 86 80 base_elevation 21 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 86 83 base_elevation 20 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 86 86 base_elevation 19 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 86 89 base_elevation 18 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 86 92 base_elevation 17 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 86 95 base_elevation 17 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 86 98 base_elevation 16 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 89 2 base_elevation 15 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 89 5 base_elevation 14 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 89 8 base_elevation 14 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 89 11 base_elevation 14 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 89 14 base_elevation 13 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 89 17 base_elevation 12 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 89 20 base_elevation 12 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 89 23 base_elevation 11 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 89 27 base_elevation 10 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 89 30 base_elevation 10 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 89 33 base_elevation 10 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 89 36 base_elevation 10 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 89 39 base_elevation 10 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 89 42 base_elevation 11 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 89 45 base_elevation 12 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 89 48 base_elevation 14 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 89 52 base_elevation 15 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 89 55 base_elevation 17 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 89 58 base_elevation 18 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 89 61 base_elevation 20 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 89 64 base_elevation 20 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 89 67 base_elevation 21 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 89 70 base_elevation 21 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 89 73 base_elevation 21 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 89 77 base_elevation 20 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 89 80 base_elevation 19 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 89 83 base_elevation 19 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 89 86 base_elevation 18 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 89 89 base_elevation 17 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 89 92 base_elevation 17 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 89 95 base_elevation 16 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 89 98 base_elevation 16 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 92 2 base_elevation 15 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 92 5 base_elevation 15 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 92 8 base_elevation 14 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 92 11 base_elevation 14 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 92 14 base_elevation 14 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 92 17 base_elevation 13 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 92 20 base_elevation 13 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 92 23 base_elevation 12 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 92 27 base_elevation 12 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 92 30 base_elevation 11 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 92 33 base_elevation 11 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 92 36 base_elevation 11 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 92 39 base_elevation 11 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 92 42 base_elevation 12 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 92 45 base_elevation 13 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 92 48 base_elevation 14 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 92 52 base_elevation 15 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 92 55 base_elevation 16 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 92 58 base_elevation 17 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 92 61 base_elevation 18 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 92 64 base_elevation 19 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 92 67 base_elevation 19 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 92 70 base_elevation 19 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 92 73 base_elevation 19 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 92 77 base_elevation 19 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 92 80 base_elevation 18 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 92 83 base_elevation 18 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 92 86 base_elevation 17 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 92 89 base_elevation 17 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 92 92 base_elevation 16 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 92 95 base_elevation 16 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 92 98 base_elevation 16 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 95 2 base_elevation 15 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 95 5 base_elevation 15 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 95 8 base_elevation 15 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 95 11 base_elevation 14 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 95 14 base_elevation 14 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 95 17 base_elevation 14 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 95 20 base_elevation 13 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 95 23 base_elevation 13 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 95 27 base_elevation 13 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 95 30 base_elevation 12 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 95 33 base_elevation 12 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 95 36 base_elevation 12 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 95 39 base_elevation 13 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 95 42 base_elevation 13 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 95 45 base_elevation 14 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 95 48 base_elevation 14 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 95 52 base_elevation 15 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 95 55 base_elevation 16 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 95 58 base_elevation 17 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 95 61 base_elevation 17 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 95 64 base_elevation 18 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 95 67 base_elevation 18 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 95 70 base_elevation 18 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 95 73 base_elevation 18 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 95 77 base_elevation 18 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 95 80 base_elevation 17 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 95 83 base_elevation 17 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 95 86 base_elevation 17 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 95 89 base_elevation 16 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 95 92 base_elevation 16 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 95 95 base_elevation 16 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 95 98 base_elevation 16 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 98 2 base_elevation 15 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 98 5 base_elevation 15 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 98 8 base_elevation 15 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 98 11 base_elevation 15 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 98 14 base_elevation 14 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 98 17 base_elevation 14 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 98 20 base_elevation 14 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 98 23 base_elevation 14 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 98 27 base_elevation 14 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 98 30 base_elevation 13 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 98 33 base_elevation 13 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 98 36 base_elevation 13 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 98 39 base_elevation 13 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 98 42 base_elevation 14 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 98 45 base_elevation 14 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 98 48 base_elevation 15 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 98 52 base_elevation 15 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 98 55 base_elevation 16 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 98 58 base_elevation 16 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 98 61 base_elevation 17 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 98 64 base_elevation 17 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 98 67 base_elevation 17 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 98 70 base_elevation 17 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 98 73 base_elevation 17 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 98 77 base_elevation 17 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 98 80 base_elevation 17 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 98 83 base_elevation 16 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 98 86 base_elevation 16 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 98 89 base_elevation 16 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 98 92 base_elevation 16 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 98 95 base_elevation 16 }
+create_land { base_size 6 terrain_type GRASS_JUNGLE land_percent 0 land_position 98 98 base_elevation 15 }
+
+
+<ELEVATION_GENERATION>
+/* 
+create_elevation  {
+base_terrain 
+base_layer 
+number_of_tiles 
+number_of_clumps 
+set_scale_by_sizegroups
+spacing 
+enable_balanced_elevation
+} */
+
+/* <CLIFF_GENERATION> */
+
+<TERRAIN_GENERATION>
+/* 
+create_terrain  {
+base_terrain 
+base_layer 
+beach_terrain 
+terrain_mask 1
+spacing_to_other_terrain_types 
+set_flat_terrain_only
+land_percent 
+number_of_tiles 
+number_of_clumps 
+clumping_factor 
+set_scale_by_sizegroups
+set_avoid_player_start_areas
+height_limits 
+} */
+
+create_terrain DLC_RAINFOREST         { base_terrain GRASS_JUNGLE   land_percent 10 number_of_clumps 20                                 set_avoid_player_start_areas }
+
+/* JUNGLELEAVES is already a GRASS_JUNGLE layering on UDBRUSH_JUNGLE */
+#const JUNGLELEAVES 62          create_terrain JUNGLELEAVES         { base_terrain GRASS_JUNGLE   number_of_tiles 250 number_of_clumps 6                                 spacing_to_other_terrain_types 0 }
+#const UDBRUSH_JUNGLE 77        create_terrain UDBRUSH_JUNGLE       { base_terrain GRASS_JUNGLE   number_of_tiles 250 number_of_clumps 6                                 spacing_to_other_terrain_types 0 }
+                                create_terrain GRASS2             { base_terrain UDBRUSH_JUNGLE terrain_mask 1          number_of_tiles 999 number_of_clumps 9                                 spacing_to_other_terrain_types 0 }
+                                create_terrain GRASS2             { base_terrain UDBRUSH_JUNGLE terrain_mask 1          number_of_tiles 999 number_of_clumps 9                                 spacing_to_other_terrain_types 0 }
+                                create_terrain GRASS2             { base_terrain UDBRUSH_JUNGLE terrain_mask 1          number_of_tiles 999 number_of_clumps 9                                 spacing_to_other_terrain_types 0 }
+#const GRASS_DRY 100            create_terrain GRASS_DRY            { base_terrain GRASS_JUNGLE   number_of_tiles 400 number_of_clumps 12                                 spacing_to_other_terrain_types 0 }
+                                create_terrain GRASS2                  { base_terrain GRASS_DRY terrain_mask 1          number_of_tiles 999 number_of_clumps 9                                 spacing_to_other_terrain_types 0 }
+                                create_terrain GRASS2                  { base_terrain GRASS_DRY terrain_mask 1          number_of_tiles 999 number_of_clumps 9                                 spacing_to_other_terrain_types 0 }
+                                create_terrain GRASS2                  { base_terrain GRASS_DRY terrain_mask 1          number_of_tiles 999 number_of_clumps 9                                 spacing_to_other_terrain_types 0 }
+
+/* <CONNECTION_GENERATION> */
+
+<OBJECTS_GENERATION>
+/* Place starter units and TC. */
+create_object TOWN_CENTER {                                                                                                                set_place_for_every_player max_distance_to_players 0          min_distance_to_players 0 }
+create_object VILLAGER {                       number_of_objects 1 if NINE_VILLS number_of_groups 9 else number_of_groups 3 endif                         set_place_for_every_player max_distance_to_players 6          min_distance_to_players 6 }
+
+if MILITARY_STARTER
+    
+    /* 1 - Pacific scout */
+    #const VMDL 206
+	#const DONKEY 846 /* Can trade. */
+    #const CAMEL_2 897
+    #const QUEEN 1292
+    #const MERCHANT 1572
+    start_random
+    percent_chance 3 #define HORSE1
+    percent_chance 3 #define HORSE2
+    percent_chance 3 #define HORSE3
+    percent_chance 3 #define HORSE4
+    percent_chance 3 #define HORSE5
+    percent_chance 3 #define HORSE6
+    percent_chance 3 #define HORSE7
+    percent_chance 10 #define HORSE8
+    percent_chance 20 #define HORSE9
+    percent_chance 30 #define HORSE10
+    percent_chance 4 #define HORSE11
+    end_random
+    if     HORSE1 create_object DLC_DROMEDARY
+    elseif HORSE2 create_object CAMEL_2
+    elseif HORSE3 create_object HORSE
+    elseif HORSE4 create_object HORSE_B
+    elseif HORSE5 create_object HORSE_C
+    elseif HORSE6 create_object HORSE_D
+    elseif HORSE7 create_object HORSE_E
+    elseif HORSE8 create_object DONKEY
+    elseif HORSE9 create_object QUEEN
+    elseif HORSE10 create_object MERCHANT
+    elseif HORSE11 create_object VMDL endif {                                                                                              set_place_for_every_player max_distance_to_players 5          min_distance_to_players 3 }
+    
+    /* 2 - The same scout (out of the three normal scout variants) for all players  */
+    #const CAMEL_SCOUT 1755
+    start_random
+    percent_chance 20 #define SCOUT_1_1
+    percent_chance 20 #define SCOUT_1_2
+    percent_chance 20 #define SCOUT_1_3
+    end_random
+    if     SCOUT_1_1 create_object SCOUT_CAVALRY
+    elseif SCOUT_1_2 create_object EAGLE_WARRIOR /* This is Eagle Scout. The real Eagle Warrior is 753 */
+    elseif SCOUT_1_3 create_object CAMEL_SCOUT endif {                                                                                     set_place_for_every_player max_distance_to_players 5          min_distance_to_players 3 }
+    
+    /* 3 - Fancy additional starting units */	
+	#const JUNK 15
+	#const AA 127
+	#const MONKBOAT1 535
+	#const MONKBOAT2 536
+    #const ASSAULT_TOWER 885
+    #const AMZ_ARCHER 850
+    #const SLINGER 185
+    #const AMZ_WARRIOR 825
+	#const MONKBOAT 1022
+    #const NINJA 1145
+	/* The unit GENITOUR has a Militia skin it's ugly so we use DLC_GENITOUR. */
+    start_random percent_chance 20 #define SCOUT_2_12 end_random if SCOUT_2_12 create_object DLC_SIEGETOWER {                              set_place_for_every_player max_distance_to_players 5          min_distance_to_players 3 } endif
+    start_random percent_chance 0  #define SCOUT_2_8  end_random if SCOUT_2_8  create_object ASSAULT_TOWER {                               set_place_for_every_player max_distance_to_players 5          min_distance_to_players 3 } endif
+    start_random percent_chance 10 #define SCOUT_2_11 end_random if SCOUT_2_11 create_object SCORPION {                                    set_place_for_every_player max_distance_to_players 5          min_distance_to_players 3 } endif
+
+    start_random percent_chance 20 #define SCOUT_2_1  end_random if SCOUT_2_1  create_object ARCHER {                                      set_place_for_every_player max_distance_to_players 5          min_distance_to_players 3 } endif
+    start_random percent_chance 30 #define SCOUT_2_4  end_random if SCOUT_2_4  create_object AMZ_ARCHER {                                  set_place_for_every_player max_distance_to_players 5          min_distance_to_players 3 } endif
+    start_random percent_chance 30 #define SCOUT_2_2  end_random if SCOUT_2_2  create_object SKIRMISHER {                                  set_place_for_every_player max_distance_to_players 5          min_distance_to_players 3 } endif
+    start_random percent_chance 20 #define SCOUT_2_3  end_random if SCOUT_2_3  create_object SLINGER {                                     set_place_for_every_player max_distance_to_players 5          min_distance_to_players 3 } endif
+    start_random percent_chance 10 #define SCOUT_2_5  end_random if SCOUT_2_5  create_object DLC_GENITOUR {                                set_place_for_every_player max_distance_to_players 5          min_distance_to_players 3 } endif
+
+    start_random percent_chance 30 #define SCOUT_2_6  end_random if SCOUT_2_6  create_object MILITIA {                                     set_place_for_every_player max_distance_to_players 5          min_distance_to_players 3 } endif
+    start_random percent_chance 30 #define SCOUT_2_7  end_random if SCOUT_2_7  create_object SPEARMAN {                                    set_place_for_every_player max_distance_to_players 5          min_distance_to_players 3 } endif
+    start_random percent_chance 30 #define SCOUT_2_9  end_random if SCOUT_2_9  create_object AMZ_WARRIOR {                                 set_place_for_every_player max_distance_to_players 5          min_distance_to_players 3 } endif
+    start_random percent_chance 20 #define SCOUT_2_13 end_random if SCOUT_2_13 create_object NINJA {                                       set_place_for_every_player max_distance_to_players 5          min_distance_to_players 3 } endif
+	
+    start_random percent_chance 10 #define SCOUT_2_14 end_random if SCOUT_2_14 create_object MONKBOAT {  ignore_terrain_restrictions       set_place_for_every_player find_closest terrain_to_place_on SHALLOWSSHALLOWS } endif
+    start_random percent_chance 10 #define SCOUT_2_15 end_random if SCOUT_2_15 create_object TRADE_COG { ignore_terrain_restrictions       set_place_for_every_player find_closest terrain_to_place_on SHALLOWSSHALLOWS } endif
+    start_random percent_chance 10 #define SCOUT_2_16 end_random if SCOUT_2_16 create_object JUNK {      ignore_terrain_restrictions       set_place_for_every_player find_closest terrain_to_place_on SHALLOWSSHALLOWS } endif
+    start_random percent_chance 10 #define SCOUT_2_17 end_random if SCOUT_2_17 create_object MONKBOAT1 { ignore_terrain_restrictions       set_place_for_every_player find_closest terrain_to_place_on SHALLOWSSHALLOWS } endif
+    start_random percent_chance 10 #define SCOUT_2_18 end_random if SCOUT_2_18 create_object MONKBOAT2 { ignore_terrain_restrictions       set_place_for_every_player find_closest terrain_to_place_on SHALLOWSSHALLOWS } endif
+else
+
+    /* Normal scout */
+    create_object SCOUT {                                                                                                                  set_place_for_every_player max_distance_to_players 5          min_distance_to_players 3 }
+endif
+
+/* Add some gold and stone quite close around each player to offer a fair start and help walling. */
+create_object GOLD {                                            number_of_objects 2 number_of_groups 3 group_variance 0 set_tight_grouping set_place_for_every_player max_distance_to_players 9          min_distance_to_players 7 set_gaia_object_only }
+create_object STONE {                                           number_of_objects 1 number_of_groups 2 group_variance 0 set_tight_grouping set_place_for_every_player max_distance_to_players 9          min_distance_to_players 7 set_gaia_object_only }
+/* Add a thick ring of deer around each player */
+create_object DEER {                                                               number_of_groups 15                                     set_place_for_every_player max_distance_to_players 15        min_distance_to_players 15 set_gaia_object_only }
+
+/* When either set_scaling_to_map_size or set_scaling_to_player_number is specified, number_of_objects 0 will still spawn a few objects (approx. 6 with 2players, approx. 10 with 8 players, map size doesn't matter). */
+/* Fill the glade. */
+#const GAIA_ARCHER 158
+create_object GAIA_ARCHER {        set_scaling_to_player_number number_of_objects 2 ignore_terrain_restrictions place_on_specific_land_id 1 terrain_to_place_on GRASS1       min_distance_to_map_edge 29 min_distance_to_players 16 set_gaia_object_only }
+create_object DEER {               set_scaling_to_map_size     number_of_objects 17 ignore_terrain_restrictions place_on_specific_land_id 1 terrain_to_place_on GRASS_JUNGL2 min_distance_to_map_edge 11 min_distance_to_players 12 
+                                                                                                                                                 actor_area 51 actor_area_radius 9 }
+																																				 
+/* Add more resources far from all players. */
+create_object GOLD {               set_scaling_to_map_size      number_of_objects 2 number_of_groups 6 group_variance 0 set_tight_grouping avoid_actor_area 51               
+                                               min_distance_to_players 17 }
+create_object STONE {              set_scaling_to_map_size      number_of_objects 1 number_of_groups 1 group_variance 0 set_tight_grouping avoid_actor_area 51                                           min_distance_to_players 17 }
+create_object FORAGE {             set_scaling_to_map_size      number_of_objects 1 number_of_groups 9 group_variance 0 set_tight_grouping avoid_actor_area 51                                           min_distance_to_players 19 }
+create_object DLC_ORANGEBUSH {     set_scaling_to_map_size      number_of_objects 1 number_of_groups 9 group_variance 0 set_tight_grouping avoid_actor_area 51                                           min_distance_to_players 19 }
+create_object RELIC {              set_scaling_to_player_number number_of_objects 7 ignore_terrain_restrictions                             terrain_to_place_on SHALLOW second_object DLC_CROCODILE }
+
+/* Add predators (with a few unconvertible archers to protect the deer in the center). */                                                                                    
+/* create_object DLC_CROCODILE {      set_scaling_to_player_number number_of_objects 0 ignore_terrain_restrictions place_on_specific_land_id 1                                  min_distance_to_map_edge 12 min_distance_to_players 16 set_gaia_object_only } */
+create_object DLC_BEAR {           set_scaling_to_player_number number_of_objects 0 ignore_terrain_restrictions place_on_specific_land_id 1 avoid_actor_area 51              min_distance_to_map_edge 12 min_distance_to_players 16 set_gaia_object_only }
+create_object JAGUAR {             set_scaling_to_player_number number_of_objects 0 ignore_terrain_restrictions place_on_specific_land_id 1 avoid_actor_area 51              min_distance_to_map_edge 12 min_distance_to_players 16 set_gaia_object_only }
+/* create_object DLC_SNOWLEOPARD {    set_scaling_to_player_number number_of_objects 0 ignore_terrain_restrictions place_on_specific_land_id 1                                  min_distance_to_map_edge 12 min_distance_to_players 16 set_gaia_object_only } */
+/* create_object DLC_KOMODO {         set_scaling_to_player_number number_of_objects 0 ignore_terrain_restrictions place_on_specific_land_id 1                                  min_distance_to_map_edge 12 min_distance_to_players 16 set_gaia_object_only } */
+create_object DIRE_WOLF {          set_scaling_to_player_number number_of_objects 0 ignore_terrain_restrictions place_on_specific_land_id 1 avoid_actor_area 51              min_distance_to_map_edge 12 min_distance_to_players 16 set_gaia_object_only }
+/* create_object DLC_LION {           set_scaling_to_player_number number_of_objects 0 ignore_terrain_restrictions place_on_specific_land_id 1                                  min_distance_to_map_edge 12 min_distance_to_players 16 set_gaia_object_only } */
+create_object RABID_WOLF {         set_scaling_to_player_number number_of_objects 0 ignore_terrain_restrictions place_on_specific_land_id 1 avoid_actor_area 51              min_distance_to_map_edge 12 min_distance_to_players 16 set_gaia_object_only }
+create_object DLC_TIGER {          set_scaling_to_player_number number_of_objects 0 ignore_terrain_restrictions place_on_specific_land_id 1 avoid_actor_area 51              min_distance_to_map_edge 12 min_distance_to_players 16 set_gaia_object_only }
+create_object WOLF {               set_scaling_to_player_number number_of_objects 0 ignore_terrain_restrictions place_on_specific_land_id 1 avoid_actor_area 51              min_distance_to_map_edge 12 min_distance_to_players 16 set_gaia_object_only }
+
+/* Add cattle. */                                                                                                                                                            
+create_object DLC_COW {            set_scaling_to_map_size      number_of_objects 0 ignore_terrain_restrictions place_on_specific_land_id 1 avoid_actor_area 51              min_distance_to_map_edge 12 min_distance_to_players 25 set_gaia_object_only }
+create_object DLC_COW_B {          set_scaling_to_map_size      number_of_objects 0 ignore_terrain_restrictions place_on_specific_land_id 1 avoid_actor_area 51              min_distance_to_map_edge 12 min_distance_to_players 25 set_gaia_object_only }
+create_object DLC_COW_C {          set_scaling_to_map_size      number_of_objects 0 ignore_terrain_restrictions place_on_specific_land_id 1 avoid_actor_area 51              min_distance_to_map_edge 12 min_distance_to_players 25 set_gaia_object_only }
+create_object DLC_COW_D {          set_scaling_to_map_size      number_of_objects 0 ignore_terrain_restrictions place_on_specific_land_id 1  avoid_actor_area 51             min_distance_to_map_edge 12 min_distance_to_players 25 set_gaia_object_only }
+create_object DLC_GOAT {           set_scaling_to_map_size      number_of_objects 0 ignore_terrain_restrictions place_on_specific_land_id 1 avoid_actor_area 51              min_distance_to_map_edge 12 min_distance_to_players 25 set_gaia_object_only }
+create_object DLC_GOOSE {          set_scaling_to_map_size      number_of_objects 0 ignore_terrain_restrictions place_on_specific_land_id 1 avoid_actor_area 51              min_distance_to_map_edge 12 min_distance_to_players 25 set_gaia_object_only }
+/* create_object DLC_LLAMA {          set_scaling_to_map_size      number_of_objects 0 ignore_terrain_restrictions place_on_specific_land_id 1                                  min_distance_to_map_edge 12 min_distance_to_players 25 set_gaia_object_only } */
+create_object DLC_PIG {            set_scaling_to_map_size      number_of_objects 0 ignore_terrain_restrictions place_on_specific_land_id 1 avoid_actor_area 51              min_distance_to_map_edge 12 min_distance_to_players 25 set_gaia_object_only }
+create_object DLC_WATERBUFFALO {   set_scaling_to_map_size      number_of_objects 0 ignore_terrain_restrictions place_on_specific_land_id 1 avoid_actor_area 51              min_distance_to_map_edge 12 min_distance_to_players 25 set_gaia_object_only }
+create_object SHEEP {              set_scaling_to_map_size      number_of_objects 0 ignore_terrain_restrictions place_on_specific_land_id 1 avoid_actor_area 51              min_distance_to_map_edge 12 min_distance_to_players 25 set_gaia_object_only }
+create_object TURKEY {             set_scaling_to_map_size      number_of_objects 0 ignore_terrain_restrictions place_on_specific_land_id 1 avoid_actor_area 51              min_distance_to_map_edge 12 min_distance_to_players 25 set_gaia_object_only }
+
+/* Add hunt (with a pack in the center). */                                                                                                                                  
+/* create_object DLC_ELEPHANT {       set_scaling_to_map_size      number_of_objects 0 ignore_terrain_restrictions place_on_specific_land_id 1                                  min_distance_to_map_edge 11 min_distance_to_players 21 } */
+/* create_object IRON_BOAR {          set_scaling_to_map_size      number_of_objects 2 ignore_terrain_restrictions place_on_specific_land_id 1 terrain_to_place_on GRASS_JUNGL2 min_distance_to_map_edge 11 min_distance_to_players 21 } */
+create_object JAVELINA {           set_scaling_to_map_size     number_of_objects 10 ignore_terrain_restrictions place_on_specific_land_id 1 avoid_actor_area 51              min_distance_to_map_edge 11 min_distance_to_players 21 }
+create_object WILD_BOAR {          set_scaling_to_map_size     number_of_objects 10 ignore_terrain_restrictions place_on_specific_land_id 1 avoid_actor_area 51              min_distance_to_map_edge 11 min_distance_to_players 21 }
+/* create_object DLC_RHINO {          set_scaling_to_map_size      number_of_objects 0 ignore_terrain_restrictions place_on_specific_land_id 1                                  min_distance_to_map_edge 11 min_distance_to_players 21 } */
+																																											 
+/* create_object GAZELLE {            set_scaling_to_map_size      number_of_objects 0 ignore_terrain_restrictions place_on_specific_land_id 1                                  min_distance_to_map_edge 11 min_distance_to_players 12 } */
+create_object DEER {               set_scaling_to_map_size      number_of_objects 4 ignore_terrain_restrictions place_on_specific_land_id 1 avoid_actor_area 51              min_distance_to_map_edge 11 min_distance_to_players 12 }
+/* create_object DLC_IBEX {           set_scaling_to_map_size      number_of_objects 1 ignore_terrain_restrictions place_on_specific_land_id 1                                  min_distance_to_map_edge 11 min_distance_to_players 12 } */
+create_object DLC_OSTRICH {        set_scaling_to_map_size     number_of_objects 10 ignore_terrain_restrictions place_on_specific_land_id 1 avoid_actor_area 51              min_distance_to_map_edge 11 min_distance_to_players 12 }
+/* create_object DLC_ZEBRA {          set_scaling_to_map_size      number_of_objects 0 ignore_terrain_restrictions place_on_specific_land_id 1                                  min_distance_to_map_edge 11 min_distance_to_players 12 } */
+
+/* Add disturbance. */                                                                                                                                                       
+/* create_object DLC_WILD_DROMEDARY { set_scaling_to_map_size      number_of_objects 0 ignore_terrain_restrictions place_on_specific_land_id 1                                  min_distance_to_map_edge 14                            set_gaia_object_only } */
+/* create_object DLC_WILD_CAMEL {     set_scaling_to_map_size      number_of_objects 0 ignore_terrain_restrictions place_on_specific_land_id 1                                  min_distance_to_map_edge 14                            set_gaia_object_only } */
+create_object WILD_HORSE {         set_scaling_to_map_size      number_of_objects 4 ignore_terrain_restrictions place_on_specific_land_id 1 avoid_actor_area 51              min_distance_to_map_edge 14                            set_gaia_object_only }
+create_object DLC_FENCE {          set_scaling_to_map_size      number_of_objects 1 ignore_terrain_restrictions place_on_specific_land_id 1 avoid_actor_area 51              min_distance_to_map_edge 14                            set_gaia_object_only }
+
+/* Add scams (These Relics are fake too.). */
+if SCAMS_EVERYWHERE
+  #const FAKE_STONE 248
+  #const FAKE_GOLD 252
+  #const FAKE_FORAGE 262
+  #const FAKE_DEER 333
+  create_object FAKE_DEER {        set_scaling_to_map_size      number_of_objects 3 ignore_terrain_restrictions place_on_specific_land_id 1                                  min_distance_to_map_edge 11 min_distance_to_players 12 set_gaia_object_only }
+  
+  create_object FAKE_STONE {       set_scaling_to_map_size      number_of_objects 1 ignore_terrain_restrictions place_on_specific_land_id 1 avoid_actor_area 51                                 min_distance_to_map_edge 12 min_distance_to_players 16 set_gaia_object_only }
+  create_object FAKE_GOLD {        set_scaling_to_map_size      number_of_objects 1 ignore_terrain_restrictions place_on_specific_land_id 1 avoid_actor_area 51                                 min_distance_to_map_edge 12 min_distance_to_players 16 set_gaia_object_only }
+  create_object FAKE_FORAGE {      set_scaling_to_map_size      number_of_objects 1 ignore_terrain_restrictions place_on_specific_land_id 1 avoid_actor_area 51                                 min_distance_to_map_edge 12 min_distance_to_players 16 set_gaia_object_only }
+  
+  create_object BRITISH_RELIC {    set_scaling_to_player_number number_of_objects 1 ignore_terrain_restrictions                             terrain_to_place_on SHALLOW second_object DLC_CROCODILE }
+  create_object BYZANTINE_RELIC {  set_scaling_to_player_number number_of_objects 1 ignore_terrain_restrictions                             terrain_to_place_on SHALLOW second_object DLC_CROCODILE }
+  create_object CHINESE_RELIC {    set_scaling_to_player_number number_of_objects 1 ignore_terrain_restrictions                             terrain_to_place_on SHALLOW second_object DLC_CROCODILE }
+  create_object FRANKISH_RELIC {   set_scaling_to_player_number number_of_objects 1 ignore_terrain_restrictions                             terrain_to_place_on SHALLOW second_object DLC_CROCODILE }
+  create_object GOTHIC_RELIC {     set_scaling_to_player_number number_of_objects 1 ignore_terrain_restrictions                             terrain_to_place_on SHALLOW second_object DLC_CROCODILE }
+  create_object JAPANESE_RELIC {   set_scaling_to_player_number number_of_objects 1 ignore_terrain_restrictions                             terrain_to_place_on SHALLOW second_object DLC_CROCODILE }
+  create_object PERSIAN_RELIC {    set_scaling_to_player_number number_of_objects 1 ignore_terrain_restrictions                             terrain_to_place_on SHALLOW second_object DLC_CROCODILE }
+  create_object SARACEN_RELIC {    set_scaling_to_player_number number_of_objects 1 ignore_terrain_restrictions                             terrain_to_place_on SHALLOW second_object DLC_CROCODILE }
+  create_object TEUTONIC_RELIC {   set_scaling_to_player_number number_of_objects 1 ignore_terrain_restrictions                             terrain_to_place_on SHALLOW second_object DLC_CROCODILE }
+  create_object TURKISH_RELIC {    set_scaling_to_player_number number_of_objects 1 ignore_terrain_restrictions                             terrain_to_place_on SHALLOW second_object DLC_CROCODILE }
+endif
+
+/* Add center trees. */
+/* create_object BIRCH_TREE {         set_scaling_to_map_size     number_of_objects 399 ignore_terrain_restrictions place_on_specific_land_id 1 terrain_to_place_on GRASS1                                  min_distance_to_players 9 set_gaia_object_only } */
+
+/* Add fish. */
+#const DOLPHIN 61
+create_object DLC_BOXTURTLE {      set_scaling_to_map_size      number_of_objects 1 ignore_terrain_restrictions                              terrain_to_place_on BEACH_WETROCK } /* Does not spawn even if i put 100 */
+create_object DOLPHIN {            set_scaling_to_map_size      number_of_objects 1                                                          terrain_to_place_on SHALLOW }
+create_object DORADO {             set_scaling_to_map_size      number_of_objects 1                                                          terrain_to_place_on SHALLOW }
+create_object GREAT_FISH_MARLIN {  set_scaling_to_map_size      number_of_objects 1                                                          terrain_to_place_on SHALLOW }
+create_object FISH_PERCH {         set_scaling_to_map_size      number_of_objects 1                                                          terrain_to_place_on SHALLOW }
+create_object SALMON {             set_scaling_to_map_size      number_of_objects 1                                                          terrain_to_place_on SHALLOW }
+create_object SHORE_FISH {         set_scaling_to_map_size      number_of_objects 1                                                          terrain_to_place_on SHALLOW }
+create_object SNAPPER {            set_scaling_to_map_size      number_of_objects 1                                                          terrain_to_place_on SHALLOW }
+create_object TUNA {               set_scaling_to_map_size      number_of_objects 1                                                          terrain_to_place_on SHALLOW }
+
+/* Add pigeons. */
+#const FALCON 1056
+#const STORMY_DOG 544   /* This one works only 1% of the time. */
+#const STORMY_DOG_2 862 /* This one works fine. */
+create_object FALCON {             set_scaling_to_map_size      number_of_objects 5 }
+create_object HAWK {               set_scaling_to_map_size      number_of_objects 5 }
+create_object MACAW {              set_scaling_to_map_size      number_of_objects 31 }
+create_object DLC_STORK {          set_scaling_to_map_size      number_of_objects 9 }
+create_object STORMY_DOG {         set_scaling_to_map_size      number_of_objects 2 }
+create_object STORMY_DOG_2 {       set_scaling_to_map_size      number_of_objects 2 }
+create_object DLC_VULTURE {        set_scaling_to_map_size      number_of_objects 5 }
+
+/* Add scenery. */
+                          create_object SEA_ROCKS_1 {           number_of_objects 1                                                          terrain_to_place_on SHALLOW                                                                set_gaia_object_only }
+                          create_object SEA_ROCKS_2 {           number_of_objects 1                                                          terrain_to_place_on SHALLOW                                                                set_gaia_object_only }
+                          create_object SHIPWRECK {             number_of_objects 1                                                          terrain_to_place_on SHALLOW                                                                set_gaia_object_only }
+                          create_object SHIPWRECK2 {            number_of_objects 1                                                          terrain_to_place_on SHALLOW                                                                set_gaia_object_only }
+#const HALF_RUBBLE 758    create_object HALF_RUBBLE {           number_of_objects 2                                                          terrain_to_place_on GRASS_JUNGLE                                min_distance_to_players 17 set_gaia_object_only }
+                          create_object HEAD {                  number_of_objects 0                                                          terrain_to_place_on GRASS_JUNGLE                                min_distance_to_players 17 set_gaia_object_only }
+                          create_object STUMP {                 number_of_objects 2                                                          terrain_to_place_on GRASS_JUNGLE                                min_distance_to_players 17 set_gaia_object_only }
+                          create_object OLD_STONE_HEAD {        number_of_objects 0                                                          terrain_to_place_on GRASS_JUNGLE                                min_distance_to_players 17 set_gaia_object_only }
+                          create_object ROMAN_RUINS {           number_of_objects 1                                                          terrain_to_place_on GRASS_JUNGLE                                min_distance_to_players 17 set_gaia_object_only }
+                          create_object HAY_STACK {             number_of_objects 1                                                          terrain_to_place_on GRASS_JUNGLE                                min_distance_to_players 17 set_gaia_object_only }
+                          create_object FLOWER_BED {            number_of_objects 1                                                          terrain_to_place_on GRASS_JUNGLE                                min_distance_to_players 17 set_gaia_object_only }
+                          create_object DLC_AFRICANBUSH {       number_of_objects 2                                                          terrain_to_place_on GRASS_JUNGLE                                min_distance_to_players 17 set_gaia_object_only }
+                          create_object DLC_FENCE {             number_of_objects 5                                                          terrain_to_place_on GRASS_JUNGLE                                min_distance_to_players 17 set_gaia_object_only }
+                          create_object DLC_MANGROVE_TREE {     number_of_objects 5  ignore_terrain_restrictions                             terrain_to_place_on SHALLOW                                                                set_gaia_object_only }
+                          create_object DLC_ROCKBEACH {         number_of_objects 1                                                          terrain_to_place_on GRASS_JUNGLE                                min_distance_to_players 17 set_gaia_object_only }
+                          create_object DLC_ROCKBEACH {         number_of_objects 4  ignore_terrain_restrictions                             terrain_to_place_on SHALLOW                                                                set_gaia_object_only }
+                          create_object DLC_ROCKBEACH {         number_of_objects 4  ignore_terrain_restrictions                             terrain_to_place_on WATER_GREEN                                                            set_gaia_object_only }
+                          create_object DLC_ROCKJUNGLE {        number_of_objects 4  ignore_terrain_restrictions                             terrain_to_place_on WATER_GREEN                                                            set_gaia_object_only }
+                          create_object DLC_ROCKJUNGLE {        number_of_objects 4  ignore_terrain_restrictions                             terrain_to_place_on SHALLOW                                                                set_gaia_object_only }
+                          create_object DLC_ROCKJUNGLE {        number_of_objects 1                                                          terrain_to_place_on GRASS_JUNGLE                                min_distance_to_players 17 set_gaia_object_only }
+                          create_object DLC_BUDDHA_STATUE_A {   number_of_objects 0                                                          terrain_to_place_on GRASS_JUNGLE                                min_distance_to_players 17 set_gaia_object_only }
+                          create_object DLC_BUDDHA_STATUE_B {   number_of_objects 0                                                          terrain_to_place_on GRASS_JUNGLE                                min_distance_to_players 17 set_gaia_object_only }
+                          create_object DLC_BUDDHA_STATUE_C {   number_of_objects 1                                                          terrain_to_place_on GRASS_JUNGLE                                min_distance_to_players 17 set_gaia_object_only }
+                          create_object DLC_BUDDHA_STATUE_D {   number_of_objects 1                                                          terrain_to_place_on GRASS_JUNGLE                                min_distance_to_players 17 set_gaia_object_only }
+                          create_object DLC_FERN_PATCH {        number_of_objects 5                                                          terrain_to_place_on GRASS_JUNGLE                                min_distance_to_players 17 set_gaia_object_only }
+                          create_object DLC_VASES {             number_of_objects 1                                                          terrain_to_place_on GRASS_JUNGLE                                min_distance_to_players 17 set_gaia_object_only }
+#const SHRINE        1323 create_object SHRINE {                number_of_objects 0                                                          terrain_to_place_on GRASS_JUNGLE                                min_distance_to_players 17 set_gaia_object_only }
+#const ROCK_2        1323 create_object ROCK_2 {                number_of_objects 1  ignore_terrain_restrictions                             terrain_to_place_on SHALLOW                                                                set_gaia_object_only }
+#const ROCK_2        1323 create_object ROCK_2 {                number_of_objects 1  ignore_terrain_restrictions                             terrain_to_place_on WATER_GREEN                                                            set_gaia_object_only }
+#const STATUE_L      1343 create_object STATUE_L {              number_of_objects 1                                                          terrain_to_place_on GRASS_JUNGLE                                min_distance_to_players 17 set_gaia_object_only }
+#const STATUE_R      1345 create_object STATUE_R {              number_of_objects 1                                                          terrain_to_place_on GRASS_JUNGLE                                min_distance_to_players 17 set_gaia_object_only }
+#const GRASS_1       1360 create_object GRASS_1 {               number_of_objects 5                                                          terrain_to_place_on GRASS_JUNGLE                                min_distance_to_players 17 set_gaia_object_only }
+#const GRASS_2       1362 create_object GRASS_2 {               number_of_objects 5                                                          terrain_to_place_on GRASS_JUNGLE                                min_distance_to_players 17 set_gaia_object_only }
+#const GRASS_3       1364 create_object GRASS_3 {               number_of_objects 5                                                          terrain_to_place_on GRASS_JUNGLE                                min_distance_to_players 17 set_gaia_object_only }
+#const INDIAN_STATUE 1777 create_object INDIAN_STATUE {         number_of_objects 0                                                          terrain_to_place_on GRASS_JUNGLE                                min_distance_to_players 17 set_gaia_object_only }
+#const INDIAN_RUIN   1784 create_object INDIAN_RUIN {           number_of_objects 1 number_of_groups 3 group_variance 0 set_tight_grouping   terrain_to_place_on GRASS_JUNGLE                                min_distance_to_players 17 set_gaia_object_only }

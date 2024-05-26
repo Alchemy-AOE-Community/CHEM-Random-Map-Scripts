@@ -1,0 +1,658 @@
+
+
+        /* 20231101 lg2312_Rhino_Wetlands_Original by ArthurXIV */
+ 
+
+<PLAYER_SETUP>
+behavior_version 1
+random_placement
+if     TINY_MAP     override_map_size 160 /* 2players */
+elseif SMALL_MAP    override_map_size 160 /* 3players */
+elseif MEDIUM_MAP   override_map_size 173 /* 4players */
+elseif LARGE_MAP    override_map_size 200 /* Normal 6players */
+elseif HUGE_MAP     override_map_size 226 /* Large 8players */
+elseif GIGANTIC_MAP override_map_size 280 /* Giant */
+elseif LUDIKRIS_MAP override_map_size 360
+endif
+
+if 2_PLAYER_GAME
+elseif 2_TEAM_GAME
+else
+#const DONKEY             846
+#const JUNK               15
+#const CARAVANSERAI       1754
+#const TECH_TRADE_CARAVAN 48
+#const TECH_SILK_ROAD     499
+effect_amount SET_ATTRIBUTE TRADE_CART   ATTR_TRAIN_LOCATION -1
+effect_amount SET_ATTRIBUTE DONKEY       ATTR_TRAIN_LOCATION -1
+effect_amount SET_ATTRIBUTE TRADE_COG    ATTR_TRAIN_LOCATION -1
+effect_amount SET_ATTRIBUTE JUNK         ATTR_TRAIN_LOCATION -1
+effect_amount SET_ATTRIBUTE CARAVANSERAI ATTR_TRAIN_LOCATION -1
+effect_amount DISABLE_TECH  TECH_TRADE_CARAVAN ATTR_DISABLE   1
+effect_amount DISABLE_TECH  TECH_SILK_ROAD     ATTR_DISABLE   1
+endif
+
+effect_amount SET_ATTRIBUTE WARSHIP_CLASS ATTR_TRAIN_LOCATION -1
+
+<ELEVATION_GENERATION>
+#const GRASS_JUNGLE 60
+
+create_elevation 2 { base_terrain GRASS
+if     TINY_MAP     number_of_tiles 833 number_of_clumps 55
+elseif SMALL_MAP    number_of_tiles 833 number_of_clumps 55
+elseif MEDIUM_MAP   number_of_tiles 974 number_of_clumps 59
+elseif LARGE_MAP    number_of_tiles 1302 number_of_clumps 69
+elseif HUGE_MAP     number_of_tiles 1662 number_of_clumps 78
+elseif GIGANTIC_MAP number_of_tiles 2551 number_of_clumps 96
+elseif LUDIKRIS_MAP number_of_tiles 4217 number_of_clumps 124
+endif enable_balanced_elevation }
+
+<TERRAIN_GENERATION>
+
+create_terrain WATER { base_terrain GRASS number_of_clumps 100 land_percent 100 }
+create_terrain WATER { base_terrain GRASS number_of_clumps 100 land_percent 100 }
+create_terrain DLC_MANGROVESHALLOW { base_terrain WATER number_of_clumps 10 land_percent 100
+if     TINY_MAP     spacing_to_other_terrain_types 61
+elseif SMALL_MAP    spacing_to_other_terrain_types 61
+elseif MEDIUM_MAP   spacing_to_other_terrain_types 67
+elseif LARGE_MAP    spacing_to_other_terrain_types 81
+elseif HUGE_MAP     spacing_to_other_terrain_types 93
+elseif GIGANTIC_MAP spacing_to_other_terrain_types 117
+elseif LUDIKRIS_MAP spacing_to_other_terrain_types 153
+endif }
+create_terrain WATER { base_terrain JUNGLE number_of_clumps 100 land_percent 100 }
+create_terrain DLC_RAINFOREST { base_terrain WATER number_of_clumps 100 land_percent 100 height_limits 0 0 beach_terrain DLC_RAINFOREST 
+if     TINY_MAP     spacing_to_other_terrain_types 53
+elseif SMALL_MAP    spacing_to_other_terrain_types 51
+elseif MEDIUM_MAP   spacing_to_other_terrain_types 55
+elseif LARGE_MAP    spacing_to_other_terrain_types 67
+elseif HUGE_MAP     spacing_to_other_terrain_types 79
+elseif GIGANTIC_MAP spacing_to_other_terrain_types 99
+elseif LUDIKRIS_MAP spacing_to_other_terrain_types 133
+endif }
+create_terrain GRASS { base_terrain WATER number_of_clumps 100 land_percent 100 height_limits 1 10 }
+create_terrain WATER { base_terrain GRASS number_of_clumps 100 land_percent 100
+if     TINY_MAP     set_avoid_player_start_areas 24
+elseif SMALL_MAP    set_avoid_player_start_areas 24
+elseif MEDIUM_MAP   set_avoid_player_start_areas 25
+elseif LARGE_MAP    set_avoid_player_start_areas 28
+elseif HUGE_MAP     set_avoid_player_start_areas 33
+elseif GIGANTIC_MAP set_avoid_player_start_areas 46
+elseif LUDIKRIS_MAP set_avoid_player_start_areas 60
+endif }
+create_terrain WATER { base_terrain GRASS number_of_clumps 100 land_percent 100
+if     TINY_MAP     set_avoid_player_start_areas 24
+elseif SMALL_MAP    set_avoid_player_start_areas 24
+elseif MEDIUM_MAP   set_avoid_player_start_areas 25
+elseif LARGE_MAP    set_avoid_player_start_areas 28
+elseif HUGE_MAP     set_avoid_player_start_areas 33
+elseif GIGANTIC_MAP set_avoid_player_start_areas 46
+elseif LUDIKRIS_MAP set_avoid_player_start_areas 60
+endif }
+create_terrain WATER { base_terrain GRASS number_of_clumps 100 land_percent 100
+if     TINY_MAP     set_avoid_player_start_areas 24
+elseif SMALL_MAP    set_avoid_player_start_areas 24
+elseif MEDIUM_MAP   set_avoid_player_start_areas 25
+elseif LARGE_MAP    set_avoid_player_start_areas 28
+elseif HUGE_MAP     set_avoid_player_start_areas 33
+elseif GIGANTIC_MAP set_avoid_player_start_areas 46
+elseif LUDIKRIS_MAP set_avoid_player_start_areas 60
+endif }
+create_terrain WATER { base_terrain GRASS number_of_clumps 100 land_percent 100
+if     TINY_MAP     set_avoid_player_start_areas 24
+elseif SMALL_MAP    set_avoid_player_start_areas 24
+elseif MEDIUM_MAP   set_avoid_player_start_areas 25
+elseif LARGE_MAP    set_avoid_player_start_areas 28
+elseif HUGE_MAP     set_avoid_player_start_areas 33
+elseif GIGANTIC_MAP set_avoid_player_start_areas 46
+elseif LUDIKRIS_MAP set_avoid_player_start_areas 60
+endif }
+create_terrain WATER { base_terrain GRASS number_of_clumps 100 land_percent 100
+if     TINY_MAP     set_avoid_player_start_areas 24
+elseif SMALL_MAP    set_avoid_player_start_areas 24
+elseif MEDIUM_MAP   set_avoid_player_start_areas 25
+elseif LARGE_MAP    set_avoid_player_start_areas 28
+elseif HUGE_MAP     set_avoid_player_start_areas 33
+elseif GIGANTIC_MAP set_avoid_player_start_areas 46
+elseif LUDIKRIS_MAP set_avoid_player_start_areas 60
+endif }
+create_terrain WATER { base_terrain GRASS number_of_clumps 100 land_percent 100
+if     TINY_MAP     set_avoid_player_start_areas 24
+elseif SMALL_MAP    set_avoid_player_start_areas 24
+elseif MEDIUM_MAP   set_avoid_player_start_areas 25
+elseif LARGE_MAP    set_avoid_player_start_areas 28
+elseif HUGE_MAP     set_avoid_player_start_areas 33
+elseif GIGANTIC_MAP set_avoid_player_start_areas 46
+elseif LUDIKRIS_MAP set_avoid_player_start_areas 60
+endif }
+create_terrain WATER { base_terrain GRASS number_of_clumps 100 land_percent 100
+if     TINY_MAP     set_avoid_player_start_areas 24
+elseif SMALL_MAP    set_avoid_player_start_areas 24
+elseif MEDIUM_MAP   set_avoid_player_start_areas 25
+elseif LARGE_MAP    set_avoid_player_start_areas 28
+elseif HUGE_MAP     set_avoid_player_start_areas 33
+elseif GIGANTIC_MAP set_avoid_player_start_areas 46
+elseif LUDIKRIS_MAP set_avoid_player_start_areas 60
+endif }
+create_terrain WATER { base_terrain GRASS number_of_clumps 100 land_percent 100
+if     TINY_MAP     set_avoid_player_start_areas 24
+elseif SMALL_MAP    set_avoid_player_start_areas 24
+elseif MEDIUM_MAP   set_avoid_player_start_areas 25
+elseif LARGE_MAP    set_avoid_player_start_areas 28
+elseif HUGE_MAP     set_avoid_player_start_areas 33
+elseif GIGANTIC_MAP set_avoid_player_start_areas 46
+elseif LUDIKRIS_MAP set_avoid_player_start_areas 60
+endif }
+
+#const WATER_BROWN 96
+create_terrain WATER_BROWN { base_terrain WATER number_of_clumps 100 land_percent 100 spacing_to_other_terrain_types 3
+if     TINY_MAP     set_avoid_player_start_areas 40
+elseif SMALL_MAP    set_avoid_player_start_areas 39
+elseif MEDIUM_MAP   set_avoid_player_start_areas 39
+elseif LARGE_MAP    set_avoid_player_start_areas 43
+elseif HUGE_MAP     set_avoid_player_start_areas 52
+elseif GIGANTIC_MAP set_avoid_player_start_areas 68
+elseif LUDIKRIS_MAP set_avoid_player_start_areas 96
+endif }
+create_terrain DIRT { base_terrain WATER_BROWN number_of_clumps 100 land_percent 100 spacing_to_other_terrain_types 1
+if     TINY_MAP     set_avoid_player_start_areas 40
+elseif SMALL_MAP    set_avoid_player_start_areas 39
+elseif MEDIUM_MAP   set_avoid_player_start_areas 39
+elseif LARGE_MAP    set_avoid_player_start_areas 43
+elseif HUGE_MAP     set_avoid_player_start_areas 52
+elseif GIGANTIC_MAP set_avoid_player_start_areas 68
+elseif LUDIKRIS_MAP set_avoid_player_start_areas 96
+endif }
+#const SWAMP_SHALLOWS 111
+create_terrain SWAMP_SHALLOWS { base_terrain DLC_RAINFOREST number_of_clumps 100 land_percent 100
+if     TINY_MAP     spacing_to_other_terrain_types 8
+elseif SMALL_MAP    spacing_to_other_terrain_types 9
+elseif MEDIUM_MAP   spacing_to_other_terrain_types 10
+elseif LARGE_MAP    spacing_to_other_terrain_types 12
+elseif HUGE_MAP     spacing_to_other_terrain_types 13
+elseif GIGANTIC_MAP spacing_to_other_terrain_types 18
+elseif LUDIKRIS_MAP spacing_to_other_terrain_types 22
+endif }
+
+create_terrain BIRCH_FOREST { base_terrain GRASS land_percent 1 set_avoid_player_start_areas 14 spacing_to_other_terrain_types 4 number_of_clumps 32 }
+
+#const DIRT_MUD 76
+create_terrain DIRT_MUD         { terrain_mask 1 base_terrain DIRT                number_of_clumps 4    number_of_tiles 200 }
+#const UDBRUSH_JUNGLE 77
+create_terrain UDBRUSH_JUNGLE   { terrain_mask 1 base_terrain DIRT                number_of_clumps 4    number_of_tiles 100 }
+create_terrain SWAMP_SHALLOWS   { terrain_mask 1 base_terrain DIRT                number_of_clumps 1000 land_percent 100 }
+#const SWAMP_BOGLAND 101
+create_terrain SWAMP_BOGLAND    { terrain_mask 1 base_terrain GRASS               number_of_clumps 4    number_of_tiles 160 }
+create_terrain DIRT_MUD         { terrain_mask 1 base_terrain GRASS               number_of_clumps 4    number_of_tiles 200 }
+create_terrain SWAMP_SHALLOWS   { terrain_mask 1 base_terrain GRASS               number_of_clumps 1000 land_percent 100 }
+#const WATER_GREEN 95
+create_terrain WATER_GREEN      {                base_terrain WATER               number_of_clumps 6    number_of_tiles 240 }
+create_terrain SWAMP_SHALLOWS   { terrain_mask 1 base_terrain WATER_GREEN         number_of_clumps 1000 land_percent 100 }
+create_terrain SWAMP_SHALLOWS   { terrain_mask 1 base_terrain WATER_BROWN         number_of_clumps 1000 land_percent 100 }
+create_terrain DIRT_MUD         { terrain_mask 1 base_terrain WATER               number_of_clumps 8    number_of_tiles 500 }
+create_terrain GRASS_JUNGLE     { terrain_mask 1 base_terrain WATER               number_of_clumps 8    number_of_tiles 600 }
+create_terrain UDBRUSH_JUNGLE   { terrain_mask 1 base_terrain WATER               number_of_clumps 8    number_of_tiles 300 }
+create_terrain DLC_DESERTGRAVEL { terrain_mask 1 base_terrain WATER               number_of_clumps 3    number_of_tiles 100 }
+create_terrain SWAMP_SHALLOWS   { terrain_mask 1 base_terrain WATER               number_of_clumps 1000 land_percent 100 }
+create_terrain DLC_BEACH3       {                base_terrain BEACH               number_of_clumps 1000 land_percent 100 }
+create_terrain GRASS_JUNGLE     { terrain_mask 1 base_terrain SWAMP_SHALLOWS      number_of_clumps 6    number_of_tiles 200 }
+create_terrain DIRT_MUD         { terrain_mask 1 base_terrain DLC_MANGROVESHALLOW number_of_clumps 8    number_of_tiles 300 }
+create_terrain SWAMP_SHALLOWS   { terrain_mask 1 base_terrain DLC_MANGROVESHALLOW number_of_clumps 8    number_of_tiles 300 }
+create_terrain GRASS_JUNGLE     { terrain_mask 1 base_terrain DLC_MANGROVESHALLOW number_of_clumps 8    number_of_tiles 300 }
+
+<CONNECTION_GENERATION>
+create_connect_all_players_land
+{
+replace_terrain WATER SHALLOW
+replace_terrain WATER_GREEN SHALLOW
+replace_terrain BEACH DLC_BEACH3
+replace_terrain DLC_BEACH3 DLC_BEACH3
+terrain_cost GRASS 1
+terrain_cost WATER 10000
+terrain_cost WATER_GREEN 10000
+terrain_cost WATER_BROWN -1
+terrain_cost SHALLOW 1
+terrain_cost DLC_MANGROVESHALLOW 1
+terrain_cost DLC_RAINFOREST -1
+terrain_cost DIRT -1
+terrain_cost BEACH 4294967296
+terrain_cost DLC_BEACH3 4294967296
+terrain_size GRASS 0 0
+terrain_size DLC_MANGROVESHALLOW 0 0
+terrain_size BEACH 0 0
+terrain_size DLC_BEACH3 0 0
+terrain_size SHALLOW 1 0
+if 2_PLAYER_GAME terrain_size WATER 1 0 elseif 3_PLAYER_GAME terrain_size WATER 1 0 else terrain_size WATER 0 0 endif
+if 2_PLAYER_GAME terrain_size WATER_GREEN 1 0 elseif 3_PLAYER_GAME terrain_size WATER_GREEN 1 0 else terrain_size WATER_GREEN 0 0 endif
+}
+
+create_connect_to_nonplayer_land
+/* create_connect_teams_lands */
+/* create_connect_all_lands */
+{
+replace_terrain WATER DLC_MANGROVESHALLOW
+replace_terrain WATER_GREEN DLC_MANGROVESHALLOW
+replace_terrain BEACH GRASS
+replace_terrain DLC_BEACH3 GRASS
+terrain_cost GRASS 1
+terrain_cost WATER 1000
+terrain_cost WATER_GREEN 1000
+terrain_cost WATER_BROWN -1
+terrain_cost SHALLOW -1
+terrain_cost DLC_RAINFOREST 1
+terrain_cost DIRT -1
+terrain_cost DLC_MANGROVESHALLOW -1
+terrain_cost SWAMP_SHALLOWS 1
+terrain_cost BEACH 10000
+terrain_cost DLC_BEACH3 10000
+terrain_size GRASS 0 0
+terrain_size BEACH 0 0
+terrain_size DLC_BEACH3 0 0
+terrain_size DLC_MANGROVESHALLOW 0 0
+terrain_size DLC_RAINFOREST 0 0
+terrain_size SWAMP_SHALLOWS 0 0
+if 2_PLAYER_GAME terrain_size WATER 2 0 elseif 3_PLAYER_GAME terrain_size WATER 2 0 else terrain_size WATER 1 0 endif
+if 2_PLAYER_GAME terrain_size WATER_GREEN 3 0 elseif 3_PLAYER_GAME terrain_size WATER_GREEN 2 0 else terrain_size WATER_GREEN 1 0 endif
+}
+
+<OBJECTS_GENERATION>
+/* Place starter units and TC. */
+create_object TOWN_CENTER { actor_area 1 actor_area_radius 23 find_closest set_place_for_every_player }
+
+create_object VILLAGER { if NINE_VILLS number_of_groups 9 else number_of_groups 3 endif max_distance_to_players 6 min_distance_to_players 5 set_circular_placement set_place_for_every_player }
+if REGICIDE create_object KING {  find_closest set_place_for_every_player } endif
+create_object SCOUT { set_place_for_every_player max_distance_to_players 7 min_distance_to_players 4 }
+#const MERCHANT 1572
+create_object MERCHANT { set_place_for_every_player max_distance_to_players 7 min_distance_to_players 4 }
+effect_amount SET_ATTRIBUTE MERCHANT ATTR_TRAITS 16
+#const DONKEY 846 /* Can trade. */
+create_object DONKEY { set_place_for_every_player max_distance_to_players 7 min_distance_to_players 4 }
+
+#const OFF_GRID 647
+create_object OFF_GRID { second_object FISHING_SHIP terrain_to_place_on WATER set_place_for_every_player find_closest ignore_terrain_restrictions }
+effect_amount SET_ATTRIBUTE FISHING_SHIP ATTR_TRAITS 18
+
+#const OFF_GRID 647
+create_object OFF_GRID { second_object TRANSPORT_SHIP terrain_to_place_on WATER set_place_for_every_player find_closest ignore_terrain_restrictions }
+effect_amount SET_ATTRIBUTE TRANSPORT_SHIP ATTR_TRAITS 19
+
+#const OFF_GRID 647
+#const JUNK 15
+create_object OFF_GRID { second_object JUNK terrain_to_place_on WATER set_place_for_every_player find_closest ignore_terrain_restrictions }
+
+#const OFF_GRID 647
+create_object OFF_GRID { second_object TRADE_COG terrain_to_place_on WATER set_place_for_every_player find_closest ignore_terrain_restrictions }
+create_object DLC_RAINTREE { set_facet -1 set_place_for_every_player max_distance_to_players 10 min_distance_to_players 5 set_gaia_object_only set_circular_placement min_distance_group_placement 1 number_of_objects 1 number_of_groups 1 }
+create_object DLC_RAINTREE { set_facet  1 set_place_for_every_player max_distance_to_players 10 min_distance_to_players 5 set_gaia_object_only set_circular_placement min_distance_group_placement 1 number_of_objects 1 number_of_groups 1 }
+
+create_object DLC_RAINTREE { set_facet 12 set_place_for_every_player max_distance_to_players 10 min_distance_to_players 5 set_gaia_object_only set_circular_placement min_distance_group_placement 1 number_of_objects 1 number_of_groups 1 }
+create_object DLC_RAINTREE { set_facet 13 set_place_for_every_player max_distance_to_players 10 min_distance_to_players 5 set_gaia_object_only set_circular_placement min_distance_group_placement 1 number_of_objects 1 number_of_groups 1 }
+create_object DLC_RAINTREE { set_facet 14 set_place_for_every_player max_distance_to_players 10 min_distance_to_players 5 set_gaia_object_only set_circular_placement min_distance_group_placement 1 number_of_objects 1 number_of_groups 1 }
+
+create_object DLC_RAINTREE { set_facet 16 set_place_for_every_player max_distance_to_players 10 min_distance_to_players 5 set_gaia_object_only set_circular_placement min_distance_group_placement 1 number_of_objects 1 number_of_groups 1 }
+
+create_object DLC_RAINTREE { set_facet 18 set_place_for_every_player max_distance_to_players 10 min_distance_to_players 5 set_gaia_object_only set_circular_placement min_distance_group_placement 1 number_of_objects 1 number_of_groups 1 }
+create_object DLC_RAINTREE { set_facet 19 set_place_for_every_player max_distance_to_players 10 min_distance_to_players 5 set_gaia_object_only set_circular_placement min_distance_group_placement 1 number_of_objects 1 number_of_groups 1 }
+
+start_random percent_chance 20 create_object DLC_COW
+             percent_chance 20 create_object DLC_COW_B
+             percent_chance 20 create_object DLC_COW_C
+             percent_chance 20 create_object DLC_COW_D
+             percent_chance 20 create_object DLC_WATERBUFFALO end_random
+{ number_of_groups 1 set_place_for_every_player max_distance_to_players 3 min_distance_to_players 3 set_gaia_object_only }
+start_random percent_chance 20 create_object DLC_GOAT
+             percent_chance 20 create_object DLC_GOOSE
+             percent_chance 20 create_object DLC_PIG
+             percent_chance 20 create_object SHEEP
+             percent_chance 20 create_object TURKEY end_random
+{ number_of_groups 1 set_place_for_every_player max_distance_to_players 3 min_distance_to_players 3 set_gaia_object_only }
+create_object HOUSE { min_distance_to_players 7 max_distance_to_players 10 set_place_for_every_player }
+
+#const OFF_GRID 647
+create_object OFF_GRID { actor_area 6 find_closest actor_area_radius 7 set_place_for_every_player }
+create_object OFF_GRID { actor_area 6 find_closest_to_map_center min_distance_to_players  0 max_distance_to_players  2 set_place_for_every_player set_circular_placement }
+create_object OFF_GRID { actor_area 6 find_closest_to_map_center min_distance_to_players  1 max_distance_to_players  3 set_place_for_every_player set_circular_placement }
+create_object OFF_GRID { actor_area 6 find_closest_to_map_center min_distance_to_players  2 max_distance_to_players  4 set_place_for_every_player set_circular_placement }
+create_object OFF_GRID { actor_area 6 find_closest_to_map_center min_distance_to_players  3 max_distance_to_players  5 set_place_for_every_player set_circular_placement }
+create_object OFF_GRID { actor_area 6 find_closest_to_map_center min_distance_to_players  4 max_distance_to_players  6 set_place_for_every_player set_circular_placement }
+create_object OFF_GRID { actor_area 6 find_closest_to_map_center min_distance_to_players  5 max_distance_to_players  7 set_place_for_every_player set_circular_placement }
+create_object OFF_GRID { actor_area 6 find_closest_to_map_center min_distance_to_players  6 max_distance_to_players  8 set_place_for_every_player set_circular_placement }
+create_object OFF_GRID { actor_area 6 find_closest_to_map_center min_distance_to_players  7 max_distance_to_players  9 set_place_for_every_player set_circular_placement }
+create_object OFF_GRID { actor_area 6 find_closest_to_map_center min_distance_to_players  8 max_distance_to_players 10 set_place_for_every_player set_circular_placement }
+create_object OFF_GRID { actor_area 6 find_closest_to_map_center min_distance_to_players  9 max_distance_to_players 11 set_place_for_every_player set_circular_placement }
+create_object OFF_GRID { actor_area 6 find_closest_to_map_center min_distance_to_players 10 max_distance_to_players 12 set_place_for_every_player set_circular_placement }
+create_object OFF_GRID { actor_area 6 find_closest_to_map_center min_distance_to_players 11 max_distance_to_players 13 set_place_for_every_player set_circular_placement }
+create_object OFF_GRID { actor_area 6 find_closest_to_map_center min_distance_to_players 12 max_distance_to_players 14 set_place_for_every_player set_circular_placement }
+create_object OFF_GRID { actor_area 6 find_closest_to_map_center min_distance_to_players 13 max_distance_to_players 15 set_place_for_every_player set_circular_placement }
+create_object OFF_GRID { actor_area 6 find_closest_to_map_center min_distance_to_players 14 max_distance_to_players 16 set_place_for_every_player set_circular_placement }
+create_object SHORE_FISH { actor_area 7 find_closest actor_area_radius 6 number_of_groups 3 temp_min_distance_group_placement 6 set_place_for_every_player set_gaia_object_only ignore_terrain_restrictions }
+create_object DLC_BOXTURTLE { actor_area 8 actor_area_radius 6 number_of_groups 4 temp_min_distance_group_placement 6 set_place_for_every_player set_gaia_object_only ignore_terrain_restrictions
+if     TINY_MAP     min_distance_to_players 16 max_distance_to_players 24
+elseif SMALL_MAP    min_distance_to_players 16 max_distance_to_players 24
+elseif MEDIUM_MAP   min_distance_to_players 16 max_distance_to_players 25
+elseif LARGE_MAP    min_distance_to_players 16 max_distance_to_players 28
+elseif HUGE_MAP     min_distance_to_players 16 max_distance_to_players 33
+elseif GIGANTIC_MAP min_distance_to_players 16 max_distance_to_players 46
+elseif LUDIKRIS_MAP min_distance_to_players 16 max_distance_to_players 60
+endif }
+
+create_object GOLD   { avoid_actor_area 6 actor_area_to_place_in 7 number_of_groups  5 set_place_for_every_player set_gaia_object_only terrain_to_place_on GRASS }
+create_object GOLD   { avoid_actor_area 6 actor_area_to_place_in 8 number_of_groups  9 set_place_for_every_player set_gaia_object_only terrain_to_place_on GRASS }
+create_object STONE  { avoid_actor_area 6 actor_area_to_place_in 7 number_of_groups  1 set_place_for_every_player set_gaia_object_only terrain_to_place_on GRASS }
+create_object STONE  { avoid_actor_area 6 actor_area_to_place_in 8 number_of_groups 12 set_place_for_every_player set_gaia_object_only terrain_to_place_on GRASS }
+create_object FORAGE { avoid_actor_area 6 actor_area_to_place_in 7 number_of_groups  3 set_place_for_every_player set_gaia_object_only terrain_to_place_on GRASS }
+create_object FORAGE { avoid_actor_area 6 actor_area_to_place_in 8 number_of_groups 12 set_place_for_every_player set_gaia_object_only terrain_to_place_on GRASS }
+
+create_object DLC_ELEPHANT { terrain_to_place_on GRASS number_of_groups 1 set_place_for_every_player set_gaia_object_only set_loose_grouping set_circular_placement
+if     TINY_MAP     min_distance_to_players 13 max_distance_to_players 24
+elseif SMALL_MAP    min_distance_to_players 13 max_distance_to_players 24
+elseif MEDIUM_MAP   min_distance_to_players 14 max_distance_to_players 25
+elseif LARGE_MAP    min_distance_to_players 17 max_distance_to_players 28
+elseif HUGE_MAP     min_distance_to_players 22 max_distance_to_players 33
+elseif GIGANTIC_MAP min_distance_to_players 35 max_distance_to_players 46
+elseif LUDIKRIS_MAP min_distance_to_players 49 max_distance_to_players 60
+endif }
+create_object JAVELINA     { terrain_to_place_on GRASS number_of_groups 1 set_place_for_every_player set_gaia_object_only set_loose_grouping set_circular_placement
+if     TINY_MAP     min_distance_to_players 13 max_distance_to_players 24
+elseif SMALL_MAP    min_distance_to_players 13 max_distance_to_players 24
+elseif MEDIUM_MAP   min_distance_to_players 14 max_distance_to_players 25
+elseif LARGE_MAP    min_distance_to_players 17 max_distance_to_players 28
+elseif HUGE_MAP     min_distance_to_players 22 max_distance_to_players 33
+elseif GIGANTIC_MAP min_distance_to_players 35 max_distance_to_players 46
+elseif LUDIKRIS_MAP min_distance_to_players 49 max_distance_to_players 60
+endif }
+create_object WILD_BOAR    { terrain_to_place_on GRASS number_of_groups 1 set_place_for_every_player set_gaia_object_only set_loose_grouping set_circular_placement
+if     TINY_MAP     min_distance_to_players 13 max_distance_to_players 24
+elseif SMALL_MAP    min_distance_to_players 13 max_distance_to_players 24
+elseif MEDIUM_MAP   min_distance_to_players 14 max_distance_to_players 25
+elseif LARGE_MAP    min_distance_to_players 17 max_distance_to_players 28
+elseif HUGE_MAP     min_distance_to_players 22 max_distance_to_players 33
+elseif GIGANTIC_MAP min_distance_to_players 35 max_distance_to_players 46
+elseif LUDIKRIS_MAP min_distance_to_players 49 max_distance_to_players 60
+endif }
+create_object DLC_RHINO    { terrain_to_place_on GRASS number_of_groups 2 set_place_for_every_player set_gaia_object_only set_loose_grouping set_circular_placement
+if     TINY_MAP     min_distance_to_players 13 max_distance_to_players 24
+elseif SMALL_MAP    min_distance_to_players 13 max_distance_to_players 24
+elseif MEDIUM_MAP   min_distance_to_players 14 max_distance_to_players 25
+elseif LARGE_MAP    min_distance_to_players 17 max_distance_to_players 28
+elseif HUGE_MAP     min_distance_to_players 22 max_distance_to_players 33
+elseif GIGANTIC_MAP min_distance_to_players 35 max_distance_to_players 46
+elseif LUDIKRIS_MAP min_distance_to_players 49 max_distance_to_players 60
+endif }
+create_object GAZELLE      { terrain_to_place_on GRASS number_of_groups 2 set_place_for_every_player set_gaia_object_only set_loose_grouping set_circular_placement
+if     TINY_MAP     min_distance_to_players 13 max_distance_to_players 24
+elseif SMALL_MAP    min_distance_to_players 13 max_distance_to_players 24
+elseif MEDIUM_MAP   min_distance_to_players 14 max_distance_to_players 25
+elseif LARGE_MAP    min_distance_to_players 17 max_distance_to_players 28
+elseif HUGE_MAP     min_distance_to_players 22 max_distance_to_players 33
+elseif GIGANTIC_MAP min_distance_to_players 35 max_distance_to_players 46
+elseif LUDIKRIS_MAP min_distance_to_players 49 max_distance_to_players 60
+endif }
+create_object DEER         { terrain_to_place_on GRASS number_of_groups 2 set_place_for_every_player set_gaia_object_only set_loose_grouping set_circular_placement
+if     TINY_MAP     min_distance_to_players 13 max_distance_to_players 24
+elseif SMALL_MAP    min_distance_to_players 13 max_distance_to_players 24
+elseif MEDIUM_MAP   min_distance_to_players 14 max_distance_to_players 25
+elseif LARGE_MAP    min_distance_to_players 17 max_distance_to_players 28
+elseif HUGE_MAP     min_distance_to_players 22 max_distance_to_players 33
+elseif GIGANTIC_MAP min_distance_to_players 35 max_distance_to_players 46
+elseif LUDIKRIS_MAP min_distance_to_players 49 max_distance_to_players 60
+endif }
+create_object DLC_IBEX     { terrain_to_place_on GRASS number_of_groups 2 set_place_for_every_player set_gaia_object_only set_loose_grouping set_circular_placement
+if     TINY_MAP     min_distance_to_players 13 max_distance_to_players 24
+elseif SMALL_MAP    min_distance_to_players 13 max_distance_to_players 24
+elseif MEDIUM_MAP   min_distance_to_players 14 max_distance_to_players 25
+elseif LARGE_MAP    min_distance_to_players 17 max_distance_to_players 28
+elseif HUGE_MAP     min_distance_to_players 22 max_distance_to_players 33
+elseif GIGANTIC_MAP min_distance_to_players 35 max_distance_to_players 46
+elseif LUDIKRIS_MAP min_distance_to_players 49 max_distance_to_players 60
+endif }
+create_object DLC_OSTRICH  { terrain_to_place_on GRASS number_of_groups 2 set_place_for_every_player set_gaia_object_only set_loose_grouping set_circular_placement
+if     TINY_MAP     min_distance_to_players 13 max_distance_to_players 24
+elseif SMALL_MAP    min_distance_to_players 13 max_distance_to_players 24
+elseif MEDIUM_MAP   min_distance_to_players 14 max_distance_to_players 25
+elseif LARGE_MAP    min_distance_to_players 17 max_distance_to_players 28
+elseif HUGE_MAP     min_distance_to_players 22 max_distance_to_players 33
+elseif GIGANTIC_MAP min_distance_to_players 35 max_distance_to_players 46
+elseif LUDIKRIS_MAP min_distance_to_players 49 max_distance_to_players 60
+endif }
+create_object DLC_ZEBRA    { terrain_to_place_on GRASS number_of_groups 2 set_place_for_every_player set_gaia_object_only set_loose_grouping set_circular_placement
+if     TINY_MAP     min_distance_to_players 13 max_distance_to_players 24
+elseif SMALL_MAP    min_distance_to_players 13 max_distance_to_players 24
+elseif MEDIUM_MAP   min_distance_to_players 14 max_distance_to_players 25
+elseif LARGE_MAP    min_distance_to_players 17 max_distance_to_players 28
+elseif HUGE_MAP     min_distance_to_players 22 max_distance_to_players 33
+elseif GIGANTIC_MAP min_distance_to_players 35 max_distance_to_players 46
+elseif LUDIKRIS_MAP min_distance_to_players 49 max_distance_to_players 60
+endif }
+
+create_object BIRCH_TREE { number_of_objects 40 terrain_to_place_on GRASS min_distance_to_players 6 temp_min_distance_group_placement 2 ignore_terrain_restrictions set_place_for_every_player set_gaia_object_only
+if     TINY_MAP     max_distance_to_players 24
+elseif SMALL_MAP    max_distance_to_players 24
+elseif MEDIUM_MAP   max_distance_to_players 25
+elseif LARGE_MAP    max_distance_to_players 28
+elseif HUGE_MAP     max_distance_to_players 33
+elseif GIGANTIC_MAP max_distance_to_players 46
+elseif LUDIKRIS_MAP max_distance_to_players 60
+endif }
+create_object FLOWER_BED { terrain_to_place_on GRASS number_of_objects 30 ignore_terrain_restrictions set_scaling_to_map_size set_gaia_object_only }
+
+#const OFF_GRID 647
+create_object OFF_GRID { actor_area 5 find_closest actor_area_radius 30 set_place_for_every_player }
+create_object GOLD        { terrain_to_place_on GRASS avoid_actor_area 5 temp_min_distance_group_placement 8 number_of_objects 3 number_of_groups 2 set_gaia_object_only }
+create_object STONE       { terrain_to_place_on GRASS avoid_actor_area 5 temp_min_distance_group_placement 8 number_of_objects 2 number_of_groups 2 set_gaia_object_only }
+create_object BIRCH_TREE  { terrain_to_place_on GRASS avoid_actor_area 5 temp_min_distance_group_placement 8 number_of_objects 1 number_of_groups 8 set_gaia_object_only }
+create_object FORAGE      { terrain_to_place_on GRASS avoid_actor_area 5 temp_min_distance_group_placement 8 number_of_objects 3 number_of_groups 2 set_gaia_object_only }
+create_object DEER        { terrain_to_place_on GRASS avoid_actor_area 5 temp_min_distance_group_placement 8 number_of_objects 3 number_of_groups 2 set_gaia_object_only }
+create_object DLC_OSTRICH { terrain_to_place_on GRASS avoid_actor_area 5 temp_min_distance_group_placement 8 number_of_objects 3 number_of_groups 2 set_gaia_object_only }
+create_object BOAR        { terrain_to_place_on GRASS avoid_actor_area 5 temp_min_distance_group_placement 8 number_of_objects 1 number_of_groups 2 set_gaia_object_only }
+
+create_object RELIC { number_of_groups 4 terrain_to_place_on SWAMP_SHALLOWS second_object DLC_CROCODILE find_closest_to_map_center ignore_terrain_restrictions }
+create_object DLC_RHINO { actor_area 50 actor_area_radius 16 number_of_groups 7 terrain_to_place_on SWAMP_SHALLOWS find_closest_to_map_center set_place_for_every_player ignore_terrain_restrictions set_gaia_object_only }
+#const MAPREVEALER 112
+create_object MAPREVEALER { actor_area_to_place_in 50 number_of_objects 99 set_place_for_every_player ignore_terrain_restrictions
+actor_area 51
+if     TINY_MAP     actor_area_radius 34
+elseif SMALL_MAP    actor_area_radius 36
+elseif MEDIUM_MAP   actor_area_radius 38
+elseif LARGE_MAP    actor_area_radius 41
+elseif HUGE_MAP     actor_area_radius 45
+elseif GIGANTIC_MAP actor_area_radius 50
+elseif LUDIKRIS_MAP actor_area_radius 60
+endif }
+create_object GOLD { terrain_to_place_on SWAMP_SHALLOWS number_of_objects 2 number_of_groups 1 set_loose_grouping ignore_terrain_restrictions set_gaia_object_only set_place_for_every_player }
+create_object STONE { terrain_to_place_on SWAMP_SHALLOWS number_of_objects 1 number_of_groups 1 set_loose_grouping ignore_terrain_restrictions set_gaia_object_only set_place_for_every_player }
+
+create_object RELIC       { avoid_actor_area 51 terrain_to_place_on DLC_MANGROVESHALLOW number_of_objects 1 number_of_groups 5 temp_min_distance_group_placement 17 set_scaling_to_player_number second_object DLC_CROCODILE }
+create_object STONE       { avoid_actor_area 51 terrain_to_place_on DLC_MANGROVESHALLOW number_of_objects 1 number_of_groups 8 temp_min_distance_group_placement 17 set_scaling_to_player_number }
+create_object GOLD        { avoid_actor_area 51 terrain_to_place_on DLC_MANGROVESHALLOW number_of_objects 2 number_of_groups 4 temp_min_distance_group_placement 17 set_scaling_to_player_number }
+create_object SEA_ROCKS_1 { avoid_actor_area 51 terrain_to_place_on DLC_MANGROVESHALLOW number_of_groups 1 set_gaia_object_only }
+create_object SEA_ROCKS_2 { avoid_actor_area 51 terrain_to_place_on DLC_MANGROVESHALLOW number_of_groups 1 set_gaia_object_only }
+create_object SHIPWRECK   { avoid_actor_area 51 terrain_to_place_on DLC_MANGROVESHALLOW number_of_groups 1 set_gaia_object_only }
+create_object SHIPWRECK2  { avoid_actor_area 51 terrain_to_place_on DLC_MANGROVESHALLOW number_of_groups 1 set_gaia_object_only }
+create_object DLC_MANGROVE_TREE { avoid_actor_area 51 terrain_to_place_on DLC_MANGROVESHALLOW number_of_groups 40 temp_min_distance_group_placement 1 ignore_terrain_restrictions set_scaling_to_map_size set_gaia_object_only }
+create_object DLC_MANGROVE_TREE { avoid_actor_area 51 terrain_to_place_on DLC_MANGROVESHALLOW number_of_groups 40 temp_min_distance_group_placement 1 ignore_terrain_restrictions set_scaling_to_map_size set_gaia_object_only }
+create_object DLC_MANGROVE_TREE { avoid_actor_area 51 terrain_to_place_on DLC_MANGROVESHALLOW number_of_groups 40 temp_min_distance_group_placement 1 ignore_terrain_restrictions set_scaling_to_map_size set_gaia_object_only }
+create_object DLC_MANGROVE_TREE { avoid_actor_area 51 terrain_to_place_on DLC_MANGROVESHALLOW number_of_groups 40 temp_min_distance_group_placement 1 ignore_terrain_restrictions set_scaling_to_map_size set_gaia_object_only }
+create_object DLC_MANGROVE_TREE                     { terrain_to_place_on DLC_MANGROVESHALLOW number_of_groups 40 temp_min_distance_group_placement 1 ignore_terrain_restrictions set_scaling_to_map_size set_gaia_object_only }
+
+create_object GOLD { terrain_to_place_on DIRT number_of_objects 2 number_of_groups 4 set_tight_grouping ignore_terrain_restrictions set_gaia_object_only set_place_for_every_player
+if     TINY_MAP     min_distance_to_players 29 max_distance_to_players 999
+elseif SMALL_MAP    min_distance_to_players 28 max_distance_to_players 999
+elseif MEDIUM_MAP   min_distance_to_players 28 max_distance_to_players 999
+elseif LARGE_MAP    min_distance_to_players 31 max_distance_to_players 999
+elseif HUGE_MAP     min_distance_to_players 35 max_distance_to_players 999
+elseif GIGANTIC_MAP min_distance_to_players 52 max_distance_to_players 999
+elseif LUDIKRIS_MAP min_distance_to_players 67 max_distance_to_players 999
+endif }
+create_object STONE { terrain_to_place_on DIRT number_of_objects 1 number_of_groups 4 set_tight_grouping ignore_terrain_restrictions set_gaia_object_only set_place_for_every_player
+if     TINY_MAP     min_distance_to_players 29 max_distance_to_players 999
+elseif SMALL_MAP    min_distance_to_players 28 max_distance_to_players 999
+elseif MEDIUM_MAP   min_distance_to_players 28 max_distance_to_players 999
+elseif LARGE_MAP    min_distance_to_players 31 max_distance_to_players 999
+elseif HUGE_MAP     min_distance_to_players 35 max_distance_to_players 999
+elseif GIGANTIC_MAP min_distance_to_players 52 max_distance_to_players 999
+elseif LUDIKRIS_MAP min_distance_to_players 67 max_distance_to_players 999
+endif }
+create_object GAZELLE { terrain_to_place_on DIRT number_of_objects 1 number_of_groups 8 set_tight_grouping ignore_terrain_restrictions set_gaia_object_only set_place_for_every_player
+if     TINY_MAP     min_distance_to_players 29 max_distance_to_players 999
+elseif SMALL_MAP    min_distance_to_players 28 max_distance_to_players 999
+elseif MEDIUM_MAP   min_distance_to_players 28 max_distance_to_players 999
+elseif LARGE_MAP    min_distance_to_players 31 max_distance_to_players 999
+elseif HUGE_MAP     min_distance_to_players 35 max_distance_to_players 999
+elseif GIGANTIC_MAP min_distance_to_players 52 max_distance_to_players 999
+elseif LUDIKRIS_MAP min_distance_to_players 67 max_distance_to_players 999
+endif }
+create_object DLC_ORANGEBUSH { terrain_to_place_on DIRT number_of_objects 1 number_of_groups 6 set_loose_grouping ignore_terrain_restrictions set_gaia_object_only set_place_for_every_player
+if     TINY_MAP     min_distance_to_players 29 max_distance_to_players 999
+elseif SMALL_MAP    min_distance_to_players 28 max_distance_to_players 999
+elseif MEDIUM_MAP   min_distance_to_players 28 max_distance_to_players 999
+elseif LARGE_MAP    min_distance_to_players 31 max_distance_to_players 999
+elseif HUGE_MAP     min_distance_to_players 35 max_distance_to_players 999
+elseif GIGANTIC_MAP min_distance_to_players 52 max_distance_to_players 999
+elseif LUDIKRIS_MAP min_distance_to_players 67 max_distance_to_players 999
+endif }
+create_object DLC_BAOBABTREE { terrain_to_place_on DIRT number_of_objects 40 temp_min_distance_group_placement 3 ignore_terrain_restrictions set_place_for_every_player set_gaia_object_only }
+create_object DLC_AFRICANBUSH { terrain_to_place_on DIRT                number_of_objects 16 ignore_terrain_restrictions set_place_for_every_player set_gaia_object_only }
+
+#const HALF_RUBBLE 758 create_object HALF_RUBBLE      { terrain_to_place_on DIRT number_of_groups 2 set_gaia_object_only }
+create_object OLD_STONE_HEAD                          { terrain_to_place_on DIRT number_of_groups 0 set_gaia_object_only }
+create_object ROMAN_RUINS                             { terrain_to_place_on DIRT number_of_groups 1 set_gaia_object_only }
+create_object HAY_STACK                               { terrain_to_place_on DIRT number_of_groups 1 set_gaia_object_only }
+create_object FLOWER_BED                              { terrain_to_place_on DIRT number_of_groups 1 set_gaia_object_only }
+create_object DLC_AFRICANBUSH                         { terrain_to_place_on DIRT number_of_groups 2 set_gaia_object_only }
+create_object DLC_VASES                               { terrain_to_place_on DIRT number_of_groups 1 set_gaia_object_only }
+#const SHRINE        1323 create_object SHRINE        { terrain_to_place_on DIRT number_of_groups 0 set_gaia_object_only }
+#const STATUE_L      1343 create_object STATUE_L      { terrain_to_place_on DIRT number_of_groups 1 set_gaia_object_only }
+#const STATUE_R      1345 create_object STATUE_R      { terrain_to_place_on DIRT number_of_groups 1 set_gaia_object_only }
+#const INDIAN_STATUE 1777 create_object INDIAN_STATUE { terrain_to_place_on DIRT number_of_groups 0 set_gaia_object_only }
+#const INDIAN_RUIN   1784 create_object INDIAN_RUIN   { terrain_to_place_on DIRT number_of_objects 1 number_of_groups 3 set_tight_grouping set_gaia_object_only }
+
+/* create_object DLC_MANGROVE_TREE { terrain_to_place_on SHALLOW number_of_groups 3 ignore_terrain_restrictions set_scaling_to_map_size set_gaia_object_only } */
+create_object DLC_ROCKBEACH        { terrain_to_place_on WATER number_of_groups 4 ignore_terrain_restrictions set_gaia_object_only }
+create_object DLC_ROCKJUNGLE       { terrain_to_place_on WATER number_of_groups 4 ignore_terrain_restrictions set_gaia_object_only }
+create_object SEA_ROCKS_1          { terrain_to_place_on WATER number_of_groups 1 set_gaia_object_only }
+create_object SEA_ROCKS_2          { terrain_to_place_on WATER number_of_groups 1 set_gaia_object_only }
+#const ROCK_2 1323 create_object ROCK_2 { terrain_to_place_on WATER number_of_groups 1  ignore_terrain_restrictions                         set_gaia_object_only }
+create_object DLC_FERN_PATCH            { terrain_to_place_on WATER number_of_groups 80 ignore_terrain_restrictions set_scaling_to_map_size set_gaia_object_only }
+create_object DLC_FERN_PATCH            { terrain_to_place_on DLC_MANGROVESHALLOW number_of_groups 80 ignore_terrain_restrictions set_scaling_to_map_size set_gaia_object_only }
+create_object DLC_ROCKBEACH             { terrain_to_place_on DLC_MANGROVESHALLOW number_of_groups 4 ignore_terrain_restrictions set_gaia_object_only }
+#const ROCK_2 1323 create_object ROCK_2 { terrain_to_place_on DLC_MANGROVESHALLOW number_of_groups 1 ignore_terrain_restrictions set_gaia_object_only }
+create_object DLC_ROCKJUNGLE            { terrain_to_place_on DLC_MANGROVESHALLOW number_of_groups 4 ignore_terrain_restrictions set_gaia_object_only }
+#const GRASS_1 1360 create_object GRASS_1 {  number_of_objects 20 ignore_terrain_restrictions set_scaling_to_map_size set_gaia_object_only }
+#const GRASS_2 1362 create_object GRASS_2 {  number_of_objects 20 ignore_terrain_restrictions set_scaling_to_map_size set_gaia_object_only }
+#const GRASS_3 1364 create_object GRASS_3 {  number_of_objects 20 ignore_terrain_restrictions set_scaling_to_map_size set_gaia_object_only }
+#const GRASS_4  301 create_object GRASS_4 {  number_of_objects 50 ignore_terrain_restrictions set_scaling_to_map_size set_gaia_object_only }
+#const GRASS_5 1033 create_object GRASS_5 { number_of_objects 120 ignore_terrain_restrictions set_scaling_to_map_size set_gaia_object_only }
+#const GRASS_6 1358 create_object GRASS_6 {  number_of_objects 50 ignore_terrain_restrictions set_scaling_to_map_size set_gaia_object_only }
+#const GRASS_7 1359 create_object GRASS_7 {  number_of_objects 90 ignore_terrain_restrictions set_scaling_to_map_size set_gaia_object_only }
+#const GRASS_8 1364 create_object GRASS_8 {  number_of_objects 20 ignore_terrain_restrictions set_scaling_to_map_size set_gaia_object_only }
+
+#const DOLPHIN 61
+create_object DOLPHIN           { terrain_to_place_on DLC_MANGROVESHALLOW set_scaling_to_player_number number_of_objects 4 set_gaia_object_only max_distance_to_players 40 }
+create_object GREAT_FISH_MARLIN { terrain_to_place_on DLC_MANGROVESHALLOW set_scaling_to_player_number number_of_objects 4 set_gaia_object_only max_distance_to_players 40 }
+create_object DORADO            { terrain_to_place_on WATER               set_scaling_to_player_number number_of_objects 3 set_gaia_object_only max_distance_to_players 40 }
+create_object FISH_PERCH        { terrain_to_place_on WATER               set_scaling_to_player_number number_of_objects 3 set_gaia_object_only max_distance_to_players 40 }
+create_object SALMON            { terrain_to_place_on WATER               set_scaling_to_player_number number_of_objects 3 set_gaia_object_only max_distance_to_players 40 }
+create_object SNAPPER           { terrain_to_place_on WATER               set_scaling_to_player_number number_of_objects 3 set_gaia_object_only max_distance_to_players 40 }
+create_object TUNA              { terrain_to_place_on WATER               set_scaling_to_player_number number_of_objects 3 set_gaia_object_only max_distance_to_players 40 }
+/* Add pigeons. */
+#const FALCON 1056
+#const STORMY_DOG 544   /* This one works only 1% of the time. */
+#const STORMY_DOG_2 862 /* This one works fine. */
+create_object FALCON       { number_of_objects 1 }
+create_object HAWK         { number_of_objects 1 }
+create_object MACAW        { number_of_objects 7 }
+create_object DLC_STORK    { number_of_objects 3 }
+create_object STORMY_DOG   { number_of_objects 1 }
+create_object STORMY_DOG_2 { number_of_objects 1 }
+create_object DLC_VULTURE  { number_of_objects 1 }
+<LAND_GENERATION>
+
+base_terrain WATER
+
+if 2_PLAYER_GAME
+	start_random
+		percent_chance 50 #define ANGLE1
+		percent_chance 50 #define ANGLE2
+	end_random
+	/* land_id should always be placed after assign_to_player, otherwise each player gets several starting TCs etc */
+	create_land { assign_to_player 1           base_size 6 terrain_type GRASS land_percent 100 zone 1 base_elevation 1 border_fuzziness 100 clumping_factor 20
+             if     TINY_MAP     other_zone_avoidance_distance 18 top_border 7 bottom_border 7 left_border 7 right_border 7 circle_radius 31 0
+             elseif SMALL_MAP    other_zone_avoidance_distance 16 top_border 7 bottom_border 7 left_border 7 right_border 7 circle_radius 31 0
+             elseif MEDIUM_MAP   other_zone_avoidance_distance 14 top_border 6 bottom_border 6 left_border 6 right_border 6 circle_radius 31 0
+             elseif LARGE_MAP    other_zone_avoidance_distance 13 top_border 6 bottom_border 6 left_border 6 right_border 6 circle_radius 31 0
+             elseif HUGE_MAP     other_zone_avoidance_distance 12 top_border 5 bottom_border 5 left_border 5 right_border 5 circle_radius 31 0
+             elseif GIGANTIC_MAP other_zone_avoidance_distance 20 top_border 4 bottom_border 4 left_border 4 right_border 4 circle_radius 30 0
+             elseif LUDIKRIS_MAP other_zone_avoidance_distance 22 top_border 3 bottom_border 3 left_border 3 right_border 3 circle_radius 30 0
+             endif }
+	create_land { assign_to_player 2 if ANGLE1 base_size 6
+	                            else land_id 1 base_size 1 endif
+	                                                       terrain_type GRASS land_percent 100 zone 1 base_elevation 1 border_fuzziness 100 clumping_factor 20
+             if     TINY_MAP     other_zone_avoidance_distance 18 top_border 7 bottom_border 7 left_border 7 right_border 7 circle_radius 31 0
+             elseif SMALL_MAP    other_zone_avoidance_distance 16 top_border 7 bottom_border 7 left_border 7 right_border 7 circle_radius 31 0
+             elseif MEDIUM_MAP   other_zone_avoidance_distance 14 top_border 6 bottom_border 6 left_border 6 right_border 6 circle_radius 31 0
+             elseif LARGE_MAP    other_zone_avoidance_distance 13 top_border 6 bottom_border 6 left_border 6 right_border 6 circle_radius 31 0
+             elseif HUGE_MAP     other_zone_avoidance_distance 12 top_border 5 bottom_border 5 left_border 5 right_border 5 circle_radius 31 0
+             elseif GIGANTIC_MAP other_zone_avoidance_distance 20 top_border 4 bottom_border 4 left_border 4 right_border 4 circle_radius 30 0
+             elseif LUDIKRIS_MAP other_zone_avoidance_distance 22 top_border 3 bottom_border 3 left_border 3 right_border 3 circle_radius 30 0
+             endif }
+	create_land { assign_to_player 2 if ANGLE2 base_size 6
+	                            else land_id 1 base_size 1 endif
+	                                                       terrain_type GRASS land_percent 100 zone 1 base_elevation 1 border_fuzziness 100 clumping_factor 20
+             if     TINY_MAP     other_zone_avoidance_distance 18 top_border 7 bottom_border 7 left_border 7 right_border 7 circle_radius 31 0
+             elseif SMALL_MAP    other_zone_avoidance_distance 16 top_border 7 bottom_border 7 left_border 7 right_border 7 circle_radius 31 0
+             elseif MEDIUM_MAP   other_zone_avoidance_distance 14 top_border 6 bottom_border 6 left_border 6 right_border 6 circle_radius 31 0
+             elseif LARGE_MAP    other_zone_avoidance_distance 13 top_border 6 bottom_border 6 left_border 6 right_border 6 circle_radius 31 0
+             elseif HUGE_MAP     other_zone_avoidance_distance 12 top_border 5 bottom_border 5 left_border 5 right_border 5 circle_radius 31 0
+             elseif GIGANTIC_MAP other_zone_avoidance_distance 20 top_border 4 bottom_border 4 left_border 4 right_border 4 circle_radius 30 0
+             elseif LUDIKRIS_MAP other_zone_avoidance_distance 22 top_border 3 bottom_border 3 left_border 3 right_border 3 circle_radius 30 0
+             endif }
+else
+    create_player_lands { base_size 6 terrain_type GRASS land_percent 100 base_elevation 1 border_fuzziness 100 clumping_factor 20
+             if     TINY_MAP     other_zone_avoidance_distance 18 top_border 7 bottom_border 7 left_border 7 right_border 7 circle_radius 31 0
+             elseif SMALL_MAP    other_zone_avoidance_distance 16 top_border 7 bottom_border 7 left_border 7 right_border 7 circle_radius 31 0
+             elseif MEDIUM_MAP   other_zone_avoidance_distance 14 top_border 6 bottom_border 6 left_border 6 right_border 6 circle_radius 31 0
+             elseif LARGE_MAP    other_zone_avoidance_distance 13 top_border 6 bottom_border 6 left_border 6 right_border 6 circle_radius 31 0
+             elseif HUGE_MAP     other_zone_avoidance_distance 12 top_border 5 bottom_border 5 left_border 5 right_border 5 circle_radius 31 0
+             elseif GIGANTIC_MAP other_zone_avoidance_distance 20 top_border 4 bottom_border 4 left_border 4 right_border 4 circle_radius 30 0
+             elseif LUDIKRIS_MAP other_zone_avoidance_distance 22 top_border 3 bottom_border 3 left_border 3 right_border 3 circle_radius 30 0
+             endif }
+endif
+
+create_land { base_size 3 terrain_type JUNGLE land_percent 100 border_fuzziness 60 clumping_factor 20 land_position 50 50
+             if     TINY_MAP     top_border 44 bottom_border 44 left_border 44 right_border 44
+             elseif SMALL_MAP    top_border 44 bottom_border 44 left_border 44 right_border 44
+             elseif MEDIUM_MAP   top_border 44 bottom_border 44 left_border 44 right_border 44
+             elseif LARGE_MAP    top_border 45 bottom_border 45 left_border 45 right_border 45
+             elseif HUGE_MAP     top_border 45 bottom_border 45 left_border 45 right_border 45
+             elseif GIGANTIC_MAP top_border 45 bottom_border 45 left_border 45 right_border 45
+             elseif LUDIKRIS_MAP top_border 45 bottom_border 45 left_border 45 right_border 45
+             endif }
+create_land { base_size 3 terrain_type JUNGLE land_percent 100 border_fuzziness 60 clumping_factor 20 land_position 50 51
+             if     TINY_MAP     top_border 44 bottom_border 44 left_border 44 right_border 44
+             elseif SMALL_MAP    top_border 44 bottom_border 44 left_border 44 right_border 44
+             elseif MEDIUM_MAP   top_border 44 bottom_border 44 left_border 44 right_border 44
+             elseif LARGE_MAP    top_border 45 bottom_border 45 left_border 45 right_border 45
+             elseif HUGE_MAP     top_border 45 bottom_border 45 left_border 45 right_border 45
+             elseif GIGANTIC_MAP top_border 45 bottom_border 45 left_border 45 right_border 45
+             elseif LUDIKRIS_MAP top_border 45 bottom_border 45 left_border 45 right_border 45
+             endif }
+create_land { base_size 3 terrain_type JUNGLE land_percent 100 border_fuzziness 60 clumping_factor 20 land_position 51 50
+             if     TINY_MAP     top_border 44 bottom_border 44 left_border 44 right_border 44
+             elseif SMALL_MAP    top_border 44 bottom_border 44 left_border 44 right_border 44
+             elseif MEDIUM_MAP   top_border 44 bottom_border 44 left_border 44 right_border 44
+             elseif LARGE_MAP    top_border 45 bottom_border 45 left_border 45 right_border 45
+             elseif HUGE_MAP     top_border 45 bottom_border 45 left_border 45 right_border 45
+             elseif GIGANTIC_MAP top_border 45 bottom_border 45 left_border 45 right_border 45
+             elseif LUDIKRIS_MAP top_border 45 bottom_border 45 left_border 45 right_border 45
+             endif }
+create_land { base_size 3 terrain_type JUNGLE land_percent 100 border_fuzziness 60 clumping_factor 20 land_position 51 51
+             if     TINY_MAP     top_border 44 bottom_border 44 left_border 44 right_border 44
+             elseif SMALL_MAP    top_border 44 bottom_border 44 left_border 44 right_border 44
+             elseif MEDIUM_MAP   top_border 44 bottom_border 44 left_border 44 right_border 44
+             elseif LARGE_MAP    top_border 45 bottom_border 45 left_border 45 right_border 45
+             elseif HUGE_MAP     top_border 45 bottom_border 45 left_border 45 right_border 45
+             elseif GIGANTIC_MAP top_border 45 bottom_border 45 left_border 45 right_border 45
+             elseif LUDIKRIS_MAP top_border 45 bottom_border 45 left_border 45 right_border 45
+             endif }
+

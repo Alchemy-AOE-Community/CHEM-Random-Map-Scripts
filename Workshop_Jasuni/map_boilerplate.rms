@@ -1,0 +1,403 @@
+<PLAYER_SETUP>
+random_placement
+behavior_version 2
+if NOMAD_START
+    nomad_resources
+    force_nomad_treaty
+endif
+
+if MAPSIZE_MINI
+    /* AT_MOST_MINI can simply use MAPSIZE_MINI */
+    #define AT_MOST_TINY
+    #define AT_MOST_SMALL
+    #define AT_MOST_MEDIUM
+    #define AT_MOST_NORMAL
+    #define AT_MOST_LARGE
+    #define AT_MOST_HUGE
+    #define AT_MOST_GIANT
+    #define AT_MOST_MASSIVE
+    #define AT_MOST_ENORMOUS
+    #define AT_MOST_COLOSSAL
+    #define AT_MOST_INCREDIBLE
+    #define AT_MOST_MONSTROUS
+    /* and AT_MOST_LUDCROUS is always true */
+elseif MAPSIZE_TINY
+    #define AT_LEAST_TINY
+    
+    #define AT_MOST_TINY
+    #define AT_MOST_SMALL
+    #define AT_MOST_MEDIUM
+    #define AT_MOST_NORMAL
+    #define AT_MOST_LARGE
+    #define AT_MOST_HUGE
+    #define AT_MOST_GIANT
+    #define AT_MOST_MASSIVE
+    #define AT_MOST_ENORMOUS
+    #define AT_MOST_COLOSSAL
+    #define AT_MOST_INCREDIBLE
+    #define AT_MOST_MONSTROUS
+elseif MAPSIZE_SMALL
+    #define AT_LEAST_TINY
+    #define AT_LEAST_SMALL
+    
+    #define AT_MOST_SMALL
+    #define AT_MOST_MEDIUM
+    #define AT_MOST_NORMAL
+    #define AT_MOST_LARGE
+    #define AT_MOST_HUGE
+    #define AT_MOST_GIANT
+    #define AT_MOST_MASSIVE
+    #define AT_MOST_ENORMOUS
+    #define AT_MOST_COLOSSAL
+    #define AT_MOST_INCREDIBLE
+    #define AT_MOST_MONSTROUS
+elseif MAPSIZE_MEDIUM
+    #define AT_LEAST_TINY
+    #define AT_LEAST_SMALL
+    #define AT_LEAST_MEDIUM
+    
+    #define AT_MOST_MEDIUM
+    #define AT_MOST_NORMAL
+    #define AT_MOST_LARGE
+    #define AT_MOST_HUGE
+    #define AT_MOST_GIANT
+    #define AT_MOST_MASSIVE
+    #define AT_MOST_ENORMOUS
+    #define AT_MOST_COLOSSAL
+    #define AT_MOST_INCREDIBLE
+    #define AT_MOST_MONSTROUS
+elseif MAPSIZE_NORMAL
+    #define AT_LEAST_TINY
+    #define AT_LEAST_SMALL
+    #define AT_LEAST_MEDIUM
+    #define AT_LEAST_NORMAL
+    
+    #define AT_MOST_NORMAL
+    #define AT_MOST_LARGE
+    #define AT_MOST_HUGE
+    #define AT_MOST_GIANT
+    #define AT_MOST_MASSIVE
+    #define AT_MOST_ENORMOUS
+    #define AT_MOST_COLOSSAL
+    #define AT_MOST_INCREDIBLE
+    #define AT_MOST_MONSTROUS
+elseif MAPSIZE_LARGE
+    #define AT_LEAST_TINY
+    #define AT_LEAST_SMALL
+    #define AT_LEAST_MEDIUM
+    #define AT_LEAST_NORMAL
+    #define AT_LEAST_LARGE
+    
+    #define AT_MOST_LARGE
+    #define AT_MOST_HUGE
+    #define AT_MOST_GIANT
+    #define AT_MOST_MASSIVE
+    #define AT_MOST_ENORMOUS
+    #define AT_MOST_COLOSSAL
+    #define AT_MOST_INCREDIBLE
+    #define AT_MOST_MONSTROUS
+elseif MAPSIZE_HUGE
+    #define AT_LEAST_TINY
+    #define AT_LEAST_SMALL
+    #define AT_LEAST_MEDIUM
+    #define AT_LEAST_NORMAL
+    #define AT_LEAST_LARGE
+    #define AT_LEAST_HUGE
+    
+    #define AT_MOST_HUGE
+    #define AT_MOST_GIANT
+    #define AT_MOST_MASSIVE
+    #define AT_MOST_ENORMOUS
+    #define AT_MOST_COLOSSAL
+    #define AT_MOST_INCREDIBLE
+    #define AT_MOST_MONSTROUS
+elseif MAPSIZE_GIANT
+    #define AT_LEAST_TINY
+    #define AT_LEAST_SMALL
+    #define AT_LEAST_MEDIUM
+    #define AT_LEAST_NORMAL
+    #define AT_LEAST_LARGE
+    #define AT_LEAST_HUGE
+    #define AT_LEAST_GIANT
+    
+    #define AT_MOST_GIANT
+    #define AT_MOST_MASSIVE
+    #define AT_MOST_ENORMOUS
+    #define AT_MOST_COLOSSAL
+    #define AT_MOST_INCREDIBLE
+    #define AT_MOST_MONSTROUS
+elseif MAPSIZE_MASSIVE
+    #define AT_LEAST_TINY
+    #define AT_LEAST_SMALL
+    #define AT_LEAST_MEDIUM
+    #define AT_LEAST_NORMAL
+    #define AT_LEAST_LARGE
+    #define AT_LEAST_HUGE
+    #define AT_LEAST_GIANT
+    #define AT_LEAST_MASSIVE
+    
+    #define AT_MOST_MASSIVE
+    #define AT_MOST_ENORMOUS
+    #define AT_MOST_COLOSSAL
+    #define AT_MOST_INCREDIBLE
+    #define AT_MOST_MONSTROUS
+elseif MAPSIZE_ENORMOUS
+    #define AT_LEAST_TINY
+    #define AT_LEAST_SMALL
+    #define AT_LEAST_MEDIUM
+    #define AT_LEAST_NORMAL
+    #define AT_LEAST_LARGE
+    #define AT_LEAST_HUGE
+    #define AT_LEAST_GIANT
+    #define AT_LEAST_MASSIVE
+    #define AT_LEAST_ENORMOUS
+    
+    #define AT_MOST_ENORMOUS
+    #define AT_MOST_COLOSSAL
+    #define AT_MOST_INCREDIBLE
+    #define AT_MOST_MONSTROUS
+elseif MAPSIZE_COLOSSAL
+    #define AT_LEAST_TINY
+    #define AT_LEAST_SMALL
+    #define AT_LEAST_MEDIUM
+    #define AT_LEAST_NORMAL
+    #define AT_LEAST_LARGE
+    #define AT_LEAST_HUGE
+    #define AT_LEAST_GIANT
+    #define AT_LEAST_MASSIVE
+    #define AT_LEAST_ENORMOUS
+    #define AT_LEAST_COLOSSAL
+    
+    #define AT_MOST_COLOSSAL
+    #define AT_MOST_INCREDIBLE
+    #define AT_MOST_MONSTROUS
+elseif MAPSIZE_INCREDIBLE
+    #define AT_LEAST_TINY
+    #define AT_LEAST_SMALL
+    #define AT_LEAST_MEDIUM
+    #define AT_LEAST_NORMAL
+    #define AT_LEAST_LARGE
+    #define AT_LEAST_HUGE
+    #define AT_LEAST_GIANT
+    #define AT_LEAST_MASSIVE
+    #define AT_LEAST_ENORMOUS
+    #define AT_LEAST_COLOSSAL
+    #define AT_LEAST_INCREDIBLE
+    
+    #define AT_MOST_INCREDIBLE
+    #define AT_MOST_MONSTROUS
+elseif MAPSIZE_MONSTROUS
+    #define AT_LEAST_TINY
+    #define AT_LEAST_SMALL
+    #define AT_LEAST_MEDIUM
+    #define AT_LEAST_NORMAL
+    #define AT_LEAST_LARGE
+    #define AT_LEAST_HUGE
+    #define AT_LEAST_GIANT
+    #define AT_LEAST_MASSIVE
+    #define AT_LEAST_ENORMOUS
+    #define AT_LEAST_COLOSSAL
+    #define AT_LEAST_INCREDIBLE
+    #define AT_LEAST_MONSTROUS
+    
+    #define AT_MOST_MONSTROUS
+elseif MAPSIZE_LUDICROUS
+    /* AT_LEAST_MINI is always true */
+    #define AT_LEAST_TINY
+    #define AT_LEAST_SMALL
+    #define AT_LEAST_MEDIUM
+    #define AT_LEAST_NORMAL
+    #define AT_LEAST_LARGE
+    #define AT_LEAST_HUGE
+    #define AT_LEAST_GIANT
+    #define AT_LEAST_MASSIVE
+    #define AT_LEAST_ENORMOUS
+    #define AT_LEAST_COLOSSAL
+    #define AT_LEAST_INCREDIBLE
+    #define AT_LEAST_MONSTROUS
+    /* and AT_LEAST_LUDCROUS - can simply use MAP_SIZE_LUDICROUS */
+endif
+
+#const ON_GRID 278 /* dead fish trap */
+effect_amount GAIA_SET_ATTRIBUTE ON_GRID ATTR_STORAGE_VALUE 0
+
+<OBJECTS_GENERATION>
+
+/* TODO add standard starting player resources/units/buildings, including king for regicide games. */
+
+
+/* neutral resources: may want to adjust */
+if AT_LEAST_LARGE
+    create_object FORAGE {
+        set_gaia_object_only
+        avoid_actor_area 40
+        number_of_objects 4
+        number_of_groups 99
+        temp_min_distance_group_placement 70
+        min_distance_group_placement 2
+        set_tight_grouping
+        /* no avoid_forest_zone - I don't particularly care if these get trapped or if a few of them spawn with less bushes. */
+    }
+endif
+create_object RELIC {
+    temp_min_distance_group_placement 40
+    if MAPSIZE_MINI
+        number_of_objects 4
+        temp_min_distance_group_placement 30
+    elseif MAPSIZE_TINY
+        number_of_objects 5
+        temp_min_distance_group_placement 36
+    elseif MAPSIZE_SMALL
+        number_of_objects 5
+    elseif MAPSIZE_MEDIUM
+        number_of_objects 5
+    elseif MAPSIZE_NORMAL
+        number_of_objects 7
+    elseif MAPSIZE_LARGE
+        number_of_objects 8
+    elseif MAPSIZE_HUGE
+        number_of_objects 20
+        temp_min_distance_group_placement 60
+    elseif MAPSIZE_GIANT
+        number_of_objects 20
+        temp_min_distance_group_placement 64
+    elseif MAPSIZE_MASSIVE
+        number_of_objects 20
+        temp_min_distance_group_placement 65
+    elseif MAPSIZE_ENORMOUS
+        number_of_objects 20
+        temp_min_distance_group_placement 68
+    elseif MAPSIZE_COLOSSAL
+        number_of_objects 20
+        temp_min_distance_group_placement 70
+    elseif MAPSIZE_INCREDIBLE
+        number_of_objects 25
+        temp_min_distance_group_placement 75
+    elseif MAPSIZE_MONSTROUS
+        number_of_objects 25
+        temp_min_distance_group_placement 80
+    elseif MAPSIZE_LUDICROUS
+        number_of_objects 30
+        temp_min_distance_group_placement 90
+    endif
+    set_gaia_object_only
+    avoid_actor_area 30
+}
+create_object GOLD {
+    temp_min_distance_group_placement 40
+    min_distance_group_placement 10
+    if AT_MOST_TINY
+        avoid_actor_area 30
+    else
+        avoid_actor_area 44
+    endif
+    set_tight_grouping
+    avoid_forest_zone
+    actor_area 100
+    actor_area_radius 16
+    avoid_actor_area 100
+    if AT_MOST_NORMAL
+        number_of_objects 3
+    else
+        number_of_objects 4
+    endif
+    if MAPSIZE_MINI
+        number_of_groups 2
+        temp_min_distance_group_placement 30
+    elseif MAPSIZE_TINY
+        number_of_groups 2
+        temp_min_distance_group_placement 36
+    elseif MAPSIZE_SMALL
+        number_of_groups 2
+    elseif MAPSIZE_MEDIUM
+        number_of_groups 3
+    elseif MAPSIZE_NORMAL
+        number_of_groups 3
+    elseif MAPSIZE_LARGE
+        number_of_groups 4
+    elseif MAPSIZE_HUGE
+        number_of_groups 5
+        temp_min_distance_group_placement 60
+    elseif MAPSIZE_GIANT
+        number_of_groups 6
+        temp_min_distance_group_placement 64
+    elseif MAPSIZE_MASSIVE
+        number_of_groups 7
+        temp_min_distance_group_placement 65
+    elseif MAPSIZE_ENORMOUS
+        number_of_groups 9
+        temp_min_distance_group_placement 68
+    elseif MAPSIZE_COLOSSAL
+        number_of_groups 11
+        temp_min_distance_group_placement 70
+    elseif MAPSIZE_INCREDIBLE
+        number_of_groups 14
+        temp_min_distance_group_placement 75
+    elseif MAPSIZE_MONSTROUS
+        number_of_groups 18
+        temp_min_distance_group_placement 80
+    elseif MAPSIZE_LUDICROUS
+        number_of_groups 26
+        temp_min_distance_group_placement 90
+    endif
+}
+create_object STONE {
+    temp_min_distance_group_placement 40
+    min_distance_group_placement 10
+    if AT_MOST_TINY
+        avoid_actor_area 30
+    else
+        avoid_actor_area 44
+    endif
+    set_tight_grouping
+    avoid_forest_zone
+    actor_area 100
+    actor_area_radius 16
+    avoid_actor_area 100
+    if AT_MOST_SMALL
+        number_of_objects 2
+    elseif AT_LEAST_NORMAL
+        number_of_objects 4
+    else
+        number_of_objects 3 /* should be medium map size */
+    endif
+    if MAPSIZE_MINI
+        number_of_groups 2
+        temp_min_distance_group_placement 30
+    elseif MAPSIZE_TINY
+        number_of_groups 2
+        temp_min_distance_group_placement 36
+    elseif MAPSIZE_SMALL
+        number_of_groups 2
+    elseif MAPSIZE_MEDIUM
+        number_of_groups 3
+    elseif MAPSIZE_NORMAL
+        number_of_groups 3
+    elseif MAPSIZE_LARGE
+        number_of_groups 4
+    elseif MAPSIZE_HUGE
+        number_of_groups 6 /* start of infinite stone groups for standard resources */
+        temp_min_distance_group_placement 60
+    elseif MAPSIZE_GIANT
+        number_of_groups 7
+        temp_min_distance_group_placement 64
+    elseif MAPSIZE_MASSIVE
+        number_of_groups 8
+        temp_min_distance_group_placement 65
+    elseif MAPSIZE_ENORMOUS
+        number_of_groups 10
+        temp_min_distance_group_placement 68
+    elseif MAPSIZE_COLOSSAL
+        number_of_groups 12
+        temp_min_distance_group_placement 70
+    elseif MAPSIZE_INCREDIBLE
+        number_of_groups 16
+        temp_min_distance_group_placement 75
+    elseif MAPSIZE_MONSTROUS
+        number_of_groups 20
+        temp_min_distance_group_placement 80
+    elseif MAPSIZE_LUDICROUS
+        number_of_groups 29
+        temp_min_distance_group_placement 90
+    endif
+}

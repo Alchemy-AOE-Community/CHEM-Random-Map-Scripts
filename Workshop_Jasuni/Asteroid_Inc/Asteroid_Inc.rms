@@ -1,0 +1,22 @@
+/*
+Map Concept: Players are fighting over a corporation that is mining in an asteroid belt. A space themed map. Could have lots of asteroids (islands of varying sizes). I think I might want to have a larger asteroid in the middle that players can fight over in on land battles. The larger asteroid would need to have multiple "trade workshops" (rename to something else, something mining-related) and possibly some neutral guardians. Neutral guardians could be modified high-tech "cheat" units (one of which could also be used as a starting scout - a space trooper). Optionally, could enable training at the neutral trade workshops for a fee.
+
+Alternative (that I think would play out better): a single large asteroid that players fight over (could still have smaller asteroids on the outskirts for extra resources and the like), 
+
+ideas: dock/house (nomad) start instead of TC? only if first idea (so no) - better have a TC and a starting trade workshop (or Feitoria) for each player
+
+no trees (may replace with rocks, or alternatively, have neutral capturable buildings as the only source of wood - think this is the idea I want to go with).
+
+
+The map should highly emphasize taking map control by having capturable trade workshops all over the place. Think it should have plenty of gold/stone. Food would be scarce ("goods" as the only food source villagers can gather from, maybe fish in the water as well - I'd rather not, but that would be needed for a dock start)
+
+King of the Hill might be a recommended setting.
+
+Neutral trade workshops (similar to Aftermath, except supplies wood/gold/stone, but not food) are capturable, highly durable (high hp, maybe higher armor as well) and auto-repair (reasonably good hp regen). Would want to look up resource cost and possibly alter to affect repair cost (make it cheap to repair). Mining facilities should be walled in guarded so that players won't be able to capture them in Dark Age (and would need to invest to capture in Feudal Age). Center Facility will be better guarded and have thicker/stronger walls. King of the Hill Mode recommended.
+
+Might have a potential issue if they can be deleted (but that would be the equivalent of a self-destruct button).
+
+
+
+*/
+

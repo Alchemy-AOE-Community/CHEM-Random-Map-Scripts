@@ -1,0 +1,1667 @@
+/*
+ANTARCTIC RIFT by Huehuecoyotl22 - October-November 2023
+
+* * * Map Description * * *
+Players start on snowy high elevations with walls made of cliffs. 
+Their starting wood is in 2 big piles of lumber, in addition 6 piles of food, 6+2+2 geese, 4 piles of gold and 5 piles of stone are closeby 
+(stone and gold always outside of the walls, close to gates, 6 geese, piles of food and 2 piles of lumber always inside). 
+All remaining stone and gold as well as wood in shape of shipwrecks, lumberpiles and driftwood are scattered across the lowlands. 
+Lastly, the center of the map is a rift where hot updrifting water has broken the ice and includes some fish, while lots of huntable penguins roam on the ice. 
+Players also start with a mill and an outpost next to the rift. 
+More snowy spots on the ice leave a little space for buildings, the center water cannot be sailed, but walked on.
+ */
+
+#const AT_TEAM 2
+
+#const WATER_BROWN 96
+#const UNDERBRUSH_LEAVES 71
+#const WET_ROCK 82
+#const MUD 76
+#const GRAVEL 70
+#const ICE_BEACH 37
+
+#const STRAGGLER_A 1250	/* dead forest tree */
+
+#const ONGRID_PLACEHOLDER 278
+#const ONGRID_PLACEHOLDER_2 1613
+#const BEACH_GRAVEL_UNSAILABLE 81
+
+/* eye candy */
+#const FLAME4 1336
+#const BLACK_TILE 306
+	#const TEMP 278
+	#const SMOKE_A 247
+	#const SMOKE_B 654
+	#const SMOKE_C 902
+	#const SMOKE_D 1308
+	#const FIRE_A 939
+	#const FIRE_B 940
+	#const FIRE_C 941
+	#const FIRE_D 942
+	#const FENCE_RUBBLE 1065
+	#const WILD_HORSE 835
+#const ICEBERG1 1045
+#const ICEBERG2 1046
+#const ICEBERG3 1047
+#const PENGUIN 639
+#const DEERXD 43
+#const AFRICANHUT_A 1082
+
+/* effect_amount SET_ATTRIBUTE FARM_DEAD ATTR_FOUNDATION_TERRAIN 73 */
+
+/* =================================================================================================== */
+<PLAYER_SETUP>
+
+	if 2_PLAYER_GAME
+override_map_size 130
+endif
+
+random_placement 
+ai_info_map_type BALTIC 0 0 0
+
+/* Removing Trade Carts and Cogs for Multi-team Games */
+if 2_TEAM_GAME
+else
+    #const TRADE_CART_ENABLER 161
+    #const TRADE_COG_ENABLER 180
+    #const TRADE_CARAVAN_ENABLER 48
+    #const HINDU_CARAVANSERAI_ENABLER 518
+    #const PERSIAN_CARAVANSERAI_ENABLER 552  
+    effect_amount DISABLE_TECH TRADE_COG_ENABLER ATTR_DISABLE 180
+    effect_amount DISABLE_TECH TRADE_CART_ENABLER ATTR_DISABLE 161
+    effect_amount DISABLE_TECH TRADE_CARAVAN_ENABLER ATTR_DISABLE 48
+    effect_amount DISABLE_TECH HINDU_CARAVANSERAI_ENABLER ATTR_DISABLE 518
+    effect_amount DISABLE_TECH PERSIAN_CARAVANSERAI_ENABLER ATTR_DISABLE 552
+endif
+
+effect_percent SET_ATTRIBUTE FENCE_RUBBLE ATTR_RADIUS_1 10
+effect_percent SET_ATTRIBUTE FENCE_RUBBLE ATTR_RADIUS_2 10
+
+#const FENCE 1062
+#const PG1 789
+#const PG2 790
+#const PG3 791
+#const PG4 792
+#const PG5 793
+#const PG6 794
+#const PG7 795
+#const PG8 796
+#const PG9 797
+#const PG10 798
+#const PG11 799
+#const PG12 800
+#const PG13 801
+#const PG14 802
+#const PG15 803
+#const PG16 804
+
+effect_amount SET_ATTRIBUTE FENCE ATTR_HITPOINTS 100
+/* effect_amount SET_ATTRIBUTE PALISADE_GATE ATTR_HITPOINTS 0 */
+
+effect_amount SET_ATTRIBUTE FENCE ATTR_STANDING_GRAPHIC 1576
+
+/*
+effect_amount SET_ATTRIBUTE PG1 ATTR_HITPOINTS 0
+effect_amount SET_ATTRIBUTE PG2 ATTR_HITPOINTS 0
+effect_amount SET_ATTRIBUTE PG3 ATTR_HITPOINTS 0
+effect_amount SET_ATTRIBUTE PG4 ATTR_HITPOINTS 0
+effect_amount SET_ATTRIBUTE PG5 ATTR_HITPOINTS 0
+effect_amount SET_ATTRIBUTE PG6 ATTR_HITPOINTS 0
+effect_amount SET_ATTRIBUTE PG7 ATTR_HITPOINTS 0
+effect_amount SET_ATTRIBUTE PG8 ATTR_HITPOINTS 0
+effect_amount SET_ATTRIBUTE PG9 ATTR_HITPOINTS 0
+effect_amount SET_ATTRIBUTE PG10 ATTR_HITPOINTS 0
+effect_amount SET_ATTRIBUTE PG11 ATTR_HITPOINTS 0
+effect_amount SET_ATTRIBUTE PG12 ATTR_HITPOINTS 0
+effect_amount SET_ATTRIBUTE PG13 ATTR_HITPOINTS 0
+effect_amount SET_ATTRIBUTE PG14 ATTR_HITPOINTS 0
+effect_amount SET_ATTRIBUTE PG15 ATTR_HITPOINTS 0
+effect_amount SET_ATTRIBUTE PG16 ATTR_HITPOINTS 0
+
+effect_amount SET_ATTRIBUTE PG1 ATTR_DEAD_ID -1
+effect_amount SET_ATTRIBUTE PG2 ATTR_DEAD_ID -1
+effect_amount SET_ATTRIBUTE PG3 ATTR_DEAD_ID -1
+effect_amount SET_ATTRIBUTE PG4 ATTR_DEAD_ID -1
+effect_amount SET_ATTRIBUTE PG5 ATTR_DEAD_ID -1
+effect_amount SET_ATTRIBUTE PG6 ATTR_DEAD_ID -1
+effect_amount SET_ATTRIBUTE PG7 ATTR_DEAD_ID -1
+effect_amount SET_ATTRIBUTE PG8 ATTR_DEAD_ID -1
+effect_amount SET_ATTRIBUTE PG9 ATTR_DEAD_ID -1
+effect_amount SET_ATTRIBUTE PG10 ATTR_DEAD_ID -1
+effect_amount SET_ATTRIBUTE PG11 ATTR_DEAD_ID -1
+effect_amount SET_ATTRIBUTE PG12 ATTR_DEAD_ID -1
+effect_amount SET_ATTRIBUTE PG13 ATTR_DEAD_ID -1
+effect_amount SET_ATTRIBUTE PG14 ATTR_DEAD_ID -1
+effect_amount SET_ATTRIBUTE PG15 ATTR_DEAD_ID -1
+effect_amount SET_ATTRIBUTE PG16 ATTR_DEAD_ID -1
+*/
+
+effect_amount GAIA_SET_ATTRIBUTE DEER ATTR_STANDING_GRAPHIC 8259
+effect_amount GAIA_SET_ATTRIBUTE DEER ATTR_WALKING_GRAPHIC 8261
+effect_amount GAIA_SET_ATTRIBUTE DEER ATTR_RUNNING_GRAPHIC 8261
+effect_amount GAIA_SET_ATTRIBUTE DEER ATTR_DYING_GRAPHIC 8258
+effect_amount GAIA_SET_ATTRIBUTE DEER ATTR_DEAD_GRAPHIC 8258
+effect_amount GAIA_SET_ATTRIBUTE DEERXD ATTR_DEAD_GRAPHIC 8260
+effect_amount GAIA_SET_ATTRIBUTE DEERXD ATTR_STANDING_GRAPHIC 8260
+effect_amount SET_ATTRIBUTE DEER ATTR_NAME_ID 5734
+effect_amount SET_ATTRIBUTE DEER ATTR_ICON_ID 157
+
+/*
+effect_amount GAIA_SET_ATTRIBUTE FISHING_SHIP ATTR_STANDING_GRAPHIC 8259
+effect_amount GAIA_SET_ATTRIBUTE FISHING_SHIP ATTR_WALKING_GRAPHIC 8261
+effect_amount GAIA_SET_ATTRIBUTE FISHING_SHIP ATTR_RUNNING_GRAPHIC 8261
+effect_amount GAIA_SET_ATTRIBUTE FISHING_SHIP ATTR_DYING_GRAPHIC 8258
+effect_amount GAIA_SET_ATTRIBUTE FISHING_SHIP ATTR_DEAD_GRAPHIC 8258
+effect_amount GAIA_SET_ATTRIBUTE FISHING_SHIP ATTR_ATTACK_GRAPHIC 8257
+effect_amount GAIA_SET_ATTRIBUTE FISHING_SHIP ATTR_SPAWN_GRAPHIC 12262
+effect_amount SET_ATTRIBUTE FISHING_SHIP ATTR_NAME_ID 5734
+effect_amount SET_ATTRIBUTE FISHING_SHIP ATTR_ICON_ID 157
+*/
+/*
+effect_amount SET_ATTRIBUTE FISHING_SHIP ATTR_STANDING_GRAPHIC 8259
+effect_amount SET_ATTRIBUTE FISHING_SHIP ATTR_WALKING_GRAPHIC 8261
+effect_amount SET_ATTRIBUTE FISHING_SHIP ATTR_RUNNING_GRAPHIC 8261
+effect_amount SET_ATTRIBUTE FISHING_SHIP ATTR_DYING_GRAPHIC 8258
+effect_amount SET_ATTRIBUTE FISHING_SHIP ATTR_DEAD_GRAPHIC 8258
+effect_amount SET_ATTRIBUTE FISHING_SHIP ATTR_NAME_ID 5734
+effect_amount SET_ATTRIBUTE FISHING_SHIP ATTR_ICON_ID 157
+*/
+effect_amount SET_ATTRIBUTE FISHING_SHIP ATTR_RADIUS_1 0
+effect_amount SET_ATTRIBUTE FISHING_SHIP ATTR_RADIUS_2 0
+
+
+/* make the penguin mostly harmless */
+effect_amount GAIA_UPGRADE_UNIT SHEEP PENGUIN 0
+effect_amount GAIA_SET_ATTRIBUTE SHEEP ATTR_ATTACK 1024
+effect_amount GAIA_SET_ATTRIBUTE SHEEP ATTR_ATTACK 3328
+effect_amount GAIA_SET_ATTRIBUTE SHEEP ATTR_ATTACK 5376
+effect_amount GAIA_SET_ATTRIBUTE SHEEP ATTR_SHOWN_ATTACK
+effect_amount GAIA_SET_ATTRIBUTE SHEEP ATTR_HITPOINTS 4
+
+/* penguins drop food on death */
+effect_amount GAIA_SET_ATTRIBUTE SHEEP ATTR_DEAD_ID 1026
+effect_amount GAIA_SET_ATTRIBUTE DLC_OSTRICH ATTR_HITPOINTS 0
+/* effect_amount SET_ATTRIBUTE DLC_OSTRICH ATTR_DYING_GRAPHIC 1751 */
+effect_amount GAIA_SET_ATTRIBUTE SHEEP ATTR_DYING_GRAPHIC 1751
+effect_amount SET_ATTRIBUTE DLC_OSTRICH ATTR_DYING_GRAPHIC 8258
+effect_amount SET_ATTRIBUTE DLC_OSTRICH ATTR_NAME_ID 5734
+effect_amount SET_ATTRIBUTE DLC_OSTRICH ATTR_ICON_ID 157
+/* effect_amount SET_ATTRIBUTE DLC_OSTRICH ATTR_DEAD_GRAPHIC 641 */
+
+effect_amount GAIA_SET_ATTRIBUTE TREE_K ATTR_STANDING_GRAPHIC 4354
+effect_amount GAIA_SET_ATTRIBUTE TREE_K ATTR_WALKING_GRAPHIC 4354
+effect_amount GAIA_SET_ATTRIBUTE TREE_K ATTR_DYING_GRAPHIC 4354
+effect_amount SET_ATTRIBUTE TREE_K ATTR_NAME_ID 729
+/* effect_amount GAIA_SET_ATTRIBUTE TREE_K ATTR_DEAD_GRAPHIC 4354 */
+
+effect_amount GAIA_SET_ATTRIBUTE TREE_J ATTR_STANDING_GRAPHIC 8244
+effect_amount GAIA_SET_ATTRIBUTE TREE_J ATTR_WALKING_GRAPHIC 8244
+effect_amount GAIA_SET_ATTRIBUTE TREE_J ATTR_DYING_GRAPHIC 8244
+effect_amount GAIA_SET_ATTRIBUTE TREE_J ATTR_DEAD_GRAPHIC 8244
+effect_amount SET_ATTRIBUTE TREE_J ATTR_NAME_ID 5323
+effect_amount SET_ATTRIBUTE TREE_J ATTR_ICON_ID 32
+
+effect_amount GAIA_SET_ATTRIBUTE TREE_I ATTR_STANDING_GRAPHIC 8505
+effect_amount GAIA_SET_ATTRIBUTE TREE_I ATTR_WALKING_GRAPHIC 8505
+effect_amount GAIA_SET_ATTRIBUTE TREE_I ATTR_DYING_GRAPHIC 8505
+effect_amount GAIA_SET_ATTRIBUTE TREE_I ATTR_DEAD_GRAPHIC 8505
+effect_amount SET_ATTRIBUTE TREE_I ATTR_NAME_ID 5323
+effect_amount SET_ATTRIBUTE TREE_I ATTR_ICON_ID 32
+effect_amount GAIA_SET_ATTRIBUTE FENCE_RUBBLE ATTR_STORAGE_VALUE 30000
+
+effect_amount GAIA_SET_ATTRIBUTE DLC_ORANGEBUSH ATTR_STANDING_GRAPHIC 8245
+effect_amount GAIA_SET_ATTRIBUTE DLC_ORANGEBUSH ATTR_WALKING_GRAPHIC 8245
+effect_amount GAIA_SET_ATTRIBUTE DLC_ORANGEBUSH ATTR_DYING_GRAPHIC 8245
+/* effect_amount GAIA_SET_ATTRIBUTE DLC_ORANGEBUSH ATTR_DEAD_GRAPHIC 8245 */
+effect_amount SET_ATTRIBUTE DLC_ORANGEBUSH ATTR_NAME_ID 5705
+/* effect_amount SET_ATTRIBUTE DLC_ORANGEBUSH ATTR_ICON_ID 916 */
+
+/*
+#const SPECIAL_BUILDING 826
+effect_amount SET_ATTRIBUTE DOCK ATTR_HITPOINTS 10000
+effect_amount SET_ATTRIBUTE SPECIAL_BUILDING ATTR_HITPOINTS 10000
+effect_amount SET_ATTRIBUTE SPECIAL_BUILDING ATTR_TERRAIN_ID 		0
+effect_amount SET_ATTRIBUTE DOCK ATTR_TERRAIN_ID 		0
+effect_amount UPGRADE_UNIT SPECIAL_BUILDING DOCK 			0
+effect_amount SET_ATTRIBUTE SPECIAL_BUILDING ATTR_LINE_OF_SIGHT 	4
+effect_percent SET_ATTRIBUTE SPECIAL_BUILDING ATTR_RADIUS_1 50
+effect_percent SET_ATTRIBUTE SPECIAL_BUILDING ATTR_RADIUS_2 50
+*/
+
+#const JUNK 15
+effect_amount ENABLE_OBJECT JUNK ATTR_ENABLE 				0
+effect_amount SET_ATTRIBUTE JUNK ATTR_TRAIN_LOCATION 			45
+effect_amount SET_ATTRIBUTE JUNK ATTR_TRAIN_BUTTON 			31
+effect_amount SET_ATTRIBUTE JUNK ATTR_WOOD_COST 			50
+effect_amount SET_ATTRIBUTE JUNK ATTR_GOLD_COST 			50
+effect_amount SET_ATTRIBUTE JUNK ATTR_FOOD_COST 			100
+
+/* =================================================================================================== */
+<LAND_GENERATION>
+
+base_terrain SNOW
+/* base_layer DLC_DIRT4 */
+
+/* the player lands */
+create_player_lands {
+	terrain_type BEACH_GRAVEL_UNSAILABLE
+	base_size 8
+	land_percent 8
+	border_fuzziness 1
+	base_elevation 9
+	zone 11
+if 2_PLAYER_GAME
+circle_radius 37
+endif
+if 3_PLAYER_GAME
+circle_radius 37
+endif	
+if 4_PLAYER_GAME
+circle_radius 37
+endif	
+if 5_PLAYER_GAME
+circle_radius 37
+endif	
+if 6_PLAYER_GAME
+circle_radius 37
+endif	
+if 7_PLAYER_GAME
+circle_radius 36
+endif	
+if 8_PLAYER_GAME
+circle_radius 36
+endif		
+}
+
+/* the circle */
+create_land { number_of_tiles 0 base_size 2 land_position 31 69 terrain_type DLC_ROCK base_elevation 6 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 30 68 terrain_type DLC_ROCK base_elevation 6 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 29 67 terrain_type DLC_ROCK base_elevation 8 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 28 66 terrain_type DLC_ROCK base_elevation 6 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 28 65 terrain_type DLC_ROCK base_elevation 6 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 27 63 terrain_type DLC_ROCK base_elevation 6 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 26 62 terrain_type DLC_ROCK base_elevation 6 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 26 61 terrain_type DLC_ROCK base_elevation 6 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 25 59 terrain_type DLC_ROCK base_elevation 8 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 25 58 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 25 57 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 25 55 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 25 54 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 25 53 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 1 land_position 25 51 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 1 land_position 25 50 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 1 land_position 25 49 terrain_type DLC_ROCK base_elevation 6 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 26 47 terrain_type DLC_ROCK base_elevation 6 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 26 46 terrain_type DLC_ROCK base_elevation 8 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 26 45 terrain_type DLC_ROCK base_elevation 6 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 27 44 terrain_type DLC_ROCK base_elevation 6 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 27 43 terrain_type DLC_ROCK base_elevation 6 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 28 42 terrain_type DLC_ROCK base_elevation 6 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 29 40 terrain_type DLC_ROCK base_elevation 6 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 29 39 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 30 38 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 31 37 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 31 36 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 32 35 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 33 35 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 34 34 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 35 33 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 35 32 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 36 31 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 37 31 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 38 30 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 39 29 terrain_type DLC_ROCK base_elevation 6 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 40 29 terrain_type DLC_ROCK base_elevation 6 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 42 28 terrain_type DLC_ROCK base_elevation 8 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 43 27 terrain_type DLC_ROCK base_elevation 6 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 44 27 terrain_type DLC_ROCK base_elevation 6 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 45 26 terrain_type DLC_ROCK base_elevation 6 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 46 26 terrain_type DLC_ROCK base_elevation 6 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 47 26 terrain_type DLC_ROCK base_elevation 6 land_id 1337 }
+create_land { number_of_tiles 0 base_size 1 land_position 49 25 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 1 land_position 50 25 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 1 land_position 51 25 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 53 25 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 54 25 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 55 25 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 57 25 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 58 25 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 59 25 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 61 26 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 62 26 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 63 27 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 65 28 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 66 28 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 67 29 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 68 30 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 69 31 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 70 32 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 71 33 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 72 34 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 72 35 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 73 37 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 74 38 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 74 39 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 75 41 terrain_type DLC_ROCK base_elevation 6 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 75 42 terrain_type DLC_ROCK base_elevation 6 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 75 43 terrain_type DLC_ROCK base_elevation 8 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 75 45 terrain_type DLC_ROCK base_elevation 6 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 75 46 terrain_type DLC_ROCK base_elevation 6 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 75 47 terrain_type DLC_ROCK base_elevation 6 land_id 1337 }
+create_land { number_of_tiles 0 base_size 1 land_position 75 49 terrain_type DLC_ROCK base_elevation 6 land_id 1337 }
+create_land { number_of_tiles 0 base_size 1 land_position 75 50 terrain_type DLC_ROCK base_elevation 6 land_id 1337 }
+create_land { number_of_tiles 0 base_size 1 land_position 75 51 terrain_type DLC_ROCK base_elevation 6 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 74 53 terrain_type DLC_ROCK base_elevation 6 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 74 54 terrain_type DLC_ROCK base_elevation 6 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 74 55 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 73 56 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 73 57 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 72 58 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 71 60 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 71 61 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 70 62 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 69 63 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 69 64 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 68 65 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 67 65 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 66 66 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 65 67 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 65 68 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 64 69 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 63 69 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 62 70 terrain_type DLC_ROCK base_elevation 6 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 61 71 terrain_type DLC_ROCK base_elevation 6 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 60 71 terrain_type DLC_ROCK base_elevation 8 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 58 72 terrain_type DLC_ROCK base_elevation 6 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 57 73 terrain_type DLC_ROCK base_elevation 6 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 56 73 terrain_type DLC_ROCK base_elevation 6 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 55 74 terrain_type DLC_ROCK base_elevation 6 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 54 74 terrain_type DLC_ROCK base_elevation 6 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 53 74 terrain_type DLC_ROCK base_elevation 6 land_id 1337 }
+create_land { number_of_tiles 0 base_size 1 land_position 51 75 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 1 land_position 50 75 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 1 land_position 49 75 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 47 75 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 46 75 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 45 75 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 43 75 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 42 75 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 41 75 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 39 74 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 38 74 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 37 73 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 35 72 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 34 72 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 33 71 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 32 70 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+
+/* relics on the ring */
+create_land { number_of_tiles 0 base_size 1 land_position 30 70 terrain_type DLC_ROCK base_elevation 8 land_id 666 }
+create_land { number_of_tiles 0 base_size 1 land_position 70 30 terrain_type DLC_ROCK base_elevation 8 land_id 666 }
+
+/* the pupil */
+create_land { number_of_tiles 0 base_size 1 land_position 35 65 terrain_type ICE_BEACH base_elevation 0 }
+create_land { number_of_tiles 0 base_size 1 land_position 36 64 terrain_type ICE_BEACH base_elevation 0 }
+create_land { number_of_tiles 0 base_size 1 land_position 37 63 terrain_type ICE_BEACH base_elevation 0 }
+create_land { number_of_tiles 0 base_size 2 land_position 38 62 terrain_type ICE_BEACH base_elevation 0 }
+create_land { number_of_tiles 0 base_size 2 land_position 39 61 terrain_type ICE_BEACH base_elevation 0 }
+create_land { number_of_tiles 0 base_size 2 land_position 40 60 terrain_type ICE_BEACH base_elevation 0 }
+create_land { number_of_tiles 0 base_size 3 land_position 41 59 terrain_type ICE_BEACH base_elevation 0 }
+create_land { number_of_tiles 0 base_size 3 land_position 42 58 terrain_type ICE_BEACH base_elevation 0 }
+create_land { number_of_tiles 0 base_size 3 land_position 43 57 terrain_type ICE_BEACH base_elevation 0 }
+create_land { number_of_tiles 0 base_size 3 land_position 44 56 terrain_type ICE_BEACH base_elevation 0 }
+create_land { number_of_tiles 0 base_size 3 land_position 45 55 terrain_type ICE_BEACH base_elevation 0 }
+create_land { number_of_tiles 0 base_size 3 land_position 46 54 terrain_type ICE_BEACH base_elevation 0 }
+create_land { number_of_tiles 0 base_size 3 land_position 47 53 terrain_type ICE_BEACH base_elevation 0 }
+create_land { number_of_tiles 0 base_size 4 land_position 48 52 terrain_type ICE_BEACH base_elevation 0 }
+create_land { number_of_tiles 0 base_size 4 land_position 49 51 terrain_type ICE_BEACH base_elevation 0 }
+create_land { number_of_tiles 0 base_size 4 land_position 50 50 terrain_type ICE_BEACH base_elevation 0 land_id 666 }
+create_land { number_of_tiles 0 base_size 4 land_position 51 49 terrain_type ICE_BEACH base_elevation 0 }
+create_land { number_of_tiles 0 base_size 4 land_position 52 48 terrain_type ICE_BEACH base_elevation 0 }
+create_land { number_of_tiles 0 base_size 3 land_position 53 47 terrain_type ICE_BEACH base_elevation 0 }
+create_land { number_of_tiles 0 base_size 3 land_position 54 46 terrain_type ICE_BEACH base_elevation 0 }
+create_land { number_of_tiles 0 base_size 3 land_position 55 45 terrain_type ICE_BEACH base_elevation 0 }
+create_land { number_of_tiles 0 base_size 3 land_position 56 44 terrain_type ICE_BEACH base_elevation 0 }
+create_land { number_of_tiles 0 base_size 3 land_position 57 43 terrain_type ICE_BEACH base_elevation 0 }
+create_land { number_of_tiles 0 base_size 3 land_position 58 42 terrain_type ICE_BEACH base_elevation 0 }
+create_land { number_of_tiles 0 base_size 3 land_position 59 41 terrain_type ICE_BEACH base_elevation 0 }
+create_land { number_of_tiles 0 base_size 2 land_position 60 40 terrain_type ICE_BEACH base_elevation 0 }
+create_land { number_of_tiles 0 base_size 2 land_position 61 39 terrain_type ICE_BEACH base_elevation 0 }
+create_land { number_of_tiles 0 base_size 2 land_position 62 38 terrain_type ICE_BEACH base_elevation 0 }
+create_land { number_of_tiles 0 base_size 1 land_position 63 37 terrain_type ICE_BEACH base_elevation 0 }
+create_land { number_of_tiles 0 base_size 1 land_position 64 36 terrain_type ICE_BEACH base_elevation 0 }
+create_land { number_of_tiles 0 base_size 1 land_position 65 35 terrain_type ICE_BEACH base_elevation 0 }
+
+create_land { land_percent 8 base_size 0 land_position 45 45 terrain_type ICE land_id 11 }
+create_land { land_percent 8 base_size 0 land_position 55 55 terrain_type ICE land_id 11 }
+
+/*
+create_land { assign_to_player 1 land_percent 100 base_size 0 land_position 88 12 terrain_type SHALLOW left_border 75 bottom_border 75 right_border -15 top_border -15 }
+create_land { assign_to_player 2 land_percent 100 base_size 0 land_position 12 88 terrain_type SHALLOW left_border -15 bottom_border -15 right_border 75 top_border 75 }
+*/
+
+/* =================================================================================================== */
+<ELEVATION_GENERATION>
+/* required for base elevation to work */
+
+/* =================================================================================================== */
+<TERRAIN_GENERATION>
+
+color_correction CC_WINTER
+
+create_terrain DESERT { 	base_terrain DLC_ROCK 	land_percent 100 	number_of_clumps 9320 	spacing_to_other_terrain_types 0 	height_limits 1 11 set_avoid_player_start_areas 10 }
+create_terrain DESERT { 	base_terrain SNOW 	land_percent 100 	number_of_clumps 9320 	spacing_to_other_terrain_types 0 	height_limits 1 11 set_avoid_player_start_areas 16 }
+create_terrain DESERT { 	base_terrain ICE 	land_percent 100 	number_of_clumps 9320 	spacing_to_other_terrain_types 0 	height_limits 1 11 set_avoid_player_start_areas 16 }
+create_terrain DESERT { 	base_terrain DLC_DRYGRASS 	land_percent 100 	number_of_clumps 9320 	spacing_to_other_terrain_types 0 	height_limits 1 11 set_avoid_player_start_areas 16 }
+create_terrain DESERT { 	base_terrain DLC_ROCK 	land_percent 100 	number_of_clumps 9320 	spacing_to_other_terrain_types 0 	height_limits 1 11 set_avoid_player_start_areas 10 }
+create_terrain DESERT { 	base_terrain SNOW 	land_percent 100 	number_of_clumps 9320 	spacing_to_other_terrain_types 0 	height_limits 1 11 set_avoid_player_start_areas 16 }
+create_terrain DESERT { 	base_terrain ICE 	land_percent 100 	number_of_clumps 9320 	spacing_to_other_terrain_types 0 	height_limits 1 11 set_avoid_player_start_areas 16 }
+create_terrain DESERT { 	base_terrain ICE_BEACH  	land_percent 100 	number_of_clumps 9320 	spacing_to_other_terrain_types 0 	height_limits 1 11 set_avoid_player_start_areas 16 }
+create_terrain DESERT { 	base_terrain BEACH_GRAVEL_UNSAILABLE  	land_percent 100 	number_of_clumps 9320 	spacing_to_other_terrain_types 0 	height_limits 1 11 set_avoid_player_start_areas 16 }
+
+create_terrain DLC_BLACK {
+	base_terrain ICE_BEACH 
+	land_percent 100
+	number_of_clumps 9320
+	spacing_to_other_terrain_types 1
+	height_limits 0 0
+}
+create_terrain DEEP_WATER {
+	base_terrain DLC_BLACK
+	land_percent 100
+	number_of_clumps 9320
+	terrain_mask 1
+	spacing_to_other_terrain_types 1
+}
+#const WATER_AZURE 58
+create_terrain WATER_AZURE {
+	base_terrain SNOW
+	land_percent 5
+	number_of_clumps 12
+	terrain_mask 1
+	spacing_to_other_terrain_types 1
+	beach_terrain WATER_AZURE
+	set_avoid_player_start_areas 20 
+	set_scaling_to_map_size
+}
+
+create_terrain DLC_DRYGRASS {
+	base_terrain BEACH_GRAVEL_UNSAILABLE
+	land_percent 1
+	number_of_clumps 18
+	set_scaling_to_map_size
+	terrain_mask 1
+	spacing_to_other_terrain_types 0
+	beach_terrain ICE 
+}
+
+#const SNOW_STRONG 74
+create_terrain SNOW_STRONG {
+	base_terrain DESERT
+	land_percent 100
+	number_of_clumps 1200
+	terrain_mask 0
+	spacing_to_other_terrain_types 0
+	beach_terrain ICE 
+}
+if 8_PLAYER_GAME
+create_terrain DESERT {
+	base_terrain SNOW
+	land_percent 7
+	number_of_clumps 16
+	terrain_mask 0
+	spacing_to_other_terrain_types 8
+	height_limits 0 0
+	beach_terrain ICE
+	set_avoid_player_start_areas 25 
+	set_scaling_to_map_size
+	border_fuzziness 1
+}
+else
+create_terrain DESERT {
+	base_terrain SNOW
+	land_percent 7
+	number_of_clumps 12
+	terrain_mask 0
+	spacing_to_other_terrain_types 8
+	height_limits 0 0
+	beach_terrain ICE
+	set_avoid_player_start_areas 25 
+	set_scaling_to_map_size
+	border_fuzziness 1
+}
+endif
+
+create_terrain BEACH_GRAVEL_UNSAILABLE {
+	base_terrain DESERT
+	land_percent 50
+	number_of_clumps 80
+	terrain_mask 0
+	spacing_to_other_terrain_types 2
+	height_limits 0 0
+	beach_terrain ICE
+	set_avoid_player_start_areas 25 
+	set_scaling_to_map_size
+	border_fuzziness 1
+}
+
+create_terrain BEACH_GRAVEL_UNSAILABLE {
+	base_terrain DESERT
+	land_percent 50
+	number_of_clumps 80
+	terrain_mask 0
+	spacing_to_other_terrain_types 2
+	height_limits 0 0
+	beach_terrain ICE
+	set_avoid_player_start_areas 25 
+	set_scaling_to_map_size
+	border_fuzziness 1
+}
+#const ICE_SAILABLE 26
+
+create_terrain ICE_SAILABLE {
+	base_terrain DESERT
+	land_percent 50
+	number_of_clumps 80
+	terrain_mask 0
+	spacing_to_other_terrain_types 0
+	height_limits 0 0
+	beach_terrain ICE
+	set_avoid_player_start_areas 25 
+	set_scaling_to_map_size
+	border_fuzziness 1
+}
+
+
+create_terrain GRASS {
+	base_terrain BEACH_GRAVEL_UNSAILABLE
+	land_percent 100
+	number_of_clumps 1000
+	terrain_mask 0
+	spacing_to_other_terrain_types 1
+	height_limits 0 0
+	beach_terrain ICE
+	set_avoid_player_start_areas 25 
+	set_scaling_to_map_size
+	border_fuzziness 1
+}
+
+create_terrain BEACH_GRAVEL_UNSAILABLE {
+	base_terrain GRASS
+	land_percent 100
+	number_of_clumps 1200
+	terrain_mask 0
+	spacing_to_other_terrain_types 0
+	beach_terrain ICE 
+}
+#const ICE_SAILABLE 26
+
+create_terrain ICE_SAILABLE {
+	base_terrain WATER_AZURE
+	land_percent 100
+	number_of_clumps 1200
+	terrain_mask 2
+	spacing_to_other_terrain_types 0
+}
+
+create_terrain ICE_SAILABLE {
+	base_terrain WATER_AZURE
+	land_percent 100
+	number_of_clumps 1200
+	terrain_mask 2
+	spacing_to_other_terrain_types 0
+}
+#const SNOW_LIGHT 73
+if 2_PLAYER_GAME
+create_terrain SNOW_LIGHT {
+	base_terrain ICE
+	land_percent 1
+	number_of_clumps 12
+	terrain_mask 2
+	spacing_to_other_terrain_types 3
+}
+elseif
+3_PLAYER_GAME
+create_terrain SNOW_LIGHT {
+	base_terrain ICE
+	land_percent 1
+	number_of_clumps 18
+	terrain_mask 2
+	spacing_to_other_terrain_types 3
+}
+elseif
+4_PLAYER_GAME
+create_terrain SNOW_LIGHT {
+	base_terrain ICE
+	land_percent 1
+	number_of_clumps 24
+	terrain_mask 2
+	spacing_to_other_terrain_types 3
+}
+else
+create_terrain SNOW_LIGHT {
+	base_terrain ICE
+	land_percent 1
+	number_of_clumps 32
+	terrain_mask 2
+	spacing_to_other_terrain_types 4
+}
+endif
+create_terrain WATER_AZURE {
+	base_terrain SNOW
+	land_percent 1
+	number_of_clumps 16
+	terrain_mask 1
+	spacing_to_other_terrain_types 5
+	beach_terrain WATER_AZURE
+	set_avoid_player_start_areas 12
+	set_scaling_to_map_size
+	height_limits 0 0
+}
+
+create_terrain SNOW {
+	base_terrain DESERT
+	land_percent 100
+	number_of_clumps 3200
+	terrain_mask 0
+	spacing_to_other_terrain_types 0
+}
+
+create_terrain WATER {
+	base_terrain SNOW
+	land_percent 3
+	number_of_clumps 8
+	terrain_mask 0
+	spacing_to_other_terrain_types 1
+	beach_terrain ICE
+	set_avoid_player_start_areas 20 
+	set_scaling_to_map_size
+}
+
+create_terrain DEEP_WATER {
+	base_terrain WATER
+	land_percent 100
+	number_of_clumps 1200
+	terrain_mask 1
+	spacing_to_other_terrain_types 0
+	beach_terrain ICE 
+	set_scaling_to_map_size
+}
+
+create_terrain DLC_ROCK {
+	base_terrain SNOW_STRONG
+	land_percent 100
+	number_of_clumps 3200
+	terrain_mask 1
+	spacing_to_other_terrain_types 0
+	height_limits 6 8
+	set_avoid_player_start_areas 25
+}
+
+create_terrain SNOW {
+	base_terrain ICE
+	land_percent 100
+	number_of_clumps 3200
+	terrain_mask 0
+	spacing_to_other_terrain_types 0
+	height_limits 4 8
+}
+
+create_terrain SNOW {
+	base_terrain ICE
+	land_percent 100
+	number_of_clumps 3200
+	terrain_mask 0
+	spacing_to_other_terrain_types 0
+	height_limits 4 8
+}
+
+
+create_terrain SNOW {
+	base_terrain ICE
+	land_percent 100
+	number_of_clumps 3200
+	terrain_mask 0
+	spacing_to_other_terrain_types 0
+	height_limits 4 8
+}
+
+create_terrain SNOW {
+	base_terrain DLC_ROCK
+	land_percent 100
+	number_of_clumps 3200
+	terrain_mask 0
+	spacing_to_other_terrain_types 0
+	height_limits 4 8
+}
+
+create_terrain SNOW {
+	base_terrain DLC_ROCK
+	land_percent 100
+	number_of_clumps 3200
+	terrain_mask 0
+	spacing_to_other_terrain_types 0
+	height_limits 4 8
+}
+
+create_terrain SNOW {
+	base_terrain DLC_ROCK
+	land_percent 100
+	number_of_clumps 3200
+	spacing_to_other_terrain_types 0
+	height_limits 3 9
+}
+
+create_terrain SNOW {
+	base_terrain DLC_ROCK
+	land_percent 100
+	number_of_clumps 3200
+	spacing_to_other_terrain_types 0
+	height_limits 3 9
+}
+
+create_terrain BEACH_GRAVEL_UNSAILABLE {
+	base_terrain GRASS
+	land_percent 100
+	number_of_clumps 1200
+	terrain_mask 0
+	spacing_to_other_terrain_types 0
+	beach_terrain ICE 
+}
+
+create_terrain DEEP_WATER {
+	base_terrain SNOW
+	number_of_tiles 48
+	number_of_clumps 12
+	terrain_mask 2
+	spacing_to_other_terrain_types 8
+	beach_terrain ICE
+	set_avoid_player_start_areas 20
+	height_limits 0 0
+	set_scaling_to_map_size
+}
+
+create_terrain DEEP_WATER {
+	base_terrain SNOW
+	number_of_tiles 56
+	number_of_clumps 28
+	terrain_mask 1
+	spacing_to_other_terrain_types 5
+	beach_terrain ICE
+	set_avoid_player_start_areas 20
+	height_limits 0 0
+	set_scaling_to_map_size
+}
+
+create_terrain ICE {
+	base_terrain SNOW
+	land_percent 1
+	number_of_clumps 28
+	terrain_mask 1
+	spacing_to_other_terrain_types 5
+	beach_terrain ICE
+	set_avoid_player_start_areas 20
+	height_limits 0 0
+	set_scaling_to_map_size
+}
+
+create_terrain BEACH_GRAVEL_UNSAILABLE {
+	base_terrain DESERT
+	land_percent 100
+	number_of_clumps 1200
+	terrain_mask 0
+	spacing_to_other_terrain_types 0
+	beach_terrain ICE 
+}
+
+/* =================================================================================================== */
+<CONNECTION_GENERATION>
+
+/* custom beaches */
+create_connect_all_lands
+{
+	replace_terrain BEACH DLC_GRAVELBEACH
+	terrain_size BEACH 999 0
+}
+
+
+/* =================================================================================================== */
+<OBJECTS_GENERATION>
+/* starting stuff */
+create_object TOWN_CENTER {
+	set_place_for_every_player
+	max_distance_to_players 0
+	actor_area 1036
+	actor_area_radius rnd(32,42)
+}
+create_object ONGRID_PLACEHOLDER_2 {
+	set_place_for_every_player
+	max_distance_to_players 0
+	actor_area 1026
+	actor_area_radius rnd(22,30)
+	set_gaia_object_only
+}
+create_object ONGRID_PLACEHOLDER_2 {
+	set_place_for_every_player
+	max_distance_to_players 0
+	actor_area 1020
+	actor_area_radius 20
+	set_gaia_object_only
+}
+create_object ONGRID_PLACEHOLDER_2 {
+	set_place_for_every_player
+	max_distance_to_players 0
+	actor_area 1015
+	actor_area_radius 15
+	set_gaia_object_only
+}
+create_object ONGRID_PLACEHOLDER_2 {
+	set_place_for_every_player
+	max_distance_to_players 0
+	actor_area 1012
+	actor_area_radius 12
+	set_gaia_object_only
+}
+create_object ONGRID_PLACEHOLDER_2 {
+	set_place_for_every_player
+	max_distance_to_players 0
+	actor_area 1010
+	actor_area_radius 10
+	set_gaia_object_only
+}
+
+create_object VILLAGER {
+	set_place_for_every_player
+	min_distance_to_players 6
+	find_closest
+	actor_area 777
+}
+if REGICIDE	create_object KING
+else create_object SCOUT
+endif
+{
+	set_place_for_every_player
+	min_distance_to_players 6
+	find_closest
+	avoid_actor_area 777
+}
+if REGICIDE
+	create_object VILLAGER {
+		number_of_objects 7
+		set_place_for_every_player
+		min_distance_to_players 6
+		max_distance_to_players 8
+	}
+	create_object CASTLE {
+		set_place_for_every_player
+		terrain_to_place_on DLC_DESERTGRAVEL
+		find_closest
+	}
+endif
+
+#const TEMP 278
+create_object TEMP
+{
+	find_closest_to_map_center
+	number_of_objects 1
+	actor_area 199
+	actor_area_radius 15
+	ignore_terrain_restrictions
+}
+create_object TEMP
+{
+	find_closest_to_map_center
+	number_of_objects 1
+	actor_area 179
+	actor_area_radius 8
+	ignore_terrain_restrictions
+}
+/*
+create_object OUTPOST {
+	set_place_for_every_player
+	number_of_objects 	1
+	actor_area 753
+	actor_area_radius 5
+	ignore_terrain_restrictions
+	terrain_to_place_on ICE
+	second_object MILL
+	/* find_closest */
+	temp_min_distance_group_placement 7
+	actor_area_to_place_in 199
+	/* avoid_actor_area 753 */
+	avoid_actor_area 179
+}
+*/
+
+create_object TEMP
+{
+  number_of_groups	200
+  number_of_objects          1
+  group_placement_radius     1
+  set_tight_grouping
+  set_gaia_object_only
+  second_object SMOKE_D
+  terrain_to_place_on DLC_BLACK
+  layer_to_place_on DEEP_WATER
+  temp_min_distance_group_placement 5
+  max_distance_to_other_zones 2
+    resource_delta -999
+}
+
+create_object TEMP
+{
+  number_of_groups	200
+  number_of_objects          1
+  group_placement_radius     1
+  set_tight_grouping
+  set_gaia_object_only
+  second_object SMOKE_A
+  terrain_to_place_on DLC_BLACK
+  temp_min_distance_group_placement 5
+    resource_delta -999
+}
+
+create_object TEMP
+{
+  number_of_groups	200
+  number_of_objects          1
+  group_placement_radius     1
+  set_tight_grouping
+  set_gaia_object_only
+  second_object MARLIN1
+  terrain_to_place_on DLC_BLACK
+  layer_to_place_on DEEP_WATER
+  temp_min_distance_group_placement 3
+  max_distance_to_other_zones 2
+  resource_delta -999
+  actor_area 119
+  actor_area_radius 3
+  min_distance_to_players 33
+}
+
+create_object OUTPOST {
+	set_place_for_every_player
+	number_of_objects 	1
+	actor_area 753
+	actor_area_radius 5
+	ignore_terrain_restrictions
+	terrain_to_place_on ICE
+	second_object MILL
+	find_closest
+	temp_min_distance_group_placement 7
+	actor_area_to_place_in 119
+	/* avoid_actor_area 753 */
+}
+
+create_object GOLD {
+	number_of_objects 4
+	group_placement_radius 2
+	set_tight_grouping
+	set_gaia_object_only
+	set_place_for_every_player
+	min_distance_group_placement 3
+	avoid_forest_zone 2
+	min_distance_to_players 16
+	find_closest
+}
+create_object GOLD {
+	number_of_groups 25
+	number_of_objects 4
+	temp_min_distance_group_placement 10
+	group_placement_radius 2
+	set_tight_grouping
+	set_gaia_object_only
+	min_distance_group_placement 3
+	avoid_forest_zone 2
+		min_distance_to_players 23
+			terrain_to_place_on BEACH_GRAVEL_UNSAILABLE
+}
+
+create_object STONE {
+	number_of_objects 5
+	group_placement_radius 2
+	set_tight_grouping
+	set_gaia_object_only
+	set_place_for_every_player
+	min_distance_group_placement 3
+	avoid_forest_zone 2
+	min_distance_to_players 16
+	find_closest
+
+}
+create_object STONE {
+	number_of_groups 25
+	number_of_objects 4
+	group_placement_radius 2
+	temp_min_distance_group_placement 10
+	set_tight_grouping
+	set_gaia_object_only
+	min_distance_group_placement 3
+	avoid_forest_zone 2
+	terrain_to_place_on BEACH_GRAVEL_UNSAILABLE
+		min_distance_to_players 23
+}
+
+create_object TREE_K {
+	number_of_groups 25
+	number_of_objects 1
+	group_placement_radius 2
+	temp_min_distance_group_placement 10
+	set_tight_grouping
+	set_gaia_object_only
+	min_distance_group_placement 2
+	avoid_forest_zone 2
+	layer_to_place_on WATER_AZURE
+		min_distance_to_players 23
+		resource_delta 975
+		set_scaling_to_map_size
+}
+
+create_object TREE_J {
+	number_of_groups 25
+	number_of_objects 1
+	group_placement_radius 2
+	temp_min_distance_group_placement 10
+	set_tight_grouping
+	set_gaia_object_only
+	min_distance_group_placement 2
+	avoid_forest_zone 2
+	layer_to_place_on WATER_AZURE
+		min_distance_to_players 23
+		resource_delta 475
+		set_scaling_to_map_size
+}
+
+create_object TREE_J {
+	number_of_groups 25
+	number_of_objects 1
+	group_placement_radius 2
+	temp_min_distance_group_placement 10
+	set_tight_grouping
+	set_gaia_object_only
+	min_distance_group_placement 2
+	layer_to_place_on WATER_AZURE
+		min_distance_to_players 23
+		resource_delta 475
+		set_scaling_to_map_size
+}
+
+create_object TREE_I {
+	number_of_groups 25
+	number_of_objects 3
+	group_placement_radius 1
+	temp_min_distance_group_placement 10
+	set_tight_grouping
+	set_gaia_object_only
+	min_distance_group_placement 0
+	avoid_forest_zone 0
+	layer_to_place_on WATER_AZURE
+		min_distance_to_players 23
+		resource_delta 175
+		set_facet 1
+		actor_area 872
+		actor_area_radius 2
+		set_scaling_to_map_size
+}
+
+create_object TREE_I {
+	number_of_groups 25
+	number_of_objects 2
+	group_placement_radius 1
+	temp_min_distance_group_placement 10
+	set_tight_grouping
+	set_gaia_object_only
+	min_distance_group_placement 0
+	avoid_forest_zone 0
+	layer_to_place_on WATER_AZURE
+		min_distance_to_players 23
+		resource_delta 175
+		set_facet 3
+		actor_area_to_place_in 872
+		second_object TREE_I
+}
+
+create_object TREE_J {
+	number_of_objects 1
+	number_of_groups 2
+	temp_min_distance_group_placement 12
+	group_placement_radius 2
+	set_tight_grouping
+	set_gaia_object_only
+	set_place_for_every_player
+	min_distance_group_placement 3
+	avoid_forest_zone 2
+	min_distance_to_players 8
+	find_closest
+	resource_delta 725
+}
+
+create_object DLC_ORANGEBUSH {
+	number_of_objects 1
+	number_of_groups 6
+	temp_min_distance_group_placement 4
+	group_placement_radius 2
+	set_tight_grouping
+	set_gaia_object_only
+	set_place_for_every_player
+	min_distance_group_placement 3
+	avoid_forest_zone 2
+	min_distance_to_players 5
+	set_circular_placement
+	find_closest
+	second_object DLC_GOOSE
+}
+
+	create_object FENCE {
+		set_place_for_every_player
+		min_distance_to_players 11
+		max_distance_to_players 11
+		terrain_to_place_on BEACH_GRAVEL_UNSAILABLE
+		set_facet 3
+		actor_area 201
+		actor_area_radius 6
+	}
+
+
+create_object TEMP
+{
+	number_of_objects 6
+	group_variance 3
+	set_loose_grouping
+	number_of_groups 3
+	set_place_for_every_player
+	set_scaling_to_map_size
+	set_gaia_object_only
+	set_gaia_unconvertible
+	terrain_to_place_on ICE
+	second_object DEER
+	ignore_terrain_restrictions
+	temp_min_distance_group_placement  10
+	avoid_actor_area 6
+}
+
+#const CLIFF1 264
+#const CLIFF2 265
+#const CLIFF3 266
+#const CLIFF4 267
+#const CLIFF5 268
+#const CLIFF6 269
+#const CLIFF7 270
+#const CLIFF8 271
+#const CLIFF9 272
+
+#const CLIFF10 1849
+#const CLIFF11 1850
+#const CLIFF12 1851
+#const CLIFF13 1852
+#const CLIFF14 1853
+#const CLIFF15 1854
+#const CLIFF16 1855
+#const CLIFF17 1856
+#const CLIFF18 1857
+
+#const CLIFF19 1858
+#const CLIFF20 1859
+#const CLIFF21 1860
+#const CLIFF22 1861
+#const CLIFF23 1862
+#const CLIFF24 1863
+#const CLIFF25 1864
+#const CLIFF26 1865
+#const CLIFF27 1866
+
+if 2_PLAYER_GAME
+create_object CLIFF19
+{
+     number_of_groups 2
+	 number_of_objects 2
+	 group_placement_radius 0
+      min_distance_to_players 25
+	  temp_min_distance_group_placement 5
+     set_tight_grouping
+	 set_facet 12
+	 terrain_to_place_on SNOW_LIGHT
+}
+
+create_object CLIFF19
+{
+     number_of_groups 3
+	 number_of_objects 2
+	 group_placement_radius 0
+      min_distance_to_players 25
+	  temp_min_distance_group_placement 5
+     set_tight_grouping
+	 set_facet 9
+	 terrain_to_place_on SNOW_LIGHT
+}
+
+create_object CLIFF19
+{
+     number_of_groups 3
+	 number_of_objects 2
+	 group_placement_radius 0
+      min_distance_to_players 25
+	  temp_min_distance_group_placement 5
+     set_tight_grouping
+	 set_facet 6
+	 terrain_to_place_on SNOW_LIGHT
+endif
+if 3_PLAYER_GAME
+create_object CLIFF19
+{
+     number_of_groups 2
+	 number_of_objects 2
+	 group_placement_radius 0
+      min_distance_to_players 25
+	  temp_min_distance_group_placement 5
+     set_tight_grouping
+	 set_facet 12
+	 terrain_to_place_on SNOW_LIGHT
+}
+
+create_object CLIFF19
+{
+     number_of_groups 3
+	 number_of_objects 2
+	 group_placement_radius 0
+      min_distance_to_players 25
+	  temp_min_distance_group_placement 5
+     set_tight_grouping
+	 set_facet 9
+	 terrain_to_place_on SNOW_LIGHT
+}
+
+create_object CLIFF19
+{
+     number_of_groups 3
+	 number_of_objects 2
+	 group_placement_radius 0
+      min_distance_to_players 25
+	  temp_min_distance_group_placement 5
+     set_tight_grouping
+	 set_facet 6
+	 terrain_to_place_on SNOW_LIGHT
+endif
+if 4_PLAYER_GAME
+create_object CLIFF19
+{
+     number_of_groups 3
+	 number_of_objects 2
+	 group_placement_radius 0
+      min_distance_to_players 25
+	  temp_min_distance_group_placement 5
+     set_tight_grouping
+	 set_facet 12
+	 terrain_to_place_on SNOW_LIGHT
+}
+
+create_object CLIFF19
+{
+     number_of_groups 4
+	 number_of_objects 2
+	 group_placement_radius 0
+      min_distance_to_players 25
+	  temp_min_distance_group_placement 5
+     set_tight_grouping
+	 set_facet 9
+	 terrain_to_place_on SNOW_LIGHT
+}
+
+create_object CLIFF19
+{
+     number_of_groups 4
+	 number_of_objects 2
+	 group_placement_radius 0
+      min_distance_to_players 25
+	  temp_min_distance_group_placement 5
+     set_tight_grouping
+	 set_facet 6
+	 terrain_to_place_on SNOW_LIGHT
+endif
+if 5_PLAYER_GAME
+create_object CLIFF19
+{
+     number_of_groups 3
+	 number_of_objects 2
+	 group_placement_radius 0
+      min_distance_to_players 25
+	  temp_min_distance_group_placement 5
+     set_tight_grouping
+	 set_facet 12
+	 terrain_to_place_on SNOW_LIGHT
+}
+
+create_object CLIFF19
+{
+     number_of_groups 5
+	 number_of_objects 2
+	 group_placement_radius 0
+      min_distance_to_players 25
+	  temp_min_distance_group_placement 5
+     set_tight_grouping
+	 set_facet 9
+	 terrain_to_place_on SNOW_LIGHT
+}
+
+create_object CLIFF19
+{
+     number_of_groups 5
+	 number_of_objects 2
+	 group_placement_radius 0
+      min_distance_to_players 25
+	  temp_min_distance_group_placement 5
+     set_tight_grouping
+	 set_facet 6
+	 terrain_to_place_on SNOW_LIGHT
+endif
+if 6_PLAYER_GAME
+create_object CLIFF19
+{
+     number_of_groups 5
+	 number_of_objects 4
+	 group_placement_radius 0
+      min_distance_to_players 25
+	  temp_min_distance_group_placement 5
+     set_tight_grouping
+	 set_facet 12
+	 terrain_to_place_on SNOW_LIGHT
+}
+
+create_object CLIFF19
+{
+     number_of_groups 7
+	 number_of_objects 4
+	 group_placement_radius 0
+      min_distance_to_players 25
+	  temp_min_distance_group_placement 5
+     set_tight_grouping
+	 set_facet 9
+	 terrain_to_place_on SNOW_LIGHT
+}
+
+create_object CLIFF19
+{
+     number_of_groups 7
+	 number_of_objects 4
+	 group_placement_radius 0
+      min_distance_to_players 25
+	  temp_min_distance_group_placement 5
+     set_tight_grouping
+	 set_facet 6
+	 terrain_to_place_on SNOW_LIGHT
+endif
+if 7_PLAYER_GAME
+create_object CLIFF19
+{
+     number_of_groups 6
+	 number_of_objects 5
+	 group_placement_radius 0
+      min_distance_to_players 25
+	  temp_min_distance_group_placement 5
+     set_tight_grouping
+	 set_facet 12
+	 terrain_to_place_on SNOW_LIGHT
+}
+
+create_object CLIFF19
+{
+     number_of_groups 9
+	 number_of_objects 5
+	 group_placement_radius 0
+      min_distance_to_players 25
+	  temp_min_distance_group_placement 5
+     set_tight_grouping
+	 set_facet 9
+	 terrain_to_place_on SNOW_LIGHT
+}
+
+create_object CLIFF19
+{
+     number_of_groups 9
+	 number_of_objects 5
+	 group_placement_radius 0
+      min_distance_to_players 25
+	  temp_min_distance_group_placement 5
+     set_tight_grouping
+	 set_facet 6
+	 terrain_to_place_on SNOW_LIGHT
+endif
+if 8_PLAYER_GAME
+create_object CLIFF19
+{
+     number_of_groups 6
+	 number_of_objects 5
+	 group_placement_radius 0
+      min_distance_to_players 25
+	  temp_min_distance_group_placement 5
+     set_tight_grouping
+	 set_facet 12
+	 terrain_to_place_on SNOW_LIGHT
+}
+
+create_object CLIFF19
+{
+     number_of_groups 9
+	 number_of_objects 5
+	 group_placement_radius 0
+      min_distance_to_players 25
+	  temp_min_distance_group_placement 5
+     set_tight_grouping
+	 set_facet 9
+	 terrain_to_place_on SNOW_LIGHT
+}
+
+create_object CLIFF19
+{
+     number_of_groups 9
+	 number_of_objects 5
+	 group_placement_radius 0
+      min_distance_to_players 25
+	  temp_min_distance_group_placement 5
+     set_tight_grouping
+	 set_facet 6
+	 terrain_to_place_on SNOW_LIGHT
+endif
+
+
+
+}
+	#const MOUNTAIN_SNOW_A 1045 /* A rocky mountain covered in snow */
+	#const MOUNTAIN_SNOW_B 1046 /* A rocky mountain covered in snow */
+	#const MOUNTAIN_SNOW_C 1047 /* A rocky mountain covered in snow */
+
+
+create_object MOUNTAIN_SNOW_A
+{
+     number_of_groups 33
+	 number_of_objects 1
+	 group_placement_radius 0
+      min_distance_to_players 20
+	  temp_min_distance_group_placement 0
+     set_tight_grouping
+	 layer_to_place_on DLC_ROCK
+	 actor_area 204
+	 actor_area_radius 8
+}
+
+create_object MOUNTAIN_SNOW_C
+{
+     number_of_groups 9999
+	 number_of_objects 9999
+	 group_placement_radius 0
+      min_distance_to_players 20
+	  temp_min_distance_group_placement 0
+     set_tight_grouping
+	 layer_to_place_on DLC_ROCK
+	 actor_area 204
+	 actor_area_radius 8
+}
+
+create_object CLIFF19
+{
+     number_of_groups 33
+	 number_of_objects 1
+	 group_placement_radius 0
+      min_distance_to_players 11
+	  temp_min_distance_group_placement 0
+     set_tight_grouping
+	 layer_to_place_on DLC_ROCK
+	 set_facet 9
+}
+
+create_object CLIFF19
+{
+     number_of_groups 33
+	 number_of_objects 1
+	 group_placement_radius 0
+      min_distance_to_players 11
+	  temp_min_distance_group_placement 0
+     set_tight_grouping
+	 layer_to_place_on DLC_ROCK
+	 set_facet 9
+}
+
+#const OFF_GRID 647
+	create_object OFF_GRID
+	{
+     number_of_groups 33
+	 number_of_objects 1
+	 group_placement_radius 0
+      min_distance_to_players 11
+	  temp_min_distance_group_placement 0
+     set_tight_grouping
+	 second_object CLIFF19
+	 layer_to_place_on DLC_ROCK
+	 set_facet 9
+}
+
+create_object RELIC {
+	number_of_objects 5
+    min_distance_to_players 30
+	temp_min_distance_group_placement 40
+	avoid_actor_area 204
+}
+
+
+/* enable resources from controlling the monument in KoTH */
+#const MONUMENT_RESOURCES 1639
+if KING_OT_HILL
+	create_object MONUMENT_RESOURCES {
+		set_place_for_every_player
+		max_distance_to_players 3
+	}
+endif
+
+
+/*
+create_object DLC_GOOSE {
+	number_of_objects 4
+	set_loose_grouping
+	set_place_for_every_player
+	min_distance_to_players 6
+	max_distance_to_players 9
+	group_placement_radius 4
+	find_closest
+	actor_area 6
+	actor_area_radius 1
+	min_distance_group_placement 1
+}
+*/
+
+/* far sheep */
+create_object DLC_GOOSE {
+	number_of_objects 2
+	number_of_groups 2
+	set_loose_grouping
+	set_gaia_object_only
+	set_place_for_every_player
+	avoid_actor_area 1015
+	max_distance_to_players 19
+	temp_min_distance_group_placement 7
+	avoid_forest_zone 1
+	avoid_actor_area 204
+}
+/*
+create_object WOLF {
+	number_of_objects 1
+	number_of_groups 6
+	set_loose_grouping
+	set_gaia_object_only
+	terrain_to_place_on SNOW
+	temp_min_distance_group_placement 30
+	min_distance_to_players 25
+	set_place_for_every_player
+}
+*/
+
+
+/* birds */
+create_object HAWK {
+	number_of_objects 6
+	set_scaling_to_map_size
+}
+/*
+#const ON_GRID 278
+#const INVIS 647
+#const GATE_CORNER 790
+create_object INVIS
+{    
+    set_place_for_every_player
+    number_of_objects 4
+    min_distance_to_players 11
+    max_distance_to_players 11
+    find_closest
+    actor_area 1
+    actor_area_radius 0
+    temp_min_distance_group_placement 7
+}
+create_object INVIS
+{    
+    set_place_for_every_player
+    number_of_objects 999
+    actor_area_to_place_in 1
+    actor_area 2
+    actor_area_radius 1
+}
+create_object INVIS
+{    
+    set_place_for_every_player
+    number_of_objects 999
+    actor_area_to_place_in 1
+    actor_area 3
+    actor_area_radius 2
+}
+create_object ON_GRID
+{
+    number_of_objects 9999
+    set_place_for_every_player
+    min_distance_to_players 11
+    max_distance_to_players 11
+    second_object FENCE
+    avoid_actor_area 3
+}
+create_object GATE_CORNER
+{    
+    set_place_for_every_player
+    number_of_objects 999
+    min_distance_to_players 11
+    max_distance_to_players 11
+    avoid_actor_area 2
+}
+*/
+
+create_object TREE_I {
+	number_of_groups 250
+	number_of_objects 3
+	group_placement_radius 1
+	temp_min_distance_group_placement 27
+	set_tight_grouping
+	set_gaia_object_only
+	min_distance_group_placement 0
+	avoid_forest_zone 10
+		min_distance_to_players 25
+		resource_delta 175
+		set_facet 3
+		second_object TREE_I
+		terrain_to_place_on SNOW
+}

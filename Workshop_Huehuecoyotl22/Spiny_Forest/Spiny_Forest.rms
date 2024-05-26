@@ -1,0 +1,1930 @@
+/*
+SPINY FOREST by Huehuecoyotl22 - October-November 2023
+
+* * * Map Description * * *
+Inspired by the Madagascar Spiny Forests. All cacti on the map can be harvested for wood like normal trees.
+Players start with 2 groups of units. 
+Group 1 are a mounted priest (can only heal with low range, but not convert), an elephant scout (can’t attack) and a packed town center. 
+They are surrounded by 2 piles of loot (contain 2000 gold each) and some cacti. 
+Group 2 are 3 villagers, a mule cart and a packed town center, surrounded by some trees, cacti, piles of wood, piles of food, a group of camels and 4 goats. 
+Camels can be hunted like deer. The map contains several big forests, gold and stone scattered around, groups of camels, piles of gold and stone, single boars, wolves and a few shallow ponds with turtles.
+ */
+
+<PLAYER_SETUP>
+random_placement  
+
+/* Removing Trade Carts and Cogs for Multi-team Games */
+if 2_TEAM_GAME
+else
+#const TRADE_CART_ENABLER 161
+#const TRADE_COG_ENABLER 180
+#const TRADE_CARAVAN_ENABLER 48
+#const HINDU_CARAVANSERAI_ENABLER 518
+#const PERSIAN_CARAVANSERAI_ENABLER 552  
+effect_amount DISABLE_TECH TRADE_COG_ENABLER ATTR_DISABLE 180
+effect_amount DISABLE_TECH TRADE_CART_ENABLER ATTR_DISABLE 161
+effect_amount DISABLE_TECH TRADE_CARAVAN_ENABLER ATTR_DISABLE 48
+effect_amount DISABLE_TECH HINDU_CARAVANSERAI_ENABLER ATTR_DISABLE 518
+effect_amount DISABLE_TECH PERSIAN_CARAVANSERAI_ENABLER ATTR_DISABLE 552
+endif
+#const TREE_BAOBAB 1052
+#const MULECART 1808
+#const WARRIORPRIEST 1811
+#const FOREST_BAOBAB 49
+
+#const LOOT 472
+ 
+/*
+effect_amount ENABLE_OBJECT FISHERM ATTR_ENABLE 				0
+effect_amount SET_ATTRIBUTE FISHERM ATTR_TRAIN_LOCATION 			1808
+effect_amount SET_ATTRIBUTE FISHERM ATTR_TRAIN_BUTTON 			6
+effect_amount SET_ATTRIBUTE FISHERM ATTR_FOOD_COST 			50
+effect_amount SET_ATTRIBUTE FISHERM ATTR_CREATION_TIME 			25
+effect_amount SET_ATTRIBUTE FISHERM ATTR_HOTKEY_ID 			16121
+effect_amount ENABLE_OBJECT FISHERW ATTR_ENABLE 				0
+effect_amount SET_ATTRIBUTE FISHERW ATTR_TRAIN_LOCATION 			1808
+effect_amount SET_ATTRIBUTE FISHERW ATTR_TRAIN_BUTTON 			7
+effect_amount SET_ATTRIBUTE FISHERW ATTR_FOOD_COST 			50
+effect_amount SET_ATTRIBUTE FISHERW ATTR_CREATION_TIME 			25
+effect_amount SET_ATTRIBUTE FISHERW ATTR_HOTKEY_ID 			16121
+*/
+
+#const CLIFF1 264
+#const CLIFF2 265
+#const CLIFF3 266
+#const CLIFF4 267
+#const CLIFF5 268
+#const CLIFF6 269
+#const CLIFF7 270
+#const CLIFF8 271
+#const CLIFF9 272
+
+#const CLIFF10 1849
+#const CLIFF11 1850
+#const CLIFF12 1851
+#const CLIFF13 1852
+#const CLIFF14 1853
+#const CLIFF15 1854
+#const CLIFF16 1855
+#const CLIFF17 1856
+#const CLIFF18 1857
+
+#const CLIFF19 1858
+#const CLIFF20 1859
+#const CLIFF21 1860
+#const CLIFF22 1861
+#const CLIFF23 1862
+#const CLIFF24 1863
+#const CLIFF25 1864
+#const CLIFF26 1865
+#const CLIFF27 1866
+
+#const TEMP 278
+
+
+effect_amount SET_ATTRIBUTE CLIFF1 ATTR_RADIUS_1 0
+effect_amount SET_ATTRIBUTE CLIFF1 ATTR_RADIUS_2 0
+effect_amount SET_ATTRIBUTE CLIFF10 ATTR_RADIUS_1 0
+effect_amount SET_ATTRIBUTE CLIFF11 ATTR_RADIUS_2 0
+effect_amount SET_ATTRIBUTE CLIFF19 ATTR_RADIUS_1 0
+effect_amount SET_ATTRIBUTE CLIFF20 ATTR_RADIUS_2 0
+
+effect_amount SET_ATTRIBUTE REED_TREE ATTR_NAME_ID 5323
+effect_amount SET_ATTRIBUTE FORAGE ATTR_NAME_ID 5324
+effect_amount SET_ATTRIBUTE REED_TREE ATTR_DEAD_ID 1350
+
+/* make the penguin mostly harmless */
+effect_amount GAIA_UPGRADE_UNIT SHEEP PENGUIN 0
+effect_amount GAIA_SET_ATTRIBUTE SHEEP ATTR_ATTACK 1024
+effect_amount GAIA_SET_ATTRIBUTE SHEEP ATTR_ATTACK 3328
+effect_amount GAIA_SET_ATTRIBUTE SHEEP ATTR_ATTACK 5376
+effect_amount GAIA_SET_ATTRIBUTE SHEEP ATTR_SHOWN_ATTACK
+effect_amount GAIA_SET_ATTRIBUTE SHEEP ATTR_HITPOINTS 4
+
+/* penguins drop food on death */
+effect_amount GAIA_SET_ATTRIBUTE SHEEP ATTR_DEAD_ID 1026
+effect_amount GAIA_SET_ATTRIBUTE DLC_OSTRICH ATTR_HITPOINTS 0
+/* effect_amount SET_ATTRIBUTE DLC_OSTRICH ATTR_DYING_GRAPHIC 1751 */
+effect_amount GAIA_SET_ATTRIBUTE SHEEP ATTR_DYING_GRAPHIC 1751
+effect_amount SET_ATTRIBUTE DLC_OSTRICH ATTR_DYING_GRAPHIC 8258
+effect_amount SET_ATTRIBUTE DLC_OSTRICH ATTR_NAME_ID 5734
+effect_amount SET_ATTRIBUTE DLC_OSTRICH ATTR_ICON_ID 157
+/* effect_amount SET_ATTRIBUTE DLC_OSTRICH ATTR_DEAD_GRAPHIC 641 */
+
+/*
+/* give a penguin scout with standard scout stats */
+effect_amount UPGRADE_UNIT HORSE_B DLC_PENGUIN 0
+effect_amount SET_ATTRIBUTE HORSE_B ATTR_ATTACK 262147
+effect_amount SET_ATTRIBUTE HORSE_B ATTR_ARMOR 262144
+effect_amount SET_ATTRIBUTE HORSE_B ATTR_ARMOR 196610
+effect_amount SET_ATTRIBUTE HORSE_B ATTR_SHOWN_ATTACK 3
+effect_amount SET_ATTRIBUTE HORSE_B ATTR_SHOWN_MELEE_ARMOR 0
+effect_amount SET_ATTRIBUTE HORSE_B ATTR_SHOWN_PIERCE_ARMOR 2
+effect_amount SET_ATTRIBUTE HORSE_B ATTR_HITPOINTS 45
+effect_percent SET_ATTRIBUTE HORSE_B ATTR_MOVE_SPEED 120
+effect_amount SET_ATTRIBUTE HORSE_B ATTR_LINE_OF_SIGHT 4
+effect_amount SET_ATTRIBUTE HORSE_B ATTR_TRAITS 16
+*/
+
+/* prevent relics on ice */
+effect_amount GAIA_SET_ATTRIBUTE RELIC ATTR_TERRAIN_ID 8
+
+effect_amount SET_ATTRIBUTE ICEBERG1 ATTR_TERRAIN_ID 0
+effect_amount SET_ATTRIBUTE ICEBERG2 ATTR_TERRAIN_ID 0
+effect_amount SET_ATTRIBUTE ICEBERG3 ATTR_TERRAIN_ID 0
+
+/*
+effect_amount SET_ATTRIBUTE DONKEY ATTR_STANDING_GRAPHIC 8349
+effect_amount SET_ATTRIBUTE DONKEY ATTR_WALKING_GRAPHIC 8351
+*/
+
+effect_amount GAIA_SET_ATTRIBUTE TREE_I ATTR_STANDING_GRAPHIC 4328
+effect_amount GAIA_SET_ATTRIBUTE TREE_I ATTR_WALKING_GRAPHIC 4328
+effect_amount GAIA_SET_ATTRIBUTE TREE_I ATTR_DYING_GRAPHIC 4327
+effect_amount GAIA_SET_ATTRIBUTE TREE_I ATTR_DEAD_GRAPHIC 4327
+effect_amount SET_ATTRIBUTE TREE_I ATTR_NAME_ID 5591
+effect_amount SET_ATTRIBUTE TREE_I ATTR_ICON_ID 32
+
+effect_amount GAIA_SET_ATTRIBUTE TREE_J ATTR_STANDING_GRAPHIC 8244
+effect_amount GAIA_SET_ATTRIBUTE TREE_J ATTR_WALKING_GRAPHIC 8244
+effect_amount GAIA_SET_ATTRIBUTE TREE_J ATTR_DYING_GRAPHIC 8244
+effect_amount GAIA_SET_ATTRIBUTE TREE_J ATTR_DEAD_GRAPHIC 8244
+effect_amount SET_ATTRIBUTE TREE_J ATTR_NAME_ID 5323
+effect_amount SET_ATTRIBUTE TREE_J ATTR_ICON_ID 32
+
+effect_amount GAIA_SET_ATTRIBUTE TREE_K ATTR_STANDING_GRAPHIC 4354
+effect_amount GAIA_SET_ATTRIBUTE TREE_K ATTR_WALKING_GRAPHIC 4354
+effect_amount GAIA_SET_ATTRIBUTE TREE_K ATTR_DYING_GRAPHIC 4354
+effect_amount SET_ATTRIBUTE TREE_K ATTR_NAME_ID 729
+/* effect_amount GAIA_SET_ATTRIBUTE TREE_K ATTR_DEAD_GRAPHIC 4354 */
+
+#const PGOLD 252
+effect_amount GAIA_SET_ATTRIBUTE PGOLD ATTR_STANDING_GRAPHIC 7640
+effect_amount GAIA_SET_ATTRIBUTE PGOLD ATTR_WALKING_GRAPHIC 7640
+effect_amount GAIA_SET_ATTRIBUTE PGOLD ATTR_DYING_GRAPHIC 7640
+/* effect_amount GAIA_SET_ATTRIBUTE PGOLD ATTR_DEAD_GRAPHIC 7640 */
+
+#const VILLAGER_FEMALE 293
+#const VILLAGER_MALE 83
+#const FISHERM 56
+#const FISHERW 57
+#const PACKEDTC 444
+
+effect_amount ENABLE_OBJECT FISHERW ATTR_ENABLE 1
+effect_amount SET_ATTRIBUTE FISHERW ATTR_TRAIN_LOCATION 444
+effect_amount SET_ATTRIBUTE FISHERW ATTR_TRAIN_BUTTON 6
+effect_amount ENABLE_OBJECT FISHERM ATTR_ENABLE 1
+effect_amount SET_ATTRIBUTE FISHERM ATTR_TRAIN_LOCATION 444
+effect_amount SET_ATTRIBUTE FISHERM ATTR_TRAIN_BUTTON 7
+
+#const PLAYER_HORSE 814
+#const DEADELEPHANT 1332
+effect_amount SET_ATTRIBUTE PLAYER_HORSE ATTR_STANDING_GRAPHIC 8354
+effect_amount SET_ATTRIBUTE PLAYER_HORSE ATTR_WALKING_GRAPHIC 8357
+effect_amount SET_ATTRIBUTE PLAYER_HORSE ATTR_RUNNING_GRAPHIC 8355
+effect_amount SET_ATTRIBUTE PLAYER_HORSE ATTR_DYING_GRAPHIC 8353
+effect_amount SET_ATTRIBUTE PLAYER_HORSE ATTR_ATTACK_GRAPHIC 8252
+effect_amount SET_ATTRIBUTE PLAYER_HORSE ATTR_DEAD_GRAPHIC 8356
+effect_amount SET_ATTRIBUTE PLAYER_HORSE ATTR_NAME_ID 5779
+effect_amount SET_ATTRIBUTE PLAYER_HORSE ATTR_ICON_ID 179
+effect_amount SET_ATTRIBUTE PLAYER_HORSE ATTR_DEAD_ID 1332
+effect_amount SET_ATTRIBUTE DEADELEPHANT ATTR_STANDING_GRAPHIC 8353
+effect_amount SET_ATTRIBUTE DEADELEPHANT ATTR_DEAD_GRAPHIC 8353
+effect_amount SET_ATTRIBUTE DEADELEPHANT ATTR_DYING_GRAPHIC 8353
+#const HORSE_D 815
+#const HORSW_D 836
+#const HORSEHVY_D 1357
+#const HORSEGBL_D 1603
+#const HORSEGBR_D 1605
+#const HORSEWBR_D 1607
+effect_amount SET_ATTRIBUTE HORSE_D ATTR_STANDING_GRAPHIC 8356
+effect_amount SET_ATTRIBUTE HORSW_D ATTR_STANDING_GRAPHIC 8356
+effect_amount SET_ATTRIBUTE HORSEHVY_D ATTR_STANDING_GRAPHIC 8356
+effect_amount SET_ATTRIBUTE HORSEGBL_D ATTR_STANDING_GRAPHIC 8356
+effect_amount SET_ATTRIBUTE HORSEGBR_D ATTR_STANDING_GRAPHIC 8356
+effect_amount SET_ATTRIBUTE HORSEWBR_D ATTR_STANDING_GRAPHIC 8356
+effect_amount SET_ATTRIBUTE HORSE_D ATTR_DEAD_GRAPHIC 8356
+effect_amount SET_ATTRIBUTE HORSW_D ATTR_DEAD_GRAPHIC 8356
+effect_amount SET_ATTRIBUTE HORSEHVY_D ATTR_DEAD_GRAPHIC 8356
+effect_amount SET_ATTRIBUTE HORSEGBL_D ATTR_DEAD_GRAPHIC 8356
+effect_amount SET_ATTRIBUTE HORSEGBR_D ATTR_DEAD_GRAPHIC 8356
+effect_amount SET_ATTRIBUTE HORSEWBR_D ATTR_DEAD_GRAPHIC 8356
+/*
+effect_amount SET_ATTRIBUTE HORSE_D ATTR_DEAD_GRAPHIC 8356
+effect_amount SET_ATTRIBUTE HORSE_D ATTR_STANDING_GRAPHIC 8356
+effect_amount GAIA_SET_ATTRIBUTE HORSE_D ATTR_DEAD_GRAPHIC 8356
+effect_amount GAIA_SET_ATTRIBUTE HORSE_D ATTR_STANDING_GRAPHIC 8356
+effect_amount SET_ATTRIBUTE HORSE_D ATTR_DYING_GRAPHIC 8353
+*/
+
+#const PLAYER_CAMEL 897 /* Can be captured and controlled by players */
+effect_amount SET_ATTRIBUTE PLAYER_CAMEL ATTR_STANDING_GRAPHIC 6643
+effect_amount SET_ATTRIBUTE PLAYER_CAMEL ATTR_WALKING_GRAPHIC 6643
+effect_amount SET_ATTRIBUTE PLAYER_CAMEL ATTR_RUNNING_GRAPHIC 6643
+effect_amount SET_ATTRIBUTE PLAYER_CAMEL ATTR_DYING_GRAPHIC 3933
+effect_amount SET_ATTRIBUTE PLAYER_CAMEL ATTR_DEAD_GRAPHIC 3933
+effect_amount SET_ATTRIBUTE PLAYER_CAMEL ATTR_NAME_ID 5302
+effect_amount SET_ATTRIBUTE PLAYER_CAMEL ATTR_ICON_ID 284
+effect_amount SET_ATTRIBUTE PLAYER_CAMEL ATTR_LINE_OF_SIGHT 9
+
+#const TREE_RAIN 1146
+effect_amount GAIA_UPGRADE_UNIT PINETREE TREE_RAIN 0
+effect_amount GAIA_SET_ATTRIBUTE PINETREE ATTR_TERRAIN_ID 3
+
+#const BUSH_A 302 /* Contains 100 wood */
+#const BUSH_B 1053 /* Contains 100 wood */
+
+effect_amount GAIA_SET_ATTRIBUTE DLC_ORANGEBUSH ATTR_STANDING_GRAPHIC 8245
+effect_amount GAIA_SET_ATTRIBUTE DLC_ORANGEBUSH ATTR_WALKING_GRAPHIC 8245
+effect_amount GAIA_SET_ATTRIBUTE DLC_ORANGEBUSH ATTR_DYING_GRAPHIC 8245
+/* effect_amount GAIA_SET_ATTRIBUTE DLC_ORANGEBUSH ATTR_DEAD_GRAPHIC 8245 */
+effect_amount SET_ATTRIBUTE DLC_ORANGEBUSH ATTR_NAME_ID 5705
+/* effect_amount SET_ATTRIBUTE DLC_ORANGEBUSH ATTR_ICON_ID 916 */
+
+effect_amount GAIA_SET_ATTRIBUTE DEER ATTR_STANDING_GRAPHIC 7572
+effect_amount GAIA_SET_ATTRIBUTE DEER ATTR_WALKING_GRAPHIC 7575
+effect_amount GAIA_SET_ATTRIBUTE DEER ATTR_RUNNING_GRAPHIC 7573
+effect_amount GAIA_SET_ATTRIBUTE DEER ATTR_DYING_GRAPHIC 7571
+effect_amount GAIA_SET_ATTRIBUTE DEER ATTR_DEAD_GRAPHIC 7574
+#const DEERXD 43
+effect_amount GAIA_SET_ATTRIBUTE DEERXD ATTR_DEAD_GRAPHIC 7574
+effect_amount GAIA_SET_ATTRIBUTE DEERXD ATTR_STANDING_GRAPHIC 7574
+effect_amount SET_ATTRIBUTE DEER ATTR_NAME_ID 5736
+effect_amount SET_ATTRIBUTE DEER ATTR_ICON_ID 135
+
+#const TAMAR 1822
+#const JOAN 430
+
+/* effect_amount SET_ATTRIBUTE TAMAR ATTR_STANDING_GRAPHIC 1825
+effect_amount SET_ATTRIBUTE TAMAR ATTR_WALKING_GRAPHIC 1829
+effect_amount SET_ATTRIBUTE TAMAR ATTR_RUNNING_GRAPHIC 1829
+effect_amount SET_ATTRIBUTE TAMAR ATTR_DYING_GRAPHIC 1822
+effect_amount SET_ATTRIBUTE TAMAR ATTR_DEAD_GRAPHIC 1822
+effect_amount SET_ATTRIBUTE TAMAR ATTR_STANDING2_GRAPHIC 1825
+effect_amount SET_ATTRIBUTE TAMAR ATTR_ATTACK_GRAPHIC 1825
+effect_amount SET_ATTRIBUTE TAMAR ATTR_HEALTING_GRAPHIC 1825
+*/
+effect_amount SET_ATTRIBUTE TAMAR ATTR_NAME_ID 5120
+effect_amount SET_ATTRIBUTE TAMAR ATTR_ICON_ID 52
+effect_amount SET_ATTRIBUTE TAMAR ATTR_HITPOINTS 45
+effect_amount SET_ATTRIBUTE TAMAR ATTR_MAX_RANGE 5
+effect_amount SET_ATTRIBUTE TAMAR ATTR_SHOWN_RANGE 5
+effect_amount SET_ATTRIBUTE TAMAR ATTR_LINE_OF_SIGHT 6
+effect_percent SET_ATTRIBUTE TAMAR ATTR_MOVE_SPEED 100
+
+
+effect_amount GAIA_SET_ATTRIBUTE MARLIN1 ATTR_STANDING_GRAPHIC 10203
+effect_amount GAIA_SET_ATTRIBUTE MARLIN1 ATTR_WALKING_GRAPHIC 10203
+effect_amount GAIA_SET_ATTRIBUTE MARLIN1 ATTR_RUNNING_GRAPHIC 10203
+effect_amount GAIA_SET_ATTRIBUTE MARLIN1 ATTR_DYING_GRAPHIC 10203
+effect_amount GAIA_SET_ATTRIBUTE MARLIN1 ATTR_DEAD_GRAPHIC 10203
+effect_amount SET_ATTRIBUTE MARLIN1 ATTR_NAME_ID 5173
+effect_amount SET_ATTRIBUTE MARLIN1 ATTR_ICON_ID 282
+
+/*
+effect_amount SET_ATTRIBUTE MILITIA ATTR_STANDING_GRAPHIC 2455
+effect_amount SET_ATTRIBUTE MILITIA ATTR_WALKING_GRAPHIC 2457
+effect_amount SET_ATTRIBUTE MILITIA ATTR_RUNNING_GRAPHIC 3238
+effect_amount SET_ATTRIBUTE MILITIA ATTR_DYING_GRAPHIC 2454
+effect_amount SET_ATTRIBUTE MILITIA ATTR_ATTACK_GRAPHIC 2453
+effect_amount SET_ATTRIBUTE MILITIA ATTR_DEAD_GRAPHIC 2456
+effect_amount SET_ATTRIBUTE MILITIA ATTR_NAME_ID 5406
+effect_amount SET_ATTRIBUTE MILITIA ATTR_ICON_ID 98
+*/
+/* ************************************ */
+<LAND_GENERATION>
+
+base_terrain DIRT
+
+create_player_lands
+{
+     terrain_type DLC_DRYGRASS
+     land_percent 5
+     base_size 4
+     border_fuzziness 20
+     clumping_factor 25
+     other_zone_avoidance_distance 5
+	 circle_radius 25
+}
+
+create_player_lands
+{
+     terrain_type DESERT
+     land_percent 5
+     base_size 4
+     border_fuzziness 20
+     clumping_factor 25
+     other_zone_avoidance_distance 5
+	 circle_radius rnd(30,40)
+}
+
+/* **************************************** */
+<TERRAIN_GENERATION>
+color_correction CC_DESERT
+
+/* FOREST */
+
+create_terrain PINE_FOREST
+{
+     base_terrain DIRT
+     spacing_to_other_terrain_types 5
+     land_percent 25
+     number_of_clumps 10
+     clumping_factor 20
+     set_avoid_player_start_areas
+     set_scale_by_groups
+	 terrain_mask 2
+}
+create_terrain DLC_CRACKED
+{
+     base_terrain DIRT
+     spacing_to_other_terrain_types 2
+     land_percent 11
+     number_of_clumps 8
+     clumping_factor 20
+     set_scale_by_groups
+	 set_avoid_player_start_areas 30
+	 height_limits 0 0
+}
+
+
+create_terrain DLC_NEWSHALLOW
+{
+     base_terrain DLC_CRACKED
+     spacing_to_other_terrain_types 2
+     land_percent 6
+     number_of_clumps 8
+     clumping_factor 20
+     set_avoid_player_start_areas 30
+     set_scale_by_groups
+	 height_limits 0 0
+}
+
+create_terrain DLC_NEWSHALLOW
+{
+     base_terrain DLC_DRYGRASS
+     spacing_to_other_terrain_types 2
+     land_percent 100
+     number_of_clumps 8
+     clumping_factor 20
+     set_scale_by_groups
+	 terrain_mask 1
+}
+
+create_terrain DLC_CRACKED
+{
+     base_terrain DESERT
+     spacing_to_other_terrain_types 2
+     land_percent 100
+     number_of_clumps 8
+     clumping_factor 20
+     set_scale_by_groups
+	 terrain_mask 1
+}
+
+create_terrain DLC_NEWSHALLOW
+{
+     base_terrain DLC_CRACKED
+     spacing_to_other_terrain_types 2
+     land_percent 100
+     number_of_clumps 8
+     clumping_factor 20
+     set_scale_by_groups
+	 terrain_mask 1
+}
+/*
+create_terrain DLC_NEWSHALLOW
+{
+     base_terrain DESERT
+     spacing_to_other_terrain_types 6
+     land_percent 100
+     number_of_clumps 8
+     clumping_factor 20
+     set_scale_by_groups
+	 terrain_mask 0
+}
+*/
+
+create_terrain FOREST_BAOBAB
+{
+     base_terrain DLC_NEWSHALLOW
+     spacing_to_other_terrain_types 2
+     land_percent 100
+     number_of_clumps 22
+     clumping_factor 20
+     set_scale_by_groups
+}
+
+create_terrain FOREST_BAOBAB
+{
+     base_terrain DLC_NEWSHALLOW
+     spacing_to_other_terrain_types 2
+     land_percent 100
+     number_of_clumps 22
+     clumping_factor 20
+     set_scale_by_groups
+}
+
+create_terrain DLC_CRACKED
+{
+     base_terrain DIRT
+     spacing_to_other_terrain_types 0
+     land_percent 4
+     number_of_clumps 8
+     clumping_factor 20
+     set_scale_by_groups
+	 set_avoid_player_start_areas 20
+	 terrain_mask 1
+}
+
+create_terrain DESERT
+{
+     base_terrain DIRT
+     spacing_to_other_terrain_types 0
+     land_percent 4
+     number_of_clumps 8
+     clumping_factor 20
+     set_scale_by_groups
+	 set_avoid_player_start_areas 20
+	 terrain_mask 1
+}
+
+create_terrain DLC_QUICKSAND
+{
+     base_terrain DIRT
+     spacing_to_other_terrain_types 0
+     land_percent 4
+     number_of_clumps 8
+     clumping_factor 20
+     set_scale_by_groups
+	 set_avoid_player_start_areas 20
+	 terrain_mask 1
+}
+
+create_terrain DLC_DRYGRASS
+{
+     base_terrain DIRT
+     spacing_to_other_terrain_types 0
+     land_percent 4
+     number_of_clumps 8
+     clumping_factor 20
+     set_scale_by_groups
+	 set_avoid_player_start_areas 20
+	 terrain_mask 1
+}
+
+/* **************************************** */
+<OBJECTS_GENERATION>
+
+create_object CLIFF10
+{
+     number_of_groups 34
+	 number_of_objects 1
+	 group_placement_radius 3
+      min_distance_to_players 22
+	  temp_min_distance_group_placement 5
+	  min_distance_group_placement 1
+     set_tight_grouping
+	 actor_area 201
+	 actor_area_radius 4
+	 set_facet 6
+	 terrain_to_place_on PINE_FOREST
+	 
+}
+
+create_object CLIFF10
+{
+     number_of_groups 34
+	 number_of_objects 1
+	 group_placement_radius 3
+      min_distance_to_players 22
+	  temp_min_distance_group_placement 5
+	  min_distance_group_placement 1
+     set_tight_grouping
+	 actor_area 201
+	 actor_area_radius 4
+	 set_facet 9
+	 terrain_to_place_on PINE_FOREST
+	 
+}
+/*
+	create_object TREE_RAIN
+{
+	number_of_groups 88
+	number_of_objects 1
+	set_place_for_every_player
+	/* min_distance_to_players 12
+	max_distance_to_players 18
+	group_placement_radius 5 */
+	set_tight_grouping
+	set_circular_placement
+	temp_min_distance_group_placement 1
+	set_gaia_object_only
+	set_gaia_unconvertible
+	/* min_distance_group_placement 4 */
+	/* second_object BUSH_B */
+	terrain_to_place_on PINE_FOREST
+	actor_area 956
+	actor_area_radius 1
+	set_facet 12
+}
+
+	create_object TREE_RAIN
+{
+	number_of_groups 88
+	number_of_objects 1
+	set_place_for_every_player
+	/* min_distance_to_players 12
+	max_distance_to_players 18
+	group_placement_radius 5 */
+	set_tight_grouping
+	set_circular_placement
+	temp_min_distance_group_placement 1
+	set_gaia_object_only
+	set_gaia_unconvertible
+	/* min_distance_group_placement 4 */
+	/* second_object BUSH_B */
+	terrain_to_place_on PINE_FOREST
+	actor_area 956
+	actor_area_radius 1
+	set_facet 80
+}
+
+	create_object TREE_RAIN
+{
+	number_of_groups 88
+	number_of_objects 1
+	set_place_for_every_player
+	/* min_distance_to_players 12
+	max_distance_to_players 18
+	group_placement_radius 5 */
+	set_tight_grouping
+	set_circular_placement
+	temp_min_distance_group_placement 1
+	set_gaia_object_only
+	set_gaia_unconvertible
+	/* min_distance_group_placement 4 */
+	/* second_object BUSH_B */
+	terrain_to_place_on PINE_FOREST
+	actor_area 956
+	actor_area_radius 1
+	set_facet 13
+}
+
+	create_object TREE_RAIN
+{
+	number_of_groups 88
+	number_of_objects 1
+	set_place_for_every_player
+	/* min_distance_to_players 12
+	max_distance_to_players 18
+	group_placement_radius 5 */
+	set_tight_grouping
+	set_circular_placement
+	temp_min_distance_group_placement 1
+	set_gaia_object_only
+	set_gaia_unconvertible
+	/* min_distance_group_placement 4 */
+	/* second_object BUSH_B */
+	terrain_to_place_on PINE_FOREST
+	actor_area 956
+	actor_area_radius 1
+	set_facet 14
+}
+
+	create_object TREE_RAIN
+{
+	number_of_groups 88
+	number_of_objects 1
+	set_place_for_every_player
+	/* min_distance_to_players 12
+	max_distance_to_players 18
+	group_placement_radius 5 */
+	set_tight_grouping
+	set_circular_placement
+	temp_min_distance_group_placement 1
+	set_gaia_object_only
+	set_gaia_unconvertible
+	/* min_distance_group_placement 4 */
+	/* second_object BUSH_B */
+	terrain_to_place_on PINE_FOREST
+	actor_area 956
+	actor_area_radius 1
+	set_facet 1
+}
+
+	create_object TREE_RAIN
+{
+	number_of_groups 88
+	number_of_objects 1
+	set_place_for_every_player
+	/* min_distance_to_players 12
+	max_distance_to_players 18
+	group_placement_radius 5 */
+	set_tight_grouping
+	set_circular_placement
+	temp_min_distance_group_placement 1
+	set_gaia_object_only
+	set_gaia_unconvertible
+	/* min_distance_group_placement 4 */
+	/* second_object BUSH_B */
+	terrain_to_place_on PINE_FOREST
+	actor_area 956
+	actor_area_radius 1
+	set_facet 2
+}
+
+	create_object TREE_RAIN
+{
+	number_of_groups 111
+	number_of_objects 1
+	set_place_for_every_player
+	/* min_distance_to_players 12
+	max_distance_to_players 18
+	group_placement_radius 5 */
+	set_tight_grouping
+	set_circular_placement
+	temp_min_distance_group_placement 1
+	set_gaia_object_only
+	set_gaia_unconvertible
+	/* min_distance_group_placement 4 */
+	/* second_object BUSH_B */
+	terrain_to_place_on PINE_FOREST
+	actor_area 956
+	actor_area_radius 1
+	set_facet 3
+}
+*/
+	create_object TREE_RAIN
+{
+	number_of_groups 111
+	number_of_objects 1
+	set_place_for_every_player
+	/* min_distance_to_players 12
+	max_distance_to_players 18
+	group_placement_radius 5 */
+	set_tight_grouping
+	set_circular_placement
+	temp_min_distance_group_placement 1
+	set_gaia_object_only
+	set_gaia_unconvertible
+	/* min_distance_group_placement 4 */
+	/* second_object BUSH_B */
+	terrain_to_place_on PINE_FOREST
+	actor_area 956
+	actor_area_radius 1
+	set_facet 11
+}
+/*
+	create_object JUNGLETREE
+{
+	number_of_groups 111
+	number_of_objects 1
+	set_place_for_every_player
+	/* min_distance_to_players 12
+	max_distance_to_players 18
+	group_placement_radius 5 */
+	set_tight_grouping
+	set_circular_placement
+	temp_min_distance_group_placement 1
+	set_gaia_object_only
+	set_gaia_unconvertible
+	/* min_distance_group_placement 4 */
+	/* second_object BUSH_B */
+	terrain_to_place_on PINE_FOREST
+	actor_area 956
+	actor_area_radius 1
+	set_facet 1
+}
+
+	create_object JUNGLETREE
+{
+	number_of_groups 111
+	number_of_objects 1
+	set_place_for_every_player
+	/* min_distance_to_players 12
+	max_distance_to_players 18
+	group_placement_radius 5 */
+	set_tight_grouping
+	set_circular_placement
+	temp_min_distance_group_placement 1
+	set_gaia_object_only
+	set_gaia_unconvertible
+	/* min_distance_group_placement 4 */
+	/* second_object BUSH_B */
+	terrain_to_place_on PINE_FOREST
+	actor_area 956
+	actor_area_radius 1
+	set_facet 4
+}
+
+	create_object JUNGLETREE
+{
+	number_of_groups 111
+	number_of_objects 1
+	set_place_for_every_player
+	/* min_distance_to_players 12
+	max_distance_to_players 18
+	group_placement_radius 5 */
+	set_tight_grouping
+	set_circular_placement
+	temp_min_distance_group_placement 1
+	set_gaia_object_only
+	set_gaia_unconvertible
+	/* min_distance_group_placement 4 */
+	/* second_object BUSH_B */
+	terrain_to_place_on PINE_FOREST
+	actor_area 956
+	actor_area_radius 1
+	set_facet 7
+}
+
+	create_object JUNGLETREE
+{
+	number_of_groups 111
+	number_of_objects 1
+	set_place_for_every_player
+	/* min_distance_to_players 12
+	max_distance_to_players 18
+	group_placement_radius 5 */
+	set_tight_grouping
+	set_circular_placement
+	temp_min_distance_group_placement 1
+	set_gaia_object_only
+	set_gaia_unconvertible
+	/* min_distance_group_placement 4 */
+	/* second_object BUSH_B */
+	terrain_to_place_on PINE_FOREST
+	actor_area 956
+	actor_area_radius 1
+	set_facet 10
+}
+
+	create_object JUNGLETREE
+{
+	number_of_groups 111
+	number_of_objects 1
+	set_place_for_every_player
+	/* min_distance_to_players 12
+	max_distance_to_players 18
+	group_placement_radius 5 */
+	set_tight_grouping
+	set_circular_placement
+	temp_min_distance_group_placement 1
+	set_gaia_object_only
+	set_gaia_unconvertible
+	/* min_distance_group_placement 4 */
+	/* second_object BUSH_B */
+	terrain_to_place_on PINE_FOREST
+	actor_area 956
+	actor_area_radius 1
+	set_facet 13
+}
+
+	create_object JUNGLETREE
+{
+	number_of_groups 111
+	number_of_objects 1
+	set_place_for_every_player
+	/* min_distance_to_players 12
+	max_distance_to_players 18
+	group_placement_radius 5 */
+	set_tight_grouping
+	set_circular_placement
+	temp_min_distance_group_placement 1
+	set_gaia_object_only
+	set_gaia_unconvertible
+	/* min_distance_group_placement 4 */
+	/* second_object BUSH_B */
+	terrain_to_place_on PINE_FOREST
+	actor_area 956
+	actor_area_radius 1
+	set_facet 16
+}
+*/
+
+	create_object TREE_I
+{
+	number_of_groups 111
+	number_of_objects 1
+	set_place_for_every_player
+	/* min_distance_to_players 12
+	max_distance_to_players 18
+	group_placement_radius 5 */
+	set_tight_grouping
+	set_circular_placement
+	temp_min_distance_group_placement 1
+	set_gaia_object_only
+	set_gaia_unconvertible
+	/* min_distance_group_placement 4 */
+	/* second_object BUSH_B */
+	terrain_to_place_on PINE_FOREST
+	actor_area 956
+	actor_area_radius 1
+	set_facet 11
+}
+
+	create_object TREE_I
+{
+	number_of_groups 111
+	number_of_objects 1
+	set_place_for_every_player
+	/* min_distance_to_players 12
+	max_distance_to_players 18
+	group_placement_radius 5 */
+	set_tight_grouping
+	set_circular_placement
+	temp_min_distance_group_placement 1
+	set_gaia_object_only
+	set_gaia_unconvertible
+	/* min_distance_group_placement 4 */
+	/* second_object BUSH_B */
+	terrain_to_place_on PINE_FOREST
+	actor_area 956
+	actor_area_radius 1
+	set_facet 8
+}
+
+	create_object BUSH_B
+{
+	number_of_groups 111
+	number_of_objects 1
+	set_place_for_every_player
+	/* min_distance_to_players 12
+	max_distance_to_players 18
+	group_placement_radius 5 */
+	set_tight_grouping
+	set_circular_placement
+	temp_min_distance_group_placement 1
+	set_gaia_object_only
+	set_gaia_unconvertible
+	/* min_distance_group_placement 4 */
+	/* second_object BUSH_B */
+	terrain_to_place_on PINE_FOREST
+	actor_area 956
+	actor_area_radius 1
+	set_facet 
+}
+	create_object PALMTREE
+{
+	number_of_groups 88
+	number_of_objects 1
+	set_place_for_every_player
+	/* min_distance_to_players 12
+	max_distance_to_players 18
+	group_placement_radius 5 */
+	set_tight_grouping
+	set_circular_placement
+	temp_min_distance_group_placement 4
+	set_gaia_object_only
+	set_gaia_unconvertible
+	/* min_distance_group_placement 4 */
+	/* second_object BUSH_B */
+	terrain_to_place_on PINE_FOREST
+	actor_area 956
+	actor_area_radius 1
+	set_facet 4
+}
+
+	create_object TREE_I
+{
+	number_of_groups 1111
+	number_of_objects 1
+	set_place_for_every_player
+	/* min_distance_to_players 12
+	max_distance_to_players 18
+	group_placement_radius 5 */
+	set_tight_grouping
+	set_circular_placement
+	temp_min_distance_group_placement 2
+	set_gaia_object_only
+	set_gaia_unconvertible
+	/* min_distance_group_placement 4 */
+	/* second_object BUSH_B */
+	terrain_to_place_on PINE_FOREST
+	actor_area 956
+	actor_area_radius 1
+}
+#const OFF_GRID 647
+	create_object OFF_GRID
+{
+	number_of_groups 222
+	number_of_objects 1
+	set_place_for_every_player
+	/* min_distance_to_players 12
+	max_distance_to_players 18
+	group_placement_radius 5 */
+	set_tight_grouping
+	set_circular_placement
+	temp_min_distance_group_placement 2
+	set_gaia_object_only
+	set_gaia_unconvertible
+	/* min_distance_group_placement 4 */
+	/* second_object BUSH_B */
+	terrain_to_place_on PINE_FOREST
+	actor_area 956
+	actor_area_radius 1
+	second_object CACTUS
+}
+
+	create_object OFF_GRID
+{
+	number_of_groups 222
+	number_of_objects 1
+	set_place_for_every_player
+	/* min_distance_to_players 12
+	max_distance_to_players 18
+	group_placement_radius 5 */
+	set_tight_grouping
+	set_circular_placement
+	temp_min_distance_group_placement 2
+	set_gaia_object_only
+	set_gaia_unconvertible
+	/* min_distance_group_placement 4 */
+	/* second_object BUSH_B */
+	terrain_to_place_on PINE_FOREST
+	actor_area 956
+	actor_area_radius 1
+	second_object BUSH_B
+}
+
+	create_object BUSH_B
+{
+	number_of_groups 1111
+	number_of_objects 1
+	set_place_for_every_player
+	/* min_distance_to_players 12
+	max_distance_to_players 18
+	group_placement_radius 5 */
+	set_tight_grouping
+	set_circular_placement
+	temp_min_distance_group_placement 0
+	set_gaia_object_only
+	set_gaia_unconvertible
+	/* min_distance_group_placement 4 */
+	/* second_object BUSH_B */
+	terrain_to_place_on PINE_FOREST
+	actor_area 956
+	actor_area_radius 1
+}
+/* Standard 3, 4 (Mayans), or 6 (Chinese) Villagers */
+
+/*
+create_object TOWN_CENTER
+{
+	set_place_for_every_player
+	max_distance_to_players 0
+}
+*/
+
+create_object PACKEDTC
+{
+ number_of_groups 1
+	 number_of_objects 1
+     set_place_for_every_player
+     min_distance_to_players 3
+     max_distance_to_players 5
+	 temp_min_distance_group_placement 20
+	 avoid_forest_zone 5
+	 avoid_cliff_zone 2
+	 actor_area 12
+	 actor_area_radius 30
+	 terrain_to_place_on DLC_DRYGRASS
+}
+
+create_object MULECART
+{
+ number_of_groups 1
+	 number_of_objects 1
+     set_place_for_every_player
+     min_distance_to_players 3
+     max_distance_to_players 5
+	 temp_min_distance_group_placement 20
+	 avoid_forest_zone 5
+	 avoid_cliff_zone 2
+	 actor_area 12
+	 actor_area_radius 30
+	 terrain_to_place_on DLC_DRYGRASS
+}
+
+create_object PACKEDTC
+{
+ number_of_groups 1
+	 number_of_objects 1
+     set_place_for_every_player
+     min_distance_to_players 3
+     max_distance_to_players 5
+	 temp_min_distance_group_placement 20
+	 avoid_forest_zone 5
+	 avoid_cliff_zone 2
+	 actor_area 12
+	 actor_area_radius 30
+	 terrain_to_place_on DESERT
+}
+
+create_object PLAYER_HORSE
+{
+ number_of_groups 1
+	 number_of_objects 1
+     set_place_for_every_player
+     min_distance_to_players 3
+     max_distance_to_players 5
+	 temp_min_distance_group_placement 20
+	 avoid_forest_zone 5
+	 avoid_cliff_zone 2
+	 actor_area 12
+	 actor_area_radius 30
+	 terrain_to_place_on DESERT
+}
+/*
+create_object PLAYER_CAMEL
+{
+ number_of_groups 1
+	 number_of_objects 1
+     set_place_for_every_player
+     min_distance_to_players 3
+     max_distance_to_players 5
+	 temp_min_distance_group_placement 20
+	 avoid_forest_zone 5
+	 avoid_cliff_zone 2
+	 actor_area 12
+	 actor_area_radius 30
+	 terrain_to_place_on DESERT
+}
+*/
+create_object TAMAR
+{
+ number_of_groups 1
+	 number_of_objects 1
+     set_place_for_every_player
+     min_distance_to_players 1
+     max_distance_to_players 5
+	 temp_min_distance_group_placement 20
+	 avoid_forest_zone 5
+	 avoid_cliff_zone 2
+	 actor_area 12
+	 actor_area_radius 30
+	terrain_to_place_on DESERT
+}
+
+
+create_object VILLAGER
+{
+     set_place_for_every_player
+     min_distance_to_players 5
+	 max_distance_to_players 6
+	 terrain_to_place_on DLC_DRYGRASS
+
+}
+
+create_object DLC_GOAT
+{
+     set_place_for_every_player
+     min_distance_to_players 3
+	 max_distance_to_players 9
+	 set_tight_grouping
+	 group_placement_radius 4
+	 number_of_objects 4
+	 terrain_to_place_on DLC_DRYGRASS
+
+}
+/*
+create_object MILITIA
+{
+     number_of_objects 10
+	 set_place_for_every_player
+     min_distance_to_players 5
+	 max_distance_to_players 6
+	 terrain_to_place_on DLC_DRYGRASS
+
+}
+*/
+
+create_object TREE_BAOBAB {
+	number_of_objects 5
+	set_place_for_every_player
+	set_gaia_object_only
+	min_distance_to_players 7
+	max_distance_to_players 10
+	set_circular_placement
+	min_distance_group_placement 1
+	terrain_to_place_on DLC_DRYGRASS
+}
+
+create_object TREE_I {
+	number_of_objects 5
+	set_place_for_every_player
+	set_gaia_object_only
+	min_distance_to_players 7
+	max_distance_to_players 10
+	set_circular_placement
+	min_distance_group_placement 1
+	set_facet 11
+	resource_delta -75
+	terrain_to_place_on DESERT
+}
+
+create_object TREE_I {
+	number_of_objects 5
+	set_place_for_every_player
+	set_gaia_object_only
+	min_distance_to_players 7
+	max_distance_to_players 10
+	set_circular_placement
+	min_distance_group_placement 1
+	set_facet 8
+		resource_delta -75
+}
+
+create_object TREE_J {
+	number_of_objects 5
+	set_place_for_every_player
+	set_gaia_object_only
+	min_distance_to_players 7
+	max_distance_to_players 10
+	set_circular_placement
+	min_distance_group_placement 1
+	set_facet 8
+		resource_delta 1000
+}
+
+/*
+create_object TREE_K {
+	number_of_objects 2
+	set_place_for_every_player
+	set_gaia_object_only
+	min_distance_to_players 7
+	max_distance_to_players 10
+	set_circular_placement
+	min_distance_group_placement 1
+	temp_min_distance_group_placement 10
+	set_facet 1
+		resource_delta 175
+}
+*/
+
+create_object GOLD {
+	number_of_objects 2
+	set_place_for_every_player
+	set_gaia_object_only
+	min_distance_to_players 2
+	max_distance_to_players 6
+	set_circular_placement
+	min_distance_group_placement 1
+	temp_min_distance_group_placement 3
+	set_facet 1
+		resource_delta 1200
+		avoid_forest_zone 4
+		terrain_to_place_on DESERT
+		second_object LOOT
+}
+
+create_object DEER
+{
+     number_of_objects         5
+     group_variance             1
+     group_placement_radius     3
+     set_loose_grouping
+     set_gaia_object_only
+     set_place_for_every_player
+     min_distance_to_players    10
+     max_distance_to_players   16
+	 avoid_forest_zone 0
+	 	 terrain_to_place_on DLC_DRYGRASS
+}
+
+create_object DEER
+{
+     number_of_groups 4
+	 number_of_objects         5
+     group_variance             1
+     group_placement_radius     3
+     set_loose_grouping
+     set_gaia_object_only
+     min_distance_to_players    30
+     max_distance_to_players   56
+	 avoid_forest_zone 2
+	 temp_min_distance_group_placement 20
+}
+
+create_object WOLF
+{
+     number_of_groups 3
+	 number_of_objects         1
+     group_variance             1
+     group_placement_radius     3
+     set_loose_grouping
+     set_gaia_object_only
+     set_place_for_every_player
+     min_distance_to_players    35
+     max_distance_to_players   56
+	 avoid_forest_zone 2
+	 temp_min_distance_group_placement 20
+}
+
+create_object DLC_ORANGEBUSH
+{
+     number_of_objects         5
+     group_variance             1
+     group_placement_radius     4
+     set_loose_grouping
+     set_gaia_object_only
+     set_place_for_every_player
+     min_distance_to_players    8
+     max_distance_to_players   13
+	 find_closest
+	 avoid_forest_zone 1
+	 terrain_to_place_on DLC_DRYGRASS
+}
+
+if 2_PLAYER_GAME
+create_object GOLD
+{
+     number_of_groups 12
+	 number_of_objects         5
+     group_variance             1
+     group_placement_radius     3
+     set_loose_grouping
+     set_gaia_object_only
+     min_distance_to_players    26
+     max_distance_to_players   76
+	 avoid_forest_zone 2
+	 temp_min_distance_group_placement 30
+	 max_distance_to_other_zones 4
+	min_distance_to_map_edge 3
+	min_distance_group_placement 2
+}
+
+
+create_object STONE
+{
+     number_of_groups 8
+	 number_of_objects         4
+     group_variance             1
+     group_placement_radius     3
+     set_loose_grouping
+     set_gaia_object_only
+     min_distance_to_players    26
+     max_distance_to_players   56
+	 avoid_forest_zone 2
+	 temp_min_distance_group_placement 30
+	 max_distance_to_other_zones 4
+	 min_distance_to_map_edge 3
+	 min_distance_group_placement 2
+}
+endif
+
+if 3_PLAYER_GAME
+create_object GOLD
+{
+     number_of_groups 18
+	 number_of_objects         5
+     group_variance             1
+     group_placement_radius     3
+     set_loose_grouping
+     set_gaia_object_only
+     min_distance_to_players    26
+     max_distance_to_players   76
+	 avoid_forest_zone 2
+	 temp_min_distance_group_placement 30
+	 max_distance_to_other_zones 4
+	min_distance_to_map_edge 3
+	min_distance_group_placement 2
+}
+
+
+create_object STONE
+{
+     number_of_groups 12
+	 number_of_objects         4
+     group_variance             1
+     group_placement_radius     3
+     set_loose_grouping
+     set_gaia_object_only
+     min_distance_to_players    26
+     max_distance_to_players   56
+	 avoid_forest_zone 2
+	 temp_min_distance_group_placement 30
+	 max_distance_to_other_zones 4
+	 min_distance_to_map_edge 3
+	 min_distance_group_placement 2
+}
+endif
+
+if 4_PLAYER_GAME
+create_object GOLD
+{
+     number_of_groups 24
+	 number_of_objects         5
+     group_variance             1
+     group_placement_radius     3
+     set_loose_grouping
+     set_gaia_object_only
+     min_distance_to_players    26
+     max_distance_to_players   76
+	 avoid_forest_zone 2
+	 temp_min_distance_group_placement 30
+	 max_distance_to_other_zones 4
+	min_distance_to_map_edge 3
+	min_distance_group_placement 2
+}
+
+
+create_object STONE
+{
+     number_of_groups 16
+	 number_of_objects         4
+     group_variance             1
+     group_placement_radius     3
+     set_loose_grouping
+     set_gaia_object_only
+     min_distance_to_players    26
+     max_distance_to_players   56
+	 avoid_forest_zone 2
+	 temp_min_distance_group_placement 30
+	 max_distance_to_other_zones 4
+	 min_distance_to_map_edge 3
+	 min_distance_group_placement 2
+}
+endif
+
+if 5_PLAYER_GAME
+create_object GOLD
+{
+     number_of_groups 30
+	 number_of_objects         5
+     group_variance             1
+     group_placement_radius     3
+     set_loose_grouping
+     set_gaia_object_only
+     min_distance_to_players    24
+     max_distance_to_players   76
+	 avoid_forest_zone 2
+	 temp_min_distance_group_placement 30
+	 max_distance_to_other_zones 4
+	min_distance_to_map_edge 3
+	min_distance_group_placement 2
+}
+
+
+create_object STONE
+{
+     number_of_groups 20
+	 number_of_objects         4
+     group_variance             1
+     group_placement_radius     3
+     set_loose_grouping
+     set_gaia_object_only
+     min_distance_to_players    24
+     max_distance_to_players   56
+	 avoid_forest_zone 2
+	 temp_min_distance_group_placement 30
+	 max_distance_to_other_zones 4
+	 min_distance_to_map_edge 3
+	 min_distance_group_placement 2
+}
+endif
+
+if 6_PLAYER_GAME
+create_object GOLD
+{
+     number_of_groups 36
+	 number_of_objects         5
+     group_variance             1
+     group_placement_radius     3
+     set_loose_grouping
+     set_gaia_object_only
+     min_distance_to_players    23
+     max_distance_to_players   76
+	 avoid_forest_zone 2
+	 temp_min_distance_group_placement 30
+	 max_distance_to_other_zones 4
+	min_distance_to_map_edge 3
+	min_distance_group_placement 2
+}
+
+
+create_object STONE
+{
+     number_of_groups 24
+	 number_of_objects         4
+     group_variance             1
+     group_placement_radius     3
+     set_loose_grouping
+     set_gaia_object_only
+     min_distance_to_players    23
+     max_distance_to_players   56
+	 avoid_forest_zone 2
+	 temp_min_distance_group_placement 30
+	 max_distance_to_other_zones 4
+	 min_distance_to_map_edge 3
+	 min_distance_group_placement 2
+}
+endif
+
+if 7_PLAYER_GAME
+create_object GOLD
+{
+     number_of_groups 42
+	 number_of_objects         5
+     group_variance             1
+     group_placement_radius     3
+     set_loose_grouping
+     set_gaia_object_only
+     min_distance_to_players    22
+     max_distance_to_players   76
+	 avoid_forest_zone 2
+	 temp_min_distance_group_placement 30
+	 max_distance_to_other_zones 4
+	min_distance_to_map_edge 3
+	min_distance_group_placement 2
+}
+
+
+create_object STONE
+{
+     number_of_groups 28
+	 number_of_objects         4
+     group_variance             1
+     group_placement_radius     3
+     set_loose_grouping
+     set_gaia_object_only
+     min_distance_to_players    22
+     max_distance_to_players   56
+	 avoid_forest_zone 2
+	 temp_min_distance_group_placement 30
+	 max_distance_to_other_zones 4
+	 min_distance_to_map_edge 3
+	 min_distance_group_placement 2
+}
+endif
+
+if 8_PLAYER_GAME
+create_object GOLD
+{
+     number_of_groups 48
+	 number_of_objects         5
+     group_variance             1
+     group_placement_radius     3
+     set_loose_grouping
+     set_gaia_object_only
+     min_distance_to_players    22
+     max_distance_to_players   76
+	 avoid_forest_zone 2
+	 temp_min_distance_group_placement 30
+	 max_distance_to_other_zones 4
+	min_distance_to_map_edge 3
+	min_distance_group_placement 2
+}
+
+
+create_object STONE
+{
+     number_of_groups 32
+	 number_of_objects         4
+     group_variance             1
+     group_placement_radius     3
+     set_loose_grouping
+     set_gaia_object_only
+     min_distance_to_players    22
+     max_distance_to_players   56
+	 avoid_forest_zone 2
+	 temp_min_distance_group_placement 30
+	 max_distance_to_other_zones 4
+	 min_distance_to_map_edge 3
+	 min_distance_group_placement 2
+}
+endif
+
+/* The standard 5 relics. */
+if 2_PLAYER_GAME
+create_object RELIC
+{
+     number_of_objects 5
+      min_distance_to_players 25
+     temp_min_distance_group_placement 40
+	 avoid_forest_zone 5
+}
+endif
+if 3_PLAYER_GAME
+create_object RELIC
+{
+     number_of_objects 5
+      min_distance_to_players 25
+     temp_min_distance_group_placement 40
+	 avoid_forest_zone 5
+}
+endif
+if 4_PLAYER_GAME
+create_object RELIC
+{
+     number_of_objects 5
+      min_distance_to_players 25
+     temp_min_distance_group_placement 45
+	 avoid_forest_zone 5
+}
+endif
+if 5_PLAYER_GAME
+create_object RELIC
+{
+     number_of_objects 5
+      min_distance_to_players 25
+     temp_min_distance_group_placement 50
+	 avoid_forest_zone 5
+}
+endif
+if 6_PLAYER_GAME
+create_object RELIC
+{
+     number_of_objects 5
+      min_distance_to_players 25
+     temp_min_distance_group_placement 50
+	 avoid_forest_zone 5
+}
+endif
+if 7_PLAYER_GAME
+create_object RELIC
+{
+     number_of_objects 5
+      min_distance_to_players 25
+     temp_min_distance_group_placement 55
+	 avoid_forest_zone 5
+}
+endif
+if 8_PLAYER_GAME
+create_object RELIC
+{
+     number_of_objects 5
+      min_distance_to_players 25
+     temp_min_distance_group_placement 55
+	 avoid_forest_zone 5
+}
+endif
+
+
+
+create_object MARLIN1
+{
+     number_of_groups                    25
+     number_of_objects                   1
+     set_scaling_to_map_size
+     set_gaia_object_only
+     temp_min_distance_group_placement        10
+     max_distance_to_other_zones         0
+}
+
+
+
+
+/* This includes support for Regiced game types, with a king and a castle */
+if REGICIDE
+
+create_object VILLAGER
+{
+     number_of_objects 7
+     set_place_for_every_player
+     min_distance_to_players 6
+     max_distance_to_players 6
+}
+
+create_object KING
+{
+     set_place_for_every_player
+     min_distance_to_players 6
+     max_distance_to_players 6
+}
+
+create_object CASTLE
+{
+     set_place_for_every_player
+     min_distance_to_players 10
+     max_distance_to_players 10
+}
+
+endif
+
+
+#const CLIFF1 264
+#const CLIFF2 265
+#const CLIFF3 266
+#const CLIFF4 267
+#const CLIFF5 268
+#const CLIFF6 269
+#const CLIFF7 270
+#const CLIFF8 271
+#const CLIFF9 272
+
+#const CLIFF10 1849
+#const CLIFF11 1850
+#const CLIFF12 1851
+#const CLIFF13 1852
+#const CLIFF14 1853
+#const CLIFF15 1854
+#const CLIFF16 1855
+#const CLIFF17 1856
+#const CLIFF18 1857
+
+#const CLIFF19 1858
+#const CLIFF20 1859
+#const CLIFF21 1860
+#const CLIFF22 1861
+#const CLIFF23 1862
+#const CLIFF24 1863
+#const CLIFF25 1864
+#const CLIFF26 1865
+#const CLIFF27 1866
+
+#const TEMP 278
+/*
+create_object CLIFF19
+{
+     number_of_groups 4
+	 number_of_objects 5
+	 group_placement_radius 3
+      min_distance_to_players 25
+     set_tight_grouping
+	 actor_area 201
+	 actor_area_radius 4
+	 set_facet 5
+	 terrain_to_place_on SNOW
+	 
+}
+
+create_object CLIFF19
+{
+     number_of_groups 4
+	 number_of_objects 5
+	 group_placement_radius 3
+      min_distance_to_players 25
+     set_tight_grouping
+	 actor_area_to_place_in 201
+	 actor_area 202
+	 actor_area_radius 4
+	 set_facet 1
+	  terrain_to_place_on SNOW
+}
+
+create_object CLIFF19
+{
+     number_of_groups 4
+	 number_of_objects 5
+	 group_placement_radius 3
+      min_distance_to_players 25
+     set_tight_grouping
+	 actor_area_to_place_in 202
+	 set_facet 3
+	  terrain_to_place_on SNOW
+}
+
+create_object CLIFF19
+{
+     number_of_groups 4
+	 number_of_objects 5
+	 group_placement_radius 3
+      min_distance_to_players 25
+     set_tight_grouping
+	 actor_area 201
+	 actor_area_radius 4
+	 set_facet 5
+	 terrain_to_place_on SNOW
+	 
+}
+
+create_object CLIFF19
+{
+     number_of_groups 4
+	 number_of_objects 5
+	 group_placement_radius 3
+      min_distance_to_players 25
+     set_tight_grouping
+	 actor_area_to_place_in 201
+	 actor_area 202
+	 actor_area_radius 4
+	 set_facet 1
+	  terrain_to_place_on SNOW
+}
+
+create_object CLIFF19
+{
+     number_of_groups 4
+	 number_of_objects 5
+	 group_placement_radius 3
+      min_distance_to_players 25
+     set_tight_grouping
+	 actor_area_to_place_in 202
+	 set_facet 3
+	  terrain_to_place_on SNOW
+}
+
+create_object CLIFF19
+{
+     number_of_groups 9999
+	 number_of_objects 5
+	 group_placement_radius 3
+     set_tight_grouping
+	 set_facet 3
+	  terrain_to_place_on SNOW
+}
+
+create_object ROCK2
+{
+     number_of_groups 9999
+	 number_of_objects 5
+	 group_placement_radius 3
+     set_tight_grouping
+	 set_facet 1
+	 terrain_to_place_on SNOW
+}
+*/
+
+/* Wolves to attack villagers. */
+
+
+
+/* Birds make the map look more realistic. */
+create_object HAWK /* or MACAW */
+{
+     number_of_objects 4
+     set_scaling_to_map_size
+}
+
+create_object DLC_VULTURE /* or MACAW */
+{
+     number_of_objects 4
+     set_scaling_to_map_size
+}
+
+create_object BOAR
+{
+     number_of_groups 9320
+	 number_of_objects         1
+     set_loose_grouping
+     set_gaia_object_only
+     min_distance_to_players    20
+	 avoid_forest_zone 2
+	 temp_min_distance_group_placement 30
+}
+
+/* **************************************** */
+<ELEVATION_GENERATION>
+
+
+/* Elevations are placed up to the specified elevation. Elevations automaticaly avoid player start areas. */
+if 2_PLAYER_GAME
+create_elevation 5
+{
+     base_terrain PINE_FOREST
+     number_of_clumps 27
+     number_of_tiles 2100
+     set_scale_by_groups
+}
+endif
+if 3_PLAYER_GAME
+create_elevation 5
+{
+     base_terrain PINE_FOREST
+     number_of_clumps 27
+     number_of_tiles 2100
+     set_scale_by_groups
+}
+endif
+if 4_PLAYER_GAME
+create_elevation 5
+{
+     base_terrain PINE_FOREST
+     number_of_clumps 28
+     number_of_tiles 2800
+     set_scale_by_groups
+}
+endif
+if 5_PLAYER_GAME
+create_elevation 5
+{
+     base_terrain PINE_FOREST
+     number_of_clumps 28
+     number_of_tiles 2800
+     set_scale_by_groups
+}
+endif
+if 6_PLAYER_GAME
+create_elevation 5
+{
+     base_terrain PINE_FOREST
+     number_of_clumps 35
+     number_of_tiles 3500
+     set_scale_by_groups
+}
+endif
+if 7_PLAYER_GAME
+create_elevation 5
+{
+     base_terrain PINE_FOREST
+     number_of_clumps 42
+     number_of_tiles 4200
+     set_scale_by_groups
+}
+endif
+if 8_PLAYER_GAME
+create_elevation 5
+{
+     base_terrain PINE_FOREST
+     number_of_clumps 49
+     number_of_tiles 4900
+     set_scale_by_groups
+}
+endif
+
+if 2_PLAYER_GAME
+create_elevation 5
+{
+     base_terrain DIRT
+     number_of_clumps 12
+     number_of_tiles 210
+     set_scale_by_groups
+}
+endif
+if 3_PLAYER_GAME
+create_elevation 5
+{
+     base_terrain DIRT
+     number_of_clumps 12
+     number_of_tiles 210
+     set_scale_by_groups
+}
+endif
+if 4_PLAYER_GAME
+create_elevation 5
+{
+     base_terrain DIRT
+     number_of_clumps 18
+     number_of_tiles 280
+     set_scale_by_groups
+}
+endif
+if 5_PLAYER_GAME
+create_elevation 5
+{
+     base_terrain DIRT
+     number_of_clumps 18
+     number_of_tiles 280
+     set_scale_by_groups
+}
+endif
+if 6_PLAYER_GAME
+create_elevation 5
+{
+     base_terrain DIRT
+     number_of_clumps 24
+     number_of_tiles 350
+     set_scale_by_groups
+}
+endif
+if 7_PLAYER_GAME
+create_elevation 5
+{
+     base_terrain DIRT
+     number_of_clumps 24
+     number_of_tiles 420
+     set_scale_by_groups
+}
+endif
+if 8_PLAYER_GAME
+create_elevation 5
+{
+     base_terrain DIRT
+     number_of_clumps 24
+     number_of_tiles 490
+     set_scale_by_groups
+}
+endif
+
+/* **************************************** */
+<CLIFF_GENERATION>
+
+
+/* Cliffs */
+min_number_of_cliffs 0
+max_number_of_cliffs 0
+min_length_of_cliff 8
+max_length_of_cliff 12
+cliff_curliness 10
+min_distance_cliffs 0
+cliff_type CT_SNOW
+
+
+/* **************************************** */
+<CONNECTION_GENERATION>
+
+create_connect_all_players_land /* or create_connect_teams_lands or create_connect_all_lands */
+{
+     replace_terrain WATER SHALLOW
+     replace_terrain MED_WATER SHALLOW
+     replace_terrain DEEP_WATER SHALLOW
+
+     terrain_cost    WATER     7
+     terrain_cost    MED_WATER     9
+     terrain_cost    DEEP_WATER    15
+
+     terrain_size    SHALLOW         3       1
+}
+

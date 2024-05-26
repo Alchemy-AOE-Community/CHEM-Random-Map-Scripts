@@ -1,0 +1,627 @@
+/* Map: Astral */
+
+
+<PLAYER_SETUP>
+direct_placement  
+
+
+----------------------------------------------------------------------------------------------------------------------
+
+
+<LAND_GENERATION>
+base_terrain WATER
+
+
+
+if TINY_MAP										/* Dimensions for tiny map size. */
+
+create_land
+
+{
+  terrain_type GRASS_SNOW
+  land_percent 				0
+  base_size 				30
+  land_position			 	50 50
+  border_fuzziness 			100
+  right_border 				20
+  bottom_border 				20
+  left_border 				20
+  top_border 				20
+  other_zone_avoidance_distance 	5
+}
+
+create_land
+
+{
+  terrain_type SNOW
+  land_percent 				0
+  base_size 				13
+  land_position			 	95 5
+  border_fuzziness 			20
+  right_border 				15
+  bottom_border 				15
+  left_border 				15
+  top_border 				15
+  other_zone_avoidance_distance 	5
+}
+
+create_land
+
+{
+  terrain_type DLC_QUICKSAND
+  land_percent 				0
+  base_size 				13
+  land_position			 	5 95
+  border_fuzziness 			20
+  right_border 				15
+  bottom_border 				15
+  left_border 				15
+  top_border 				15
+  other_zone_avoidance_distance 	5
+}
+
+create_land
+{
+  terrain_type DLC_JUNGLEGRASS
+  land_percent 				0
+  base_size 				13
+  land_position			 	5 5
+  border_fuzziness 			20
+  right_border 				15
+  bottom_border 				15
+  left_border 				15
+  top_border 				15
+  other_zone_avoidance_distance 	5
+}
+
+create_land
+{
+  terrain_type GRASS1
+  land_percent 				0
+  base_size 				13
+  land_position			 	95 95
+  border_fuzziness 			20
+  right_border 				15
+  bottom_border 				15
+  left_border 				15
+  top_border 				15
+  other_zone_avoidance_distance 	5
+}
+
+
+
+elseif SMALL_MAP									/* Dimensions for small map size. */
+
+create_land
+
+{
+  terrain_type GRASS_SNOW
+  land_percent 				0
+  base_size 				35
+  land_position			 	50 50
+  border_fuzziness 			100
+  right_border 				20
+  bottom_border 				20
+  left_border 				20
+  top_border 				20
+  other_zone_avoidance_distance 	5
+}
+
+create_land
+
+{
+  terrain_type SNOW
+  land_percent 				0
+  base_size 				15
+  land_position			 	95 5
+  border_fuzziness 			20
+  right_border 				15
+  bottom_border 				15
+  left_border 				15
+  top_border 				15
+  other_zone_avoidance_distance 	5
+}
+
+create_land
+
+{
+  terrain_type DLC_QUICKSAND
+  land_percent 				0
+  base_size 				15
+  land_position			 	5 95
+  border_fuzziness 			20
+  right_border 				15
+  bottom_border 				15
+  left_border 				15
+  top_border 				15
+  other_zone_avoidance_distance 	5
+}
+
+create_land
+{
+  terrain_type DLC_JUNGLEGRASS
+  land_percent 				0
+  base_size 				15
+  land_position			 	5 5
+  border_fuzziness 			20
+  right_border 				15
+  bottom_border 				15
+  left_border 				15
+  top_border 				15
+  other_zone_avoidance_distance 	5
+}
+
+create_land
+{
+  terrain_type GRASS1
+  land_percent 				0
+  base_size 				15
+  land_position			 	95 95
+  border_fuzziness 			20
+  right_border 				15
+  bottom_border 				15
+  left_border 				15
+  top_border 				15
+  other_zone_avoidance_distance 	5
+}
+
+
+
+elseif MEDIUM_MAP									/* Dimensions for medium map size. */
+
+create_land
+
+{
+  terrain_type GRASS_SNOW
+  land_percent 				0
+  base_size 				42
+  land_position			 	50 50
+  border_fuzziness 			100
+  right_border 				20
+  bottom_border 				20
+  left_border 				20
+  top_border 				20
+  other_zone_avoidance_distance 	5
+}
+
+create_land
+
+{
+  terrain_type SNOW
+  land_percent 				0
+  base_size 				16
+  land_position			 	95 5
+  border_fuzziness 			20
+  right_border 				15
+  bottom_border 				15
+  left_border 				15
+  top_border 				15
+  other_zone_avoidance_distance 	5
+}
+
+create_land
+
+{
+  terrain_type DLC_QUICKSAND
+  land_percent 				0
+  base_size 				16
+  land_position			 	5 95
+  border_fuzziness 			20
+  right_border 				15
+  bottom_border 				15
+  left_border 				15
+  top_border 				15
+  other_zone_avoidance_distance 	5
+}
+
+create_land
+{
+  terrain_type DLC_JUNGLEGRASS
+  land_percent 				0
+  base_size 				16
+  land_position			 	5 5
+  border_fuzziness 			20
+  right_border 				15
+  bottom_border 				15
+  left_border 				15
+  top_border 				15
+  other_zone_avoidance_distance 	5
+}
+
+create_land
+{
+  terrain_type GRASS1
+  land_percent 				0
+  base_size 				16
+  land_position			 	95 95
+  border_fuzziness 			20
+  right_border 				15
+  bottom_border 				15
+  left_border 				15
+  top_border 				15
+  other_zone_avoidance_distance 	5
+}
+
+
+
+elseif LARGE_MAP									/* Dimensions for normal map size. */
+
+create_land
+
+{
+  terrain_type GRASS_SNOW
+  land_percent 				0
+  base_size 				50
+  land_position			 	50 50
+  border_fuzziness 			100
+  right_border 				20
+  bottom_border 				20
+  left_border 				20
+  top_border 				20
+  other_zone_avoidance_distance 	5
+}
+
+create_land
+
+{
+  terrain_type SNOW
+  land_percent 				0
+  base_size 				20
+  land_position			 	95 5
+  border_fuzziness 			20
+  right_border 				15
+  bottom_border 				15
+  left_border 				15
+  top_border 				15
+  other_zone_avoidance_distance 	5
+}
+
+create_land
+
+{
+  terrain_type DLC_QUICKSAND
+  land_percent 				0
+  base_size 				20
+  land_position			 	5 95
+  border_fuzziness 			20
+  right_border 				15
+  bottom_border 				15
+  left_border 				15
+  top_border 				15
+  other_zone_avoidance_distance 	5
+}
+
+create_land
+{
+  terrain_type DLC_JUNGLEGRASS
+  land_percent 				0
+  base_size 				20
+  land_position			 	5 5
+  border_fuzziness 			20
+  right_border 				15
+  bottom_border 				15
+  left_border 				15
+  top_border 				15
+  other_zone_avoidance_distance 	5
+}
+
+create_land
+{
+  terrain_type GRASS1
+  land_percent 				0
+  base_size 				20
+  land_position			 	95 95
+  border_fuzziness 			20
+  right_border 				15
+  bottom_border 				15
+  left_border 				15
+  top_border 				15
+  other_zone_avoidance_distance 	5
+}
+
+
+
+elseif HUGE_MAP									/* Dimensions for large map size. */
+
+create_land
+
+{
+  terrain_type GRASS_SNOW
+  land_percent 				0
+  base_size 				55
+  land_position			 	50 50
+  border_fuzziness 			100
+  right_border 				20
+  bottom_border 				20
+  left_border 				20
+  top_border 				20
+  other_zone_avoidance_distance 	5
+}
+
+create_land
+
+{
+  terrain_type SNOW
+  land_percent 				0
+  base_size 				23
+  land_position			 	95 5
+  border_fuzziness 			20
+  right_border 				15
+  bottom_border 				15
+  left_border 				15
+  top_border 				15
+  other_zone_avoidance_distance 	5
+}
+
+create_land
+
+{
+  terrain_type DLC_QUICKSAND
+  land_percent 				0
+  base_size 				23
+  land_position			 	5 95
+  border_fuzziness 			20
+  right_border 				15
+  bottom_border 				15
+  left_border 				15
+  top_border 				15
+  other_zone_avoidance_distance 	5
+}
+
+create_land
+{
+  terrain_type DLC_JUNGLEGRASS
+  land_percent 				0
+  base_size 				23
+  land_position			 	5 5
+  border_fuzziness 			20
+  right_border 				15
+  bottom_border 				15
+  left_border 				15
+  top_border 				15
+  other_zone_avoidance_distance 	5
+}
+
+create_land
+{
+  terrain_type GRASS1
+  land_percent 				0
+  base_size 				23
+  land_position			 	95 95
+  border_fuzziness 			20
+  right_border 				15
+  bottom_border 				15
+  left_border 				15
+  top_border 				15
+  other_zone_avoidance_distance 	5
+}
+
+
+
+elseif GIGANTIC_MAP								/* Dimensions for giant map size. */
+
+create_land
+
+{
+  terrain_type GRASS_SNOW
+  land_percent 				0
+  base_size 				60
+  land_position			 	50 50
+  border_fuzziness 			100
+  right_border 				20
+  bottom_border 				20
+  left_border 				20
+  top_border 				20
+  other_zone_avoidance_distance 	5
+}
+
+create_land
+
+{
+  terrain_type SNOW
+  land_percent 				0
+  base_size 				25
+  land_position			 	95 5
+  border_fuzziness 			20
+  right_border 				15
+  bottom_border 				15
+  left_border 				15
+  top_border 				15
+  other_zone_avoidance_distance 	5
+}
+
+create_land
+
+{
+  terrain_type DLC_QUICKSAND
+  land_percent 				0
+  base_size 				25
+  land_position			 	5 95
+  border_fuzziness 			20
+  right_border 				15
+  bottom_border 				15
+  left_border 				15
+  top_border 				15
+  other_zone_avoidance_distance 	5
+}
+
+create_land
+{
+  terrain_type DLC_JUNGLEGRASS
+  land_percent 				0
+  base_size 				25
+  land_position			 	5 5
+  border_fuzziness 			20
+  right_border 				15
+  bottom_border 				15
+  left_border 				15
+  top_border 				15
+  other_zone_avoidance_distance 	5
+}
+
+create_land
+{
+  terrain_type GRASS1
+  land_percent 				0
+  base_size 				25
+  land_position			 	95 95
+  border_fuzziness 			20
+  right_border 				15
+  bottom_border 				15
+  left_border 				15
+  top_border 				15
+  other_zone_avoidance_distance 	5
+}
+
+
+
+elseif LUDIKRIS_MAP								/* Dimensions for ludicrous map size. */
+
+create_land
+
+{
+  terrain_type GRASS_SNOW
+  land_percent 				0
+  base_size 				120
+  land_position			 	50 50
+  border_fuzziness 			100
+  right_border 				20
+  bottom_border 				20
+  left_border 				20
+  top_border 				20
+  other_zone_avoidance_distance 	5
+}
+
+create_land
+
+{
+  terrain_type SNOW
+  land_percent 				0
+  base_size 				60
+  land_position			 	95 5
+  border_fuzziness 			20
+  right_border 				15
+  bottom_border 				15
+  left_border 				15
+  top_border 				15
+  other_zone_avoidance_distance 	5
+}
+
+create_land
+
+{
+  terrain_type DLC_QUICKSAND
+  land_percent 				0
+  base_size 				60
+  land_position			 	5 95
+  border_fuzziness 			20
+  right_border 				15
+  bottom_border 				15
+  left_border 				15
+  top_border 				15
+  other_zone_avoidance_distance 	5
+}
+
+create_land
+{
+  terrain_type DLC_JUNGLEGRASS
+  land_percent 				0
+  base_size 				60
+  land_position			 	5 5
+  border_fuzziness 			20
+  right_border 				15
+  bottom_border 				15
+  left_border 				15
+  top_border 				15
+  other_zone_avoidance_distance 	5
+}
+
+create_land
+{
+  terrain_type GRASS1
+  land_percent 				0
+  base_size 				60
+  land_position			 	95 95
+  border_fuzziness 			20
+  right_border 				15
+  bottom_border 				15
+  left_border 				15
+  top_border 				15
+  other_zone_avoidance_distance 	5
+}
+
+endif
+
+
+----------------------------------------------------------------------------------------------------------------------
+
+
+<TERRAIN_GENERATION>
+
+
+----------------------------------------------------------------------------------------------------------------------
+
+
+<OBJECTS_GENERATION>
+
+
+
+create_object TOWN_CENTER
+
+{
+     set_place_for_every_player
+     group_placement_radius 18
+     min_distance_to_players 0
+     max_distance_to_players 0
+}
+
+create_object VILLAGER
+
+{
+     set_place_for_every_player
+     min_distance_to_players 6
+     max_distance_to_players 6
+}
+
+create_object SCOUT 
+
+{
+     number_of_objects 1
+     set_place_for_every_player
+     min_distance_to_players 7
+     max_distance_to_players 9
+}
+
+
+if REGICIDE
+
+create_object VILLAGER
+
+{
+     number_of_objects 7
+     set_place_for_every_player
+     min_distance_to_players 6
+     max_distance_to_players 6
+}
+
+create_object KING
+
+{
+     set_place_for_every_player
+     min_distance_to_players 6
+     max_distance_to_players 6
+}
+
+create_object CASTLE
+
+{
+     set_place_for_every_player
+     min_distance_to_players 10
+     max_distance_to_players 10
+}
+
+endif
+
+
+
+

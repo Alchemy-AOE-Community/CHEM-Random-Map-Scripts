@@ -1,0 +1,639 @@
+/* Astral by Arwin */
+/* Land Generation by TechChariot 04/21/23 */
+
+<PLAYER_SETUP>
+direct_placement
+behavior_version 1
+
+ai_info_map_type ISLANDS 0 0 0
+
+/* Defining Land Creation Command */
+#const L 32
+
+/* Defining Terrains */
+/* #const BT 81 */
+#const BT 79
+#const EOT 70 
+#const EIT 81
+
+/* Window Pane Terrains */
+#const WPT1 6
+#const WPT2 12
+#const WPT3 0
+#const WPT4 14
+
+/* Cross-Brace Terrains */
+#const CBT_1A 6
+#const CBT_1B 12
+#const CBT_2A 0
+#const CBT_2B 14
+#const CBT_3A 14
+#const CBT_3B 12
+#const CBT_4A 6
+#const CBT_4B 0
+
+/* Outside Island Terrains */
+#const OI1 0
+#const OI2 0
+#const OI3 32
+#const OI4 0
+
+/* Removing Visual Effect of Dead Gaia Fish Trap */
+#const ON_GRID 278
+effect_amount GAIA_SET_ATTRIBUTE ON_GRID ATTR_STORAGE_VALUE 0
+
+/* Definitions Regarding Trade Carts and Cogs */
+effect_percent MUL_ATTRIBUTE TRADE_CART ATTR_WORK_RATE 50
+effect_amount SET_ATTRIBUTE TRADE_CART ATTR_WOOD_COST 25
+effect_amount SET_ATTRIBUTE TRADE_CART ATTR_GOLD_COST 0
+effect_percent MUL_ATTRIBUTE TRADE_CART ATTR_MOVE_SPEED 50
+effect_amount SET_ATTRIBUTE TRADE_CART ATTR_LINE_OF_SIGHT 1
+effect_percent MUL_ATTRIBUTE TRADE_COG ATTR_WORK_RATE 50
+effect_amount SET_ATTRIBUTE TRADE_COG ATTR_WOOD_COST 25
+effect_amount SET_ATTRIBUTE TRADE_COG ATTR_GOLD_COST 0
+effect_percent MUL_ATTRIBUTE TRADE_COG ATTR_MOVE_SPEED 50
+effect_amount SET_ATTRIBUTE TRADE_COG ATTR_LINE_OF_SIGHT 1
+
+<ELEVATION_GENERATION>
+
+/* Elevating Obstacle Border */
+create_elevation 1 { base_terrain EOT number_of_clumps 9320 set_scale_by_groups number_of_tiles 10000 enable_balanced_elevation }
+
+/* Elevating Central Landmass */
+create_elevation 1 { base_terrain CBT_1A number_of_clumps 9320 set_scale_by_groups number_of_tiles 10000 enable_balanced_elevation }
+create_elevation 1 { base_terrain CBT_1B number_of_clumps 9320 set_scale_by_groups number_of_tiles 10000 enable_balanced_elevation }
+create_elevation 1 { base_terrain CBT_2A number_of_clumps 9320 set_scale_by_groups number_of_tiles 10000 enable_balanced_elevation }
+create_elevation 1 { base_terrain CBT_2B number_of_clumps 9320 set_scale_by_groups number_of_tiles 10000 enable_balanced_elevation }
+
+create_elevation 1 { base_terrain CBT_3A number_of_clumps 9320 set_scale_by_groups number_of_tiles 10000 enable_balanced_elevation }
+create_elevation 1 { base_terrain CBT_3B number_of_clumps 9320 set_scale_by_groups number_of_tiles 10000 enable_balanced_elevation }
+create_elevation 1 { base_terrain CBT_4A number_of_clumps 9320 set_scale_by_groups number_of_tiles 10000 enable_balanced_elevation }
+create_elevation 1 { base_terrain CBT_4B number_of_clumps 9320 set_scale_by_groups number_of_tiles 10000 enable_balanced_elevation }
+
+/* create_elevation 1 { base_terrain GRASS number_of_clumps 24 set_scale_by_groups if TINY_MAP number_of_tiles 200 elseif SMALL_MAP number_of_tiles 240 elseif MEDIUM_MAP number_of_tiles 280 elseif LARGE_MAP number_of_tiles 333 elseif HUGE_MAP number_of_tiles 367 else number_of_tiles 400 endif enable_balanced_elevation } */
+
+
+/* create_elevation 4 { base_terrain OI3 number_of_clumps 24 set_scale_by_groups if TINY_MAP number_of_tiles 200 elseif SMALL_MAP number_of_tiles 240 elseif MEDIUM_MAP number_of_tiles 280 elseif LARGE_MAP number_of_tiles 333 elseif HUGE_MAP number_of_tiles 367 else number_of_tiles 400 endif enable_balanced_elevation } */
+
+create_elevation 7 { base_terrain OI3 number_of_clumps 1 set_scale_by_groups  number_of_tiles 4000  enable_balanced_elevation }
+
+
+<TERRAIN_GENERATION>
+
+#define OUTLYING_ISLAND_CLEANUP
+if OUTLYING_ISLAND_CLEANUP
+  /* First Outlying Island */
+  create_terrain OI1 { base_terrain BT land_percent 100 number_of_clumps 9320 set_scale_by_groups spacing_to_other_terrain_types 1 height_limits 1 1 }
+  create_terrain OI1 { base_terrain BT land_percent 100 number_of_clumps 9320 set_scale_by_groups spacing_to_other_terrain_types 1 height_limits 1 1 }
+  create_terrain OI1 { base_terrain BT land_percent 100 number_of_clumps 9320 set_scale_by_groups spacing_to_other_terrain_types 1 height_limits 1 1 }
+  create_terrain OI1 { base_terrain BT land_percent 100 number_of_clumps 9320 set_scale_by_groups spacing_to_other_terrain_types 1 height_limits 1 1 }
+  /* Second Outlying Island */
+  create_terrain OI2 { base_terrain BT land_percent 100 number_of_clumps 9320 set_scale_by_groups spacing_to_other_terrain_types 1 height_limits 1 1 }
+  create_terrain OI2 { base_terrain BT land_percent 100 number_of_clumps 9320 set_scale_by_groups spacing_to_other_terrain_types 1 height_limits 1 1 }
+  create_terrain OI2 { base_terrain BT land_percent 100 number_of_clumps 9320 set_scale_by_groups spacing_to_other_terrain_types 1 height_limits 1 1 }
+  create_terrain OI2 { base_terrain BT land_percent 100 number_of_clumps 9320 set_scale_by_groups spacing_to_other_terrain_types 1 height_limits 1 1 }
+  /* Third Outlying Island */
+  create_terrain OI3 { base_terrain BT land_percent 100 number_of_clumps 9320 set_scale_by_groups spacing_to_other_terrain_types 1 height_limits 1 1 }
+  create_terrain OI3 { base_terrain BT land_percent 100 number_of_clumps 9320 set_scale_by_groups spacing_to_other_terrain_types 1 height_limits 1 1 }
+  create_terrain OI3 { base_terrain BT land_percent 100 number_of_clumps 9320 set_scale_by_groups spacing_to_other_terrain_types 1 height_limits 1 1 }
+  create_terrain OI3 { base_terrain BT land_percent 100 number_of_clumps 9320 set_scale_by_groups spacing_to_other_terrain_types 1 height_limits 1 1 }
+  /* Fourth Outlying Island */
+  create_terrain OI4 { base_terrain BT land_percent 100 number_of_clumps 9320 set_scale_by_groups spacing_to_other_terrain_types 1 height_limits 1 1 }
+  create_terrain OI4 { base_terrain BT land_percent 100 number_of_clumps 9320 set_scale_by_groups spacing_to_other_terrain_types 1 height_limits 1 1 }
+  create_terrain OI4 { base_terrain BT land_percent 100 number_of_clumps 9320 set_scale_by_groups spacing_to_other_terrain_types 1 height_limits 1 1 }
+  create_terrain OI4 { base_terrain BT land_percent 100 number_of_clumps 9320 set_scale_by_groups spacing_to_other_terrain_types 1 height_limits 1 1 }
+endif
+
+#define WATER_LAYERING
+if WATER_LAYERING
+  /* Putting Down Gravelbeach */
+  /* create_terrain DLC_GRAVELBEACH { base_terrain BT land_percent 100 number_of_clumps 9320 set_scale_by_groups spacing_to_other_terrain_types 1 }
+  create_terrain DLC_GRAVELBEACH { base_terrain BT land_percent 100 number_of_clumps 9320 set_scale_by_groups spacing_to_other_terrain_types 1 }
+  create_terrain DLC_GRAVELBEACH { base_terrain BT land_percent 100 number_of_clumps 9320 set_scale_by_groups spacing_to_other_terrain_types 1 }
+  create_terrain DLC_GRAVELBEACH { base_terrain BT land_percent 100 number_of_clumps 9320 set_scale_by_groups spacing_to_other_terrain_types 1 } */
+  create_terrain BEACH { base_terrain BT land_percent 100 number_of_clumps 9320 set_scale_by_groups spacing_to_other_terrain_types 1 }
+  create_terrain BEACH { base_terrain BT land_percent 100 number_of_clumps 9320 set_scale_by_groups spacing_to_other_terrain_types 1 }
+  create_terrain BEACH { base_terrain BT land_percent 100 number_of_clumps 9320 set_scale_by_groups spacing_to_other_terrain_types 1 }
+  create_terrain BEACH { base_terrain BT land_percent 100 number_of_clumps 9320 set_scale_by_groups spacing_to_other_terrain_types 1 }
+  /* Putting Down Water */
+  /* create_terrain WATER { base_terrain DLC_GRAVELBEACH land_percent 100 number_of_clumps 9320 set_scale_by_groups spacing_to_other_terrain_types 1 }
+  create_terrain WATER { base_terrain DLC_GRAVELBEACH land_percent 100 number_of_clumps 9320 set_scale_by_groups spacing_to_other_terrain_types 1 }
+  create_terrain WATER { base_terrain DLC_GRAVELBEACH land_percent 100 number_of_clumps 9320 set_scale_by_groups spacing_to_other_terrain_types 1 }
+  create_terrain WATER { base_terrain DLC_GRAVELBEACH land_percent 100 number_of_clumps 9320 set_scale_by_groups spacing_to_other_terrain_types 1 } */
+  create_terrain WATER { base_terrain BEACH land_percent 100 number_of_clumps 9320 set_scale_by_groups spacing_to_other_terrain_types 1 }
+  create_terrain WATER { base_terrain BEACH land_percent 100 number_of_clumps 9320 set_scale_by_groups spacing_to_other_terrain_types 1 }
+  create_terrain WATER { base_terrain BEACH land_percent 100 number_of_clumps 9320 set_scale_by_groups spacing_to_other_terrain_types 1 }
+  create_terrain WATER { base_terrain BEACH land_percent 100 number_of_clumps 9320 set_scale_by_groups spacing_to_other_terrain_types 1 }
+endif
+
+
+
+#define ISLAND_MASKING
+if ISLAND_MASKING
+  /* Masking some non-navigable beach with the snow */
+  create_terrain BT { base_terrain OI3 land_percent 100 number_of_clumps 9320 set_scale_by_groups terrain_mask 2 }
+  create_terrain BT { base_terrain OI3 land_percent 100 number_of_clumps 9320 set_scale_by_groups terrain_mask 2 }
+  create_terrain BT { base_terrain OI3 land_percent 100 number_of_clumps 9320 set_scale_by_groups terrain_mask 2 }
+  create_terrain BT { base_terrain OI3 land_percent 100 number_of_clumps 9320 set_scale_by_groups terrain_mask 2 }
+  create_terrain BT { base_terrain OI3 land_percent 100 number_of_clumps 9320 set_scale_by_groups terrain_mask 2 }
+  create_terrain BT { base_terrain OI3 land_percent 100 number_of_clumps 9320 set_scale_by_groups terrain_mask 2 }
+  create_terrain BT { base_terrain OI3 land_percent 100 number_of_clumps 9320 set_scale_by_groups terrain_mask 2 }
+  create_terrain BT { base_terrain OI3 land_percent 100 number_of_clumps 9320 set_scale_by_groups terrain_mask 2 }
+
+
+
+  create_terrain OI3 { base_terrain BT land_percent 100 number_of_clumps 9320 set_scale_by_groups spacing_to_other_terrain_types 2 }
+  create_terrain OI3 { base_terrain BT land_percent 100 number_of_clumps 9320 set_scale_by_groups spacing_to_other_terrain_types 2 }
+  create_terrain OI3 { base_terrain BT land_percent 100 number_of_clumps 9320 set_scale_by_groups spacing_to_other_terrain_types 2 }
+  create_terrain OI3 { base_terrain BT land_percent 100 number_of_clumps 9320 set_scale_by_groups spacing_to_other_terrain_types 2 }
+
+  create_terrain DLC_FORESTSNOWAUTUMN { base_terrain OI3 land_percent 1 number_of_clumps 6 set_scale_by_groups set_avoid_player_start_areas 13 }
+  create_terrain SNOW_FOREST { base_terrain DLC_FORESTSNOWAUTUMN land_percent 100 number_of_clumps 9320 set_scale_by_groups height_limits 5 7 }
+
+  create_terrain GRASS3 { base_terrain SNOW land_percent 1 number_of_clumps 9320 set_scale_by_groups height_limits 4 7 terrain_mask 1 }
+
+
+endif
+
+
+create_terrain SNOW { base_terrain DIRT land_percent 100 number_of_clumps 9320 set_scale_by_groups }
+
+
+
+
+/* #define ISLAND_CAPS */
+if ISLAND_CAPS
+  /* Tallest Island Cap */
+  create_terrain GRASS3 { base_terrain NNB land_percent 100 number_of_clumps 9320 set_scale_by_groups height_limits 4 4 spacing_to_other_terrain_types 1 set_flat_terrain_only }
+  create_terrain GRASS3 { base_terrain NNB land_percent 100 number_of_clumps 9320 set_scale_by_groups height_limits 4 4 spacing_to_other_terrain_types 1 set_flat_terrain_only }
+  create_terrain GRASS3 { base_terrain NNB land_percent 100 number_of_clumps 9320 set_scale_by_groups height_limits 4 4 spacing_to_other_terrain_types 1 set_flat_terrain_only }
+  create_terrain GRASS3 { base_terrain NNB land_percent 100 number_of_clumps 9320 set_scale_by_groups height_limits 4 4 spacing_to_other_terrain_types 1 set_flat_terrain_only }
+  /* Taller Island Cap */
+  create_terrain DLC_DRYGRASS { base_terrain NNB land_percent 100 number_of_clumps 9320 set_scale_by_groups height_limits 3 3 spacing_to_other_terrain_types 1 set_flat_terrain_only }
+  create_terrain DLC_DRYGRASS { base_terrain NNB land_percent 100 number_of_clumps 9320 set_scale_by_groups height_limits 3 3 spacing_to_other_terrain_types 1 set_flat_terrain_only }
+  create_terrain DLC_DRYGRASS { base_terrain NNB land_percent 100 number_of_clumps 9320 set_scale_by_groups height_limits 3 3 spacing_to_other_terrain_types 1 set_flat_terrain_only }
+  create_terrain DLC_DRYGRASS { base_terrain NNB land_percent 100 number_of_clumps 9320 set_scale_by_groups height_limits 3 3 spacing_to_other_terrain_types 1 set_flat_terrain_only }
+  /* Player Island Cap */
+  create_terrain DIRT { base_terrain NNB land_percent 100 number_of_clumps 9320 set_scale_by_groups height_limits 2 2 spacing_to_other_terrain_types 1 set_flat_terrain_only }
+  create_terrain DIRT { base_terrain NNB land_percent 100 number_of_clumps 9320 set_scale_by_groups height_limits 2 2 spacing_to_other_terrain_types 1 set_flat_terrain_only }
+  create_terrain DIRT { base_terrain NNB land_percent 100 number_of_clumps 9320 set_scale_by_groups height_limits 2 2 spacing_to_other_terrain_types 1 set_flat_terrain_only }
+  create_terrain DIRT { base_terrain NNB land_percent 100 number_of_clumps 9320 set_scale_by_groups height_limits 2 2 spacing_to_other_terrain_types 1 set_flat_terrain_only }
+  /* Small  Island Cap */
+  create_terrain GRAVEL { base_terrain NNB land_percent 100 number_of_clumps 9320 set_scale_by_groups height_limits 1 1 spacing_to_other_terrain_types 5 }
+  create_terrain GRAVEL { base_terrain NNB land_percent 100 number_of_clumps 9320 set_scale_by_groups height_limits 1 1 spacing_to_other_terrain_types 5 }
+  create_terrain GRAVEL { base_terrain NNB land_percent 100 number_of_clumps 9320 set_scale_by_groups height_limits 1 1 spacing_to_other_terrain_types 5 }
+  create_terrain GRAVEL { base_terrain NNB land_percent 100 number_of_clumps 9320 set_scale_by_groups height_limits 1 1 spacing_to_other_terrain_types 5 }
+  /* Player Island Cap */
+  create_terrain DIRT { base_terrain NNB land_percent 100 number_of_clumps 9320 set_scale_by_groups height_limits 1 2 spacing_to_other_terrain_types 5 }
+  create_terrain DIRT { base_terrain NNB land_percent 100 number_of_clumps 9320 set_scale_by_groups height_limits 1 2 spacing_to_other_terrain_types 5 }
+  create_terrain DIRT { base_terrain NNB land_percent 100 number_of_clumps 9320 set_scale_by_groups height_limits 1 2 spacing_to_other_terrain_types 5 }
+  create_terrain DIRT { base_terrain NNB land_percent 100 number_of_clumps 9320 set_scale_by_groups height_limits 1 2 spacing_to_other_terrain_types 5 }
+  /* Taller Island Cap */
+  create_terrain DLC_DRYGRASS { base_terrain NNB land_percent 100 number_of_clumps 9320 set_scale_by_groups height_limits 2 3 spacing_to_other_terrain_types 4 }
+  create_terrain DLC_DRYGRASS { base_terrain NNB land_percent 100 number_of_clumps 9320 set_scale_by_groups height_limits 2 3 spacing_to_other_terrain_types 4 }
+  create_terrain DLC_DRYGRASS { base_terrain NNB land_percent 100 number_of_clumps 9320 set_scale_by_groups height_limits 2 3 spacing_to_other_terrain_types 4 }
+  create_terrain DLC_DRYGRASS { base_terrain NNB land_percent 100 number_of_clumps 9320 set_scale_by_groups height_limits 2 3 spacing_to_other_terrain_types 4 }
+  /* Tallest Island Cap */
+  create_terrain GRASS3 { base_terrain NNB land_percent 100 number_of_clumps 9320 set_scale_by_groups height_limits 3 4 spacing_to_other_terrain_types 3 }
+  create_terrain GRASS3 { base_terrain NNB land_percent 100 number_of_clumps 9320 set_scale_by_groups height_limits 3 4 spacing_to_other_terrain_types 3 }
+  create_terrain GRASS3 { base_terrain NNB land_percent 100 number_of_clumps 9320 set_scale_by_groups height_limits 3 4 spacing_to_other_terrain_types 3 }
+  create_terrain GRASS3 { base_terrain NNB land_percent 100 number_of_clumps 9320 set_scale_by_groups height_limits 3 4 spacing_to_other_terrain_types 3 }
+endif
+
+/* #define PLAYER_ISLAND_FOREST_CREATION */
+if PLAYER_ISLAND_FOREST_CREATION
+  /* Island 1 */
+  create_terrain DIRT2 { base_terrain DIRT land_percent 100 number_of_clumps 1 }
+  create_terrain PALM_DESERT { base_terrain DIRT2 number_of_tiles 100 number_of_clumps 10 spacing_to_other_terrain_types 2 set_avoid_player_start_areas 12 }
+  create_terrain DLC_DIRT4 { base_terrain DIRT2 land_percent 100 number_of_clumps 9320 set_scale_by_groups }
+  /* Island 2 */
+  create_terrain DIRT2 { base_terrain DIRT land_percent 100 number_of_clumps 1 }
+  create_terrain PALM_DESERT { base_terrain DIRT2 number_of_tiles 100 number_of_clumps 10 spacing_to_other_terrain_types 2 set_avoid_player_start_areas 12 }
+  create_terrain DLC_DIRT4 { base_terrain DIRT2 land_percent 100 number_of_clumps 9320 set_scale_by_groups }
+  /* Island 3 */
+  create_terrain DIRT2 { base_terrain DIRT land_percent 100 number_of_clumps 1 }
+  create_terrain PALM_DESERT { base_terrain DIRT2 number_of_tiles 100 number_of_clumps 10 spacing_to_other_terrain_types 2 set_avoid_player_start_areas 12 }
+  create_terrain DLC_DIRT4 { base_terrain DIRT2 land_percent 100 number_of_clumps 9320 set_scale_by_groups }
+  /* Island 4 */
+  create_terrain DIRT2 { base_terrain DIRT land_percent 100 number_of_clumps 1 }
+  create_terrain PALM_DESERT { base_terrain DIRT2 number_of_tiles 80 number_of_clumps 10 spacing_to_other_terrain_types 2 set_avoid_player_start_areas 12 }
+  create_terrain DLC_DIRT4 { base_terrain DIRT2 land_percent 100 number_of_clumps 9320 set_scale_by_groups }
+  /* Island 5 */
+  create_terrain DIRT2 { base_terrain DIRT land_percent 100 number_of_clumps 1 }
+  create_terrain PALM_DESERT { base_terrain DIRT2 number_of_tiles 100 number_of_clumps 10 spacing_to_other_terrain_types 2 set_avoid_player_start_areas 12 }
+  create_terrain DLC_DIRT4 { base_terrain DIRT2 land_percent 100 number_of_clumps 9320 set_scale_by_groups }
+  /* Island 6 */
+  create_terrain DIRT2 { base_terrain DIRT land_percent 100 number_of_clumps 1 }
+  create_terrain PALM_DESERT { base_terrain DIRT2 number_of_tiles 100 number_of_clumps 10 spacing_to_other_terrain_types 2 set_avoid_player_start_areas 12 }
+  create_terrain DLC_DIRT4 { base_terrain DIRT2 land_percent 100 number_of_clumps 9320 set_scale_by_groups }
+  /* Island 7 */
+  create_terrain DIRT2 { base_terrain DIRT land_percent 100 number_of_clumps 1 }
+  create_terrain PALM_DESERT { base_terrain DIRT2 number_of_tiles 100 number_of_clumps 10 spacing_to_other_terrain_types 2 set_avoid_player_start_areas 12 }
+  create_terrain DLC_DIRT4 { base_terrain DIRT2 land_percent 100 number_of_clumps 9320 set_scale_by_groups }
+  /* Island 8 */
+  create_terrain DIRT2 { base_terrain DIRT land_percent 100 number_of_clumps 1 }
+  create_terrain PALM_DESERT { base_terrain DIRT2 number_of_tiles 100 number_of_clumps 10 spacing_to_other_terrain_types 2 set_avoid_player_start_areas 12 }
+  create_terrain DLC_DIRT4 { base_terrain DIRT2 land_percent 100 number_of_clumps 9320 set_scale_by_groups }
+  /* Cleaning Up After Forest Creation */
+  create_terrain DIRT { base_terrain DLC_DIRT4 land_percent 100 number_of_clumps 9320 set_scale_by_groups }
+  create_terrain DIRT { base_terrain PALM_DESERT land_percent 100 number_of_clumps 9320 set_scale_by_groups terrain_mask 1 }
+
+  /* Mixing Forests */
+  create_terrain BUSH_FOREST { base_terrain PALM_DESERT if TINY_MAP number_of_tiles 100 elseif SMALL_MAP number_of_tiles 120 elseif MEDIUM_MAP number_of_tiles 140 elseif LARGE_MAP number_of_tiles 167 elseif HUGE_MAP number_of_tiles 183 else number_of_tiles 200 endif number_of_clumps 9320 set_scale_by_groups }
+  create_terrain DLC_DRAGONFOREST { base_terrain BUSH_FOREST if TINY_MAP number_of_tiles 25 elseif SMALL_MAP number_of_tiles 30 elseif MEDIUM_MAP number_of_tiles 35 elseif LARGE_MAP number_of_tiles 41 elseif HUGE_MAP number_of_tiles 46 else number_of_tiles 50 endif number_of_clumps 9320 set_scale_by_groups }
+  create_terrain DIRT { base_terrain BUSH_FOREST land_percent 100 number_of_clumps 9320 set_scale_by_groups terrain_mask 1 }
+endif
+
+<OBJECTS_GENERATION>
+create_object TOWN_CENTER { set_place_for_every_player find_closest }
+/* BEGIN_OBJECTS_AUTOSCRIBE */
+/* END_OBJECTS_AUTOSCRIBE */
+if REGICIDE create_object KING { set_place_for_every_player find_closest } endif
+
+<LAND_GENERATION>
+base_terrain BT
+if 6_PLAYER_GAME
+L {  terrain_type  OI3 base_elevation 1 zone 1 other_zone_avoidance_distance 7 base_size 2 land_percent 7 land_position 86 14  left_border 6 right_border 6 top_border 6 bottom_border 6 clumping_factor 30 border_fuzziness 90 }
+L {  terrain_type  OI2 base_elevation 1 zone 1 other_zone_avoidance_distance 7 base_size 2 land_percent 7 land_position 14 86  left_border 6 right_border 6 top_border 6 bottom_border 6 clumping_factor 30 }
+endif
+
+
+
+/* LAND_AUTOSCRIBE */
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 39 15  }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 46 92  }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 26 72  }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 74 28  }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 72 26  }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 23 69  }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 64 82  }
+L {  terrain_type  WPT3 base_size 2 number_of_tiles 0 land_position 72 40  }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 63 83  }
+L {  terrain_type  WPT1 base_size 2 number_of_tiles 0 land_position 61 29  }
+L {  terrain_type  WPT3 base_size 2 number_of_tiles 0 land_position 81 49  }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 94 48  }
+L {  terrain_type  WPT1 base_size 2 number_of_tiles 0 land_position 56 24  }
+L {  terrain_type  WPT3 base_size 2 number_of_tiles 0 land_position 71 39  }
+L {  terrain_type  WPT1 base_size 2 number_of_tiles 0 land_position 52 20  }
+L {  terrain_type  WPT3 base_size 2 number_of_tiles 0 land_position 69 37  }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 27 27  }
+L {  terrain_type  WPT2 base_size 2 number_of_tiles 0 land_position 21 53  }
+L {  terrain_type  OI2 base_elevation 1 zone 1 other_zone_avoidance_distance 7 base_size 2 land_percent 7 land_position 14 86  left_border 6 right_border 6 top_border 6 bottom_border 6 clumping_factor 30 if TEAM_POSITIONS assign_to AT_COLOR 8 0 0 else assign_to AT_TEAM -10 0 0 endif }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 93 47  }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 82 36  }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 75 29  }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 15 61  }
+L {  terrain_type  WPT3 base_size 2 number_of_tiles 0 land_position 67 65  }
+L {  terrain_type  WPT1 base_size 2 number_of_tiles 0 land_position 47 21  }
+L {  terrain_type  WPT2 base_size 2 number_of_tiles 0 land_position 29 39  }
+L {  start_random percent_chance 50 terrain_type CBT_1A percent_chance 50 terrain_type CBT_1B end_random base_elevation 1 base_size 2 number_of_tiles 0 land_position 39 39  }
+L {  start_random percent_chance 50 terrain_type CBT_4A percent_chance 50 terrain_type CBT_4B end_random base_elevation 1 base_size 2 number_of_tiles 0 land_position 51 49  }
+L {  start_random percent_chance 50 terrain_type CBT_4A percent_chance 50 terrain_type CBT_4B end_random base_elevation 1 base_size 2 number_of_tiles 0 land_position 56 44  }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 13 41  }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 13 59  }
+L {  terrain_type  WPT3 base_size 2 number_of_tiles 0 land_position 68 36  }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 33 21  }
+L {  start_random percent_chance 50 terrain_type CBT_3A percent_chance 50 terrain_type CBT_3B end_random base_elevation 1 base_size 2 number_of_tiles 0 land_position 47 53  }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 38 84  }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 80 66  }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 42 12  }
+L {  terrain_type  WPT4 base_size 2 number_of_tiles 0 land_position 42 74  }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 48 94  }
+L {  terrain_type  WPT4 base_size 2 number_of_tiles 0 land_position 54 78  }
+L {  terrain_type  WPT3 base_size 2 number_of_tiles 0 land_position 75 57  }
+L {  terrain_type  WPT2 base_size 2 number_of_tiles 0 land_position 28 40  }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 19 35  }
+L {  terrain_type  WPT4 base_size 2 number_of_tiles 0 land_position 38 70  }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 64 18  }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 51 5  }
+L {  terrain_type  WPT4 base_size 2 number_of_tiles 0 land_position 64 68  }
+L {  start_random percent_chance 50 terrain_type CBT_1A percent_chance 50 terrain_type CBT_1B end_random base_elevation 1 base_size 2 number_of_tiles 0 land_position 46 46  }
+L {  start_random percent_chance 50 terrain_type CBT_2A percent_chance 50 terrain_type CBT_2B end_random base_elevation 1 base_size 2 number_of_tiles 0 land_position 60 60  }
+L {  terrain_type  WPT1 base_size 2 number_of_tiles 0 land_position 63 31  }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 85 39  }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 12 58  }
+L {  start_random percent_chance 50 terrain_type CBT_2A percent_chance 50 terrain_type CBT_2B end_random base_elevation 1 base_size 2 number_of_tiles 0 land_position 55 55  }
+L {  start_random percent_chance 50 terrain_type CBT_1A percent_chance 50 terrain_type CBT_1B end_random base_elevation 1 base_size 2 number_of_tiles 0 land_position 48 48  }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 87 41  }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 92 54  }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 14 60  }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 55 9  }
+L {  start_random percent_chance 50 terrain_type CBT_4A percent_chance 50 terrain_type CBT_4B end_random base_elevation 1 base_size 2 number_of_tiles 0 land_position 58 42  }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 80 34  }
+L {  terrain_type  OI1 base_elevation 1 zone 1 other_zone_avoidance_distance 7 base_size 2 land_percent 7 land_position 14 14  left_border 6 right_border 6 top_border 6 bottom_border 6 clumping_factor 30 if TEAM_POSITIONS assign_to AT_COLOR 5 0 0 else assign_to AT_TEAM -10 0 0 endif }
+L {  terrain_type  WPT4 base_size 2 number_of_tiles 0 land_position 55 77  }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 48 6  }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 56 90  }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 47 7  }
+L {  start_random percent_chance 50 terrain_type CBT_4A percent_chance 50 terrain_type CBT_4B end_random base_elevation 1 base_size 2 number_of_tiles 0 land_position 60 40  }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 85 61  }
+L {  terrain_type  WPT1 base_size 2 number_of_tiles 0 land_position 65 33  }
+L {  terrain_type  WPT4 base_elevation 1 base_size 2 land_position 50 68  if TEAM_POSITIONS assign_to AT_COLOR 2 0 0 else assign_to AT_TEAM -10 0 0 endif }
+L {  terrain_type  WPT3 base_size 2 number_of_tiles 0 land_position 76 56  }
+L {  start_random percent_chance 50 terrain_type CBT_4A percent_chance 50 terrain_type CBT_4B end_random base_elevation 1 base_size 2 number_of_tiles 0 land_position 57 43  }
+L {  start_random percent_chance 50 terrain_type CBT_4A percent_chance 50 terrain_type CBT_4B end_random base_elevation 1 base_size 2 number_of_tiles 0 land_position 64 36  }
+L {  terrain_type  WPT3 base_size 2 number_of_tiles 0 land_position 81 51  }
+L {  terrain_type  WPT1 base_size 2 number_of_tiles 0 land_position 43 25  }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 83 37  }
+L {  terrain_type  WPT4 base_size 2 number_of_tiles 0 land_position 43 75  }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 47 93  }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 17 37  }
+L {  terrain_type  WPT4 base_size 2 number_of_tiles 0 land_position 49 81  }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 68 78  }
+L {  start_random percent_chance 50 terrain_type CBT_1A percent_chance 50 terrain_type CBT_1B end_random base_elevation 1 base_size 2 number_of_tiles 0 land_position 50 50  }
+L {  terrain_type  WPT4 base_size 2 number_of_tiles 0 land_position 63 69  }
+L {  terrain_type  WPT2 base_size 2 number_of_tiles 0 land_position 24 56  }
+L {  terrain_type  WPT1 base_size 2 number_of_tiles 0 land_position 36 32  }
+L {  terrain_type  WPT4 base_size 2 number_of_tiles 0 land_position 66 66  }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 23 31  }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 78 68  }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 17 63  }
+L {  terrain_type  WPT2 base_size 2 number_of_tiles 0 land_position 34 34  }
+L {  start_random percent_chance 50 terrain_type CBT_1A percent_chance 50 terrain_type CBT_1B end_random base_elevation 1 base_size 2 number_of_tiles 0 land_position 41 41  }
+L {  start_random percent_chance 50 terrain_type CBT_1A percent_chance 50 terrain_type CBT_1B end_random base_elevation 1 base_size 2 number_of_tiles 0 land_position 44 44  }
+L {  terrain_type  WPT1 base_size 2 number_of_tiles 0 land_position 40 28  }
+L {  start_random percent_chance 50 terrain_type CBT_1A percent_chance 50 terrain_type CBT_1B end_random base_elevation 1 base_size 2 number_of_tiles 0 land_position 40 40  }
+L {  terrain_type  WPT4 base_size 2 number_of_tiles 0 land_position 37 69  }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 88 58  }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 33 79  }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 35 81  }
+L {  terrain_type  WPT2 base_size 2 number_of_tiles 0 land_position 20 48  }
+L {  start_random percent_chance 50 terrain_type CBT_2A percent_chance 50 terrain_type CBT_2B end_random base_elevation 1 base_size 2 number_of_tiles 0 land_position 54 54  }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 77 31  }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 66 20  }
+L {  start_random percent_chance 50 terrain_type CBT_1A percent_chance 50 terrain_type CBT_1B end_random base_elevation 1 base_size 2 number_of_tiles 0 land_position 37 37  }
+L {  terrain_type  WPT1 base_size 2 number_of_tiles 0 land_position 48 20  }
+L {  start_random percent_chance 50 terrain_type CBT_4A percent_chance 50 terrain_type CBT_4B end_random base_elevation 1 base_size 2 number_of_tiles 0 land_position 59 41  }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 93 53  }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 79 67  }
+L {  terrain_type  WPT3 base_size 2 number_of_tiles 0 land_position 71 61  }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 69 77  }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 86 40  }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 25 29  }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 36 18  }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 56 10  }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 53 7  }
+L {  terrain_type  WPT2 base_size 2 number_of_tiles 0 land_position 24 44  }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 35 19  }
+L {  start_random percent_chance 50 terrain_type CBT_3A percent_chance 50 terrain_type CBT_3B end_random base_elevation 1 base_size 2 number_of_tiles 0 land_position 43 57  }
+L {  start_random percent_chance 50 terrain_type CBT_3A percent_chance 50 terrain_type CBT_3B end_random base_elevation 1 base_size 2 number_of_tiles 0 land_position 38 62  }
+L {  start_random percent_chance 50 terrain_type CBT_3A percent_chance 50 terrain_type CBT_3B end_random base_elevation 1 base_size 2 number_of_tiles 0 land_position 36 64  }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 6 52  }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 82 64  }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 28 26  }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 24 70  }
+L {  start_random percent_chance 50 terrain_type CBT_4A percent_chance 50 terrain_type CBT_4B end_random base_elevation 1 base_size 2 number_of_tiles 0 land_position 53 47  }
+L {  terrain_type  WPT3 base_size 2 number_of_tiles 0 land_position 67 35  }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 30 76  }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 95 51  }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 57 89  }
+L {  terrain_type  WPT3 base_size 2 number_of_tiles 0 land_position 74 42  }
+L {  terrain_type  WPT1 base_size 2 number_of_tiles 0 land_position 57 25  }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 8 46  }
+L {  terrain_type  WPT2 base_size 2 number_of_tiles 0 land_position 21 47  }
+L {  terrain_type  WPT2 base_size 2 number_of_tiles 0 land_position 19 51  }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 25 71  }
+L {  terrain_type  WPT2 base_elevation 1 base_size 2 land_position 32 50  if TEAM_POSITIONS assign_to AT_COLOR 4 0 0 else assign_to AT_TEAM -10 0 0 endif }
+L {  terrain_type  WPT4 base_size 2 number_of_tiles 0 land_position 46 78  }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 12 42  }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 32 78  }
+L {  terrain_type  WPT1 base_size 2 number_of_tiles 0 land_position 50 18  }
+L {  terrain_type  WPT2 base_size 2 number_of_tiles 0 land_position 19 49  }
+L {  start_random percent_chance 50 terrain_type CBT_3A percent_chance 50 terrain_type CBT_3B end_random base_elevation 1 base_size 2 number_of_tiles 0 land_position 42 58  }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 52 6  }
+L {  terrain_type  WPT1 base_size 2 number_of_tiles 0 land_position 35 33  }
+L {  start_random percent_chance 50 terrain_type CBT_1A percent_chance 50 terrain_type CBT_1B end_random base_elevation 1 base_size 2 number_of_tiles 0 land_position 36 36  }
+L {  terrain_type  WPT3 base_size 2 number_of_tiles 0 land_position 80 52  }
+L {  start_random percent_chance 50 terrain_type CBT_3A percent_chance 50 terrain_type CBT_3B end_random base_elevation 1 base_size 2 number_of_tiles 0 land_position 37 63  }
+L {  terrain_type  WPT3 base_size 2 number_of_tiles 0 land_position 78 46  }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 58 12  }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 39 85  }
+L {  start_random percent_chance 50 terrain_type CBT_2A percent_chance 50 terrain_type CBT_2B end_random base_elevation 1 base_size 2 number_of_tiles 0 land_position 53 53  }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 40 14  }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 69 23  }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 81 65  }
+L {  start_random percent_chance 50 terrain_type CBT_1A percent_chance 50 terrain_type CBT_1B end_random base_elevation 1 base_size 2 number_of_tiles 0 land_position 38 38  }
+L {  terrain_type  WPT1 base_size 2 number_of_tiles 0 land_position 45 23  }
+L {  terrain_type  WPT1 base_size 2 number_of_tiles 0 land_position 49 19  }
+L {  start_random percent_chance 50 terrain_type CBT_3A percent_chance 50 terrain_type CBT_3B end_random base_elevation 1 base_size 2 number_of_tiles 0 land_position 49 51  }
+L {  terrain_type  WPT4 base_size 2 number_of_tiles 0 land_position 61 71  }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 7 47  }
+L {  terrain_type  WPT4 base_size 2 number_of_tiles 0 land_position 52 80  }
+L {  terrain_type  WPT2 base_size 2 number_of_tiles 0 land_position 29 61  }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 73 27  }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 41 13  }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 92 46  }
+L {  start_random percent_chance 50 terrain_type CBT_1A percent_chance 50 terrain_type CBT_1B end_random base_elevation 1 base_size 2 number_of_tiles 0 land_position 47 47  }
+L {  terrain_type  WPT2 base_size 2 number_of_tiles 0 land_position 31 37  }
+L {  terrain_type  WPT3 base_size 2 number_of_tiles 0 land_position 77 45  }
+L {  terrain_type  WPT3 base_size 2 number_of_tiles 0 land_position 75 43  }
+L {  terrain_type  WPT1 base_size 2 number_of_tiles 0 land_position 46 22  }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 53 93  }
+L {  terrain_type  WPT1 base_size 2 number_of_tiles 0 land_position 66 34  }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 6 48  }
+L {  terrain_type  WPT2 base_size 2 number_of_tiles 0 land_position 23 45  }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 49 95  }
+L {  start_random percent_chance 50 terrain_type CBT_3A percent_chance 50 terrain_type CBT_3B end_random base_elevation 1 base_size 2 number_of_tiles 0 land_position 45 55  }
+L {  start_random percent_chance 50 terrain_type CBT_2A percent_chance 50 terrain_type CBT_2B end_random base_elevation 1 base_size 2 number_of_tiles 0 land_position 65 65  }
+L {  start_random percent_chance 50 terrain_type CBT_2A percent_chance 50 terrain_type CBT_2B end_random base_elevation 1 base_size 2 number_of_tiles 0 land_position 57 57  }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 45 9  }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 95 49  }
+L {  terrain_type  WPT2 base_size 2 number_of_tiles 0 land_position 26 58  }
+L {  terrain_type  WPT1 base_size 2 number_of_tiles 0 land_position 37 31  }
+L {  terrain_type  WPT2 base_size 2 number_of_tiles 0 land_position 20 52  }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 9 45  }
+L {  terrain_type  WPT2 base_size 2 number_of_tiles 0 land_position 25 57  }
+L {  terrain_type  WPT1 base_size 2 number_of_tiles 0 land_position 42 26  }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 73 73  }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 5 51  }
+L {  start_random percent_chance 50 terrain_type CBT_4A percent_chance 50 terrain_type CBT_4B end_random base_elevation 1 base_size 2 number_of_tiles 0 land_position 62 38  }
+L {  start_random percent_chance 50 terrain_type CBT_2A percent_chance 50 terrain_type CBT_2B end_random base_elevation 1 base_size 2 number_of_tiles 0 land_position 58 58  }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 60 86  }
+L {  terrain_type  WPT3 base_size 2 number_of_tiles 0 land_position 78 54  }
+L {  terrain_type  WPT4 base_size 2 number_of_tiles 0 land_position 50 82  }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 8 54  }
+L {  start_random percent_chance 50 terrain_type CBT_2A percent_chance 50 terrain_type CBT_2B end_random base_elevation 1 base_size 2 number_of_tiles 0 land_position 51 51  }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 77 69  }
+L {  terrain_type  WPT1 base_elevation 1 base_size 2 land_position 50 32  if TEAM_POSITIONS assign_to AT_COLOR 1 0 0 else assign_to AT_TEAM -10 0 0 endif }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 90 56  }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 28 74  }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 9 55  }
+L {  terrain_type  WPT2 base_size 2 number_of_tiles 0 land_position 26 42  }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 70 76  }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 34 20  }
+L {  terrain_type  WPT2 base_size 2 number_of_tiles 0 land_position 33 65  }
+L {  terrain_type  WPT2 base_size 2 number_of_tiles 0 land_position 27 41  }
+L {  terrain_type  WPT1 base_size 2 number_of_tiles 0 land_position 41 27  }
+L {  start_random percent_chance 50 terrain_type CBT_4A percent_chance 50 terrain_type CBT_4B end_random base_elevation 1 base_size 2 number_of_tiles 0 land_position 61 39  }
+L {  terrain_type  WPT2 base_size 2 number_of_tiles 0 land_position 28 60  }
+L {  start_random percent_chance 50 terrain_type CBT_4A percent_chance 50 terrain_type CBT_4B end_random base_elevation 1 base_size 2 number_of_tiles 0 land_position 55 45  }
+L {  terrain_type  WPT4 base_size 2 number_of_tiles 0 land_position 53 79  }
+L {  terrain_type  WPT3 base_size 2 number_of_tiles 0 land_position 70 38  }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 5 49  }
+L {  start_random percent_chance 50 terrain_type CBT_2A percent_chance 50 terrain_type CBT_2B end_random base_elevation 1 base_size 2 number_of_tiles 0 land_position 59 59  }
+L {  terrain_type  OI3 base_elevation 1 zone 1 other_zone_avoidance_distance 7 base_size 2 land_percent 7 land_position 86 14  left_border 6 right_border 6 top_border 6 bottom_border 6 clumping_factor 30 border_fuzziness 90 if TEAM_POSITIONS assign_to AT_COLOR 7 0 0 else assign_to AT_TEAM -10 0 0 endif }
+L {  terrain_type  OI4 base_elevation 1 zone 1 other_zone_avoidance_distance 7 base_size 2 land_percent 7 land_position 86 86  left_border 6 right_border 6 top_border 6 bottom_border 6 clumping_factor 30 if TEAM_POSITIONS assign_to AT_COLOR 6 0 0 else assign_to AT_TEAM -10 0 0 endif }
+L {  terrain_type  WPT2 base_size 2 number_of_tiles 0 land_position 30 62  }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 51 95  }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 76 70  }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 62 84  }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 24 30  }
+L {  start_random percent_chance 50 terrain_type CBT_3A percent_chance 50 terrain_type CBT_3B end_random base_elevation 1 base_size 2 number_of_tiles 0 land_position 41 59  }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 71 75  }
+L {  terrain_type  WPT1 base_size 2 number_of_tiles 0 land_position 62 30  }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 61 85  }
+L {  terrain_type  WPT4 base_size 2 number_of_tiles 0 land_position 60 72  }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 32 22  }
+L {  start_random percent_chance 50 terrain_type CBT_2A percent_chance 50 terrain_type CBT_2B end_random base_elevation 1 base_size 2 number_of_tiles 0 land_position 56 56  }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 86 60  }
+L {  terrain_type  WPT4 base_size 2 number_of_tiles 0 land_position 51 81  }
+L {  terrain_type  WPT2 base_size 2 number_of_tiles 0 land_position 33 35  }
+L {  start_random percent_chance 50 terrain_type CBT_1A percent_chance 50 terrain_type CBT_1B end_random base_elevation 1 base_size 2 number_of_tiles 0 land_position 35 35  }
+L {  terrain_type  WPT4 base_size 2 number_of_tiles 0 land_position 59 73  }
+L {  terrain_type  WPT1 base_size 2 number_of_tiles 0 land_position 58 26  }
+L {  terrain_type  WPT3 base_size 2 number_of_tiles 0 land_position 76 44  }
+L {  terrain_type  WPT4 base_size 2 number_of_tiles 0 land_position 41 73  }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 71 25  }
+L {  start_random percent_chance 50 terrain_type CBT_1A percent_chance 50 terrain_type CBT_1B end_random base_elevation 1 base_size 2 number_of_tiles 0 land_position 45 45  }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 11 43  }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 79 33  }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 19 65  }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 21 33  }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 67 79  }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 34 80  }
+L {  terrain_type  WPT3 base_size 2 number_of_tiles 0 land_position 72 60  }
+L {  terrain_type  WPT2 base_size 2 number_of_tiles 0 land_position 25 43  }
+L {  terrain_type  WPT3 base_size 2 number_of_tiles 0 land_position 68 64  }
+L {  terrain_type  WPT4 base_size 2 number_of_tiles 0 land_position 39 71  }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 20 34  }
+L {  terrain_type  WPT4 base_size 2 number_of_tiles 0 land_position 35 67  }
+L {  terrain_type  WPT1 base_size 2 number_of_tiles 0 land_position 51 19  }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 16 62  }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 65 81  }
+L {  terrain_type  WPT3 base_size 2 number_of_tiles 0 land_position 77 55  }
+L {  terrain_type  WPT1 base_size 2 number_of_tiles 0 land_position 54 22  }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 38 16  }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 83 63  }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 78 32  }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 72 74  }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 87 59  }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 81 35  }
+L {  terrain_type  WPT2 base_size 2 number_of_tiles 0 land_position 22 54  }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 18 64  }
+L {  start_random percent_chance 50 terrain_type CBT_2A percent_chance 50 terrain_type CBT_2B end_random base_elevation 1 base_size 2 number_of_tiles 0 land_position 62 62  }
+L {  terrain_type  WPT1 base_size 2 number_of_tiles 0 land_position 64 32  }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 60 14  }
+L {  terrain_type  WPT4 base_size 2 number_of_tiles 0 land_position 40 72  }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 67 21  }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 46 8  }
+L {  terrain_type  WPT4 base_size 2 number_of_tiles 0 land_position 36 68  }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 41 87  }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 36 82  }
+L {  start_random percent_chance 50 terrain_type CBT_1A percent_chance 50 terrain_type CBT_1B end_random base_elevation 1 base_size 2 number_of_tiles 0 land_position 49 49  }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 22 68  }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 44 10  }
+L {  terrain_type  WPT2 base_size 2 number_of_tiles 0 land_position 32 36  }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 27 73  }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 76 30  }
+L {  start_random percent_chance 50 terrain_type CBT_4A percent_chance 50 terrain_type CBT_4B end_random base_elevation 1 base_size 2 number_of_tiles 0 land_position 54 46  }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 52 94  }
+L {  terrain_type  WPT2 base_size 2 number_of_tiles 0 land_position 18 50  }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 18 36  }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 84 62  }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 16 38  }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 54 92  }
+L {  terrain_type  WPT3 base_size 2 number_of_tiles 0 land_position 79 47  }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 10 56  }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 49 5  }
+L {  terrain_type  WPT2 base_size 2 number_of_tiles 0 land_position 30 38  }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 29 25  }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 43 11  }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 65 19  }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 45 91  }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 55 91  }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 84 38  }
+L {  start_random percent_chance 50 terrain_type CBT_3A percent_chance 50 terrain_type CBT_3B end_random base_elevation 1 base_size 2 number_of_tiles 0 land_position 40 60  }
+L {  terrain_type  WPT2 base_size 2 number_of_tiles 0 land_position 23 55  }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 54 8  }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 11 57  }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 74 72  }
+L {  terrain_type  WPT3 base_elevation 1 base_size 2 land_position 68 50  if TEAM_POSITIONS assign_to AT_COLOR 3 0 0 else assign_to AT_TEAM -10 0 0 endif }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 57 11  }
+L {  terrain_type  WPT1 base_size 2 number_of_tiles 0 land_position 53 21  }
+L {  start_random percent_chance 50 terrain_type CBT_2A percent_chance 50 terrain_type CBT_2B end_random base_elevation 1 base_size 2 number_of_tiles 0 land_position 61 61  }
+L {  terrain_type  WPT3 base_size 2 number_of_tiles 0 land_position 82 50  }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 42 88  }
+L {  terrain_type  WPT3 base_size 2 number_of_tiles 0 land_position 73 59  }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 59 87  }
+L {  start_random percent_chance 50 terrain_type CBT_4A percent_chance 50 terrain_type CBT_4B end_random base_elevation 1 base_size 2 number_of_tiles 0 land_position 52 48  }
+L {  terrain_type  WPT1 base_size 2 number_of_tiles 0 land_position 60 28  }
+L {  terrain_type  WPT3 base_size 2 number_of_tiles 0 land_position 74 58  }
+L {  start_random percent_chance 50 terrain_type CBT_3A percent_chance 50 terrain_type CBT_3B end_random base_elevation 1 base_size 2 number_of_tiles 0 land_position 35 65  }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 70 24  }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 62 16  }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 89 43  }
+L {  start_random percent_chance 50 terrain_type CBT_2A percent_chance 50 terrain_type CBT_2B end_random base_elevation 1 base_size 2 number_of_tiles 0 land_position 63 63  }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 37 17  }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 58 88  }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 29 75  }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 31 23  }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 94 52  }
+L {  start_random percent_chance 50 terrain_type CBT_1A percent_chance 50 terrain_type CBT_1B end_random base_elevation 1 base_size 2 number_of_tiles 0 land_position 42 42  }
+L {  terrain_type  WPT3 base_size 2 number_of_tiles 0 land_position 73 41  }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 15 39  }
+L {  terrain_type  WPT4 base_size 2 number_of_tiles 0 land_position 44 76  }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 68 22  }
+L {  start_random percent_chance 50 terrain_type CBT_3A percent_chance 50 terrain_type CBT_3B end_random base_elevation 1 base_size 2 number_of_tiles 0 land_position 39 61  }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 37 83  }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 90 44  }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 20 66  }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 21 67  }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 66 80  }
+L {  terrain_type  WPT2 base_size 2 number_of_tiles 0 land_position 32 64  }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 10 44  }
+L {  terrain_type  WPT1 base_size 2 number_of_tiles 0 land_position 44 24  }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 31 77  }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 43 89  }
+L {  terrain_type  WPT1 base_size 2 number_of_tiles 0 land_position 55 23  }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 91 55  }
+L {  terrain_type  WPT1 base_size 2 number_of_tiles 0 land_position 39 29  }
+L {  start_random percent_chance 50 terrain_type CBT_1A percent_chance 50 terrain_type CBT_1B end_random base_elevation 1 base_size 2 number_of_tiles 0 land_position 43 43  }
+L {  terrain_type  WPT3 base_size 2 number_of_tiles 0 land_position 79 53  }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 88 42  }
+L {  terrain_type  WPT4 base_size 2 number_of_tiles 0 land_position 65 67  }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 26 28  }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 59 13  }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 44 90  }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 63 17  }
+L {  terrain_type  WPT2 base_size 2 number_of_tiles 0 land_position 22 46  }
+L {  start_random percent_chance 50 terrain_type CBT_2A percent_chance 50 terrain_type CBT_2B end_random base_elevation 1 base_size 2 number_of_tiles 0 land_position 52 52  }
+L {  start_random percent_chance 50 terrain_type CBT_3A percent_chance 50 terrain_type CBT_3B end_random base_elevation 1 base_size 2 number_of_tiles 0 land_position 46 54  }
+L {  terrain_type  WPT3 base_size 2 number_of_tiles 0 land_position 80 48  }
+L {  terrain_type  WPT2 base_size 2 number_of_tiles 0 land_position 34 66  }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 61 15  }
+L {  terrain_type  WPT4 base_size 2 number_of_tiles 0 land_position 47 79  }
+L {  start_random percent_chance 50 terrain_type CBT_3A percent_chance 50 terrain_type CBT_3B end_random base_elevation 1 base_size 2 number_of_tiles 0 land_position 48 52  }
+L {  start_random percent_chance 50 terrain_type CBT_4A percent_chance 50 terrain_type CBT_4B end_random base_elevation 1 base_size 2 number_of_tiles 0 land_position 65 35  }
+L {  terrain_type  WPT2 base_size 2 number_of_tiles 0 land_position 31 63  }
+L {  terrain_type  WPT3 base_size 2 number_of_tiles 0 land_position 70 62  }
+L {  terrain_type  WPT1 base_size 2 number_of_tiles 0 land_position 59 27  }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 22 32  }
+L {  terrain_type  WPT4 base_size 2 number_of_tiles 0 land_position 57 75  }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 91 45  }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 40 86  }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 30 24  }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 89 57  }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 14 40  }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 75 71  }
+L {  terrain_type  WPT4 base_size 2 number_of_tiles 0 land_position 48 80  }
+L {  start_random percent_chance 50 terrain_type CBT_3A percent_chance 50 terrain_type CBT_3B end_random base_elevation 1 base_size 2 number_of_tiles 0 land_position 44 56  }
+L {  terrain_type  WPT4 base_size 2 number_of_tiles 0 land_position 56 76  }
+L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 7 53  }
+L {  terrain_type  WPT4 base_size 2 number_of_tiles 0 land_position 45 77  }
+L {  terrain_type  WPT1 base_size 2 number_of_tiles 0 land_position 38 30  }
+L {  start_random percent_chance 50 terrain_type CBT_2A percent_chance 50 terrain_type CBT_2B end_random base_elevation 1 base_size 2 number_of_tiles 0 land_position 64 64  }
+L {  terrain_type  WPT2 base_size 2 number_of_tiles 0 land_position 27 59  }
+L {  terrain_type  WPT4 base_size 2 number_of_tiles 0 land_position 58 74  }
+L {  terrain_type  WPT3 base_size 2 number_of_tiles 0 land_position 69 63  }
+L {  terrain_type  WPT4 base_size 2 number_of_tiles 0 land_position 62 70  }
+L {  start_random percent_chance 50 terrain_type CBT_4A percent_chance 50 terrain_type CBT_4B end_random base_elevation 1 base_size 2 number_of_tiles 0 land_position 63 37  }

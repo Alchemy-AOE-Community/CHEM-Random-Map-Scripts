@@ -1,0 +1,191 @@
+/*End of the Line (10/22/23) by BPDrej*/
+#const GRAVEL1 70
+#const MUD 76
+#const F 69
+#const WRB 82
+
+#const DOLPHIN 61
+#const TRAP 278
+#const ROCK2 1323
+#const ROCK3 389
+#const ROCK4 396
+
+<PLAYER_SETUP>
+direct_placement
+nomad_resources
+ai_info_map_type NOMAD 1 0 1
+
+behavior_version 1
+
+<ELEVATION_GENERATION>
+
+
+<TERRAIN_GENERATION>
+
+<OBJECTS_GENERATION>
+if REGICIDE
+create_object KING
+{
+	set_place_for_every_player
+	avoid_forest_zone 2
+}
+endif
+create_object VILLAGER
+{
+	set_place_for_every_player
+	avoid_forest_zone 2
+}
+create_object FORAGE
+{
+	number_of_objects 3
+	number_of_groups 99
+	group_placement_radius 3
+	set_tight_grouping
+	set_gaia_object_only
+	temp_min_distance_group_placement 30
+	avoid_actor_area 66
+    avoid_actor_area 67
+	actor_area_radius 2
+	avoid_forest_zone 2
+}
+create_object GOLD 
+{
+	number_of_objects 4
+	number_of_groups 1000
+	set_tight_grouping
+	set_gaia_object_only
+	set_scaling_to_map_size
+	if TINY_MAP
+		temp_min_distance_group_placement 27
+	elseif SMALL_MAP
+		temp_min_distance_group_placement 27
+	elseif MEDIUM_MAP
+		temp_min_distance_group_placement 30
+	elseif LARGE_MAP
+		temp_min_distance_group_placement 32
+	elseif HUGE_MAP
+		temp_min_distance_group_placement 35
+	endif
+	actor_area 66
+    actor_area_radius 4
+    avoid_forest_zone 2
+}
+create_object STONE
+{
+	number_of_objects 4
+	number_of_groups 1000
+	set_tight_grouping
+	set_gaia_object_only
+	set_scaling_to_map_size
+	if TINY_MAP
+		temp_min_distance_group_placement 27
+	elseif SMALL_MAP
+		temp_min_distance_group_placement 27
+	elseif MEDIUM_MAP
+		temp_min_distance_group_placement 30
+	elseif LARGE_MAP
+		temp_min_distance_group_placement 32
+	elseif HUGE_MAP
+		temp_min_distance_group_placement 35
+	endif
+    actor_area 67
+    actor_area_radius 3
+	avoid_actor_area 66
+    avoid_forest_zone 2
+}
+create_object JUNGLETREE
+{
+    number_of_objects 15
+    set_gaia_object_only
+    set_scaling_to_map_size
+    avoid_actor_area 66
+    avoid_actor_area 67
+    avoid_forest_zone 2
+}
+create_object RELIC 
+{
+	min_distance_group_placement 1
+	if TINY_MAP
+		number_of_objects 3
+		temp_min_distance_group_placement 35
+	elseif MEDIUM_MAP
+		number_of_objects 2
+		temp_min_distance_group_placement 38
+	elseif LARGE_MAP
+		number_of_objects 4
+		temp_min_distance_group_placement 65
+	elseif HUGE_MAP
+		number_of_objects 4
+		temp_min_distance_group_placement 75
+	endif
+	avoid_forest_zone 3
+}
+
+create_object BOAR
+{
+	number_of_objects 1
+	number_of_groups 1000
+	set_loose_grouping
+	set_gaia_object_only
+	temp_min_distance_group_placement 24
+	avoid_forest_zone 2
+}
+
+/* Star Resources
+create_object GOLD 
+{
+	number_of_objects 3
+	number_of_groups 1000
+	set_tight_grouping
+	set_gaia_object_only
+	set_scaling_to_map_size
+	temp_min_distance_group_placement 6
+}
+create_object STONE
+{
+	number_of_objects 3
+	number_of_groups 1000
+	set_tight_grouping
+	set_gaia_object_only
+	set_scaling_to_map_size
+	temp_min_distance_group_placement 10
+	min_distance_group_placement 5
+}
+create_object RELIC 
+{
+	min_distance_group_placement 1
+	if TINY_MAP
+		number_of_objects 2
+		temp_min_distance_group_placement 35
+	elseif MEDIUM_MAP
+		number_of_objects 3
+		temp_min_distance_group_placement 38
+	elseif LARGE_MAP
+		number_of_objects 3
+		temp_min_distance_group_placement 48
+	elseif HUGE_MAP
+		number_of_objects 4
+		temp_min_distance_group_placement 52
+	endif
+}
+/* Aesthetic Objects */
+
+<LAND_GENERATION>
+base_terrain GRASS
+
+create_land
+{
+	terrain_type DIRT
+	land_percent 100
+	zone 1
+	other_zone_avoidance_distance 85
+}
+create_land
+{
+	terrain_type GRASS
+	land_percent 100
+	zone 2
+	top_border 1
+	bottom_border 1
+	left_border 1
+	right_border 90

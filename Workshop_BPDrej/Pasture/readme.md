@@ -1,0 +1,1 @@
+An open cow pasture surrounded by trees, with little other vegetation except for the occasional reed clumps. In the center of the map is a small pond, recently stocked with plenty of shore fish. On both sides of the pond, in between the players, are unnaturally large cow patties that contain all the neutral gold and stone, along with some additional herdable cows.

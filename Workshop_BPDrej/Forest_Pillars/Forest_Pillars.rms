@@ -1,0 +1,1083 @@
+/* Forest Pillars (7/28/22) by BPDrej */
+
+<PLAYER_SETUP>
+direct_placement
+behavior_version 1
+
+<LAND_GENERATION>
+base_terrain GRASS
+
+/* Pillars edges Base Radius 10, Xoff: 50 Yoff: 10, etc. Tips are Base Radius 8, Xoff: 40 Yoff: 0, etc. */
+/* Left Pillar */
+create_land { base_size 3 land_position 15 29 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 14 29 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 14 28 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 13 28 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 13 27 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 13 27 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 12 26 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 12 26 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 11 25 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 11 25 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 10 24 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 9 24 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 9 23 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 8 22 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 8 22 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 7 21 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 6 20 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 6 20 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 5 19 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 5 19 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 4 18 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 4 18 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 3 17 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 3 17 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 2 16 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 2 16 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 1 16 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 1 15 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 1 16 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 2 16 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 2 16 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 3 17 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 3 17 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 4 18 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 4 18 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 5 19 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 5 19 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 6 20 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 6 20 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 7 21 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 8 22 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 8 22 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 9 23 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 9 24 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 10 24 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 11 25 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 11 25 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 12 26 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 12 26 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 13 27 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 13 27 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 13 28 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 14 28 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 14 28 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 14 28 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 14 29 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 15 29 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 15 29 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 29 15 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 29 14 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 28 14 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 28 14 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 28 14 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 28 13 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 27 13 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 27 13 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 26 12 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 26 12 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 25 11 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 25 11 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 24 10 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 24 9 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 23 9 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 22 8 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 22 8 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 21 7 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 20 6 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 20 6 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 19 5 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 19 5 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 18 4 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 18 4 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 17 3 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 17 3 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 16 2 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 16 2 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 16 1 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 15 1 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 15 1 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 16 1 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 16 2 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 16 2 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 17 3 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 17 3 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 18 4 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 18 4 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 19 5 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 19 5 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 20 6 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 20 6 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 21 7 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 22 8 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 22 8 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 23 9 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 24 9 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 24 10 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 25 11 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 25 11 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 26 12 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 26 12 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 27 13 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 27 13 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 28 13 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 28 14 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 28 14 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 28 14 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 29 14 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 29 15 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 29 15 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 22 22 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 21 22 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 21 23 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 20 23 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 20 24 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 19 24 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 19 25 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 18 25 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 18 25 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 18 26 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 17 26 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 17 26 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 17 27 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 17 27 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 16 27 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 16 27 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 17 27 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 17 27 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 17 26 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 17 26 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 18 26 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 18 25 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 18 25 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 19 25 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 19 24 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 20 24 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 20 23 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 21 23 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 21 22 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 22 22 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 22 21 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 23 21 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 23 20 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 24 20 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 24 19 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 25 19 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 25 18 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 25 18 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 26 18 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 26 17 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 26 17 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 27 17 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 27 17 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 27 16 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 27 17 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 27 17 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 26 17 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 26 17 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 26 18 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 25 18 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 25 18 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 25 19 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 24 19 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 24 20 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 23 20 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 23 21 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 22 21 terrain_type FOREST number_of_tiles 0 }
+create_land { land_position 1 1 terrain_type FOREST number_of_tiles 5000 }
+
+/* Right Pilar */
+create_land { base_size 3 land_position 99 85 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 99 85 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 99 85 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 99 85 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 99 85 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 99 85 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 99 84 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 98 84 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 98 84 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 97 83 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 97 83 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 96 82 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 96 82 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 95 81 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 95 81 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 94 80 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 94 80 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 93 79 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 92 78 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 92 78 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 91 77 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 91 76 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 90 76 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 89 75 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 89 75 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 88 74 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 88 74 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 87 73 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 87 73 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 87 72 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 86 72 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 86 72 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 86 72 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 86 71 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 85 71 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 86 71 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 86 72 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 86 72 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 86 72 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 87 72 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 87 73 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 87 73 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 88 74 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 88 74 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 89 75 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 89 75 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 90 76 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 91 76 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 91 77 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 92 78 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 92 78 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 93 79 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 94 80 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 94 80 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 95 81 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 95 81 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 96 82 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 96 82 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 97 83 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 97 83 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 99 84 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 99 85 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 85 99 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 84 99 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 84 98 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 84 98 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 83 97 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 83 97 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 82 96 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 82 96 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 81 95 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 81 95 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 80 94 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 80 94 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 79 93 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 78 92 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 78 92 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 77 91 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 76 91 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 76 90 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 75 89 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 75 89 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 74 88 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 74 88 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 73 87 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 73 87 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 72 87 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 72 86 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 72 86 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 72 86 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 71 86 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 71 85 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 71 86 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 72 86 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 72 86 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 72 86 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 72 87 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 73 87 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 73 87 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 74 88 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 74 88 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 75 89 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 75 89 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 76 90 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 76 91 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 77 91 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 78 92 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 78 92 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 79 93 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 80 94 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 80 94 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 81 95 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 81 95 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 82 96 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 82 96 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 83 97 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 83 97 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 84 98 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 84 98 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 84 99 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 85 99 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 78 78 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 78 79 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 77 79 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 77 80 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 76 80 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 76 81 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 75 81 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 75 82 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 75 82 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 74 82 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 74 83 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 74 83 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 73 83 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 73 83 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 73 84 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 73 84 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 73 83 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 73 83 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 74 83 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 74 83 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 74 82 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 75 82 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 75 82 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 75 81 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 76 81 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 76 80 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 77 80 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 77 79 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 78 79 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 78 78 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 79 78 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 79 77 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 80 77 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 80 76 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 81 76 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 81 75 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 82 75 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 82 75 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 82 74 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 83 74 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 83 74 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 83 73 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 83 73 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 84 73 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 84 73 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 83 73 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 83 73 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 83 74 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 83 74 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 82 74 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 82 75 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 82 75 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 81 75 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 81 76 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 80 76 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 80 77 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 79 77 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 79 78 terrain_type FOREST number_of_tiles 0 }
+create_land { land_position 99 99 terrain_type FOREST number_of_tiles 5000 }
+
+/* Bottom Pillar */
+create_land { base_size 3 land_position 22 92 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 21 93 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 20 94 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 20 94 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 19 95 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 19 95 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 18 96 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 18 96 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 17 97 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 17 97 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 16 98 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 16 98 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 16 99 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 15 99 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 16 99 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 16 98 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 16 98 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 17 97 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 17 97 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 18 96 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 18 96 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 19 95 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 19 95 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 20 94 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 20 94 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 21 93 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 22 92 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 22 92 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 23 91 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 24 91 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 24 90 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 25 89 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 25 89 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 26 88 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 26 88 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 27 87 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 27 87 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 28 87 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 28 86 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 28 86 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 28 86 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 29 86 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 29 85 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 29 86 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 28 86 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 28 86 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 28 86 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 28 87 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 27 87 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 27 87 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 26 88 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 26 88 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 25 89 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 25 89 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 24 90 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 24 91 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 23 91 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 22 92 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 8 78 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 7 79 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 6 80 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 6 80 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 5 81 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 5 81 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 4 82 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 4 82 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 3 83 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 3 83 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 2 84 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 2 84 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 1 84 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 1 85 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 1 85 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 1 84 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 2 84 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 2 84 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 3 83 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 3 83 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 4 82 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 4 82 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 5 81 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 5 81 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 6 80 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 6 80 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 7 79 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 8 78 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 8 78 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 9 77 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 9 76 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 10 76 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 11 75 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 11 75 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 12 74 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 12 74 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 13 73 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 13 73 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 13 72 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 14 72 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 14 72 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 14 72 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 14 71 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 15 71 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 14 71 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 14 72 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 14 72 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 14 72 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 13 72 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 13 73 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 13 73 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 12 74 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 12 74 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 11 75 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 11 75 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 10 76 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 9 76 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 9 77 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 8 78 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 27 84 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 27 84 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 27 84 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 27 84 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 27 84 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 27 83 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 27 83 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 26 83 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 26 83 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 26 82 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 25 82 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 25 82 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 25 81 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 24 81 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 24 80 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 23 80 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 23 79 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 22 79 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 22 78 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 21 78 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 21 77 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 20 77 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 20 76 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 19 76 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 19 75 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 18 75 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 18 75 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 18 74 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 17 74 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 17 74 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 17 73 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 17 73 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 16 73 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 16 73 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 17 73 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 17 73 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 17 74 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 17 74 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 18 74 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 18 75 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 18 75 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 19 75 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 19 76 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 20 76 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 20 77 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 21 77 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 21 78 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 22 78 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 22 79 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 23 79 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 23 80 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 24 80 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 24 81 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 25 81 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 25 82 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 25 82 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 26 82 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 26 83 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 26 83 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 27 83 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 27 83 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 27 84 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 27 84 terrain_type FOREST number_of_tiles 0 }
+create_land { land_position 1 99 terrain_type FOREST number_of_tiles 5000 }
+
+/* Top Pillar */
+create_land { base_size 3 land_position 78 8 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 78 8 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 77 9 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 76 9 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 76 10 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 75 11 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 75 11 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 74 12 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 74 12 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 73 13 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 73 13 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 72 13 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 72 14 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 72 14 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 71 14 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 71 15 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 71 14 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 72 14 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 72 14 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 72 14 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 72 13 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 73 13 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 73 13 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 74 12 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 74 12 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 75 11 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 75 11 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 76 10 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 76 9 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 77 9 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 78 8 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 78 8 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 79 7 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 80 6 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 80 6 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 81 5 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 81 5 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 82 4 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 82 4 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 83 3 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 83 3 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 84 2 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 84 2 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 84 1 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 85 1 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 84 1 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 84 2 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 84 2 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 83 3 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 83 3 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 82 4 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 82 4 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 81 5 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 81 5 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 80 6 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 80 6 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 79 7 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 92 22 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 92 22 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 91 23 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 91 24 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 90 24 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 89 25 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 89 25 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 88 26 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 88 26 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 87 27 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 87 27 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 87 28 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 86 28 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 86 28 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 86 28 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 86 29 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 86 28 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 86 28 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 86 28 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 87 28 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 87 27 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 87 27 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 88 26 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 88 26 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 89 25 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 89 25 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 90 24 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 91 24 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 91 23 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 92 22 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 92 22 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 93 21 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 94 20 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 94 20 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 95 19 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 95 19 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 96 18 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 96 18 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 97 17 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 97 17 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 98 16 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 98 16 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 99 16 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 99 15 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 99 15 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 99 16 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 98 16 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 98 16 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 97 17 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 97 17 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 96 18 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 96 18 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 95 19 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 95 19 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 94 20 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 94 20 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 93 21 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 84 27 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 83 27 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 83 27 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 83 26 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 83 26 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 82 26 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 82 25 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 82 25 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 81 25 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 81 24 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 80 24 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 80 23 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 79 23 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 79 22 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 78 22 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 78 21 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 77 21 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 77 20 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 76 20 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 76 19 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 75 19 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 75 18 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 75 18 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 74 18 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 74 17 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 74 17 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 73 17 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 73 17 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 73 16 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 73 17 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 73 17 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 74 17 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 74 17 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 74 18 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 75 18 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 75 18 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 75 19 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 76 19 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 76 20 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 77 20 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 77 21 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 78 21 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 78 22 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 79 22 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 79 23 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 80 23 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 80 24 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 81 24 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 81 25 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 82 25 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 82 25 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 82 26 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 83 26 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 83 26 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 83 27 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 83 27 terrain_type FOREST number_of_tiles 0 }
+create_land { base_size 3 land_position 84 27 terrain_type FOREST number_of_tiles 0 }
+create_land { land_position 99 1 terrain_type FOREST number_of_tiles 5000 }
+
+if TINY_MAP
+start_random
+percent_chance 50
+create_land { terrain_type DIRT land_percent 0 land_position 27 27 base_size 0 assign_to AT_TEAM 1 0 0 }
+create_land { terrain_type DIRT land_percent 0 land_position 73 73 base_size 0 assign_to AT_TEAM 2 0 0 }
+percent_chance 50
+create_land { terrain_type DIRT land_percent 0 land_position 27 27 base_size 0 assign_to AT_TEAM 2 0 0 }
+create_land { terrain_type DIRT land_percent 0 land_position 73 73 base_size 0 assign_to AT_TEAM 1 0 0 }
+end_random
+elseif MEDIUM_MAP 
+start_random
+percent_chance 25
+create_land { terrain_type DIRT land_percent 0 land_position 27 27 base_size 0 assign_to AT_TEAM 1 0 0 }
+create_land { terrain_type DIRT land_percent 0 land_position 27 73 base_size 0 assign_to AT_TEAM 1 0 0 }
+create_land { terrain_type DIRT land_percent 0 land_position 73 73 base_size 0 assign_to AT_TEAM 2 0 0 }
+create_land { terrain_type DIRT land_percent 0 land_position 73 27 base_size 0 assign_to AT_TEAM 2 0 0 }
+percent_chance 25
+create_land { terrain_type DIRT land_percent 0 land_position 27 27 base_size 0 assign_to AT_TEAM 2 0 0 }
+create_land { terrain_type DIRT land_percent 0 land_position 27 73 base_size 0 assign_to AT_TEAM 2 0 0 }
+create_land { terrain_type DIRT land_percent 0 land_position 73 73 base_size 0 assign_to AT_TEAM 1 0 0 }
+create_land { terrain_type DIRT land_percent 0 land_position 73 27 base_size 0 assign_to AT_TEAM 1 0 0 }
+percent_chance 25
+create_land { terrain_type DIRT land_percent 0 land_position 27 27 base_size 0 assign_to AT_TEAM 1 0 0 }
+create_land { terrain_type DIRT land_percent 0 land_position 73 27 base_size 0 assign_to AT_TEAM 1 0 0 }
+create_land { terrain_type DIRT land_percent 0 land_position 73 73 base_size 0 assign_to AT_TEAM 2 0 0 }
+create_land { terrain_type DIRT land_percent 0 land_position 27 73 base_size 0 assign_to AT_TEAM 2 0 0 }
+percent_chance 25
+create_land { terrain_type DIRT land_percent 0 land_position 27 27 base_size 0 assign_to AT_TEAM 2 0 0 }
+create_land { terrain_type DIRT land_percent 0 land_position 73 27 base_size 0 assign_to AT_TEAM 2 0 0 }
+create_land { terrain_type DIRT land_percent 0 land_position 73 73 base_size 0 assign_to AT_TEAM 1 0 0 }
+create_land { terrain_type DIRT land_percent 0 land_position 27 73 base_size 0 assign_to AT_TEAM 1 0 0 }
+end_random
+elseif LARGE_MAP
+start_random
+percent_chance 25
+create_land { terrain_type DIRT land_percent 0 land_position 27 27 base_size 0 assign_to AT_TEAM 1 0 0 }
+create_land { terrain_type DIRT land_percent 0 land_position 18 50 base_size 0 assign_to AT_TEAM 1 0 0 }
+create_land { terrain_type DIRT land_percent 0 land_position 27 73 base_size 0 assign_to AT_TEAM 1 0 0 }
+create_land { terrain_type DIRT land_percent 0 land_position 73 73 base_size 0 assign_to AT_TEAM 2 0 0 }
+create_land { terrain_type DIRT land_percent 0 land_position 82 50 base_size 0 assign_to AT_TEAM 2 0 0 }
+create_land { terrain_type DIRT land_percent 0 land_position 73 27 base_size 0 assign_to AT_TEAM 2 0 0 }
+percent_chance 25
+create_land { terrain_type DIRT land_percent 0 land_position 27 27 base_size 0 assign_to AT_TEAM 2 0 0 }
+create_land { terrain_type DIRT land_percent 0 land_position 18 50 base_size 0 assign_to AT_TEAM 2 0 0 }
+create_land { terrain_type DIRT land_percent 0 land_position 27 73 base_size 0 assign_to AT_TEAM 2 0 0 }
+create_land { terrain_type DIRT land_percent 0 land_position 73 73 base_size 0 assign_to AT_TEAM 1 0 0 }
+create_land { terrain_type DIRT land_percent 0 land_position 82 50 base_size 0 assign_to AT_TEAM 1 0 0 }
+create_land { terrain_type DIRT land_percent 0 land_position 73 27 base_size 0 assign_to AT_TEAM 1 0 0 }
+percent_chance 25
+create_land { terrain_type DIRT land_percent 0 land_position 27 27 base_size 0 assign_to AT_TEAM 1 0 0 }
+create_land { terrain_type DIRT land_percent 0 land_position 50 18 base_size 0 assign_to AT_TEAM 1 0 0 }
+create_land { terrain_type DIRT land_percent 0 land_position 73 27 base_size 0 assign_to AT_TEAM 1 0 0 }
+create_land { terrain_type DIRT land_percent 0 land_position 73 73 base_size 0 assign_to AT_TEAM 2 0 0 }
+create_land { terrain_type DIRT land_percent 0 land_position 50 82 base_size 0 assign_to AT_TEAM 2 0 0 }
+create_land { terrain_type DIRT land_percent 0 land_position 27 73 base_size 0 assign_to AT_TEAM 2 0 0 }
+percent_chance 25
+create_land { terrain_type DIRT land_percent 0 land_position 27 27 base_size 0 assign_to AT_TEAM 2 0 0 }
+create_land { terrain_type DIRT land_percent 0 land_position 50 18 base_size 0 assign_to AT_TEAM 2 0 0 }
+create_land { terrain_type DIRT land_percent 0 land_position 73 27 base_size 0 assign_to AT_TEAM 2 0 0 }
+create_land { terrain_type DIRT land_percent 0 land_position 73 73 base_size 0 assign_to AT_TEAM 1 0 0 }
+create_land { terrain_type DIRT land_percent 0 land_position 50 82 base_size 0 assign_to AT_TEAM 1 0 0 }
+create_land { terrain_type DIRT land_percent 0 land_position 27 73 base_size 0 assign_to AT_TEAM 1 0 0 }
+end_random
+elseif HUGE_MAP
+start_random
+percent_chance 25
+create_land { terrain_type DIRT land_percent 0 land_position 27 27 base_size 0 assign_to AT_TEAM 1 0 0 }
+create_land { terrain_type DIRT land_percent 0 land_position 18 50 base_size 0 assign_to AT_TEAM 1 0 0 }
+create_land { terrain_type DIRT land_percent 0 land_position 27 73 base_size 0 assign_to AT_TEAM 1 0 0 }
+create_land { terrain_type DIRT land_percent 0 land_position 50 82 base_size 0 assign_to AT_TEAM 1 0 0 }
+create_land { terrain_type DIRT land_percent 0 land_position 73 73 base_size 0 assign_to AT_TEAM 2 0 0 }
+create_land { terrain_type DIRT land_percent 0 land_position 82 50 base_size 0 assign_to AT_TEAM 2 0 0 }
+create_land { terrain_type DIRT land_percent 0 land_position 73 27 base_size 0 assign_to AT_TEAM 2 0 0 }
+create_land { terrain_type DIRT land_percent 0 land_position 50 18 base_size 0 assign_to AT_TEAM 2 0 0 }
+percent_chance 25
+create_land { terrain_type DIRT land_percent 0 land_position 27 27 base_size 0 assign_to AT_TEAM 2 0 0 }
+create_land { terrain_type DIRT land_percent 0 land_position 18 50 base_size 0 assign_to AT_TEAM 2 0 0 }
+create_land { terrain_type DIRT land_percent 0 land_position 27 73 base_size 0 assign_to AT_TEAM 2 0 0 }
+create_land { terrain_type DIRT land_percent 0 land_position 50 82 base_size 0 assign_to AT_TEAM 2 0 0 }
+create_land { terrain_type DIRT land_percent 0 land_position 73 73 base_size 0 assign_to AT_TEAM 1 0 0 }
+create_land { terrain_type DIRT land_percent 0 land_position 82 50 base_size 0 assign_to AT_TEAM 1 0 0 }
+create_land { terrain_type DIRT land_percent 0 land_position 73 27 base_size 0 assign_to AT_TEAM 1 0 0 }
+create_land { terrain_type DIRT land_percent 0 land_position 50 18 base_size 0 assign_to AT_TEAM 1 0 0 }
+percent_chance 25
+create_land { terrain_type DIRT land_percent 0 land_position 27 27 base_size 0 assign_to AT_TEAM 1 0 0 }
+create_land { terrain_type DIRT land_percent 0 land_position 50 18 base_size 0 assign_to AT_TEAM 1 0 0 }
+create_land { terrain_type DIRT land_percent 0 land_position 73 27 base_size 0 assign_to AT_TEAM 1 0 0 }
+create_land { terrain_type DIRT land_percent 0 land_position 82 50 base_size 0 assign_to AT_TEAM 1 0 0 }
+create_land { terrain_type DIRT land_percent 0 land_position 73 73 base_size 0 assign_to AT_TEAM 2 0 0 }
+create_land { terrain_type DIRT land_percent 0 land_position 50 82 base_size 0 assign_to AT_TEAM 2 0 0 }
+create_land { terrain_type DIRT land_percent 0 land_position 27 73 base_size 0 assign_to AT_TEAM 2 0 0 }
+create_land { terrain_type DIRT land_percent 0 land_position 18 50 base_size 0 assign_to AT_TEAM 2 0 0 }
+percent_chance 25
+create_land { terrain_type DIRT land_percent 0 land_position 27 27 base_size 0 assign_to AT_TEAM 2 0 0 }
+create_land { terrain_type DIRT land_percent 0 land_position 50 18 base_size 0 assign_to AT_TEAM 2 0 0 }
+create_land { terrain_type DIRT land_percent 0 land_position 73 27 base_size 0 assign_to AT_TEAM 2 0 0 }
+create_land { terrain_type DIRT land_percent 0 land_position 82 50 base_size 0 assign_to AT_TEAM 2 0 0 }
+create_land { terrain_type DIRT land_percent 0 land_position 73 73 base_size 0 assign_to AT_TEAM 1 0 0 }
+create_land { terrain_type DIRT land_percent 0 land_position 50 82 base_size 0 assign_to AT_TEAM 1 0 0 }
+create_land { terrain_type DIRT land_percent 0 land_position 27 73 base_size 0 assign_to AT_TEAM 1 0 0 }
+create_land { terrain_type DIRT land_percent 0 land_position 18 50 base_size 0 assign_to AT_TEAM 1 0 0 }
+end_random
+endif
+<ELEVATION_GENERATION>
+create_elevation 4
+{
+	base_terrain GRASS
+	number_of_tiles 2000
+	number_of_clumps 10
+	set_scale_by_groups
+	enable_balanced_elevation
+}
+	
+<TERRAIN_GENERATION>
+#const BF 20
+#const JGRASS 83
+create_terrain BF
+{
+	base_terrain GRASS
+	land_percent 5
+	number_of_clumps 6
+	set_scale_by_groups
+	set_avoid_player_start_areas 25
+	spacing_to_other_terrain_types 10
+}
+create_terrain GRASS2
+{
+	base_terrain GRASS
+	land_percent 8
+	number_of_clumps 15
+	set_scale_by_groups
+	terrain_mask 1
+}
+create_terrain GRASS3
+{
+	base_terrain GRASS
+	land_percent 10
+	number_of_clumps 12
+	set_scale_by_groups
+	terrain_mask 1
+}
+create_terrain JGRASS
+{
+	base_terrain GRASS
+	land_percent 10
+	number_of_clumps 12
+	set_scale_by_groups
+	terrain_mask 1
+}
+<OBJECTS_GENERATION>
+create_object VILLAGER
+{
+	set_place_for_every_player
+	min_distance_to_players 6
+	max_distance_to_players 6
+}
+create_object TOWN_CENTER
+{
+	set_place_for_every_player
+	min_distance_to_players 0
+	max_distance_to_players 0
+}
+create_object SCOUT
+{
+	set_place_for_every_player
+	min_distance_to_players 7
+	max_distance_to_players 9
+}
+create_object FORAGE
+{
+  number_of_objects          6
+  group_placement_radius     3
+  set_tight_grouping
+  set_gaia_object_only
+  set_place_for_every_player
+  min_distance_to_players    11
+  max_distance_to_players    12
+  min_distance_group_placement  6
+  avoid_forest_zone 4
+}
+create_object OAKTREE
+{
+  number_of_objects             2
+  set_gaia_object_only
+  set_place_for_every_player
+  min_distance_to_players       6
+  max_distance_to_players       8
+  min_distance_group_placement  1
+  temp_min_distance_group_placement 5
+  set_circular_placement
+  avoid_forest_zone 4
+}
+if REGICIDE
+create_object KING
+{
+	set_place_for_every_player
+	min_distance_to_players 6
+	max_distance_to_players 6
+}
+endif
+/* Primary Gold */
+create_object GOLD 
+{
+	number_of_objects 6
+	group_placement_radius 3
+	set_tight_grouping
+	set_gaia_object_only
+	set_place_for_every_player
+	min_distance_to_players 14
+	max_distance_to_players 16
+	set_circular_placement
+	min_distance_group_placement 10
+	temp_min_distance_group_placement 8
+	avoid_forest_zone 2
+}
+/* Secondary Gold */
+create_object GOLD 
+{
+	number_of_objects 4
+	group_placement_radius 2
+	set_tight_grouping
+	set_gaia_object_only
+	set_place_for_every_player
+	min_distance_to_players 14
+	max_distance_to_players 16
+	set_circular_placement
+	min_distance_group_placement 10
+	temp_min_distance_group_placement 8
+	avoid_forest_zone 2
+}
+/* Primary Stone */
+create_object STONE
+{
+	number_of_objects 5
+	set_tight_grouping
+	set_gaia_object_only
+	set_place_for_every_player
+	min_distance_to_players 14
+	max_distance_to_players 16
+	min_distance_group_placement 7
+	temp_min_distance_group_placement 3
+	avoid_forest_zone 2
+}
+/* Secondary Stone */
+create_object STONE
+{
+	number_of_objects 4
+	set_tight_grouping
+	set_gaia_object_only
+	set_place_for_every_player
+	min_distance_to_players 16
+	max_distance_to_players 20
+	min_distance_group_placement 4
+	temp_min_distance_group_placement 3
+	avoid_forest_zone 2
+}
+start_random
+percent_chance 25
+create_object DLC_GOAT /* primary */
+{ number_of_objects 4 set_loose_grouping set_place_for_every_player min_distance_to_players 4 find_closest }
+create_object DLC_GOAT /* secondary */
+{ number_of_objects 2 number_of_groups 2 set_loose_grouping set_gaia_object_only set_place_for_every_player min_distance_to_players 14 max_distance_to_players 24
+avoid_forest_zone 1 }
+percent_chance 25
+create_object SHEEP /* primary */
+{ number_of_objects 4 set_loose_grouping set_place_for_every_player min_distance_to_players 4 find_closest }
+create_object SHEEP /* secondary */
+{ number_of_objects 2 number_of_groups 2 set_loose_grouping set_gaia_object_only set_place_for_every_player min_distance_to_players 14 max_distance_to_players 24
+avoid_forest_zone 1 }
+percent_chance 25
+create_object DLC_PIG /* primary */
+{ number_of_objects 4 set_loose_grouping set_place_for_every_player min_distance_to_players 4 find_closest }
+create_object DLC_PIG /* secondary */
+{ number_of_objects 2 number_of_groups 2 set_loose_grouping set_gaia_object_only set_place_for_every_player min_distance_to_players 14 max_distance_to_players 24
+avoid_forest_zone 1 }
+percent_chance 25
+create_object DLC_GOOSE /* primary */
+{ number_of_objects 4 set_loose_grouping set_place_for_every_player min_distance_to_players 4 find_closest }
+create_object DLC_GOOSE /* secondary */
+{ number_of_objects 2 number_of_groups 2 set_loose_grouping set_gaia_object_only set_place_for_every_player min_distance_to_players 14 max_distance_to_players 24
+avoid_forest_zone 1 }
+end_random
+
+create_object BOAR
+{
+	number_of_objects 2
+	set_place_for_every_player
+	set_gaia_object_only
+	min_distance_to_players 18
+	max_distance_to_players 26
+	set_circular_placement
+	avoid_forest_zone 2
+}
+create_object DEER
+{
+	number_of_objects 4
+	set_place_for_every_player
+	set_gaia_object_only
+	set_loose_grouping
+	min_distance_to_players 16
+	max_distance_to_players 24
+	max_distance_to_other_zones 7
+	avoid_forest_zone 2
+}
+/* Neutral Resources */
+create_object GOLD
+{
+	number_of_objects 3
+	number_of_groups 9999
+	set_tight_grouping
+	set_gaia_object_only
+	min_distance_group_placement 10
+	min_distance_to_players 24
+	temp_min_distance_group_placement 50
+	avoid_forest_zone 4
+}
+create_object STONE
+{
+	number_of_objects 3
+	number_of_groups 9999
+	set_tight_grouping
+	set_gaia_object_only
+	min_distance_group_placement 10
+	min_distance_to_players 24
+	temp_min_distance_group_placement 65
+	avoid_forest_zone 4
+}
+create_object RELIC
+{
+	number_of_objects 1
+if TINY_MAP
+	number_of_groups 5
+elseif MEDIUM_MAP
+	number_of_groups 5
+elseif LARGE_MAP
+	number_of_groups 7
+elseif HUGE_MAP
+	number_of_groups 8
+elseif GIGANTIC_MAP
+	number_of_groups 1000
+endif
+	set_loose_grouping
+	set_circular_placement
+	min_distance_group_placement 0
+	min_distance_to_players 20
+	temp_min_distance_group_placement 25
+	avoid_forest_zone 2
+}
+create_object HAWK
+{
+	number_of_objects 1
+	number_of_groups 4
+	set_scaling_to_map_size
+	temp_min_distance_group_placement 15
+}

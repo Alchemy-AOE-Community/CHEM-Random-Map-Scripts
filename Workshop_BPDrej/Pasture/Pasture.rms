@@ -1,0 +1,401 @@
+/* Pasture 1.0 (5/24/22) by BPDrej */
+	
+#const MUD 76
+#const REEDS 92
+#const REED 1350
+#const SHORE 15
+#const GWATER 95
+#const BWATER 96
+#const GRASS4 83
+#const TRAP 278
+
+<PLAYER_SETUP>
+random_placement
+	
+<LAND_GENERATION>
+base_terrain LEAVES
+create_land
+{
+	terrain_type GRASS
+	land_percent 100
+	top_border 8
+	bottom_border 8
+	right_border 8
+	left_border 8
+	border_fuzziness 25
+	land_id 30
+}
+create_player_lands
+{
+	terrain_type DIRT
+	land_percent 0
+	base_size 0
+	circle_radius 26 0
+	land_id 10
+	zone 2
+	other_zone_avoidance_distance 10
+}
+create_land
+{
+	terrain_type DLC_BEACH3
+	number_of_tiles 150
+	land_position 50 50
+	clumping_factor 30
+	zone 5
+	land_id 40
+	other_zone_avoidance_distance 10
+}
+create_player_lands
+{
+	terrain_type MUD
+	number_of_tiles 60
+	clumping_factor 30
+	circle_radius 30 0
+	land_id 20
+	zone 3
+	other_zone_avoidance_distance 10
+	base_elevation 3
+}
+
+<ELEVATION_GENERATION>
+
+<TERRAIN_GENERATION>
+create_terrain FOREST
+{
+	base_terrain LEAVES
+	land_percent 100
+	number_of_clumps 100
+	set_scale_by_groups
+}
+create_terrain MUD
+{
+	base_terrain GRASS
+	land_percent 100
+	number_of_clumps 1000
+	height_limits 1 6
+	set_scale_by_groups
+}
+create_terrain GRASS2
+{
+	base_terrain GRASS
+	land_percent 5
+	number_of_clumps 10
+	spacing_to_other_terrain_types 3
+	set_scale_by_groups
+}
+create_terrain GRASS2
+{
+	base_terrain GRASS
+	land_percent 3
+	number_of_clumps 8
+	spacing_to_other_terrain_types 3
+	set_scale_by_groups
+	terrain_mask 1
+}
+create_terrain GRASS3
+{
+	base_terrain GRASS
+	land_percent 8
+	number_of_clumps 2
+	spacing_to_other_terrain_types 3
+	set_scale_by_groups
+	terrain_mask 1
+}
+create_terrain MUD
+{
+	base_terrain GRASS
+	number_of_tiles 4
+	number_of_clumps 35
+	terrain_mask 1
+	set_scale_by_groups
+}
+create_terrain SHALLOW
+{
+	base_terrain DLC_BEACH3
+	land_percent 100
+	number_of_clumps 1000
+	set_scale_by_groups
+	set_flat_terrain_only
+	spacing_to_other_terrain_types 1
+}
+create_terrain DLC_WATER5
+{
+	base_terrain SHALLOW
+	land_percent 100
+	number_of_clumps 1000
+	spacing_to_other_terrain_types 1
+	set_scale_by_groups
+}
+create_terrain REEDS
+{
+	base_terrain GRASS
+	land_percent 2
+	number_of_clumps 12
+	set_scale_by_groups
+	set_avoid_player_start_areas 20
+	spacing_to_other_terrain_types 5
+}
+
+<OBJECTS_GENERATION>
+if REGICIDE
+create_object KING
+{
+	set_place_for_every_player
+	min_distance_to_players 6
+	max_distance_to_players 6
+}
+endif
+create_object VILLAGER
+{
+	set_place_for_every_player
+	min_distance_to_players 6
+	max_distance_to_players 6
+	place_on_specific_land_id 10
+}
+create_object TOWN_CENTER
+{
+	set_place_for_every_player
+	min_distance_to_players 0
+	max_distance_to_players 0
+	place_on_specific_land_id 10
+}
+create_object SCOUT
+{
+	set_place_for_every_player
+	min_distance_to_players 7
+	max_distance_to_players 9
+	place_on_specific_land_id 10
+}
+create_object FORAGE
+{
+  number_of_objects          6
+  group_placement_radius     3
+  set_tight_grouping
+  set_gaia_object_only
+  set_place_for_every_player
+  min_distance_to_players    9
+  max_distance_to_players    11
+  min_distance_group_placement  6
+  avoid_forest_zone 4
+  place_on_specific_land_id 10
+}
+create_object OAKTREE
+{
+  number_of_objects             2
+  set_gaia_object_only
+  set_place_for_every_player
+  min_distance_to_players       6
+  max_distance_to_players       8
+  min_distance_group_placement  2
+  place_on_specific_land_id 10
+}
+create_object DLC_AFRICANBUSH
+{
+  number_of_objects             3
+  set_gaia_object_only
+  set_place_for_every_player
+  min_distance_to_players       6
+  max_distance_to_players       8
+  min_distance_group_placement  2
+  place_on_specific_land_id 10
+}
+create_object GOLD /* primary */
+{
+	number_of_objects 4
+	group_placement_radius 1
+	set_tight_grouping
+	set_gaia_object_only
+	set_place_for_every_player
+	min_distance_to_players 12
+	max_distance_to_players 14
+	min_distance_group_placement 7
+	avoid_forest_zone 4
+	place_on_specific_land_id 10
+}
+create_object STONE /* primary */
+{
+	number_of_objects 3
+	group_placement_radius 3
+	set_tight_grouping
+	set_gaia_object_only
+	set_place_for_every_player
+	min_distance_to_players 12
+	max_distance_to_players 14
+	min_distance_group_placement 7
+	avoid_forest_zone 4
+	place_on_specific_land_id 10
+}
+create_object GOLD /* secondary */
+{
+	number_of_objects 3
+	set_tight_grouping
+	group_placement_radius 3
+	set_place_for_every_player
+	set_gaia_object_only
+	min_distance_to_players 15
+	max_distance_to_players 16
+	min_distance_group_placement 7
+	max_distance_to_other_zones 7
+	avoid_forest_zone 4
+	place_on_specific_land_id 10
+}
+create_object STONE /* secondary */
+{
+	number_of_objects 3
+	group_placement_radius 2
+	set_tight_grouping
+	set_gaia_object_only
+	set_place_for_every_player
+	min_distance_to_players 15
+	max_distance_to_players 18
+	min_distance_group_placement 7
+	max_distance_to_other_zones 7
+	avoid_forest_zone 4
+	place_on_specific_land_id 10
+}
+create_object GOLD /* Specks */
+{
+	number_of_objects 1
+	number_of_groups 9999
+	set_scaling_to_map_size
+	min_distance_group_placement 1
+	temp_min_distance_group_placement 3
+	terrain_to_place_on MUD
+}
+create_object STONE /* Specks */
+{
+	number_of_objects 1
+	number_of_groups 9999
+	set_scaling_to_map_size
+	min_distance_group_placement 2
+	temp_min_distance_group_placement 5
+	terrain_to_place_on MUD
+}
+create_object DLC_COW /* Primary */
+{
+   number_of_objects 3
+   set_loose_grouping
+   set_gaia_object_only
+   set_place_for_every_player
+   temp_min_distance_group_placement 2
+   min_distance_to_players 7
+   max_distance_to_players 9
+   place_on_specific_land_id 10
+}
+create_object DLC_COW_B /* Secondary */
+{
+   number_of_objects 2
+   number_of_groups  2
+   set_loose_grouping
+   set_gaia_object_only
+   set_place_for_every_player
+   min_distance_to_players 16
+   max_distance_to_players 19
+   place_on_specific_land_id 10
+}
+create_object DLC_COW_C /* extra */
+{
+   number_of_objects 4
+   number_of_groups  2
+   set_loose_grouping
+   set_gaia_object_only
+   set_scaling_to_map_size
+   group_placement_radius 18
+   temp_min_distance_group_placement 20
+   terrain_to_place_on MUD
+}
+create_object WILD_HORSE
+{
+  number_of_objects 3
+  number_of_groups 4
+  set_gaia_object_only
+  set_scaling_to_map_size
+  terrain_to_place_on GRASS
+  temp_min_distance_group_placement 25
+  set_loose_grouping
+  min_distance_to_players 20
+}
+create_object TRAP
+{
+	number_of_objects 1
+	number_of_groups 10
+	set_scaling_to_map_size
+	set_gaia_object_only
+	min_distance_group_placement 2
+	ignore_terrain_restrictions
+	second_object SHORE_FISH
+	terrain_to_place_on SHALLOW
+}
+create_object BOAR
+{
+  number_of_objects 1
+  number_of_groups 2
+  set_gaia_object_only
+  set_place_for_every_player
+  min_distance_to_players 14
+  max_distance_to_players 18
+  temp_min_distance_group_placement 20
+  place_on_specific_land_id 10
+}
+create_object DEER
+{
+  number_of_objects          4
+  group_placement_radius     3
+  set_loose_grouping
+  set_gaia_object_only
+  set_place_for_every_player
+  place_on_specific_land_id 10
+start_random
+percent_chance 50
+  min_distance_to_players    14
+  max_distance_to_players    22
+percent_chance 50
+  min_distance_to_players    23
+  max_distance_to_players    30
+end_random
+}
+create_object RELIC
+{
+	number_of_objects 1
+	set_gaia_object_only
+	set_place_for_every_player
+	min_distance_to_players 12
+	max_distance_to_players 14
+	avoid_forest_zone 4
+	place_on_specific_land_id 10
+}
+create_object RELIC
+{
+	number_of_objects 1
+	set_gaia_object_only
+	set_place_for_every_player
+	min_distance_to_players 0
+	max_distance_to_players 6
+	avoid_forest_zone 4
+	place_on_specific_land_id 20
+}
+create_object RELIC
+{
+	number_of_objects 1
+	terrain_to_place_on DLC_BEACH3
+}
+create_object HAY_STACK
+{
+	number_of_objects 2
+	number_of_groups 4
+	set_tight_grouping
+	set_gaia_object_only
+	min_distance_group_placement 30
+	min_distance_to_players 25
+	place_on_specific_land_id 30
+}
+create_object BROKEN_CART
+{
+	number_of_objects 1
+	set_place_for_every_player
+	set_gaia_object_only
+	min_distance_to_players 20
+	place_on_forest_zone
+	place_on_specific_land_id 10
+}
+	

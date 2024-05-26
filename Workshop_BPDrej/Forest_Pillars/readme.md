@@ -1,0 +1,1 @@
+In each corner of the map are large forests. These four are always populated first, games with more than 4 players will have others spawning between them. Standard resources, with neutral resources scattered around the map.

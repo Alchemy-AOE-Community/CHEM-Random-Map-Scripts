@@ -1,0 +1,995 @@
+/*
+Eye 
+by: Zetnus
+Zetnus@outlook.com
+06 January 2021
+Most recent update: 05 May 2022
+
+Made for Masters of RMS
+This is a 1v1 map only, with a very static layout.
+Gold-rush style but you also have lakes to fight over.
+
+v2.1
+-added evil terrain to the center
+
+v2
+-moved players somewhat towards the center.
+-increased fish per lake 7->9
+-slightly increased back forest size
+-wolves moved closer to the center and total count reduced by 50%
+-player gold reduced from 2*4 to 2*2
+
+
+Learn about random map scripting: https://docs.google.com/document/d/e/2PACX-1vR_I1I9u-hI2FFm-EYyjoM_-9dNJFOfTaIgr05wXNbdpv9tI18b6r18ARULy3Jqyvlq6-lc2VjX6xP4/pub
+
+This map was harvested from a mod in the official AOE2DE mod center, whose licensing agreement with Microsoft supersedes any Github restrictions: https://www.microsoft.com/en-us/servicesagreement
+
+ */
+ 
+start_random
+	percent_chance 20 #define DOUBLE_EYE
+	percent_chance 80 #define SINGLE_EYE
+end_random
+
+
+/* constant definitions */
+
+#const WATER_BROWN 96
+#const EVIL_FOG 69
+#const UNDERBRUSH_LEAVES 71
+#const WET_ROCK 82
+#const MUD 76
+#const GRAVEL 70
+
+#const STRAGGLER_A 1250	/* dead forest tree */
+
+#const ONGRID_PLACEHOLDER 278
+#const ONGRID_PLACEHOLDER_2 1613
+
+/* eye candy */
+#const FLAME4 1336
+#const BLACK_TILE 306
+#const INVIS_COMBATANT 94
+#const PROJ 676
+
+/* =================================================================================================== */
+<PLAYER_SETUP>
+
+direct_placement 
+ai_info_map_type CUSTOM 0 0 0
+behavior_version 1
+
+/*
+effect_amount GAIA_SET_ATTRIBUTE INVIS_COMBATANT ATTR_MOVE_SPEED 0
+effect_amount GAIA_SET_ATTRIBUTE INVIS_COMBATANT ATTR_MAX_RANGE 1
+
+effect_amount GAIA_SET_ATTRIBUTE INVIS_COMBATANT ATTR_RELOAD_TIME 1
+effect_amount GAIA_SET_ATTRIBUTE INVIS_COMBATANT ATTR_SHOWN_RANGE 1
+effect_amount GAIA_SET_ATTRIBUTE INVIS_COMBATANT ATTR_LINE_OF_SIGHT 1
+effect_amount GAIA_SET_ATTRIBUTE INVIS_COMBATANT ATTR_SEARCH_RADIUS 1
+effect_amount GAIA_SET_ATTRIBUTE INVIS_COMBATANT ATTR_ACCURACY_PERCENT 100
+effect_amount GAIA_SET_ATTRIBUTE INVIS_COMBATANT ATTR_ATTACK_DISPERSION 0
+effect_amount GAIA_SET_ATTRIBUTE INVIS_COMBATANT ATTR_PROJECTILE_ID 676
+effect_amount GAIA_SET_ATTRIBUTE INVIS_COMBATANT ATTR_ATTACK 262145
+effect_amount GAIA_SET_ATTRIBUTE INVIS_COMBATANT ATTR_SHOWN_ATTACK 1
+
+effect_percent GAIA_SET_ATTRIBUTE INVIS_COMBATANT ATTR_BLAST_RADIUS 50
+effect_amount GAIA_SET_ATTRIBUTE INVIS_COMBATANT ATTR_HITPOINTS 30000
+effect_amount GAIA_SET_ATTRIBUTE INVIS_COMBATANT ATTR_REGENERATION_RATE 30000
+effect_amount GAIA_SET_ATTRIBUTE INVIS_COMBATANT ATTR_COMBAT_ABILITY 1
+*/
+
+
+/* Disabling Trade Carts and Cogs for Multi-team Games */
+if 2_TEAM_GAME
+else
+  #const TRADE_CART_ENABLER 161
+  #const TRADE_COG_ENABLER 180
+  #const TRADE_CARAVAN_ENABLER 48
+  #const HINDU_CARAVANSERAI_ENABLER 518
+  #const PERSIAN_CARAVANSERAI_ENABLER 552  
+  #const SILK_ROAD 499
+  effect_amount DISABLE_TECH TRADE_COG_ENABLER ATTR_DISABLE 180
+  effect_amount DISABLE_TECH TRADE_CART_ENABLER ATTR_DISABLE 161
+  effect_amount DISABLE_TECH TRADE_CARAVAN_ENABLER ATTR_DISABLE 48
+  effect_amount DISABLE_TECH HINDU_CARAVANSERAI_ENABLER ATTR_DISABLE 518
+  effect_amount DISABLE_TECH PERSIAN_CARAVANSERAI_ENABLER ATTR_DISABLE 552
+  effect_amount DISABLE_TECH SILK_ROAD ATTR_DISABLE 499    
+endif
+
+/* =================================================================================================== */
+<LAND_GENERATION>
+
+base_terrain UNDERBRUSH_LEAVES
+base_layer DLC_DIRT4
+
+/* Generated with MadLands v4: I: 3 R: 25 XO: 0 YO: 0 OA: 135 XS: 1 YS: 1 A: 2 F: 2 SF: 0 */
+/* big thanks to TheMadCADer for this utility */
+/* https://www.aoezone.net/threads/madlands-utility-for-rms.166398/ */
+
+/* the circle */
+create_land { number_of_tiles 0 base_size 2 land_position 31 69 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 30 68 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 29 67 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 28 66 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 28 65 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 27 63 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 26 62 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 26 61 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 25 59 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 25 58 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 25 57 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 25 55 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 25 54 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 25 53 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 1 land_position 25 51 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 1 land_position 25 50 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 1 land_position 25 49 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 26 47 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 26 46 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 26 45 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 27 44 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 27 43 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 28 42 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 29 40 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 29 39 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 30 38 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 31 37 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 31 36 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 32 35 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 33 35 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 34 34 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 35 33 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 35 32 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 36 31 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 37 31 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 38 30 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 39 29 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 40 29 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 42 28 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 43 27 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 44 27 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 45 26 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 46 26 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 47 26 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 1 land_position 49 25 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 1 land_position 50 25 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 1 land_position 51 25 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 53 25 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 54 25 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 55 25 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 57 25 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 58 25 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 59 25 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 61 26 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 62 26 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 63 27 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 65 28 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 66 28 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 67 29 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 68 30 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 69 31 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 70 32 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 71 33 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 72 34 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 72 35 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 73 37 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 74 38 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 74 39 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 75 41 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 75 42 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 75 43 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 75 45 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 75 46 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 75 47 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 1 land_position 75 49 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 1 land_position 75 50 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 1 land_position 75 51 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 74 53 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 74 54 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 74 55 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 73 56 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 73 57 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 72 58 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 71 60 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 71 61 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 70 62 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 69 63 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 69 64 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 68 65 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 67 65 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 66 66 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 65 67 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 65 68 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 64 69 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 63 69 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 62 70 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 61 71 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 60 71 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 58 72 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 57 73 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 56 73 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 55 74 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 54 74 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 53 74 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 1 land_position 51 75 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 1 land_position 50 75 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 1 land_position 49 75 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 47 75 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 46 75 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 45 75 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 43 75 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 42 75 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 41 75 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 39 74 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 38 74 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 37 73 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 35 72 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 34 72 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 33 71 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+create_land { number_of_tiles 0 base_size 2 land_position 32 70 terrain_type DLC_ROCK base_elevation 2 land_id 1337 }
+
+/* relics on the ring */
+create_land { number_of_tiles 0 base_size 1 land_position 30 70 terrain_type DLC_ROCK base_elevation 2 land_id 666 }
+create_land { number_of_tiles 0 base_size 1 land_position 70 30 terrain_type DLC_ROCK base_elevation 2 land_id 666 }
+
+/* the pupil */
+create_land { number_of_tiles 0 base_size 1 land_position 35 65 terrain_type DLC_WETROCKBEACH }
+create_land { number_of_tiles 0 base_size 1 land_position 36 64 terrain_type DLC_WETROCKBEACH }
+create_land { number_of_tiles 0 base_size 1 land_position 37 63 terrain_type DLC_WETROCKBEACH }
+create_land { number_of_tiles 0 base_size 2 land_position 38 62 terrain_type DLC_WETROCKBEACH }
+create_land { number_of_tiles 0 base_size 2 land_position 39 61 terrain_type DLC_WETROCKBEACH }
+create_land { number_of_tiles 0 base_size 2 land_position 40 60 terrain_type DLC_WETROCKBEACH }
+create_land { number_of_tiles 0 base_size 3 land_position 41 59 terrain_type DLC_WETROCKBEACH }
+create_land { number_of_tiles 0 base_size 3 land_position 42 58 terrain_type DLC_WETROCKBEACH }
+create_land { number_of_tiles 0 base_size 3 land_position 43 57 terrain_type DLC_WETROCKBEACH }
+create_land { number_of_tiles 0 base_size 3 land_position 44 56 terrain_type DLC_WETROCKBEACH }
+create_land { number_of_tiles 0 base_size 3 land_position 45 55 terrain_type DLC_WETROCKBEACH }
+create_land { number_of_tiles 0 base_size 3 land_position 46 54 terrain_type DLC_WETROCKBEACH }
+create_land { number_of_tiles 0 base_size 3 land_position 47 53 terrain_type DLC_WETROCKBEACH }
+create_land { number_of_tiles 0 base_size 4 land_position 48 52 terrain_type DLC_WETROCKBEACH }
+create_land { number_of_tiles 0 base_size 4 land_position 49 51 terrain_type DLC_WETROCKBEACH }
+create_land { number_of_tiles 0 base_size 4 land_position 50 50 terrain_type DLC_WETROCKBEACH land_id 666 }
+create_land { number_of_tiles 0 base_size 4 land_position 51 49 terrain_type DLC_WETROCKBEACH }
+create_land { number_of_tiles 0 base_size 4 land_position 52 48 terrain_type DLC_WETROCKBEACH }
+create_land { number_of_tiles 0 base_size 3 land_position 53 47 terrain_type DLC_WETROCKBEACH }
+create_land { number_of_tiles 0 base_size 3 land_position 54 46 terrain_type DLC_WETROCKBEACH }
+create_land { number_of_tiles 0 base_size 3 land_position 55 45 terrain_type DLC_WETROCKBEACH }
+create_land { number_of_tiles 0 base_size 3 land_position 56 44 terrain_type DLC_WETROCKBEACH }
+create_land { number_of_tiles 0 base_size 3 land_position 57 43 terrain_type DLC_WETROCKBEACH }
+create_land { number_of_tiles 0 base_size 3 land_position 58 42 terrain_type DLC_WETROCKBEACH }
+create_land { number_of_tiles 0 base_size 3 land_position 59 41 terrain_type DLC_WETROCKBEACH }
+create_land { number_of_tiles 0 base_size 2 land_position 60 40 terrain_type DLC_WETROCKBEACH }
+create_land { number_of_tiles 0 base_size 2 land_position 61 39 terrain_type DLC_WETROCKBEACH }
+create_land { number_of_tiles 0 base_size 2 land_position 62 38 terrain_type DLC_WETROCKBEACH }
+create_land { number_of_tiles 0 base_size 1 land_position 63 37 terrain_type DLC_WETROCKBEACH }
+create_land { number_of_tiles 0 base_size 1 land_position 64 36 terrain_type DLC_WETROCKBEACH }
+create_land { number_of_tiles 0 base_size 1 land_position 65 35 terrain_type DLC_WETROCKBEACH }
+
+/* filling the iris */
+create_land { land_percent 100 base_size 0 land_position 45 45 terrain_type DLC_CRACKED land_id 11 }
+create_land { land_percent 100 base_size 0 land_position 55 55 terrain_type DLC_CRACKED land_id 11 }
+
+/* the player lands */
+create_land { assign_to AT_TEAM -10 0 0 land_percent 100 base_size 0 land_position 15 15 terrain_type DIRT3 left_border -15 bottom_border 75 right_border 75 top_border -15 }
+create_land { assign_to AT_TEAM -10 0 0 land_percent 100 base_size 0 land_position 85 85 terrain_type DIRT3 left_border 75 bottom_border -15 right_border -15 top_border 75 }
+
+/* the lakes */
+if 4_PLAYER_GAME
+create_land { assign_to AT_TEAM -10 0 0 land_percent 100 base_size 0 land_position 88 12 terrain_type SHALLOW left_border 75 bottom_border 75 right_border -15 top_border -15 }
+create_land { assign_to AT_TEAM -10 0 0 land_percent 100 base_size 0 land_position 12 88 terrain_type SHALLOW left_border -15 bottom_border -15 right_border 75 top_border 75 }
+elseif SINGLE_EYE
+create_land { land_percent 100 base_size 0 land_position 97 3 terrain_type SHALLOW left_border 75 bottom_border 75 right_border -15 top_border -15 land_id 15 }
+create_land { land_percent 100 base_size 0 land_position 3 97 terrain_type SHALLOW left_border -15 bottom_border -15 right_border 75 top_border 75 land_id 15 }
+/* the islands */
+create_land { land_percent 0 base_size 1 land_position 99 1 terrain_type MUD land_id 666 }
+create_land { land_percent 0 base_size 1 land_position 1 99 terrain_type MUD land_id 666 }
+elseif DOUBLE_EYE
+	start_random
+	percent_chance 50
+	create_land { assign_to AT_PLAYER 1 0 1 land_percent 100 base_size 0 land_position 88 12 terrain_type SHALLOW left_border 75 bottom_border 75 right_border -15 top_border -15 }
+	create_land { assign_to AT_PLAYER 2 0 1 land_percent 100 base_size 0 land_position 12 88 terrain_type SHALLOW left_border -15 bottom_border -15 right_border 75 top_border 75 }
+	percent_chance 50
+	create_land { assign_to AT_PLAYER 2 0 1 land_percent 100 base_size 0 land_position 88 12 terrain_type SHALLOW left_border 75 bottom_border 75 right_border -15 top_border -15 }
+	create_land { assign_to AT_PLAYER 1 0 1 land_percent 100 base_size 0 land_position 12 88 terrain_type SHALLOW left_border -15 bottom_border -15 right_border 75 top_border 75 }
+	end_random
+endif
+
+
+/* protected forests */
+create_land { land_percent 100 base_size 1 land_position 3 3 terrain_type DLC_DRAGONFOREST base_elevation 1 left_border -15 bottom_border 90 right_border 90 top_border -15 border_fuzziness 100 }
+create_land { land_percent 100 base_size 1 land_position 97 97 terrain_type DLC_DRAGONFOREST base_elevation 1 left_border 90 bottom_border -15 right_border -15 top_border 90 border_fuzziness 100 }
+
+
+/* =================================================================================================== */
+<ELEVATION_GENERATION>
+/* required for base elevation to work */
+
+/* =================================================================================================== */
+<TERRAIN_GENERATION>
+
+color_correction CC_AUTUMN
+
+if 4_PLAYER_GAME
+create_terrain DLC_MANGROVESHALLOW {
+	base_terrain SHALLOW
+	land_percent 100
+	number_of_clumps 400
+	set_scale_by_groups
+	spacing_to_other_terrain_types 2
+}
+create_terrain DLC_MANGROVEFOREST {
+	base_terrain DLC_MANGROVESHALLOW
+	land_percent 1
+	number_of_clumps 4
+	set_scale_by_groups
+	set_avoid_player_start_areas
+	spacing_to_other_terrain_types 0
+}
+elseif SINGLE_EYE
+else
+create_terrain DLC_MANGROVESHALLOW {
+	base_terrain SHALLOW
+	land_percent 100
+	number_of_clumps 400
+	set_scale_by_groups
+	spacing_to_other_terrain_types 2
+}
+create_terrain DLC_MANGROVEFOREST {
+	base_terrain DLC_MANGROVESHALLOW
+	land_percent 1
+	number_of_clumps 4
+	set_scale_by_groups
+	set_avoid_player_start_areas
+	spacing_to_other_terrain_types 0
+}
+endif
+
+create_terrain DLC_FORESTAUTUMN {
+	base_terrain UNDERBRUSH_LEAVES
+	land_percent 9
+	number_of_clumps 46
+	set_scale_by_groups
+	set_avoid_player_start_areas
+	spacing_to_other_terrain_types 2
+}
+
+create_terrain UNDERBRUSH_LEAVES {
+	base_terrain DIRT3
+	land_percent 100
+	number_of_clumps 9320
+	terrain_mask 1
+}
+
+create_terrain DLC_ROCK {
+	base_terrain DLC_CRACKED
+	land_percent 100
+	number_of_clumps 9320
+	terrain_mask 2
+	height_limits 1 1
+}
+
+create_terrain DESERT {
+	base_terrain DLC_CRACKED
+	land_percent 2
+	number_of_clumps 9320
+	terrain_mask 1
+	height_limits 0 0
+}
+
+create_terrain DLC_ROCK {
+	base_terrain UNDERBRUSH_LEAVES
+	land_percent 100
+	number_of_clumps 9320
+	terrain_mask 2
+	height_limits 1 2
+}
+
+create_terrain WET_ROCK {
+	base_terrain DLC_ROCK
+	land_percent 100
+	number_of_clumps 9320
+	terrain_mask 1
+	spacing_to_other_terrain_types 1
+}
+
+create_terrain DLC_BLACK {
+	base_terrain DLC_WETROCKBEACH
+	land_percent 100
+	number_of_clumps 9320
+	spacing_to_other_terrain_types 1
+}
+create_terrain EVIL_FOG {
+	base_terrain DLC_BLACK
+	land_percent 100
+	number_of_clumps 9320
+	terrain_mask 1
+	spacing_to_other_terrain_types 0
+}
+
+create_terrain WATER_BROWN {
+	base_terrain SHALLOW
+	land_percent 100
+	number_of_clumps 9320
+	terrain_mask 1
+}
+create_terrain WATER_BROWN {
+	base_terrain SHALLOW
+	land_percent 100
+	number_of_clumps 9320
+	terrain_mask 1
+}
+create_terrain WATER_BROWN {
+	base_terrain SHALLOW
+	land_percent 100
+	number_of_clumps 9320
+	spacing_to_other_terrain_types 3
+}
+create_terrain WATER {
+	base_terrain WATER_BROWN
+	land_percent 100
+	number_of_clumps 9320
+	terrain_mask 1
+}
+create_terrain WATER_BROWN {
+	base_terrain DLC_MANGROVESHALLOW
+	land_percent 100
+	number_of_clumps 9320
+	terrain_mask 1
+}
+create_terrain WATER_BROWN {
+	base_terrain DLC_MANGROVESHALLOW
+	land_percent 100
+	number_of_clumps 9320
+	terrain_mask 1
+}
+create_terrain WATER_BROWN {
+	base_terrain DLC_MANGROVEFOREST
+	land_percent 100
+	number_of_clumps 9320
+	terrain_mask 1
+}
+create_terrain WATER_BROWN {
+	base_terrain DLC_MANGROVEFOREST
+	land_percent 100
+	number_of_clumps 9320
+	terrain_mask 1
+}
+
+/* =================================================================================================== */
+<CONNECTION_GENERATION>
+
+/* custom beaches */
+create_connect_all_lands
+{
+	replace_terrain BEACH DLC_GRAVELBEACH
+	terrain_size BEACH 999 0
+}
+
+/* get rid of unwanted forest straglers */
+create_connect_all_players_land
+{
+	replace_terrain DLC_FORESTAUTUMN GRAVEL
+	
+	terrain_cost DLC_MANGROVESHALLOW 0
+	
+	terrain_size DIRT3 8 0
+	terrain_size UNDERBRUSH_LEAVES 8 0
+}
+
+create_connect_to_nonplayer_land
+{
+	replace_terrain UNDERBRUSH_LEAVES DLC_DESERTGRAVEL
+	replace_terrain DLC_FORESTAUTUMN UNDERBRUSH_LEAVES
+	
+	terrain_cost DLC_WETROCKBEACH 0
+	terrain_cost DLC_BLACK 0
+	terrain_cost DLC_CRACKED 0
+	terrain_cost WATER_BROWN 0
+	terrain_cost MUD 0
+	terrain_cost SHALLOW 0
+	terrain_cost BEACH 0
+	terrain_cost DLC_DRAGONFOREST 0
+	terrain_cost DLC_MANGROVESHALLOW 0
+	
+	terrain_size UNDERBRUSH_LEAVES 0 0
+}
+
+
+
+
+/* =================================================================================================== */
+<OBJECTS_GENERATION>
+
+/* all the relics */
+create_object BLACK_TILE {
+	place_on_specific_land_id 666
+	max_distance_to_players 0
+	second_object RELIC
+}
+
+create_object ONGRID_PLACEHOLDER_2 {
+	terrain_to_place_on DLC_BLACK
+	number_of_objects 9320
+	actor_area 666
+	actor_area_radius 0
+}
+
+create_object FLAME4 {
+	place_on_specific_land_id 1337
+	max_distance_to_players 0
+}
+
+/*
+create_object INVIS_COMBATANT {
+	place_on_specific_land_id 1337
+	max_distance_to_players 0
+	set_gaia_object_only
+	set_gaia_unconvertible
+}
+*/
+
+create_object ONGRID_PLACEHOLDER {
+	terrain_to_place_on DLC_WETROCKBEACH
+	number_of_objects 9320
+	second_object GOLD
+	avoid_actor_area 666
+}
+
+/* starting stuff */
+create_object TOWN_CENTER {
+	set_place_for_every_player
+	find_closest
+	terrain_to_place_on DLC_DESERTGRAVEL
+	actor_area 1
+	actor_area_radius 0
+}
+create_object TOWN_CENTER {
+	set_place_for_every_player
+	terrain_to_place_on DLC_MANGROVESHALLOW
+	max_distance_to_players 0
+}
+
+create_object ONGRID_PLACEHOLDER_2 {
+	set_place_for_every_player
+	actor_area_to_place_in 1
+	actor_area 1004
+	actor_area_radius 4
+	set_gaia_object_only
+}
+create_object ONGRID_PLACEHOLDER_2 {
+	set_place_for_every_player
+	actor_area_to_place_in 1
+	actor_area 1006
+	actor_area_radius 6
+	set_gaia_object_only
+}
+create_object ONGRID_PLACEHOLDER_2 {
+	set_place_for_every_player
+	actor_area_to_place_in 1
+	actor_area 1010
+	actor_area_radius 10
+	set_gaia_object_only
+}
+create_object ONGRID_PLACEHOLDER_2 {
+	set_place_for_every_player
+	actor_area_to_place_in 1
+	actor_area 1012
+	actor_area_radius 12
+	set_gaia_object_only
+}
+create_object ONGRID_PLACEHOLDER_2 {
+	set_place_for_every_player
+	actor_area_to_place_in 1
+	actor_area 1015
+	actor_area_radius 15
+	set_gaia_object_only
+}
+create_object ONGRID_PLACEHOLDER_2 {
+	set_place_for_every_player
+	actor_area_to_place_in 1
+	actor_area 1020
+	actor_area_radius 20
+	set_gaia_object_only
+}
+create_object ONGRID_PLACEHOLDER_2 {
+	set_place_for_every_player
+	actor_area_to_place_in 1
+	actor_area 1026
+	actor_area_radius rnd(24,28)
+	set_gaia_object_only
+}
+create_object ONGRID_PLACEHOLDER_2 {
+	set_place_for_every_player
+	actor_area_to_place_in 1
+	actor_area 1030
+	actor_area_radius rnd(28,32)
+	set_gaia_object_only
+}
+create_object ONGRID_PLACEHOLDER_2 {
+	set_place_for_every_player
+	actor_area_to_place_in 1
+	actor_area 1036
+	actor_area_radius rnd(34,38)
+	set_gaia_object_only
+}
+
+create_object VILLAGER {
+	set_place_for_every_player
+	actor_area_to_place_in 1006
+	temp_min_distance_group_placement 3
+	actor_area 777
+	max_distance_to_players 20
+	set_circular_placement
+}
+if REGICIDE	create_object KING
+else create_object SCOUT
+endif
+{
+	set_place_for_every_player
+	actor_area_to_place_in 1006
+	avoid_actor_area 777
+	max_distance_to_players 20
+	set_circular_placement
+}
+if REGICIDE
+	create_object VILLAGER {
+		number_of_objects 7
+		set_place_for_every_player
+		actor_area_to_place_in 1010
+		avoid_actor_area 1006
+		max_distance_to_players 20
+		set_circular_placement
+	}
+	create_object CASTLE {
+		set_place_for_every_player
+		terrain_to_place_on DLC_DESERTGRAVEL
+		avoid_actor_area 1010
+		find_closest
+		min_distance_group_placement 4
+		max_distance_to_players 20
+		set_circular_placement
+	}
+endif
+
+if SINGLE_EYE
+else
+create_object VILLAGER {
+	set_place_for_every_player
+	terrain_to_place_on DLC_MANGROVESHALLOW
+	min_distance_to_players 6
+	max_distance_to_players 9
+	set_circular_placement
+	find_closest
+	temp_min_distance_group_placement 3
+	actor_area 778
+}
+if REGICIDE	create_object KING
+else create_object SCOUT
+endif
+{
+	set_place_for_every_player
+	terrain_to_place_on DLC_MANGROVESHALLOW
+	min_distance_to_players 6
+	max_distance_to_players 9
+	set_circular_placement
+	find_closest
+	avoid_actor_area 778
+}
+if REGICIDE
+	create_object VILLAGER {
+		number_of_objects 7
+		set_place_for_every_player
+		terrain_to_place_on DLC_MANGROVESHALLOW
+		min_distance_to_players 6
+		max_distance_to_players 9
+		set_circular_placement
+	}
+	create_object CASTLE {
+		set_place_for_every_player
+		terrain_to_place_on DLC_MANGROVESHALLOW
+		min_distance_to_players 9
+		max_distance_to_players 12
+		set_circular_placement
+		find_closest
+		min_distance_group_placement 4
+	}
+endif
+endif
+
+if EMPIRE_WARS
+/* please contact Zetnus to implement empire wars */
+endif
+
+create_object MARLIN1 {
+	number_of_objects 700
+	terrain_to_place_on DLC_MANGROVESHALLOW
+	min_distance_to_players 4
+	set_circular_placement
+	temp_min_distance_group_placement 5
+}
+create_object DLC_MANGROVE_TREE {
+	number_of_objects 2
+	terrain_to_place_on DLC_MANGROVESHALLOW
+	set_gaia_object_only
+	set_place_for_every_player
+	min_distance_to_players 4
+	max_distance_to_players 5
+	set_circular_placement
+	min_distance_group_placement 1
+}
+create_object DLC_MANGROVE_TREE {
+	number_of_objects 3
+	terrain_to_place_on DLC_MANGROVESHALLOW
+	set_gaia_object_only
+	set_place_for_every_player
+	min_distance_to_players 6
+	max_distance_to_players 8
+	set_circular_placement
+	min_distance_group_placement 1
+}
+
+create_object DLC_ORANGEBUSH {
+	number_of_objects 6
+	group_placement_radius 2
+	set_tight_grouping
+	set_gaia_object_only
+	set_place_for_every_player
+	min_distance_group_placement 3
+	avoid_forest_zone 3
+	avoid_actor_area 1010
+	terrain_to_place_on DLC_DESERTGRAVEL
+	find_closest
+	actor_area 20
+	actor_area_radius 6
+}
+/* back gold */
+create_object GOLD {
+	number_of_objects 2
+	group_placement_radius 2
+	set_tight_grouping
+	set_gaia_object_only
+	set_place_for_every_player
+	avoid_actor_area 1012
+	find_closest
+	min_distance_group_placement 3
+	avoid_forest_zone 2
+	actor_area 21
+	actor_area_radius 9
+	terrain_to_place_on DIRT3
+}
+/* front gold */
+create_object GOLD {
+	number_of_objects 2
+	group_placement_radius 2
+	set_tight_grouping
+	set_gaia_object_only
+	set_place_for_every_player
+	avoid_actor_area 1012
+	min_distance_group_placement 3
+	avoid_forest_zone 2
+	actor_area 22
+	actor_area_radius 7
+	avoid_actor_area 20
+	terrain_to_place_on DLC_DESERTGRAVEL
+	find_closest
+}
+/* back stone */
+create_object STONE {
+	number_of_objects 5
+	group_placement_radius 2
+	set_tight_grouping
+	set_gaia_object_only
+	set_place_for_every_player
+	avoid_actor_area 1015
+	min_distance_to_players 6
+	max_distance_to_players 14
+	min_distance_group_placement 3
+	avoid_forest_zone 2
+	actor_area 23
+	actor_area_radius 8
+	terrain_to_place_on DIRT3
+	avoid_actor_area 21
+}
+/* this stone can be anywhere */
+create_object STONE {
+	number_of_objects 4
+	group_placement_radius 2
+	set_tight_grouping
+	set_gaia_object_only
+	set_place_for_every_player
+	avoid_actor_area 1012
+	min_distance_to_players 6
+	max_distance_to_players 19
+	min_distance_group_placement 3
+	avoid_forest_zone 2
+	actor_area 25
+	actor_area_radius 7
+	avoid_actor_area 20
+	avoid_actor_area 21
+	avoid_actor_area 22
+	avoid_actor_area 23
+}
+
+/* far gold in the center */
+create_object GOLD {	
+	set_gaia_object_only
+	set_place_for_every_player
+	number_of_objects 3
+	number_of_groups 2
+	set_tight_grouping
+	avoid_actor_area 1030
+	temp_min_distance_group_placement 8
+	terrain_to_place_on DLC_CRACKED
+	find_closest
+	ignore_terrain_restrictions
+}
+
+/* far stone */
+create_object ONGRID_PLACEHOLDER_2 {	
+	set_gaia_object_only
+	set_place_for_every_player
+	number_of_objects 2
+	avoid_actor_area 1036
+	temp_min_distance_group_placement 10
+	terrain_to_place_on DLC_DESERTGRAVEL
+	find_closest
+	actor_area 10
+	avoid_forest_zone 2
+}
+create_object STONE {	
+	set_gaia_object_only
+	set_place_for_every_player
+	number_of_objects 3
+	set_tight_grouping
+	actor_area_to_place_in 10
+}
+
+create_object DLC_ELEPHANT {
+	number_of_objects 2
+	set_gaia_object_only
+	set_place_for_every_player
+	avoid_forest_zone 1
+	avoid_actor_area 1015
+	max_distance_to_players 25
+	terrain_to_place_on DIRT3
+	temp_min_distance_group_placement 5
+}
+
+create_object DLC_IBEX {
+	number_of_objects 3
+	number_of_groups 2
+	set_gaia_object_only
+	set_place_for_every_player
+	avoid_forest_zone 1
+	avoid_actor_area 1026
+	temp_min_distance_group_placement 15
+	terrain_to_place_on DLC_DESERTGRAVEL
+	find_closest
+}
+
+create_object DLC_GOAT {
+	number_of_objects 3
+	set_loose_grouping
+	set_gaia_object_only
+	set_place_for_every_player
+	avoid_actor_area 1006
+	terrain_to_place_on DIRT3
+	find_closest
+	actor_area 6
+	actor_area_radius 1
+	max_distance_to_players 20
+	set_circular_placement
+}
+create_object DLC_GOAT {
+	number_of_objects 1
+	set_place_for_every_player
+	actor_area_to_place_in 6
+	max_distance_to_players 20
+	set_circular_placement
+}
+
+/* far sheep */
+create_object DLC_GOAT {
+	number_of_objects 2
+	number_of_groups 2
+	set_loose_grouping
+	set_gaia_object_only
+	set_place_for_every_player
+	avoid_actor_area 1015
+	max_distance_to_players 19
+	set_circular_placement
+	temp_min_distance_group_placement 7
+	avoid_forest_zone 1
+}
+
+create_object WOLF {
+	number_of_objects 3
+	number_of_groups 1
+	set_loose_grouping
+	set_gaia_object_only
+	place_on_specific_land_id 11
+	max_distance_to_players 4
+	set_circular_placement
+	terrain_to_place_on DLC_CRACKED
+}
+
+create_object SALMON {
+	number_of_objects 9
+	min_distance_to_players 3
+	place_on_specific_land_id 15
+	temp_min_distance_group_placement 6
+}
+create_object SHORE_FISH {
+	number_of_objects 4
+	min_distance_to_players 5
+	place_on_specific_land_id 15
+	temp_min_distance_group_placement 10
+	terrain_to_place_on DLC_GRAVELBEACH
+	max_distance_to_players 30
+	ignore_terrain_restrictions
+}
+
+/* personal atragglers */
+create_object STRAGGLER_A {
+	number_of_objects 2
+	set_gaia_object_only
+	set_place_for_every_player
+	actor_area_to_place_in 1006
+	avoid_actor_area 1004
+	min_distance_group_placement 1
+}
+create_object STRAGGLER_A {
+	number_of_objects 3
+	set_gaia_object_only
+	set_place_for_every_player
+	actor_area_to_place_in 1010
+	avoid_actor_area 1006
+	min_distance_group_placement 1
+}
+
+/* scattered stragglers */
+create_object STRAGGLER_A {
+	number_of_objects 25
+	set_gaia_object_only
+	set_scaling_to_map_size
+	avoid_actor_area 1015
+	avoid_actor_area 666
+	min_distance_group_placement 1
+	temp_min_distance_group_placement 12
+	avoid_forest_zone 1
+}
+
+/* birds */
+create_object DLC_VULTURE {
+	number_of_objects 6
+	set_scaling_to_map_size
+}
+
+
+/* a bit more eyecandy */
+create_object DLC_ANIMALSKELETON {
+	number_of_objects 6
+	set_scaling_to_map_size
+	terrain_to_place_on DLC_CRACKED
+	min_distance_group_placement 3
+	temp_min_distance_group_placement 9
+}
+create_object SKELETON {
+	number_of_objects 9
+	set_scaling_to_map_size
+	terrain_to_place_on DLC_CRACKED
+	temp_min_distance_group_placement 3
+}
+
+
+
+
+
+
+
+
+
+
+
+

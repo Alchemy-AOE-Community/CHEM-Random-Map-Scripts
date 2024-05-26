@@ -1,0 +1,1311 @@
+
+/* Snow Arabia 2021 by Zetnus 
+Zetnus@outlook.com
+Zetnus#6414 on Discord
+
+Most recent update: 05 May 2022
+
+This map was harvested from a mod in the official AOE2DE mod center, whose licensing agreement with Microsoft supersedes any Github restrictions: https://www.microsoft.com/en-us/servicesagreement
+
+*/
+
+#const UNDERBRUSH_SNOW 72
+#const SNOW_LIGHT 73
+#const SNOW_HEAVY 74
+
+/* =================================================================================================== */
+<PLAYER_SETUP>
+random_placement
+ai_info_map_type ARABIA 0 0 0
+behavior_version 1
+
+/* Disabling Trade Carts and Cogs for Multi-team Games */
+if 2_TEAM_GAME
+else
+  #const TRADE_CART_ENABLER 161
+  #const TRADE_COG_ENABLER 180
+  #const TRADE_CARAVAN_ENABLER 48
+  #const HINDU_CARAVANSERAI_ENABLER 518
+  #const PERSIAN_CARAVANSERAI_ENABLER 552  
+  #const SILK_ROAD 499
+  effect_amount DISABLE_TECH TRADE_COG_ENABLER ATTR_DISABLE 180
+  effect_amount DISABLE_TECH TRADE_CART_ENABLER ATTR_DISABLE 161
+  effect_amount DISABLE_TECH TRADE_CARAVAN_ENABLER ATTR_DISABLE 48
+  effect_amount DISABLE_TECH HINDU_CARAVANSERAI_ENABLER ATTR_DISABLE 518
+  effect_amount DISABLE_TECH PERSIAN_CARAVANSERAI_ENABLER ATTR_DISABLE 552
+  effect_amount DISABLE_TECH SILK_ROAD ATTR_DISABLE 499    
+endif
+
+/* =================================================================================================== */
+<LAND_GENERATION>
+
+base_terrain SNOW
+
+create_player_lands 
+{ 
+	terrain_type ICE	/* a placeholder to keep cliffs away */
+	number_of_tiles 1781
+	base_size 14
+	if TINY_MAP circle_radius 34 1
+	elseif SMALL_MAP circle_radius 36 1
+	else
+	endif
+	other_zone_avoidance_distance 1
+	clumping_factor 15
+}
+
+/* =================================================================================================== */
+<ELEVATION_GENERATION> 
+
+create_elevation 7 {
+	base_terrain SNOW
+	if TINY_MAP	number_of_clumps 20
+	elseif SMALL_MAP	number_of_clumps 29
+	elseif MEDIUM_MAP	number_of_clumps 39
+	elseif LARGE_MAP	number_of_clumps 56
+	elseif HUGE_MAP		number_of_clumps 67
+	elseif GIGANTIC_MAP	number_of_clumps 81
+	elseif LUDIKRIS_MAP	number_of_clumps 322
+	endif
+	number_of_tiles 2000
+	set_scale_by_size
+	enable_balanced_elevation
+}
+
+create_elevation 2
+{
+	base_terrain ICE
+	if TINY_MAP number_of_clumps 4
+	elseif SMALL_MAP number_of_clumps 6
+	elseif MEDIUM_MAP number_of_clumps 8
+	elseif LARGE_MAP number_of_clumps 12
+	elseif HUGE_MAP number_of_clumps 16
+	else number_of_clumps 16
+	endif
+	number_of_tiles 300
+	set_scale_by_size
+	enable_balanced_elevation
+}
+
+
+/* =================================================================================================== */
+<CLIFF_GENERATION>
+cliff_type CT_SNOW
+
+/* possibly reduce */
+if TINY_MAP
+	min_number_of_cliffs 5
+	max_number_of_cliffs 8
+	min_length_of_cliff 4
+	max_length_of_cliff 6
+elseif SMALL_MAP
+	min_number_of_cliffs 8
+	max_number_of_cliffs 12
+	min_length_of_cliff 4
+	max_length_of_cliff 7
+elseif MEDIUM_MAP
+	min_number_of_cliffs 11
+	max_number_of_cliffs 16
+	min_length_of_cliff 5
+	max_length_of_cliff 8
+elseif LARGE_MAP
+	min_number_of_cliffs 16
+	max_number_of_cliffs 24
+	min_length_of_cliff 6
+	max_length_of_cliff 9
+elseif HUGE_MAP
+	min_number_of_cliffs 19
+	max_number_of_cliffs 27
+	min_length_of_cliff 6
+	max_length_of_cliff 10
+elseif GIGANTIC_MAP
+	min_number_of_cliffs 23
+	max_number_of_cliffs 34
+	min_length_of_cliff 6
+	max_length_of_cliff 10
+elseif LUDIKRIS_MAP
+	min_number_of_cliffs 92
+	max_number_of_cliffs 138
+	min_length_of_cliff 6
+	max_length_of_cliff 10 
+endif
+
+/* =================================================================================================== */
+<TERRAIN_GENERATION>
+
+color_correction CC_WINTER
+
+/* neutral forests */
+create_terrain SNOW_FOREST
+{
+	base_terrain SNOW
+	spacing_to_other_terrain_types 6
+	land_percent 7
+	number_of_clumps 9
+	set_avoid_player_start_areas 22    
+	set_scale_by_groups
+}
+create_terrain DLC_FORESTSNOWAUTUMN
+{
+	base_terrain SNOW
+	spacing_to_other_terrain_types 3
+	land_percent 1
+	number_of_clumps 3
+	set_avoid_player_start_areas 22     
+	set_scale_by_groups
+}
+
+/* Adding individual forests to player lands */
+
+create_terrain SNOW_HEAVY { base_terrain ICE land_percent 100 }
+create_terrain SNOW_FOREST { base_terrain SNOW_HEAVY number_of_tiles 200 number_of_clumps 3 set_avoid_player_start_areas 16 }
+create_terrain SNOW_LIGHT { base_terrain SNOW_HEAVY land_percent 100 number_of_clumps 9320 }
+create_terrain SNOW_LIGHT { base_terrain SNOW_HEAVY land_percent 100 number_of_clumps 9320 }
+create_terrain SNOW_LIGHT { base_terrain SNOW_HEAVY land_percent 100 number_of_clumps 9320 }
+create_terrain SNOW_LIGHT { base_terrain SNOW_HEAVY land_percent 100 number_of_clumps 9320 }
+create_terrain SNOW_LIGHT { base_terrain SNOW_HEAVY land_percent 100 number_of_clumps 9320 }
+
+create_terrain SNOW_HEAVY { base_terrain ICE land_percent 100 }
+create_terrain SNOW_FOREST { base_terrain SNOW_HEAVY number_of_tiles 200 number_of_clumps 3 set_avoid_player_start_areas 16 }
+create_terrain SNOW_LIGHT { base_terrain SNOW_HEAVY land_percent 100 number_of_clumps 9320 }
+create_terrain SNOW_LIGHT { base_terrain SNOW_HEAVY land_percent 100 number_of_clumps 9320 }
+create_terrain SNOW_LIGHT { base_terrain SNOW_HEAVY land_percent 100 number_of_clumps 9320 }
+create_terrain SNOW_LIGHT { base_terrain SNOW_HEAVY land_percent 100 number_of_clumps 9320 }
+create_terrain SNOW_LIGHT { base_terrain SNOW_HEAVY land_percent 100 number_of_clumps 9320 }
+
+create_terrain SNOW_HEAVY { base_terrain ICE land_percent 100 }
+create_terrain SNOW_FOREST { base_terrain SNOW_HEAVY number_of_tiles 200 number_of_clumps 3 set_avoid_player_start_areas 16 }
+create_terrain SNOW_LIGHT { base_terrain SNOW_HEAVY land_percent 100 number_of_clumps 9320 }
+create_terrain SNOW_LIGHT { base_terrain SNOW_HEAVY land_percent 100 number_of_clumps 9320 }
+create_terrain SNOW_LIGHT { base_terrain SNOW_HEAVY land_percent 100 number_of_clumps 9320 }
+create_terrain SNOW_LIGHT { base_terrain SNOW_HEAVY land_percent 100 number_of_clumps 9320 }
+create_terrain SNOW_LIGHT { base_terrain SNOW_HEAVY land_percent 100 number_of_clumps 9320 }
+
+create_terrain SNOW_HEAVY { base_terrain ICE land_percent 100 }
+create_terrain SNOW_FOREST { base_terrain SNOW_HEAVY number_of_tiles 200 number_of_clumps 3 set_avoid_player_start_areas 16 }
+create_terrain SNOW_LIGHT { base_terrain SNOW_HEAVY land_percent 100 number_of_clumps 9320 }
+create_terrain SNOW_LIGHT { base_terrain SNOW_HEAVY land_percent 100 number_of_clumps 9320 }
+create_terrain SNOW_LIGHT { base_terrain SNOW_HEAVY land_percent 100 number_of_clumps 9320 }
+create_terrain SNOW_LIGHT { base_terrain SNOW_HEAVY land_percent 100 number_of_clumps 9320 }
+create_terrain SNOW_LIGHT { base_terrain SNOW_HEAVY land_percent 100 number_of_clumps 9320 }
+
+create_terrain SNOW_HEAVY { base_terrain ICE land_percent 100 }
+create_terrain SNOW_FOREST { base_terrain SNOW_HEAVY number_of_tiles 200 number_of_clumps 3 set_avoid_player_start_areas 16 }
+create_terrain SNOW_LIGHT { base_terrain SNOW_HEAVY land_percent 100 number_of_clumps 9320 }
+create_terrain SNOW_LIGHT { base_terrain SNOW_HEAVY land_percent 100 number_of_clumps 9320 }
+create_terrain SNOW_LIGHT { base_terrain SNOW_HEAVY land_percent 100 number_of_clumps 9320 }
+create_terrain SNOW_LIGHT { base_terrain SNOW_HEAVY land_percent 100 number_of_clumps 9320 }
+create_terrain SNOW_LIGHT { base_terrain SNOW_HEAVY land_percent 100 number_of_clumps 9320 }
+
+create_terrain SNOW_HEAVY { base_terrain ICE land_percent 100 }
+create_terrain SNOW_FOREST { base_terrain SNOW_HEAVY number_of_tiles 200 number_of_clumps 3 set_avoid_player_start_areas 16 }
+create_terrain SNOW_LIGHT { base_terrain SNOW_HEAVY land_percent 100 number_of_clumps 9320 }
+create_terrain SNOW_LIGHT { base_terrain SNOW_HEAVY land_percent 100 number_of_clumps 9320 }
+create_terrain SNOW_LIGHT { base_terrain SNOW_HEAVY land_percent 100 number_of_clumps 9320 }
+create_terrain SNOW_LIGHT { base_terrain SNOW_HEAVY land_percent 100 number_of_clumps 9320 }
+create_terrain SNOW_LIGHT { base_terrain SNOW_HEAVY land_percent 100 number_of_clumps 9320 }
+
+create_terrain SNOW_HEAVY { base_terrain ICE land_percent 100 }
+create_terrain SNOW_FOREST { base_terrain SNOW_HEAVY number_of_tiles 200 number_of_clumps 3 set_avoid_player_start_areas 16 }
+create_terrain SNOW_LIGHT { base_terrain SNOW_HEAVY land_percent 100 number_of_clumps 9320 }
+create_terrain SNOW_LIGHT { base_terrain SNOW_HEAVY land_percent 100 number_of_clumps 9320 }
+create_terrain SNOW_LIGHT { base_terrain SNOW_HEAVY land_percent 100 number_of_clumps 9320 }
+create_terrain SNOW_LIGHT { base_terrain SNOW_HEAVY land_percent 100 number_of_clumps 9320 }
+create_terrain SNOW_LIGHT { base_terrain SNOW_HEAVY land_percent 100 number_of_clumps 9320 }
+
+create_terrain SNOW_HEAVY { base_terrain ICE land_percent 100 }
+create_terrain SNOW_FOREST { base_terrain SNOW_HEAVY number_of_tiles 200 number_of_clumps 3 set_avoid_player_start_areas 16 }
+create_terrain SNOW_LIGHT { base_terrain SNOW_HEAVY land_percent 100 number_of_clumps 9320 }
+create_terrain SNOW_LIGHT { base_terrain SNOW_HEAVY land_percent 100 number_of_clumps 9320 }
+create_terrain SNOW_LIGHT { base_terrain SNOW_HEAVY land_percent 100 number_of_clumps 9320 }
+create_terrain SNOW_LIGHT { base_terrain SNOW_HEAVY land_percent 100 number_of_clumps 9320 }
+create_terrain SNOW_LIGHT { base_terrain SNOW_HEAVY land_percent 100 number_of_clumps 9320 }
+
+/* clean up */
+create_terrain SNOW { base_terrain SNOW_LIGHT land_percent 100 number_of_clumps 9320 }
+create_terrain SNOW { base_terrain SNOW_LIGHT land_percent 100 number_of_clumps 9320 }
+create_terrain SNOW { base_terrain SNOW_LIGHT land_percent 100 number_of_clumps 9320 }
+create_terrain SNOW { base_terrain SNOW_LIGHT land_percent 100 number_of_clumps 9320 }
+create_terrain SNOW { base_terrain SNOW_LIGHT land_percent 100 number_of_clumps 9320 }
+
+
+
+/* cosmetic mixing */
+create_terrain UNDERBRUSH_SNOW
+{
+	base_terrain SNOW
+	land_percent 15
+	number_of_clumps 12
+	set_scale_by_groups
+	terrain_mask 1
+}
+
+create_terrain LEAVES
+{
+	base_terrain SNOW
+	land_percent 10
+	number_of_clumps 12
+	set_scale_by_groups 
+	terrain_mask 1
+}
+
+create_terrain ICYSHORE
+{
+	base_terrain SNOW
+	land_percent 10
+	number_of_clumps 20
+	set_scale_by_groups
+	terrain_mask 1
+}
+
+
+
+<OBJECTS_GENERATION>
+
+#const BLANKOBJECT 647
+
+if INFINITE_RESOURCES #define DEATH_MATCH
+endif
+
+/* Town Center generation */
+create_object TOWN_CENTER
+{
+	set_place_for_every_player
+	max_distance_to_players 0
+}
+
+/* starting villagers */
+if EMPIRE_WARS
+else
+create_object VILLAGER
+{
+	set_place_for_every_player
+	min_distance_to_players 6
+	max_distance_to_players 7
+	set_circular_placement
+	min_distance_group_placement 2
+}
+endif
+
+/* scout cavalry */
+create_object SCOUT
+{
+	set_place_for_every_player
+	if EMPIRE_WARS
+		min_distance_to_players 12
+		max_distance_to_players 16
+		avoid_forest_zone 1
+	else
+		min_distance_to_players 7
+		max_distance_to_players 9
+	endif
+	set_circular_placement
+	min_distance_group_placement 2
+}
+
+/* Regicide buildings - 7 villagers, king, castle */
+if REGICIDE
+create_object VILLAGER
+{
+	number_of_objects 7
+	set_place_for_every_player
+	min_distance_to_players 6
+	max_distance_to_players 7
+	set_circular_placement
+	force_placement
+}
+
+create_object KING
+{
+	set_place_for_every_player
+	min_distance_to_players 6
+	set_circular_placement
+	find_closest
+}
+
+create_object CASTLE
+{
+	set_place_for_every_player
+	min_distance_to_players 10
+	set_circular_placement
+	find_closest
+	min_distance_group_placement 2
+}
+endif
+/* Regicide end */
+
+/* Modern DE uses find closest to ensure resources are placed properly.
+In order to avoid the issue with find closest where things are placed in perpendicular lines going out from the town center, circles of placeholders are positioned on the map.
+Resources will be set to avoid these actor areas.
+*/
+if EMPIRE_WARS
+elseif INFINITE_RESOURCES
+else
+create_object BLANKOBJECT
+{
+	number_of_objects rnd(220,320)
+	set_gaia_object_only
+	set_place_for_every_player
+	find_closest
+	min_distance_to_players 9
+	actor_area 6009
+	actor_area_radius 0
+}
+create_object BLANKOBJECT 
+{
+	number_of_objects rnd(240,320)
+	set_gaia_object_only
+	set_place_for_every_player
+	find_closest
+	min_distance_to_players 11
+	actor_area 6011
+	actor_area_radius 0
+}
+create_object BLANKOBJECT 
+{
+	number_of_objects rnd(290,440)
+	set_gaia_object_only
+	set_place_for_every_player
+	find_closest
+	min_distance_to_players 13
+	actor_area 6013
+	actor_area_radius 0
+}
+create_object BLANKOBJECT
+{
+	number_of_objects rnd(290,440)
+	set_gaia_object_only
+	set_place_for_every_player
+	find_closest
+	min_distance_to_players 15
+	actor_area 6015
+	actor_area_radius 0
+}
+create_object BLANKOBJECT
+{
+	number_of_objects rnd(400,500)
+	set_gaia_object_only
+	set_place_for_every_player
+	find_closest
+	min_distance_to_players 17
+	actor_area 6017
+	actor_area_radius 0
+}
+create_object BLANKOBJECT 
+{
+	number_of_objects rnd(500,600)
+	set_gaia_object_only
+	set_place_for_every_player
+	find_closest
+	min_distance_to_players 20
+	actor_area 6020
+	actor_area_radius 0
+}
+
+create_object BLANKOBJECT 
+{
+	number_of_objects rnd(600,700)
+	set_gaia_object_only
+	set_place_for_every_player
+	find_closest
+	min_distance_to_players 23
+	actor_area 6023
+	actor_area_radius 0
+}
+endif
+
+/* All the main Empire Wars code is consolidated here.
+Remember to remove primary berries, primary gold, primary sheep, player boars, and player straggler trees for Empire Wars later one */
+if EMPIRE_WARS
+
+/* Berries */
+create_object FORAGE
+{
+	number_of_objects 6
+	group_placement_radius 3
+	set_tight_grouping
+	set_gaia_object_only
+	set_place_for_every_player
+	min_distance_to_players 10
+	set_circular_placement
+	find_closest
+	actor_area 14
+	actor_area_radius 2
+	avoid_forest_zone 4
+}
+/* Empire Wars 8 Farms around TC */
+create_object FARM
+{
+	set_place_for_every_player
+	min_distance_to_players 3
+	max_distance_to_players 3
+	actor_area 21
+	actor_area_radius 0
+	second_object VILLAGER
+}
+create_object FARM
+{
+	set_place_for_every_player
+	min_distance_to_players 3
+	max_distance_to_players 3
+	actor_area 22
+	actor_area_radius 0
+	second_object VILLAGER
+}
+create_object FARM
+{
+	set_place_for_every_player
+	min_distance_to_players 3
+	max_distance_to_players 3
+	actor_area 23
+	actor_area_radius 0
+	second_object VILLAGER
+}
+create_object FARM
+{
+	set_place_for_every_player
+	min_distance_to_players 3
+	max_distance_to_players 3
+	actor_area 24
+	actor_area_radius 0
+	second_object VILLAGER
+}
+create_object FARM
+{
+	set_place_for_every_player
+	min_distance_to_players 3
+	max_distance_to_players 3
+	actor_area 25
+	actor_area_radius 0
+	second_object VILLAGER
+}
+create_object FARM
+{
+	set_place_for_every_player
+	min_distance_to_players 4
+	max_distance_to_players 4
+	actor_area 26
+	actor_area_radius 0
+	second_object VILLAGER
+}
+create_object FARM
+{
+	set_place_for_every_player
+	min_distance_to_players 4
+	find_closest
+	actor_area 27
+	actor_area_radius 0
+	second_object VILLAGER
+}
+create_object FARM
+{
+	set_place_for_every_player
+	min_distance_to_players 4
+	find_closest
+	actor_area 28
+	actor_area_radius 0
+	second_object VILLAGER
+}
+ 
+ /* Empire Wars Mill */
+create_object MILL
+{
+	set_place_for_every_player
+	actor_area_to_place_in 14	/* berries */
+	find_closest
+	actor_area 40
+	actor_area_radius 6
+}
+create_object VILLAGER
+{
+	set_place_for_every_player
+	number_of_objects 5
+	actor_area_to_place_in 14	/* berries */
+	actor_area 94
+	actor_area_radius 6
+	force_placement
+	find_closest
+}
+
+/* Empire Wars Primary Gold Mine */
+create_object GOLD
+{
+	number_of_objects 7
+	group_placement_radius 3
+	set_tight_grouping
+	set_gaia_object_only
+	set_place_for_every_player
+	min_distance_to_players 10
+	set_circular_placement
+	find_closest
+	max_distance_to_other_zones 7
+	avoid_cliff_zone 3
+	avoid_forest_zone 3
+	actor_area 12
+	actor_area_radius 1
+	avoid_actor_area 40
+	avoid_actor_area 94
+}
+
+/* Mining Camp for Empire Wars */
+create_object MINING_CAMP
+{
+	set_place_for_every_player
+	find_closest
+	actor_area_to_place_in 12	/* primary gold */
+	actor_area 10
+	actor_area_radius 2
+	avoid_forest_zone 1
+}
+create_object VILLAGER
+{
+	set_place_for_every_player
+	number_of_objects 4
+	actor_area_to_place_in 12	/* primary gold */
+	actor_area 171
+	actor_area_radius 5
+	find_closest
+	force_placement
+}
+
+/* Empire Wars Lumbercamps */
+create_object LUMBER_CAMP
+{
+	set_place_for_every_player
+	place_on_forest_zone
+	find_closest
+	actor_area 8
+	actor_area_radius 4
+	avoid_actor_area 94
+	avoid_actor_area 40
+	avoid_actor_area 171
+}
+create_object VILLAGER
+{
+	set_place_for_every_player
+	number_of_objects 4
+	actor_area_to_place_in 8
+	place_on_forest_zone
+	actor_area 71
+	actor_area_radius 4
+	find_closest
+	force_placement
+}
+
+create_object LUMBER_CAMP
+{
+	set_place_for_every_player
+	place_on_forest_zone
+	find_closest 
+	actor_area 9
+	actor_area_radius 4
+	avoid_actor_area 71
+	avoid_actor_area 94
+	avoid_actor_area 40
+	avoid_actor_area 171
+}
+create_object VILLAGER
+{
+	set_place_for_every_player
+	number_of_objects 3
+	actor_area_to_place_in 9
+	place_on_forest_zone
+	actor_area 72
+	actor_area_radius 4
+	find_closest
+	force_placement
+}
+
+create_object LUMBER_CAMP
+{
+	set_place_for_every_player
+	place_on_forest_zone
+	avoid_actor_area 71
+	avoid_actor_area 72
+	avoid_actor_area 94
+	avoid_actor_area 40
+	find_closest 
+	actor_area 99
+	actor_area_radius 4
+	avoid_actor_area 171
+}
+create_object VILLAGER
+{
+	set_place_for_every_player
+	number_of_objects 3
+	actor_area_to_place_in 99
+	place_on_forest_zone
+	actor_area 73
+	actor_area_radius 5
+	find_closest
+	force_placement
+}
+
+/* Blacksmith, barracks, and houses for Empire Wars */
+create_object BLACKSMITH
+{
+	set_place_for_every_player
+	min_distance_to_players 7
+	find_closest
+	avoid_actor_area 94
+	avoid_actor_area 40
+	avoid_actor_area 8
+	avoid_actor_area 9
+	avoid_actor_area 99
+	avoid_actor_area 171 /* primary gold villagers, large radius */
+	actor_area 80
+	actor_area_radius 4
+}
+
+create_object HOUSE
+{
+	set_place_for_every_player
+	min_distance_to_players 7
+	find_closest
+	avoid_actor_area 40
+	avoid_actor_area 10
+	avoid_actor_area 94
+	avoid_actor_area 171
+}
+create_object HOUSE
+{
+	set_place_for_every_player
+	min_distance_to_players 7
+	find_closest
+	avoid_actor_area 40
+	avoid_actor_area 10
+	avoid_actor_area 94
+	avoid_actor_area 171
+	find_closest
+}
+create_object HOUSE
+{
+	set_place_for_every_player
+	min_distance_to_players 7
+	find_closest
+	avoid_actor_area 40
+	avoid_actor_area 10
+	avoid_actor_area 94
+	avoid_actor_area 171
+}
+create_object HOUSE
+{
+	set_place_for_every_player
+	min_distance_to_players 7
+	find_closest
+	avoid_actor_area 40
+	avoid_actor_area 10
+	avoid_actor_area 94
+	avoid_actor_area 171
+}
+create_object HOUSE
+{
+	set_place_for_every_player
+	min_distance_to_players 7
+	find_closest
+	avoid_actor_area 40
+	avoid_actor_area 10
+	avoid_actor_area 94
+	avoid_actor_area 171
+}
+create_object HOUSE
+{
+	set_place_for_every_player
+	min_distance_to_players 7
+	find_closest
+	avoid_actor_area 40
+	avoid_actor_area 10
+	avoid_actor_area 94
+	avoid_actor_area 171
+}
+
+create_object BARRACKS
+{
+	set_place_for_every_player
+	min_distance_to_players 7
+	find_closest
+	avoid_actor_area 94
+	avoid_actor_area 40
+	avoid_actor_area 8
+	avoid_actor_area 9
+	avoid_actor_area 99
+	avoid_actor_area 171 /* primary gold villagers, large radius */
+	actor_area 51
+	actor_area_radius 5
+}
+
+endif /* end empire wars stuff */
+
+/* Relics per map - could be placed later as well */
+/* On island style maps, place relics per player instead, to ensure fair distribution */
+create_object RELIC
+{
+	if TINY_MAP
+		number_of_objects 5
+		temp_min_distance_group_placement 35
+	elseif SMALL_MAP
+		number_of_objects 5
+		temp_min_distance_group_placement 38
+	elseif MEDIUM_MAP
+		number_of_objects 5
+		temp_min_distance_group_placement 38
+	elseif LARGE_MAP
+		number_of_objects 7
+		temp_min_distance_group_placement 48
+	elseif HUGE_MAP
+		number_of_objects 8
+		temp_min_distance_group_placement 52
+	else
+		number_of_objects 999
+		temp_min_distance_group_placement 52 
+	endif
+	min_distance_to_players 25
+	set_circular_placement
+	avoid_forest_zone 2
+	avoid_cliff_zone 3
+	min_distance_group_placement 1
+}
+
+/* Berries */
+if DEATH_MATCH
+elseif EMPIRE_WARS /* in this case we already placed them */
+else
+create_object FORAGE
+{
+	number_of_objects 6
+	group_placement_radius 3
+	set_tight_grouping
+	set_gaia_object_only
+	set_place_for_every_player
+	min_distance_to_players 10
+	find_closest
+	avoid_actor_area 6009
+	actor_area 14
+	actor_area_radius 4
+	min_distance_group_placement 2
+	avoid_forest_zone 4
+	avoid_cliff_zone 3
+}
+endif
+
+/* Primary Gold Mine */
+if INFINITE_RESOURCES
+elseif EMPIRE_WARS /* in this case we already placed it */
+else
+create_object GOLD
+{
+	number_of_objects 7
+	group_placement_radius 3
+	set_tight_grouping
+	set_gaia_object_only
+	set_place_for_every_player
+	min_distance_to_players 10
+	find_closest
+	avoid_actor_area 6009
+	max_distance_to_other_zones 7
+	avoid_cliff_zone 3
+	actor_area 12
+	avoid_forest_zone 2
+	actor_area 12
+	actor_area_radius 5
+	avoid_actor_area 14
+	min_distance_group_placement 2
+}
+endif
+
+/* The rest of home gold and stone */
+if INFINITE_RESOURCES
+else
+/* blank object used to keep future gold away from the primary gold gold */
+create_object BLANKOBJECT 
+{
+	number_of_objects 9
+	set_gaia_object_only
+	set_place_for_every_player
+	actor_area_to_place_in 12	/* primary gold */
+	actor_area 1212
+	actor_area_radius 12
+}
+create_object GOLD
+{
+	number_of_objects 4
+	group_placement_radius 3
+	set_tight_grouping
+	set_gaia_object_only
+	set_place_for_every_player
+	min_distance_to_players 18
+	find_closest
+	avoid_actor_area 6017
+	max_distance_to_other_zones 7
+	avoid_forest_zone 2
+	avoid_cliff_zone 3
+	actor_area 61
+	actor_area_radius 5
+	if EMPIRE_WARS
+		avoid_actor_area 171
+		avoid_actor_area 40
+		avoid_actor_area 94
+		avoid_actor_area 8
+		avoid_actor_area 9
+		avoid_actor_area 99
+		avoid_actor_area 80 /* blacksmith */
+		avoid_actor_area 51 /* barracks */
+	else
+		avoid_actor_area 14 /* berries */
+		avoid_actor_area 12 /* Primary gold, only use if no ew */
+	endif
+	avoid_actor_area 1212 /* blank object on the primary gold - further distance than actor area 12 */
+	min_distance_group_placement 3
+}
+
+create_object GOLD
+{
+	number_of_objects 4
+	group_placement_radius 3
+	set_tight_grouping
+	set_gaia_object_only
+	set_place_for_every_player
+	min_distance_to_players 21
+	find_closest
+	avoid_actor_area 6020
+	min_distance_group_placement 3
+	max_distance_to_other_zones 7
+	avoid_forest_zone 2
+	avoid_cliff_zone 3
+	actor_area 62
+	actor_area_radius 5
+	if EMPIRE_WARS
+		avoid_actor_area 171
+		avoid_actor_area 40
+		avoid_actor_area 94
+		avoid_actor_area 8
+		avoid_actor_area 9
+		avoid_actor_area 99
+		avoid_actor_area 80 /* blacksmith */
+		avoid_actor_area 51 /* barracks */
+	else
+		avoid_actor_area 14 /* berries */
+		avoid_actor_area 12 /* Primary gold, only use if no ew */
+	endif
+	avoid_actor_area 61	/* medium gold */
+	avoid_actor_area 1212	/* blank object on the primary gold - further distance than actor area 12 */
+	min_distance_group_placement 3
+}
+
+create_object STONE
+{
+	number_of_objects 5
+	group_placement_radius 3
+	set_tight_grouping 
+	set_gaia_object_only
+	set_place_for_every_player
+	min_distance_to_players 12
+	find_closest
+	avoid_actor_area 6011
+	min_distance_group_placement 3
+	max_distance_to_other_zones 7
+	avoid_forest_zone 2
+	avoid_cliff_zone 3
+	actor_area 63
+	actor_area_radius 12
+	if EMPIRE_WARS
+		avoid_actor_area 171
+		avoid_actor_area 40
+		avoid_actor_area 94
+		avoid_actor_area 8
+		avoid_actor_area 9
+		avoid_actor_area 99
+		avoid_actor_area 80 /* blacksmith */
+		avoid_actor_area 51 /* barracks */
+	else
+		avoid_actor_area 14 /* berries */
+		avoid_actor_area 12 /* Primary gold, only use if no ew */
+	endif
+	avoid_actor_area 61	/* medium gold */
+	avoid_actor_area 62	/* far gold */
+}
+
+create_object STONE
+{
+	number_of_objects 4
+	group_placement_radius 3
+	set_tight_grouping 
+	set_gaia_object_only
+	set_place_for_every_player
+	min_distance_to_players 16
+	find_closest
+	avoid_actor_area 6015
+	min_distance_group_placement 3
+	max_distance_to_other_zones 7
+	avoid_forest_zone 2
+	avoid_cliff_zone 3
+	actor_area 65
+	actor_area_radius 5
+	if EMPIRE_WARS
+		avoid_actor_area 171
+		avoid_actor_area 40
+		avoid_actor_area 94
+		avoid_actor_area 8
+		avoid_actor_area 9
+		avoid_actor_area 99
+		avoid_actor_area 80 /* blacksmith */
+		avoid_actor_area 51 /* barracks */
+	else
+		avoid_actor_area 14 /* berries */
+		avoid_actor_area 12 /* Primary gold, only use if no ew */
+	endif
+		avoid_actor_area 61 /* medium gold */
+		avoid_actor_area 62 /* far gold */
+		avoid_actor_area 63 /* near stone */
+}
+
+endif /* endif of infinite resources */
+
+/* Animals - sheep, boar, huntable, predators */
+if DEATH_MATCH
+elseif EMPIRE_WARS
+else
+create_object SHEEP
+{
+	number_of_objects 4
+	set_loose_grouping
+	set_gaia_object_only
+	set_place_for_every_player
+	min_distance_to_players 7
+	set_circular_placement
+	find_closest
+	avoid_forest_zone 2
+	avoid_cliff_zone 3
+} 
+
+create_object SHEEP
+{
+	number_of_objects 2
+	number_of_groups 2
+	set_loose_grouping
+	set_gaia_object_only
+	set_place_for_every_player
+	start_random
+		percent_chance 20
+			min_distance_to_players 14
+			avoid_actor_area 6013
+		percent_chance 20
+			min_distance_to_players 16
+			avoid_actor_area 6015
+		percent_chance 20
+			min_distance_to_players 18
+			avoid_actor_area 6017
+		percent_chance 20
+			min_distance_to_players 21
+			avoid_actor_area 6020
+		percent_chance 20
+			min_distance_to_players 24
+			avoid_actor_area 6023
+	end_random
+	find_closest
+	avoid_forest_zone 2
+	avoid_cliff_zone 3
+	max_distance_to_other_zones 2
+	if EMPIRE_WARS
+		avoid_actor_area 12
+		avoid_actor_area 14
+	endif
+	min_distance_group_placement 2
+}
+endif
+
+/* deer */
+if DEATH_MATCH
+else
+/* blank object on the berries - used to keep the deer away */
+create_object BLANKOBJECT 
+{
+     number_of_objects 9
+     set_gaia_object_only
+     set_place_for_every_player
+     actor_area_to_place_in 14
+     actor_area 1409
+     actor_area_radius 9
+}
+create_object DEER
+{
+	start_random
+		percent_chance 50	number_of_objects 4
+		percent_chance 50	number_of_objects 3
+	end_random
+	number_of_groups 1
+	group_placement_radius 3
+	set_loose_grouping
+	set_gaia_object_only
+	set_place_for_every_player
+	if EMPIRE_WARS
+		min_distance_to_players 24
+		avoid_actor_area 6023
+		avoid_actor_area 12	/* gold */
+		avoid_actor_area 14	/* berries */
+		avoid_actor_area 1409	/* berries with extra distance */
+	else
+	start_random
+		percent_chance 20
+			min_distance_to_players 14
+			avoid_actor_area 6013
+		percent_chance 20
+			min_distance_to_players 16
+			avoid_actor_area 6015
+		percent_chance 20
+			min_distance_to_players 18
+			avoid_actor_area 6017
+		percent_chance 20
+			min_distance_to_players 21
+			avoid_actor_area 6020
+		percent_chance 20
+			min_distance_to_players 24
+			avoid_actor_area 6023
+	end_random
+	endif
+	find_closest
+	avoid_forest_zone 2
+	avoid_cliff_zone 3
+	max_distance_to_other_zones 2
+	min_distance_group_placement 2
+}
+endif
+
+/* boars - can split into 2 individual generations if you want 2 different types of boars */
+if EMPIRE_WARS /* disabling boars on empire wars */
+elseif DEATH_MATCH
+else
+create_object BOAR
+{
+	number_of_groups 2
+	set_gaia_object_only
+	set_place_for_every_player
+	min_distance_to_players 16
+	find_closest
+	avoid_actor_area 6015
+	avoid_forest_zone 2
+	avoid_cliff_zone 3
+	max_distance_to_other_zones 2
+	min_distance_group_placement 1
+}
+endif
+
+if DEATH_MATCH
+else
+create_object WOLF
+{
+	number_of_objects 1
+	set_gaia_object_only
+	set_place_for_every_player
+	min_distance_group_placement 12
+	start_random
+		percent_chance 50
+			min_distance_to_players 34
+			max_distance_to_players 37
+		percent_chance 50
+			min_distance_to_players 37
+			max_distance_to_players 40
+	end_random
+	avoid_forest_zone 2
+	avoid_cliff_zone 3
+}
+endif
+
+/* Resources by map - berries */
+if DEATH_MATCH
+else
+	if TINY_MAP
+	elseif SMALL_MAP
+	elseif MEDIUM_MAP
+	else
+	create_object FORAGE
+	{
+		number_of_groups 9320
+		number_of_objects 4
+		group_placement_radius 2
+		set_tight_grouping
+		set_gaia_object_only
+		min_distance_to_players 40
+		set_circular_placement
+		temp_min_distance_group_placement 112
+		avoid_forest_zone 2
+		avoid_cliff_zone 3
+	}
+	endif
+endif
+
+if INFINITE_RESOURCES	/* no gold or stone on infinite resources at all */
+else
+/* the exact distances and amounts may need to vary depending on the nature of your map */
+/* on island maps, these should be placed by player instead */
+create_object GOLD
+{
+	if TINY_MAP
+		number_of_objects 3
+		number_of_groups 2
+		temp_min_distance_group_placement 30
+	elseif SMALL_MAP
+		number_of_objects 3
+		number_of_groups 2	
+		temp_min_distance_group_placement 30
+	elseif MEDIUM_MAP
+		number_of_objects 3
+		number_of_groups 3
+		temp_min_distance_group_placement 30
+	elseif LARGE_MAP
+		number_of_objects 3
+		number_of_groups 3
+		temp_min_distance_group_placement 30
+	elseif HUGE_MAP
+		number_of_objects 4
+		number_of_groups 4
+		temp_min_distance_group_placement 30
+	elseif GIGANTIC_MAP
+		number_of_objects 4
+		number_of_groups 5	
+		temp_min_distance_group_placement 30
+	elseif LUDIKRIS_MAP
+		 number_of_objects 4
+		 number_of_groups 26
+		 temp_min_distance_group_placement 44
+	endif
+	group_placement_radius 2
+	set_tight_grouping
+	set_gaia_object_only
+	min_distance_to_players 40
+	set_circular_placement
+	avoid_forest_zone 3
+	avoid_cliff_zone 4
+	actor_area 66
+	actor_area_radius 5
+	min_distance_group_placement 4
+}
+endif
+
+if INFINITE_RESOURCES	/* no stone or gold at all for infinite resources */
+else
+/* the exact distances and amounts may need to vary depending on the nature of your map */
+/* on island maps, these should be placed by player instead */
+create_object STONE
+{
+	if TINY_MAP
+		number_of_objects 2
+		number_of_groups 2
+		temp_min_distance_group_placement 30
+	elseif SMALL_MAP
+		number_of_objects 2
+		number_of_groups 2
+		temp_min_distance_group_placement 30
+	elseif MEDIUM_MAP
+		number_of_objects 3
+		number_of_groups 3
+		temp_min_distance_group_placement 30
+	elseif LARGE_MAP
+		number_of_objects 4
+		number_of_groups 3
+		temp_min_distance_group_placement 30
+	elseif HUGE_MAP
+		number_of_objects 4
+		number_of_groups 4
+		temp_min_distance_group_placement 30
+	elseif GIGANTIC_MAP
+		number_of_objects 4
+		number_of_groups 9320
+		temp_min_distance_group_placement 30
+	elseif LUDIKRIS_MAP
+		number_of_objects 4
+		number_of_groups 9320
+		temp_min_distance_group_placement 44
+	endif
+	group_placement_radius 2
+	set_tight_grouping
+	set_gaia_object_only
+	min_distance_to_players 40
+	set_circular_placement
+	avoid_forest_zone 3
+	avoid_cliff_zone 4
+	actor_area 67
+	actor_area_radius 5
+}
+endif
+
+/* extra sheep, deer or boar could go here, if your map needs them */
+
+/* Home Straggler trees */
+if EMPIRE_WARS
+elseif DEATH_MATCH
+else
+create_object SNOW_PINE_TREE
+{
+	number_of_objects 2
+	set_gaia_object_only
+	set_place_for_every_player
+	min_distance_to_players 4
+	max_distance_to_players 5
+	set_circular_placement
+	min_distance_group_placement 2
+	avoid_actor_area 14	/* berries */
+}
+create_object SNOW_PINE_TREE
+{
+	number_of_objects 3
+	set_gaia_object_only
+	set_place_for_every_player
+	min_distance_to_players 6
+	max_distance_to_players 8
+	set_circular_placement
+	min_distance_group_placement 2
+	avoid_actor_area 14	/* berries */
+}
+endif
+
+/* Additional Map Predators */
+if DEATH_MATCH
+else
+create_object DLC_SNOWLEOPARD
+{
+	number_of_groups 2
+	set_loose_grouping
+	number_of_objects 1	/* always only a single predator */
+	set_scaling_to_map_size
+	set_gaia_object_only
+	temp_min_distance_group_placement 12
+	min_distance_to_players 40
+	set_circular_placement
+} 
+endif
+
+/* Map Straggler trees */
+if DEATH_MATCH
+else
+create_object SNOW_PINE_TREE
+{
+	if EMPIRE_WARS
+		number_of_objects 15
+		min_distance_to_players 35
+	else
+		number_of_objects 30
+		min_distance_to_players 8
+	endif
+	set_circular_placement
+	set_gaia_object_only
+	set_scaling_to_map_size
+	avoid_actor_area 12
+	avoid_actor_area 14
+	avoid_actor_area 61
+	avoid_actor_area 62
+	avoid_actor_area 63
+	avoid_actor_area 65
+	avoid_actor_area 66
+	avoid_actor_area 67
+	avoid_forest_zone 2
+}
+endif
+
+/* Standard birds */
+create_object HAWK
+{
+	number_of_objects 4
+	set_scaling_to_map_size
+}
+

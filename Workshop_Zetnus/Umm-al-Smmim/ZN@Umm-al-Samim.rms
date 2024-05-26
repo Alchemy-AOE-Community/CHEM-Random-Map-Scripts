@@ -1,0 +1,1100 @@
+/*
+Umm al Samim, Oman
+
+by Zetnus
+zetnus@outlook.com
+Zetnus#6414 on Discord
+
+Most recent update 17 June 2021
+-removed the well
+-made the unbuildable areas more visually distinct
+-updated banit camps for the actor area changes in the next DE update
+
+A barren desert surrounds brackish salt flats.
+Nothing grows here, so wildlife is scarce and wood can only be found in imported piles of lumber, the control of which will be important.
+Raiders guard holy relics in the surrounding dunes.
+
+Nomad start with two scouting units.  All starting units are in the same location.
+
+Resources per player:
+>2+2+2 infinite wood piles
+>1 food pile with 750 food
+>6 starting goats
+>2+2 nearby goats
+>0 boar
+>3+3+3 nearby ibex
+>5+5+5 gold
+>3+3+3 stone
+
+Scattered resources:
+>2 tile wood piles scattered around the map
+>neutral stone and gold on the outside
+>relics are guarded by raider camps on the outside
+
+This map was harvested from a mod in the official AOE2DE mod center, whose licensing agreement with Microsoft supersedes any Github restrictions: https://www.microsoft.com/en-us/servicesagreement
+
+*/
+
+/* =================================================================================================== */
+/* constant definitions */
+
+/* terrains */
+#const GRAVEL 70
+#const MUD 76
+#const BEACH_BUILDABLE 79
+#const WATER_GREEN 95
+
+/* placeholders */
+#const ONGRID_PLACEHOLDER_1 278
+#const BLANKOBJECT 647
+#const ON_GRID 1291
+#const ONGRID_PLACEHOLDER_2 1613
+#const BLOCKER 1776
+
+/* objects */
+#const SEAGULLS 303
+#const EASTERN_SWORDSMAN 894
+#const CAMEL_SCOUT 897
+#const TENT_A 1097
+#const TENT_B 1098
+#const TENT_C 1099
+#const TENT_D 1100
+#const TENT_E 1101
+#const OX_WAGON 1273
+#const LUMBER 1320
+#const REED_TREE 1350
+#const DRY_BUSH 1365
+#const MULE_CART 1808
+
+/* =================================================================================================== */
+<PLAYER_SETUP>
+random_placement
+if EMPIRE_WARS
+else nomad_resources
+endif
+ai_info_map_type CUSTOM 0 0 0
+behavior_version 1
+
+effect_amount SET_ATTRIBUTE REED_TREE ATTR_NAME_ID 5323 /* pile of wood */
+effect_amount SET_ATTRIBUTE DLC_ORANGEBUSH ATTR_NAME_ID 5324 /* pile of food */
+effect_amount SET_ATTRIBUTE REED_TREE ATTR_DEAD_ID 1350 /* this makes them respawn */
+effect_amount SET_ATTRIBUTE OX_WAGON ATTR_NAME_ID 7410 /* caravan */
+effect_amount SET_ATTRIBUTE OX_WAGON ATTR_TRAITS 16
+effect_amount GAIA_SET_ATTRIBUTE ARCHER ATTR_NAME_ID 13356 /* raider */
+effect_amount GAIA_SET_ATTRIBUTE EASTERN_SWORDSMAN ATTR_NAME_ID 13356 /* raider */
+effect_amount GAIA_SET_ATTRIBUTE LIGHT_CAVALRY ATTR_NAME_ID 13357 /* cavalry raider */
+effect_amount GAIA_SET_ATTRIBUTE CAVALRY_ARCHER ATTR_NAME_ID 13357 /* cavalry raider */
+
+
+/* Disabling Trade Carts and Cogs for Multi-team Games */
+if 2_TEAM_GAME
+else
+  #const TRADE_CART_ENABLER 161
+  #const TRADE_COG_ENABLER 180
+  #const TRADE_CARAVAN_ENABLER 48
+  #const HINDU_CARAVANSERAI_ENABLER 518
+  #const PERSIAN_CARAVANSERAI_ENABLER 552  
+  #const SILK_ROAD 499
+  effect_amount DISABLE_TECH TRADE_COG_ENABLER ATTR_DISABLE 180
+  effect_amount DISABLE_TECH TRADE_CART_ENABLER ATTR_DISABLE 161
+  effect_amount DISABLE_TECH TRADE_CARAVAN_ENABLER ATTR_DISABLE 48
+  effect_amount DISABLE_TECH HINDU_CARAVANSERAI_ENABLER ATTR_DISABLE 518
+  effect_amount DISABLE_TECH PERSIAN_CARAVANSERAI_ENABLER ATTR_DISABLE 552
+  effect_amount DISABLE_TECH SILK_ROAD ATTR_DISABLE 499    
+endif
+
+/* =================================================================================================== */
+<LAND_GENERATION> 
+
+base_terrain DIRT
+
+create_player_lands {
+	terrain_type DESERT
+	land_percent 70
+	right_border 15 left_border 15 top_border 15 bottom_border 15
+	border_fuzziness 2
+	base_size 12
+	zone 1
+	base_elevation 1
+}
+
+/* the center */
+create_land {
+	terrain_type DLC_QUICKSAND
+	land_percent 70
+	right_border 32 left_border 32 top_border 32 bottom_border 32
+	border_fuzziness 75
+	base_size 10
+	zone 1
+	land_id 1
+}
+
+/* =================================================================================================== */
+<ELEVATION_GENERATION> 
+
+create_elevation 2 {
+	base_terrain DIRT
+	number_of_clumps 9320
+	number_of_tiles 999999
+	set_scale_by_groups
+	enable_balanced_elevation
+}
+
+/* the outside */
+create_elevation 5 {
+	base_terrain DIRT
+	number_of_clumps 90
+	if TINY_MAP number_of_tiles 2000
+	elseif SMALL_MAP number_of_tiles 3000
+	elseif MEDIUM_MAP number_of_tiles 4000
+	elseif LARGE_MAP number_of_tiles 5712
+	elseif HUGE_MAP number_of_tiles 6854
+	elseif GIGANTIC_MAP number_of_tiles 8282
+	elseif LUDIKRIS_MAP number_of_tiles 32844
+	endif
+	set_scale_by_groups
+	enable_balanced_elevation
+}
+
+/* =================================================================================================== */
+<TERRAIN_GENERATION>
+
+color_correction CC_DESERT
+
+/* the center */
+create_terrain DLC_CRACKED { base_terrain DLC_QUICKSAND number_of_tiles 300 terrain_mask 1 spacing_to_other_terrain_types 1 set_flat_terrain_only }
+create_terrain DLC_NEWSHALLOW { base_layer DLC_CRACKED land_percent 100 terrain_mask 1 }
+create_terrain SHALLOW { base_layer DLC_NEWSHALLOW land_percent 100 terrain_mask 1 spacing_to_other_terrain_types 1 }
+create_terrain WATER_GREEN { base_layer SHALLOW land_percent 100 terrain_mask 1 spacing_to_other_terrain_types 2 }
+
+create_terrain DLC_CRACKED { base_terrain DLC_QUICKSAND number_of_tiles 300 terrain_mask 1 spacing_to_other_terrain_types 1 set_flat_terrain_only }
+create_terrain DLC_NEWSHALLOW { base_layer DLC_CRACKED land_percent 100 terrain_mask 1 }
+create_terrain SHALLOW { base_layer DLC_NEWSHALLOW land_percent 100 terrain_mask 1 spacing_to_other_terrain_types 1 }
+create_terrain WATER_GREEN { base_layer SHALLOW land_percent 100 terrain_mask 1 spacing_to_other_terrain_types 2 }
+
+create_terrain DLC_CRACKED { base_terrain DLC_QUICKSAND number_of_tiles 300 terrain_mask 1 spacing_to_other_terrain_types 1 set_flat_terrain_only }
+create_terrain DLC_NEWSHALLOW { base_layer DLC_CRACKED land_percent 100 terrain_mask 1 }
+create_terrain SHALLOW { base_layer DLC_NEWSHALLOW land_percent 100 terrain_mask 1 spacing_to_other_terrain_types 1 }
+create_terrain WATER_GREEN { base_layer SHALLOW land_percent 100 terrain_mask 1 spacing_to_other_terrain_types 2 }
+
+create_terrain DLC_CRACKED { base_terrain DLC_QUICKSAND number_of_tiles 300 terrain_mask 1 spacing_to_other_terrain_types 1 set_flat_terrain_only }
+create_terrain DLC_NEWSHALLOW { base_layer DLC_CRACKED land_percent 100 terrain_mask 1 }
+create_terrain SHALLOW { base_layer DLC_NEWSHALLOW land_percent 100 terrain_mask 1 spacing_to_other_terrain_types 1 }
+create_terrain WATER_GREEN { base_layer SHALLOW land_percent 100 terrain_mask 1 spacing_to_other_terrain_types 2 }
+
+create_terrain DLC_CRACKED { base_terrain DLC_QUICKSAND number_of_tiles 300 terrain_mask 1 spacing_to_other_terrain_types 1 set_flat_terrain_only }
+create_terrain DLC_NEWSHALLOW { base_layer DLC_CRACKED land_percent 100 terrain_mask 1 }
+create_terrain SHALLOW { base_layer DLC_NEWSHALLOW land_percent 100 terrain_mask 1 spacing_to_other_terrain_types 1 }
+create_terrain WATER_GREEN { base_layer SHALLOW land_percent 100 terrain_mask 1 spacing_to_other_terrain_types 2 }
+
+create_terrain DLC_CRACKED { base_terrain DLC_QUICKSAND number_of_tiles 300 terrain_mask 1 spacing_to_other_terrain_types 1 set_flat_terrain_only }
+create_terrain DLC_NEWSHALLOW { base_layer DLC_CRACKED land_percent 100 terrain_mask 1 }
+create_terrain SHALLOW { base_layer DLC_NEWSHALLOW land_percent 100 terrain_mask 1 spacing_to_other_terrain_types 1 }
+create_terrain WATER_GREEN { base_layer SHALLOW land_percent 100 terrain_mask 1 spacing_to_other_terrain_types 2 }
+
+create_terrain DLC_CRACKED { base_terrain DLC_QUICKSAND number_of_tiles 300 terrain_mask 1 spacing_to_other_terrain_types 1 set_flat_terrain_only }
+create_terrain DLC_NEWSHALLOW { base_layer DLC_CRACKED land_percent 100 terrain_mask 1 }
+create_terrain SHALLOW { base_layer DLC_NEWSHALLOW land_percent 100 terrain_mask 1 spacing_to_other_terrain_types 1 }
+create_terrain WATER_GREEN { base_layer SHALLOW land_percent 100 terrain_mask 1 spacing_to_other_terrain_types 2 }
+
+create_terrain DLC_CRACKED { base_terrain DLC_QUICKSAND number_of_tiles 300 terrain_mask 1 spacing_to_other_terrain_types 1 set_flat_terrain_only }
+create_terrain DLC_NEWSHALLOW { base_layer DLC_CRACKED land_percent 100 terrain_mask 1 }
+create_terrain SHALLOW { base_layer DLC_NEWSHALLOW land_percent 100 terrain_mask 1 spacing_to_other_terrain_types 1 }
+create_terrain WATER_GREEN { base_layer SHALLOW land_percent 100 terrain_mask 1 spacing_to_other_terrain_types 2 }
+
+create_terrain DLC_CRACKED { base_terrain DLC_QUICKSAND number_of_tiles 300 terrain_mask 1 spacing_to_other_terrain_types 1 set_flat_terrain_only }
+create_terrain DLC_NEWSHALLOW { base_layer DLC_CRACKED land_percent 100 terrain_mask 1 }
+create_terrain SHALLOW { base_layer DLC_NEWSHALLOW land_percent 100 terrain_mask 1 spacing_to_other_terrain_types 1 }
+create_terrain WATER_GREEN { base_layer SHALLOW land_percent 100 terrain_mask 1 spacing_to_other_terrain_types 2 }
+
+create_terrain DLC_CRACKED { base_terrain DLC_QUICKSAND number_of_tiles 300 terrain_mask 1 spacing_to_other_terrain_types 1 set_flat_terrain_only }
+create_terrain DLC_NEWSHALLOW { base_layer DLC_CRACKED land_percent 100 terrain_mask 1 }
+create_terrain SHALLOW { base_layer DLC_NEWSHALLOW land_percent 100 terrain_mask 1 spacing_to_other_terrain_types 1 }
+create_terrain WATER_GREEN { base_layer SHALLOW land_percent 100 terrain_mask 1 spacing_to_other_terrain_types 2 }
+
+create_terrain DLC_CRACKED { base_terrain DLC_QUICKSAND number_of_tiles 300 terrain_mask 1 spacing_to_other_terrain_types 1 set_flat_terrain_only }
+create_terrain DLC_NEWSHALLOW { base_layer DLC_CRACKED land_percent 100 terrain_mask 1 }
+create_terrain SHALLOW { base_layer DLC_NEWSHALLOW land_percent 100 terrain_mask 1 spacing_to_other_terrain_types 1 }
+create_terrain WATER_GREEN { base_layer SHALLOW land_percent 100 terrain_mask 1 spacing_to_other_terrain_types 2 }
+
+/* remove anything not in the depression */
+create_terrain DESERT { base_terrain DLC_QUICKSAND land_percent 100 number_of_clumps 9320 height_limits 1 1 }
+
+/* terrain mixing on the player lands and on the outside */
+create_terrain DLC_SAVANNAH { base_terrain DESERT land_percent 10 number_of_clumps 9320 terrain_mask 2 }
+
+create_terrain DLC_CRACKED { base_terrain DIRT land_percent 100 number_of_clumps 9320 terrain_mask 1 spacing_to_other_terrain_types 1 set_flat_terrain_only }
+
+create_terrain DLC_BEACH4 { base_terrain DESERT land_percent 10 number_of_clumps 9320 terrain_mask 1 }
+
+create_terrain DLC_DESERTGRAVEL { base_terrain DESERT land_percent 10 number_of_clumps 9320 terrain_mask 2 }
+
+create_terrain MUD { base_terrain DESERT land_percent 10 number_of_clumps 9320 terrain_mask 2 }
+
+create_terrain BEACH_BUILDABLE { base_terrain DESERT land_percent 10 number_of_clumps 9320 terrain_mask 1 }
+
+
+/* =================================================================================================== */
+<OBJECTS_GENERATION>
+
+/* central objects */
+create_object SEAGULLS {
+	number_of_objects 100
+	temp_min_distance_group_placement 7
+	set_gaia_object_only
+	terrain_to_place_on DLC_QUICKSAND
+}
+
+/* decoration */
+create_object DLC_ANIMALSKELETON {
+	number_of_objects 9320
+	temp_min_distance_group_placement 16
+	terrain_to_place_on DESERT
+}
+create_object CRACKS {
+	number_of_objects 9320
+	temp_min_distance_group_placement 22
+	terrain_to_place_on DESERT
+}
+create_object CRATER {
+	number_of_objects 9320
+	temp_min_distance_group_placement 17
+	terrain_to_place_on DESERT
+}
+
+/* blank objects to help distribute resources in a more circular manner */
+create_object BLANKOBJECT {
+	number_of_objects rnd(220,320)
+	set_gaia_object_only
+	set_place_for_every_player
+	find_closest
+	min_distance_to_players 9
+	actor_area 6009
+	actor_area_radius 0
+}
+create_object BLANKOBJECT {
+	number_of_objects rnd(240,320)
+	set_gaia_object_only
+	set_place_for_every_player
+	find_closest
+	min_distance_to_players 11
+	actor_area 6011
+	actor_area_radius 0
+}
+create_object BLANKOBJECT {
+	number_of_objects rnd(290,440)
+	set_gaia_object_only
+	set_place_for_every_player
+	find_closest
+	min_distance_to_players 13
+	actor_area 6013
+	actor_area_radius 0
+}
+create_object BLANKOBJECT {
+	number_of_objects rnd(290,440)
+	set_gaia_object_only
+	set_place_for_every_player
+	find_closest
+	min_distance_to_players 15
+	actor_area 6015
+	actor_area_radius 0
+}
+create_object BLANKOBJECT {
+	number_of_objects rnd(400,500)
+	set_gaia_object_only
+	set_place_for_every_player
+	find_closest
+	min_distance_to_players 17
+	actor_area 6017
+	actor_area_radius 0
+}
+create_object BLANKOBJECT  {
+	number_of_objects rnd(500,600)
+	set_gaia_object_only
+	set_place_for_every_player
+	find_closest
+	min_distance_to_players 20
+	actor_area 6020
+	actor_area_radius 0
+}
+create_object BLANKOBJECT {
+	number_of_objects rnd(600,700)
+	set_gaia_object_only
+	set_place_for_every_player
+	find_closest
+	min_distance_to_players 23
+	actor_area 6023
+	actor_area_radius 0
+}
+
+if EMPIRE_WARS
+create_object TOWN_CENTER {
+	set_place_for_every_player
+	max_distance_to_players    0
+	actor_area 100
+	actor_area_radius 2
+}
+create_object DLC_ORANGEBUSH {
+	number_of_objects 1
+	set_gaia_object_only
+	set_place_for_every_player
+	min_distance_to_players 10
+	find_closest
+	avoid_actor_area 6009
+	actor_area 14
+	actor_area_radius 2
+	resource_delta 625
+	second_object BROKEN_CART
+}
+/* Empire Wars 5 Farms around TC */
+create_object FARM {
+	set_place_for_every_player
+	min_distance_to_players 3
+	find_closest
+	actor_area 21
+	actor_area_radius 0
+	second_object VILLAGER
+}
+create_object FARM {
+	set_place_for_every_player
+	min_distance_to_players 3
+	find_closest
+	actor_area 22
+	actor_area_radius 0
+	second_object VILLAGER
+}
+create_object FARM {
+	set_place_for_every_player
+	min_distance_to_players 3
+	find_closest
+	actor_area 23
+	actor_area_radius 0
+	second_object VILLAGER
+}
+create_object FARM {
+	set_place_for_every_player
+	min_distance_to_players 3
+	find_closest
+	actor_area 24
+	actor_area_radius 0
+	second_object VILLAGER
+}
+create_object FARM {
+	set_place_for_every_player
+	min_distance_to_players 3
+	find_closest
+	actor_area 25
+	actor_area_radius 0
+	second_object VILLAGER
+}
+/* Empire Wars Mill */
+create_object MILL {
+	set_place_for_every_player
+	actor_area_to_place_in 14	/* berries */
+	find_closest
+	actor_area 40
+	actor_area_radius 6
+}
+create_object VILLAGER {
+	set_place_for_every_player
+	number_of_objects 6
+	actor_area_to_place_in 14	/* berries */
+	actor_area 94
+	actor_area_radius 6
+	force_placement
+	find_closest
+}
+
+/* player wood */
+create_object REED_TREE {
+	number_of_objects 2
+	number_of_groups 3
+	group_placement_radius 1
+	set_place_for_every_player
+	set_gaia_object_only
+	resource_delta 99950
+	second_object BLOCKER
+	actor_area 999
+	actor_area_radius 0
+	min_distance_to_players 12
+	find_closest
+	temp_min_distance_group_placement 18
+	avoid_actor_area 6011
+	avoid_actor_area 40
+	avoid_actor_area 14
+}
+
+create_object CRATER {
+	number_of_objects 9320
+	set_scaling_to_map_size
+    set_place_for_every_player
+    set_gaia_object_only
+    actor_area_to_place_in 999
+    second_object LUMBER
+	actor_area 13
+	actor_area_radius 12
+}
+
+/* Empire Wars Lumbercamps */
+create_object LUMBER_CAMP {
+	set_place_for_every_player
+	place_on_forest_zone
+	find_closest
+	actor_area 8
+	actor_area_radius 4
+}
+create_object VILLAGER {
+	set_place_for_every_player
+	number_of_objects 4
+	actor_area_to_place_in 8
+	place_on_forest_zone
+	actor_area 71
+	actor_area_radius 4
+	find_closest
+	force_placement
+}
+
+create_object LUMBER_CAMP {
+	set_place_for_every_player
+	place_on_forest_zone
+	find_closest 
+	actor_area 9
+	actor_area_radius 4
+	avoid_actor_area 71
+}
+create_object VILLAGER {
+	set_place_for_every_player
+	number_of_objects 4
+	actor_area_to_place_in 9
+	place_on_forest_zone
+	actor_area 72
+	actor_area_radius 4
+	find_closest
+	force_placement
+}
+
+create_object LUMBER_CAMP {
+	set_place_for_every_player
+	place_on_forest_zone
+	avoid_actor_area 71
+	avoid_actor_area 72
+	find_closest 
+	actor_area 99
+	actor_area_radius 4
+}
+create_object VILLAGER {
+	set_place_for_every_player
+	number_of_objects 3
+	actor_area_to_place_in 99
+	place_on_forest_zone
+	actor_area 73
+	actor_area_radius 5
+	find_closest
+	force_placement
+}
+
+/* 5+5+5 player gold */
+create_object GOLD {
+	number_of_objects 5
+	number_of_groups 3
+	group_placement_radius 2
+	set_tight_grouping
+	set_gaia_object_only
+	set_place_for_every_player
+	min_distance_to_players 14
+	find_closest
+	avoid_actor_area 6015
+	max_distance_to_other_zones 4
+	actor_area 61
+	actor_area_radius 12
+	avoid_actor_area 13
+	avoid_actor_area 14 
+	temp_min_distance_group_placement 14
+	actor_area 12
+	actor_area_radius 2
+	avoid_actor_area 40
+	avoid_actor_area 94
+	avoid_actor_area 71
+	avoid_actor_area 72
+	avoid_actor_area 73
+}
+
+/* Mining Camp for Empire Wars */
+create_object MINING_CAMP {
+	set_place_for_every_player
+	find_closest
+	actor_area_to_place_in 12	/* primary gold */
+	actor_area 10
+	actor_area_radius 2
+	avoid_forest_zone 1
+}
+create_object VILLAGER {
+	set_place_for_every_player
+	number_of_objects 5
+	actor_area_to_place_in 10
+	actor_area 171
+	actor_area_radius 5
+	find_closest
+	force_placement
+}
+
+/* Blacksmith, barracks, and houses for Empire Wars */
+create_object BLACKSMITH {
+	set_place_for_every_player
+	min_distance_to_players 7
+	find_closest
+	avoid_actor_area 94
+	avoid_actor_area 40
+	avoid_actor_area 8
+	avoid_actor_area 9
+	avoid_actor_area 99
+	avoid_actor_area 171 /* primary gold villagers, large radius */
+	actor_area 80
+	actor_area_radius 4
+}
+
+create_object HOUSE {
+	set_place_for_every_player
+	min_distance_to_players 7
+	find_closest
+	avoid_actor_area 40
+	avoid_actor_area 10
+	avoid_actor_area 94
+	avoid_actor_area 171
+}
+create_object HOUSE {
+	set_place_for_every_player
+	min_distance_to_players 7
+	find_closest
+	avoid_actor_area 40
+	avoid_actor_area 10
+	avoid_actor_area 94
+	avoid_actor_area 171
+	find_closest
+}
+create_object HOUSE {
+	set_place_for_every_player
+	min_distance_to_players 7
+	find_closest
+	avoid_actor_area 40
+	avoid_actor_area 10
+	avoid_actor_area 94
+	avoid_actor_area 171
+}
+create_object HOUSE {
+	set_place_for_every_player
+	min_distance_to_players 7
+	find_closest
+	avoid_actor_area 40
+	avoid_actor_area 10
+	avoid_actor_area 94
+	avoid_actor_area 171
+}
+create_object HOUSE {
+	set_place_for_every_player
+	min_distance_to_players 7
+	find_closest
+	avoid_actor_area 40
+	avoid_actor_area 10
+	avoid_actor_area 94
+	avoid_actor_area 171
+}
+create_object HOUSE {
+	set_place_for_every_player
+	min_distance_to_players 7
+	find_closest
+	avoid_actor_area 40
+	avoid_actor_area 10
+	avoid_actor_area 94
+	avoid_actor_area 171
+}
+
+create_object BARRACKS {
+	set_place_for_every_player
+	min_distance_to_players 7
+	find_closest
+	avoid_actor_area 94
+	avoid_actor_area 40
+	avoid_actor_area 8
+	avoid_actor_area 9
+	avoid_actor_area 99
+	avoid_actor_area 171 /* primary gold villagers, large radius */
+	actor_area 51
+	actor_area_radius 5
+}
+
+if REGICIDE create_object KING
+else create_object CAMEL_SCOUT
+endif
+{
+	set_place_for_every_player
+	min_distance_to_players 6
+	set_circular_placement
+	min_distance_group_placement 1
+	find_closest
+}
+
+/* end empire wars */
+endif
+
+
+/* player starting objects */
+if EMPIRE_WARS
+else
+create_object DRY_BUSH {
+	set_place_for_every_player
+	set_gaia_object_only
+	max_distance_to_players 0
+	min_distance_group_placement 1
+}
+create_object VILLAGER {
+	set_place_for_every_player
+	find_closest
+	min_distance_group_placement 1
+	actor_area 1
+	actor_area_radius 1
+}
+create_object MULE_CART {
+	set_place_for_every_player
+	min_distance_to_players 1
+	min_distance_group_placement 1
+	find_closest
+	actor_area 2
+	actor_area_radius 2
+}
+if REGICIDE create_object KING
+else create_object CAMEL_SCOUT
+endif
+{
+	set_place_for_every_player
+	min_distance_to_players 3
+	min_distance_group_placement 1
+	actor_area_to_place_in 2
+	avoid_actor_area 1
+	actor_area 3
+	actor_area_radius 2
+}
+create_object DLC_GOAT {
+	number_of_objects 2
+	set_place_for_every_player
+	min_distance_to_players 4
+	min_distance_group_placement 1
+	actor_area_to_place_in 3
+	avoid_actor_area 1
+	avoid_actor_area 2
+	actor_area 4
+	actor_area_radius 3
+}
+create_object DLC_GOAT {
+	number_of_objects 4
+	set_place_for_every_player
+	min_distance_to_players 5
+	min_distance_group_placement 1
+	actor_area_to_place_in 4
+	avoid_actor_area 1
+	avoid_actor_area 2
+	avoid_actor_area 3
+	actor_area 5
+	actor_area_radius 3
+}
+
+/* player wood */
+create_object REED_TREE {
+	number_of_objects 2
+	number_of_groups 3
+	group_placement_radius 1
+	set_place_for_every_player
+	set_gaia_object_only
+	resource_delta 99950
+	second_object BLOCKER
+	actor_area 999
+	actor_area_radius 0
+	min_distance_to_players 12
+	avoid_actor_area 6011
+	max_distance_to_players 18
+	temp_min_distance_group_placement 18
+}
+
+create_object CRATER {
+	number_of_objects 9320
+	set_scaling_to_map_size
+    set_place_for_every_player
+    set_gaia_object_only
+    actor_area_to_place_in 999
+    second_object LUMBER
+	actor_area 13
+	actor_area_radius 12
+}
+
+/* Berries */
+create_object DLC_ORANGEBUSH {
+	number_of_objects 1
+	set_gaia_object_only
+	set_place_for_every_player
+	min_distance_to_players 10
+	find_closest
+	avoid_actor_area 5
+	avoid_actor_area 13
+	avoid_actor_area 6009
+	actor_area 14
+	actor_area_radius 12
+	resource_delta 625
+	second_object BROKEN_CART
+	min_distance_group_placement 6
+}
+
+/* 5+5+5 player gold */
+create_object GOLD {
+	number_of_objects 5
+	number_of_groups 3
+	group_placement_radius 3
+	set_tight_grouping
+	set_gaia_object_only
+	set_place_for_every_player
+	min_distance_to_players 14
+	find_closest
+	avoid_actor_area 6015
+	max_distance_to_other_zones 4
+	actor_area 61
+	actor_area_radius 12
+	avoid_actor_area 13
+	avoid_actor_area 14 
+	temp_min_distance_group_placement 14
+	min_distance_group_placement 6
+}
+endif
+
+/* 3+3+3 player stone */
+create_object STONE
+{
+	number_of_objects 3
+	number_of_groups 3
+	group_placement_radius 2
+	set_tight_grouping
+	set_gaia_object_only
+	set_place_for_every_player
+	min_distance_to_players 16
+	find_closest
+	avoid_actor_area 6015
+	max_distance_to_other_zones 4
+	actor_area 62
+	actor_area_radius 12
+	avoid_actor_area 12
+	avoid_actor_area 13
+	avoid_actor_area 14 
+	avoid_actor_area 61
+	temp_min_distance_group_placement 14
+	min_distance_group_placement 6
+}
+
+if EMPIRE_WARS
+else
+/* goats to find */
+create_object DLC_GOAT {
+	set_gaia_object_only
+	number_of_objects 2
+	number_of_groups 2
+	set_loose_grouping
+	set_place_for_every_player
+	min_distance_to_players 14
+	find_closest
+	avoid_actor_area 6015
+	min_distance_group_placement 1
+}
+
+/* ibex to hunt */
+create_object DLC_IBEX {
+	set_gaia_object_only
+	number_of_objects 3
+	number_of_groups 3
+	set_loose_grouping
+	set_place_for_every_player
+	min_distance_to_players 23
+	find_closest
+	avoid_actor_area 6023
+	min_distance_group_placement 5
+	temp_min_distance_group_placement 18
+}
+endif
+
+/* scattered wood */
+create_object REED_TREE {
+	number_of_objects 2
+	group_placement_radius 1
+	number_of_groups 9320
+	set_scaling_to_map_size
+	terrain_to_place_on DLC_SAVANNAH
+	temp_min_distance_group_placement 25
+	resource_delta 99950
+	second_object BLOCKER
+	actor_area 999
+	actor_area_radius 0
+	min_distance_to_players 26
+	set_circular_placement
+}
+
+create_object CRATER {
+	number_of_objects 9320
+	set_scaling_to_map_size
+    set_gaia_object_only
+    actor_area_to_place_in 999
+    second_object LUMBER
+	actor_area 606
+	actor_area_radius 6
+}
+
+/* bandit camps */
+create_object RELIC {
+	number_of_objects 8
+	terrain_to_place_on DIRT
+	layer_to_place_on DLC_CRACKED
+	temp_min_distance_group_placement 60
+	actor_area 6666
+	actor_area_radius 5
+	avoid_actor_area 12
+	avoid_actor_area 13
+	avoid_actor_area 14 
+	avoid_actor_area 61
+	avoid_actor_area 606
+	min_distance_group_placement 1
+	second_object DLC_GALLOW
+}
+create_object TENT_A {
+	number_of_objects 8
+	set_gaia_object_only
+	set_gaia_unconvertible
+	actor_area_to_place_in 6666
+	temp_min_distance_group_placement 30
+	min_distance_group_placement 1
+	actor_area 6667
+	actor_area_radius 8
+	avoid_actor_area 606
+}
+create_object TENT_B {
+	number_of_objects 8
+	set_gaia_object_only
+	set_gaia_unconvertible
+	actor_area_to_place_in 6666
+	temp_min_distance_group_placement 30
+	min_distance_group_placement 1
+	avoid_actor_area 606
+}
+create_object TENT_C {
+	number_of_objects 8
+	set_gaia_object_only
+	set_gaia_unconvertible
+	actor_area_to_place_in 6666
+	temp_min_distance_group_placement 30
+	min_distance_group_placement 1
+	avoid_actor_area 606
+}
+create_object TENT_D {
+	number_of_objects 8
+	set_gaia_object_only
+	set_gaia_unconvertible
+	actor_area_to_place_in 6666
+	temp_min_distance_group_placement 30
+	min_distance_group_placement 1
+	avoid_actor_area 606
+}
+create_object TENT_E {
+	number_of_objects 8
+	set_gaia_object_only
+	set_gaia_unconvertible
+	actor_area_to_place_in 6666
+	temp_min_distance_group_placement 30
+	min_distance_group_placement 1
+	avoid_actor_area 606
+}
+
+create_object LIGHT_CAVALRY {
+	number_of_groups 8
+	set_gaia_object_only
+	set_gaia_unconvertible
+	actor_area_to_place_in 6667
+	temp_min_distance_group_placement 25
+	min_distance_group_placement 1
+	avoid_actor_area 606
+}
+create_object LIGHT_CAVALRY {
+	number_of_groups 8
+	set_gaia_object_only
+	set_gaia_unconvertible
+	actor_area_to_place_in 6667
+	temp_min_distance_group_placement 25
+	min_distance_group_placement 1
+	avoid_actor_area 606
+}
+create_object CAVALRY_ARCHER {
+	number_of_groups 8
+	set_gaia_object_only
+	set_gaia_unconvertible
+	actor_area_to_place_in 6666
+	temp_min_distance_group_placement 25
+	min_distance_group_placement 1
+	avoid_actor_area 606
+}
+create_object EASTERN_SWORDSMAN {
+	number_of_groups 8
+	set_gaia_object_only
+	set_gaia_unconvertible
+	actor_area_to_place_in 6666
+	temp_min_distance_group_placement 25
+	min_distance_group_placement 1
+	avoid_actor_area 606
+}
+create_object ARCHER {
+	number_of_groups 8
+	set_gaia_object_only
+	set_gaia_unconvertible
+	actor_area_to_place_in 6667
+	temp_min_distance_group_placement 25
+	min_distance_group_placement 1
+	avoid_actor_area 606
+}
+create_object EASTERN_SWORDSMAN {
+	number_of_groups 8
+	set_gaia_object_only
+	set_gaia_unconvertible
+	actor_area_to_place_in 6666
+	temp_min_distance_group_placement 25
+	min_distance_group_placement 1
+	avoid_actor_area 606
+}
+create_object ARCHER {
+	number_of_groups 8
+	set_gaia_object_only
+	set_gaia_unconvertible
+	actor_area_to_place_in 6666
+	temp_min_distance_group_placement 25
+	min_distance_group_placement 1
+}
+create_object EASTERN_SWORDSMAN {
+	number_of_groups 8
+	set_gaia_object_only
+	set_gaia_unconvertible
+	actor_area_to_place_in 6666
+	temp_min_distance_group_placement 25
+	min_distance_group_placement 1
+	avoid_actor_area 606
+}
+create_object ARCHER {
+	number_of_groups 8
+	set_gaia_object_only
+	set_gaia_unconvertible
+	actor_area_to_place_in 6666
+	temp_min_distance_group_placement 25
+	min_distance_group_placement 1
+	avoid_actor_area 606
+}
+
+
+/* scattered gold and stone  */
+create_object GOLD {
+	if TINY_MAP
+		number_of_objects 3
+		number_of_groups 4
+		temp_min_distance_group_placement 30
+	elseif SMALL_MAP
+		number_of_objects 3
+		number_of_groups 4	
+		temp_min_distance_group_placement 30
+	elseif MEDIUM_MAP
+		number_of_objects 3
+		number_of_groups 6
+		temp_min_distance_group_placement 30
+	elseif LARGE_MAP
+		number_of_objects 3
+		number_of_groups 6
+		temp_min_distance_group_placement 30
+	elseif HUGE_MAP
+		number_of_objects 4
+		number_of_groups 8
+		temp_min_distance_group_placement 30
+	elseif GIGANTIC_MAP
+		number_of_objects 4
+		number_of_groups 10	
+		temp_min_distance_group_placement 30
+	elseif LUDIKRIS_MAP
+		 number_of_objects 4
+		 number_of_groups 30
+		 temp_min_distance_group_placement 44
+	endif
+	group_placement_radius 2
+	set_tight_grouping
+	set_gaia_object_only
+	min_distance_to_players 40
+	set_circular_placement
+	avoid_actor_area 6666
+	avoid_actor_area 6667
+	avoid_actor_area 606
+	actor_area 66
+	actor_area_radius 5
+	min_distance_group_placement 6
+	terrain_to_place_on DIRT
+}
+
+create_object STONE {
+	if TINY_MAP
+		number_of_objects 2
+		number_of_groups 4
+		temp_min_distance_group_placement 30
+	elseif SMALL_MAP
+		number_of_objects 2
+		number_of_groups 4
+		temp_min_distance_group_placement 30
+	elseif MEDIUM_MAP
+		number_of_objects 3
+		number_of_groups 6
+		temp_min_distance_group_placement 30
+	elseif LARGE_MAP
+		number_of_objects 4
+		number_of_groups 6
+		temp_min_distance_group_placement 30
+	elseif HUGE_MAP
+		number_of_objects 4
+		number_of_groups 8
+		temp_min_distance_group_placement 30
+	elseif GIGANTIC_MAP
+		number_of_objects 4
+		number_of_groups 9320
+		temp_min_distance_group_placement 30
+	elseif LUDIKRIS_MAP
+		number_of_objects 4
+		number_of_groups 9320
+		temp_min_distance_group_placement 44
+	endif
+	group_placement_radius 2
+	set_tight_grouping
+	set_gaia_object_only
+	min_distance_to_players 40
+	set_circular_placement
+	avoid_actor_area 6666
+	avoid_actor_area 6667
+	avoid_actor_area 606
+	actor_area 67
+	actor_area_radius 5
+	min_distance_group_placement 6
+	terrain_to_place_on DIRT
+}
+
+create_object DLC_WILD_CAMEL {
+	number_of_objects 4
+	group_variance 1
+	number_of_groups 9320
+	temp_min_distance_group_placement 50
+	terrain_to_place_on DIRT
+	avoid_actor_area 6666
+	avoid_actor_area 6667
+	avoid_actor_area 606
+}
+
+create_object DLC_VULTURE {
+	number_of_objects 6
+	set_scaling_to_map_size
+}
+
+
+
+
+

@@ -1,0 +1,770 @@
+/*
+Zetnus's Perfect Forest
+DE only
+
+by Zetnus
+Zetnus@outlook.com
+
+Created: December 16 2020
+Most recent update: 05 May 2022
+
+
+Learn about random map scripting: https://docs.google.com/document/d/e/2PACX-1vR_I1I9u-hI2FFm-EYyjoM_-9dNJFOfTaIgr05wXNbdpv9tI18b6r18ARULy3Jqyvlq6-lc2VjX6xP4/pub
+
+This map was harvested from a mod in the official AOE2DE mod center, whose licensing agreement with Microsoft supersedes any Github restrictions: https://www.microsoft.com/en-us/servicesagreement
+
+*/
+
+start_random
+	percent_chance 34	#define NO_CLEARINGS
+	percent_chance 66	#define YES_CLEARINGS
+end_random
+if YES_CLEARINGS
+	start_random
+		percent_chance 50	#define CLEARINGS_AND_PONDS
+	end_random
+endif
+
+#const UNDERBRUSH 71
+#const OAK_BUSH_FOREST 20
+
+
+/* =================================================================================================== */
+<PLAYER_SETUP>
+
+random_placement 
+ai_info_map_type BLACK_FOREST 0 0 0
+behavior_version 1
+
+/* Disabling Trade Carts and Cogs for Multi-team Games */
+if 2_TEAM_GAME
+else
+  #const TRADE_CART_ENABLER 161
+  #const TRADE_COG_ENABLER 180
+  #const TRADE_CARAVAN_ENABLER 48
+  #const HINDU_CARAVANSERAI_ENABLER 518
+  #const PERSIAN_CARAVANSERAI_ENABLER 552  
+  #const SILK_ROAD 499
+  effect_amount DISABLE_TECH TRADE_COG_ENABLER ATTR_DISABLE 180
+  effect_amount DISABLE_TECH TRADE_CART_ENABLER ATTR_DISABLE 161
+  effect_amount DISABLE_TECH TRADE_CARAVAN_ENABLER ATTR_DISABLE 48
+  effect_amount DISABLE_TECH HINDU_CARAVANSERAI_ENABLER ATTR_DISABLE 518
+  effect_amount DISABLE_TECH PERSIAN_CARAVANSERAI_ENABLER ATTR_DISABLE 552
+  effect_amount DISABLE_TECH SILK_ROAD ATTR_DISABLE 499    
+endif
+
+/* =================================================================================================== */
+<LAND_GENERATION>
+
+base_terrain LEAVES
+
+create_player_lands  {
+	terrain_type GRASS2
+	number_of_tiles 641
+	base_size 10
+	other_zone_avoidance_distance 6
+}
+
+if KING_OT_HILL #define SPECIAL_CENTER
+elseif BATTLE_ROYALE #define SPECIAL_CENTER
+endif
+
+if SPECIAL_CENTER
+create_land  {
+	terrain_type GRASS2
+	number_of_tiles 641
+	base_size 10
+	land_position 50 50
+}
+endif
+
+/* =================================================================================================== */
+<TERRAIN_GENERATION>
+
+create_terrain UNDERBRUSH { base_terrain LEAVES land_percent 1 spacing_to_other_terrain_types 4 }
+create_terrain FOREST { base_terrain UNDERBRUSH land_percent 100 number_of_clumps 9320 spacing_to_other_terrain_types 0 }
+create_terrain UNDERBRUSH { base_terrain LEAVES land_percent 1 spacing_to_other_terrain_types 4 }
+create_terrain FOREST { base_terrain UNDERBRUSH land_percent 100 number_of_clumps 9320 spacing_to_other_terrain_types 0 }
+create_terrain UNDERBRUSH { base_terrain LEAVES land_percent 1 spacing_to_other_terrain_types 4 }
+create_terrain FOREST { base_terrain UNDERBRUSH land_percent 100 number_of_clumps 9320 spacing_to_other_terrain_types 0 }
+create_terrain UNDERBRUSH { base_terrain LEAVES land_percent 1 spacing_to_other_terrain_types 4 }
+create_terrain FOREST { base_terrain UNDERBRUSH land_percent 100 number_of_clumps 9320 spacing_to_other_terrain_types 0 }
+create_terrain UNDERBRUSH { base_terrain LEAVES land_percent 1 spacing_to_other_terrain_types 4 }
+create_terrain FOREST { base_terrain UNDERBRUSH land_percent 100 number_of_clumps 9320 spacing_to_other_terrain_types 0 }
+create_terrain UNDERBRUSH { base_terrain LEAVES land_percent 1 spacing_to_other_terrain_types 4 }
+create_terrain FOREST { base_terrain UNDERBRUSH land_percent 100 number_of_clumps 9320 spacing_to_other_terrain_types 0 }
+create_terrain UNDERBRUSH { base_terrain LEAVES land_percent 1 spacing_to_other_terrain_types 4 }
+create_terrain FOREST { base_terrain UNDERBRUSH land_percent 100 number_of_clumps 9320 spacing_to_other_terrain_types 0 }
+create_terrain UNDERBRUSH { base_terrain LEAVES land_percent 1 spacing_to_other_terrain_types 4 }
+create_terrain FOREST { base_terrain UNDERBRUSH land_percent 100 number_of_clumps 9320 spacing_to_other_terrain_types 0 }
+create_terrain UNDERBRUSH { base_terrain LEAVES land_percent 1 spacing_to_other_terrain_types 4 }
+create_terrain FOREST { base_terrain UNDERBRUSH land_percent 100 number_of_clumps 9320 spacing_to_other_terrain_types 0 }
+create_terrain UNDERBRUSH { base_terrain LEAVES land_percent 1 spacing_to_other_terrain_types 4 }
+create_terrain FOREST { base_terrain UNDERBRUSH land_percent 100 number_of_clumps 9320 spacing_to_other_terrain_types 0 }
+create_terrain UNDERBRUSH { base_terrain LEAVES land_percent 1 spacing_to_other_terrain_types 4 }
+create_terrain FOREST { base_terrain UNDERBRUSH land_percent 100 number_of_clumps 9320 spacing_to_other_terrain_types 0 }
+create_terrain UNDERBRUSH { base_terrain LEAVES land_percent 1 spacing_to_other_terrain_types 4 }
+create_terrain FOREST { base_terrain UNDERBRUSH land_percent 100 number_of_clumps 9320 spacing_to_other_terrain_types 0 }
+create_terrain UNDERBRUSH { base_terrain LEAVES land_percent 1 spacing_to_other_terrain_types 4 }
+create_terrain FOREST { base_terrain UNDERBRUSH land_percent 100 number_of_clumps 9320 spacing_to_other_terrain_types 0 }
+create_terrain UNDERBRUSH { base_terrain LEAVES land_percent 1 spacing_to_other_terrain_types 4 }
+create_terrain FOREST { base_terrain UNDERBRUSH land_percent 100 number_of_clumps 9320 spacing_to_other_terrain_types 0 }
+create_terrain UNDERBRUSH { base_terrain LEAVES land_percent 1 spacing_to_other_terrain_types 4 }
+create_terrain FOREST { base_terrain UNDERBRUSH land_percent 100 number_of_clumps 9320 spacing_to_other_terrain_types 0 }
+create_terrain UNDERBRUSH { base_terrain LEAVES land_percent 1 spacing_to_other_terrain_types 4 }
+create_terrain FOREST { base_terrain UNDERBRUSH land_percent 100 number_of_clumps 9320 spacing_to_other_terrain_types 0 }
+create_terrain UNDERBRUSH { base_terrain LEAVES land_percent 1 spacing_to_other_terrain_types 4 }
+create_terrain FOREST { base_terrain UNDERBRUSH land_percent 100 number_of_clumps 9320 spacing_to_other_terrain_types 0 }
+create_terrain UNDERBRUSH { base_terrain LEAVES land_percent 1 spacing_to_other_terrain_types 4 }
+create_terrain FOREST { base_terrain UNDERBRUSH land_percent 100 number_of_clumps 9320 spacing_to_other_terrain_types 0 }
+create_terrain UNDERBRUSH { base_terrain LEAVES land_percent 1 spacing_to_other_terrain_types 4 }
+create_terrain FOREST { base_terrain UNDERBRUSH land_percent 100 number_of_clumps 9320 spacing_to_other_terrain_types 0 }
+create_terrain UNDERBRUSH { base_terrain LEAVES land_percent 1 spacing_to_other_terrain_types 4 }
+create_terrain FOREST { base_terrain UNDERBRUSH land_percent 100 number_of_clumps 9320 spacing_to_other_terrain_types 0 }
+create_terrain UNDERBRUSH { base_terrain LEAVES land_percent 1 spacing_to_other_terrain_types 4 }
+create_terrain FOREST { base_terrain UNDERBRUSH land_percent 100 number_of_clumps 9320 spacing_to_other_terrain_types 0 }
+create_terrain UNDERBRUSH { base_terrain LEAVES land_percent 1 spacing_to_other_terrain_types 4 }
+create_terrain FOREST { base_terrain UNDERBRUSH land_percent 100 number_of_clumps 9320 spacing_to_other_terrain_types 0 }
+create_terrain UNDERBRUSH { base_terrain LEAVES land_percent 1 spacing_to_other_terrain_types 4 }
+create_terrain FOREST { base_terrain UNDERBRUSH land_percent 100 number_of_clumps 9320 spacing_to_other_terrain_types 0 }
+create_terrain UNDERBRUSH { base_terrain LEAVES land_percent 1 spacing_to_other_terrain_types 4 }
+create_terrain FOREST { base_terrain UNDERBRUSH land_percent 100 number_of_clumps 9320 spacing_to_other_terrain_types 0 }
+create_terrain UNDERBRUSH { base_terrain LEAVES land_percent 1 spacing_to_other_terrain_types 4 }
+create_terrain FOREST { base_terrain UNDERBRUSH land_percent 100 number_of_clumps 9320 spacing_to_other_terrain_types 0 }
+create_terrain UNDERBRUSH { base_terrain LEAVES land_percent 1 spacing_to_other_terrain_types 4 }
+create_terrain FOREST { base_terrain UNDERBRUSH land_percent 100 number_of_clumps 9320 spacing_to_other_terrain_types 0 }
+create_terrain UNDERBRUSH { base_terrain LEAVES land_percent 1 spacing_to_other_terrain_types 4 }
+create_terrain FOREST { base_terrain UNDERBRUSH land_percent 100 number_of_clumps 9320 spacing_to_other_terrain_types 0 }
+create_terrain UNDERBRUSH { base_terrain LEAVES land_percent 1 spacing_to_other_terrain_types 4 }
+create_terrain FOREST { base_terrain UNDERBRUSH land_percent 100 number_of_clumps 9320 spacing_to_other_terrain_types 0 }
+create_terrain UNDERBRUSH { base_terrain LEAVES land_percent 1 spacing_to_other_terrain_types 4 }
+create_terrain FOREST { base_terrain UNDERBRUSH land_percent 100 number_of_clumps 9320 spacing_to_other_terrain_types 0 }
+create_terrain UNDERBRUSH { base_terrain LEAVES land_percent 1 spacing_to_other_terrain_types 4 }
+create_terrain FOREST { base_terrain UNDERBRUSH land_percent 100 number_of_clumps 9320 spacing_to_other_terrain_types 0 }
+create_terrain UNDERBRUSH { base_terrain LEAVES land_percent 1 spacing_to_other_terrain_types 4 }
+create_terrain FOREST { base_terrain UNDERBRUSH land_percent 100 number_of_clumps 9320 spacing_to_other_terrain_types 0 }
+create_terrain UNDERBRUSH { base_terrain LEAVES land_percent 1 spacing_to_other_terrain_types 4 }
+create_terrain FOREST { base_terrain UNDERBRUSH land_percent 100 number_of_clumps 9320 spacing_to_other_terrain_types 0 }
+create_terrain UNDERBRUSH { base_terrain LEAVES land_percent 1 spacing_to_other_terrain_types 4 }
+create_terrain FOREST { base_terrain UNDERBRUSH land_percent 100 number_of_clumps 9320 spacing_to_other_terrain_types 0 }
+create_terrain UNDERBRUSH { base_terrain LEAVES land_percent 1 spacing_to_other_terrain_types 4 }
+create_terrain FOREST { base_terrain UNDERBRUSH land_percent 100 number_of_clumps 9320 spacing_to_other_terrain_types 0 }
+create_terrain UNDERBRUSH { base_terrain LEAVES land_percent 1 spacing_to_other_terrain_types 4 }
+create_terrain FOREST { base_terrain UNDERBRUSH land_percent 100 number_of_clumps 9320 spacing_to_other_terrain_types 0 }
+create_terrain UNDERBRUSH { base_terrain LEAVES land_percent 1 spacing_to_other_terrain_types 4 }
+create_terrain FOREST { base_terrain UNDERBRUSH land_percent 100 number_of_clumps 9320 spacing_to_other_terrain_types 0 }
+create_terrain UNDERBRUSH { base_terrain LEAVES land_percent 1 spacing_to_other_terrain_types 4 }
+create_terrain FOREST { base_terrain UNDERBRUSH land_percent 100 number_of_clumps 9320 spacing_to_other_terrain_types 0 }
+create_terrain UNDERBRUSH { base_terrain LEAVES land_percent 1 spacing_to_other_terrain_types 4 }
+create_terrain FOREST { base_terrain UNDERBRUSH land_percent 100 number_of_clumps 9320 spacing_to_other_terrain_types 0 }
+create_terrain UNDERBRUSH { base_terrain LEAVES land_percent 1 spacing_to_other_terrain_types 4 }
+create_terrain FOREST { base_terrain UNDERBRUSH land_percent 100 number_of_clumps 9320 spacing_to_other_terrain_types 0 }
+create_terrain UNDERBRUSH { base_terrain LEAVES land_percent 1 spacing_to_other_terrain_types 4 }
+create_terrain FOREST { base_terrain UNDERBRUSH land_percent 100 number_of_clumps 9320 spacing_to_other_terrain_types 0 }
+create_terrain UNDERBRUSH { base_terrain LEAVES land_percent 1 spacing_to_other_terrain_types 4 }
+create_terrain FOREST { base_terrain UNDERBRUSH land_percent 100 number_of_clumps 9320 spacing_to_other_terrain_types 0 }
+create_terrain UNDERBRUSH { base_terrain LEAVES land_percent 1 spacing_to_other_terrain_types 4 }
+create_terrain FOREST { base_terrain UNDERBRUSH land_percent 100 number_of_clumps 9320 spacing_to_other_terrain_types 0 }
+create_terrain UNDERBRUSH { base_terrain LEAVES land_percent 1 spacing_to_other_terrain_types 4 }
+create_terrain FOREST { base_terrain UNDERBRUSH land_percent 100 number_of_clumps 9320 spacing_to_other_terrain_types 0 }
+create_terrain UNDERBRUSH { base_terrain LEAVES land_percent 1 spacing_to_other_terrain_types 4 }
+create_terrain FOREST { base_terrain UNDERBRUSH land_percent 100 number_of_clumps 9320 spacing_to_other_terrain_types 0 }
+create_terrain UNDERBRUSH { base_terrain LEAVES land_percent 1 spacing_to_other_terrain_types 4 }
+create_terrain FOREST { base_terrain UNDERBRUSH land_percent 100 number_of_clumps 9320 spacing_to_other_terrain_types 0 }
+create_terrain UNDERBRUSH { base_terrain LEAVES land_percent 1 spacing_to_other_terrain_types 4 }
+create_terrain FOREST { base_terrain UNDERBRUSH land_percent 100 number_of_clumps 9320 spacing_to_other_terrain_types 0 }
+create_terrain UNDERBRUSH { base_terrain LEAVES land_percent 1 spacing_to_other_terrain_types 4 }
+create_terrain FOREST { base_terrain UNDERBRUSH land_percent 100 number_of_clumps 9320 spacing_to_other_terrain_types 0 }
+create_terrain UNDERBRUSH { base_terrain LEAVES land_percent 1 spacing_to_other_terrain_types 4 }
+create_terrain FOREST { base_terrain UNDERBRUSH land_percent 100 number_of_clumps 9320 spacing_to_other_terrain_types 0 }
+create_terrain UNDERBRUSH { base_terrain LEAVES land_percent 1 spacing_to_other_terrain_types 4 }
+create_terrain FOREST { base_terrain UNDERBRUSH land_percent 100 number_of_clumps 9320 spacing_to_other_terrain_types 0 }
+create_terrain UNDERBRUSH { base_terrain LEAVES land_percent 1 spacing_to_other_terrain_types 4 }
+create_terrain FOREST { base_terrain UNDERBRUSH land_percent 100 number_of_clumps 9320 spacing_to_other_terrain_types 0 }
+create_terrain UNDERBRUSH { base_terrain LEAVES land_percent 1 spacing_to_other_terrain_types 4 }
+create_terrain FOREST { base_terrain UNDERBRUSH land_percent 100 number_of_clumps 9320 spacing_to_other_terrain_types 0 }
+create_terrain UNDERBRUSH { base_terrain LEAVES land_percent 1 spacing_to_other_terrain_types 4 }
+create_terrain FOREST { base_terrain UNDERBRUSH land_percent 100 number_of_clumps 9320 spacing_to_other_terrain_types 0 }
+create_terrain UNDERBRUSH { base_terrain LEAVES land_percent 1 spacing_to_other_terrain_types 4 }
+create_terrain FOREST { base_terrain UNDERBRUSH land_percent 100 number_of_clumps 9320 spacing_to_other_terrain_types 0 }
+create_terrain UNDERBRUSH { base_terrain LEAVES land_percent 1 spacing_to_other_terrain_types 4 }
+create_terrain FOREST { base_terrain UNDERBRUSH land_percent 100 number_of_clumps 9320 spacing_to_other_terrain_types 0 }
+create_terrain UNDERBRUSH { base_terrain LEAVES land_percent 1 spacing_to_other_terrain_types 4 }
+create_terrain FOREST { base_terrain UNDERBRUSH land_percent 100 number_of_clumps 9320 spacing_to_other_terrain_types 0 }
+create_terrain UNDERBRUSH { base_terrain LEAVES land_percent 1 spacing_to_other_terrain_types 4 }
+create_terrain FOREST { base_terrain UNDERBRUSH land_percent 100 number_of_clumps 9320 spacing_to_other_terrain_types 0 }
+create_terrain UNDERBRUSH { base_terrain LEAVES land_percent 1 spacing_to_other_terrain_types 4 }
+create_terrain FOREST { base_terrain UNDERBRUSH land_percent 100 number_of_clumps 9320 spacing_to_other_terrain_types 0 }
+create_terrain UNDERBRUSH { base_terrain LEAVES land_percent 1 spacing_to_other_terrain_types 4 }
+create_terrain FOREST { base_terrain UNDERBRUSH land_percent 100 number_of_clumps 9320 spacing_to_other_terrain_types 0 }
+create_terrain UNDERBRUSH { base_terrain LEAVES land_percent 1 spacing_to_other_terrain_types 4 }
+create_terrain FOREST { base_terrain UNDERBRUSH land_percent 100 number_of_clumps 9320 spacing_to_other_terrain_types 0 }
+create_terrain UNDERBRUSH { base_terrain LEAVES land_percent 1 spacing_to_other_terrain_types 4 }
+create_terrain FOREST { base_terrain UNDERBRUSH land_percent 100 number_of_clumps 9320 spacing_to_other_terrain_types 0 }
+create_terrain UNDERBRUSH { base_terrain LEAVES land_percent 1 spacing_to_other_terrain_types 4 }
+create_terrain FOREST { base_terrain UNDERBRUSH land_percent 100 number_of_clumps 9320 spacing_to_other_terrain_types 0 }
+create_terrain UNDERBRUSH { base_terrain LEAVES land_percent 1 spacing_to_other_terrain_types 4 }
+create_terrain FOREST { base_terrain UNDERBRUSH land_percent 100 number_of_clumps 9320 spacing_to_other_terrain_types 0 }
+create_terrain UNDERBRUSH { base_terrain LEAVES land_percent 1 spacing_to_other_terrain_types 4 }
+create_terrain FOREST { base_terrain UNDERBRUSH land_percent 100 number_of_clumps 9320 spacing_to_other_terrain_types 0 }
+create_terrain UNDERBRUSH { base_terrain LEAVES land_percent 1 spacing_to_other_terrain_types 4 }
+create_terrain FOREST { base_terrain UNDERBRUSH land_percent 100 number_of_clumps 9320 spacing_to_other_terrain_types 0 }
+create_terrain UNDERBRUSH { base_terrain LEAVES land_percent 1 spacing_to_other_terrain_types 4 }
+create_terrain FOREST { base_terrain UNDERBRUSH land_percent 100 number_of_clumps 9320 spacing_to_other_terrain_types 0 }
+create_terrain UNDERBRUSH { base_terrain LEAVES land_percent 1 spacing_to_other_terrain_types 4 }
+create_terrain FOREST { base_terrain UNDERBRUSH land_percent 100 number_of_clumps 9320 spacing_to_other_terrain_types 0 }
+create_terrain UNDERBRUSH { base_terrain LEAVES land_percent 1 spacing_to_other_terrain_types 4 }
+create_terrain FOREST { base_terrain UNDERBRUSH land_percent 100 number_of_clumps 9320 spacing_to_other_terrain_types 0 }
+create_terrain UNDERBRUSH { base_terrain LEAVES land_percent 1 spacing_to_other_terrain_types 4 }
+create_terrain FOREST { base_terrain UNDERBRUSH land_percent 100 number_of_clumps 9320 spacing_to_other_terrain_types 0 }
+create_terrain UNDERBRUSH { base_terrain LEAVES land_percent 1 spacing_to_other_terrain_types 4 }
+create_terrain FOREST { base_terrain UNDERBRUSH land_percent 100 number_of_clumps 9320 spacing_to_other_terrain_types 0 }
+create_terrain UNDERBRUSH { base_terrain LEAVES land_percent 1 spacing_to_other_terrain_types 4 }
+create_terrain FOREST { base_terrain UNDERBRUSH land_percent 100 number_of_clumps 9320 spacing_to_other_terrain_types 0 }
+create_terrain UNDERBRUSH { base_terrain LEAVES land_percent 1 spacing_to_other_terrain_types 4 }
+create_terrain FOREST { base_terrain UNDERBRUSH land_percent 100 number_of_clumps 9320 spacing_to_other_terrain_types 0 }
+create_terrain UNDERBRUSH { base_terrain LEAVES land_percent 1 spacing_to_other_terrain_types 4 }
+create_terrain FOREST { base_terrain UNDERBRUSH land_percent 100 number_of_clumps 9320 spacing_to_other_terrain_types 0 }
+create_terrain UNDERBRUSH { base_terrain LEAVES land_percent 1 spacing_to_other_terrain_types 4 }
+create_terrain FOREST { base_terrain UNDERBRUSH land_percent 100 number_of_clumps 9320 spacing_to_other_terrain_types 0 }
+create_terrain UNDERBRUSH { base_terrain LEAVES land_percent 1 spacing_to_other_terrain_types 4 }
+create_terrain FOREST { base_terrain UNDERBRUSH land_percent 100 number_of_clumps 9320 spacing_to_other_terrain_types 0 }
+create_terrain UNDERBRUSH { base_terrain LEAVES land_percent 1 spacing_to_other_terrain_types 4 }
+create_terrain FOREST { base_terrain UNDERBRUSH land_percent 100 number_of_clumps 9320 spacing_to_other_terrain_types 0 }
+create_terrain UNDERBRUSH { base_terrain LEAVES land_percent 1 spacing_to_other_terrain_types 4 }
+create_terrain FOREST { base_terrain UNDERBRUSH land_percent 100 number_of_clumps 9320 spacing_to_other_terrain_types 0 }
+create_terrain UNDERBRUSH { base_terrain LEAVES land_percent 1 spacing_to_other_terrain_types 4 }
+create_terrain FOREST { base_terrain UNDERBRUSH land_percent 100 number_of_clumps 9320 spacing_to_other_terrain_types 0 }
+create_terrain UNDERBRUSH { base_terrain LEAVES land_percent 1 spacing_to_other_terrain_types 4 }
+create_terrain FOREST { base_terrain UNDERBRUSH land_percent 100 number_of_clumps 9320 spacing_to_other_terrain_types 0 }
+create_terrain UNDERBRUSH { base_terrain LEAVES land_percent 1 spacing_to_other_terrain_types 4 }
+create_terrain FOREST { base_terrain UNDERBRUSH land_percent 100 number_of_clumps 9320 spacing_to_other_terrain_types 0 }
+create_terrain UNDERBRUSH { base_terrain LEAVES land_percent 1 spacing_to_other_terrain_types 4 }
+create_terrain FOREST { base_terrain UNDERBRUSH land_percent 100 number_of_clumps 9320 spacing_to_other_terrain_types 0 }
+create_terrain UNDERBRUSH { base_terrain LEAVES land_percent 1 spacing_to_other_terrain_types 4 }
+create_terrain FOREST { base_terrain UNDERBRUSH land_percent 100 number_of_clumps 9320 spacing_to_other_terrain_types 0 }
+create_terrain UNDERBRUSH { base_terrain LEAVES land_percent 1 spacing_to_other_terrain_types 4 }
+create_terrain FOREST { base_terrain UNDERBRUSH land_percent 100 number_of_clumps 9320 spacing_to_other_terrain_types 0 }
+create_terrain UNDERBRUSH { base_terrain LEAVES land_percent 1 spacing_to_other_terrain_types 4 }
+create_terrain FOREST { base_terrain UNDERBRUSH land_percent 100 number_of_clumps 9320 spacing_to_other_terrain_types 0 }
+create_terrain UNDERBRUSH { base_terrain LEAVES land_percent 1 spacing_to_other_terrain_types 4 }
+create_terrain FOREST { base_terrain UNDERBRUSH land_percent 100 number_of_clumps 9320 spacing_to_other_terrain_types 0 }
+create_terrain UNDERBRUSH { base_terrain LEAVES land_percent 1 spacing_to_other_terrain_types 4 }
+create_terrain FOREST { base_terrain UNDERBRUSH land_percent 100 number_of_clumps 9320 spacing_to_other_terrain_types 0 }
+create_terrain UNDERBRUSH { base_terrain LEAVES land_percent 1 spacing_to_other_terrain_types 4 }
+create_terrain FOREST { base_terrain UNDERBRUSH land_percent 100 number_of_clumps 9320 spacing_to_other_terrain_types 0 }
+create_terrain UNDERBRUSH { base_terrain LEAVES land_percent 1 spacing_to_other_terrain_types 4 }
+create_terrain FOREST { base_terrain UNDERBRUSH land_percent 100 number_of_clumps 9320 spacing_to_other_terrain_types 0 }
+create_terrain UNDERBRUSH { base_terrain LEAVES land_percent 1 spacing_to_other_terrain_types 4 }
+create_terrain FOREST { base_terrain UNDERBRUSH land_percent 100 number_of_clumps 9320 spacing_to_other_terrain_types 0 }
+create_terrain UNDERBRUSH { base_terrain LEAVES land_percent 1 spacing_to_other_terrain_types 4 }
+create_terrain FOREST { base_terrain UNDERBRUSH land_percent 100 number_of_clumps 9320 spacing_to_other_terrain_types 0 }
+create_terrain UNDERBRUSH { base_terrain LEAVES land_percent 1 spacing_to_other_terrain_types 4 }
+create_terrain FOREST { base_terrain UNDERBRUSH land_percent 100 number_of_clumps 9320 spacing_to_other_terrain_types 0 }
+create_terrain UNDERBRUSH { base_terrain LEAVES land_percent 1 spacing_to_other_terrain_types 4 }
+create_terrain FOREST { base_terrain UNDERBRUSH land_percent 100 number_of_clumps 9320 spacing_to_other_terrain_types 0 }
+create_terrain UNDERBRUSH { base_terrain LEAVES land_percent 1 spacing_to_other_terrain_types 4 }
+create_terrain FOREST { base_terrain UNDERBRUSH land_percent 100 number_of_clumps 9320 spacing_to_other_terrain_types 0 }
+create_terrain UNDERBRUSH { base_terrain LEAVES land_percent 1 spacing_to_other_terrain_types 4 }
+create_terrain FOREST { base_terrain UNDERBRUSH land_percent 100 number_of_clumps 9320 spacing_to_other_terrain_types 0 }
+create_terrain UNDERBRUSH { base_terrain LEAVES land_percent 1 spacing_to_other_terrain_types 4 }
+create_terrain FOREST { base_terrain UNDERBRUSH land_percent 100 number_of_clumps 9320 spacing_to_other_terrain_types 0 }
+create_terrain UNDERBRUSH { base_terrain LEAVES land_percent 1 spacing_to_other_terrain_types 4 }
+create_terrain FOREST { base_terrain UNDERBRUSH land_percent 100 number_of_clumps 9320 spacing_to_other_terrain_types 0 }
+create_terrain UNDERBRUSH { base_terrain LEAVES land_percent 1 spacing_to_other_terrain_types 4 }
+create_terrain FOREST { base_terrain UNDERBRUSH land_percent 100 number_of_clumps 9320 spacing_to_other_terrain_types 0 }
+create_terrain UNDERBRUSH { base_terrain LEAVES land_percent 1 spacing_to_other_terrain_types 4 }
+create_terrain FOREST { base_terrain UNDERBRUSH land_percent 100 number_of_clumps 9320 spacing_to_other_terrain_types 0 }
+create_terrain UNDERBRUSH { base_terrain LEAVES land_percent 1 spacing_to_other_terrain_types 4 }
+create_terrain FOREST { base_terrain UNDERBRUSH land_percent 100 number_of_clumps 9320 spacing_to_other_terrain_types 0 }
+create_terrain UNDERBRUSH { base_terrain LEAVES land_percent 1 spacing_to_other_terrain_types 4 }
+create_terrain FOREST { base_terrain UNDERBRUSH land_percent 100 number_of_clumps 9320 spacing_to_other_terrain_types 0 }
+create_terrain UNDERBRUSH { base_terrain LEAVES land_percent 1 spacing_to_other_terrain_types 4 }
+create_terrain FOREST { base_terrain UNDERBRUSH land_percent 100 number_of_clumps 9320 spacing_to_other_terrain_types 0 }
+create_terrain UNDERBRUSH { base_terrain LEAVES land_percent 1 spacing_to_other_terrain_types 4 }
+create_terrain FOREST { base_terrain UNDERBRUSH land_percent 100 number_of_clumps 9320 spacing_to_other_terrain_types 0 }
+create_terrain UNDERBRUSH { base_terrain LEAVES land_percent 1 spacing_to_other_terrain_types 4 }
+create_terrain FOREST { base_terrain UNDERBRUSH land_percent 100 number_of_clumps 9320 spacing_to_other_terrain_types 0 }
+
+
+if YES_CLEARINGS
+/* clearings replace one forest each */
+create_terrain GRASS { base_terrain FOREST land_percent 100 }
+create_terrain GRASS { base_terrain FOREST land_percent 100 }
+create_terrain GRASS { base_terrain FOREST land_percent 100 }
+create_terrain GRASS { base_terrain FOREST land_percent 100 }
+create_terrain GRASS { base_terrain FOREST land_percent 100 }
+create_terrain GRASS { base_terrain FOREST land_percent 100 }
+create_terrain GRASS { base_terrain FOREST land_percent 100 }
+create_terrain GRASS { base_terrain FOREST land_percent 100 }
+if GIGANTIC_MAP
+	create_terrain GRASS { base_terrain FOREST land_percent 100 }
+	create_terrain GRASS { base_terrain FOREST land_percent 100 }
+elseif LUDIKRIS_MAP
+	create_terrain GRASS { base_terrain FOREST land_percent 100 }
+	create_terrain GRASS { base_terrain FOREST land_percent 100 }
+	create_terrain GRASS { base_terrain FOREST land_percent 100 }
+	create_terrain GRASS { base_terrain FOREST land_percent 100 }
+	create_terrain GRASS { base_terrain FOREST land_percent 100 }
+endif
+endif
+
+if CLEARINGS_AND_PONDS
+/* ponds */
+
+create_terrain WATER { base_terrain GRASS land_percent 100 spacing_to_other_terrain_types 2 }
+create_terrain WATER { base_terrain GRASS land_percent 100 spacing_to_other_terrain_types 2 }
+create_terrain WATER { base_terrain GRASS land_percent 100 spacing_to_other_terrain_types 2 }
+create_terrain WATER { base_terrain GRASS land_percent 100 spacing_to_other_terrain_types 2 }
+create_terrain WATER { base_terrain GRASS land_percent 100 spacing_to_other_terrain_types 2 }
+create_terrain WATER { base_terrain GRASS land_percent 100 spacing_to_other_terrain_types 2 }
+
+if HUGE_MAP
+	create_terrain WATER { base_terrain GRASS land_percent 100 spacing_to_other_terrain_types 3 }
+elseif GIGANTIC_MAP
+	create_terrain WATER { base_terrain GRASS land_percent 100 spacing_to_other_terrain_types 4 }
+	create_terrain WATER { base_terrain GRASS land_percent 100 spacing_to_other_terrain_types 4 }
+elseif LUDIKRIS_MAP
+	create_terrain GRASS { base_terrain FOREST land_percent 100 }
+	create_terrain GRASS { base_terrain FOREST land_percent 100 }
+	create_terrain GRASS { base_terrain FOREST land_percent 100 }
+	create_terrain GRASS { base_terrain FOREST land_percent 100 }
+	create_terrain WATER { base_terrain GRASS land_percent 100 spacing_to_other_terrain_types 6 }
+	create_terrain WATER { base_terrain GRASS land_percent 100 spacing_to_other_terrain_types 6 }
+	create_terrain WATER { base_terrain GRASS land_percent 100 spacing_to_other_terrain_types 6 }
+	create_terrain WATER { base_terrain GRASS land_percent 100 spacing_to_other_terrain_types 6 }
+endif
+
+
+endif
+
+/* make the player lands match the neutral clearings - we didn't do this initially because we don't want lakes by towns */
+create_terrain GRASS { base_terrain GRASS2 land_percent 100 number_of_clumps 9320 spacing_to_other_terrain_types 0 }
+create_terrain GRASS { base_terrain GRASS2 land_percent 100 number_of_clumps 9320 spacing_to_other_terrain_types 0 }
+create_terrain GRASS { base_terrain GRASS2 land_percent 100 number_of_clumps 9320 spacing_to_other_terrain_types 0 }
+create_terrain GRASS { base_terrain GRASS2 land_percent 100 number_of_clumps 9320 spacing_to_other_terrain_types 0 }
+create_terrain GRASS { base_terrain GRASS2 land_percent 100 number_of_clumps 9320 spacing_to_other_terrain_types 0 }
+
+/* cosmetic terrain mixing */
+create_terrain LEAVES {
+	base_terrain GRASS
+	land_percent 10
+	number_of_clumps 30
+	set_scale_by_groups
+	terrain_mask 1 /* check this */
+}
+create_terrain DLC_JUNGLEGRASS {
+	base_terrain LEAVES
+	land_percent 10
+	number_of_clumps 30
+	set_scale_by_groups
+	terrain_mask 1 /* check this */
+}
+create_terrain UNDERBRUSH {
+	base_terrain LEAVES
+	land_percent 10
+	number_of_clumps 30
+	set_scale_by_groups
+	terrain_mask 1 /* check this */
+}
+
+/* maybe mix in some mud */
+
+
+/* forest mixing */
+create_terrain PINE_FOREST {
+	base_terrain FOREST
+	land_percent 8
+	number_of_clumps 9320
+	set_scale_by_groups
+}
+create_terrain DLC_FORESTAUTUMN {
+	base_terrain FOREST
+	land_percent 8
+	number_of_clumps 9320
+	set_scale_by_groups
+}
+create_terrain OAK_BUSH_FOREST {
+	base_terrain FOREST
+	land_percent 8
+	number_of_clumps 9320
+	set_scale_by_groups
+}
+
+/* water mixing */
+create_terrain MED_WATER {
+	base_terrain WATER
+	land_percent 100
+	number_of_clumps 9320
+	spacing_to_other_terrain_types 1
+	terrain_mask 1
+}
+create_terrain MED_WATER {
+	base_terrain WATER
+	land_percent 100
+	number_of_clumps 9320
+	spacing_to_other_terrain_types 2
+}
+
+
+
+
+/* =================================================================================================== */
+<OBJECTS_GENERATION>
+
+create_object TOWN_CENTER {
+	set_place_for_every_player
+	max_distance_to_players 0
+}
+
+create_object VILLAGER {
+	set_place_for_every_player
+	min_distance_to_players 5
+	max_distance_to_players 7
+	set_circular_placement
+	min_distance_group_placement 1
+}
+
+create_object SCOUT {
+	set_place_for_every_player
+	min_distance_to_players 6
+	max_distance_to_players 8
+	set_circular_placement
+	min_distance_group_placement 1
+}
+
+if REGICIDE
+	create_object KING {
+		set_place_for_every_player
+		min_distance_to_players 6
+		set_circular_placement
+		find_closest
+		min_distance_group_placement 1
+	}
+	create_object VILLAGER {
+		number_of_objects 7
+		set_place_for_every_player
+		min_distance_to_players 6
+		max_distance_to_players 8
+		set_circular_placement
+	}
+	create_object CASTLE {
+		set_place_for_every_player
+		min_distance_to_players 9
+		max_distance_to_players 11
+		set_circular_placement
+		min_distance_group_placement 2
+	}
+endif
+
+/* relic balance from DE */
+create_object RELIC
+{
+	max_distance_to_other_zones 2
+	avoid_forest_zone 1
+	min_distance_to_players 25
+	set_circular_placement
+	min_distance_group_placement 1
+	if TINY_MAP
+		number_of_objects            5
+		temp_min_distance_group_placement 35
+	elseif SMALL_MAP
+		number_of_objects            5
+		temp_min_distance_group_placement 38
+	elseif MEDIUM_MAP
+		number_of_objects            5
+		temp_min_distance_group_placement 38
+	elseif LARGE_MAP
+		number_of_objects            7
+		temp_min_distance_group_placement 48
+	elseif HUGE_MAP
+		number_of_objects            8
+		temp_min_distance_group_placement 52
+	else
+		number_of_objects            999
+		temp_min_distance_group_placement 52 
+	endif
+}
+
+/* default straggler trees */
+if DEATH_MATCH
+elseif DEFEND_WONDER
+elseif EMPIRE_WARS
+else
+create_object OAKTREE {
+	number_of_objects 2
+	set_gaia_object_only
+	set_place_for_every_player
+	min_distance_to_players 4
+	max_distance_to_players 5
+	set_circular_placement
+	min_distance_group_placement 1
+}
+create_object OAKTREE {
+	number_of_objects 3
+	set_gaia_object_only
+	set_place_for_every_player
+	min_distance_to_players 6
+	max_distance_to_players 8
+	set_circular_placement
+	min_distance_group_placement 1
+}
+endif
+
+/* near forage */
+create_object FORAGE
+{
+	number_of_objects 6
+	group_placement_radius 2
+	set_tight_grouping
+	set_gaia_object_only
+	set_place_for_every_player
+	min_distance_to_players 8
+	max_distance_to_players 10
+	set_circular_placement
+	min_distance_group_placement 4
+	avoid_forest_zone 1
+}
+
+/* near gold */
+create_object GOLD
+{
+	number_of_objects 7
+	group_placement_radius 2
+	set_tight_grouping
+	set_gaia_object_only
+	set_place_for_every_player
+	min_distance_to_players 8
+	max_distance_to_players 10
+	set_circular_placement
+	min_distance_group_placement 4
+	avoid_forest_zone 1
+}
+
+/* medium gold */
+create_object GOLD
+{
+	number_of_objects 4
+	number_of_groups 2
+	group_placement_radius 2
+	set_tight_grouping
+	set_gaia_object_only
+	set_place_for_every_player
+	min_distance_to_players 12
+	max_distance_to_players 16
+	set_circular_placement
+	min_distance_group_placement 4
+	avoid_forest_zone 1
+}
+
+/* near stone */
+create_object STONE
+{
+	number_of_objects 5
+	group_placement_radius 2  
+	set_tight_grouping 
+	set_gaia_object_only
+	set_place_for_every_player
+	min_distance_to_players 8
+	max_distance_to_players 10
+	set_circular_placement
+	min_distance_group_placement 4
+	avoid_forest_zone 1
+}
+
+/* far stone */
+create_object STONE
+{
+	number_of_objects 4
+	group_placement_radius 2  
+	set_tight_grouping 
+	set_gaia_object_only
+	set_place_for_every_player
+	min_distance_to_players 12
+	max_distance_to_players 16
+	set_circular_placement
+	min_distance_group_placement 4
+	avoid_forest_zone 1
+}
+
+create_object SHEEP
+{
+	number_of_objects 4
+	set_loose_grouping
+	set_gaia_object_only
+	set_place_for_every_player
+	min_distance_to_players 8
+	max_distance_to_players 9
+	set_circular_placement
+	avoid_forest_zone 1
+}
+create_object SHEEP
+{	
+	number_of_objects 2
+	number_of_groups 2
+	set_loose_grouping
+	set_gaia_object_only
+	set_place_for_every_player
+	min_distance_to_players 16
+	max_distance_to_players 23
+	set_circular_placement
+	avoid_forest_zone 1
+}
+
+create_object DEER
+{
+	number_of_objects 4
+	group_placement_radius 3
+	set_loose_grouping
+	set_gaia_object_only
+	set_place_for_every_player
+	avoid_forest_zone 1
+	min_distance_to_players 17
+	max_distance_to_players 21
+	set_circular_placement
+}
+
+create_object BOAR
+{	
+	number_of_objects 2
+	set_gaia_object_only
+	set_place_for_every_player
+	avoid_forest_zone 1
+	min_distance_to_players 16
+	max_distance_to_players 19
+	set_circular_placement
+}
+
+create_object WOLF
+{
+	number_of_objects 2
+	set_gaia_object_only
+	set_place_for_every_player
+	start_random
+	percent_chance 33
+		min_distance_to_players    30
+		max_distance_to_players    33
+	percent_chance 33
+		min_distance_to_players    34
+		max_distance_to_players    37
+	percent_chance 34
+		min_distance_to_players    37
+		max_distance_to_players    40
+	end_random
+	set_circular_placement
+	temp_min_distance_group_placement 15
+	avoid_forest_zone 1
+}
+
+/* scattered resources */
+
+create_object FORAGE {
+    number_of_groups 9320
+	number_of_objects 4
+    group_placement_radius 2
+    set_tight_grouping
+    set_gaia_object_only
+	min_distance_to_players 40
+	set_circular_placement
+	min_distance_group_placement 4
+	temp_min_distance_group_placement 64
+	avoid_forest_zone 4
+}
+
+/* extra gold */
+create_object GOLD {
+    number_of_groups 9320
+	number_of_objects 3
+    group_placement_radius 1
+    set_tight_grouping
+    set_gaia_object_only
+	min_distance_to_players 30
+	set_circular_placement
+	min_distance_group_placement 4
+	temp_min_distance_group_placement 40
+	avoid_forest_zone 1
+}
+
+/* extra stone */
+create_object STONE {
+    number_of_groups 9320
+	number_of_objects 3
+    group_placement_radius 1
+    set_tight_grouping
+    set_gaia_object_only
+	min_distance_to_players 36
+	set_circular_placement
+	min_distance_group_placement 4
+	temp_min_distance_group_placement 54
+	avoid_forest_zone 1
+}
+
+/* extra animals  */
+create_object SHEEP {
+	number_of_groups 9320
+	set_gaia_object_only
+	min_distance_group_placement 4
+	temp_min_distance_group_placement 32
+	min_distance_to_players 40
+	set_circular_placement
+}
+create_object DEER {
+	number_of_groups 9320
+	number_of_objects 3
+	group_variance 2
+	set_gaia_object_only
+	min_distance_group_placement 4
+	temp_min_distance_group_placement 25
+	min_distance_to_players 31
+	set_circular_placement
+}
+create_object BOAR {
+	number_of_groups 9320
+	set_gaia_object_only
+	min_distance_group_placement 4
+	temp_min_distance_group_placement 49
+	min_distance_to_players 40
+	set_circular_placement
+}
+
+create_object WOLF {
+	number_of_groups 9320
+	set_loose_grouping
+	number_of_objects 1
+	set_gaia_object_only
+	min_distance_group_placement 4
+	temp_min_distance_group_placement 32
+	min_distance_to_players 40
+	set_circular_placement
+} 
+
+create_object SHORE_FISH {
+	number_of_objects 9320
+	set_gaia_object_only
+	temp_min_distance_group_placement 4
+}
+
+create_object FISH {
+	number_of_objects 9320
+	set_gaia_object_only
+	max_distance_to_other_zones 2
+	temp_min_distance_group_placement 4
+}
+
+
+
+/* birds */
+create_object HAWK {
+	number_of_objects 6
+	set_scaling_to_map_size
+}
+
+
+
+
+
+
+
+
+
+

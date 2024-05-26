@@ -1,0 +1,1152 @@
+/*  Zetnus's Improved Nile Delta 
+
+   Author: Zetnus   zetnus@outlook.com
+   Last edit:   05 May 2022
+
+This is my attempt to improve some aspects of the Nile Delta map included with African Kingdoms.
+I've done the following:
+>Added transport ship
+>Randomized map orientations
+>Slightly more land on the sides
+>Fixed bugs in the objects_generation section
+>Slightly more trees and gold/stone/berries
+>Slightly larger central islands
+>Removed a failed attempt to implement elevation
+
+
+Hope you enjoy it!
+Let my know If futher changes are needed.
+
+   
+Learn about random map scripting: https://docs.google.com/document/d/e/2PACX-1vR_I1I9u-hI2FFm-EYyjoM_-9dNJFOfTaIgr05wXNbdpv9tI18b6r18ARULy3Jqyvlq6-lc2VjX6xP4/pub
+
+This map was harvested from a mod in the official AOE2DE mod center, whose licensing agreement with Microsoft supersedes any Github restrictions: https://www.microsoft.com/en-us/servicesagreement
+  
+*/
+
+/* =================================================================================================== */
+/* version checking */
+if DE_AVAILABLE #define DLC #define DLC_NO_WK
+elseif DLC_TIGER #define DLC  /* could be WK or HD DLC */	
+	if UP_EXTENSION #define WOLOLOKINGDOMS
+	else #define HD_EDITION_DLC #define DLC_NO_WK
+	endif	
+elseif DLC_COW #define HD_EDITION_BASE	
+elseif UP_EXTENSION #define USERPATCH_1.5	
+elseif UP_AVAILABLE #define USERPATCH_1.4	
+else #define CONQUERORS_CD	
+endif
+
+if DLC_NO_WK
+	#const SAVANNAH 41
+	#const MOORLAND 44
+	#const CRACKEDIRT 45
+	#const ACACIA_FOREST 50
+	#const DIRT4 42
+	
+	#const GOATEE 1060
+	#const ZEBRA 1019
+	#const OSTRICH 1026
+	if DE_AVAILABLE #const ELEPHANT 1301
+	else #const ELEPHANT 936 endif
+	#const STORK 1028
+	#const ORANGEBUSH 1059
+	#const CROCODILE 1031
+	
+	#const ACCACIASTUMP 1063
+	#const AFROBOULDER_A 1048
+	#const AFROBOULDER_B 1049
+	#const AFROBOULDER_C 1050
+	#const AFROBUSH 1053
+elseif WOLOLOKINGDOMS
+	#const SAVANNAH 14
+	#const MOORLAND 9
+	#const CRACKEDIRT 38
+	#const ACACIA_FOREST 41
+	#const DIRT4 3
+	
+	#const GOATEE 1060
+	#const ZEBRA 1019
+	#const OSTRICH 1026
+	#const ELEPHANT 412
+	#const STORK 1028
+	#const ORANGEBUSH 1059
+	#const CROCODILE 1031
+	
+	#const ACCACIASTUMP 1063
+	#const AFROBOULDER_A 1048
+	#const AFROBOULDER_B 1049
+	#const AFROBOULDER_C 1050
+	#const AFROBUSH 1053
+else
+	#const SAVANNAH 6
+	#const MOORLAND 5
+	#const CRACKEDIRT 14
+	#const ACACIA_FOREST 10
+	#const DIRT4 11
+	
+	#const GOATEE 594
+	#const ZEBRA 65
+	#const OSTRICH 65
+	#const ELEPHANT 48
+	#const STORK 96
+	#const ORANGEBUSH 59
+	#const CROCODILE 126
+
+	#const ACCACIASTUMP 349
+	#const AFROBOULDER_A 623
+	#const AFROBOULDER_B 623
+	#const AFROBOULDER_C 623
+	#const AFROBUSH 349
+endif
+
+/* =================================================================================================== */
+<PLAYER_SETUP>
+grouped_by_team
+nomad_resources
+ai_info_map_type NILE_DELTA 1 0 0
+behavior_version 1
+
+effect_amount GAIA_SET_ATTRIBUTE DLC_BOULDER_A ATTR_OCCLUSION_MODE 2
+effect_amount GAIA_SET_ATTRIBUTE DLC_BOULDER_B ATTR_OCCLUSION_MODE 2
+effect_amount GAIA_SET_ATTRIBUTE DLC_BOULDER_C ATTR_OCCLUSION_MODE 2
+
+/* Disabling Trade Carts and Cogs for Multi-team Games */
+if 2_TEAM_GAME
+else
+  #const TRADE_CART_ENABLER 161
+  #const TRADE_COG_ENABLER 180
+  #const TRADE_CARAVAN_ENABLER 48
+  #const HINDU_CARAVANSERAI_ENABLER 518
+  #const PERSIAN_CARAVANSERAI_ENABLER 552  
+  #const SILK_ROAD 499
+  effect_amount DISABLE_TECH TRADE_COG_ENABLER ATTR_DISABLE 180
+  effect_amount DISABLE_TECH TRADE_CART_ENABLER ATTR_DISABLE 161
+  effect_amount DISABLE_TECH TRADE_CARAVAN_ENABLER ATTR_DISABLE 48
+  effect_amount DISABLE_TECH HINDU_CARAVANSERAI_ENABLER ATTR_DISABLE 518
+  effect_amount DISABLE_TECH PERSIAN_CARAVANSERAI_ENABLER ATTR_DISABLE 552
+  effect_amount DISABLE_TECH SILK_ROAD ATTR_DISABLE 499    
+endif
+
+/* =================================================================================================== */
+<LAND_GENERATION>
+
+base_terrain WATER
+
+start_random
+  percent_chance 25
+  #define NORTH_PLAYERS  
+  percent_chance 25
+  #define EAST_PLAYERS 
+  percent_chance 25
+  #define SOUTH_PLAYERS  
+  percent_chance 25
+  #define WEST_PLAYERS     
+end_random
+
+if NORTH_PLAYERS
+
+create_player_lands
+{
+terrain_type CRACKEDIRT
+land_percent 40
+base_size 3
+border_fuzziness 20
+clumping_factor 20
+other_zone_avoidance_distance 3
+bottom_border 70
+left_border 70
+}
+
+create_land
+{
+terrain_type DEEP_WATER
+land_percent 100
+base_size 12
+border_fuzziness 20
+clumping_factor 20
+other_zone_avoidance_distance 6
+top_border 50 
+right_border 50
+}
+
+if TINY_MAP
+create_land
+{
+terrain_type MED_WATER
+land_percent 100
+base_size 12
+border_fuzziness 20
+clumping_factor 20
+other_zone_avoidance_distance 6
+top_border 13
+right_border 13
+bottom_border 50
+left_border 50
+}
+elseif HUGE_MAP
+create_land
+{
+terrain_type MED_WATER
+land_percent 100
+base_size 12
+border_fuzziness 20
+clumping_factor 20
+other_zone_avoidance_distance 6
+top_border 23
+right_border 23
+bottom_border 55
+left_border 55
+}
+elseif GIGANTIC_MAP
+create_land
+{
+terrain_type MED_WATER
+land_percent 100
+base_size 12
+border_fuzziness 20
+clumping_factor 20
+other_zone_avoidance_distance 6
+top_border 23
+right_border 23
+bottom_border 55
+left_border 55
+}
+elseif LUDIKRIS_MAP
+create_land
+{
+terrain_type MED_WATER
+land_percent 100
+base_size 12
+border_fuzziness 20
+clumping_factor 20
+other_zone_avoidance_distance 6
+top_border 23
+right_border 23
+bottom_border 55
+left_border 55
+}
+else
+create_land
+{
+terrain_type MED_WATER
+land_percent 100
+base_size 12
+border_fuzziness 20
+clumping_factor 20
+other_zone_avoidance_distance 6
+top_border 18
+right_border 18
+bottom_border 55
+left_border 55
+}
+endif
+
+create_land
+{
+terrain_type MED_WATER
+land_percent 100
+base_size 12
+border_fuzziness 20
+clumping_factor 20
+other_zone_avoidance_distance 6
+top_border 28
+right_border 28
+bottom_border 45
+left_border 45
+}
+
+create_land
+{
+terrain_type MED_WATER
+land_percent 100
+base_size 12
+border_fuzziness 20
+clumping_factor 20
+other_zone_avoidance_distance 6
+top_border 36
+right_border 45
+bottom_border 55
+left_border 35
+}
+
+create_land
+{
+terrain_type MED_WATER
+land_percent 100
+base_size 12
+border_fuzziness 20
+clumping_factor 20
+other_zone_avoidance_distance 6
+top_border 45
+right_border 36
+bottom_border 35
+left_border 55
+}
+
+/* extra lands for elevation */
+create_land
+{
+	terrain_type DLC_SAVANNAH
+	land_percent 100
+	base_size 12
+	border_fuzziness 20
+	clumping_factor 20
+	right_border 42
+	bottom_border 61
+	zone 449
+	other_zone_avoidance_distance 6
+}
+create_land
+{
+	terrain_type DLC_SAVANNAH
+	land_percent 100
+	base_size 12
+	border_fuzziness 20
+	clumping_factor 20
+	left_border 61
+	top_border 42
+	zone 450
+	other_zone_avoidance_distance 6
+}
+
+
+elseif SOUTH_PLAYERS
+ 
+create_player_lands
+{
+terrain_type CRACKEDIRT
+land_percent 40
+base_size 3
+border_fuzziness 20
+clumping_factor 20
+other_zone_avoidance_distance 3
+top_border 70
+right_border 70
+}
+
+create_land
+{
+terrain_type DEEP_WATER
+land_percent 100
+base_size 12
+border_fuzziness 20
+clumping_factor 20
+other_zone_avoidance_distance 6
+bottom_border 50 
+left_border 50
+}
+
+if TINY_MAP
+create_land
+{
+terrain_type MED_WATER
+land_percent 100
+base_size 12
+border_fuzziness 20
+clumping_factor 20
+other_zone_avoidance_distance 6
+bottom_border 13
+left_border 13
+top_border 50
+right_border 50
+}
+elseif HUGE_MAP
+create_land
+{
+terrain_type MED_WATER
+land_percent 100
+base_size 12
+border_fuzziness 20
+clumping_factor 20
+other_zone_avoidance_distance 6
+bottom_border 23
+left_border 23
+top_border 55
+right_border 55
+}
+elseif GIGANTIC_MAP
+create_land
+{
+terrain_type MED_WATER
+land_percent 100
+base_size 12
+border_fuzziness 20
+clumping_factor 20
+other_zone_avoidance_distance 6
+bottom_border 23
+left_border 23
+top_border 55
+right_border 55
+}
+elseif LUDIKRIS_MAP
+create_land
+{
+terrain_type MED_WATER
+land_percent 100
+base_size 12
+border_fuzziness 20
+clumping_factor 20
+other_zone_avoidance_distance 6
+bottom_border 23
+left_border 23
+top_border 55
+right_border 55
+}
+else
+create_land
+{
+terrain_type MED_WATER
+land_percent 100
+base_size 12
+border_fuzziness 20
+clumping_factor 20
+other_zone_avoidance_distance 6
+bottom_border 18
+left_border 18
+top_border 55
+right_border 55
+}
+endif
+
+create_land
+{
+terrain_type MED_WATER
+land_percent 100
+base_size 12
+border_fuzziness 20
+clumping_factor 20
+other_zone_avoidance_distance 6
+bottom_border 28
+left_border 28
+top_border 45
+right_border 45
+}
+
+create_land
+{
+terrain_type MED_WATER
+land_percent 100
+base_size 12
+border_fuzziness 20
+clumping_factor 20
+other_zone_avoidance_distance 6
+bottom_border 36
+left_border 45
+top_border 55
+right_border 35
+}
+
+create_land
+{
+terrain_type MED_WATER
+land_percent 100
+base_size 12
+border_fuzziness 20
+clumping_factor 20
+other_zone_avoidance_distance 6
+bottom_border 45
+left_border 36
+top_border 35
+right_border 55
+}
+
+/* extra lands for elevation */
+create_land
+{
+	terrain_type DLC_SAVANNAH
+	land_percent 100
+	base_size 12
+	border_fuzziness 20
+	clumping_factor 20
+	left_border 42
+	top_border 61
+	zone 449
+	other_zone_avoidance_distance 6
+}
+create_land
+{
+	terrain_type DLC_SAVANNAH
+	land_percent 100
+	base_size 12
+	border_fuzziness 20
+	clumping_factor 20
+	right_border 61
+	bottom_border 42
+	zone 450
+	other_zone_avoidance_distance 6
+}
+
+
+elseif EAST_PLAYERS
+
+create_player_lands
+{
+terrain_type CRACKEDIRT
+land_percent 40
+base_size 3
+border_fuzziness 20
+clumping_factor 20
+other_zone_avoidance_distance 4
+left_border 70
+top_border 70
+}
+
+create_land
+{
+terrain_type DEEP_WATER
+land_percent 100
+base_size 12
+border_fuzziness 20
+clumping_factor 20
+other_zone_avoidance_distance 6
+right_border 50 
+bottom_border 50
+}
+
+if TINY_MAP
+create_land
+{
+terrain_type MED_WATER
+land_percent 100
+base_size 12
+border_fuzziness 20
+clumping_factor 20
+other_zone_avoidance_distance 6
+right_border 13
+bottom_border 13
+left_border 50
+top_border 50
+}
+elseif HUGE_MAP
+create_land
+{
+terrain_type MED_WATER
+land_percent 100
+base_size 12
+border_fuzziness 20
+clumping_factor 20
+other_zone_avoidance_distance 6
+right_border 23
+bottom_border 23
+left_border 55
+top_border 55
+}
+elseif GIGANTIC_MAP
+create_land
+{
+terrain_type MED_WATER
+land_percent 100
+base_size 12
+border_fuzziness 20
+clumping_factor 20
+other_zone_avoidance_distance 6
+right_border 23
+bottom_border 23
+left_border 55
+top_border 55
+}
+elseif LUDIKRIS_MAP
+create_land
+{
+terrain_type MED_WATER
+land_percent 100
+base_size 12
+border_fuzziness 20
+clumping_factor 20
+other_zone_avoidance_distance 6
+right_border 23
+bottom_border 23
+left_border 55
+top_border 55
+}
+else
+create_land
+{
+terrain_type MED_WATER
+land_percent 100
+base_size 12
+border_fuzziness 20
+clumping_factor 20
+other_zone_avoidance_distance 6
+right_border 18
+bottom_border 18
+left_border 55
+top_border 55
+}
+endif
+
+create_land
+{
+terrain_type MED_WATER
+land_percent 100
+base_size 12
+border_fuzziness 20
+clumping_factor 20
+other_zone_avoidance_distance 6
+right_border 28
+bottom_border 28
+left_border 45
+top_border 45
+}
+
+create_land
+{
+terrain_type MED_WATER
+land_percent 100
+base_size 12
+border_fuzziness 20
+clumping_factor 20
+other_zone_avoidance_distance 6
+right_border 36
+bottom_border 45
+left_border 55
+top_border 35
+}
+
+create_land
+{
+terrain_type MED_WATER
+land_percent 100
+base_size 12
+border_fuzziness 20
+clumping_factor 20
+other_zone_avoidance_distance 6
+right_border 45
+bottom_border 36
+left_border 35
+top_border 55
+}
+
+/* extra lands for elevation */
+create_land
+{
+	terrain_type DLC_SAVANNAH
+	land_percent 100
+	base_size 12
+	border_fuzziness 20
+	clumping_factor 20
+	bottom_border 42
+	left_border 61
+	zone 449
+	other_zone_avoidance_distance 6
+}
+create_land
+{
+	terrain_type DLC_SAVANNAH
+	land_percent 100
+	base_size 12
+	border_fuzziness 20
+	clumping_factor 20
+	top_border 61
+	right_border 42
+	zone 450
+	other_zone_avoidance_distance 6
+}
+
+elseif WEST_PLAYERS
+
+create_player_lands
+{
+terrain_type CRACKEDIRT
+land_percent 40
+base_size 3
+border_fuzziness 20
+clumping_factor 20
+other_zone_avoidance_distance 3
+right_border 70
+bottom_border 70
+}
+
+create_land
+{
+terrain_type DEEP_WATER
+land_percent 100
+base_size 12
+border_fuzziness 20
+clumping_factor 20
+other_zone_avoidance_distance 6
+left_border 50 
+top_border 50
+}
+
+if TINY_MAP
+create_land
+{
+terrain_type MED_WATER
+land_percent 100
+base_size 12
+border_fuzziness 20
+clumping_factor 20
+other_zone_avoidance_distance 6
+left_border 13
+top_border 13
+right_border 50
+bottom_border 50
+}
+elseif HUGE_MAP
+create_land
+{
+terrain_type MED_WATER
+land_percent 100
+base_size 12
+border_fuzziness 20
+clumping_factor 20
+other_zone_avoidance_distance 6
+left_border 23
+top_border 23
+right_border 55
+bottom_border 55
+}
+elseif GIGANTIC_MAP
+create_land
+{
+terrain_type MED_WATER
+land_percent 100
+base_size 12
+border_fuzziness 20
+clumping_factor 20
+other_zone_avoidance_distance 6
+left_border 23
+top_border 23
+right_border 55
+bottom_border 55
+}
+elseif LUDIKRIS_MAP
+create_land
+{
+terrain_type MED_WATER
+land_percent 100
+base_size 12
+border_fuzziness 20
+clumping_factor 20
+other_zone_avoidance_distance 6
+left_border 23
+top_border 23
+right_border 55
+bottom_border 55
+}
+else
+create_land
+{
+terrain_type MED_WATER
+land_percent 100
+base_size 12
+border_fuzziness 20
+clumping_factor 20
+other_zone_avoidance_distance 6
+left_border 18
+top_border 18
+right_border 55
+bottom_border 55
+}
+endif
+
+create_land
+{
+terrain_type MED_WATER
+land_percent 100
+base_size 12
+border_fuzziness 20
+clumping_factor 20
+other_zone_avoidance_distance 6
+left_border 28
+top_border 28
+right_border 45
+bottom_border 45
+}
+
+create_land
+{
+terrain_type MED_WATER
+land_percent 100
+base_size 12
+border_fuzziness 20
+clumping_factor 20
+other_zone_avoidance_distance 6
+left_border 36
+top_border 45
+right_border 55
+bottom_border 35
+}
+
+create_land
+{
+terrain_type MED_WATER
+land_percent 100
+base_size 12
+border_fuzziness 20
+clumping_factor 20
+other_zone_avoidance_distance 6
+left_border 45
+top_border 36
+right_border 35
+bottom_border 55
+}
+
+/* extra lands for elevation */
+create_land
+{
+	terrain_type DLC_SAVANNAH
+	land_percent 100
+	base_size 12
+	border_fuzziness 20
+	clumping_factor 20
+	top_border 42
+	right_border 61
+	zone 449
+	other_zone_avoidance_distance 6
+}
+create_land
+{
+	terrain_type DLC_SAVANNAH
+	land_percent 100
+	base_size 12
+	border_fuzziness 20
+	clumping_factor 20
+	bottom_border 61
+	left_border 42
+	zone 450
+	other_zone_avoidance_distance 6
+}
+
+endif
+
+
+
+/* =================================================================================================== */
+<ELEVATION_GENERATION>
+create_elevation 2
+{
+enable_balanced_elevation
+base_terrain DLC_SAVANNAH
+if TINY_MAP
+number_of_clumps 15
+number_of_tiles 1000
+elseif SMALL_MAP
+number_of_clumps 21
+number_of_tiles 1440
+elseif MEDIUM_MAP
+number_of_clumps 30
+number_of_tiles 2000
+elseif LARGE_MAP
+number_of_clumps 42
+number_of_tiles 2770
+elseif HUGE_MAP
+number_of_clumps 50
+number_of_tiles 3360
+elseif GIGANTIC_MAP
+number_of_clumps 60
+number_of_tiles 4000
+else
+number_of_clumps 240
+number_of_tiles 16000
+endif
+}
+
+/* =================================================================================================== */
+<TERRAIN_GENERATION>
+
+color_correction	CC_DESERT
+
+create_terrain SAVANNAH
+{
+base_terrain WATER
+land_percent 55
+number_of_clumps 20
+spacing_to_other_terrain_types 4
+set_avoid_player_start_areas
+}
+
+create_terrain SAVANNAH
+{
+base_terrain MED_WATER
+land_percent 5
+number_of_clumps 10
+spacing_to_other_terrain_types 1
+set_avoid_player_start_areas
+}
+
+create_terrain WATER
+{
+base_terrain MED_WATER
+land_percent 100
+number_of_clumps 100
+spacing_to_other_terrain_types 0
+set_avoid_player_start_areas
+}
+
+create_terrain WATER
+{
+base_terrain DEEP_WATER
+land_percent 100
+number_of_clumps 100
+spacing_to_other_terrain_types 0
+set_avoid_player_start_areas
+}
+
+create_terrain ACACIA_FOREST
+{
+base_terrain SAVANNAH
+land_percent 10
+number_of_clumps 20
+spacing_to_other_terrain_types 3
+set_avoid_player_start_areas
+}
+
+create_terrain DIRT4
+{
+base_terrain SAVANNAH
+land_percent 3
+number_of_clumps 36
+spacing_to_other_terrain_types 0
+}
+
+create_terrain MED_WATER
+{
+base_terrain WATER
+number_of_clumps 10
+spacing_to_other_terrain_types 2
+land_percent 40
+}
+
+create_terrain DEEP_WATER
+{
+base_terrain MED_WATER
+number_of_clumps 6
+spacing_to_other_terrain_types 6
+land_percent 20
+}
+
+/* =================================================================================================== */
+<OBJECTS_GENERATION>
+
+create_object VILLAGER
+{
+	set_place_for_every_player
+	min_distance_to_players       1
+	max_distance_to_players       3
+	set_circular_placement
+}
+
+create_object TRANSPORT_SHIP
+{
+	set_place_for_every_player
+	max_distance_to_players 40
+	set_circular_placement
+	find_closest
+}
+
+create_object RELIC
+{
+   number_of_objects            999
+   min_distance_to_players     25
+   set_circular_placement
+   temp_min_distance_group_placement 52
+}
+
+if REGICIDE
+	create_object KING
+	{
+		set_place_for_every_player
+		min_distance_to_players       1
+		max_distance_to_players       3
+		set_circular_placement
+	}
+endif
+
+
+create_object GOATEE
+{
+   number_of_objects 4
+   set_loose_grouping
+   set_gaia_object_only
+   set_place_for_every_player
+   min_distance_to_players    1
+   max_distance_to_players    3
+   set_circular_placement
+}
+
+create_object OSTRICH
+{
+	number_of_groups 180
+	number_of_objects 3
+	group_placement_radius 3
+	set_loose_grouping
+	set_gaia_object_only
+	temp_min_distance_group_placement 26
+	terrain_to_place_on SAVANNAH
+}
+
+create_object GOATEE
+{
+	number_of_groups 180
+	number_of_objects 2
+	group_placement_radius 3
+	set_loose_grouping
+	set_gaia_object_only
+	terrain_to_place_on SAVANNAH
+	temp_min_distance_group_placement 26
+}
+
+create_object ELEPHANT
+{
+	number_of_groups 180
+	number_of_objects 1
+	group_placement_radius 3
+	set_loose_grouping
+	set_gaia_object_only
+	terrain_to_place_on SAVANNAH
+	temp_min_distance_group_placement 26
+}
+
+/* distant gold and stone */
+
+create_object GOLD
+{
+	number_of_groups 180
+	number_of_objects 4
+	group_placement_radius 2
+	set_tight_grouping
+	set_gaia_object_only
+	terrain_to_place_on SAVANNAH
+	temp_min_distance_group_placement 30
+	min_distance_group_placement 4
+	max_distance_to_other_zones 4
+}
+
+create_object STONE
+{
+	number_of_groups 180
+	number_of_objects 3
+	group_placement_radius 2
+	set_tight_grouping
+	set_gaia_object_only
+	terrain_to_place_on SAVANNAH
+	temp_min_distance_group_placement 35
+	min_distance_group_placement 4
+	max_distance_to_other_zones 4
+}
+
+create_object STORK
+{
+	number_of_objects         4
+	set_scaling_to_map_size
+}
+
+create_object ORANGEBUSH
+{
+	number_of_groups 180
+	number_of_objects 3
+	group_placement_radius 2
+	set_tight_grouping
+	set_gaia_object_only
+	terrain_to_place_on SAVANNAH
+	temp_min_distance_group_placement 45
+	min_distance_group_placement 4
+	max_distance_to_other_zones 4
+}
+
+create_object ACCACIASTUMP 
+{
+	number_of_objects             2
+	set_gaia_object_only
+	set_place_for_every_player
+	min_distance_to_players       4
+	max_distance_to_players       5
+	set_circular_placement
+	min_distance_group_placement  2
+}
+create_object ACCACIASTUMP 
+{
+	number_of_objects             3
+	set_gaia_object_only
+	set_place_for_every_player
+	min_distance_to_players       6
+	max_distance_to_players       8
+	set_circular_placement
+	min_distance_group_placement  2
+}
+
+create_object ACCACIASTUMP 
+{
+	number_of_objects          60
+	set_gaia_object_only
+	set_scaling_to_map_size
+	min_distance_to_players    1
+	max_distance_to_players    20
+	set_circular_placement
+	terrain_to_place_on CRACKEDIRT
+}
+
+create_object ACCACIASTUMP 
+{
+	number_of_objects          20
+	set_gaia_object_only
+	set_scaling_to_map_size
+	min_distance_to_players    8
+	set_circular_placement
+}
+
+create_object CROCODILE
+{
+	number_of_groups 30
+	set_loose_grouping
+	number_of_objects 1
+	set_gaia_object_only
+	temp_min_distance_group_placement 60
+	min_distance_to_players 60
+	set_circular_placement
+}
+
+create_object DORADO
+{
+	number_of_objects 999
+	set_scaling_to_map_size
+	set_gaia_object_only
+	max_distance_to_other_zones 5
+	temp_min_distance_group_placement 8
+}
+
+create_object SHORE_FISH
+{
+	number_of_objects 999
+	set_scaling_to_map_size
+	temp_min_distance_group_placement 15
+	set_gaia_object_only
+}
+
+
+create_object AFROBOULDER_A 
+{
+	number_of_objects 999
+	set_scaling_to_map_size
+	temp_min_distance_group_placement 160
+	set_gaia_object_only
+	min_distance_to_players 25
+	set_circular_placement
+	terrain_to_place_on SAVANNAH
+}
+
+create_object AFROBOULDER_B
+{
+	number_of_objects 999
+	set_scaling_to_map_size
+	temp_min_distance_group_placement 160
+	set_gaia_object_only
+	min_distance_to_players 25
+	set_circular_placement
+	terrain_to_place_on SAVANNAH
+}
+
+create_object AFROBOULDER_C
+{
+	number_of_objects 999
+	set_scaling_to_map_size
+	temp_min_distance_group_placement 160
+	set_gaia_object_only
+	min_distance_to_players 25
+	set_circular_placement
+	terrain_to_place_on SAVANNAH
+}
+

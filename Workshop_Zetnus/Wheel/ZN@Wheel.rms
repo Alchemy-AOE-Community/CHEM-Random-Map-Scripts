@@ -1,0 +1,705 @@
+/* Wheel */
+
+/*
+
+Most recent update: 03 July 2022
+
+By: Zetnus 
+Zetnus@outlook.com
+
+designed for FFA king of the hill
+
+Learn about random map scripting: https://docs.google.com/document/d/e/2PACX-1vR_I1I9u-hI2FFm-EYyjoM_-9dNJFOfTaIgr05wXNbdpv9tI18b6r18ARULy3Jqyvlq6-lc2VjX6xP4/pub
+
+This map was harvested from a mod in the official AOE2DE mod center, whose licensing agreement with Microsoft supersedes any Github restrictions: https://www.microsoft.com/en-us/servicesagreement
+
+*/
+
+
+#const UNDERBRUSH 71
+#const DIRT_MUD 76
+
+
+/* =================================================================================================== */
+<PLAYER_SETUP>
+random_placement
+nomad_resources
+ai_info_map_type CUSTOM 1 0 0
+behavior_version 1
+
+/* Disabling Trade Carts and Cogs for Multi-team Games */
+if 2_TEAM_GAME
+else
+  #const TRADE_CART_ENABLER 161
+  #const TRADE_COG_ENABLER 180
+  #const TRADE_CARAVAN_ENABLER 48
+  #const HINDU_CARAVANSERAI_ENABLER 518
+  #const PERSIAN_CARAVANSERAI_ENABLER 552  
+  #const SILK_ROAD 499
+  effect_amount DISABLE_TECH TRADE_COG_ENABLER ATTR_DISABLE 180
+  effect_amount DISABLE_TECH TRADE_CART_ENABLER ATTR_DISABLE 161
+  effect_amount DISABLE_TECH TRADE_CARAVAN_ENABLER ATTR_DISABLE 48
+  effect_amount DISABLE_TECH HINDU_CARAVANSERAI_ENABLER ATTR_DISABLE 518
+  effect_amount DISABLE_TECH PERSIAN_CARAVANSERAI_ENABLER ATTR_DISABLE 552
+  effect_amount DISABLE_TECH SILK_ROAD ATTR_DISABLE 499    
+endif
+
+/* =================================================================================================== */
+<LAND_GENERATION>
+
+base_terrain GRASS
+
+create_player_lands {
+	number_of_tiles 1200
+	terrain_type UNDERBRUSH
+	base_size 14
+	circle_radius 30 0
+	left_border 8
+	right_border 8
+	top_border 8
+	bottom_border 8
+	other_zone_avoidance_distance 5
+	border_fuzziness 0
+	clumping_factor 20
+}
+
+create_land {
+	land_percent 100
+	terrain_type DLC_RAINFOREST
+	land_position 50 50
+	left_border 22
+	right_border 22
+	top_border 22
+	bottom_border 22
+}
+
+
+/* =================================================================================================== */
+<TERRAIN_GENERATION>
+
+
+create_terrain DLC_QUICKSAND {
+	base_terrain DLC_RAINFOREST
+	land_percent 100
+	if LUDIKRIS_MAP spacing_to_other_terrain_types 70
+	elseif GIGANTIC_MAP	spacing_to_other_terrain_types 31
+	elseif HUGE_MAP	spacing_to_other_terrain_types 27
+	elseif LARGE_MAP spacing_to_other_terrain_types 24
+	elseif MEDIUM_MAP	spacing_to_other_terrain_types 999
+	else spacing_to_other_terrain_types 999
+	endif
+}
+
+
+create_terrain DLC_ROCK {
+	base_terrain DLC_QUICKSAND
+	land_percent 100
+	number_of_clumps 9320
+	terrain_mask 1
+}
+
+
+create_terrain DLC_DRYGRASS { base_terrain UNDERBRUSH land_percent 100 set_avoid_player_start_areas 16 }
+create_terrain DLC_DRYGRASS { base_terrain UNDERBRUSH land_percent 100 set_avoid_player_start_areas 16 }
+create_terrain DLC_DRYGRASS { base_terrain UNDERBRUSH land_percent 100 set_avoid_player_start_areas 16 }
+create_terrain DLC_DRYGRASS { base_terrain UNDERBRUSH land_percent 100 set_avoid_player_start_areas 16 }
+create_terrain DLC_DRYGRASS { base_terrain UNDERBRUSH land_percent 100 set_avoid_player_start_areas 16 }
+create_terrain DLC_DRYGRASS { base_terrain UNDERBRUSH land_percent 100 set_avoid_player_start_areas 16 }
+create_terrain DLC_DRYGRASS { base_terrain UNDERBRUSH land_percent 100 set_avoid_player_start_areas 16 }
+create_terrain DLC_DRYGRASS { base_terrain UNDERBRUSH land_percent 100 set_avoid_player_start_areas 16 }
+
+create_terrain DLC_DRYGRASS {
+	base_terrain UNDERBRUSH
+	land_percent 100
+	number_of_clumps 9320
+	set_avoid_player_start_areas 16
+}
+
+create_terrain JUNGLE {
+	base_terrain GRASS
+	land_percent 7
+	number_of_clumps 14
+	set_scale_by_groups
+	spacing_to_other_terrain_types 2
+}
+
+/* cosmetic terrain mixing */
+create_terrain DIRT2 {
+	base_terrain GRASS
+	land_percent 8
+	number_of_clumps 30
+	terrain_mask 1
+}
+create_terrain LEAVES {
+	base_terrain GRASS
+	land_percent 8
+	number_of_clumps 30
+	terrain_mask 1
+}
+create_terrain UNDERBRUSH {
+	base_terrain GRASS
+	land_percent 8
+	number_of_clumps 30
+	terrain_mask 1
+}
+create_terrain DIRT_MUD {
+	base_terrain GRASS
+	land_percent 8
+	number_of_clumps 30
+	terrain_mask 1
+}
+create_terrain DLC_JUNGLEGRASS {
+	base_terrain GRASS
+	land_percent 8
+	number_of_clumps 30
+	terrain_mask 1
+}
+
+
+/* =================================================================================================== */
+<CONNECTION_GENERATION>
+
+accumulate_connections
+
+create_connect_all_players_land {
+	replace_terrain DLC_DRYGRASS LEAVES
+		
+	terrain_size DLC_DRYGRASS 12 0
+}
+
+create_connect_all_players_land {
+	replace_terrain GRASS WATER
+	replace_terrain JUNGLE WATER
+	
+	terrain_cost GRASS 2
+	terrain_cost JUNGLE 2
+	terrain_cost DLC_RAINFOREST 0
+	terrain_cost WATER 1
+	terrain_cost BEACH 15
+	
+	terrain_size GRASS 8 0
+	terrain_size JUNGLE 8 0
+	terrain_size WATER 0 0
+	terrain_size SHALLOW 0 1
+}
+
+create_connect_all_players_land {
+	replace_terrain DLC_DRYGRASS DLC_MANGROVESHALLOW
+	
+	terrain_cost UNDERBRUSH 25
+	terrain_cost LEAVES 0
+	
+	terrain_cost GRASS 2
+	terrain_cost JUNGLE 2
+	terrain_cost DLC_RAINFOREST 0
+	terrain_cost WATER 0
+	terrain_cost BEACH 0
+	
+	terrain_size GRASS 0 1
+	terrain_size JUNGLE 0 1
+	if MEDIUM_MAP	terrain_size DLC_DRYGRASS 20 0
+	elseif SMALL_MAP	terrain_size DLC_DRYGRASS 20 0
+	else	terrain_size DLC_DRYGRASS 5 0
+	endif
+	terrain_size WATER 0 0
+	terrain_size SHALLOW 0 1
+}
+
+create_connect_all_players_land {
+	if 2_PLAYER_GAME
+	replace_terrain GRASS SHALLOW
+	replace_terrain JUNGLE SHALLOW
+	else
+	replace_terrain GRASS DLC_WATER5
+	replace_terrain JUNGLE DLC_WATER5
+	endif
+	
+	terrain_cost UNDERBRUSH 25
+	terrain_cost LEAVES 0
+	
+	terrain_cost GRASS 2
+	terrain_cost JUNGLE 2
+	terrain_cost DLC_RAINFOREST 0
+	terrain_cost WATER 0
+	terrain_cost BEACH 0
+	
+	terrain_size GRASS 1 0
+	terrain_size JUNGLE 1 0
+	terrain_size DLC_DRYGRASS 0 0
+	terrain_size WATER 0 0
+	terrain_size SHALLOW 0 1
+}
+
+/* must be the last connection */
+create_connect_to_nonplayer_land {
+	replace_terrain DLC_RAINFOREST DLC_ROCK
+	replace_terrain LEAVES DLC_ROCK
+	
+	terrain_cost GRASS 0
+	terrain_cost JUNGLE 0
+	terrain_cost DLC_RAINFOREST 2
+	terrain_cost UNDERBRUSH 2
+	terrain_cost WATER 0
+
+	if TINY_MAP
+	elseif SMALL_MAP
+	elseif MEDIUM_MAP
+	else
+	terrain_cost DLC_ROCK 0
+	endif
+
+	terrain_cost BEACH 0
+	
+	terrain_size DLC_RAINFOREST 1 0
+	terrain_size DLC_ROCK 0 0
+}
+
+
+/* =================================================================================================== */
+<OBJECTS_GENERATION>
+
+#const REED_TREE 1350
+#const BLANKOBJECT 647
+
+create_object REED_TREE {
+	number_of_objects 9320
+	set_scaling_to_map_size
+	terrain_to_place_on BEACH
+	place_on_forest_zone
+	set_gaia_object_only
+}
+
+create_object BLANKOBJECT {
+	number_of_objects 9320
+	set_scaling_to_map_size
+	terrain_to_place_on BEACH
+	set_gaia_object_only
+	actor_area 999
+	actor_area_radius 4
+}
+create_object BLANKOBJECT {
+	number_of_objects 9320
+	set_scaling_to_map_size
+	terrain_to_place_on DLC_MANGROVESHALLOW
+	set_gaia_object_only
+	actor_area 998
+	actor_area_radius 4
+}
+
+
+
+create_object TOWN_CENTER {
+	set_place_for_every_player
+	max_distance_to_players 0
+}
+
+create_object VILLAGER {
+	set_place_for_every_player
+	min_distance_to_players 5
+	max_distance_to_players 7
+	set_circular_placement
+	min_distance_group_placement 1
+}
+
+create_object SCOUT {
+	set_place_for_every_player
+	min_distance_to_players 6
+	max_distance_to_players 8
+	set_circular_placement
+	min_distance_group_placement 1
+}
+
+if REGICIDE
+	create_object KING {
+		set_place_for_every_player
+		min_distance_to_players 6
+		set_circular_placement
+		find_closest
+		min_distance_group_placement 1
+	}
+	create_object VILLAGER {
+		number_of_objects 7
+		set_place_for_every_player
+		min_distance_to_players 6
+		max_distance_to_players 8
+		set_circular_placement
+	}
+	create_object CASTLE {
+		set_place_for_every_player
+		terrain_to_place_on DLC_ROCK
+		find_closest
+		ignore_terrain_restrictions
+		min_distance_group_placement 2
+	}
+endif
+
+/* near forage */
+create_object FORAGE {
+	number_of_objects 6
+	group_placement_radius 2
+	set_tight_grouping
+	set_gaia_object_only
+	set_place_for_every_player
+	min_distance_to_players 9
+	max_distance_to_players 13
+	set_circular_placement
+	min_distance_group_placement 4
+	avoid_forest_zone 3
+	max_distance_to_other_zones 5
+}
+
+/* near gold */
+create_object GOLD {
+	number_of_objects 6
+	number_of_groups 2
+	temp_min_distance_group_placement 8
+	group_placement_radius 3
+	set_tight_grouping
+	set_gaia_object_only
+	set_place_for_every_player
+	min_distance_to_players 10
+	max_distance_to_players 16
+	set_circular_placement
+	min_distance_group_placement 4
+	max_distance_to_other_zones 3
+	avoid_forest_zone 3
+}
+
+/* near stone */
+create_object STONE {
+	number_of_objects 5
+	group_placement_radius 2  
+	set_tight_grouping 
+	set_gaia_object_only
+	set_place_for_every_player
+	min_distance_to_players 10
+	max_distance_to_players 16
+	set_circular_placement
+	min_distance_group_placement 4
+	max_distance_to_other_zones 3
+	avoid_forest_zone 2
+}
+
+/* far gold */
+create_object GOLD {
+	number_of_objects 4
+	group_placement_radius 2
+	set_tight_grouping
+	set_gaia_object_only
+	set_place_for_every_player
+	start_random
+		percent_chance 50
+			min_distance_to_players 23
+			max_distance_to_players 28
+		percent_chance 50
+			min_distance_to_players 27
+			max_distance_to_players 32
+	end_random
+	set_circular_placement
+	min_distance_group_placement 4
+	avoid_forest_zone 2
+	terrain_to_place_on GRASS
+	ignore_terrain_restrictions
+	find_closest_to_map_edge
+}
+
+/* far stone */
+create_object STONE {
+	number_of_objects 4
+	group_placement_radius 2  
+	set_tight_grouping 
+	set_gaia_object_only
+	set_place_for_every_player
+	min_distance_to_players 23
+	max_distance_to_players 27
+	set_circular_placement
+	min_distance_group_placement 4
+	avoid_forest_zone 2
+	terrain_to_place_on GRASS
+	ignore_terrain_restrictions
+	find_closest_to_map_edge
+}
+
+/* starting sheep */
+create_object TURKEY {
+	number_of_objects 4
+	set_loose_grouping
+	set_gaia_object_only
+	set_place_for_every_player
+	min_distance_to_players 6
+	find_closest
+	set_circular_placement
+}
+
+create_object JAVELINA {
+	number_of_groups 2
+	set_gaia_object_only
+	set_place_for_every_player
+	avoid_forest_zone 2
+	min_distance_to_players 14
+	find_closest
+	set_circular_placement
+	min_distance_group_placement 2
+	temp_min_distance_group_placement 6
+	terrain_to_place_on DLC_MANGROVESHALLOW
+}
+
+
+/* far sheep */
+create_object TURKEY {
+	number_of_objects 2
+	number_of_groups 2
+	temp_min_distance_group_placement 18
+	set_loose_grouping
+	set_gaia_object_only
+	set_place_for_every_player
+	min_distance_to_players 25
+	find_closest
+	set_circular_placement
+	avoid_forest_zone 2
+	min_distance_group_placement 2
+	terrain_to_place_on GRASS
+}
+
+/* personal stragglers */
+create_object PALMTREE {
+	number_of_objects 2
+	set_gaia_object_only
+	set_place_for_every_player
+	min_distance_to_players 4
+	max_distance_to_players 5
+	set_circular_placement
+	min_distance_group_placement 1
+}
+create_object PALMTREE {
+	number_of_objects 3
+	set_gaia_object_only
+	set_place_for_every_player
+	min_distance_to_players 6
+	max_distance_to_players 8
+	set_circular_placement
+	min_distance_group_placement 1
+}
+
+
+/* =================================================================================================== */
+/* scattered map resources */ 
+
+create_object RELIC {
+	avoid_forest_zone 3
+	min_distance_to_players 28
+	set_circular_placement
+	min_distance_group_placement 1
+	if TINY_MAP
+		number_of_objects 5
+		temp_min_distance_group_placement 35
+	elseif SMALL_MAP
+		number_of_objects 5
+		temp_min_distance_group_placement 38
+	elseif MEDIUM_MAP
+		number_of_objects 5
+		temp_min_distance_group_placement 38
+	elseif LARGE_MAP
+		number_of_objects 7
+		temp_min_distance_group_placement 48
+	elseif HUGE_MAP
+		number_of_objects 8
+		temp_min_distance_group_placement 52
+	else
+		number_of_objects 999
+		temp_min_distance_group_placement 52 
+	endif
+	terrain_to_place_on GRASS
+}
+
+/* extra gold */
+create_object GOLD {
+	if TINY_MAP
+		number_of_groups 4
+		number_of_objects 3
+		temp_min_distance_group_placement 42
+	elseif SMALL_MAP
+		number_of_groups 5
+		number_of_objects 3
+		temp_min_distance_group_placement 48
+	elseif MEDIUM_MAP
+		number_of_groups 9320
+		number_of_objects 4
+		temp_min_distance_group_placement 52
+	elseif LARGE_MAP
+		number_of_groups 9320
+		number_of_objects 4
+		temp_min_distance_group_placement 52
+	else
+		number_of_groups 9320
+		number_of_objects 4
+		temp_min_distance_group_placement 60
+	endif
+    group_placement_radius 2
+    set_tight_grouping
+    set_gaia_object_only
+	min_distance_group_placement 4
+	min_distance_to_players 40
+	set_circular_placement
+	avoid_forest_zone 2
+	terrain_to_place_on GRASS
+	min_distance_to_map_edge 2
+}
+
+/* extra stone */
+create_object STONE {
+	if TINY_MAP
+		number_of_objects 2
+		number_of_groups 3
+		temp_min_distance_group_placement 48
+	elseif SMALL_MAP
+		number_of_objects 2
+		number_of_groups 4
+		temp_min_distance_group_placement 52
+	elseif MEDIUM_MAP
+		number_of_groups 9320
+		number_of_objects 3
+		temp_min_distance_group_placement 52
+	elseif LARGE_MAP
+		number_of_groups 9320
+		number_of_objects 4
+		temp_min_distance_group_placement 52
+	elseif HUGE_MAP
+		number_of_groups 9320
+		number_of_objects 4
+		temp_min_distance_group_placement 66
+	else
+		number_of_groups 9320
+		number_of_objects 4
+		temp_min_distance_group_placement 60
+	endif
+    group_placement_radius 2
+    set_tight_grouping
+    set_gaia_object_only
+	min_distance_group_placement 4
+	min_distance_to_players 40
+	set_circular_placement
+	avoid_forest_zone 2
+	terrain_to_place_on GRASS
+	min_distance_to_map_edge 2
+}
+
+/* extra berries */
+create_object FORAGE {
+    number_of_groups 9320
+    group_placement_radius 2
+    set_tight_grouping
+    set_gaia_object_only
+	min_distance_group_placement 4
+	number_of_objects 4
+	min_distance_to_players 45
+	set_circular_placement
+	avoid_forest_zone 2
+	terrain_to_place_on GRASS
+	min_distance_to_map_edge 2
+	temp_min_distance_group_placement 72
+	avoid_forest_zone 3
+}
+
+create_object DEER {
+	number_of_groups 9320
+	number_of_objects 3
+	set_gaia_object_only
+	temp_min_distance_group_placement 35
+	min_distance_to_players 45
+	set_circular_placement
+	avoid_forest_zone 2
+	terrain_to_place_on GRASS
+}
+
+/* scattered wolves */
+create_object DLC_TIGER {
+	number_of_groups 9320
+	set_loose_grouping
+	start_random
+		percent_chance 75	number_of_objects 1
+		percent_chance 25	number_of_objects 2
+	end_random
+	set_gaia_object_only
+	min_distance_group_placement 1
+	temp_min_distance_group_placement 40
+	avoid_forest_zone 2
+	min_distance_to_players 40
+	set_circular_placement
+} 
+
+create_object SHORE_FISH {
+	number_of_objects 9320
+	set_gaia_object_only
+	temp_min_distance_group_placement 5
+	min_distance_to_players 27
+	set_circular_placement
+}
+
+create_object DORADO {
+	number_of_groups 2
+	number_of_objects 4
+	set_tight_grouping
+	group_placement_radius 2
+	temp_min_distance_group_placement 20
+	set_gaia_object_only
+	set_place_for_every_player
+	max_distance_to_other_zones 4
+	terrain_to_place_on WATER
+	find_closest
+	ignore_terrain_restrictions
+	avoid_actor_area 998
+	avoid_actor_area 999
+}
+
+create_object DORADO {
+	number_of_groups 9320
+	terrain_to_place_on WATER
+	max_distance_to_other_zones 4
+	temp_min_distance_group_placement 7
+	avoid_actor_area 998
+	avoid_actor_area 999
+	min_distance_to_players 40
+	set_circular_placement
+}
+
+create_object PALMTREE {
+	number_of_objects 15
+	set_gaia_object_only
+	set_scaling_to_map_size
+	min_distance_to_players 9
+	set_circular_placement
+	min_distance_group_placement 1
+	temp_min_distance_group_placement 12
+	avoid_forest_zone 1
+	terrain_to_place_on GRASS
+}
+create_object DLC_RAINTREE {
+	number_of_objects 15
+	set_gaia_object_only
+	set_scaling_to_map_size
+	min_distance_to_players 9
+	set_circular_placement
+	min_distance_group_placement 1
+	temp_min_distance_group_placement 12
+	avoid_forest_zone 1
+	terrain_to_place_on GRASS
+}
+create_object DLC_MANGROVE_TREE {
+	number_of_objects 10
+	set_gaia_object_only
+	set_scaling_to_map_size
+	min_distance_to_players 9
+	set_circular_placement
+	min_distance_group_placement 1
+	temp_min_distance_group_placement 6
+	avoid_forest_zone 1
+	terrain_to_place_on DLC_MANGROVESHALLOW
+}
+
+/* birds */
+create_object MACAW {
+	number_of_objects 6
+	set_scaling_to_map_size
+}
+

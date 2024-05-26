@@ -1,0 +1,687 @@
+
+/* Barrier Reef */
+/*
+28/09/2020
+Most recent update: 06 May 2022
+by: Zetnus
+zetnus@outlook.com
+Zetnus#6414 on Discord
+
+v1.4
+-changed reed forest to allow building on the centers of forests
+
+v1.3
+-increased the width of the buildable land on the barriers
+
+v1.2
+-fixed and issue with boar spawns
+-moved boar spawn super close to discourage laming
+
+v1.1
+-starting shore fish increased 2->4 (to fully replace berries)
+-aesthetic reeds will avoid spawning underneath forest reed trees
+-1v1 gold generation completely reworked: players now start with two close piles of 4 gold and two far piles of 3 gold, and one pile of 3 gold in the center.
+-added 1 starting boar
+-added shore fish on the sides
+-slightly reduced forest density (to prevent excessively large woodlines)
+-removed lone stragglers (to free up building space)
+-reduced central fish density
+-reduced and spread out crocodile spawns, and added several to the center
+-fixed an issue where reeds could entirely block off areas (which also interfered with gold spawns)
+
+
+Learn about random map scripting: https://docs.google.com/document/d/e/2PACX-1vR_I1I9u-hI2FFm-EYyjoM_-9dNJFOfTaIgr05wXNbdpv9tI18b6r18ARULy3Jqyvlq6-lc2VjX6xP4/pub
+
+This map was harvested from a mod in the official AOE2DE mod center, whose licensing agreement with Microsoft supersedes any Github restrictions: https://www.microsoft.com/en-us/servicesagreement
+
+*/
+
+
+/* constants  */
+#const WET_SAND 80
+#const DLC_REEDSFOREST 92
+
+#const DOLPHIN 61
+#const REED_TREE 1350
+
+/* placeholder objects */
+#const ONGRID_PLACEHOLDER 278
+
+/* =================================================================================================== */
+<PLAYER_SETUP>
+
+random_placement 
+ai_info_map_type CUSTOM 0 0 0
+behavior_version 1
+
+
+/* Disabling Trade Carts and Cogs for Multi-team Games */
+if 2_TEAM_GAME
+else
+  #const TRADE_CART_ENABLER 161
+  #const TRADE_COG_ENABLER 180
+  #const TRADE_CARAVAN_ENABLER 48
+  #const HINDU_CARAVANSERAI_ENABLER 518
+  #const PERSIAN_CARAVANSERAI_ENABLER 552  
+  #const SILK_ROAD 499
+  effect_amount DISABLE_TECH TRADE_COG_ENABLER ATTR_DISABLE 180
+  effect_amount DISABLE_TECH TRADE_CART_ENABLER ATTR_DISABLE 161
+  effect_amount DISABLE_TECH TRADE_CARAVAN_ENABLER ATTR_DISABLE 48
+  effect_amount DISABLE_TECH HINDU_CARAVANSERAI_ENABLER ATTR_DISABLE 518
+  effect_amount DISABLE_TECH PERSIAN_CARAVANSERAI_ENABLER ATTR_DISABLE 552
+  effect_amount DISABLE_TECH SILK_ROAD ATTR_DISABLE 499    
+endif
+
+/* =================================================================================================== */
+<LAND_GENERATION>
+
+base_terrain WET_SAND
+
+create_player_lands {
+	terrain_type DLC_ROCK
+	land_percent 100
+	base_size 12
+	start_random
+		percent_chance 50	left_border 14	right_border 14
+		percent_chance 50	top_border 14	bottom_border 14
+	end_random
+	circle_radius 30 3
+	other_zone_avoidance_distance 3
+	
+}
+
+create_land {
+	terrain_type DLC_ROCK
+	land_percent 100
+	base_size 5
+	land_position 50 50
+	left_border 30	right_border 30	top_border 30	bottom_border 30
+	other_zone_avoidance_distance 3
+	land_id 1
+}
+
+
+/* =================================================================================================== */
+<TERRAIN_GENERATION>
+
+create_terrain DLC_MANGROVESHALLOW {
+	base_terrain DLC_ROCK
+	land_percent 100
+	number_of_clumps 9320
+	spacing_to_other_terrain_types 2
+}
+
+create_terrain DLC_WATER5 {
+	base_terrain WET_SAND
+	land_percent 100
+	number_of_clumps 9320
+	spacing_to_other_terrain_types 3
+}
+
+create_terrain DLC_WATER4 {
+	base_terrain DLC_WATER5
+	land_percent 100
+	number_of_clumps 9320
+	spacing_to_other_terrain_types 4
+	terrain_mask 1
+}
+create_terrain MED_WATER {
+	base_terrain DLC_WATER5
+	land_percent 100
+	number_of_clumps 9320
+	spacing_to_other_terrain_types 0
+	terrain_mask 1
+}
+
+create_terrain DLC_MANGROVESHALLOW {
+	base_terrain WET_SAND
+	land_percent 100
+	number_of_clumps 9320
+	terrain_mask 1
+}
+
+create_terrain DLC_WETROCKBEACH {
+	base_terrain DLC_ROCK
+	land_percent 100
+	number_of_clumps 9320
+	terrain_mask 1
+}
+
+/* these are the main forests */
+create_terrain DLC_REEDSBEACH {
+	base_terrain DLC_MANGROVESHALLOW
+	land_percent 10
+	number_of_clumps 29
+	set_scale_by_groups
+	set_avoid_player_start_areas 
+	spacing_to_other_terrain_types 1
+}
+create_terrain DLC_REEDSFOREST {
+	base_terrain DLC_REEDSBEACH
+	land_percent 100
+	number_of_clumps 9320
+	spacing_to_other_terrain_types 1
+	terrain_mask 2
+}
+
+/* purely cosmetic mixing - all of the mangrove shallows remain buildable */
+create_terrain DLC_WATER5 {
+	base_terrain DLC_MANGROVESHALLOW
+	land_percent 3
+	number_of_clumps 6
+	set_scale_by_groups
+	terrain_mask 1
+}
+create_terrain WATER {
+	base_layer DLC_WATER5
+	land_percent 100
+	number_of_clumps 9320
+	set_scale_by_groups
+	terrain_mask 1
+}
+create_terrain MED_WATER {
+	base_layer WATER
+	land_percent 100
+	number_of_clumps 9320
+	terrain_mask 1
+	spacing_to_other_terrain_types 1
+}
+
+create_terrain DLC_WATER5 {
+	base_terrain DLC_MANGROVESHALLOW
+	land_percent 6
+	number_of_clumps 12
+	set_scale_by_groups
+	terrain_mask 1
+}
+create_terrain WATER {
+	base_layer DLC_WATER5
+	land_percent 100
+	number_of_clumps 9320
+	set_scale_by_groups
+	terrain_mask 1
+}
+create_terrain MED_WATER {
+	base_layer WATER
+	land_percent 100
+	number_of_clumps 9320
+	terrain_mask 1
+	spacing_to_other_terrain_types 1
+}
+
+create_terrain DLC_WATER5 {
+	base_terrain DLC_MANGROVESHALLOW
+	land_percent 6
+	number_of_clumps 12
+	set_scale_by_groups
+	terrain_mask 1
+	spacing_to_other_terrain_types 1
+}
+create_terrain WATER {
+	base_layer DLC_WATER5
+	land_percent 100
+	number_of_clumps 9320
+	set_scale_by_groups
+	terrain_mask 1
+}
+create_terrain MED_WATER {
+	base_layer WATER
+	land_percent 100
+	number_of_clumps 9320
+	terrain_mask 1
+	spacing_to_other_terrain_types 1
+}
+create_terrain DLC_WATER5 {
+	base_terrain DLC_MANGROVESHALLOW
+	land_percent 3
+	number_of_clumps 6
+	set_scale_by_groups
+	terrain_mask 1
+	spacing_to_other_terrain_types 1
+}
+
+
+/* =================================================================================================== */
+<CONNECTION_GENERATION>
+
+/* custom beaches */
+create_connect_all_lands {
+	replace_terrain BEACH DLC_GRAVELBEACH
+	terrain_size BEACH 999 0
+}
+
+/* just in case the forests clump too much */
+create_connect_all_players_land {
+	replace_terrain DLC_REEDSFOREST DLC_MANGROVESHALLOW
+	terrain_cost DLC_REEDSBEACH 9999
+	terrain_cost DLC_REEDSFOREST 9999
+	terrain_size DLC_REEDSBEACH 3 0
+	terrain_size DLC_REEDSFOREST 3 0
+}
+
+
+
+
+/* =================================================================================================== */
+<OBJECTS_GENERATION>
+
+create_object TOWN_CENTER {
+	set_place_for_every_player
+	max_distance_to_players 0
+	actor_area 1028
+	actor_area_radius 28
+}
+
+create_object VILLAGER {
+	set_place_for_every_player
+	min_distance_to_players 5
+	max_distance_to_players 7
+	set_circular_placement
+	min_distance_group_placement 1
+}
+
+create_object SCOUT {
+	set_place_for_every_player
+	min_distance_to_players 6
+	max_distance_to_players 8
+	set_circular_placement
+	min_distance_group_placement 1
+}
+
+if REGICIDE
+	create_object KING {
+		set_place_for_every_player
+		min_distance_to_players 6
+		set_circular_placement
+		find_closest
+		min_distance_group_placement 1
+	}
+	create_object VILLAGER {
+		number_of_objects 7
+		set_place_for_every_player
+		min_distance_to_players 6
+		max_distance_to_players 8
+		set_circular_placement
+	}
+	create_object CASTLE {
+		set_place_for_every_player
+		min_distance_to_players 9
+		max_distance_to_players 11
+		set_circular_placement
+		min_distance_group_placement 2
+	}
+endif
+
+if EMPIRE_WARS
+/* please contact Zetnus to implement empire wars */
+endif
+
+
+create_object RELIC {
+	max_distance_to_other_zones 2
+	avoid_forest_zone 2
+	avoid_actor_area 1026
+	min_distance_group_placement 1
+	if TINY_MAP
+		number_of_objects 5
+		temp_min_distance_group_placement 35
+	elseif SMALL_MAP
+		number_of_objects 5
+		temp_min_distance_group_placement 38
+	elseif MEDIUM_MAP
+		number_of_objects 5
+		temp_min_distance_group_placement 38
+	elseif LARGE_MAP
+		number_of_objects 7
+		temp_min_distance_group_placement 48
+	elseif HUGE_MAP
+		number_of_objects 8
+		temp_min_distance_group_placement 52
+	else
+		number_of_objects 999
+		temp_min_distance_group_placement 52 
+	endif
+	layer_to_place_on DLC_MANGROVESHALLOW
+}
+
+/* gold in the center */
+create_object GOLD {
+	number_of_objects 3
+	number_of_groups 1
+	group_placement_radius 2
+	set_tight_grouping
+	set_gaia_object_only
+	set_scaling_to_player_number
+	min_distance_group_placement 3
+	max_distance_to_other_zones 2
+	avoid_forest_zone 2
+	temp_min_distance_group_placement 14
+	place_on_specific_land_id 1
+}
+
+/* fish in the center */
+create_object DOLPHIN {
+	second_object SNAPPER
+	number_of_objects 9320
+	set_gaia_object_only
+	max_distance_to_other_zones 3
+	min_distance_group_placement 2
+	temp_min_distance_group_placement 8
+	avoid_forest_zone 2
+	place_on_specific_land_id 1
+}
+create_object DLC_CROCODILE {
+	number_of_objects 3
+	group_variance 1
+	set_loose_grouping
+	set_gaia_object_only
+	min_distance_group_placement 2
+	avoid_forest_zone 2
+	place_on_specific_land_id 1
+	find_closest
+	terrain_to_place_on DLC_MANGROVESHALLOW
+	avoid_actor_area 1028
+}
+
+
+
+/* near gold */
+create_object GOLD {
+	number_of_objects 4
+	number_of_groups 2
+	group_placement_radius 2
+	set_tight_grouping
+	set_gaia_object_only
+	set_place_for_every_player
+	min_distance_to_players 14
+	set_circular_placement
+	find_closest
+	min_distance_group_placement 3
+	max_distance_to_other_zones 3
+	avoid_forest_zone 2
+	temp_min_distance_group_placement 10
+	actor_area 23
+	actor_area_radius 5
+}
+
+/* replaces the forage */
+create_object ONGRID_PLACEHOLDER {
+	second_object SHORE_FISH
+	number_of_objects 4
+	group_placement_radius 2
+	set_tight_grouping
+	set_gaia_object_only
+	set_place_for_every_player
+	min_distance_to_players 11
+	set_circular_placement
+	find_closest
+	avoid_forest_zone 2
+	avoid_actor_area 23 /* gold */
+	actor_area 10
+	actor_area_radius 1
+	terrain_to_place_on DLC_MANGROVESHALLOW
+}
+create_object DLC_AFRICANBUSH_2 {
+	set_gaia_object_only
+	set_place_for_every_player
+	actor_area_to_place_in 10
+	min_distance_group_placement 3
+}
+
+/* boar */
+create_object JAVELINA {
+	number_of_groups 1
+	set_gaia_object_only
+	set_place_for_every_player
+	avoid_forest_zone 1
+	min_distance_to_players 10
+	set_circular_placement
+	find_closest
+}
+
+
+/* far gold */
+create_object GOLD {
+	if TINY_MAP
+		number_of_groups 2
+		set_place_for_every_player
+		avoid_actor_area 1028
+		temp_min_distance_group_placement 22
+	else
+		number_of_groups 9320
+		min_distance_to_players 25
+		temp_min_distance_group_placement 18
+	endif
+	set_circular_placement
+	number_of_objects 3
+	group_placement_radius 2
+	set_tight_grouping
+	set_gaia_object_only
+	avoid_actor_area 1028
+	min_distance_group_placement 4
+	max_distance_to_other_zones 2
+	avoid_forest_zone 2
+}
+
+/* scattered stone */
+create_object STONE {
+	number_of_objects 1
+	number_of_groups 9320
+	group_placement_radius 2
+	set_tight_grouping
+	set_gaia_object_only
+	min_distance_group_placement 4
+	avoid_forest_zone 2
+	temp_min_distance_group_placement 12
+	layer_to_place_on DLC_MANGROVESHALLOW
+}
+
+if DEATH_MATCH
+elseif DEFEND_WONDER
+else
+
+/* starting geese - start with 1 under your control */
+create_object DLC_GOOSE {
+	number_of_objects 3
+	set_loose_grouping
+	set_gaia_object_only
+	set_place_for_every_player
+	min_distance_to_players 7
+	set_circular_placement
+	find_closest
+	actor_area 6
+	actor_area_radius 1
+}
+create_object DLC_GOOSE {
+	number_of_objects 1
+	set_place_for_every_player
+	min_distance_to_players 7
+	set_circular_placement
+	actor_area_to_place_in 6
+}
+
+/* far geese */
+create_object DLC_GOOSE {
+	number_of_objects 2
+	number_of_groups 2
+	set_loose_grouping
+	set_gaia_object_only
+	set_place_for_every_player
+	min_distance_to_players 14
+	max_distance_to_players 19
+	set_circular_placement
+	avoid_forest_zone 2
+	min_distance_group_placement 2
+}
+
+/* scattered geese */
+create_object DLC_GOOSE {
+	number_of_objects 1
+	number_of_groups 9320
+	set_loose_grouping
+	set_gaia_object_only
+	min_distance_to_players 30
+	set_circular_placement
+	avoid_forest_zone 2
+	min_distance_group_placement 1
+	temp_min_distance_group_placement 18
+}
+
+/* scattered shorefish */
+create_object ONGRID_PLACEHOLDER {
+	second_object SHORE_FISH
+	number_of_groups 9320
+	number_of_objects 2
+	group_placement_radius 2
+	set_tight_grouping
+	set_gaia_object_only
+	avoid_forest_zone 2
+	actor_area 11
+	actor_area_radius 1
+	terrain_to_place_on DLC_MANGROVESHALLOW
+	min_distance_to_players 30
+	set_circular_placement
+	temp_min_distance_group_placement 22
+}
+create_object DLC_AFRICANBUSH_2 {
+	set_gaia_object_only
+	actor_area_to_place_in 11
+	min_distance_group_placement 2
+	number_of_groups 9320
+	temp_min_distance_group_placement 10
+}
+
+/* scattered predators */
+create_object DLC_CROCODILE {
+	number_of_groups 9320
+	set_loose_grouping
+	number_of_objects 1
+	set_gaia_object_only
+	min_distance_group_placement 1
+	temp_min_distance_group_placement 30
+	avoid_forest_zone 2
+	min_distance_to_players 40
+	set_circular_placement
+}
+
+/* starting stragglers - given extra wood to reach 100 */
+create_object REED_TREE {
+	number_of_objects 2
+	set_gaia_object_only
+	set_place_for_every_player
+	min_distance_to_players 4
+	max_distance_to_players 5
+	set_circular_placement
+	min_distance_group_placement 1
+	resource_delta 50
+}
+create_object REED_TREE {
+	number_of_objects 3
+	set_gaia_object_only
+	set_place_for_every_player
+	min_distance_to_players 6
+	max_distance_to_players 8
+	set_circular_placement
+	min_distance_group_placement 1
+	resource_delta 50
+}
+
+/* scattered stragglers */
+/*
+create_object REED_TREE {
+	resource_delta 50
+	number_of_objects 25
+	set_gaia_object_only
+	set_scaling_to_map_size
+	min_distance_to_players 15
+	set_circular_placement
+	min_distance_group_placement 1
+	temp_min_distance_group_placement 12
+	avoid_forest_zone 1
+	terrain_to_place_on DLC_MANGROVESHALLOW
+}
+*/
+create_object REED_TREE {
+	resource_delta 50
+	number_of_groups 9320
+	number_of_objects 4
+	group_variance 2
+	set_tight_grouping
+	set_gaia_object_only
+	set_scaling_to_map_size
+	min_distance_group_placement 1
+	temp_min_distance_group_placement 12
+	layer_to_place_on DLC_MANGROVESHALLOW
+} 
+
+
+endif
+
+/* fish */
+create_object SHORE_FISH {
+	number_of_objects 9320
+	set_gaia_object_only
+	temp_min_distance_group_placement 14
+	min_distance_group_placement 2
+}
+create_object DOLPHIN {
+	number_of_objects 9320
+	set_gaia_object_only
+	min_distance_group_placement 5 
+	temp_min_distance_group_placement 16
+	max_distance_to_other_zones 7
+	terrain_to_place_on DLC_WATER5
+} 
+create_object TUNA {
+	number_of_objects 9320
+	set_gaia_object_only
+	max_distance_to_other_zones 5
+	min_distance_group_placement 4
+	temp_min_distance_group_placement 14
+}
+create_object DORADO {
+	number_of_objects 9320
+	set_gaia_object_only
+	max_distance_to_other_zones 2
+	min_distance_group_placement 4
+	temp_min_distance_group_placement 10
+}
+
+
+
+/* birds */
+create_object DLC_STORK {
+	number_of_objects 6
+	set_scaling_to_map_size
+}
+
+
+/* eye-candy */
+create_object SEA_ROCKS_1 {
+	number_of_groups 9320
+	number_of_objects 3
+	group_variance 2
+	temp_min_distance_group_placement 25
+	layer_to_place_on DLC_MANGROVESHALLOW
+}
+create_object SEA_ROCKS_2 {
+	number_of_groups 9320
+	number_of_objects 2
+	group_variance 1
+	temp_min_distance_group_placement 20
+	layer_to_place_on DLC_MANGROVESHALLOW
+}
+
+/* 
+create_object DLC_SAVANNAHPATCH {
+	number_of_groups 9320
+	number_of_objects 2
+	group_variance 1
+	temp_min_distance_group_placement 0
+	layer_to_place_on DLC_WETROCKBEACH
+	avoid_forest_zone 3
+}
+*/
+
+
+

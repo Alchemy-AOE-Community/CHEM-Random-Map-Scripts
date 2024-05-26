@@ -1,0 +1,1482 @@
+/* ****************   LAKE NOMAD  **********
+   Version: 3.5
+   Author: Zetnus   zetnus@outlook.com
+   Date created:  8 April 2014
+   Last edit:    05 May 2022
+
+
+*/
+
+/* 
+The idea for this map was to make a sea nomad map where you start on a transport ship
+instead of starting on a tiny island or scattered across islands.  It turned into
+a lake nomad because the player lands (well ... player waters) often look like lakes.
+
+The standard AI will not play this map at all because it does not use transport ships 
+to build new towns.
+However, I have created a single-player (SP) version which AIs can play.
+
+I've found so far that the map can sometimes be very cramped, and sometimes much 
+more open depending on the position of the land.
+
+
+Learn about random map scripting: https://docs.google.com/document/d/e/2PACX-1vR_I1I9u-hI2FFm-EYyjoM_-9dNJFOfTaIgr05wXNbdpv9tI18b6r18ARULy3Jqyvlq6-lc2VjX6xP4/pub
+
+This map was harvested from a mod in the official AOE2DE mod center, whose licensing agreement with Microsoft supersedes any Github restrictions: https://www.microsoft.com/en-us/servicesagreement
+
+*/
+
+/*
+#define SINGLE_PLAYER_VERSION
+*/
+
+
+
+/* =================================================================================================== */
+/* version checking */
+if DE_AVAILABLE #define DLC #define DLC_NO_WK
+elseif DLC_TIGER #define DLC  /* could be WK or HD DLC */	
+	if UP_EXTENSION #define WOLOLOKINGDOMS
+	else #define HD_EDITION_DLC #define DLC_NO_WK
+	endif	
+elseif DLC_COW #define HD_EDITION_BASE	
+elseif UP_EXTENSION #define USERPATCH_1.5	
+elseif UP_AVAILABLE #define USERPATCH_1.4	
+else #define CONQUERORS_CD	
+endif
+
+/* =================================================================================================== */
+/* biomes */ 
+
+start_random
+	percent_chance 50	#define TEMPERATE_BIOME
+	percent_chance 10	#define HIGHLAND_BIOME
+	percent_chance 10	#define SNOWY_BIOME
+	percent_chance 10	#define JUNGLE_BIOME
+	percent_chance 10	#define TROPICAL_BIOME
+	percent_chance 10	#define SAVANNAH_BIOME
+end_random
+
+
+if TEMPERATE_BIOME
+	#define TEMPERATE_ANIMALS
+	#const PRIMARY_LAND_TYPE 0		/* grass 1 */
+	#const SECONDARY_LAND_TYPE 12	/* grass 2 */
+	#const TERTIARY_LAND_TYPE 6		/* dirt */
+	#const QUATERNARY_LAND_TYPE 3	/* dirt 3 */
+	if WOLOLOKINGDOMS #const ISLAND_LAND_TYPE 27 else #const ISLAND_LAND_TYPE 11	/* dirt 2 */	endif	
+
+	if DE_AVAILABLE
+		start_random
+			percent_chance 40	/* default */
+				#const PRIMARY_FOREST_TYPE 20	/* oak bush */
+				#const SECONDARY_FOREST_TYPE 10	/* oak */
+				#const TERTIARY_FOREST_TYPE 19	/* pine */
+			percent_chance 30	/* autumn */
+				#define AUTUMN_BIOME
+				#const PRIMARY_FOREST_TYPE 104	/* autumn oak forest */
+				#const SECONDARY_FOREST_TYPE 19	/* pine forest */
+				#const TERTIARY_FOREST_TYPE 10	/* oak bush forest */ 
+			percent_chance 20	/* mediteranean */
+				#const PRIMARY_FOREST_TYPE 88	/* mediteranean forest */
+				#const SECONDARY_FOREST_TYPE 10	/* oak bush forest */ 
+				#const TERTIARY_FOREST_TYPE 19	/* pine forest */
+			percent_chance 10	/* asian */
+				#const PRIMARY_FOREST_TYPE 10	/* oak */
+				#const SECONDARY_FOREST_TYPE 18	/* bamboo */
+				#const TERTIARY_FOREST_TYPE 92	/* reeds */
+		end_random
+	else
+		start_random
+			percent_chance 90
+				#const PRIMARY_FOREST_TYPE 10	/* oak forest */
+				#const SECONDARY_FOREST_TYPE 19	/* pine */
+				if WOLOLOKINGDOMS #const TERTIARY_FOREST_TYPE 10 else #const TERTIARY_FOREST_TYPE 20	/* oak bush forest */ endif
+			percent_chance 10	/* asian */
+				#const PRIMARY_FOREST_TYPE 10	/* oak */
+				#const SECONDARY_FOREST_TYPE 18	/* bamboo */
+				#const TERTIARY_FOREST_TYPE 10	/* oak */
+		end_random
+	endif
+
+	#const PRIMARY_STRAGGLER_TREE_TYPE 349		/* oak */
+	#const SECONDARY_STRAGGLER_TREE_TYPE 350	/* pine */
+	#const TERTIARY_STRAGGLER_TREE_TYPE 411		/* forest(oak) */
+
+	start_random
+		percent_chance 50	#define SUNNY_WEATHER 
+		percent_chance 30	#define RAINY_WEATHER
+		percent_chance 20	#define THUNDERSTORM_WEATHER
+	end_random 
+	
+elseif HIGHLAND_BIOME
+	#define TEMPERATE_ANIMALS
+	#const PRIMARY_LAND_TYPE 9		/* grass 3 */
+	#const SECONDARY_LAND_TYPE 0	/* grass 1 */
+	if WOLOLOKINGDOMS #const TERTIARY_LAND_TYPE 27 else #const TERTIARY_LAND_TYPE 11  /* dirt grass */ endif
+	#const QUATERNARY_LAND_TYPE 3	/* dirt 3 */
+	#const ISLAND_LAND_TYPE 6		/* dirt */
+
+	start_random
+		percent_chance 90 
+			#const PRIMARY_FOREST_TYPE 19 /* pine */
+			#const SECONDARY_FOREST_TYPE 10 /* (oak) forest */
+			#const TERTIARY_FOREST_TYPE 19 /* pine */
+		percent_chance 10
+			#const PRIMARY_FOREST_TYPE 19 /* pine */
+			#const SECONDARY_FOREST_TYPE 18 /* bamboo */
+			#const TERTIARY_FOREST_TYPE 19 /* pine */
+	end_random
+
+	#const PRIMARY_STRAGGLER_TREE_TYPE 350		/* pine */
+	#const SECONDARY_STRAGGLER_TREE_TYPE 349	/* oak */
+	#const TERTIARY_STRAGGLER_TREE_TYPE 411		/* forest(oak) */
+	
+	start_random
+		percent_chance 50	#define SUNNY_WEATHER 
+		percent_chance 30	#define RAINY_WEATHER
+		percent_chance 20	#define THUNDERSTORM_WEATHER
+	end_random 	
+	
+elseif SNOWY_BIOME
+	#define SNOW_ANIMALS
+	#const PRIMARY_LAND_TYPE 32   /* snow */
+	#const SECONDARY_LAND_TYPE 34  /* grass snow */
+	#const TERTIARY_LAND_TYPE 32   /* snow */
+	if DE_AVAILABLE #const TERTIARY_LAND_TYPE 72	/* snow underbrush */ else #const TERTIARY_LAND_TYPE 32	/* snow */	endif
+	if DE_AVAILABLE #const QUATERNARY_LAND_TYPE 72	/* snow underbrush */ else #const QUATERNARY_LAND_TYPE 5	/* leaves */	endif
+	if WOLOLOKINGDOMS #const ISLAND_LAND_TYPE 36 else #const ISLAND_LAND_TYPE 33	/* dirt snow */	endif
+	
+	if DE_AVAILABLE
+		#const PRIMARY_FOREST_TYPE 21		/* pine forest */
+		#const SECONDARY_FOREST_TYPE 105	/* snow autumn forest */
+		#const TERTIARY_FOREST_TYPE 106		/* dead snow forest */ 
+	else
+		#const PRIMARY_FOREST_TYPE 21	/* snow pine */
+		#const SECONDARY_FOREST_TYPE 21	/* snow pine */
+		#const TERTIARY_FOREST_TYPE 21	/* snow pine */
+	endif
+
+	if DE_AVAILABLE
+		#const PRIMARY_STRAGGLER_TREE_TYPE 1250		/* dead snow tree */
+		#const SECONDARY_STRAGGLER_TREE_TYPE 413	/* snow pine */
+		#const TERTIARY_STRAGGLER_TREE_TYPE 1054	/* snowy bush */
+	elseif DLC
+		#const PRIMARY_STRAGGLER_TREE_TYPE 413		/* snow pine */
+		#const SECONDARY_STRAGGLER_TREE_TYPE 413	/* snow pine */
+		#const TERTIARY_STRAGGLER_TREE_TYPE 1054	/* snowy bush */
+	else
+		#const PRIMARY_STRAGGLER_TREE_TYPE 413		/* snow pine */
+		#const SECONDARY_STRAGGLER_TREE_TYPE 413	/* snow pine */
+		#const TERTIARY_STRAGGLER_TREE_TYPE 413		/* snow pine */
+	endif
+	
+	start_random
+		percent_chance 40	#define SUNNY_WEATHER 
+		percent_chance 5	#define RAINY_WEATHER
+		percent_chance 5	#define THUNDERSTORM_WEATHER
+		percent_chance 50	#define SNOWY_WEATHER
+	end_random 
+	
+elseif JUNGLE_BIOME
+	#define JUNGLE_ANIMALS
+	
+	if DE_AVAILABLE
+		#const PRIMARY_LAND_TYPE 60	/* grass jungle */
+		start_random
+			percent_chance 50	#const SECONDARY_LAND_TYPE 62	/*  jungle leaves */
+			percent_chance 50	#const SECONDARY_LAND_TYPE 77	/* underbrush jungle */
+		end_random
+		#const TERTIARY_LAND_TYPE 83	/* jungle grass */
+		#const QUATERNARY_LAND_TYPE 12	/* grass 2 */
+	elseif DLC_NO_WK
+		#const PRIMARY_LAND_TYPE 60		/* grass jungle */
+		#const SECONDARY_LAND_TYPE 62	/* jungle leaves */
+		#const TERTIARY_LAND_TYPE 60	/* grass jungle */
+		#const QUATERNARY_LAND_TYPE 12	/* grass 2 */
+	else 
+		#const PRIMARY_LAND_TYPE 12		/* grass 2 */
+		#const SECONDARY_LAND_TYPE 5	/*  leaves */
+		#const TERTIARY_LAND_TYPE 3		/* dirt 3 */
+		if WOLOLOKINGDOMS #const QUATERNARY_LAND_TYPE 27 else #const QUATERNARY_LAND_TYPE 11	/* dirt 2 */ endif
+	endif
+	#const ISLAND_LAND_TYPE 6		/* dirt */
+	
+	start_random
+		percent_chance 40 #define TEMPERATE_JUNGLE
+		percent_chance 10 #define ASIAN_JUNGLE
+	end_random
+	if TEMPERATE_JUNGLE
+		if DLC_NO_WK
+			#const PRIMARY_FOREST_TYPE 56	/* rainforest */
+			#const SECONDARY_FOREST_TYPE 10	/* (oak) forest */
+			#const TERTIARY_FOREST_TYPE 17	/* jungle */
+		else
+			#const PRIMARY_FOREST_TYPE 17	/* jungle */
+			#const SECONDARY_FOREST_TYPE 10	/* (oak) forest */
+			#const TERTIARY_FOREST_TYPE 17	/* jungle */
+		endif
+	elseif ASIAN_JUNGLE
+		if DLC_NO_WK
+			#const PRIMARY_FOREST_TYPE 56	/* rainforest */
+			#const SECONDARY_FOREST_TYPE 17	/* jungle */
+			#const TERTIARY_FOREST_TYPE 18	/* bamboo */
+		else
+			#const PRIMARY_FOREST_TYPE 17	/* jungle */
+			#const SECONDARY_FOREST_TYPE 18	/* bamboo */
+			#const TERTIARY_FOREST_TYPE 17	/* jungle */
+		endif
+	else /* full jungle */
+		if DLC_NO_WK
+			#const PRIMARY_FOREST_TYPE 56	/* rainforest */
+			#const SECONDARY_FOREST_TYPE 17	/* jungle */
+			#const TERTIARY_FOREST_TYPE 56	/* rainforest */
+		else
+			#const PRIMARY_FOREST_TYPE 17	/* jungle */
+			#const SECONDARY_FOREST_TYPE 17	/* jungle */
+			#const TERTIARY_FOREST_TYPE 17	/* jungle */
+		endif
+	endif
+	
+	if DLC
+		#const PRIMARY_STRAGGLER_TREE_TYPE 1146		/* rainforest tree */
+		#const SECONDARY_STRAGGLER_TREE_TYPE 414	/* jungletree */
+		#const TERTIARY_STRAGGLER_TREE_TYPE 1053	/* bush */
+	else
+		#const PRIMARY_STRAGGLER_TREE_TYPE 414		/* jungletree */
+		#const SECONDARY_STRAGGLER_TREE_TYPE 349	/* oaktree */
+		#const TERTIARY_STRAGGLER_TREE_TYPE 414		/* jungletree */
+	endif
+	
+	start_random
+		percent_chance 50	#define SUNNY_WEATHER 
+		percent_chance 30	#define RAINY_WEATHER
+		percent_chance 20	#define THUNDERSTORM_WEATHER
+	end_random 
+	
+elseif TROPICAL_BIOME
+	#define TROPICAL_ANIMALS 
+	
+	#const PRIMARY_LAND_TYPE 14	/* desert */
+	#const QUATERNARY_LAND_TYPE 12	/* grass 2 */
+	if DE_AVAILABLE
+		#const SECONDARY_LAND_TYPE 60	/*  grass jungle */
+		#const TERTIARY_LAND_TYPE 11	/* dirt grass */
+	elseif DLC_NO_WK
+		#const SECONDARY_LAND_TYPE 11	/*  dirt grass */
+		#const TERTIARY_LAND_TYPE 60	/* grass jungle */
+	elseif WOLOLOKINGDOMS
+		#const SECONDARY_LAND_TYPE 27	/*  dirt grass */
+		#const TERTIARY_LAND_TYPE 12	/* grass 2 */
+	else
+		#const SECONDARY_LAND_TYPE 11	/*  dirt grass */
+		#const TERTIARY_LAND_TYPE 12	/* grass 2 */
+	endif
+	#const ISLAND_LAND_TYPE 6		/* dirt */
+
+	if DLC_NO_WK
+		#const PRIMARY_FOREST_TYPE 13	/* palm forest */
+		#const SECONDARY_FOREST_TYPE 17	/* jungle */
+		#const TERTIARY_FOREST_TYPE 56	/* rainforest */
+	else
+		#const PRIMARY_FOREST_TYPE 13	/* palm forest */
+		#const SECONDARY_FOREST_TYPE 17	/* jungle */
+		#const TERTIARY_FOREST_TYPE 13	/* palm forest */
+	endif
+		
+	#const PRIMARY_STRAGGLER_TREE_TYPE 351		/* palmtree */
+	#const SECONDARY_STRAGGLER_TREE_TYPE 414	/* jungletree */
+	#const TERTIARY_STRAGGLER_TREE_TYPE 351		/* palmtree */
+	
+	start_random
+		percent_chance 85	#define SUNNY_WEATHER 
+		percent_chance 10	#define RAINY_WEATHER
+		percent_chance 5	#define THUNDERSTORM_WEATHER
+	end_random 
+
+elseif SAVANNAH_BIOME
+	#define SAVANNAH_ANIMALS 
+	
+	#const TERTIARY_LAND_TYPE 6	/* dirt 1 */
+	#const ISLAND_LAND_TYPE 0	/* grass 1 */
+	if DE_AVAILABLE
+		#const PRIMARY_LAND_TYPE 41		/* savannah */
+		#const SECONDARY_LAND_TYPE 42	/* dirt 4 */
+		#const QUATERNARY_LAND_TYPE 100	/* dry grass */
+	elseif DLC_NO_WK
+		#const PRIMARY_LAND_TYPE 41		/* savannah */
+		#const SECONDARY_LAND_TYPE 42	/* dirt 4 */
+		#const QUATERNARY_LAND_TYPE 9	/* grass 3 */
+	else
+		#const PRIMARY_LAND_TYPE 14		/* desert */
+		#const SECONDARY_LAND_TYPE 3	/* dirt 3 */
+		#const QUATERNARY_LAND_TYPE 9	/* grass 3 */
+	endif
+	
+	if DLC_NO_WK
+		#const PRIMARY_FOREST_TYPE 48	/* dragon forest */
+		#const SECONDARY_FOREST_TYPE 49	/* baobab forest */
+		#const TERTIARY_FOREST_TYPE 50	/* acacia forest */
+	else
+		#const PRIMARY_FOREST_TYPE 13	/* palm forest */
+		#const SECONDARY_FOREST_TYPE 10	/* (oak) forest */
+		#const TERTIARY_FOREST_TYPE 10	/* (oak) forest */
+	endif
+	
+	if DLC
+		#const PRIMARY_STRAGGLER_TREE_TYPE 1052		/* baobab tree */
+		#const SECONDARY_STRAGGLER_TREE_TYPE 1063	/* acacia tree */
+		#const TERTIARY_STRAGGLER_TREE_TYPE 1051	/* dragon tree */
+	else
+		#const PRIMARY_STRAGGLER_TREE_TYPE 351		/* palmtree */
+		#const SECONDARY_STRAGGLER_TREE_TYPE 349	/* oaktree */
+		#const TERTIARY_STRAGGLER_TREE_TYPE 411		/* (oak) tree */
+	endif   
+	
+	start_random
+		percent_chance 90	#define SUNNY_WEATHER 
+		percent_chance 5	#define RAINY_WEATHER
+		percent_chance 5	#define THUNDERSTORM_WEATHER
+	end_random 
+endif
+
+
+/* =================================================================================================== */
+/* pick animals */
+if TEMPERATE_ANIMALS
+
+	if DLC
+		start_random
+			percent_chance 50 	#const	BERRY_TYPE 59	/* forage bush */
+			percent_chance 50 	#const	BERRY_TYPE 1059	/* fruit bush */
+		end_random
+	else 	#const	BERRY_TYPE 59	/* forage bush */ endif
+	
+	if DE_AVAILABLE
+		start_random
+			percent_chance 12	#const SHEEP_TYPE 305	/* llama */
+			percent_chance 12	#const SHEEP_TYPE 594	/* sheep */
+			percent_chance 12	#const SHEEP_TYPE 833	/* turkey */
+			percent_chance 3	#const SHEEP_TYPE 705	#define SHEEP_IS_COW	/* cow */
+			percent_chance 3	#const SHEEP_TYPE 1596	#define SHEEP_IS_COW	/* cow B */
+			percent_chance 3	#const SHEEP_TYPE 1598	#define SHEEP_IS_COW	/* cow C */
+			percent_chance 3	#const SHEEP_TYPE 1600	#define SHEEP_IS_COW	/* cow D */
+			percent_chance 13	#const SHEEP_TYPE 1142	#define SHEEP_IS_COW	/* water buffalo */
+			percent_chance 13	#const SHEEP_TYPE 1060	/* goat */
+			percent_chance 13	#const SHEEP_TYPE 1243	/* goose */
+			percent_chance 13	#const SHEEP_TYPE 1245	/* pig */
+		end_random		
+	elseif DLC
+		start_random
+			percent_chance 16	#const SHEEP_TYPE 305	/* llama */
+			percent_chance 20	#const SHEEP_TYPE 594	/* sheep */
+			percent_chance 16	#const SHEEP_TYPE 833	/* turkey */
+			percent_chance 16	#const SHEEP_TYPE 705	#define SHEEP_IS_COW	/* cow */
+			percent_chance 16	#const SHEEP_TYPE 1142	#define SHEEP_IS_COW	/* water buffalo */
+			percent_chance 16	#const SHEEP_TYPE 1060	/* goat */
+		end_random
+	else
+		start_random
+			percent_chance 50	#const SHEEP_TYPE 594	/* sheep */
+			percent_chance 50	#const SHEEP_TYPE 833	/* turkey */
+		end_random	
+	endif
+	
+	start_random
+		percent_chance 50	#const BOAR_TYPE 48		/* boar */
+		percent_chance 50	#const BOAR_TYPE 822	/* javelina */
+	end_random	
+	
+	if DE_AVAILABLE
+		start_random
+			percent_chance 25	#const DEER_TYPE 1239	/* ibex */
+			percent_chance 50	#const DEER_TYPE 65		/* deer */
+			percent_chance 25	#const DEER_TYPE 1796	/* gazelle */
+		end_random
+	else	#const DEER_TYPE 65	/* deer */ endif 
+	
+	if DLC
+		start_random
+			percent_chance 25	#const BIRD_TYPE 96		/* hawk */
+			percent_chance 25	if DE_AVAILABLE #const BIRD_TYPE 1305 else #const BIRD_TYPE 917	/* vulture */ endif
+			percent_chance 25	#const BIRD_TYPE 1028	/* stork */
+			percent_chance 25	#const BIRD_TYPE 1056	/* falcon */
+		end_random
+	else	#const BIRD_TYPE 96	/* hawk */ endif
+	
+	start_random
+		percent_chance 50
+			#const FISH_TYPE 456			/* salmon */
+			#const SECONDARY_FISH_TYPE 457	/* tuna */
+		percent_chance 50
+			#const FISH_TYPE 458			/* snapper */
+			#const SECONDARY_FISH_TYPE 455	/* dorado */
+	end_random
+	
+	if DLC
+		start_random
+			percent_chance 50	#const SHORE_FISH_TYPE 69	/* shore fish */
+			percent_chance 50	#const SHORE_FISH_TYPE 1141	/* box turtles */
+		end_random
+	else #const SHORE_FISH_TYPE 69	/* shore fish */ endif
+	
+	if DE_AVAILABLE
+		start_random
+			percent_chance 34	#const DEEP_FISH_TYPE 61	/* dolphin */
+			percent_chance 33	#const DEEP_FISH_TYPE 450	/* marlin 1 */
+			percent_chance 33	#const DEEP_FISH_TYPE 451	/* marlin 2 */
+		end_random
+	else
+		start_random
+			percent_chance 50	#const DEEP_FISH_TYPE 450	/* marlin 1 */
+			percent_chance 50	#const DEEP_FISH_TYPE 451	/* marlin 2 */
+		end_random
+	endif
+	
+elseif SNOW_ANIMALS
+
+	#const BERRY_TYPE 59	/* forage bush */
+	
+	if DE_AVAILABLE
+		start_random
+			percent_chance 34	#const SHEEP_TYPE 594	/* sheep */
+			percent_chance 33	#const SHEEP_TYPE 1060	/* goat */
+			percent_chance 33	#const SHEEP_TYPE 1243	/* goose */
+		end_random		
+	elseif DLC
+		start_random
+			percent_chance 50	#const SHEEP_TYPE 594	/* sheep */
+			percent_chance 50	#const SHEEP_TYPE 1060	/* goat */
+		end_random
+	else	#const SHEEP_TYPE 594	/* sheep */ endif
+	
+	#const BOAR_TYPE 48	/* boar */
+	
+	if DE_AVAILABLE
+		start_random
+			percent_chance 50	#const DEER_TYPE 1239	/* ibex */
+			percent_chance 50	#const DEER_TYPE 65		/* deer */
+		end_random
+	else	#const DEER_TYPE 65	/* deer */ endif 
+	
+	if DLC
+		start_random
+			percent_chance 33	#const BIRD_TYPE 96		/* hawk */
+			percent_chance 33	if DE_AVAILABLE #const BIRD_TYPE 1305 else #const BIRD_TYPE 917	/* vulture */ endif
+			percent_chance 34	#const BIRD_TYPE 1056	/* falcon */
+		end_random
+	else	#const BIRD_TYPE 96	/* hawk */ endif
+	
+	#const FISH_TYPE 456	/* salmon */
+	
+	start_random
+		percent_chance 75	#const SECONDARY_FISH_TYPE 457	/* tuna */
+		percent_chance 25	#const SECONDARY_FISH_TYPE 53	/* perch */
+	end_random
+	
+	#const SHORE_FISH_TYPE 69	/* shore fish */
+	
+	start_random
+		percent_chance 50	#const DEEP_FISH_TYPE 450	/* marlin 1 */
+		percent_chance 50	#const DEEP_FISH_TYPE 451	/* marlin 2 */
+	end_random
+	
+elseif JUNGLE_ANIMALS
+
+	if DLC
+		start_random
+			percent_chance 50 	#const	BERRY_TYPE 59	/* forage bush */
+			percent_chance 50 	#const	BERRY_TYPE 1059	/* fruit bush */
+		end_random
+	else 	#const	BERRY_TYPE 59	/* forage bush */ endif
+	
+	if DE_AVAILABLE
+		start_random
+			percent_chance 25	#const SHEEP_TYPE 833	/* turkey */
+			percent_chance 25	#const SHEEP_TYPE 1142	#define SHEEP_IS_COW	/* water buffalo */
+			percent_chance 25	#const SHEEP_TYPE 1243	/* goose */
+			percent_chance 25	#const SHEEP_TYPE 1245	/* pig */
+		end_random		
+	elseif DLC
+		start_random
+			percent_chance 50	#const SHEEP_TYPE 833	/* turkey */
+			percent_chance 50	#const SHEEP_TYPE 1142	#define SHEEP_IS_COW	/* water buffalo */
+		end_random
+	else	#const SHEEP_TYPE 833	/* turkey */ endif
+
+	if DLC
+		start_random
+			percent_chance 25	#const BOAR_TYPE 48		/* boar */
+			percent_chance 25	#const BOAR_TYPE 822	/* javelina */
+			percent_chance 25	#const BOAR_TYPE 1139	/* rhino */
+			percent_chance 25	if WOLOLOKINGDOMS #const BOAR_TYPE 412 elseif DE_AVAILABLE #const BOAR_TYPE 1301 else #const BOAR_TYPE 936	/* elephant */ endif
+		end_random
+	else
+		start_random
+			percent_chance 50	#const BOAR_TYPE 48		/* boar */
+			percent_chance 50	#const BOAR_TYPE 822	/* javelina */
+		end_random	
+	endif
+	
+	#const DEER_TYPE 65	/* deer */ 
+	
+	if DLC
+		start_random
+			percent_chance 5	#const BIRD_TYPE 96		/* hawk */
+			percent_chance 80	#const BIRD_TYPE 816	/* macaw */
+			percent_chance 5	if DE_AVAILABLE #const BIRD_TYPE 1305 else #const BIRD_TYPE 917	/* vulture */ endif
+			percent_chance 5	#const BIRD_TYPE 1028	/* stork */
+			percent_chance 5	#const BIRD_TYPE 1056	/* falcon */
+		end_random
+	else
+		start_random
+		percent_chance 20	#const BIRD_TYPE 96		/* hawk */
+		percent_chance 80	#const BIRD_TYPE 816	/* macaw */
+		end_random
+	endif
+	
+	#const FISH_TYPE 458			/* snapper */
+	#const SECONDARY_FISH_TYPE 455	/* dorado */
+
+	if DLC
+		start_random
+			percent_chance 20	#const SHORE_FISH_TYPE 69	/* shore fish */
+			percent_chance 80	#const SHORE_FISH_TYPE 1141	/* box turtles */
+		end_random
+	else #const SHORE_FISH_TYPE 69	/* shore fish */ endif
+	
+	if DE_AVAILABLE
+		start_random
+			percent_chance 34	#const DEEP_FISH_TYPE 61	/* dolphin */
+			percent_chance 33	#const DEEP_FISH_TYPE 450	/* marlin 1 */
+			percent_chance 33	#const DEEP_FISH_TYPE 451	/* marlin 2 */
+		end_random
+	else
+		start_random
+			percent_chance 50	#const DEEP_FISH_TYPE 450	/* marlin 1 */
+			percent_chance 50	#const DEEP_FISH_TYPE 451	/* marlin 2 */
+		end_random
+	endif
+	
+elseif TROPICAL_ANIMALS
+
+	if DLC
+		start_random
+			percent_chance 50 	#const	BERRY_TYPE 59	/* forage bush */
+			percent_chance 50 	#const	BERRY_TYPE 1059	/* fruit bush */
+		end_random
+	else 	#const	BERRY_TYPE 59	/* forage bush */ endif
+	
+	if DE_AVAILABLE
+		start_random
+			percent_chance 34	#const SHEEP_TYPE 833	/* turkey */
+			percent_chance 33	#const SHEEP_TYPE 1243	/* goose */
+			percent_chance 33	#const SHEEP_TYPE 1245	/* pig */
+		end_random		
+	else	#const SHEEP_TYPE 833	/* turkey */ endif
+
+	start_random
+		percent_chance 50	#const BOAR_TYPE 48		/* boar */
+		percent_chance 50	#const BOAR_TYPE 822	/* javelina */
+	end_random	
+	
+	#const DEER_TYPE 65	/* deer */ 
+	
+	if DLC
+		start_random
+			percent_chance 5	#const BIRD_TYPE 96		/* hawk */
+			percent_chance 80	#const BIRD_TYPE 816	/* macaw */
+			percent_chance 5	if DE_AVAILABLE #const BIRD_TYPE 1305 else #const BIRD_TYPE 917	/* vulture */ endif
+			percent_chance 5	#const BIRD_TYPE 1028	/* stork */
+			percent_chance 5	#const BIRD_TYPE 1056	/* falcon */
+		end_random
+	else
+		start_random
+		percent_chance 20	#const BIRD_TYPE 96		/* hawk */
+		percent_chance 80	#const BIRD_TYPE 816	/* macaw */
+		end_random
+	endif
+	
+	#const FISH_TYPE 458			/* snapper */
+	#const SECONDARY_FISH_TYPE 455	/* dorado */
+
+	if DLC
+		start_random
+			percent_chance 80	#const SHORE_FISH_TYPE 69	/* shore fish */
+			percent_chance 20	#const SHORE_FISH_TYPE 1141	/* box turtles */
+		end_random
+	else #const SHORE_FISH_TYPE 69	/* shore fish */ endif
+	
+	if DE_AVAILABLE
+		#const DEEP_FISH_TYPE 61	/* dolphin */
+	else
+		start_random
+			percent_chance 50	#const DEEP_FISH_TYPE 450	/* marlin 1 */
+			percent_chance 50	#const DEEP_FISH_TYPE 451	/* marlin 2 */
+		end_random
+	endif
+	
+elseif SAVANNAH_ANIMALS
+	
+	if DLC
+		start_random
+			percent_chance 50 	#const	BERRY_TYPE 59	/* forage bush */
+			percent_chance 50 	#const	BERRY_TYPE 1059	/* fruit bush */
+		end_random
+	else 	#const	BERRY_TYPE 59	/* forage bush */ endif
+	
+	if DE_AVAILABLE
+		start_random
+			percent_chance 20	#const SHEEP_TYPE 594	/* sheep */
+			percent_chance 20	#const SHEEP_TYPE 1142	#define SHEEP_IS_COW	/* water buffalo */
+			percent_chance 20	#const SHEEP_TYPE 1060	/* goat */
+			percent_chance 20	#const SHEEP_TYPE 1243	/* goose */
+			percent_chance 20	#const SHEEP_TYPE 1245	/* pig */
+		end_random		
+	elseif DLC
+		start_random
+			percent_chance 33	#const SHEEP_TYPE 594	/* sheep */
+			percent_chance 34	#const SHEEP_TYPE 1142	#define SHEEP_IS_COW	/* water buffalo */
+			percent_chance 33	#const SHEEP_TYPE 1060	/* goat */
+		end_random
+	else	#const SHEEP_TYPE 594	/* sheep */ endif
+
+	if DLC
+		start_random
+			percent_chance 5	#const BOAR_TYPE 48		/* boar */
+			percent_chance 45	#const BOAR_TYPE 1139	/* rhino */
+			percent_chance 50	if WOLOLOKINGDOMS #const BOAR_TYPE 412 elseif DE_AVAILABLE #const BOAR_TYPE 1301 else #const BOAR_TYPE 936	/* elephant */ endif
+		end_random
+	else	#const BOAR_TYPE 48		/* boar */ endif
+	
+	if DLC
+		start_random
+			percent_chance 33	#const DEER_TYPE 1019	/* zebra */
+			percent_chance 33	#const DEER_TYPE 1026	/* ostrich */
+			percent_chance 34	#const DEER_TYPE 1796	/* gazelle */
+		end_random
+	else #const DEER_TYPE 65	/* deer */ endif
+	
+	if DLC
+		start_random
+			percent_chance 20	#const BIRD_TYPE 96		/* hawk */
+			percent_chance 20	#const BIRD_TYPE 816	/* macaw */
+			percent_chance 20	if DE_AVAILABLE #const BIRD_TYPE 1305 else #const BIRD_TYPE 917	/* vulture */ endif
+			percent_chance 20	#const BIRD_TYPE 1028	/* stork */
+			percent_chance 20	#const BIRD_TYPE 1056	/* falcon */
+		end_random
+	else
+		start_random
+		percent_chance 50	#const BIRD_TYPE 96		/* hawk */
+		percent_chance 50	#const BIRD_TYPE 816	/* macaw */
+		end_random
+	endif
+	
+	#const FISH_TYPE 458			/* snapper */
+	#const SECONDARY_FISH_TYPE 455	/* dorado */
+
+	if DLC
+		start_random
+			percent_chance 50	#const SHORE_FISH_TYPE 69	/* shore fish */
+			percent_chance 50	#const SHORE_FISH_TYPE 1141	/* box turtles */
+		end_random
+	else #const SHORE_FISH_TYPE 69	/* shore fish */ endif
+	
+	if DE_AVAILABLE
+		start_random
+			percent_chance 34	#const DEEP_FISH_TYPE 61	/* dolphin */
+			percent_chance 33	#const DEEP_FISH_TYPE 450	/* marlin 1 */
+			percent_chance 33	#const DEEP_FISH_TYPE 451	/* marlin 2 */
+		end_random
+	else
+		start_random
+			percent_chance 50	#const DEEP_FISH_TYPE 450	/* marlin 1 */
+			percent_chance 50	#const DEEP_FISH_TYPE 451	/* marlin 2 */
+		end_random
+	endif
+	
+endif
+
+
+/* =================================================================================================== */
+<PLAYER_SETUP>
+
+random_placement
+nomad_resources 
+ai_info_map_type CUSTOM 1 0 0
+behavior_version 1
+
+start_random
+	percent_chance 75	#define SUNNY_WEATHER
+	percent_chance 10	#define RAINY_WEATHER
+	percent_chance 10	#define THUNDERSTORM_WEATHER
+	percent_chance 5	#define SNOWY_WEATHER
+end_random
+
+if UP_EXTENSION
+	if SUNNY_WEATHER		weather_type 0 0 0 0 
+	elseif RAINY_WEATHER
+		start_random
+			percent_chance 50	weather_type 2 0 0 1
+			percent_chance 50	weather_type -2 0 0 -1	
+		end_random
+	elseif THUNDERSTORM_WEATHER
+		start_random
+			percent_chance 50	weather_type -3 0 0 -1
+			percent_chance 50	weather_type 3 0 0 1
+		end_random
+	elseif SNOWY_WEATHER
+		start_random
+			percent_chance 50	weather_type 4 0 0 1
+			percent_chance 50	weather_type -4 0 0 -1	
+		end_random
+	else	weather_type 0 0 0 0	/* fall-back here */
+	endif
+endif
+
+/* Disabling Trade Carts and Cogs for Multi-team Games */
+if 2_TEAM_GAME
+else
+  #const TRADE_CART_ENABLER 161
+  #const TRADE_COG_ENABLER 180
+  #const TRADE_CARAVAN_ENABLER 48
+  #const HINDU_CARAVANSERAI_ENABLER 518
+  #const PERSIAN_CARAVANSERAI_ENABLER 552  
+  #const SILK_ROAD 499
+  effect_amount DISABLE_TECH TRADE_COG_ENABLER ATTR_DISABLE 180
+  effect_amount DISABLE_TECH TRADE_CART_ENABLER ATTR_DISABLE 161
+  effect_amount DISABLE_TECH TRADE_CARAVAN_ENABLER ATTR_DISABLE 48
+  effect_amount DISABLE_TECH HINDU_CARAVANSERAI_ENABLER ATTR_DISABLE 518
+  effect_amount DISABLE_TECH PERSIAN_CARAVANSERAI_ENABLER ATTR_DISABLE 552
+  effect_amount DISABLE_TECH SILK_ROAD ATTR_DISABLE 499    
+endif
+
+/* =================================================================================================== */
+<LAND_GENERATION>
+
+/* Initially this base terrain covers the entire map */
+base_terrain WATER
+
+if SINGLE_PLAYER_VERSION
+
+/* Individual lands for each player */
+create_land {
+	terrain_type DEEP_WATER
+	land_percent 8
+	base_size 8
+	set_zone_randomly
+	other_zone_avoidance_distance 2 
+	assign_to_player 1
+}
+
+create_land {
+	terrain_type SHALLOW
+	number_of_tiles 271
+	base_size 5
+	set_zone_randomly
+	other_zone_avoidance_distance 2 
+	assign_to_player 2
+}
+create_land {
+	terrain_type SHALLOW
+	number_of_tiles 271
+	base_size 5
+	set_zone_randomly
+	other_zone_avoidance_distance 2 
+	assign_to_player 3
+}
+create_land {
+	terrain_type SHALLOW
+	number_of_tiles 271
+	base_size 5
+	set_zone_randomly
+	other_zone_avoidance_distance 2 
+	assign_to_player 4
+}
+create_land {
+	terrain_type SHALLOW
+	number_of_tiles 271
+	base_size 5
+	set_zone_randomly
+	other_zone_avoidance_distance 2 
+	assign_to_player 5
+}
+create_land {
+	terrain_type SHALLOW
+	number_of_tiles 271
+	base_size 5
+	set_zone_randomly
+	other_zone_avoidance_distance 2 
+	assign_to_player 6
+}
+create_land {
+	terrain_type SHALLOW
+	number_of_tiles 271
+	base_size 5
+	set_zone_randomly
+	other_zone_avoidance_distance 2 
+	assign_to_player 7
+}
+create_land {
+	terrain_type SHALLOW
+	number_of_tiles 271
+	base_size 5
+	set_zone_randomly
+	other_zone_avoidance_distance 2 
+	assign_to_player 8
+}
+
+else /* multiplayer */
+
+/* the lakes you spawn in */
+create_player_lands {
+	terrain_type DEEP_WATER
+	land_percent 20
+	base_size 8
+	set_zone_randomly
+	other_zone_avoidance_distance 2 
+}
+
+endif
+
+/* the actual lands */
+create_land {
+	terrain_type PRIMARY_LAND_TYPE
+	land_percent 30
+	base_size 8
+	clumping_factor 12
+	set_zone_randomly
+	other_zone_avoidance_distance 5
+}
+
+create_land {
+	terrain_type PRIMARY_LAND_TYPE
+	land_percent 20
+	base_size 8
+	clumping_factor 12
+	set_zone_randomly
+	other_zone_avoidance_distance 5
+}
+
+create_land {
+	terrain_type PRIMARY_LAND_TYPE
+	land_percent 14
+	base_size 6
+	clumping_factor 12
+	set_zone_randomly
+	other_zone_avoidance_distance 5
+}
+
+create_land {
+	terrain_type PRIMARY_LAND_TYPE
+	land_percent 8
+	base_size 5
+	clumping_factor 12
+	set_zone_randomly
+	other_zone_avoidance_distance 5
+}
+
+create_land {
+	terrain_type PRIMARY_LAND_TYPE
+	land_percent 8
+	base_size 5
+	clumping_factor 12
+	set_zone_randomly
+	other_zone_avoidance_distance 5
+}
+
+/* =================================================================================================== */
+ <ELEVATION_GENERATION>  
+
+/* removed to increase buildable space */
+
+/* =================================================================================================== */
+<TERRAIN_GENERATION>
+
+if SNOWY_BIOME color_correction CC_WINTER
+elseif SAVANNAH_BIOME color_correction CC_DESERT   
+elseif JUNGLE_BIOME color_correction CC_JUNGLE
+elseif AUTUMN_BIOME color_correction CC_AUTUMN
+endif
+
+/* Tiny Islands */
+create_terrain ISLAND_LAND_TYPE {
+	base_terrain WATER
+	number_of_tiles 250
+	number_of_clumps 1
+	spacing_to_other_terrain_types 2
+	set_avoid_player_start_areas
+}
+create_terrain ISLAND_LAND_TYPE {
+	base_terrain WATER
+	number_of_tiles 250
+	number_of_clumps 1
+	spacing_to_other_terrain_types 2
+	set_avoid_player_start_areas
+}
+
+/* primary forest */
+create_terrain PRIMARY_FOREST_TYPE {
+	base_terrain                   PRIMARY_LAND_TYPE
+	spacing_to_other_terrain_types 6
+	land_percent                   6
+	number_of_clumps               12
+	set_avoid_player_start_areas     
+	set_scale_by_groups
+}
+
+/* terrain patch */
+create_terrain SECONDARY_LAND_TYPE {
+  base_terrain                   PRIMARY_LAND_TYPE
+  number_of_clumps               26
+  spacing_to_other_terrain_types 1
+  land_percent                   9
+  set_scale_by_size
+}
+
+/* Secondary forest */
+create_terrain SECONDARY_FOREST_TYPE {
+	base_terrain                   SECONDARY_LAND_TYPE
+	spacing_to_other_terrain_types 4
+	land_percent                   1
+	number_of_clumps               3
+	set_avoid_player_start_areas     
+	set_scale_by_groups
+}
+
+/* Tertiary forest */
+create_terrain TERTIARY_FOREST_TYPE {
+	base_terrain                   PRIMARY_FOREST_TYPE
+	spacing_to_other_terrain_types 4
+	land_percent                   1
+	number_of_clumps               3
+	set_avoid_player_start_areas     
+	set_scale_by_groups
+}
+
+/* more terrain patches */
+create_terrain TERTIARY_LAND_TYPE {
+	base_terrain                   PRIMARY_LAND_TYPE
+	number_of_clumps               24
+	spacing_to_other_terrain_types 1
+	land_percent                   2
+	set_scale_by_size
+	terrain_mask 2
+}
+
+/* more terrain patches */
+create_terrain QUATERNARY_LAND_TYPE {
+	base_terrain                   PRIMARY_LAND_TYPE
+	number_of_clumps               30
+	spacing_to_other_terrain_types 1
+	land_percent                   2
+	set_scale_by_size
+	terrain_mask 2
+}
+
+/* replacing everything but the center of lands with less deep water */
+create_terrain WATER {
+	base_terrain DEEP_WATER
+	land_percent 100
+	number_of_clumps 9320
+	set_scale_by_size
+	set_scale_by_groups
+	spacing_to_other_terrain_types 0
+	set_avoid_player_start_areas
+	terrain_mask 2
+}
+
+/* tiny bit of shallow to spawn the players */
+create_terrain SHALLOW {
+	base_terrain DEEP_WATER
+	land_percent 100
+	number_of_clumps 99
+	spacing_to_other_terrain_types 6
+	terrain_mask 2
+}
+
+/* water mixing */
+create_terrain MED_WATER {
+	base_terrain WATER
+	number_of_clumps 10
+	spacing_to_other_terrain_types 2
+	land_percent 25
+	terrain_mask 2
+}
+
+create_terrain DEEP_WATER {
+	base_terrain MED_WATER
+	number_of_clumps 12
+	spacing_to_other_terrain_types 2
+	land_percent 12
+}
+
+create_terrain MED_WATER {
+	base_terrain WATER
+	number_of_clumps 20
+	spacing_to_other_terrain_types 1
+	land_percent 3
+	terrain_mask 2
+}
+
+create_terrain DEEP_WATER {
+	base_terrain MED_WATER
+	number_of_clumps 15
+	spacing_to_other_terrain_types 2
+	land_percent 1
+	terrain_mask 2
+}
+
+create_terrain MED_WATER {
+	base_terrain DEEP_WATER
+	number_of_clumps 15
+	spacing_to_other_terrain_types 1
+	land_percent 1
+	terrain_mask 2
+	if SINGLE_PLAYER_VERSION set_avoid_player_start_areas endif
+}
+
+create_terrain WATER {
+	base_terrain MED_WATER
+	number_of_clumps 15
+	spacing_to_other_terrain_types 1
+	land_percent 1
+	terrain_mask 2
+}
+/* ---End of water mixing--- */
+
+/* =================================================================================================== */
+<CONNECTION_GENERATION>
+
+#const BEACH_ICY 37
+
+accumulate_connections 
+
+create_connect_all_players_land {
+	if SINGLE_PLAYER_VERSION
+		replace_terrain WATER SHALLOW
+		replace_terrain MED_WATER SHALLOW
+	endif
+	replace_terrain BEACH SHALLOW
+	replace_terrain BEACH_ICY SHALLOW
+	replace_terrain PRIMARY_LAND_TYPE SHALLOW
+	replace_terrain SECONDARY_LAND_TYPE SHALLOW
+	replace_terrain TERTIARY_LAND_TYPE SHALLOW
+	replace_terrain QUATERNARY_LAND_TYPE SHALLOW
+	replace_terrain PRIMARY_FOREST_TYPE SHALLOW
+	replace_terrain SECONDARY_FOREST_TYPE SHALLOW
+	replace_terrain TERTIARY_FOREST_TYPE SHALLOW
+
+	terrain_cost WATER 1
+	if SINGLE_PLAYER_VERSION
+		terrain_cost MED_WATER 10
+		terrain_cost DEEP_WATER 15
+	else
+		terrain_cost MED_WATER 1
+		terrain_cost DEEP_WATER 1
+	endif
+	terrain_cost BEACH 12
+	terrain_cost BEACH_ICY 12
+	terrain_cost PRIMARY_LAND_TYPE 12
+	terrain_cost SECONDARY_LAND_TYPE 12
+	terrain_cost TERTIARY_LAND_TYPE 12
+	terrain_cost QUATERNARY_LAND_TYPE 12
+	terrain_cost ISLAND_LAND_TYPE 15
+	terrain_cost PRIMARY_FOREST_TYPE 15
+	terrain_cost SECONDARY_FOREST_TYPE 15
+	terrain_cost TERTIARY_FOREST_TYPE 15
+
+	terrain_size PRIMARY_LAND_TYPE 3 1
+	terrain_size SECONDARY_LAND_TYPE 3 1
+	terrain_size TERTIARY_LAND_TYPE 3 1
+	terrain_size QUATERNARY_LAND_TYPE 3 1
+	terrain_size PRIMARY_FOREST_TYPE 2 0
+	terrain_size SECONDARY_FOREST_TYPE 2 0
+	terrain_size TERTIARY_FOREST_TYPE 2 0
+}
+
+create_connect_all_lands {
+	replace_terrain WATER SHALLOW
+	replace_terrain MED_WATER SHALLOW
+
+	terrain_cost WATER 12
+	terrain_cost MED_WATER 12
+	terrain_cost DEEP_WATER 0
+	terrain_cost BEACH 12
+	terrain_cost BEACH_ICY 12
+	terrain_cost PRIMARY_LAND_TYPE 1
+	terrain_cost SECONDARY_LAND_TYPE 1
+	terrain_cost TERTIARY_LAND_TYPE 1
+	terrain_cost QUATERNARY_LAND_TYPE 1
+	terrain_cost ISLAND_LAND_TYPE 1
+	terrain_cost PRIMARY_FOREST_TYPE 1
+	terrain_cost SECONDARY_FOREST_TYPE 1
+	terrain_cost TERTIARY_FOREST_TYPE 1
+
+	terrain_size WATER 3 1
+	terrain_size MED_WATER 3 1
+}
+
+
+/* =================================================================================================== */
+<OBJECTS_GENERATION>
+
+/* Player start objects */
+
+if REGICIDE
+	create_object KING {
+		set_place_for_every_player
+		max_distance_to_players 3
+		set_circular_placement
+		find_closest
+		force_placement
+		ignore_terrain_restrictions
+	}
+endif
+
+create_object VILLAGER {
+	set_place_for_every_player
+	max_distance_to_players 3
+	set_circular_placement
+	find_closest
+	force_placement
+	ignore_terrain_restrictions
+}  
+
+if SINGLE_PLAYER_VERSION
+/* for player 1 */
+create_object TRANSPORT_SHIP {
+	terrain_to_place_on DEEP_WATER
+	set_place_for_every_player
+	min_distance_to_players 6
+	max_distance_to_players 6
+	set_circular_placement
+	force_placement
+}
+/* for the rest */
+create_object FISHING_SHIP {
+	terrain_to_place_on SHALLOW
+	set_place_for_every_player
+	min_distance_to_players 6
+	max_distance_to_players 6
+	set_circular_placement
+	force_placement
+}
+else
+create_object TRANSPORT_SHIP {
+	set_place_for_every_player
+	max_distance_to_players 3
+	set_circular_placement
+	force_placement
+}
+endif
+
+/* DE relic balance */
+	create_object RELIC {
+		avoid_forest_zone 2
+		min_distance_group_placement 1
+		min_distance_to_players 10
+		set_circular_placement
+		if TINY_MAP
+		   number_of_objects            5
+		   temp_min_distance_group_placement 35
+		elseif SMALL_MAP
+		   number_of_objects            5
+		   temp_min_distance_group_placement 38
+		elseif MEDIUM_MAP
+		   number_of_objects            5
+		   temp_min_distance_group_placement 38
+		elseif LARGE_MAP
+		   number_of_objects            7
+		   temp_min_distance_group_placement 48
+		elseif HUGE_MAP
+		   number_of_objects            8
+		   temp_min_distance_group_placement 52
+		else
+		   number_of_objects            999
+		   temp_min_distance_group_placement 52 
+		endif
+	}
+
+
+/* starting resources must be scattered around the map for nomad */
+
+create_object BERRY_TYPE {
+	number_of_objects 7
+	number_of_groups 1
+	group_variance 2
+	set_scaling_to_player_number
+	set_gaia_object_only
+	min_distance_group_placement 5
+	temp_min_distance_group_placement 25
+	group_placement_radius 3
+	set_tight_grouping
+	avoid_forest_zone 2
+	actor_area 101
+	actor_area_radius 15
+	min_distance_to_map_edge 4
+}
+
+/* Big gold */
+create_object GOLD {
+	number_of_objects 6
+	number_of_groups 1
+	group_variance 2
+	set_scaling_to_player_number
+	set_gaia_object_only
+	min_distance_group_placement 5
+	temp_min_distance_group_placement 25
+	group_placement_radius 3
+	set_tight_grouping
+	avoid_forest_zone 2
+	actor_area 102
+	actor_area_radius 15
+	min_distance_to_map_edge 4
+}
+
+/* Medium gold */
+create_object GOLD {
+	number_of_objects 4
+	number_of_groups 1
+	group_variance 1
+	set_scaling_to_player_number
+	set_gaia_object_only
+	min_distance_group_placement 5
+	temp_min_distance_group_placement 25
+	group_placement_radius 3
+	set_tight_grouping
+	avoid_forest_zone 2
+	actor_area 103
+	actor_area_radius 15
+	avoid_actor_area 102
+	min_distance_to_map_edge 4
+}
+
+/* Small gold */
+create_object GOLD {
+	number_of_objects 3
+	number_of_groups 1
+	group_variance 0    
+	set_scaling_to_player_number
+	set_gaia_object_only
+	min_distance_group_placement 5
+	temp_min_distance_group_placement 25
+	group_placement_radius 3
+	set_tight_grouping
+	avoid_forest_zone 2
+	actor_area 104
+	actor_area_radius 15
+	avoid_actor_area 102
+	avoid_actor_area 103
+	min_distance_to_map_edge 4
+}
+
+/* Big stone */
+create_object STONE {
+	number_of_objects 5
+	number_of_groups 1
+	group_variance 1
+	set_scaling_to_player_number
+	set_gaia_object_only
+	min_distance_group_placement 5
+	temp_min_distance_group_placement 25
+	group_placement_radius 3
+	set_tight_grouping 
+	avoid_forest_zone 2
+	actor_area 105
+	actor_area_radius 15
+	min_distance_to_map_edge 4
+}
+
+/* Small stone */
+create_object STONE {
+	number_of_objects 4
+	number_of_groups 1
+	group_variance 1
+	set_scaling_to_player_number
+	set_gaia_object_only
+	min_distance_group_placement 5
+	temp_min_distance_group_placement 25
+	group_placement_radius 3
+	set_tight_grouping 
+	avoid_forest_zone 2
+	actor_area 106
+	actor_area_radius 15
+	avoid_actor_area 105
+	min_distance_to_map_edge 4
+}
+
+/* Livestock */
+create_object SHEEP_TYPE {
+	number_of_objects 4
+	number_of_groups 1
+	group_variance 1
+	set_scaling_to_player_number
+	set_gaia_object_only
+	min_distance_group_placement 2
+	temp_min_distance_group_placement 20
+	set_loose_grouping
+	min_distance_to_players 10
+	set_circular_placement
+}
+
+create_object SHEEP_TYPE {
+	number_of_objects 2
+	number_of_groups 3
+	group_variance 1
+	set_scaling_to_player_number
+	set_gaia_object_only
+	min_distance_group_placement 2
+	temp_min_distance_group_placement 12
+	set_loose_grouping
+	min_distance_to_players 10
+	set_circular_placement
+}
+
+/* Game to hunt */
+create_object DEER_TYPE {
+	number_of_objects 4
+	number_of_groups 2
+	group_variance 2
+	set_scaling_to_player_number
+	set_gaia_object_only
+	temp_min_distance_group_placement 12
+	group_placement_radius 3
+	set_loose_grouping 
+	min_distance_to_players 10
+	set_circular_placement
+}
+
+create_object BOAR_TYPE {
+	number_of_objects 1
+	number_of_groups 3
+	set_scaling_to_player_number
+	temp_min_distance_group_placement 12
+	set_gaia_object_only 
+	min_distance_to_players 10
+	set_circular_placement
+	min_distance_to_map_edge 4
+}
+
+
+/* Resources by map size */
+
+create_object BERRY_TYPE {
+    number_of_groups 9320
+    number_of_objects 5
+    group_placement_radius 2
+    set_tight_grouping
+    set_gaia_object_only
+	min_distance_group_placement 4
+    temp_min_distance_group_placement 30
+	avoid_forest_zone 2
+	avoid_actor_area 101
+	min_distance_to_map_edge 4
+}
+/* extra gold */
+create_object GOLD {
+    number_of_groups           9320
+	if TINY_MAP			number_of_objects          4
+	elseif SMALL_MAP	number_of_objects          4
+	elseif MEDIUM_MAP	number_of_objects          5
+	elseif LARGE_MAP	number_of_objects          5
+	else				number_of_objects          5
+	endif
+    group_placement_radius 2
+    set_tight_grouping
+    set_gaia_object_only
+    min_distance_to_players 30
+	set_circular_placement
+	min_distance_group_placement 4
+    temp_min_distance_group_placement 35
+	avoid_forest_zone 2
+	avoid_actor_area 102
+	avoid_actor_area 103
+	avoid_actor_area 104
+	min_distance_to_map_edge 4
+}
+/* extra stone */
+create_object STONE {
+    number_of_groups           9320
+	if TINY_MAP			number_of_objects          3
+	elseif SMALL_MAP	number_of_objects          3
+	elseif MEDIUM_MAP	number_of_objects          3
+	elseif LARGE_MAP	number_of_objects          4
+	else				number_of_objects          4
+	endif
+    group_placement_radius 2
+    set_tight_grouping
+    set_gaia_object_only
+    min_distance_to_players 30
+	set_circular_placement
+	min_distance_group_placement 4
+    temp_min_distance_group_placement 40
+	avoid_forest_zone 2
+	avoid_actor_area 105
+	avoid_actor_area 106
+	min_distance_to_map_edge 4
+}
+
+/* End of resources by map size */
+
+
+/* Lone trees to dot the landscape. Including straggler trees like this make the map look more realistic. */
+create_object PRIMARY_STRAGGLER_TREE_TYPE {
+	number_of_objects 10
+	set_gaia_object_only
+	set_scaling_to_map_size
+}
+create_object SECONDARY_STRAGGLER_TREE_TYPE {
+	number_of_objects 10
+	set_gaia_object_only
+	set_scaling_to_map_size
+}
+create_object TERTIARY_STRAGGLER_TREE_TYPE {
+	number_of_objects 10
+	set_gaia_object_only
+	set_scaling_to_map_size
+}
+
+create_object PRIMARY_STRAGGLER_TREE_TYPE {
+	number_of_objects 12
+	terrain_to_place_on ISLAND_LAND_TYPE
+	set_gaia_object_only
+}
+
+/* fish */
+create_object SHORE_FISH_TYPE {
+	number_of_objects 9320
+	set_gaia_object_only
+	min_distance_group_placement 3
+	temp_min_distance_group_placement 7
+}
+create_object DEEP_FISH_TYPE {
+	number_of_objects 9320
+	terrain_to_place_on DEEP_WATER
+	set_gaia_object_only
+	min_distance_group_placement 4 
+	temp_min_distance_group_placement 9
+	max_distance_to_other_zones 7
+} 
+create_object FISH_TYPE {
+	number_of_objects 9320
+	set_gaia_object_only
+	max_distance_to_other_zones 4
+	min_distance_group_placement 4
+	temp_min_distance_group_placement 12
+}
+create_object SECONDARY_FISH_TYPE {
+	number_of_objects 9320
+	set_gaia_object_only
+	max_distance_to_other_zones 4
+	min_distance_group_placement 4
+	temp_min_distance_group_placement 8
+}
+
+/* Birds for eye-candy */
+create_object BIRD_TYPE {
+	number_of_objects 6
+	set_scaling_to_map_size
+}
+
+

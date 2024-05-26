@@ -1,0 +1,342 @@
+/*  Pamir Mountains
+Tajikistan
+
+by Zetnus
+zetnus@outlook.com
+Zetnus#6414 on Discord
+
+A gravelly mountain range sometimes called the roof of the world.
+
+Players begin as nomads in the plains and must choose where to settle.
+Wood is found exclusively in the mountains where it can be difficult to construct a town center.
+
+updates:
+-removed nomad resources, so you have to build a lumber camp while exploring for a good TC spot
+-doubled villager counts
+-mountain percentage increased again
+
+This map was harvested from a mod in the official AOE2DE mod center, whose licensing agreement with Microsoft supersedes any Github restrictions: https://www.microsoft.com/en-us/servicesagreement
+
+*/
+
+
+/* terrains */
+#const CLIFF_TERRAIN 16
+#const GRAVEL 70
+#const WET_GRAVEL 81
+#const BUSH_FOREST 89
+
+/* objects */
+#const ONGRID_PLACEHOLDER_1 278
+#const BUSH_A 302
+#const ROCK2 1323
+#const FALCON 1056
+#const TERRAIN_BLOCKER 1613
+
+
+/* =================================================================================================== */
+<PLAYER_SETUP>
+random_placement
+
+ai_info_map_type MONGOLIA 1 0 0 
+behavior_version 1
+
+effect_amount GAIA_UPGRADE_UNIT BUSH_A DLC_DRAGONTREE 0
+effect_amount GAIA_SET_ATTRIBUTE ROCK ATTR_OCCLUSION_MODE 2
+effect_amount GAIA_SET_ATTRIBUTE ROCK2 ATTR_OCCLUSION_MODE 2
+
+/* Disabling Trade Carts and Cogs for Multi-team Games */
+if 2_TEAM_GAME
+else
+  #const TRADE_CART_ENABLER 161
+  #const TRADE_COG_ENABLER 180
+  #const TRADE_CARAVAN_ENABLER 48
+  #const HINDU_CARAVANSERAI_ENABLER 518
+  #const PERSIAN_CARAVANSERAI_ENABLER 552  
+  #const SILK_ROAD 499
+  effect_amount DISABLE_TECH TRADE_COG_ENABLER ATTR_DISABLE 180
+  effect_amount DISABLE_TECH TRADE_CART_ENABLER ATTR_DISABLE 161
+  effect_amount DISABLE_TECH TRADE_CARAVAN_ENABLER ATTR_DISABLE 48
+  effect_amount DISABLE_TECH HINDU_CARAVANSERAI_ENABLER ATTR_DISABLE 518
+  effect_amount DISABLE_TECH PERSIAN_CARAVANSERAI_ENABLER ATTR_DISABLE 552
+  effect_amount DISABLE_TECH SILK_ROAD ATTR_DISABLE 499    
+endif
+
+/* =================================================================================================== */
+<LAND_GENERATION> 
+
+base_terrain WATER
+
+create_player_lands {
+	terrain_type BUSH_FOREST
+	land_percent 25
+	base_size 1
+	zone 1
+	clumping_factor -100
+	base_elevation 5
+}
+
+/* =================================================================================================== */
+<ELEVATION_GENERATION> 
+/* required for land base elevation to work */
+
+/* =================================================================================================== */
+<CLIFF_GENERATION>
+
+/* curliness - the percent chance of turning rather than going straight at any given tile */
+cliff_curliness 5
+
+/* spacing to other cliffs */
+min_distance_cliffs 3 /* 9 tiles */
+
+/* distance from water */
+min_terrain_distance 0
+	
+min_number_of_cliffs 9320
+max_number_of_cliffs 9320
+min_length_of_cliff 4
+max_length_of_cliff 8
+
+/* =================================================================================================== */
+<TERRAIN_GENERATION>
+
+color_correction CC_DESERT
+
+create_terrain DLC_ROADGRAVEL { base_terrain CLIFF_TERRAIN land_percent 100 number_of_clumps 9320 }
+create_terrain DLC_ROADGRAVEL { base_terrain CLIFF_TERRAIN land_percent 100 number_of_clumps 9320 }
+create_terrain DLC_ROADGRAVEL { base_terrain CLIFF_TERRAIN land_percent 100 number_of_clumps 9320 }
+create_terrain DLC_ROADGRAVEL { base_terrain CLIFF_TERRAIN land_percent 100 number_of_clumps 9320 }
+create_terrain DLC_ROADGRAVEL { base_terrain CLIFF_TERRAIN land_percent 100 number_of_clumps 9320 }
+create_terrain DLC_ROADGRAVEL { base_terrain CLIFF_TERRAIN land_percent 100 number_of_clumps 9320 }
+create_terrain DLC_ROADGRAVEL { base_terrain CLIFF_TERRAIN land_percent 100 number_of_clumps 9320 }
+create_terrain DLC_ROADGRAVEL { base_terrain CLIFF_TERRAIN land_percent 100 number_of_clumps 9320 }
+create_terrain DLC_ROADGRAVEL { base_terrain CLIFF_TERRAIN land_percent 100 number_of_clumps 9320 }
+create_terrain DLC_ROADGRAVEL { base_terrain CLIFF_TERRAIN land_percent 100 number_of_clumps 9320 }
+
+create_terrain GRAVEL { base_terrain WATER land_percent 100 number_of_clumps 9320 }
+create_terrain WET_GRAVEL { base_terrain GRAVEL land_percent 100 number_of_clumps 9320 height_limits 0 0 }
+
+create_terrain DLC_DESERTGRAVEL { base_terrain BUSH_FOREST land_percent 100 number_of_clumps 9320 terrain_mask 1 }
+create_terrain DLC_DESERTGRAVEL { base_terrain BUSH_FOREST land_percent 100 number_of_clumps 9320 terrain_mask 1 }
+create_terrain DLC_DESERTGRAVEL { base_terrain BUSH_FOREST land_percent 100 number_of_clumps 9320 terrain_mask 1 }
+create_terrain DLC_DESERTGRAVEL { base_terrain BUSH_FOREST land_percent 100 number_of_clumps 9320 terrain_mask 1 }
+create_terrain DLC_DESERTGRAVEL { base_terrain BUSH_FOREST land_percent 100 number_of_clumps 9320 terrain_mask 1 }
+
+create_terrain DLC_DESERTGRAVEL { base_terrain GRAVEL land_percent 100 number_of_clumps 9320 height_limits 4 6 terrain_mask 2 }
+
+create_terrain DIRT3 { base_terrain WET_GRAVEL land_percent 100 number_of_clumps 9320 height_limits 0 0 terrain_mask 2 spacing_to_other_terrain_types 1 }
+
+create_terrain WET_GRAVEL { base_terrain DIRT3 land_percent 100 number_of_clumps 9320 terrain_mask 2 spacing_to_other_terrain_types 4 set_flat_terrain_only }
+
+create_terrain DLC_DRYGRASS { base_terrain WET_GRAVEL land_percent 100 number_of_clumps 9320 spacing_to_other_terrain_types 4 set_flat_terrain_only }
+create_terrain WET_GRAVEL { base_terrain DLC_DRYGRASS land_percent 100 number_of_clumps 9320 terrain_mask 2 spacing_to_other_terrain_types 4 set_flat_terrain_only }
+
+create_terrain PINE_FOREST { base_terrain WET_GRAVEL land_percent 1 number_of_clumps 15 set_scale_by_groups spacing_to_other_terrain_types 3 terrain_mask 2 }
+
+/* =================================================================================================== */
+<CONNECTION_GENERATION>
+create_connect_all_lands {
+replace_terrain CLIFF_TERRAIN DLC_ROADGRAVEL
+replace_terrain WATER ICE
+replace_terrain BEACH DLC_ROADGRAVEL
+terrain_size CLIFF_TERRAIN 999 0
+terrain_size GRAVEL 999 0
+terrain_size BUSH_FOREST 999 0
+terrain_size DLC_DESERTGRAVEL 999 0
+}
+
+create_connect_all_lands {
+replace_terrain BEACH DLC_DESERTGRAVEL
+replace_terrain BUSH_FOREST DLC_DESERTGRAVEL
+terrain_cost CLIFF_TERRAIN 9999
+terrain_size BUSH_FOREST 2 0
+terrain_size BEACH 2 0
+terrain_size DLC_DESERTGRAVEL 0 0
+}
+
+
+/* =================================================================================================== */
+<OBJECTS_GENERATION>
+
+create_object TERRAIN_BLOCKER {
+	number_of_groups 9320
+	number_of_objects 200
+	terrain_to_place_on ICE
+}
+
+create_object DLC_SAVANNAHPATCH {
+	number_of_groups 24
+	set_scaling_to_map_size
+	number_of_objects 2
+	group_variance 1
+	layer_to_place_on DLC_DRYGRASS
+}
+create_object DLC_SAVANNAHPATCH {
+	number_of_groups 24
+	set_scaling_to_map_size
+	number_of_objects 2
+	group_variance 1
+	terrain_to_place_on DIRT3
+}
+
+create_object ROCK {
+	ignore_terrain_restrictions
+	number_of_groups 9320
+	number_of_objects 4
+	temp_min_distance_group_placement 8
+	terrain_to_place_on DLC_ROADGRAVEL
+}
+create_object ROCK {
+	number_of_groups 9320
+	number_of_objects 4
+	temp_min_distance_group_placement 8
+	terrain_to_place_on BUSH_FOREST
+}
+create_object ROCK2 {
+	ignore_terrain_restrictions
+	number_of_groups 9320
+	number_of_objects 200
+	terrain_to_place_on DLC_ROADGRAVEL
+}
+create_object ROCK2 {
+	number_of_groups 9320
+	number_of_objects 200
+	terrain_to_place_on BUSH_FOREST
+}
+
+create_object VILLAGER {
+	number_of_objects 6
+	set_place_for_every_player
+	terrain_to_place_on WET_GRAVEL
+	temp_min_distance_group_placement 15
+	min_distance_group_placement 1
+	avoid_forest_zone 1
+	actor_area 1
+	actor_area_radius 7
+	avoid_actor_area 1
+}
+create_object HORSE_B {
+	set_place_for_every_player
+	layer_to_place_on DLC_DRYGRASS
+	min_distance_group_placement 4
+	avoid_forest_zone 2
+	actor_area 2
+	actor_area_radius 10
+	avoid_actor_area 1
+	avoid_actor_area 2
+}
+if REGICIDE create_object KING {
+	set_place_for_every_player
+	layer_to_place_on DLC_DRYGRASS
+	min_distance_group_placement 4
+	avoid_forest_zone 2
+	actor_area 3
+	actor_area_radius 10
+	avoid_actor_area 1
+	avoid_actor_area 2
+	avoid_actor_area 3
+}
+endif
+
+
+/* scatter resources evenly across the map */
+
+/* DE relic balance */
+create_object RELIC {
+	max_distance_to_other_zones 2
+	avoid_forest_zone 2
+	avoid_cliff_zone 2
+	min_distance_group_placement 1
+	terrain_to_place_on GRAVEL
+	if TINY_MAP
+		number_of_objects 5
+		temp_min_distance_group_placement 35
+	elseif SMALL_MAP
+		number_of_objects 5
+		temp_min_distance_group_placement 38
+	elseif MEDIUM_MAP
+		number_of_objects 5
+		temp_min_distance_group_placement 38
+	elseif LARGE_MAP
+		number_of_objects 7
+		temp_min_distance_group_placement 48
+	elseif HUGE_MAP
+		number_of_objects 8
+		temp_min_distance_group_placement 52
+	else
+		number_of_objects 9320
+		temp_min_distance_group_placement 52 
+	endif
+}
+
+create_object FORAGE {
+    number_of_groups 9320
+	number_of_objects 6
+    group_placement_radius 2
+    set_tight_grouping
+    set_gaia_object_only
+	min_distance_group_placement 4
+	temp_min_distance_group_placement 16
+	avoid_forest_zone 2
+	avoid_cliff_zone 2
+	layer_to_place_on DLC_DRYGRASS
+}
+create_object GOLD {
+    number_of_groups 9320
+	number_of_objects 6
+    group_placement_radius 2
+    set_tight_grouping
+    set_gaia_object_only
+	min_distance_group_placement 4
+	temp_min_distance_group_placement 23
+	avoid_forest_zone 2
+	avoid_cliff_zone 2
+}
+create_object STONE {
+    number_of_groups 9320
+	number_of_objects 4
+    group_placement_radius 2
+    set_tight_grouping
+    set_gaia_object_only
+	min_distance_group_placement 4
+	temp_min_distance_group_placement 23
+	avoid_forest_zone 2
+	avoid_cliff_zone 2
+}
+create_object DLC_GOAT {
+	number_of_groups 9320
+	number_of_objects 2
+	set_gaia_object_only
+	temp_min_distance_group_placement 20
+	avoid_forest_zone 2
+	avoid_cliff_zone 2
+}
+create_object DLC_IBEX {
+	number_of_groups 9320
+	number_of_objects 3
+	set_gaia_object_only
+	temp_min_distance_group_placement 21
+	avoid_forest_zone 2
+	avoid_cliff_zone 2
+	terrain_to_place_on GRAVEL
+}
+create_object BOAR {
+	number_of_groups 9320
+	number_of_objects 1
+	set_gaia_object_only
+	temp_min_distance_group_placement 24
+	avoid_forest_zone 2
+	avoid_cliff_zone 2
+}
+
+/* birds */
+create_object HAWK {
+	number_of_objects 3
+	set_scaling_to_map_size
+}
+create_object FALCON {
+	number_of_objects 3
+	set_scaling_to_map_size
+}
+
+

@@ -1,0 +1,1589 @@
+/* 
+   Water Wars 
+   Created: 22 February 2015
+   Last edit: 06 May 2022
+   
+   By: Zetnus
+   Zetnus@outlook.com
+
+   This is a water map that I created per request.
+   Each player starts on a small island and almost all the fighting will happen in the water.
+   Make sure to play on suffciently large map sizes to unsure that the lands are not touching.
+  
+   
+Learn about random map scripting: https://tinyurl.com/7xteyu58
+
+This map was harvested from a mod in the official AOE2DE mod center, whose licensing agreement with Microsoft supersedes any Github restrictions: https://www.microsoft.com/en-us/servicesagreement
+
+   
+   ENJOY!
+   */
+
+
+/* version checking */
+if DE_AVAILABLE #define DLC #define DLC_NO_WK
+elseif DLC_TIGER #define DLC  /* could be WK or HD DLC */	
+	if UP_EXTENSION #define WOLOLOKINGDOMS
+	else #define HD_EDITION_DLC #define DLC_NO_WK
+	endif	
+elseif DLC_COW #define HD_EDITION_BASE	
+elseif UP_EXTENSION #define USERPATCH_1.5	
+elseif UP_AVAILABLE #define USERPATCH_1.4	
+else #define CONQUERORS_CD	
+endif
+
+if UP_EXTENSION #define RND_AVAILABLE
+elseif DE_AVAILABLE #define RND_AVAILABLE
+endif
+
+
+
+/* =================================================================================================== */
+<PLAYER_SETUP>
+if RND_AVAILABLE
+	direct_placement
+else
+	random_placement
+endif
+ai_info_map_type CUSTOM 0 0 0
+behavior_version 1
+
+#const ABGAL 536
+
+if RND_AVAILABLE
+#const AT_PLAYER 0
+#const AT_COLOR 1
+#const AT_TEAM 2
+#const SET_ATTRIBUTE 0
+#const ATTR_STORAGE_VALUE 21
+effect_amount SET_ATTRIBUTE FOREST_TREE ATTR_STORAGE_VALUE 500
+
+effect_amount SET_ATTRIBUTE ABGAL ATTR_NAME_ID 13353 /* boarding boat */
+effect_amount SET_ATTRIBUTE ABGAL ATTR_HERO_STATUS 2 /* cannot be converted */
+endif
+
+if DE_AVAILABLE
+	effect_amount SET_ATTRIBUTE SEA_TOWER ATTR_HERO_STATUS 2 /* cannot be converted */
+	effect_amount SET_ATTRIBUTE DOCK ATTR_HERO_STATUS 2 /* cannot be converted */
+	effect_amount SET_ATTRIBUTE DOCK_F ATTR_HERO_STATUS 2 /* cannot be converted */
+}
+
+start_random
+	percent_chance 50	#define 50%_A
+	percent_chance 50	#define 50%_B
+end_random
+
+start_random
+	percent_chance 25	#define 25%_A
+	percent_chance 25	#define 25%_B
+	percent_chance 25	#define 25%_C
+	percent_chance 25	#define 25%_D
+end_random
+
+start_random
+	percent_chance 17	#define 17%_A
+	percent_chance 17	#define 17%_B
+	percent_chance 17	#define 17%_C
+	percent_chance 17	#define 17%_D
+	percent_chance 16	#define 17%_E
+	percent_chance 16	#define 17%_F
+end_random
+
+start_random
+	percent_chance 12	#define 12%_A
+	percent_chance 13	#define 12%_B
+	percent_chance 12	#define 12%_C
+	percent_chance 13	#define 12%_D
+	percent_chance 12	#define 12%_E
+	percent_chance 13	#define 12%_F
+	percent_chance 12	#define 12%_G
+	percent_chance 13	#define 12%_H
+end_random
+
+/* Disabling Trade Carts and Cogs for Multi-team Games */
+if 2_TEAM_GAME
+else
+  #const TRADE_CART_ENABLER 161
+  #const TRADE_COG_ENABLER 180
+  #const TRADE_CARAVAN_ENABLER 48
+  #const HINDU_CARAVANSERAI_ENABLER 518
+  #const PERSIAN_CARAVANSERAI_ENABLER 552  
+  #const SILK_ROAD 499
+  effect_amount DISABLE_TECH TRADE_COG_ENABLER ATTR_DISABLE 180
+  effect_amount DISABLE_TECH TRADE_CART_ENABLER ATTR_DISABLE 161
+  effect_amount DISABLE_TECH TRADE_CARAVAN_ENABLER ATTR_DISABLE 48
+  effect_amount DISABLE_TECH HINDU_CARAVANSERAI_ENABLER ATTR_DISABLE 518
+  effect_amount DISABLE_TECH PERSIAN_CARAVANSERAI_ENABLER ATTR_DISABLE 552
+  effect_amount DISABLE_TECH SILK_ROAD ATTR_DISABLE 499    
+endif
+
+/* =================================================================================================== */
+<LAND_GENERATION>
+
+base_terrain GRASS3
+
+if RND_AVAILABLE
+if 1_PLAYER_GAME
+create_land {
+	terrain_type DIRT2
+	number_of_tiles 0
+	base_size 20
+	assign_to AT_TEAM -10 0 0
+	if 25%_A
+		land_position 25 25
+	elseif 25%_B
+		land_position 75 25
+	elseif 25%_C
+		land_position 25 75
+	elseif 25%_D
+		land_position 75 75
+	endif
+}
+elseif 2_PLAYER_GAME
+create_land {
+	terrain_type DIRT2
+	number_of_tiles 0
+	base_size 20
+	assign_to AT_TEAM -10 0 0
+	if 50%_A
+		land_position 25 25
+	elseif 50%_B
+		land_position 75 25
+	endif
+}
+create_land {
+	terrain_type DIRT2
+	number_of_tiles 0
+	base_size 20
+	assign_to AT_TEAM -10 0 0
+	if 50%_A
+		land_position 75 75
+	elseif 50%_B
+		land_position 25 75
+	endif
+}
+elseif 3_PLAYER_GAME /* 6 points, radius 20, variation 1 */
+create_land {
+	terrain_type DIRT2
+	number_of_tiles 0
+	base_size 20
+	assign_to AT_TEAM -10 0 0
+	if 50%_A
+		land_position 80 50
+	elseif 50%_B
+		land_position 65 76
+	endif
+}
+create_land {
+	terrain_type DIRT2
+	number_of_tiles 0
+	base_size 20
+	assign_to AT_TEAM -10 0 0
+	if 50%_A
+		land_position 35 76
+	elseif 50%_B
+		land_position 20 50
+	endif
+}
+create_land {
+	terrain_type DIRT2
+	number_of_tiles 0
+	base_size 20
+	assign_to AT_TEAM -10 0 0
+	if 50%_A
+		land_position 35 24
+	elseif 50%_B
+		land_position 65 24
+	endif
+}
+
+elseif 4_PLAYER_GAME
+create_land {
+	terrain_type DIRT2
+	number_of_tiles 0
+	base_size 20
+	land_position 20 20
+	if 2_TEAM_GAME
+		if 25%_A
+			assign_to AT_TEAM 1 0 0
+		elseif 25%_B
+			assign_to AT_TEAM 1 0 0
+		elseif 25%_C
+			assign_to AT_TEAM 2 0 0
+		elseif 25%_D
+			assign_to AT_TEAM 2 0 0
+		endif
+	else
+		assign_to AT_TEAM -10 0 0
+	endif
+}
+create_land {
+	terrain_type DIRT2
+	number_of_tiles 0
+	base_size 20
+	land_position 80 80
+	if 2_TEAM_GAME
+		if 25%_A
+			assign_to AT_TEAM 2 0 0
+		elseif 25%_B
+			assign_to AT_TEAM 2 0 0
+		elseif 25%_C
+			assign_to AT_TEAM 1 0 0
+		elseif 25%_D
+			assign_to AT_TEAM 1 0 0
+		endif
+	else
+		assign_to AT_TEAM -10 0 0
+	endif
+}
+create_land {
+	terrain_type DIRT2
+	number_of_tiles 0
+	base_size 20
+	land_position 20 80
+		if 2_TEAM_GAME
+		if 25%_A
+			assign_to AT_TEAM 1 0 0
+		elseif 25%_B
+			assign_to AT_TEAM 2 0 0
+		elseif 25%_C
+			assign_to AT_TEAM 2 0 0
+		elseif 25%_D
+			assign_to AT_TEAM 1 0 0
+		endif
+	else
+		assign_to AT_TEAM -10 0 0
+	endif
+}
+create_land {
+	terrain_type DIRT2
+	number_of_tiles 0
+	base_size 20
+	land_position 80 20
+	if 2_TEAM_GAME
+		if 25%_A
+			assign_to AT_TEAM 2 0 0
+		elseif 25%_B
+			assign_to AT_TEAM 1 0 0
+		elseif 25%_C
+			assign_to AT_TEAM 1 0 0
+		elseif 25%_D
+			assign_to AT_TEAM 2 0 0
+		endif
+	else
+		assign_to AT_TEAM -10 0 0
+	endif
+}
+elseif 5_PLAYER_GAME /* 10 points, radius 15, variation 1 */
+create_land {
+	terrain_type DIRT2
+	number_of_tiles 0
+	base_size 20
+	assign_to AT_TEAM -10 0 0
+	if 50%_A
+		land_position 85 50
+	elseif 50%_B
+		land_position 78 71
+	endif
+}
+create_land {
+	terrain_type DIRT2
+	number_of_tiles 0
+	base_size 20
+	assign_to AT_TEAM -10 0 0
+	if 50%_A
+		land_position 61 83
+	elseif 50%_B
+		land_position 39 83
+	endif
+}
+create_land {
+	terrain_type DIRT2
+	number_of_tiles 0
+	base_size 20
+	assign_to AT_TEAM -10 0 0
+	if 50%_A
+		land_position 22 71
+	elseif 50%_B
+		land_position 15 50
+	endif
+}
+create_land {
+	terrain_type DIRT2
+	number_of_tiles 0
+	base_size 20
+	assign_to AT_TEAM -10 0 0
+	if 50%_A
+		land_position 22 29
+	elseif 50%_B
+		land_position 39 17
+	endif
+}
+create_land {
+	terrain_type DIRT2
+	number_of_tiles 0
+	base_size 20
+	assign_to AT_TEAM -10 0 0
+	if 50%_A
+		land_position 61 17
+	elseif 50%_B
+		land_position 78 29
+	endif
+}
+elseif 6_PLAYER_GAME /* 12 points, radius 15, variation 1 */
+if TEAM1_SIZE3
+	if TEAM2_SIZE3
+		#define 3v3
+	endif
+elseif TEAM1_SIZE2
+	if TEAM2_SIZE2
+		#define 2v2v2
+	endif
+endif
+create_land {
+	terrain_type DIRT2
+	number_of_tiles 0
+	base_size 20
+	if 3v3
+		if 17%_A
+			assign_to AT_TEAM 1 0 0
+		elseif 17%_B
+			assign_to AT_TEAM 1 0 0
+		elseif 17%_C
+			assign_to AT_TEAM 1 0 0
+		elseif 17%_D
+			assign_to AT_TEAM 2 0 0
+		elseif 17%_E
+			assign_to AT_TEAM 2 0 0
+		elseif 17%_F
+			assign_to AT_TEAM 2 0 0
+		endif
+	elseif 2v2v2
+		if 17%_A
+			assign_to AT_TEAM 1 0 0
+		elseif 17%_B
+			assign_to AT_TEAM 1 0 0
+		elseif 17%_C
+			assign_to AT_TEAM 2 0 0
+		elseif 17%_D
+			assign_to AT_TEAM 2 0 0
+		elseif 17%_E
+			assign_to AT_TEAM 3 0 0
+		elseif 17%_F
+			assign_to AT_TEAM 3 0 0
+		endif
+	else
+		assign_to AT_TEAM -10 0 0
+	endif
+	if 50%_A
+		land_position 85 50
+	elseif 50%_B
+		land_position 80 68
+	endif
+}
+create_land {
+	terrain_type DIRT2
+	number_of_tiles 0
+	base_size 20
+	if 3v3
+		if 17%_A
+			assign_to AT_TEAM 1 0 0
+		elseif 17%_B
+			assign_to AT_TEAM 1 0 0
+		elseif 17%_C
+			assign_to AT_TEAM 2 0 0
+		elseif 17%_D
+			assign_to AT_TEAM 2 0 0
+		elseif 17%_E
+			assign_to AT_TEAM 2 0 0
+		elseif 17%_F
+			assign_to AT_TEAM 1 0 0
+		endif
+	elseif 2v2v2
+		if 17%_A
+			assign_to AT_TEAM 1 0 0
+		elseif 17%_B
+			assign_to AT_TEAM 2 0 0
+		elseif 17%_C
+			assign_to AT_TEAM 2 0 0
+		elseif 17%_D
+			assign_to AT_TEAM 3 0 0
+		elseif 17%_E
+			assign_to AT_TEAM 3 0 0
+		elseif 17%_F
+			assign_to AT_TEAM 1 0 0
+		endif
+	else
+		assign_to AT_TEAM -10 0 0
+	endif
+	if 50%_A
+		land_position 68 80
+	elseif 50%_B
+		land_position 50 85
+	endif
+}
+create_land {
+	terrain_type DIRT2
+	number_of_tiles 0
+	base_size 20
+	if 3v3
+		if 17%_A
+			assign_to AT_TEAM 1 0 0
+		elseif 17%_B
+			assign_to AT_TEAM 2 0 0
+		elseif 17%_C
+			assign_to AT_TEAM 2 0 0
+		elseif 17%_D
+			assign_to AT_TEAM 2 0 0
+		elseif 17%_E
+			assign_to AT_TEAM 1 0 0
+		elseif 17%_F
+			assign_to AT_TEAM 1 0 0
+		endif
+	elseif 2v2v2
+		if 17%_A
+			assign_to AT_TEAM 2 0 0
+		elseif 17%_B
+			assign_to AT_TEAM 2 0 0
+		elseif 17%_C
+			assign_to AT_TEAM 3 0 0
+		elseif 17%_D
+			assign_to AT_TEAM 3 0 0
+		elseif 17%_E
+			assign_to AT_TEAM 1 0 0
+		elseif 17%_F
+			assign_to AT_TEAM 1 0 0
+		endif
+	else
+		assign_to AT_TEAM -10 0 0
+	endif
+	if 50%_A
+		land_position 33 80
+	elseif 50%_B
+		land_position 20 68
+	endif
+}
+create_land {
+	terrain_type DIRT2
+	number_of_tiles 0
+	base_size 20
+	if 3v3
+		if 17%_A
+			assign_to AT_TEAM 2 0 0
+		elseif 17%_B
+			assign_to AT_TEAM 2 0 0
+		elseif 17%_C
+			assign_to AT_TEAM 2 0 0
+		elseif 17%_D
+			assign_to AT_TEAM 1 0 0
+		elseif 17%_E
+			assign_to AT_TEAM 1 0 0
+		elseif 17%_F
+			assign_to AT_TEAM 1 0 0
+		endif
+	elseif 2v2v2
+		if 17%_A
+			assign_to AT_TEAM 2 0 0
+		elseif 17%_B
+			assign_to AT_TEAM 3 0 0
+		elseif 17%_C
+			assign_to AT_TEAM 3 0 0
+		elseif 17%_D
+			assign_to AT_TEAM 1 0 0
+		elseif 17%_E
+			assign_to AT_TEAM 1 0 0
+		elseif 17%_F
+			assign_to AT_TEAM 2 0 0
+		endif
+	else
+		assign_to AT_TEAM -10 0 0
+	endif
+	if 50%_A
+		land_position 15 50
+	elseif 50%_B
+		land_position 20 33
+	endif
+}
+create_land {
+	terrain_type DIRT2
+	number_of_tiles 0
+	base_size 20
+	if 3v3
+		if 17%_A
+			assign_to AT_TEAM 2 0 0
+		elseif 17%_B
+			assign_to AT_TEAM 2 0 0
+		elseif 17%_C
+			assign_to AT_TEAM 1 0 0
+		elseif 17%_D
+			assign_to AT_TEAM 1 0 0
+		elseif 17%_E
+			assign_to AT_TEAM 1 0 0
+		elseif 17%_F
+			assign_to AT_TEAM 2 0 0
+		endif
+	elseif 2v2v2
+		if 17%_A
+			assign_to AT_TEAM 3 0 0
+		elseif 17%_B
+			assign_to AT_TEAM 3 0 0
+		elseif 17%_C
+			assign_to AT_TEAM 1 0 0
+		elseif 17%_D
+			assign_to AT_TEAM 1 0 0
+		elseif 17%_E
+			assign_to AT_TEAM 2 0 0
+		elseif 17%_F
+			assign_to AT_TEAM 2 0 0
+		endif
+	else
+		assign_to AT_TEAM -10 0 0
+	endif
+	if 50%_A
+		land_position 33 20
+	elseif 50%_B
+		land_position 50 15
+	endif
+}
+create_land {
+	terrain_type DIRT2
+	number_of_tiles 0
+	base_size 20
+	if 3v3
+		if 17%_A
+			assign_to AT_TEAM 2 0 0
+		elseif 17%_B
+			assign_to AT_TEAM 1 0 0
+		elseif 17%_C
+			assign_to AT_TEAM 1 0 0
+		elseif 17%_D
+			assign_to AT_TEAM 1 0 0
+		elseif 17%_E
+			assign_to AT_TEAM 2 0 0
+		elseif 17%_F
+			assign_to AT_TEAM 2 0 0
+		endif
+	elseif 2v2v2
+		if 17%_A
+			assign_to AT_TEAM 3 0 0
+		elseif 17%_B
+			assign_to AT_TEAM 1 0 0
+		elseif 17%_C
+			assign_to AT_TEAM 1 0 0
+		elseif 17%_D
+			assign_to AT_TEAM 2 0 0
+		elseif 17%_E
+			assign_to AT_TEAM 2 0 0
+		elseif 17%_F
+			assign_to AT_TEAM 1 0 0
+		endif
+	else
+		assign_to AT_TEAM -10 0 0
+	endif
+	if 50%_A
+		land_position 68 20
+	elseif 50%_B
+		land_position 80 33
+	endif
+}
+elseif 7_PLAYER_GAME /* 7 points, radius 12, variation 1 */
+create_land {
+	terrain_type DIRT2
+	number_of_tiles 0
+	base_size 20
+	assign_to AT_TEAM -10 0 0
+	land_position 88 50
+}
+create_land {
+	terrain_type DIRT2
+	number_of_tiles 0
+	base_size 20
+	assign_to AT_TEAM -10 0 0
+	land_position 74 80
+}
+create_land {
+	terrain_type DIRT2
+	number_of_tiles 0
+	base_size 20
+	assign_to AT_TEAM -10 0 0
+	land_position 42 87
+}
+create_land {
+	terrain_type DIRT2
+	number_of_tiles 0
+	base_size 20
+	assign_to AT_TEAM -10 0 0
+	land_position 16 66
+}
+create_land {
+	terrain_type DIRT2
+	number_of_tiles 0
+	base_size 20
+	assign_to AT_TEAM -10 0 0
+	land_position 16 34
+}
+create_land {
+	terrain_type DIRT2
+	number_of_tiles 0
+	base_size 20
+	assign_to AT_TEAM -10 0 0
+	land_position 42 13
+}
+create_land {
+	terrain_type DIRT2
+	number_of_tiles 0
+	base_size 20
+	assign_to AT_TEAM -10 0 0
+	land_position 74 20
+}
+elseif 8_PLAYER_GAME
+if TEAM1_SIZE4
+	if TEAM2_SIZE4
+		#define 4v4
+	endif
+elseif TEAM1_SIZE2
+	if TEAM2_SIZE2
+		if TEAM3_SIZE2
+			#define 2v2v2v2
+		endif
+	endif
+endif
+create_land {
+	terrain_type DIRT2
+	number_of_tiles 0
+	base_size 20
+	land_position 87 65
+	if 4v4
+		if 12%_A
+			assign_to AT_TEAM 1 0 0
+		elseif 12%_B
+			assign_to AT_TEAM 1 0 0
+		elseif 12%_C
+			assign_to AT_TEAM 1 0 0
+		elseif 12%_D
+			assign_to AT_TEAM 1 0 0
+		elseif 12%_E
+			assign_to AT_TEAM 2 0 0
+		elseif 12%_F
+			assign_to AT_TEAM 2 0 0
+		elseif 12%_G
+			assign_to AT_TEAM 2 0 0
+		elseif 12%_H
+			assign_to AT_TEAM 2 0 0
+		endif
+	elseif 2v2v2v2
+		if 12%_A
+			assign_to AT_TEAM 1 0 0
+		elseif 12%_B
+			assign_to AT_TEAM 1 0 0
+		elseif 12%_C
+			assign_to AT_TEAM 2 0 0
+		elseif 12%_D
+			assign_to AT_TEAM 2 0 0
+		elseif 12%_E
+			assign_to AT_TEAM 3 0 0
+		elseif 12%_F
+			assign_to AT_TEAM 3 0 0
+		elseif 12%_G
+			assign_to AT_TEAM 4 0 0
+		elseif 12%_H
+			assign_to AT_TEAM 4 0 0
+		endif
+	else
+		assign_to AT_TEAM -10 0 0
+	endif
+}
+create_land {
+	terrain_type DIRT2
+	number_of_tiles 0
+	base_size 20
+	land_position 65 87
+	if 4v4
+		if 12%_A
+			assign_to AT_TEAM 1 0 0
+		elseif 12%_B
+			assign_to AT_TEAM 1 0 0
+		elseif 12%_C
+			assign_to AT_TEAM 1 0 0
+		elseif 12%_D
+			assign_to AT_TEAM 2 0 0
+		elseif 12%_E
+			assign_to AT_TEAM 2 0 0
+		elseif 12%_F
+			assign_to AT_TEAM 2 0 0
+		elseif 12%_G
+			assign_to AT_TEAM 2 0 0
+		elseif 12%_H
+			assign_to AT_TEAM 1 0 0
+		endif
+	elseif 2v2v2v2
+		if 12%_A
+			assign_to AT_TEAM 1 0 0
+		elseif 12%_B
+			assign_to AT_TEAM 2 0 0
+		elseif 12%_C
+			assign_to AT_TEAM 2 0 0
+		elseif 12%_D
+			assign_to AT_TEAM 3 0 0
+		elseif 12%_E
+			assign_to AT_TEAM 3 0 0
+		elseif 12%_F
+			assign_to AT_TEAM 4 0 0
+		elseif 12%_G
+			assign_to AT_TEAM 4 0 0
+		elseif 12%_H
+			assign_to AT_TEAM 1 0 0
+		endif
+	else
+		assign_to AT_TEAM -10 0 0
+	endif
+}
+create_land {
+	terrain_type DIRT2
+	number_of_tiles 0
+	base_size 20
+	land_position 35 87
+	if 4v4
+		if 12%_A
+			assign_to AT_TEAM 1 0 0
+		elseif 12%_B
+			assign_to AT_TEAM 1 0 0
+		elseif 12%_C
+			assign_to AT_TEAM 2 0 0
+		elseif 12%_D
+			assign_to AT_TEAM 2 0 0
+		elseif 12%_E
+			assign_to AT_TEAM 2 0 0
+		elseif 12%_F
+			assign_to AT_TEAM 2 0 0
+		elseif 12%_G
+			assign_to AT_TEAM 1 0 0
+		elseif 12%_H
+			assign_to AT_TEAM 1 0 0
+		endif
+	elseif 2v2v2v2
+		if 12%_A
+			assign_to AT_TEAM 2 0 0
+		elseif 12%_B
+			assign_to AT_TEAM 2 0 0
+		elseif 12%_C
+			assign_to AT_TEAM 3 0 0
+		elseif 12%_D
+			assign_to AT_TEAM 3 0 0
+		elseif 12%_E
+			assign_to AT_TEAM 4 0 0
+		elseif 12%_F
+			assign_to AT_TEAM 4 0 0
+		elseif 12%_G
+			assign_to AT_TEAM 1 0 0
+		elseif 12%_H
+			assign_to AT_TEAM 1 0 0
+		endif
+	else
+		assign_to AT_TEAM -10 0 0
+	endif
+}
+create_land {
+	terrain_type DIRT2
+	number_of_tiles 0
+	base_size 20
+	land_position 13 65
+	if 4v4
+		if 12%_A
+			assign_to AT_TEAM 1 0 0
+		elseif 12%_B
+			assign_to AT_TEAM 2 0 0
+		elseif 12%_C
+			assign_to AT_TEAM 2 0 0
+		elseif 12%_D
+			assign_to AT_TEAM 2 0 0
+		elseif 12%_E
+			assign_to AT_TEAM 2 0 0
+		elseif 12%_F
+			assign_to AT_TEAM 1 0 0
+		elseif 12%_G
+			assign_to AT_TEAM 1 0 0
+		elseif 12%_H
+			assign_to AT_TEAM 1 0 0
+		endif
+	elseif 2v2v2v2
+		if 12%_A
+			assign_to AT_TEAM 2 0 0
+		elseif 12%_B
+			assign_to AT_TEAM 3 0 0
+		elseif 12%_C
+			assign_to AT_TEAM 3 0 0
+		elseif 12%_D
+			assign_to AT_TEAM 4 0 0
+		elseif 12%_E
+			assign_to AT_TEAM 4 0 0
+		elseif 12%_F
+			assign_to AT_TEAM 1 0 0
+		elseif 12%_G
+			assign_to AT_TEAM 1 0 0
+		elseif 12%_H
+			assign_to AT_TEAM 2 0 0
+		endif
+	else
+		assign_to AT_TEAM -10 0 0
+	endif
+}
+create_land {
+	terrain_type DIRT2
+	number_of_tiles 0
+	base_size 20
+	land_position 13 35
+	if 4v4
+		if 12%_A
+			assign_to AT_TEAM 2 0 0
+		elseif 12%_B
+			assign_to AT_TEAM 2 0 0
+		elseif 12%_C
+			assign_to AT_TEAM 2 0 0
+		elseif 12%_D
+			assign_to AT_TEAM 2 0 0
+		elseif 12%_E
+			assign_to AT_TEAM 1 0 0
+		elseif 12%_F
+			assign_to AT_TEAM 1 0 0
+		elseif 12%_G
+			assign_to AT_TEAM 1 0 0
+		elseif 12%_H
+			assign_to AT_TEAM 1 0 0
+		endif
+	elseif 2v2v2v2
+		if 12%_A
+			assign_to AT_TEAM 3 0 0
+		elseif 12%_B
+			assign_to AT_TEAM 3 0 0
+		elseif 12%_C
+			assign_to AT_TEAM 4 0 0
+		elseif 12%_D
+			assign_to AT_TEAM 4 0 0
+		elseif 12%_E
+			assign_to AT_TEAM 1 0 0
+		elseif 12%_F
+			assign_to AT_TEAM 1 0 0
+		elseif 12%_G
+			assign_to AT_TEAM 2 0 0
+		elseif 12%_H
+			assign_to AT_TEAM 2 0 0
+		endif
+	else
+		assign_to AT_TEAM -10 0 0
+	endif
+}
+create_land {
+	terrain_type DIRT2
+	number_of_tiles 0
+	base_size 20
+	land_position 35 13
+	if 4v4
+		if 12%_A
+			assign_to AT_TEAM 2 0 0
+		elseif 12%_B
+			assign_to AT_TEAM 2 0 0
+		elseif 12%_C
+			assign_to AT_TEAM 2 0 0
+		elseif 12%_D
+			assign_to AT_TEAM 1 0 0
+		elseif 12%_E
+			assign_to AT_TEAM 1 0 0
+		elseif 12%_F
+			assign_to AT_TEAM 1 0 0
+		elseif 12%_G
+			assign_to AT_TEAM 1 0 0
+		elseif 12%_H
+			assign_to AT_TEAM 2 0 0
+		endif
+	elseif 2v2v2v2
+		if 12%_A
+			assign_to AT_TEAM 3 0 0
+		elseif 12%_B
+			assign_to AT_TEAM 4 0 0
+		elseif 12%_C
+			assign_to AT_TEAM 4 0 0
+		elseif 12%_D
+			assign_to AT_TEAM 1 0 0
+		elseif 12%_E
+			assign_to AT_TEAM 1 0 0
+		elseif 12%_F
+			assign_to AT_TEAM 2 0 0
+		elseif 12%_G
+			assign_to AT_TEAM 2 0 0
+		elseif 12%_H
+			assign_to AT_TEAM 3 0 0
+		endif
+	else
+		assign_to AT_TEAM -10 0 0
+	endif
+}
+create_land {
+	terrain_type DIRT2
+	number_of_tiles 0
+	base_size 20
+	land_position 65 13
+	if 4v4
+		if 12%_A
+			assign_to AT_TEAM 2 0 0
+		elseif 12%_B
+			assign_to AT_TEAM 2 0 0
+		elseif 12%_C
+			assign_to AT_TEAM 1 0 0
+		elseif 12%_D
+			assign_to AT_TEAM 1 0 0
+		elseif 12%_E
+			assign_to AT_TEAM 1 0 0
+		elseif 12%_F
+			assign_to AT_TEAM 1 0 0
+		elseif 12%_G
+			assign_to AT_TEAM 2 0 0
+		elseif 12%_H
+			assign_to AT_TEAM 2 0 0
+		endif
+	elseif 2v2v2v2
+		if 12%_A
+			assign_to AT_TEAM 4 0 0
+		elseif 12%_B
+			assign_to AT_TEAM 4 0 0
+		elseif 12%_C
+			assign_to AT_TEAM 1 0 0
+		elseif 12%_D
+			assign_to AT_TEAM 1 0 0
+		elseif 12%_E
+			assign_to AT_TEAM 2 0 0
+		elseif 12%_F
+			assign_to AT_TEAM 2 0 0
+		elseif 12%_G
+			assign_to AT_TEAM 3 0 0
+		elseif 12%_H
+			assign_to AT_TEAM 3 0 0
+		endif
+	else
+		assign_to AT_TEAM -10 0 0
+	endif
+}
+create_land {
+	terrain_type DIRT2
+	number_of_tiles 0
+	base_size 20
+	land_position 87 35
+	if 4v4
+		if 12%_A
+			assign_to AT_TEAM 2 0 0
+		elseif 12%_B
+			assign_to AT_TEAM 1 0 0
+		elseif 12%_C
+			assign_to AT_TEAM 1 0 0
+		elseif 12%_D
+			assign_to AT_TEAM 1 0 0
+		elseif 12%_E
+			assign_to AT_TEAM 1 0 0
+		elseif 12%_F
+			assign_to AT_TEAM 2 0 0
+		elseif 12%_G
+			assign_to AT_TEAM 2 0 0
+		elseif 12%_H
+			assign_to AT_TEAM 2 0 0
+		endif
+	elseif 2v2v2v2
+		if 12%_A
+			assign_to AT_TEAM 4 0 0
+		elseif 12%_B
+			assign_to AT_TEAM 1 0 0
+		elseif 12%_C
+			assign_to AT_TEAM 1 0 0
+		elseif 12%_D
+			assign_to AT_TEAM 2 0 0
+		elseif 12%_E
+			assign_to AT_TEAM 2 0 0
+		elseif 12%_F
+			assign_to AT_TEAM 3 0 0
+		elseif 12%_G
+			assign_to AT_TEAM 3 0 0
+		elseif 12%_H
+			assign_to AT_TEAM 4 0 0
+		endif
+	else
+		assign_to AT_TEAM -10 0 0
+	endif
+}
+endif
+
+else /* no direct placement */
+create_player_lands
+{
+	terrain_type DIRT2
+	number_of_tiles 0
+	base_size 20
+	if DE_AVAILABLE
+		if LUDIKRIS_MAP
+			circle_radius 40 0
+		elseif GIGANTIC_MAP
+			circle_radius 39 0
+		elseif HUGE_MAP
+			circle_radius 38 0
+		elseif LARGE_MAP
+			circle_radius 35 0
+		else
+			circle_radius 33 0
+		endif
+	elseif TINY_MAP
+		left_border 3
+		right_border 3
+		top_border 3
+		bottom_border 3
+		other_zone_avoidance_distance 15
+	elseif SMALL_MAP
+		left_border 2
+		right_border 2
+		top_border 2
+		bottom_border 2
+		other_zone_avoidance_distance 15
+	elseif MEDIUM_MAP
+		left_border 2
+		right_border 2
+		top_border 2
+		bottom_border 2
+		other_zone_avoidance_distance 15
+	else
+		left_border 1
+		right_border 1
+		top_border 1
+		bottom_border 1
+		other_zone_avoidance_distance 15
+	endif
+}
+endif
+
+create_land
+{	
+	if TINY_MAP
+		terrain_type GRASS3
+		number_of_tiles 0
+		#define NO_CENTER 
+	elseif SMALL_MAP
+		terrain_type GRASS3
+		number_of_tiles 0
+		#define NO_CENTER 
+	elseif MEDIUM_MAP
+		terrain_type DIRT
+		number_of_tiles 331
+	elseif LARGE_MAP
+		number_of_tiles 481
+		terrain_type DIRT
+	elseif HUGE_MAP
+		number_of_tiles 681
+		terrain_type DIRT
+	elseif GIGANTIC_MAP
+		number_of_tiles 781
+		terrain_type DIRT
+	elseif LUDIKRIS_MAP
+		number_of_tiles 2081
+		terrain_type DIRT
+	else
+		number_of_tiles 331
+		terrain_type DIRT
+	endif
+	base_size 4
+	left_border 40
+	right_border 40
+	top_border 40
+	bottom_border 40
+	land_position 50 50
+	zone 9
+	other_zone_avoidance_distance 12
+	land_id 9 
+}
+
+
+/* =================================================================================================== */
+<ELEVATION_GENERATION>
+
+create_elevation 7
+{
+	base_terrain GRASS3
+	if TINY_MAP			number_of_tiles 1500
+	elseif SMALL_MAP	number_of_tiles 2250
+	elseif MEDIUM_MAP	number_of_tiles 3000
+	elseif LARGE_MAP	number_of_tiles 4286
+	elseif HUGE_MAP		number_of_tiles 5143
+	elseif GIGANTIC_MAP	number_of_tiles 6214
+	elseif LUDIKRIS_MAP	number_of_tiles 24643
+	endif
+	number_of_clumps 100
+	spacing 2
+	if DE_AVAILABLE	set_scale_by_groups
+	else			set_scale_by_size
+	endif
+	enable_balanced_elevation
+}
+
+/* =================================================================================================== */
+<TERRAIN_GENERATION>
+
+/* main ocean and lands stuff */
+create_terrain WATER
+{
+	base_terrain GRASS3
+	land_percent 100
+}
+
+create_terrain FOREST
+{
+	base_terrain DIRT2
+	land_percent 100
+	number_of_clumps 25
+	set_scale_by_groups
+}
+
+create_terrain DIRT2
+{
+	base_terrain FOREST
+	land_percent 100
+	number_of_clumps 25
+	set_scale_by_groups
+	spacing_to_other_terrain_types 10
+}
+
+/* water mixing */
+
+create_terrain MED_WATER
+{
+	base_terrain WATER
+	number_of_clumps 10
+	spacing_to_other_terrain_types 2
+	land_percent 60
+}
+create_terrain MED_WATER
+{
+	base_terrain WATER
+	number_of_clumps 30
+	spacing_to_other_terrain_types 1
+	land_percent 5
+}
+create_terrain DEEP_WATER
+{
+	base_terrain MED_WATER
+	number_of_clumps 8
+	spacing_to_other_terrain_types 3
+	land_percent 40
+}
+create_terrain DEEP_WATER
+{
+	base_terrain MED_WATER
+	number_of_clumps 30
+	spacing_to_other_terrain_types 1
+	land_percent 5
+	terrain_mask 2
+}
+create_terrain MED_WATER
+{
+	base_terrain DEEP_WATER
+	number_of_clumps 30
+	spacing_to_other_terrain_types 1
+	land_percent 5
+	terrain_mask 2
+}
+create_terrain WATER
+{
+	base_terrain MED_WATER
+	number_of_clumps 30
+	spacing_to_other_terrain_types 1
+	land_percent 5
+	terrain_mask 1
+}
+
+/* =================================================================================================== */
+<CONNECTION_GENERATION>
+
+#const DLC_WETBEACH 107
+if DE_AVAILABLE
+create_connect_all_lands 
+{
+	replace_terrain BEACH DLC_WETBEACH
+	terrain_size BEACH 999 0
+}
+endif
+
+if 2v2
+create_connect_teams_lands
+elseif 2v2v2
+create_connect_teams_lands
+elseif 2v2v2v2
+create_connect_teams_lands
+elseif DE_AVAILABLE
+create_connect_to_nonplayer_land
+elseif 1_PLAYER_GAME
+create_connect_all_lands 
+else
+create_connect_all_players_land
+endif
+{
+	replace_terrain FOREST SHALLOW
+	terrain_cost FOREST 15
+	terrain_size FOREST 5 0
+	replace_terrain BEACH SHALLOW
+	terrain_cost BEACH 15
+	terrain_size BEACH 1 0    
+	replace_terrain WATER WATER
+	terrain_cost WATER 1
+	terrain_size WATER 1 0
+	replace_terrain MED_WATER MED_WATER
+	terrain_cost MED_WATER 1
+	terrain_size MED_WATER 1 0
+	replace_terrain DEEP_WATER DEEP_WATER
+	terrain_cost DEEP_WATER 1
+	terrain_size DEEP_WATER 1 0
+}
+
+
+/* =================================================================================================== */
+<OBJECTS_GENERATION>
+
+#const SEA_TOWER 785
+#const JUNK_SHIP 15
+#const PERCH_FISH 53
+#const OUTLAW 158
+#const ICE_PATCH 728
+#const FLAT_BOAT 438
+
+/* block the coasts so you can't walk along */
+#const REED_TREE 1350
+if DE_AVAILABLE
+	create_object REED_TREE
+	{
+		number_of_objects 9999
+		set_scaling_to_map_size
+		terrain_to_place_on DLC_WETBEACH
+		place_on_forest_zone
+		set_gaia_object_only
+	}
+endif
+
+if DE_AVAILABLE
+create_object DLC_COW
+{
+	set_place_for_every_player
+	max_distance_to_players 0
+	second_object TOWN_CENTER
+}
+else
+create_object TOWN_CENTER
+{
+	set_place_for_every_player
+	max_distance_to_players 0
+}
+endif
+
+create_object SEA_TOWER
+{
+	number_of_objects 4
+	set_place_for_every_player
+	min_distance_to_players 17
+	max_distance_to_players 17
+	temp_min_distance_group_placement 2
+	find_closest
+}
+
+create_object VILLAGER
+{
+	set_place_for_every_player
+	min_distance_to_players 5
+	max_distance_to_players 7
+	set_circular_placement
+}
+
+/* a boarding galley to scout with */
+create_object ABGAL
+{
+	set_place_for_every_player
+	min_distance_to_players 14
+	max_distance_to_players 16
+}
+
+/* Personal relic to supply extra gold */
+create_object RELIC
+{
+	set_place_for_every_player 
+	set_gaia_object_only 
+	min_distance_to_players 13
+	max_distance_to_players 15
+}
+
+/* Regicide support */
+if REGICIDE
+	create_object KING
+	{
+		set_place_for_every_player
+		min_distance_to_players 5
+		max_distance_to_players 7
+		set_circular_placement
+	}
+endif
+
+/* super fat resource nodes */
+if DE_AVAILABLE
+create_object FORAGE
+{
+	set_gaia_object_only
+	set_place_for_every_player
+	min_distance_to_players 3
+	max_distance_to_players 3
+	min_distance_group_placement 1
+	resource_delta 30000
+	find_closest
+}
+create_object GOLD
+{
+	set_gaia_object_only
+	set_place_for_every_player
+	min_distance_to_players 3
+	max_distance_to_players 3
+	min_distance_group_placement 1
+	resource_delta 30000
+	find_closest
+}
+create_object STONE
+{
+	set_gaia_object_only
+	set_place_for_every_player
+	min_distance_to_players 3
+	max_distance_to_players 3
+	min_distance_group_placement 1
+	resource_delta 30000
+	find_closest
+}
+create_object OAKTREE
+{
+	set_gaia_object_only
+	set_place_for_every_player
+	min_distance_to_players 3
+	max_distance_to_players 3
+	min_distance_group_placement 1
+	resource_delta 30000
+	second_object HAY_STACK
+	find_closest
+}
+elseif UP_EXTENSION
+create_object FORAGE
+{
+	set_gaia_object_only
+	set_place_for_every_player
+	min_distance_to_players 4
+	max_distance_to_players 4
+	min_distance_group_placement 2
+	resource_delta 30000
+}
+create_object GOLD
+{
+	set_gaia_object_only
+	set_place_for_every_player
+	min_distance_to_players 4
+	max_distance_to_players 4
+	min_distance_group_placement 2
+	resource_delta 30000
+}
+create_object STONE
+{
+	set_gaia_object_only
+	set_place_for_every_player
+	min_distance_to_players 4
+	max_distance_to_players 4
+	min_distance_group_placement 2
+	resource_delta 30000
+}
+else
+create_object FORAGE
+{
+	number_of_objects 6
+	group_placement_radius 2
+	set_tight_grouping
+	set_gaia_object_only
+	set_place_for_every_player
+	min_distance_to_players 8
+	max_distance_to_players 12
+	min_distance_group_placement 3
+}
+create_object GOLD
+{
+	number_of_objects 8
+	number_of_groups 2
+	group_placement_radius 2
+	set_tight_grouping
+	set_gaia_object_only
+	set_place_for_every_player
+	min_distance_to_players 8
+	max_distance_to_players 12
+	min_distance_group_placement 3
+	temp_min_distance_group_placement 6
+	max_distance_to_other_zones 7
+}
+create_object STONE
+{
+	number_of_objects 8
+	group_placement_radius 2
+	set_tight_grouping
+	set_gaia_object_only
+	set_place_for_every_player
+	min_distance_to_players 8
+	max_distance_to_players 12
+	min_distance_group_placement 3
+	max_distance_to_other_zones 7
+}
+endif
+
+/* sheep */
+create_object SHEEP
+{
+   number_of_objects 4
+   set_loose_grouping
+   set_gaia_object_only
+   set_place_for_every_player
+   min_distance_to_players 8
+   max_distance_to_players 16
+   set_circular_placement
+}
+
+/* boars */
+create_object BOAR
+{
+	number_of_objects 2
+	set_gaia_object_only
+	set_place_for_every_player
+	min_distance_to_players 6
+	max_distance_to_players 12
+	set_circular_placement
+}
+
+/* fish */
+
+create_object DORADO
+{
+	number_of_objects 999
+	set_scaling_to_map_size
+	min_distance_to_players 12
+	temp_min_distance_group_placement 6
+}
+create_object MARLIN1
+{
+	number_of_objects 999
+	set_scaling_to_map_size
+	min_distance_to_players 29
+	temp_min_distance_group_placement 10
+}
+
+/* populate the center */
+create_object MAP_REVEALER
+{
+	set_place_for_every_player
+	number_of_objects 8000
+	terrain_to_place_on DIRT
+}
+#const ROCK_KOTH 40
+create_object MAP_REVEALER
+{
+	set_place_for_every_player
+	number_of_objects 8000
+	terrain_to_place_on ROCK_KOTH
+}
+create_object GOLD
+{
+	number_of_objects 9
+	number_of_groups 1
+	group_variance 3
+	set_scaling_to_map_size
+	terrain_to_place_on DIRT
+	temp_min_distance_group_placement 6
+	set_tight_grouping
+	place_on_specific_land_id 9
+	resource_delta 5000
+}
+if NO_CENTER
+else
+create_object OUTLAW
+{
+	number_of_objects 16
+	set_scaling_to_map_size
+	set_gaia_object_only
+	temp_min_distance_group_placement 1
+	place_on_specific_land_id 9
+}
+endif
+
+/* Birds */
+create_object MACAW
+{
+	number_of_objects 6
+	set_scaling_to_map_size
+}
+
+
+/* Candy for the eyes */
+
+create_object SEA_ROCKS_1
+{
+  number_of_objects 6
+  number_of_groups 3
+  group_variance 3
+  set_scaling_to_map_size
+  set_gaia_object_only
+  terrain_to_place_on MED_WATER
+  min_distance_to_players 25
+  temp_min_distance_group_placement 13
+  group_placement_radius 4
+  set_loose_grouping
+}
+
+create_object SEA_ROCKS_2
+{
+  number_of_objects 4
+  number_of_groups 3
+  group_variance 3
+  set_scaling_to_map_size
+  set_gaia_object_only
+  terrain_to_place_on WATER
+  min_distance_to_players 25
+  temp_min_distance_group_placement 13
+  group_placement_radius 4
+  set_loose_grouping
+}
+
+if DE_AVAILABLE
+create_object SEA_ROCKS_2
+{
+	number_of_objects 2
+	set_scaling_to_map_size 
+	min_distance_to_players 30
+	temp_min_distance_group_placement 30
+	second_object SHIPWRECK
+}
+create_object SEA_ROCKS_1
+{
+	number_of_objects 2
+	set_scaling_to_map_size 
+	min_distance_to_players 30
+	temp_min_distance_group_placement 30
+	second_object SHIPWRECK2
+}
+else
+start_random
+percent_chance 50
+create_object SHIPWRECK
+{
+	number_of_objects 2
+	set_scaling_to_map_size 
+	min_distance_to_players 30
+	temp_min_distance_group_placement 30
+}
+percent_chance 50
+create_object SHIPWRECK2
+{
+	number_of_objects 2
+	set_scaling_to_map_size
+	min_distance_to_players 30
+	temp_min_distance_group_placement 30
+}
+end_random
+endif
+  

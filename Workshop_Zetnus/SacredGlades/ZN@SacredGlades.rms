@@ -1,0 +1,741 @@
+
+/*
+Sacred Glades
+by: Zetnus
+Zetnus@outlook.com
+Zetnus#6414 on Discord
+
+25 September 2021
+Most recent update: 05 May 2022
+
+Map Information:
+Sacred Glades is an open land map that features additional trainable units to serve as healing support.  These are monks with modified stats.
+The following are available:
+
+"Blind Lame Priest" - trainable in dark age from the pagan shrine that players spawn with.
+-	Cost: 30 gold
+-	0 conversion range
+-	Very slow walk speed when carrying a relic
+-	4 line of sight
+-	15 hitpoints
+
+"Healer" - trainable from a monastery.
+-	Cost: 60 gold
+-	0 conversion range
+-	Cannot pick up relics
+-	45 hitpoints
+-	4/4 armor
+-	Regenerates health
+-	Cannot be converted
+
+Map Resources:
+-	6 berry bushes, 6 gold, 6 stone close to the starting area
+-	Standard amount of starting food (4+2+2 sheep, 2 boar, 2+2 deer)
+-	3 Neutral glades each containing 6+6 berries, 6 gold, 6 stone, 2 deer, 1 relic
+-	Additional scattered 3 tile golds and 2 tile stones
+-	1 additional relic per player (for a total of 5 in 1v1)
+
+
+Changelog:
+-	Birch trees now have 200 wood
+-	Slightly larger woodlines
+-	Nerfed the priests 
+-	Increased size of the woodlines
+
+
+Learn about random map scripting: https://docs.google.com/document/d/e/2PACX-1vR_I1I9u-hI2FFm-EYyjoM_-9dNJFOfTaIgr05wXNbdpv9tI18b6r18ARULy3Jqyvlq6-lc2VjX6xP4/pub
+
+This map was harvested from a mod in the official AOE2DE mod center, whose licensing agreement with Microsoft supersedes any Github restrictions: https://www.microsoft.com/en-us/servicesagreement
+
+*/
+
+
+/* terrains */
+#const OAK_BUSH_FOREST 20
+#const UNDERBRUSH 71
+#const DIRT_MUD 76
+
+/* objects */
+#const BLANKOBJECT 647
+#const FALCON 1056
+#const PRIEST_WITH_RELIC 1400
+#const PAGAN_SHRINE 1712
+
+
+/* =================================================================================================== */
+<PLAYER_SETUP>
+
+random_placement
+ai_info_map_type CUSTOM 0 0 0
+behavior_version 1
+
+/* weak priest in dark age from the pagan shrine to heal in the early game */
+effect_amount ENABLE_OBJECT DLC_AOE1PRIEST ATTR_ENABLE 1
+effect_amount SET_ATTRIBUTE DLC_AOE1PRIEST ATTR_NAME_ID 67842 /* Blind Lame Priest */
+effect_amount SET_ATTRIBUTE DLC_AOE1PRIEST ATTR_MAX_RANGE 0
+effect_amount SET_ATTRIBUTE DLC_AOE1PRIEST ATTR_SHOWN_RANGE 0
+effect_amount SET_ATTRIBUTE DLC_AOE1PRIEST ATTR_LINE_OF_SIGHT 4
+effect_amount SET_ATTRIBUTE DLC_AOE1PRIEST ATTR_HITPOINTS 15
+effect_amount SET_ATTRIBUTE DLC_AOE1PRIEST ATTR_TRAIN_LOCATION 1712
+effect_amount SET_ATTRIBUTE DLC_AOE1PRIEST ATTR_TRAIN_BUTTON 1
+effect_amount SET_ATTRIBUTE DLC_AOE1PRIEST ATTR_GOLD_COST -1
+effect_amount SET_ATTRIBUTE DLC_AOE1PRIEST ATTR_GOLD_COST 30
+effect_percent ADD_ATTRIBUTE DLC_AOE1PRIEST ATTR_MOVE_SPEED -10
+
+/* make priest extra slow while carrying a relic */
+effect_amount SET_ATTRIBUTE PRIEST_WITH_RELIC ATTR_HITPOINTS 25
+effect_percent ADD_ATTRIBUTE PRIEST_WITH_RELIC ATTR_MOVE_SPEED -50
+effect_amount SET_ATTRIBUTE PRIEST_WITH_RELIC ATTR_LINE_OF_SIGHT 3
+effect_amount SET_ATTRIBUTE PRIEST_WITH_RELIC ATTR_ICON_ID 294
+
+/* strong healer from the monastary to heal in the mid/late game */
+effect_amount ENABLE_OBJECT IMAM ATTR_ENABLE 1
+effect_amount SET_ATTRIBUTE IMAM ATTR_NAME_ID 13317 /* Healer */
+effect_amount SET_ATTRIBUTE IMAM ATTR_MAX_RANGE 0
+effect_amount SET_ATTRIBUTE IMAM ATTR_SHOWN_RANGE 0
+effect_amount SET_ATTRIBUTE IMAM ATTR_TRAIN_LOCATION 104
+effect_amount SET_ATTRIBUTE IMAM ATTR_TRAIN_BUTTON 14
+effect_amount SET_ATTRIBUTE IMAM ATTR_GOLD_COST -1
+effect_amount SET_ATTRIBUTE IMAM ATTR_GOLD_COST 60
+
+/* Disabling Trade Carts and Cogs for Multi-team Games */
+if 2_TEAM_GAME
+else
+  #const TRADE_CART_ENABLER 161
+  #const TRADE_COG_ENABLER 180
+  #const TRADE_CARAVAN_ENABLER 48
+  #const HINDU_CARAVANSERAI_ENABLER 518
+  #const PERSIAN_CARAVANSERAI_ENABLER 552  
+  #const SILK_ROAD 499
+  effect_amount DISABLE_TECH TRADE_COG_ENABLER ATTR_DISABLE 180
+  effect_amount DISABLE_TECH TRADE_CART_ENABLER ATTR_DISABLE 161
+  effect_amount DISABLE_TECH TRADE_CARAVAN_ENABLER ATTR_DISABLE 48
+  effect_amount DISABLE_TECH HINDU_CARAVANSERAI_ENABLER ATTR_DISABLE 518
+  effect_amount DISABLE_TECH PERSIAN_CARAVANSERAI_ENABLER ATTR_DISABLE 552
+  effect_amount DISABLE_TECH SILK_ROAD ATTR_DISABLE 499    
+endif
+
+/* =================================================================================================== */
+<LAND_GENERATION> 
+
+base_terrain GRASS
+
+create_player_lands {
+	terrain_type DIRT_MUD
+	base_size 18
+	number_of_tiles 1300
+	clumping_factor 25
+	other_zone_avoidance_distance 5
+}
+
+/* neutral glades */
+create_land {
+	terrain_type DIRT3
+	base_size 10
+	number_of_tiles 700
+	clumping_factor 25
+	min_placement_distance 30
+	land_id 11
+	zone 1
+	other_zone_avoidance_distance 5
+}
+create_land {
+	terrain_type DIRT3
+	base_size 10
+	number_of_tiles 700
+	clumping_factor 25
+	min_placement_distance 30
+	land_id 11
+	zone 2
+	other_zone_avoidance_distance 5
+}
+
+create_land {
+	terrain_type DIRT3
+	base_size 10
+	number_of_tiles 700
+	clumping_factor 25
+	min_placement_distance 30
+	land_id 11
+	zone 3
+	other_zone_avoidance_distance 5
+}
+
+/* =================================================================================================== */
+<TERRAIN_GENERATION>
+
+/* large groves */
+
+create_terrain GRASS {
+	base_terrain DIRT_MUD
+	land_percent 100
+	number_of_clumps 9320
+	set_avoid_player_start_areas 21
+}
+
+create_terrain DIRT_MUD {
+	base_terrain DIRT3
+	land_percent 100
+	number_of_clumps 9320
+}
+
+create_terrain DIRT3 {
+	base_terrain DIRT_MUD
+	land_percent 100
+	number_of_clumps 9320
+	terrain_mask 1
+}
+
+create_terrain LEAVES {
+	base_terrain DIRT_MUD
+	base_layer DIRT3
+	land_percent 100
+	number_of_clumps 9320
+	terrain_mask 1
+	spacing_to_other_terrain_types 4
+}
+
+create_terrain DIRT_MUD {
+	base_terrain DIRT_MUD
+	base_layer LEAVES
+	land_percent 100
+	number_of_clumps 9320
+	terrain_mask 1
+	spacing_to_other_terrain_types 4
+}
+
+/* small_goves */
+
+create_terrain GRASS3 { base_terrain GRASS land_percent 2 clumping_factor 100 set_avoid_player_start_areas 25 spacing_to_other_terrain_types 8 }
+create_terrain DIRT3 { base_terrain GRASS3 land_percent 100 number_of_clumps 9320 }
+
+create_terrain GRASS3 { base_terrain GRASS land_percent 2 clumping_factor 100 set_avoid_player_start_areas 25 spacing_to_other_terrain_types 8 }
+create_terrain DIRT3 { base_terrain GRASS3 land_percent 100 number_of_clumps 9320 }
+
+create_terrain GRASS3 { base_terrain GRASS land_percent 2 clumping_factor 100 set_avoid_player_start_areas 25 spacing_to_other_terrain_types 8 }
+create_terrain DIRT3 { base_terrain GRASS3 land_percent 100 number_of_clumps 9320 }
+
+create_terrain GRASS3 { base_terrain GRASS land_percent 2 clumping_factor 100 set_avoid_player_start_areas 25 spacing_to_other_terrain_types 8 }
+create_terrain DIRT3 { base_terrain GRASS3 land_percent 100 number_of_clumps 9320 }
+
+create_terrain GRASS3 { base_terrain GRASS land_percent 2 clumping_factor 100 set_avoid_player_start_areas 25 spacing_to_other_terrain_types 8 }
+create_terrain DIRT3 { base_terrain GRASS3 land_percent 100 number_of_clumps 9320 }
+
+create_terrain GRASS3 { base_terrain GRASS land_percent 2 clumping_factor 100 set_avoid_player_start_areas 25 spacing_to_other_terrain_types 8 }
+create_terrain DIRT3 { base_terrain GRASS3 land_percent 100 number_of_clumps 9320 }
+
+create_terrain GRASS3 { base_terrain GRASS land_percent 2 clumping_factor 100 set_avoid_player_start_areas 25 spacing_to_other_terrain_types 8 }
+create_terrain DIRT3 { base_terrain GRASS3 land_percent 100 number_of_clumps 9320 }
+
+create_terrain GRASS3 { base_terrain GRASS land_percent 2 clumping_factor 100 set_avoid_player_start_areas 25 spacing_to_other_terrain_types 8 }
+create_terrain DIRT3 { base_terrain GRASS3 land_percent 100 number_of_clumps 9320 }
+
+create_terrain GRASS3 { base_terrain GRASS land_percent 2 clumping_factor 100 set_avoid_player_start_areas 25 spacing_to_other_terrain_types 8 }
+create_terrain DIRT3 { base_terrain GRASS3 land_percent 100 number_of_clumps 9320 }
+
+create_terrain GRASS3 { base_terrain GRASS land_percent 2 clumping_factor 100 set_avoid_player_start_areas 25 spacing_to_other_terrain_types 8 }
+create_terrain DIRT3 { base_terrain GRASS3 land_percent 100 number_of_clumps 9320 }
+
+
+
+create_terrain LEAVES {
+	base_terrain DIRT3
+	land_percent 100
+	number_of_clumps 9320
+	terrain_mask 1
+	spacing_to_other_terrain_types 1
+}
+create_terrain DIRT_MUD {
+	base_terrain DIRT3
+	base_layer LEAVES
+	land_percent 100
+	number_of_clumps 9320
+	terrain_mask 1
+	spacing_to_other_terrain_types 2
+}
+
+/* forests */
+
+create_terrain OAK_BUSH_FOREST {
+	base_terrain GRASS
+	land_percent 14
+	number_of_clumps 46
+	set_scale_by_groups
+	set_avoid_player_start_areas 25
+	spacing_to_other_terrain_types 2
+}
+
+/* cosmetic terrain mixing */
+
+create_terrain UNDERBRUSH {
+	base_terrain GRASS
+	land_percent 10
+	number_of_clumps 15
+	set_scale_by_groups
+	terrain_mask 1
+}
+create_terrain LEAVES {
+	base_terrain GRASS
+	land_percent 10
+	number_of_clumps 15
+	set_scale_by_groups
+	terrain_mask 1
+}
+create_terrain GRASS2 {
+	base_terrain GRASS
+	land_percent 10
+	number_of_clumps 15
+	set_scale_by_groups
+	terrain_mask 1
+}
+create_terrain DLC_JUNGLEGRASS {
+	base_terrain GRASS
+	land_percent 10
+	number_of_clumps 15
+	set_scale_by_groups
+	terrain_mask 1
+}
+
+/* =================================================================================================== */
+<OBJECTS_GENERATION>
+
+/* tree circles */
+create_object BLANKOBJECT {
+	number_of_objects rnd(290,440)
+	set_gaia_object_only
+	set_place_for_every_player
+	find_closest
+	min_distance_to_players 13
+	actor_area 6013
+	actor_area_radius 0
+}
+create_object BIRCH_TREE {
+	set_place_for_every_player
+	set_gaia_object_only
+	number_of_objects 27
+	temp_min_distance_group_placement 2
+	min_distance_to_players 13
+	avoid_actor_area 6013
+	find_closest
+	resource_delta 100
+}
+
+create_object BLANKOBJECT {
+	number_of_objects rnd(20,40)
+	set_gaia_object_only
+	set_place_for_every_player
+	find_closest
+	min_distance_to_players 3
+	actor_area 6003
+	actor_area_radius 0
+}
+create_object BIRCH_TREE {
+	set_place_for_every_player
+	set_gaia_object_only
+	number_of_objects 5
+	temp_min_distance_group_placement 3
+	min_distance_to_players 3
+	avoid_actor_area 6003
+	find_closest
+	resource_delta 100
+}
+
+create_object BLANKOBJECT {
+	number_of_objects rnd(240,320)
+	place_on_specific_land_id 11
+	set_gaia_object_only
+	find_closest
+	min_distance_to_players 11
+	actor_area 6011
+	actor_area_radius 0
+}
+create_object BIRCH_TREE {
+	place_on_specific_land_id 11
+	set_gaia_object_only
+	number_of_objects 23
+	temp_min_distance_group_placement 2
+	min_distance_to_players 11
+	avoid_actor_area 6011
+	find_closest
+	resource_delta 100
+}
+
+create_object BLANKOBJECT {
+	number_of_objects rnd(15,25)
+	place_on_specific_land_id 11
+	set_gaia_object_only
+	find_closest
+	min_distance_to_players 2
+	actor_area 6002
+	actor_area_radius 0
+}
+create_object BIRCH_TREE {
+	place_on_specific_land_id 11
+	set_gaia_object_only
+	number_of_objects 5
+	temp_min_distance_group_placement 2
+	min_distance_to_players 2
+	avoid_actor_area 6002
+	find_closest
+	resource_delta 100
+}
+
+create_object RELIC {
+	place_on_specific_land_id 11
+	set_gaia_object_only
+	min_distance_group_placement 3
+	find_closest
+}
+
+create_object BIRCH_TREE {
+	set_gaia_object_only
+	number_of_objects 9320
+	temp_min_distance_group_placement 3
+	terrain_to_place_on DIRT3
+	layer_to_place_on LEAVES
+	resource_delta 100
+}
+
+/* player_start objects */
+
+create_object PAGAN_SHRINE {
+	set_place_for_every_player
+	max_distance_to_players 0
+}
+
+create_object TOWN_CENTER {
+	set_place_for_every_player
+	min_distance_to_players 8
+	find_closest
+	actor_area 901
+	actor_area_radius 7
+	avoid_forest_zone 2
+}
+
+create_object DLC_ORANGEBUSH {
+	number_of_objects 6
+	group_placement_radius 2
+	set_tight_grouping
+	set_place_for_every_player
+	set_gaia_object_only
+	min_distance_to_players 8
+	find_closest
+	min_distance_group_placement 2
+	avoid_forest_zone 3
+	actor_area 902
+	actor_area_radius 7
+	avoid_actor_area 901
+}
+
+create_object STONE {
+	number_of_objects 6
+	group_placement_radius 2
+	set_tight_grouping
+	set_place_for_every_player
+	set_gaia_object_only
+	min_distance_to_players 8
+	find_closest
+	min_distance_group_placement 2
+	avoid_forest_zone 3
+	actor_area 903
+	actor_area_radius 7
+	avoid_actor_area 901
+	avoid_actor_area 902
+}
+
+create_object GOLD {
+	number_of_objects 6
+	group_placement_radius 2
+	set_tight_grouping
+	set_place_for_every_player
+	set_gaia_object_only
+	min_distance_to_players 8
+	find_closest
+	min_distance_group_placement 2
+	avoid_forest_zone 3
+	actor_area 904
+	actor_area_radius 7
+	avoid_actor_area 901
+	avoid_actor_area 902
+	avoid_actor_area 903
+}
+
+create_object VILLAGER {
+	set_place_for_every_player
+	min_distance_to_players 3
+	find_closest
+	actor_area 777
+}
+if REGICIDE	create_object KING
+else create_object DLC_AOE1PRIEST
+endif
+{
+	set_place_for_every_player
+	min_distance_to_players 3
+	find_closest
+	avoid_actor_area 777
+	actor_area 778
+}
+
+create_object SHEEP {
+	number_of_objects 4
+	set_place_for_every_player
+	min_distance_to_players 4
+	find_closest
+	avoid_actor_area 777
+	avoid_actor_area 778
+}
+
+create_object BLANKOBJECT {
+	number_of_objects rnd(240,320)
+	set_gaia_object_only
+	set_place_for_every_player
+	find_closest
+	min_distance_to_players 10
+	actor_area 6010
+	actor_area_radius 0
+}
+
+create_object BOAR {
+	number_of_groups 2
+	set_gaia_object_only
+	set_place_for_every_player
+	avoid_forest_zone 1
+	min_distance_to_players 10
+	avoid_actor_area 6010
+	avoid_actor_area 901
+	find_closest
+	temp_min_distance_group_placement 8
+	min_distance_group_placement 1
+}
+
+create_object SHEEP {
+	number_of_objects 2
+	number_of_groups 2
+	set_loose_grouping
+	set_place_for_every_player
+	set_gaia_object_only
+	min_distance_to_players 13
+	find_closest
+	avoid_actor_area 6013
+	avoid_actor_area 901
+	avoid_forest_zone 2
+	min_distance_group_placement 2
+	temp_min_distance_group_placement 13
+}
+
+create_object DEER {
+	number_of_objects 2
+	number_of_groups 2
+	set_loose_grouping
+	set_place_for_every_player
+	set_gaia_object_only
+	min_distance_to_players 13
+	find_closest
+	avoid_actor_area 6013
+	avoid_actor_area 901
+	avoid_forest_zone 2
+	min_distance_group_placement 2
+	temp_min_distance_group_placement 13
+}
+
+create_object RELIC {
+	set_place_for_every_player
+	set_gaia_object_only
+	min_distance_to_players 30
+	set_circular_placement
+	find_closest
+	avoid_forest_zone 2
+	terrain_to_place_on DIRT3
+	layer_to_place_on DIRT_MUD
+	min_distance_group_placement 3
+}
+
+/* neutral glades */
+create_object DLC_ORANGEBUSH {
+	number_of_objects 6
+	group_placement_radius 2
+	set_tight_grouping
+	place_on_specific_land_id 11
+	set_gaia_object_only
+	min_distance_to_players 6
+	find_closest
+	min_distance_group_placement 2
+	avoid_forest_zone 2
+	actor_area 801
+	actor_area_radius 6
+}
+
+create_object STONE {
+	number_of_objects 6
+	group_placement_radius 2
+	set_tight_grouping
+	place_on_specific_land_id 11
+	set_gaia_object_only
+	min_distance_to_players 6
+	find_closest
+	min_distance_group_placement 2
+	avoid_forest_zone 2
+	actor_area 802
+	actor_area_radius 6
+	avoid_actor_area 801
+}
+
+create_object GOLD {
+	number_of_objects 6
+	group_placement_radius 2
+	set_tight_grouping
+	place_on_specific_land_id 11
+	set_gaia_object_only
+	min_distance_to_players 6
+	find_closest
+	min_distance_group_placement 2
+	avoid_forest_zone 2
+	actor_area 803
+	actor_area_radius 6
+	avoid_actor_area 801
+	avoid_actor_area 802
+}
+
+create_object FORAGE {
+	number_of_objects 6
+	group_placement_radius 2
+	set_tight_grouping
+	place_on_specific_land_id 11
+	set_gaia_object_only
+	min_distance_to_players 6
+	find_closest
+	min_distance_group_placement 2
+	avoid_forest_zone 2
+	actor_area 804
+	actor_area_radius 6
+	avoid_actor_area 801
+	avoid_actor_area 802
+	avoid_actor_area 803
+}
+
+create_object DEER {
+	number_of_objects 2
+	number_of_groups 1
+	set_loose_grouping
+	place_on_specific_land_id 11
+	set_gaia_object_only
+	min_distance_to_players 11
+	find_closest
+	avoid_actor_area 6011
+	avoid_actor_area 901
+	avoid_forest_zone 2
+	min_distance_group_placement 2
+	temp_min_distance_group_placement 9
+}
+
+create_object WOLF {
+	number_of_objects 2
+	set_gaia_object_only
+	set_place_for_every_player
+	min_distance_to_players 35
+	set_circular_placement
+	temp_min_distance_group_placement 18
+	avoid_forest_zone 1
+	min_distance_group_placement 1
+}
+
+/* =================================================================================================== */
+/* scattered map resources */ 
+
+/* extra berries */
+create_object FORAGE {
+    number_of_groups 9320
+    group_placement_radius 2
+    set_tight_grouping
+    set_gaia_object_only
+	min_distance_group_placement 4
+	number_of_objects 5
+	min_distance_to_players 40
+	set_circular_placement
+	temp_min_distance_group_placement 97
+	avoid_forest_zone 1
+	terrain_to_place_on DIRT3
+	layer_to_place_on DIRT_MUD
+}
+
+create_object GOLD {
+	number_of_objects 3
+    number_of_groups 9320
+    group_placement_radius 2
+    set_tight_grouping
+    set_gaia_object_only
+	min_distance_group_placement 4
+	min_distance_to_players 35
+	set_circular_placement
+	temp_min_distance_group_placement 31
+	avoid_forest_zone 1
+	terrain_to_place_on DIRT3
+	layer_to_place_on DIRT_MUD
+}
+
+create_object STONE {
+	number_of_objects 2
+    number_of_groups 9320
+    group_placement_radius 2
+    set_tight_grouping
+    set_gaia_object_only
+	min_distance_group_placement 4
+	min_distance_to_players 35
+	set_circular_placement
+	temp_min_distance_group_placement 34
+	avoid_forest_zone 1
+	terrain_to_place_on DIRT3
+	layer_to_place_on DIRT_MUD
+}
+
+if TINY_MAP
+else
+	/* extra animals  */
+	create_object SHEEP {
+		number_of_groups 9320
+		set_gaia_object_only
+		number_of_objects 2
+		temp_min_distance_group_placement 70
+		min_distance_to_players 40
+		set_circular_placement
+		avoid_forest_zone 1
+	}
+	create_object DEER {
+		number_of_groups 9320
+		number_of_objects 3
+		set_gaia_object_only
+		temp_min_distance_group_placement 60
+		min_distance_to_players 40
+		set_circular_placement
+		avoid_forest_zone 1
+	}
+	create_object BOAR {
+		number_of_groups 9320
+		set_gaia_object_only
+		number_of_objects 2
+		temp_min_distance_group_placement 80
+		min_distance_to_players 40
+		set_circular_placement
+		avoid_forest_zone 1
+	}
+endif
+
+/* scattered bears */
+create_object DLC_BEAR {
+	number_of_groups 9320
+	set_loose_grouping
+	number_of_objects 1
+	set_gaia_object_only
+	min_distance_group_placement 1
+	temp_min_distance_group_placement 60
+	avoid_forest_zone 1
+	min_distance_to_players 40
+	set_circular_placement
+} 
+
+/* birds */
+create_object FALCON {
+	number_of_objects 4
+	set_scaling_to_map_size
+}

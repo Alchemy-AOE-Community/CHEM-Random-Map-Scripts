@@ -1,0 +1,260 @@
+/*
+Ring Nothing Too 
+
+by: Zetnus
+Zetnus@outlook.com
+14 July 2021
+
+Learn about random map scripting: https://docs.google.com/document/d/e/2PACX-1vR_I1I9u-hI2FFm-EYyjoM_-9dNJFOfTaIgr05wXNbdpv9tI18b6r18ARULy3Jqyvlq6-lc2VjX6xP4/pub
+
+This map was harvested from a mod in the official AOE2DE mod center, whose licensing agreement with Microsoft supersedes any Github restrictions: https://www.microsoft.com/en-us/servicesagreement
+
+*/
+
+#const REED_FOREST 92
+#const REED_TREE 1350
+
+<PLAYER_SETUP>
+random_placement
+ai_info_map_type CUSTOM 0 1 0
+behavior_version 1
+
+effect_amount GAIA_SET_ATTRIBUTE REED_TREE ATTR_STORAGE_VALUE 100
+
+/* Disabling Trade Carts and Cogs for Multi-team Games */
+if 2_TEAM_GAME
+else
+  #const TRADE_CART_ENABLER 161
+  #const TRADE_COG_ENABLER 180
+  #const TRADE_CARAVAN_ENABLER 48
+  #const HINDU_CARAVANSERAI_ENABLER 518
+  #const PERSIAN_CARAVANSERAI_ENABLER 552  
+  #const SILK_ROAD 499
+  effect_amount DISABLE_TECH TRADE_COG_ENABLER ATTR_DISABLE 180
+  effect_amount DISABLE_TECH TRADE_CART_ENABLER ATTR_DISABLE 161
+  effect_amount DISABLE_TECH TRADE_CARAVAN_ENABLER ATTR_DISABLE 48
+  effect_amount DISABLE_TECH HINDU_CARAVANSERAI_ENABLER ATTR_DISABLE 518
+  effect_amount DISABLE_TECH PERSIAN_CARAVANSERAI_ENABLER ATTR_DISABLE 552
+  effect_amount DISABLE_TECH SILK_ROAD ATTR_DISABLE 499    
+endif
+
+<LAND_GENERATION>
+base_terrain GRASS
+create_player_lands
+{
+    terrain_type GRASS
+    number_of_tiles 0
+    left_border 5
+    right_border 5
+    top_border 5
+    bottom_border 5
+	base_size 10
+	circle_radius 40 0
+}
+
+<TERRAIN_GENERATION>
+
+create_terrain REED_FOREST { base_terrain GRASS set_avoid_player_start_areas 9 number_of_clumps 9320 land_percent 100 }
+
+create_terrain GRASS2 { base_terrain REED_FOREST spacing_to_other_terrain_types 1 number_of_clumps 9320 land_percent 100 }
+create_terrain DIRT2 { base_terrain GRASS2 spacing_to_other_terrain_types 1 number_of_clumps 9320 land_percent 100 }
+create_terrain DLC_DESERTGRAVEL { base_terrain DIRT2 spacing_to_other_terrain_types 1 number_of_clumps 9320 land_percent 100 }
+create_terrain REED_FOREST { base_terrain DLC_DESERTGRAVEL spacing_to_other_terrain_types 1 number_of_clumps 9320 land_percent 100 }
+
+create_terrain REED_FOREST { base_terrain GRASS set_avoid_player_start_areas 13 number_of_clumps 9320 land_percent 100 }
+create_terrain GRASS2 { base_terrain REED_FOREST spacing_to_other_terrain_types 1 number_of_clumps 9320 land_percent 100 }
+create_terrain DIRT2 { base_terrain GRASS2 spacing_to_other_terrain_types 1 number_of_clumps 9320 land_percent 100 }
+create_terrain DLC_DESERTGRAVEL { base_terrain DIRT2 spacing_to_other_terrain_types 1 number_of_clumps 9320 land_percent 100 }
+create_terrain REED_FOREST { base_terrain DLC_DESERTGRAVEL spacing_to_other_terrain_types 1 number_of_clumps 9320 land_percent 100 }
+
+create_terrain REED_FOREST { base_terrain GRASS set_avoid_player_start_areas 13 number_of_clumps 9320 land_percent 100 }
+create_terrain GRASS2 { base_terrain REED_FOREST spacing_to_other_terrain_types 1 number_of_clumps 9320 land_percent 100 }
+create_terrain DIRT2 { base_terrain GRASS2 spacing_to_other_terrain_types 1 number_of_clumps 9320 land_percent 100 }
+create_terrain DLC_DESERTGRAVEL { base_terrain DIRT2 spacing_to_other_terrain_types 1 number_of_clumps 9320 land_percent 100 }
+create_terrain REED_FOREST { base_terrain DLC_DESERTGRAVEL spacing_to_other_terrain_types 1 number_of_clumps 9320 land_percent 100 }
+
+create_terrain REED_FOREST { base_terrain GRASS set_avoid_player_start_areas 13 number_of_clumps 9320 land_percent 100 }
+create_terrain GRASS2 { base_terrain REED_FOREST spacing_to_other_terrain_types 1 number_of_clumps 9320 land_percent 100 }
+create_terrain DIRT2 { base_terrain GRASS2 spacing_to_other_terrain_types 1 number_of_clumps 9320 land_percent 100 }
+create_terrain DLC_DESERTGRAVEL { base_terrain DIRT2 spacing_to_other_terrain_types 1 number_of_clumps 9320 land_percent 100 }
+create_terrain REED_FOREST { base_terrain DLC_DESERTGRAVEL spacing_to_other_terrain_types 1 number_of_clumps 9320 land_percent 100 }
+
+create_terrain REED_FOREST { base_terrain GRASS set_avoid_player_start_areas 13 number_of_clumps 9320 land_percent 100 }
+create_terrain GRASS2 { base_terrain REED_FOREST spacing_to_other_terrain_types 1 number_of_clumps 9320 land_percent 100 }
+create_terrain DIRT2 { base_terrain GRASS2 spacing_to_other_terrain_types 1 number_of_clumps 9320 land_percent 100 }
+create_terrain DLC_DESERTGRAVEL { base_terrain DIRT2 spacing_to_other_terrain_types 1 number_of_clumps 9320 land_percent 100 }
+create_terrain REED_FOREST { base_terrain DLC_DESERTGRAVEL spacing_to_other_terrain_types 1 number_of_clumps 9320 land_percent 100 }
+
+create_terrain REED_FOREST { base_terrain GRASS set_avoid_player_start_areas 13 number_of_clumps 9320 land_percent 100 }
+create_terrain GRASS2 { base_terrain REED_FOREST spacing_to_other_terrain_types 1 number_of_clumps 9320 land_percent 100 }
+create_terrain DIRT2 { base_terrain GRASS2 spacing_to_other_terrain_types 1 number_of_clumps 9320 land_percent 100 }
+create_terrain DLC_DESERTGRAVEL { base_terrain DIRT2 spacing_to_other_terrain_types 1 number_of_clumps 9320 land_percent 100 }
+create_terrain REED_FOREST { base_terrain DLC_DESERTGRAVEL spacing_to_other_terrain_types 1 number_of_clumps 9320 land_percent 100 }
+
+create_terrain REED_FOREST { base_terrain GRASS set_avoid_player_start_areas 13 number_of_clumps 9320 land_percent 100 }
+create_terrain GRASS2 { base_terrain REED_FOREST spacing_to_other_terrain_types 1 number_of_clumps 9320 land_percent 100 }
+create_terrain DIRT2 { base_terrain GRASS2 spacing_to_other_terrain_types 1 number_of_clumps 9320 land_percent 100 }
+create_terrain DLC_DESERTGRAVEL { base_terrain DIRT2 spacing_to_other_terrain_types 1 number_of_clumps 9320 land_percent 100 }
+create_terrain REED_FOREST { base_terrain DLC_DESERTGRAVEL spacing_to_other_terrain_types 1 number_of_clumps 9320 land_percent 100 }
+
+create_terrain REED_FOREST { base_terrain GRASS set_avoid_player_start_areas 13 number_of_clumps 9320 land_percent 100 }
+create_terrain GRASS2 { base_terrain REED_FOREST spacing_to_other_terrain_types 1 number_of_clumps 9320 land_percent 100 }
+create_terrain DIRT2 { base_terrain GRASS2 spacing_to_other_terrain_types 1 number_of_clumps 9320 land_percent 100 }
+create_terrain DLC_DESERTGRAVEL { base_terrain DIRT2 spacing_to_other_terrain_types 1 number_of_clumps 9320 land_percent 100 }
+create_terrain REED_FOREST { base_terrain DLC_DESERTGRAVEL spacing_to_other_terrain_types 1 number_of_clumps 9320 land_percent 100 }
+
+create_terrain REED_FOREST { base_terrain GRASS set_avoid_player_start_areas 13 number_of_clumps 9320 land_percent 100 }
+create_terrain GRASS2 { base_terrain REED_FOREST spacing_to_other_terrain_types 1 number_of_clumps 9320 land_percent 100 }
+create_terrain DIRT2 { base_terrain GRASS2 spacing_to_other_terrain_types 1 number_of_clumps 9320 land_percent 100 }
+create_terrain DLC_DESERTGRAVEL { base_terrain DIRT2 spacing_to_other_terrain_types 1 number_of_clumps 9320 land_percent 100 }
+create_terrain REED_FOREST { base_terrain DLC_DESERTGRAVEL spacing_to_other_terrain_types 1 number_of_clumps 9320 land_percent 100 }
+
+create_terrain REED_FOREST { base_terrain GRASS set_avoid_player_start_areas 13 number_of_clumps 9320 land_percent 100 }
+create_terrain GRASS2 { base_terrain REED_FOREST spacing_to_other_terrain_types 1 number_of_clumps 9320 land_percent 100 }
+create_terrain DIRT2 { base_terrain GRASS2 spacing_to_other_terrain_types 1 number_of_clumps 9320 land_percent 100 }
+create_terrain DLC_DESERTGRAVEL { base_terrain DIRT2 spacing_to_other_terrain_types 1 number_of_clumps 9320 land_percent 100 }
+create_terrain REED_FOREST { base_terrain DLC_DESERTGRAVEL spacing_to_other_terrain_types 1 number_of_clumps 9320 land_percent 100 }
+
+create_terrain REED_FOREST { base_terrain GRASS set_avoid_player_start_areas 13 number_of_clumps 9320 land_percent 100 }
+create_terrain GRASS2 { base_terrain REED_FOREST spacing_to_other_terrain_types 1 number_of_clumps 9320 land_percent 100 }
+create_terrain DIRT2 { base_terrain GRASS2 spacing_to_other_terrain_types 1 number_of_clumps 9320 land_percent 100 }
+create_terrain DLC_DESERTGRAVEL { base_terrain DIRT2 spacing_to_other_terrain_types 1 number_of_clumps 9320 land_percent 100 }
+create_terrain REED_FOREST { base_terrain DLC_DESERTGRAVEL spacing_to_other_terrain_types 1 number_of_clumps 9320 land_percent 100 }
+
+create_terrain REED_FOREST { base_terrain GRASS set_avoid_player_start_areas 13 number_of_clumps 9320 land_percent 100 }
+create_terrain GRASS2 { base_terrain REED_FOREST spacing_to_other_terrain_types 1 number_of_clumps 9320 land_percent 100 }
+create_terrain DIRT2 { base_terrain GRASS2 spacing_to_other_terrain_types 1 number_of_clumps 9320 land_percent 100 }
+create_terrain DLC_DESERTGRAVEL { base_terrain DIRT2 spacing_to_other_terrain_types 1 number_of_clumps 9320 land_percent 100 }
+create_terrain REED_FOREST { base_terrain DLC_DESERTGRAVEL spacing_to_other_terrain_types 1 number_of_clumps 9320 land_percent 100 }
+
+create_terrain REED_FOREST { base_terrain GRASS set_avoid_player_start_areas 13 number_of_clumps 9320 land_percent 100 }
+create_terrain GRASS2 { base_terrain REED_FOREST spacing_to_other_terrain_types 1 number_of_clumps 9320 land_percent 100 }
+create_terrain DIRT2 { base_terrain GRASS2 spacing_to_other_terrain_types 1 number_of_clumps 9320 land_percent 100 }
+create_terrain DLC_DESERTGRAVEL { base_terrain DIRT2 spacing_to_other_terrain_types 1 number_of_clumps 9320 land_percent 100 }
+create_terrain REED_FOREST { base_terrain DLC_DESERTGRAVEL spacing_to_other_terrain_types 1 number_of_clumps 9320 land_percent 100 }
+
+create_terrain REED_FOREST { base_terrain GRASS set_avoid_player_start_areas 13 number_of_clumps 9320 land_percent 100 }
+create_terrain GRASS2 { base_terrain REED_FOREST spacing_to_other_terrain_types 1 number_of_clumps 9320 land_percent 100 }
+create_terrain DIRT2 { base_terrain GRASS2 spacing_to_other_terrain_types 1 number_of_clumps 9320 land_percent 100 }
+create_terrain DLC_DESERTGRAVEL { base_terrain DIRT2 spacing_to_other_terrain_types 1 number_of_clumps 9320 land_percent 100 }
+create_terrain REED_FOREST { base_terrain DLC_DESERTGRAVEL spacing_to_other_terrain_types 1 number_of_clumps 9320 land_percent 100 }
+
+create_terrain REED_FOREST { base_terrain GRASS set_avoid_player_start_areas 13 number_of_clumps 9320 land_percent 100 }
+create_terrain GRASS2 { base_terrain REED_FOREST spacing_to_other_terrain_types 1 number_of_clumps 9320 land_percent 100 }
+create_terrain DIRT2 { base_terrain GRASS2 spacing_to_other_terrain_types 1 number_of_clumps 9320 land_percent 100 }
+create_terrain DLC_DESERTGRAVEL { base_terrain DIRT2 spacing_to_other_terrain_types 1 number_of_clumps 9320 land_percent 100 }
+create_terrain REED_FOREST { base_terrain DLC_DESERTGRAVEL spacing_to_other_terrain_types 1 number_of_clumps 9320 land_percent 100 }
+
+create_terrain REED_FOREST { base_terrain GRASS set_avoid_player_start_areas 13 number_of_clumps 9320 land_percent 100 }
+create_terrain GRASS2 { base_terrain REED_FOREST spacing_to_other_terrain_types 1 number_of_clumps 9320 land_percent 100 }
+create_terrain DIRT2 { base_terrain GRASS2 spacing_to_other_terrain_types 1 number_of_clumps 9320 land_percent 100 }
+create_terrain DLC_DESERTGRAVEL { base_terrain DIRT2 spacing_to_other_terrain_types 1 number_of_clumps 9320 land_percent 100 }
+create_terrain REED_FOREST { base_terrain DLC_DESERTGRAVEL spacing_to_other_terrain_types 1 number_of_clumps 9320 land_percent 100 }
+
+create_terrain REED_FOREST { base_terrain GRASS set_avoid_player_start_areas 13 number_of_clumps 9320 land_percent 100 }
+create_terrain GRASS2 { base_terrain REED_FOREST spacing_to_other_terrain_types 1 number_of_clumps 9320 land_percent 100 }
+create_terrain DIRT2 { base_terrain GRASS2 spacing_to_other_terrain_types 1 number_of_clumps 9320 land_percent 100 }
+create_terrain DLC_DESERTGRAVEL { base_terrain DIRT2 spacing_to_other_terrain_types 1 number_of_clumps 9320 land_percent 100 }
+create_terrain REED_FOREST { base_terrain DLC_DESERTGRAVEL spacing_to_other_terrain_types 1 number_of_clumps 9320 land_percent 100 }
+
+create_terrain REED_FOREST { base_terrain GRASS set_avoid_player_start_areas 13 number_of_clumps 9320 land_percent 100 }
+create_terrain GRASS2 { base_terrain REED_FOREST spacing_to_other_terrain_types 1 number_of_clumps 9320 land_percent 100 }
+create_terrain DIRT2 { base_terrain GRASS2 spacing_to_other_terrain_types 1 number_of_clumps 9320 land_percent 100 }
+create_terrain DLC_DESERTGRAVEL { base_terrain DIRT2 spacing_to_other_terrain_types 1 number_of_clumps 9320 land_percent 100 }
+create_terrain REED_FOREST { base_terrain DLC_DESERTGRAVEL spacing_to_other_terrain_types 1 number_of_clumps 9320 land_percent 100 }
+
+create_terrain REED_FOREST { base_terrain GRASS set_avoid_player_start_areas 13 number_of_clumps 9320 land_percent 100 }
+create_terrain GRASS2 { base_terrain REED_FOREST spacing_to_other_terrain_types 1 number_of_clumps 9320 land_percent 100 }
+create_terrain DIRT2 { base_terrain GRASS2 spacing_to_other_terrain_types 1 number_of_clumps 9320 land_percent 100 }
+create_terrain DLC_DESERTGRAVEL { base_terrain DIRT2 spacing_to_other_terrain_types 1 number_of_clumps 9320 land_percent 100 }
+create_terrain REED_FOREST { base_terrain DLC_DESERTGRAVEL spacing_to_other_terrain_types 1 number_of_clumps 9320 land_percent 100 }
+
+create_terrain REED_FOREST { base_terrain GRASS set_avoid_player_start_areas 13 number_of_clumps 9320 land_percent 100 }
+create_terrain GRASS2 { base_terrain REED_FOREST spacing_to_other_terrain_types 1 number_of_clumps 9320 land_percent 100 }
+create_terrain DIRT2 { base_terrain GRASS2 spacing_to_other_terrain_types 1 number_of_clumps 9320 land_percent 100 }
+create_terrain DLC_DESERTGRAVEL { base_terrain DIRT2 spacing_to_other_terrain_types 1 number_of_clumps 9320 land_percent 100 }
+create_terrain REED_FOREST { base_terrain DLC_DESERTGRAVEL spacing_to_other_terrain_types 1 number_of_clumps 9320 land_percent 100 }
+
+create_terrain REED_FOREST { base_terrain GRASS set_avoid_player_start_areas 13 number_of_clumps 9320 land_percent 100 }
+create_terrain GRASS2 { base_terrain REED_FOREST spacing_to_other_terrain_types 1 number_of_clumps 9320 land_percent 100 }
+create_terrain DIRT2 { base_terrain GRASS2 spacing_to_other_terrain_types 1 number_of_clumps 9320 land_percent 100 }
+create_terrain DLC_DESERTGRAVEL { base_terrain DIRT2 spacing_to_other_terrain_types 1 number_of_clumps 9320 land_percent 100 }
+create_terrain REED_FOREST { base_terrain DLC_DESERTGRAVEL spacing_to_other_terrain_types 1 number_of_clumps 9320 land_percent 100 }
+
+create_terrain REED_FOREST { base_terrain GRASS set_avoid_player_start_areas 13 number_of_clumps 9320 land_percent 100 }
+create_terrain GRASS2 { base_terrain REED_FOREST spacing_to_other_terrain_types 1 number_of_clumps 9320 land_percent 100 }
+create_terrain DIRT2 { base_terrain GRASS2 spacing_to_other_terrain_types 1 number_of_clumps 9320 land_percent 100 }
+create_terrain DLC_DESERTGRAVEL { base_terrain DIRT2 spacing_to_other_terrain_types 1 number_of_clumps 9320 land_percent 100 }
+create_terrain REED_FOREST { base_terrain DLC_DESERTGRAVEL spacing_to_other_terrain_types 1 number_of_clumps 9320 land_percent 100 }
+
+create_terrain REED_FOREST { base_terrain GRASS set_avoid_player_start_areas 13 number_of_clumps 9320 land_percent 100 }
+create_terrain GRASS2 { base_terrain REED_FOREST spacing_to_other_terrain_types 1 number_of_clumps 9320 land_percent 100 }
+create_terrain DIRT2 { base_terrain GRASS2 spacing_to_other_terrain_types 1 number_of_clumps 9320 land_percent 100 }
+create_terrain DLC_DESERTGRAVEL { base_terrain DIRT2 spacing_to_other_terrain_types 1 number_of_clumps 9320 land_percent 100 }
+create_terrain REED_FOREST { base_terrain DLC_DESERTGRAVEL spacing_to_other_terrain_types 1 number_of_clumps 9320 land_percent 100 }
+
+create_terrain REED_FOREST { base_terrain GRASS set_avoid_player_start_areas 13 number_of_clumps 9320 land_percent 100 }
+create_terrain GRASS2 { base_terrain REED_FOREST spacing_to_other_terrain_types 1 number_of_clumps 9320 land_percent 100 }
+create_terrain DIRT2 { base_terrain GRASS2 spacing_to_other_terrain_types 1 number_of_clumps 9320 land_percent 100 }
+create_terrain DLC_DESERTGRAVEL { base_terrain DIRT2 spacing_to_other_terrain_types 1 number_of_clumps 9320 land_percent 100 }
+create_terrain REED_FOREST { base_terrain DLC_DESERTGRAVEL spacing_to_other_terrain_types 1 number_of_clumps 9320 land_percent 100 }
+
+create_terrain REED_FOREST { base_terrain GRASS set_avoid_player_start_areas 13 number_of_clumps 9320 land_percent 100 }
+create_terrain GRASS2 { base_terrain REED_FOREST spacing_to_other_terrain_types 1 number_of_clumps 9320 land_percent 100 }
+create_terrain DIRT2 { base_terrain GRASS2 spacing_to_other_terrain_types 1 number_of_clumps 9320 land_percent 100 }
+create_terrain DLC_DESERTGRAVEL { base_terrain DIRT2 spacing_to_other_terrain_types 1 number_of_clumps 9320 land_percent 100 }
+create_terrain REED_FOREST { base_terrain DLC_DESERTGRAVEL spacing_to_other_terrain_types 1 number_of_clumps 9320 land_percent 100 }
+
+create_terrain REED_FOREST { base_terrain GRASS set_avoid_player_start_areas 13 number_of_clumps 9320 land_percent 100 }
+create_terrain GRASS2 { base_terrain REED_FOREST spacing_to_other_terrain_types 1 number_of_clumps 9320 land_percent 100 }
+create_terrain DIRT2 { base_terrain GRASS2 spacing_to_other_terrain_types 1 number_of_clumps 9320 land_percent 100 }
+create_terrain DLC_DESERTGRAVEL { base_terrain DIRT2 spacing_to_other_terrain_types 1 number_of_clumps 9320 land_percent 100 }
+create_terrain REED_FOREST { base_terrain DLC_DESERTGRAVEL spacing_to_other_terrain_types 1 number_of_clumps 9320 land_percent 100 }
+
+<OBJECTS_GENERATION>
+
+create_object TOWN_CENTER
+{
+	set_place_for_every_player
+	max_distance_to_players 0
+}
+
+create_object VILLAGER
+{	
+	number_of_objects 3
+	set_place_for_every_player
+	max_distance_to_players 4
+	find_closest
+	force_placement
+}
+
+if REGICIDE
+create_object KING
+{	
+	set_place_for_every_player
+	max_distance_to_players 4
+	find_closest
+}
+endif
+
+create_object FORAGE
+{
+	number_of_objects 9320
+	set_scaling_to_map_size
+	terrain_to_place_on GRASS2
+	resource_delta -25
+}
+create_object GOLD
+{
+	number_of_objects 9320
+	set_scaling_to_map_size
+	terrain_to_place_on DIRT2
+	resource_delta -700
+}
+create_object STONE
+{
+	number_of_objects 9320
+	set_scaling_to_map_size
+	terrain_to_place_on DLC_DESERTGRAVEL
+	resource_delta -250
+}

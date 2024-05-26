@@ -1,0 +1,844 @@
+/* Geothermal Valley
+
+08 April 2022
+by Zetnus
+zetnus@outlook.com
+Zetnus#6414 on Discord
+
+Learn about random map scripting: https://docs.google.com/document/d/e/2PACX-1vR_I1I9u-hI2FFm-EYyjoM_-9dNJFOfTaIgr05wXNbdpv9tI18b6r18ARULy3Jqyvlq6-lc2VjX6xP4/pub
+
+This map was harvested from a mod in the official AOE2DE mod center, whose licensing agreement with Microsoft supersedes any Github restrictions: https://www.microsoft.com/en-us/servicesagreement
+
+*/
+
+#const GRAVEL_DEFAULT 70
+#const UNDERBRUSH_LEAVES 71
+#const UNDERBRUSH_SNOW 72
+#const SNOW_LIGHT 73
+#const SNOW_HEAVY 74
+#const DIRT_MUD 76
+#const WATER_GREEN 95
+#const WATER_BROWN 96
+
+#const BLANKOBJECT 647
+#const SMOKE 1308
+#const ROCK_2 1323
+
+#const PLACEHOLDER1 84
+#const PLACEHOLDER2 12
+#const PLACEHOLDER3 6
+#const PLACEHOLDER4 11
+#const PLACEHOLDER5 14
+#const PLACEHOLDER6 85
+#const PLACEHOLDER7 86
+#const PLACEHOLDER8 87
+#const PLACEHOLDER_TEMP 47
+#const PLACEHOLDER_WATER 97
+
+/* =================================================================================================== */
+<PLAYER_SETUP>
+
+random_placement
+effect_amount GAIA_SET_ATTRIBUTE ROCK_2 ATTR_OCCLUSION_MODE 2
+effect_amount GAIA_SET_ATTRIBUTE ROCK ATTR_OCCLUSION_MODE 2
+
+/* Disabling Trade Carts and Cogs for Multi-team Games */
+if 2_TEAM_GAME
+else
+  #const TRADE_CART_ENABLER 161
+  #const TRADE_COG_ENABLER 180
+  #const TRADE_CARAVAN_ENABLER 48
+  #const HINDU_CARAVANSERAI_ENABLER 518
+  #const PERSIAN_CARAVANSERAI_ENABLER 552  
+  #const SILK_ROAD 499
+  effect_amount DISABLE_TECH TRADE_COG_ENABLER ATTR_DISABLE 180
+  effect_amount DISABLE_TECH TRADE_CART_ENABLER ATTR_DISABLE 161
+  effect_amount DISABLE_TECH TRADE_CARAVAN_ENABLER ATTR_DISABLE 48
+  effect_amount DISABLE_TECH HINDU_CARAVANSERAI_ENABLER ATTR_DISABLE 518
+  effect_amount DISABLE_TECH PERSIAN_CARAVANSERAI_ENABLER ATTR_DISABLE 552
+  effect_amount DISABLE_TECH SILK_ROAD ATTR_DISABLE 499    
+endif
+
+/* =================================================================================================== */
+<LAND_GENERATION> 
+
+base_terrain SNOW
+/* team 1 */
+create_land { terrain_type PLACEHOLDER1 land_percent 100 base_size 9 left_border 20 right_border 20 top_border 20 bottom_border 20 zone 1 other_zone_avoidance_distance 7 clumping_factor 20 assign_to AT_TEAM 1 0 0 circle_radius 15 0 }
+create_land { terrain_type PLACEHOLDER2 land_percent 100 base_size 9 left_border 20 right_border 20 top_border 20 bottom_border 20 zone 1 other_zone_avoidance_distance 7 clumping_factor 20 assign_to AT_TEAM 1 0 0 }
+create_land { terrain_type PLACEHOLDER3 land_percent 100 base_size 9 left_border 20 right_border 20 top_border 20 bottom_border 20 zone 1 other_zone_avoidance_distance 7 clumping_factor 20 assign_to AT_TEAM 1 0 0 }
+create_land { terrain_type PLACEHOLDER4 land_percent 100 base_size 9 left_border 20 right_border 20 top_border 20 bottom_border 20 zone 1 other_zone_avoidance_distance 7 clumping_factor 20 assign_to AT_TEAM 1 0 0 }
+create_land { terrain_type PLACEHOLDER5 land_percent 100 base_size 9 left_border 20 right_border 20 top_border 20 bottom_border 20 zone 1 other_zone_avoidance_distance 7 clumping_factor 20 assign_to AT_TEAM 1 0 0 }
+create_land { terrain_type PLACEHOLDER6 land_percent 100 base_size 9 left_border 20 right_border 20 top_border 20 bottom_border 20 zone 1 other_zone_avoidance_distance 7 clumping_factor 20 assign_to AT_TEAM 1 0 0 }
+create_land { terrain_type PLACEHOLDER7 land_percent 100 base_size 9 left_border 20 right_border 20 top_border 20 bottom_border 20 zone 1 other_zone_avoidance_distance 7 clumping_factor 20 assign_to AT_TEAM 1 0 0 }
+create_land { terrain_type PLACEHOLDER8 land_percent 100 base_size 9 left_border 20 right_border 20 top_border 20 bottom_border 20 zone 1 other_zone_avoidance_distance 7 clumping_factor 20 assign_to AT_TEAM 1 0 0 }
+/* team 2 */
+create_land { terrain_type PLACEHOLDER1 land_percent 100 base_size 9 left_border 20 right_border 20 top_border 20 bottom_border 20 zone 2 other_zone_avoidance_distance 7 clumping_factor 20 assign_to AT_TEAM 2 0 0 circle_radius 15 0 }
+create_land { terrain_type PLACEHOLDER2 land_percent 100 base_size 9 left_border 20 right_border 20 top_border 20 bottom_border 20 zone 2 other_zone_avoidance_distance 7 clumping_factor 20 assign_to AT_TEAM 2 0 0 }
+create_land { terrain_type PLACEHOLDER3 land_percent 100 base_size 9 left_border 20 right_border 20 top_border 20 bottom_border 20 zone 2 other_zone_avoidance_distance 7 clumping_factor 20 assign_to AT_TEAM 2 0 0 }
+create_land { terrain_type PLACEHOLDER4 land_percent 100 base_size 9 left_border 20 right_border 20 top_border 20 bottom_border 20 zone 2 other_zone_avoidance_distance 7 clumping_factor 20 assign_to AT_TEAM 2 0 0 }
+create_land { terrain_type PLACEHOLDER5 land_percent 100 base_size 9 left_border 20 right_border 20 top_border 20 bottom_border 20 zone 2 other_zone_avoidance_distance 7 clumping_factor 20 assign_to AT_TEAM 2 0 0 }
+create_land { terrain_type PLACEHOLDER6 land_percent 100 base_size 9 left_border 20 right_border 20 top_border 20 bottom_border 20 zone 2 other_zone_avoidance_distance 7 clumping_factor 20 assign_to AT_TEAM 2 0 0 }
+create_land { terrain_type PLACEHOLDER7 land_percent 100 base_size 9 left_border 20 right_border 20 top_border 20 bottom_border 20 zone 2 other_zone_avoidance_distance 7 clumping_factor 20 assign_to AT_TEAM 2 0 0 }
+create_land { terrain_type PLACEHOLDER8 land_percent 100 base_size 9 left_border 20 right_border 20 top_border 20 bottom_border 20 zone 2 other_zone_avoidance_distance 7 clumping_factor 20 assign_to AT_TEAM 2 0 0 }
+/* team 3 */
+create_land { terrain_type PLACEHOLDER1 land_percent 100 base_size 9 left_border 20 right_border 20 top_border 20 bottom_border 20 zone 3 other_zone_avoidance_distance 7 clumping_factor 20 assign_to AT_TEAM 3 0 0 circle_radius 15 0 }
+create_land { terrain_type PLACEHOLDER2 land_percent 100 base_size 9 left_border 20 right_border 20 top_border 20 bottom_border 20 zone 3 other_zone_avoidance_distance 7 clumping_factor 20 assign_to AT_TEAM 3 0 0 }
+create_land { terrain_type PLACEHOLDER3 land_percent 100 base_size 9 left_border 20 right_border 20 top_border 20 bottom_border 20 zone 3 other_zone_avoidance_distance 7 clumping_factor 20 assign_to AT_TEAM 3 0 0 }
+create_land { terrain_type PLACEHOLDER4 land_percent 100 base_size 9 left_border 20 right_border 20 top_border 20 bottom_border 20 zone 3 other_zone_avoidance_distance 7 clumping_factor 20 assign_to AT_TEAM 3 0 0 }
+create_land { terrain_type PLACEHOLDER5 land_percent 100 base_size 9 left_border 20 right_border 20 top_border 20 bottom_border 20 zone 3 other_zone_avoidance_distance 7 clumping_factor 20 assign_to AT_TEAM 3 0 0 }
+create_land { terrain_type PLACEHOLDER6 land_percent 100 base_size 9 left_border 20 right_border 20 top_border 20 bottom_border 20 zone 3 other_zone_avoidance_distance 7 clumping_factor 20 assign_to AT_TEAM 3 0 0 }
+create_land { terrain_type PLACEHOLDER7 land_percent 100 base_size 9 left_border 20 right_border 20 top_border 20 bottom_border 20 zone 3 other_zone_avoidance_distance 7 clumping_factor 20 assign_to AT_TEAM 3 0 0 }
+create_land { terrain_type PLACEHOLDER8 land_percent 100 base_size 9 left_border 20 right_border 20 top_border 20 bottom_border 20 zone 3 other_zone_avoidance_distance 7 clumping_factor 20 assign_to AT_TEAM 3 0 0 }
+/* team 4 */
+create_land { terrain_type PLACEHOLDER1 land_percent 100 base_size 9 left_border 20 right_border 20 top_border 20 bottom_border 20 zone 4 other_zone_avoidance_distance 7 clumping_factor 20 assign_to AT_TEAM 4 0 0 circle_radius 15 0 }
+create_land { terrain_type PLACEHOLDER2 land_percent 100 base_size 9 left_border 20 right_border 20 top_border 20 bottom_border 20 zone 4 other_zone_avoidance_distance 7 clumping_factor 20 assign_to AT_TEAM 4 0 0 }
+create_land { terrain_type PLACEHOLDER3 land_percent 100 base_size 9 left_border 20 right_border 20 top_border 20 bottom_border 20 zone 4 other_zone_avoidance_distance 7 clumping_factor 20 assign_to AT_TEAM 4 0 0 }
+create_land { terrain_type PLACEHOLDER4 land_percent 100 base_size 9 left_border 20 right_border 20 top_border 20 bottom_border 20 zone 4 other_zone_avoidance_distance 7 clumping_factor 20 assign_to AT_TEAM 4 0 0 }
+create_land { terrain_type PLACEHOLDER5 land_percent 100 base_size 9 left_border 20 right_border 20 top_border 20 bottom_border 20 zone 4 other_zone_avoidance_distance 7 clumping_factor 20 assign_to AT_TEAM 4 0 0 }
+create_land { terrain_type PLACEHOLDER6 land_percent 100 base_size 9 left_border 20 right_border 20 top_border 20 bottom_border 20 zone 4 other_zone_avoidance_distance 7 clumping_factor 20 assign_to AT_TEAM 4 0 0 }
+create_land { terrain_type PLACEHOLDER7 land_percent 100 base_size 9 left_border 20 right_border 20 top_border 20 bottom_border 20 zone 4 other_zone_avoidance_distance 7 clumping_factor 20 assign_to AT_TEAM 4 0 0 }
+create_land { terrain_type PLACEHOLDER8 land_percent 100 base_size 9 left_border 20 right_border 20 top_border 20 bottom_border 20 zone 4 other_zone_avoidance_distance 7 clumping_factor 20 assign_to AT_TEAM 4 0 0 }
+/* team 4 */
+create_land { terrain_type PLACEHOLDER1 land_percent 100 base_size 9 left_border 20 right_border 20 top_border 20 bottom_border 20 zone 4 other_zone_avoidance_distance 7 clumping_factor 20 assign_to AT_TEAM 4 0 0 circle_radius 15 0 }
+create_land { terrain_type PLACEHOLDER2 land_percent 100 base_size 9 left_border 20 right_border 20 top_border 20 bottom_border 20 zone 4 other_zone_avoidance_distance 7 clumping_factor 20 assign_to AT_TEAM 4 0 0 }
+create_land { terrain_type PLACEHOLDER3 land_percent 100 base_size 9 left_border 20 right_border 20 top_border 20 bottom_border 20 zone 4 other_zone_avoidance_distance 7 clumping_factor 20 assign_to AT_TEAM 4 0 0 }
+create_land { terrain_type PLACEHOLDER4 land_percent 100 base_size 9 left_border 20 right_border 20 top_border 20 bottom_border 20 zone 4 other_zone_avoidance_distance 7 clumping_factor 20 assign_to AT_TEAM 4 0 0 }
+create_land { terrain_type PLACEHOLDER5 land_percent 100 base_size 9 left_border 20 right_border 20 top_border 20 bottom_border 20 zone 4 other_zone_avoidance_distance 7 clumping_factor 20 assign_to AT_TEAM 4 0 0 }
+create_land { terrain_type PLACEHOLDER6 land_percent 100 base_size 9 left_border 20 right_border 20 top_border 20 bottom_border 20 zone 4 other_zone_avoidance_distance 7 clumping_factor 20 assign_to AT_TEAM 4 0 0 }
+create_land { terrain_type PLACEHOLDER7 land_percent 100 base_size 9 left_border 20 right_border 20 top_border 20 bottom_border 20 zone 4 other_zone_avoidance_distance 7 clumping_factor 20 assign_to AT_TEAM 4 0 0 }
+create_land { terrain_type PLACEHOLDER8 land_percent 100 base_size 9 left_border 20 right_border 20 top_border 20 bottom_border 20 zone 4 other_zone_avoidance_distance 7 clumping_factor 20 assign_to AT_TEAM 4 0 0 }
+/* unteamed */
+create_land { terrain_type PLACEHOLDER1 land_percent 100 base_size 9 left_border 20 right_border 20 top_border 20 bottom_border 20 zone 5 other_zone_avoidance_distance 7 clumping_factor 20 assign_to AT_TEAM -10 0 0 circle_radius 15 0 }
+create_land { terrain_type PLACEHOLDER2 land_percent 100 base_size 9 left_border 20 right_border 20 top_border 20 bottom_border 20 zone 6 other_zone_avoidance_distance 7 clumping_factor 20 assign_to AT_TEAM -10 0 0 }
+create_land { terrain_type PLACEHOLDER3 land_percent 100 base_size 9 left_border 20 right_border 20 top_border 20 bottom_border 20 zone 7 other_zone_avoidance_distance 7 clumping_factor 20 assign_to AT_TEAM -10 0 0 }
+create_land { terrain_type PLACEHOLDER4 land_percent 100 base_size 9 left_border 20 right_border 20 top_border 20 bottom_border 20 zone 8 other_zone_avoidance_distance 7 clumping_factor 20 assign_to AT_TEAM -10 0 0 }
+create_land { terrain_type PLACEHOLDER5 land_percent 100 base_size 9 left_border 20 right_border 20 top_border 20 bottom_border 20 zone 9 other_zone_avoidance_distance 7 clumping_factor 20 assign_to AT_TEAM -10 0 0 }
+create_land { terrain_type PLACEHOLDER6 land_percent 100 base_size 9 left_border 20 right_border 20 top_border 20 bottom_border 20 zone 10 other_zone_avoidance_distance 7 clumping_factor 20 assign_to AT_TEAM -10 0 0 }
+create_land { terrain_type PLACEHOLDER7 land_percent 100 base_size 9 left_border 20 right_border 20 top_border 20 bottom_border 20 zone 11 other_zone_avoidance_distance 7 clumping_factor 20 assign_to AT_TEAM -10 0 0 }
+create_land { terrain_type PLACEHOLDER8 land_percent 100 base_size 9 left_border 20 right_border 20 top_border 20 bottom_border 20 zone 12 other_zone_avoidance_distance 7 clumping_factor 20 assign_to AT_TEAM -10 0 0 }
+
+
+create_land {
+	terrain_type SNOW
+	land_position 50 50
+	land_percent 0
+	base_size 0
+	land_id 1
+}
+
+/* =================================================================================================== */
+<ELEVATION_GENERATION>
+create_elevation 7 {
+	base_terrain SNOW
+	number_of_tiles 999999
+}
+create_elevation 7 {
+	base_terrain SNOW
+	number_of_tiles 999999
+}
+
+/* =================================================================================================== */
+<TERRAIN_GENERATION>
+color_correction CC_WINTER
+
+create_terrain PLACEHOLDER_TEMP { base_terrain PLACEHOLDER1 land_percent 100 }
+create_terrain PLACEHOLDER_WATER { base_terrain PLACEHOLDER_TEMP number_of_tiles 5 set_avoid_player_start_areas spacing_to_other_terrain_types 5 }
+create_terrain WATER_GREEN { base_terrain PLACEHOLDER_WATER land_percent 100 }
+create_terrain PLACEHOLDER_WATER { base_terrain PLACEHOLDER_TEMP number_of_tiles 5 set_avoid_player_start_areas spacing_to_other_terrain_types 5 }
+create_terrain WATER_GREEN { base_terrain PLACEHOLDER_WATER land_percent 100 }
+create_terrain PLACEHOLDER_WATER { base_terrain PLACEHOLDER_TEMP number_of_tiles 5 set_avoid_player_start_areas spacing_to_other_terrain_types 5 }
+create_terrain WATER_GREEN { base_terrain PLACEHOLDER_WATER land_percent 100 }
+create_terrain PLACEHOLDER_WATER { base_terrain PLACEHOLDER_TEMP number_of_tiles 5 set_avoid_player_start_areas spacing_to_other_terrain_types 5 }
+create_terrain WATER_GREEN { base_terrain PLACEHOLDER_WATER land_percent 100 }
+create_terrain GRASS { base_terrain PLACEHOLDER_TEMP land_percent 100 }
+create_terrain GRASS { base_terrain PLACEHOLDER_TEMP land_percent 100 number_of_clumps 9320 set_scale_by_groups }
+create_terrain PLACEHOLDER_TEMP { base_terrain PLACEHOLDER1 land_percent 100 }
+create_terrain PLACEHOLDER_WATER { base_terrain PLACEHOLDER_TEMP number_of_tiles 5 set_avoid_player_start_areas spacing_to_other_terrain_types 5 }
+create_terrain WATER_GREEN { base_terrain PLACEHOLDER_WATER land_percent 100 }
+create_terrain PLACEHOLDER_WATER { base_terrain PLACEHOLDER_TEMP number_of_tiles 5 set_avoid_player_start_areas spacing_to_other_terrain_types 5 }
+create_terrain WATER_GREEN { base_terrain PLACEHOLDER_WATER land_percent 100 }
+create_terrain PLACEHOLDER_WATER { base_terrain PLACEHOLDER_TEMP number_of_tiles 5 set_avoid_player_start_areas spacing_to_other_terrain_types 5 }
+create_terrain WATER_GREEN { base_terrain PLACEHOLDER_WATER land_percent 100 }
+create_terrain PLACEHOLDER_WATER { base_terrain PLACEHOLDER_TEMP number_of_tiles 5 set_avoid_player_start_areas spacing_to_other_terrain_types 5 }
+create_terrain WATER_GREEN { base_terrain PLACEHOLDER_WATER land_percent 100 }
+create_terrain GRASS { base_terrain PLACEHOLDER_TEMP land_percent 100 }
+create_terrain GRASS { base_terrain PLACEHOLDER_TEMP land_percent 100 number_of_clumps 9320 set_scale_by_groups }
+create_terrain PLACEHOLDER_TEMP { base_terrain PLACEHOLDER1 land_percent 100 }
+create_terrain PLACEHOLDER_WATER { base_terrain PLACEHOLDER_TEMP number_of_tiles 5 set_avoid_player_start_areas spacing_to_other_terrain_types 5 }
+create_terrain WATER_GREEN { base_terrain PLACEHOLDER_WATER land_percent 100 }
+create_terrain PLACEHOLDER_WATER { base_terrain PLACEHOLDER_TEMP number_of_tiles 5 set_avoid_player_start_areas spacing_to_other_terrain_types 5 }
+create_terrain WATER_GREEN { base_terrain PLACEHOLDER_WATER land_percent 100 }
+create_terrain PLACEHOLDER_WATER { base_terrain PLACEHOLDER_TEMP number_of_tiles 5 set_avoid_player_start_areas spacing_to_other_terrain_types 5 }
+create_terrain WATER_GREEN { base_terrain PLACEHOLDER_WATER land_percent 100 }
+create_terrain PLACEHOLDER_WATER { base_terrain PLACEHOLDER_TEMP number_of_tiles 5 set_avoid_player_start_areas spacing_to_other_terrain_types 5 }
+create_terrain WATER_GREEN { base_terrain PLACEHOLDER_WATER land_percent 100 }
+create_terrain GRASS { base_terrain PLACEHOLDER_TEMP land_percent 100 }
+create_terrain GRASS { base_terrain PLACEHOLDER_TEMP land_percent 100 number_of_clumps 9320 set_scale_by_groups }
+create_terrain PLACEHOLDER_TEMP { base_terrain PLACEHOLDER1 land_percent 100 }
+create_terrain PLACEHOLDER_WATER { base_terrain PLACEHOLDER_TEMP number_of_tiles 5 set_avoid_player_start_areas spacing_to_other_terrain_types 5 }
+create_terrain WATER_GREEN { base_terrain PLACEHOLDER_WATER land_percent 100 }
+create_terrain PLACEHOLDER_WATER { base_terrain PLACEHOLDER_TEMP number_of_tiles 5 set_avoid_player_start_areas spacing_to_other_terrain_types 5 }
+create_terrain WATER_GREEN { base_terrain PLACEHOLDER_WATER land_percent 100 }
+create_terrain PLACEHOLDER_WATER { base_terrain PLACEHOLDER_TEMP number_of_tiles 5 set_avoid_player_start_areas spacing_to_other_terrain_types 5 }
+create_terrain WATER_GREEN { base_terrain PLACEHOLDER_WATER land_percent 100 }
+create_terrain PLACEHOLDER_WATER { base_terrain PLACEHOLDER_TEMP number_of_tiles 5 set_avoid_player_start_areas spacing_to_other_terrain_types 5 }
+create_terrain WATER_GREEN { base_terrain PLACEHOLDER_WATER land_percent 100 }
+create_terrain GRASS { base_terrain PLACEHOLDER_TEMP land_percent 100 }
+create_terrain GRASS { base_terrain PLACEHOLDER_TEMP land_percent 100 number_of_clumps 9320 set_scale_by_groups }
+create_terrain PLACEHOLDER_TEMP { base_terrain PLACEHOLDER1 land_percent 100 }
+create_terrain PLACEHOLDER_WATER { base_terrain PLACEHOLDER_TEMP number_of_tiles 5 set_avoid_player_start_areas spacing_to_other_terrain_types 5 }
+create_terrain WATER_GREEN { base_terrain PLACEHOLDER_WATER land_percent 100 }
+create_terrain PLACEHOLDER_WATER { base_terrain PLACEHOLDER_TEMP number_of_tiles 5 set_avoid_player_start_areas spacing_to_other_terrain_types 5 }
+create_terrain WATER_GREEN { base_terrain PLACEHOLDER_WATER land_percent 100 }
+create_terrain PLACEHOLDER_WATER { base_terrain PLACEHOLDER_TEMP number_of_tiles 5 set_avoid_player_start_areas spacing_to_other_terrain_types 5 }
+create_terrain WATER_GREEN { base_terrain PLACEHOLDER_WATER land_percent 100 }
+create_terrain PLACEHOLDER_WATER { base_terrain PLACEHOLDER_TEMP number_of_tiles 5 set_avoid_player_start_areas spacing_to_other_terrain_types 5 }
+create_terrain WATER_GREEN { base_terrain PLACEHOLDER_WATER land_percent 100 }
+create_terrain GRASS { base_terrain PLACEHOLDER_TEMP land_percent 100 }
+create_terrain GRASS { base_terrain PLACEHOLDER_TEMP land_percent 100 number_of_clumps 9320 set_scale_by_groups }
+
+create_terrain PLACEHOLDER_TEMP { base_terrain PLACEHOLDER2 land_percent 100 }
+create_terrain PLACEHOLDER_WATER { base_terrain PLACEHOLDER_TEMP number_of_tiles 5 set_avoid_player_start_areas spacing_to_other_terrain_types 5 }
+create_terrain WATER_GREEN { base_terrain PLACEHOLDER_WATER land_percent 100 }
+create_terrain PLACEHOLDER_WATER { base_terrain PLACEHOLDER_TEMP number_of_tiles 5 set_avoid_player_start_areas spacing_to_other_terrain_types 5 }
+create_terrain WATER_GREEN { base_terrain PLACEHOLDER_WATER land_percent 100 }
+create_terrain PLACEHOLDER_WATER { base_terrain PLACEHOLDER_TEMP number_of_tiles 5 set_avoid_player_start_areas spacing_to_other_terrain_types 5 }
+create_terrain WATER_GREEN { base_terrain PLACEHOLDER_WATER land_percent 100 }
+create_terrain PLACEHOLDER_WATER { base_terrain PLACEHOLDER_TEMP number_of_tiles 5 set_avoid_player_start_areas spacing_to_other_terrain_types 5 }
+create_terrain WATER_GREEN { base_terrain PLACEHOLDER_WATER land_percent 100 }
+create_terrain GRASS { base_terrain PLACEHOLDER_TEMP land_percent 100 }
+create_terrain GRASS { base_terrain PLACEHOLDER_TEMP land_percent 100 number_of_clumps 9320 set_scale_by_groups }
+create_terrain PLACEHOLDER_TEMP { base_terrain PLACEHOLDER2 land_percent 100 }
+create_terrain PLACEHOLDER_WATER { base_terrain PLACEHOLDER_TEMP number_of_tiles 5 set_avoid_player_start_areas spacing_to_other_terrain_types 5 }
+create_terrain WATER_GREEN { base_terrain PLACEHOLDER_WATER land_percent 100 }
+create_terrain PLACEHOLDER_WATER { base_terrain PLACEHOLDER_TEMP number_of_tiles 5 set_avoid_player_start_areas spacing_to_other_terrain_types 5 }
+create_terrain WATER_GREEN { base_terrain PLACEHOLDER_WATER land_percent 100 }
+create_terrain PLACEHOLDER_WATER { base_terrain PLACEHOLDER_TEMP number_of_tiles 5 set_avoid_player_start_areas spacing_to_other_terrain_types 5 }
+create_terrain WATER_GREEN { base_terrain PLACEHOLDER_WATER land_percent 100 }
+create_terrain PLACEHOLDER_WATER { base_terrain PLACEHOLDER_TEMP number_of_tiles 5 set_avoid_player_start_areas spacing_to_other_terrain_types 5 }
+create_terrain WATER_GREEN { base_terrain PLACEHOLDER_WATER land_percent 100 }
+create_terrain GRASS { base_terrain PLACEHOLDER_TEMP land_percent 100 }
+create_terrain GRASS { base_terrain PLACEHOLDER_TEMP land_percent 100 number_of_clumps 9320 set_scale_by_groups }
+create_terrain PLACEHOLDER_TEMP { base_terrain PLACEHOLDER2 land_percent 100 }
+create_terrain PLACEHOLDER_WATER { base_terrain PLACEHOLDER_TEMP number_of_tiles 5 set_avoid_player_start_areas spacing_to_other_terrain_types 5 }
+create_terrain WATER_GREEN { base_terrain PLACEHOLDER_WATER land_percent 100 }
+create_terrain PLACEHOLDER_WATER { base_terrain PLACEHOLDER_TEMP number_of_tiles 5 set_avoid_player_start_areas spacing_to_other_terrain_types 5 }
+create_terrain WATER_GREEN { base_terrain PLACEHOLDER_WATER land_percent 100 }
+create_terrain PLACEHOLDER_WATER { base_terrain PLACEHOLDER_TEMP number_of_tiles 5 set_avoid_player_start_areas spacing_to_other_terrain_types 5 }
+create_terrain WATER_GREEN { base_terrain PLACEHOLDER_WATER land_percent 100 }
+create_terrain PLACEHOLDER_WATER { base_terrain PLACEHOLDER_TEMP number_of_tiles 5 set_avoid_player_start_areas spacing_to_other_terrain_types 5 }
+create_terrain WATER_GREEN { base_terrain PLACEHOLDER_WATER land_percent 100 }
+create_terrain GRASS { base_terrain PLACEHOLDER_TEMP land_percent 100 }
+create_terrain GRASS { base_terrain PLACEHOLDER_TEMP land_percent 100 number_of_clumps 9320 set_scale_by_groups }
+create_terrain PLACEHOLDER_TEMP { base_terrain PLACEHOLDER2 land_percent 100 }
+create_terrain PLACEHOLDER_WATER { base_terrain PLACEHOLDER_TEMP number_of_tiles 5 set_avoid_player_start_areas spacing_to_other_terrain_types 5 }
+create_terrain WATER_GREEN { base_terrain PLACEHOLDER_WATER land_percent 100 }
+create_terrain PLACEHOLDER_WATER { base_terrain PLACEHOLDER_TEMP number_of_tiles 5 set_avoid_player_start_areas spacing_to_other_terrain_types 5 }
+create_terrain WATER_GREEN { base_terrain PLACEHOLDER_WATER land_percent 100 }
+create_terrain PLACEHOLDER_WATER { base_terrain PLACEHOLDER_TEMP number_of_tiles 5 set_avoid_player_start_areas spacing_to_other_terrain_types 5 }
+create_terrain WATER_GREEN { base_terrain PLACEHOLDER_WATER land_percent 100 }
+create_terrain PLACEHOLDER_WATER { base_terrain PLACEHOLDER_TEMP number_of_tiles 5 set_avoid_player_start_areas spacing_to_other_terrain_types 5 }
+create_terrain WATER_GREEN { base_terrain PLACEHOLDER_WATER land_percent 100 }
+create_terrain GRASS { base_terrain PLACEHOLDER_TEMP land_percent 100 }
+create_terrain GRASS { base_terrain PLACEHOLDER_TEMP land_percent 100 number_of_clumps 9320 set_scale_by_groups }
+create_terrain PLACEHOLDER_TEMP { base_terrain PLACEHOLDER2 land_percent 100 }
+create_terrain PLACEHOLDER_WATER { base_terrain PLACEHOLDER_TEMP number_of_tiles 5 set_avoid_player_start_areas spacing_to_other_terrain_types 5 }
+create_terrain WATER_GREEN { base_terrain PLACEHOLDER_WATER land_percent 100 }
+create_terrain PLACEHOLDER_WATER { base_terrain PLACEHOLDER_TEMP number_of_tiles 5 set_avoid_player_start_areas spacing_to_other_terrain_types 5 }
+create_terrain WATER_GREEN { base_terrain PLACEHOLDER_WATER land_percent 100 }
+create_terrain PLACEHOLDER_WATER { base_terrain PLACEHOLDER_TEMP number_of_tiles 5 set_avoid_player_start_areas spacing_to_other_terrain_types 5 }
+create_terrain WATER_GREEN { base_terrain PLACEHOLDER_WATER land_percent 100 }
+create_terrain PLACEHOLDER_WATER { base_terrain PLACEHOLDER_TEMP number_of_tiles 5 set_avoid_player_start_areas spacing_to_other_terrain_types 5 }
+create_terrain WATER_GREEN { base_terrain PLACEHOLDER_WATER land_percent 100 }
+create_terrain GRASS { base_terrain PLACEHOLDER_TEMP land_percent 100 }
+create_terrain GRASS { base_terrain PLACEHOLDER_TEMP land_percent 100 number_of_clumps 9320 set_scale_by_groups }
+
+create_terrain PLACEHOLDER_TEMP { base_terrain PLACEHOLDER3 land_percent 100 }
+create_terrain PLACEHOLDER_WATER { base_terrain PLACEHOLDER_TEMP number_of_tiles 5 set_avoid_player_start_areas spacing_to_other_terrain_types 5 }
+create_terrain WATER_GREEN { base_terrain PLACEHOLDER_WATER land_percent 100 }
+create_terrain PLACEHOLDER_WATER { base_terrain PLACEHOLDER_TEMP number_of_tiles 5 set_avoid_player_start_areas spacing_to_other_terrain_types 5 }
+create_terrain WATER_GREEN { base_terrain PLACEHOLDER_WATER land_percent 100 }
+create_terrain PLACEHOLDER_WATER { base_terrain PLACEHOLDER_TEMP number_of_tiles 5 set_avoid_player_start_areas spacing_to_other_terrain_types 5 }
+create_terrain WATER_GREEN { base_terrain PLACEHOLDER_WATER land_percent 100 }
+create_terrain PLACEHOLDER_WATER { base_terrain PLACEHOLDER_TEMP number_of_tiles 5 set_avoid_player_start_areas spacing_to_other_terrain_types 5 }
+create_terrain WATER_GREEN { base_terrain PLACEHOLDER_WATER land_percent 100 }
+create_terrain GRASS { base_terrain PLACEHOLDER_TEMP land_percent 100 }
+create_terrain GRASS { base_terrain PLACEHOLDER_TEMP land_percent 100 number_of_clumps 9320 set_scale_by_groups }
+create_terrain PLACEHOLDER_TEMP { base_terrain PLACEHOLDER3 land_percent 100 }
+create_terrain PLACEHOLDER_WATER { base_terrain PLACEHOLDER_TEMP number_of_tiles 5 set_avoid_player_start_areas spacing_to_other_terrain_types 5 }
+create_terrain WATER_GREEN { base_terrain PLACEHOLDER_WATER land_percent 100 }
+create_terrain PLACEHOLDER_WATER { base_terrain PLACEHOLDER_TEMP number_of_tiles 5 set_avoid_player_start_areas spacing_to_other_terrain_types 5 }
+create_terrain WATER_GREEN { base_terrain PLACEHOLDER_WATER land_percent 100 }
+create_terrain PLACEHOLDER_WATER { base_terrain PLACEHOLDER_TEMP number_of_tiles 5 set_avoid_player_start_areas spacing_to_other_terrain_types 5 }
+create_terrain WATER_GREEN { base_terrain PLACEHOLDER_WATER land_percent 100 }
+create_terrain PLACEHOLDER_WATER { base_terrain PLACEHOLDER_TEMP number_of_tiles 5 set_avoid_player_start_areas spacing_to_other_terrain_types 5 }
+create_terrain WATER_GREEN { base_terrain PLACEHOLDER_WATER land_percent 100 }
+create_terrain GRASS { base_terrain PLACEHOLDER_TEMP land_percent 100 }
+create_terrain GRASS { base_terrain PLACEHOLDER_TEMP land_percent 100 number_of_clumps 9320 set_scale_by_groups }
+create_terrain PLACEHOLDER_TEMP { base_terrain PLACEHOLDER3 land_percent 100 }
+create_terrain PLACEHOLDER_WATER { base_terrain PLACEHOLDER_TEMP number_of_tiles 5 set_avoid_player_start_areas spacing_to_other_terrain_types 5 }
+create_terrain WATER_GREEN { base_terrain PLACEHOLDER_WATER land_percent 100 }
+create_terrain PLACEHOLDER_WATER { base_terrain PLACEHOLDER_TEMP number_of_tiles 5 set_avoid_player_start_areas spacing_to_other_terrain_types 5 }
+create_terrain WATER_GREEN { base_terrain PLACEHOLDER_WATER land_percent 100 }
+create_terrain PLACEHOLDER_WATER { base_terrain PLACEHOLDER_TEMP number_of_tiles 5 set_avoid_player_start_areas spacing_to_other_terrain_types 5 }
+create_terrain WATER_GREEN { base_terrain PLACEHOLDER_WATER land_percent 100 }
+create_terrain PLACEHOLDER_WATER { base_terrain PLACEHOLDER_TEMP number_of_tiles 5 set_avoid_player_start_areas spacing_to_other_terrain_types 5 }
+create_terrain WATER_GREEN { base_terrain PLACEHOLDER_WATER land_percent 100 }
+create_terrain GRASS { base_terrain PLACEHOLDER_TEMP land_percent 100 }
+create_terrain GRASS { base_terrain PLACEHOLDER_TEMP land_percent 100 number_of_clumps 9320 set_scale_by_groups }
+create_terrain PLACEHOLDER_TEMP { base_terrain PLACEHOLDER3 land_percent 100 }
+create_terrain PLACEHOLDER_WATER { base_terrain PLACEHOLDER_TEMP number_of_tiles 5 set_avoid_player_start_areas spacing_to_other_terrain_types 5 }
+create_terrain WATER_GREEN { base_terrain PLACEHOLDER_WATER land_percent 100 }
+create_terrain PLACEHOLDER_WATER { base_terrain PLACEHOLDER_TEMP number_of_tiles 5 set_avoid_player_start_areas spacing_to_other_terrain_types 5 }
+create_terrain WATER_GREEN { base_terrain PLACEHOLDER_WATER land_percent 100 }
+create_terrain PLACEHOLDER_WATER { base_terrain PLACEHOLDER_TEMP number_of_tiles 5 set_avoid_player_start_areas spacing_to_other_terrain_types 5 }
+create_terrain WATER_GREEN { base_terrain PLACEHOLDER_WATER land_percent 100 }
+create_terrain PLACEHOLDER_WATER { base_terrain PLACEHOLDER_TEMP number_of_tiles 5 set_avoid_player_start_areas spacing_to_other_terrain_types 5 }
+create_terrain WATER_GREEN { base_terrain PLACEHOLDER_WATER land_percent 100 }
+create_terrain GRASS { base_terrain PLACEHOLDER_TEMP land_percent 100 }
+create_terrain GRASS { base_terrain PLACEHOLDER_TEMP land_percent 100 number_of_clumps 9320 set_scale_by_groups }
+
+create_terrain PLACEHOLDER_TEMP { base_terrain PLACEHOLDER4 land_percent 100 }
+create_terrain PLACEHOLDER_WATER { base_terrain PLACEHOLDER_TEMP number_of_tiles 5 set_avoid_player_start_areas spacing_to_other_terrain_types 5 }
+create_terrain WATER_GREEN { base_terrain PLACEHOLDER_WATER land_percent 100 }
+create_terrain PLACEHOLDER_WATER { base_terrain PLACEHOLDER_TEMP number_of_tiles 5 set_avoid_player_start_areas spacing_to_other_terrain_types 5 }
+create_terrain WATER_GREEN { base_terrain PLACEHOLDER_WATER land_percent 100 }
+create_terrain PLACEHOLDER_WATER { base_terrain PLACEHOLDER_TEMP number_of_tiles 5 set_avoid_player_start_areas spacing_to_other_terrain_types 5 }
+create_terrain WATER_GREEN { base_terrain PLACEHOLDER_WATER land_percent 100 }
+create_terrain PLACEHOLDER_WATER { base_terrain PLACEHOLDER_TEMP number_of_tiles 5 set_avoid_player_start_areas spacing_to_other_terrain_types 5 }
+create_terrain WATER_GREEN { base_terrain PLACEHOLDER_WATER land_percent 100 }
+create_terrain GRASS { base_terrain PLACEHOLDER_TEMP land_percent 100 }
+create_terrain GRASS { base_terrain PLACEHOLDER_TEMP land_percent 100 number_of_clumps 9320 set_scale_by_groups }
+create_terrain PLACEHOLDER_TEMP { base_terrain PLACEHOLDER4 land_percent 100 }
+create_terrain PLACEHOLDER_WATER { base_terrain PLACEHOLDER_TEMP number_of_tiles 5 set_avoid_player_start_areas spacing_to_other_terrain_types 5 }
+create_terrain WATER_GREEN { base_terrain PLACEHOLDER_WATER land_percent 100 }
+create_terrain PLACEHOLDER_WATER { base_terrain PLACEHOLDER_TEMP number_of_tiles 5 set_avoid_player_start_areas spacing_to_other_terrain_types 5 }
+create_terrain WATER_GREEN { base_terrain PLACEHOLDER_WATER land_percent 100 }
+create_terrain PLACEHOLDER_WATER { base_terrain PLACEHOLDER_TEMP number_of_tiles 5 set_avoid_player_start_areas spacing_to_other_terrain_types 5 }
+create_terrain WATER_GREEN { base_terrain PLACEHOLDER_WATER land_percent 100 }
+create_terrain PLACEHOLDER_WATER { base_terrain PLACEHOLDER_TEMP number_of_tiles 5 set_avoid_player_start_areas spacing_to_other_terrain_types 5 }
+create_terrain WATER_GREEN { base_terrain PLACEHOLDER_WATER land_percent 100 }
+create_terrain GRASS { base_terrain PLACEHOLDER_TEMP land_percent 100 }
+create_terrain GRASS { base_terrain PLACEHOLDER_TEMP land_percent 100 number_of_clumps 9320 set_scale_by_groups }
+
+create_terrain PLACEHOLDER_TEMP { base_terrain PLACEHOLDER5 land_percent 100 }
+create_terrain PLACEHOLDER_WATER { base_terrain PLACEHOLDER_TEMP number_of_tiles 5 set_avoid_player_start_areas spacing_to_other_terrain_types 5 }
+create_terrain WATER_GREEN { base_terrain PLACEHOLDER_WATER land_percent 100 }
+create_terrain PLACEHOLDER_WATER { base_terrain PLACEHOLDER_TEMP number_of_tiles 5 set_avoid_player_start_areas spacing_to_other_terrain_types 5 }
+create_terrain WATER_GREEN { base_terrain PLACEHOLDER_WATER land_percent 100 }
+create_terrain PLACEHOLDER_WATER { base_terrain PLACEHOLDER_TEMP number_of_tiles 5 set_avoid_player_start_areas spacing_to_other_terrain_types 5 }
+create_terrain WATER_GREEN { base_terrain PLACEHOLDER_WATER land_percent 100 }
+create_terrain PLACEHOLDER_WATER { base_terrain PLACEHOLDER_TEMP number_of_tiles 5 set_avoid_player_start_areas spacing_to_other_terrain_types 5 }
+create_terrain WATER_GREEN { base_terrain PLACEHOLDER_WATER land_percent 100 }
+create_terrain GRASS { base_terrain PLACEHOLDER_TEMP land_percent 100 }
+create_terrain GRASS { base_terrain PLACEHOLDER_TEMP land_percent 100 number_of_clumps 9320 set_scale_by_groups }
+
+create_terrain PLACEHOLDER_TEMP { base_terrain PLACEHOLDER6 land_percent 100 }
+create_terrain PLACEHOLDER_WATER { base_terrain PLACEHOLDER_TEMP number_of_tiles 5 set_avoid_player_start_areas spacing_to_other_terrain_types 5 }
+create_terrain WATER_GREEN { base_terrain PLACEHOLDER_WATER land_percent 100 }
+create_terrain PLACEHOLDER_WATER { base_terrain PLACEHOLDER_TEMP number_of_tiles 5 set_avoid_player_start_areas spacing_to_other_terrain_types 5 }
+create_terrain WATER_GREEN { base_terrain PLACEHOLDER_WATER land_percent 100 }
+create_terrain PLACEHOLDER_WATER { base_terrain PLACEHOLDER_TEMP number_of_tiles 5 set_avoid_player_start_areas spacing_to_other_terrain_types 5 }
+create_terrain WATER_GREEN { base_terrain PLACEHOLDER_WATER land_percent 100 }
+create_terrain PLACEHOLDER_WATER { base_terrain PLACEHOLDER_TEMP number_of_tiles 5 set_avoid_player_start_areas spacing_to_other_terrain_types 5 }
+create_terrain WATER_GREEN { base_terrain PLACEHOLDER_WATER land_percent 100 }
+create_terrain GRASS { base_terrain PLACEHOLDER_TEMP land_percent 100 }
+create_terrain GRASS { base_terrain PLACEHOLDER_TEMP land_percent 100 number_of_clumps 9320 set_scale_by_groups }
+
+create_terrain PLACEHOLDER_TEMP { base_terrain PLACEHOLDER7 land_percent 100 }
+create_terrain PLACEHOLDER_WATER { base_terrain PLACEHOLDER_TEMP number_of_tiles 5 set_avoid_player_start_areas spacing_to_other_terrain_types 5 }
+create_terrain WATER_GREEN { base_terrain PLACEHOLDER_WATER land_percent 100 }
+create_terrain PLACEHOLDER_WATER { base_terrain PLACEHOLDER_TEMP number_of_tiles 5 set_avoid_player_start_areas spacing_to_other_terrain_types 5 }
+create_terrain WATER_GREEN { base_terrain PLACEHOLDER_WATER land_percent 100 }
+create_terrain PLACEHOLDER_WATER { base_terrain PLACEHOLDER_TEMP number_of_tiles 5 set_avoid_player_start_areas spacing_to_other_terrain_types 5 }
+create_terrain WATER_GREEN { base_terrain PLACEHOLDER_WATER land_percent 100 }
+create_terrain PLACEHOLDER_WATER { base_terrain PLACEHOLDER_TEMP number_of_tiles 5 set_avoid_player_start_areas spacing_to_other_terrain_types 5 }
+create_terrain WATER_GREEN { base_terrain PLACEHOLDER_WATER land_percent 100 }
+create_terrain GRASS { base_terrain PLACEHOLDER_TEMP land_percent 100 }
+create_terrain GRASS { base_terrain PLACEHOLDER_TEMP land_percent 100 number_of_clumps 9320 set_scale_by_groups }
+
+create_terrain PLACEHOLDER_TEMP { base_terrain PLACEHOLDER8 land_percent 100 }
+create_terrain PLACEHOLDER_WATER { base_terrain PLACEHOLDER_TEMP number_of_tiles 5 set_avoid_player_start_areas spacing_to_other_terrain_types 5 }
+create_terrain WATER_GREEN { base_terrain PLACEHOLDER_WATER land_percent 100 }
+create_terrain PLACEHOLDER_WATER { base_terrain PLACEHOLDER_TEMP number_of_tiles 5 set_avoid_player_start_areas spacing_to_other_terrain_types 5 }
+create_terrain WATER_GREEN { base_terrain PLACEHOLDER_WATER land_percent 100 }
+create_terrain PLACEHOLDER_WATER { base_terrain PLACEHOLDER_TEMP number_of_tiles 5 set_avoid_player_start_areas spacing_to_other_terrain_types 5 }
+create_terrain WATER_GREEN { base_terrain PLACEHOLDER_WATER land_percent 100 }
+create_terrain PLACEHOLDER_WATER { base_terrain PLACEHOLDER_TEMP number_of_tiles 5 set_avoid_player_start_areas spacing_to_other_terrain_types 5 }
+create_terrain WATER_GREEN { base_terrain PLACEHOLDER_WATER land_percent 100 }
+create_terrain GRASS { base_terrain PLACEHOLDER_TEMP land_percent 100 }
+create_terrain GRASS { base_terrain PLACEHOLDER_TEMP land_percent 100 number_of_clumps 9320 set_scale_by_groups }
+
+
+
+
+create_terrain ICE { base_terrain SNOW land_percent 100 height_limits 1 6 }
+create_terrain ICE { base_terrain SNOW land_percent 100 height_limits 1 6 }
+create_terrain ICE { base_terrain SNOW land_percent 100 height_limits 1 6 number_of_clumps 9320 }
+
+create_terrain DIRT2 { base_terrain ICE land_percent 100 height_limits 1 2 terrain_mask 1 }
+create_terrain DIRT2 { base_terrain ICE land_percent 100 height_limits 1 2 terrain_mask 1 }
+create_terrain DIRT2 { base_terrain ICE land_percent 100 height_limits 1 2 terrain_mask 1 number_of_clumps 9320 }
+
+create_terrain DIRT2 { base_terrain SNOW land_percent 100 height_limits 0 2 }
+create_terrain DIRT2 { base_terrain SNOW land_percent 100 height_limits 0 2 }
+create_terrain DIRT2 { base_terrain SNOW land_percent 100 height_limits 0 2 number_of_clumps 9320 }
+
+create_terrain GRASS3 { base_terrain DIRT2 land_percent 100 height_limits 0 1 terrain_mask 1 }
+create_terrain GRASS3 { base_terrain DIRT2 land_percent 100 height_limits 0 1 terrain_mask 1 }
+create_terrain GRASS3 { base_terrain DIRT2 land_percent 100 height_limits 0 1 terrain_mask 1 number_of_clumps 9320 }
+
+
+create_terrain DIRT_MUD {
+	base_terrain GRASS
+	land_percent 5
+	number_of_clumps 10
+	terrain_mask 1
+	spacing_to_other_terrain_types 1
+	set_scale_by_groups
+}
+create_terrain GRAVEL_DEFAULT {
+	base_terrain GRASS
+	land_percent 5
+	number_of_clumps 10
+	terrain_mask 1
+	spacing_to_other_terrain_types 0
+	set_scale_by_groups
+}
+create_terrain DLC_NEWSHALLOW {
+	base_terrain GRASS
+	land_percent 2
+	number_of_clumps 5
+	terrain_mask 1
+	spacing_to_other_terrain_types 2
+	set_scale_by_groups
+}
+
+create_terrain SHALLOW {
+	base_terrain GRASS
+	land_percent 2
+	number_of_clumps 5
+	terrain_mask 1
+	spacing_to_other_terrain_types 2
+	set_scale_by_groups
+}
+
+create_terrain MUDDY_SHALLOW {
+	base_terrain GRASS
+	land_percent 100
+	number_of_clumps 9320
+	terrain_mask 1
+	spacing_to_other_terrain_types 0
+	set_scale_by_groups
+}
+
+create_terrain DLC_NEWSHALLOW {
+	base_terrain WATER_GREEN
+	land_percent 1
+	number_of_clumps 100
+	terrain_mask 1
+}
+
+
+
+/* outside */
+
+create_terrain ICE {
+	base_terrain SNOW
+	land_percent 3
+	number_of_clumps 8
+	terrain_mask 1
+	set_scale_by_groups
+	spacing_to_other_terrain_types 10
+}
+
+create_terrain SNOW_FOREST {
+	base_terrain SNOW
+	land_percent 10
+	number_of_clumps 5
+	terrain_mask 2
+	set_scale_by_groups
+	spacing_to_other_terrain_types 2
+}
+create_terrain DLC_FORESTDEAD {
+	base_terrain SNOW
+	land_percent 10
+	number_of_clumps 20
+	terrain_mask 2
+	set_scale_by_groups
+	spacing_to_other_terrain_types 0
+}
+
+create_terrain UNDERBRUSH_SNOW {
+	base_terrain SNOW
+	land_percent 10
+	number_of_clumps 6
+	terrain_mask 1
+	set_scale_by_groups
+}
+
+create_terrain GRAVEL_DEFAULT {
+	base_terrain SNOW
+	land_percent 3
+	number_of_clumps 8
+	terrain_mask 1
+	set_scale_by_groups
+}
+
+
+/* =================================================================================================== */
+<CONNECTION_GENERATION> 
+
+create_connect_to_nonplayer_land {
+	replace_terrain SNOW BIRCH_FOREST
+	replace_terrain DIRT2 BIRCH_FOREST
+	replace_terrain GRASS3 BIRCH_FOREST
+	replace_terrain ICE PINE_FOREST
+	
+	if TINY_MAP
+		terrain_size SNOW 25 0
+		terrain_size DIRT2 25 0
+	elseif SMALL_MAP
+		terrain_size SNOW 27 0
+		terrain_size DIRT2 27 0
+	elseif MEDIUM_MAP
+		terrain_size SNOW 30 0
+		terrain_size DIRT2 30 0
+	elseif LARGE_MAP
+		terrain_size SNOW 35 0
+		terrain_size DIRT2 35 0
+	elseif HUGE_MAP
+		terrain_size SNOW 38 0
+		terrain_size DIRT2 38 0
+	elseif GIGANTIC_MAP
+		terrain_size SNOW 40 0
+		terrain_size DIRT2 40 0
+	elseif LUDIKRIS_MAP
+		terrain_size SNOW 80 0
+		terrain_size DIRT2 80 0
+	endif
+}
+
+
+/* =================================================================================================== */
+<OBJECTS_GENERATION>
+
+create_object DLC_MOUNTAIN_10 {
+	number_of_objects 9320
+	terrain_to_place_on SNOW
+	layer_to_place_on ICE
+	set_scaling_to_map_size
+	temp_min_distance_group_placement 40
+}
+create_object DLC_MOUNTAIN_9 {
+	number_of_objects 9320
+	terrain_to_place_on SNOW
+	layer_to_place_on ICE
+	set_scaling_to_map_size
+	temp_min_distance_group_placement 15
+}
+create_object DLC_MOUNTAIN_11 {
+	number_of_objects 9320
+	terrain_to_place_on SNOW
+	layer_to_place_on ICE
+	set_scaling_to_map_size
+	temp_min_distance_group_placement 10
+}
+
+
+create_object ROCK {
+	number_of_objects 9320
+	terrain_to_place_on BEACH
+	set_scaling_to_map_size
+	temp_min_distance_group_placement 1
+}
+
+create_object ROCK_2 {
+	number_of_objects 9320
+	terrain_to_place_on BEACH
+	set_scaling_to_map_size
+	temp_min_distance_group_placement 0
+}
+
+create_object SMOKE {
+	number_of_objects 9320
+	terrain_to_place_on WATER_GREEN
+	set_scaling_to_map_size
+	temp_min_distance_group_placement 1
+}
+create_object SEA_ROCKS_2 {
+	number_of_objects 9320
+	terrain_to_place_on WATER_GREEN
+	set_scaling_to_map_size
+	temp_min_distance_group_placement 0
+}
+
+create_object TOWN_CENTER {
+	set_place_for_every_player
+	max_distance_to_players 0
+}	
+
+create_object BLANKOBJECT {
+	terrain_to_place_on BEACH
+	number_of_objects 9320
+	set_scaling_to_map_size
+	actor_area 3333
+	actor_area_radius 1
+	place_on_specific_land_id 1
+}
+create_object BLANKOBJECT {
+	terrain_to_place_on BEACH
+	number_of_objects 9320
+	set_scaling_to_map_size
+	actor_area 3334
+	actor_area_radius 2
+	place_on_specific_land_id 1
+}
+
+create_object GOLD {
+	number_of_objects 9999
+	actor_area_to_place_in 3333
+	set_gaia_object_only
+	min_distance_group_placement 1
+	temp_min_distance_group_placement 3
+	actor_area 1
+	actor_area_radius 5
+}	
+
+create_object STONE {
+	number_of_objects 9999
+	actor_area_to_place_in 3333
+	set_gaia_object_only
+	min_distance_group_placement 1
+	temp_min_distance_group_placement 3
+	actor_area 1
+	actor_area_radius 5
+}	
+	
+create_object GOLD {
+	number_of_objects 9999
+	actor_area_to_place_in 3333
+	set_gaia_object_only
+	min_distance_group_placement 1
+	temp_min_distance_group_placement 6
+	actor_area 1
+	actor_area_radius 5
+}
+
+create_object STONE {
+	number_of_objects 9999
+	actor_area_to_place_in 3333
+	set_gaia_object_only
+	min_distance_group_placement 1
+	temp_min_distance_group_placement 6
+	actor_area 1
+	actor_area_radius 5
+}	
+
+create_object VILLAGER {
+	set_place_for_every_player
+	min_distance_to_players 5
+	max_distance_to_players 7
+	set_circular_placement
+	min_distance_group_placement 1
+}
+
+create_object SCOUT {
+	set_place_for_every_player
+	min_distance_to_players 6
+	max_distance_to_players 8
+	set_circular_placement
+	min_distance_group_placement 1
+}
+
+if REGICIDE
+	create_object KING {
+		set_place_for_every_player
+		min_distance_to_players 6
+		set_circular_placement
+		find_closest
+		min_distance_group_placement 1
+	}
+	create_object VILLAGER {
+		number_of_objects 7
+		set_place_for_every_player
+		min_distance_to_players 6
+		max_distance_to_players 8
+		set_circular_placement
+	}
+	create_object CASTLE {
+		set_place_for_every_player
+		min_distance_to_players 9
+		max_distance_to_players 11
+		set_circular_placement
+		min_distance_group_placement 2
+	}
+endif
+
+create_object SHEEP {
+	number_of_objects 4
+	set_loose_grouping
+	set_gaia_object_only
+	set_place_for_every_player
+	min_distance_to_players 7
+	set_circular_placement
+	find_closest
+	avoid_forest_zone 2
+}
+
+create_object FORAGE {
+	number_of_objects 6
+	number_of_groups 2
+	temp_min_distance_group_placement 14
+	group_placement_radius 2
+	set_tight_grouping
+	set_gaia_object_only
+	set_place_for_every_player
+	min_distance_to_players 9
+	max_distance_to_players 13
+	set_circular_placement
+	min_distance_group_placement 5
+	avoid_forest_zone 3
+	actor_area 11
+	actor_area_radius 11
+	avoid_actor_area 1
+}
+
+create_object BOAR {
+	number_of_groups 2
+	temp_min_distance_group_placement 14
+	set_loose_grouping
+	set_gaia_object_only
+	set_place_for_every_player
+	min_distance_to_players 14
+	set_circular_placement
+	find_closest
+	min_distance_group_placement 2
+	avoid_forest_zone 2
+	avoid_actor_area 1
+}
+
+
+create_object RELIC {
+	terrain_to_place_on ICE
+	max_distance_to_other_zones 2
+	avoid_forest_zone 2
+	min_distance_to_players 25
+	set_circular_placement
+	min_distance_group_placement 1
+	if TINY_MAP
+		number_of_objects 5
+		temp_min_distance_group_placement 35
+	elseif SMALL_MAP
+		number_of_objects 5
+		temp_min_distance_group_placement 39
+	elseif MEDIUM_MAP
+		number_of_objects 5
+		temp_min_distance_group_placement 42
+	elseif LARGE_MAP
+		number_of_objects 7
+		temp_min_distance_group_placement 50
+	elseif HUGE_MAP
+		number_of_objects 8
+		temp_min_distance_group_placement 60
+	else
+		number_of_objects 999
+		temp_min_distance_group_placement 70 
+	endif
+}
+
+create_object DLC_IBEX {
+	number_of_groups 20
+	set_scaling_to_player_number
+	temp_min_distance_group_placement 15
+	set_gaia_object_only
+	terrain_to_place_on DIRT2
+}
+
+/* extra gold */
+create_object GOLD {
+	number_of_groups 9320
+	number_of_objects 3
+	temp_min_distance_group_placement 30
+    group_placement_radius 2
+    set_tight_grouping
+    set_gaia_object_only
+	min_distance_group_placement 4
+	min_distance_to_players 36
+	set_circular_placement
+	avoid_forest_zone 3
+	terrain_to_place_on SNOW
+	max_distance_to_other_zones 3
+}
+
+create_object BIRCH_TREE /* straggler trees */
+{
+	number_of_objects 2
+	set_gaia_object_only
+	set_place_for_every_player
+	min_distance_to_players 4
+	max_distance_to_players 5
+	set_circular_placement
+	min_distance_group_placement 2
+}
+
+create_object PINETREE
+{
+	number_of_objects 3
+	set_gaia_object_only
+	set_place_for_every_player
+	min_distance_to_players 6
+	max_distance_to_players 8
+	set_circular_placement
+	min_distance_group_placement 2
+}
+
+create_object BIRCH_TREE {
+	number_of_objects 12
+	set_gaia_object_only
+	set_scaling_to_map_size
+	min_distance_to_players 9
+	set_circular_placement
+	min_distance_group_placement 1
+	temp_min_distance_group_placement 12
+	avoid_forest_zone 1
+	terrain_to_place_on GRASS
+}
+create_object PINETREE {
+	number_of_objects 12
+	set_gaia_object_only
+	set_scaling_to_map_size
+	min_distance_to_players 9
+	set_circular_placement
+	min_distance_group_placement 1
+	temp_min_distance_group_placement 12
+	avoid_forest_zone 1
+	terrain_to_place_on GRASS
+}
+
+create_object DLC_DEADTREE {
+	number_of_objects 10
+	set_gaia_object_only
+	set_scaling_to_map_size
+	temp_min_distance_group_placement 6
+	layer_to_place_on UNDERBRUSH_SNOW
+}
+create_object SNOWPINETREE {
+	number_of_objects 15
+	set_gaia_object_only
+	set_scaling_to_map_size
+	temp_min_distance_group_placement 10
+	terrain_to_place_on SNOW
+}
+
+/* birds */
+create_object HAWK {
+	number_of_objects 6
+	set_scaling_to_map_size
+}
+
+
+
+
+	

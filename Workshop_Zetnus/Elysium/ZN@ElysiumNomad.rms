@@ -1,0 +1,2214 @@
+/* Elysium
+
+updated dec 2022
+by Zetnus
+zetnus@outlook.com
+Zetnus#6414 on Discord
+
+Learn about random map scripting: https://docs.google.com/document/d/e/2PACX-1vR_I1I9u-hI2FFm-EYyjoM_-9dNJFOfTaIgr05wXNbdpv9tI18b6r18ARULy3Jqyvlq6-lc2VjX6xP4/pub
+
+This map was harvested from a mod in the official AOE2DE mod center, whose licensing agreement with Microsoft supersedes any Github restrictions: https://www.microsoft.com/en-us/servicesagreement
+
+*/
+
+
+/* eycandy animals */
+
+/* excandy grass patches rocks and mountains and sea rocks */
+
+
+
+
+#define NOMAD_VERSION
+
+
+start_random
+	percent_chance 10	#define DESERT_MAP
+	percent_chance 10	#define SAVANNAH_MAP
+	percent_chance 10	#define TROPICAL_MAP
+	percent_chance 10	#define FROZEN_MAP
+	percent_chance 12	#define JUNGLE_MAP
+	percent_chance 12	#define AUTUMN_MAP
+	percent_chance 10	#define ASIAN_MAP
+	percent_chance 100	#define TEMPERATE_MAP
+end_random
+
+
+
+if DESERT_MAP
+#const MAP_BASE_TERRAIN 14	/* sand desert */
+#const PLAYER_LAND_TERRAIN 102	/* desert gravel */
+#const NEUTRAL_LAND_TERRAIN 45	/* beach land */
+#const HILL_TERRAIN 6	/* dirt */
+#const SHALLOWS_TYPE 4	/* shallows */
+#const SANDBANK_TERRAIN 107	/* wetbeach */
+#const LOW_MAP_BASE_TERRAIN 41	/* maybe savannah */
+
+#const PLAYER_LAND_FOREST 48	/* dragon tree forest */
+#const NEUTRAL_LAND_FOREST 49	/* baobab forest */
+#const MAP_BASE_FOREST 50	/* acacia forest */
+#const SWAMP_FOREST_UPGRADE 1053	/* bush b */
+#const SWAMP_FILLER_TREE 351	/* palmtree */
+
+#const MAP_BASE_LAYER_1 11	/* dirt 2 */
+#const MAP_BASE_LAYER_2 6	/* dirt */
+#const HILL_MED_LAYER 102	/* desert gravel */
+#const HILL_TOP_LAYER 70	/* gravel */
+#const PLAYER_LAND_LAYER_1 46	/* quicksand */
+#const PLAYER_LAND_LAYER_2 14	/* sand desert */
+#const PLAYER_LAND_LAYER_3 46	/* quicksand */
+#const PLAYER_LAND_LAYER_4 46	/* quicksand */
+#const PLAYER_LAND_LAYER_5 14	/* sand desert */
+#const NEUTRAL_LAYER_1 46	/* quicksand */
+#const NEUTRAL_LAYER_2 11	/* dirt 2 */
+#const SWAMP_LAYER_1 111	/* muddy swamp */
+#const SWAMP_LAYER_2 76	/* mud */
+#const SWAMP_LAYER_3 111	/* muddy swamp */
+#const SWAMP_LAYER_4 45	/* cracked desert */
+#const SWAMP_LAYER_5 45	/* cracked desert */
+
+#const COMMON_STRAGGELR_A 1051	/* dragon */
+#const COMMON_STRAGGELR_B 1250	/* dead */
+#const COMMON_STRAGGELR_C 1063	/* acacia */
+#const HILL_TREE 1048 /* african rock a */
+#const HILL_TOP_TREE 1049 /* african rock b */
+#const LOWLAND_STRAGGELR_A 1349	/* olive */
+#const LOWLAND_STRAGGELR_B 1347	/* cypress */
+#const LOWLAND_STRAGGELR_C 1348	/* italian pine */
+
+#const COMMON_FORAGE 1059 /* oranges */
+#const PLAYER_BOAR 1091	/* animal skeleton */
+#const PLAYER_SHEEP 1060 /* goat */
+#const PLAYER_DEER 1026	/* ostrich */
+#const NEUTRAL_BOAR 1091	/* animal skeleton */
+#const NEUTRAL_SHEEP 1060 /* goat */
+#const NEUTRAL_DEER 1796	/* gazelle */
+#const NEUTRAL_PREDATOR 1029 /* lion */
+#const HILL_SHEEP 1060 /* goat */
+#const HILL_PREDATOR 126	/* wolf */
+#const HILL_DEER 1239	/* ibex */
+#const LOWLAND_FORAGE 1059	/* fruit bush */
+#const LOWLAND_BOAR 1301	/* elephant */
+#const LOWLAND_SHEEP 1600 /* cow brown */
+#const LOWLAND_DEER 1019	/* zebra */
+#const LOWLAND_PREDATOR 1029 /* lion */
+#const OTHER_NEUTRAL_FORAGE 59	/* berries */
+#const OTHER_NEUTRAL_BOAR 1139	/* rhino */
+#const OTHER_NEUTRAL_SHEEP 1091	/* animal skeleton */
+#const OTHER_NEUTRAL_DEER 1026	/* ostrich */
+#const OTHER_NEUTRAL_PREDATOR 1029 /* lion */
+#const SWAMP_FISH 1141 /* boxturtles */
+#const SWAMP_FORAGE 59 /* berries */
+#const SWAMP_PREDATOR 1031	/* crocodile */
+#const COMMON_CROCODILE 1031	/* crocodile */
+#const STANDARD_FISH_TYPE 458	/* snapper */
+#const GREAT_FISH_TYPE 61	/* dolphin */
+#const BIRD_TYPE_A 96	/* hawk */
+#const BIRD_TYPE_B 96	/* hawk */
+#const BIRD_TYPE_C 1305	/* vulture */
+#const BIRD_TYPE_D 1305	/* vulture */
+#const BIRD_TYPE_E 1305	/* vulture */
+
+
+elseif SAVANNAH_MAP
+#const MAP_BASE_TERRAIN 3	/* dirt 3 */
+#const PLAYER_LAND_TERRAIN 11	/* dirt 2 */
+#const NEUTRAL_LAND_TERRAIN 6	/* dirt 1 */
+#const HILL_TERRAIN 102	/* desert gravel */
+#const SHALLOWS_TYPE 4	/* shallows */
+#const SANDBANK_TERRAIN 107	/* wetbeach */
+#const LOW_MAP_BASE_TERRAIN 41	/* savannah */
+
+#const PLAYER_LAND_FOREST 89	/* bush forest */
+#const NEUTRAL_LAND_FOREST 49	/* baobab forest */
+#const MAP_BASE_FOREST 50	/* acacia forest */
+#const SWAMP_FOREST_UPGRADE 1053	/* bush b */
+#const SWAMP_FILLER_TREE 351	/* palmtree */
+
+#const MAP_BASE_LAYER_1 41	/* savannah */
+#const MAP_BASE_LAYER_2 100	/* dry grass */
+#const HILL_MED_LAYER 70	/* gravel */
+#const HILL_TOP_LAYER 81	/* wet gravel */
+#const PLAYER_LAND_LAYER_1 41	/* savannah */
+#const PLAYER_LAND_LAYER_2 100	/* dry grass */
+#const PLAYER_LAND_LAYER_3 9	/* grass 3 */
+#const PLAYER_LAND_LAYER_4 3	/* dirt 3 */
+#const PLAYER_LAND_LAYER_5 14	/* sand desert */
+#const NEUTRAL_LAYER_1 41	/* savannah */
+#const NEUTRAL_LAYER_2  100	/* dry grass */
+#const SWAMP_LAYER_1 111	/* muddy swamp */
+#const SWAMP_LAYER_2 76	/* mud */
+#const SWAMP_LAYER_3 111	/* muddy swamp */
+#const SWAMP_LAYER_4 45	/* cracked desert */
+#const SWAMP_LAYER_5 45	/* cracked desert */
+
+#const COMMON_STRAGGELR_A 1051	/* dragon */
+#const COMMON_STRAGGELR_B 1052	/* boabab */
+#const COMMON_STRAGGELR_C 1063	/* acacia */
+#const HILL_TREE 1323	/* rock2 */
+#const HILL_TOP_TREE 623	/* rock */
+#const LOWLAND_STRAGGELR_A 1349	/* olive */
+#const LOWLAND_STRAGGELR_B 1347	/* cypress */
+#const LOWLAND_STRAGGELR_C 1348	/* italian pine */
+
+#const COMMON_FORAGE 1059 /* oranges */
+#const PLAYER_BOAR 1301	/* elephant */
+#const PLAYER_SHEEP 1060 /* goat */
+#const PLAYER_DEER 1026	/* ostrich */
+#const NEUTRAL_BOAR 1139	/* rhino */
+#const NEUTRAL_SHEEP 1060 /* goat */
+#const NEUTRAL_DEER 1796	/* gazelle */
+#const NEUTRAL_PREDATOR 1029 /* lion */
+#const HILL_SHEEP 1060 /* goat */
+#const HILL_DEER 1239	/* ibex */
+#const HILL_PREDATOR 126	/* wolf */
+#const LOWLAND_FORAGE 1059	/* fruit bush */
+#const LOWLAND_BOAR 1301	/* elephant */
+#const LOWLAND_SHEEP 1142 /* water buffalo */
+#const LOWLAND_DEER 1019	/* zebra */
+#const LOWLAND_PREDATOR 1029 /* lion */
+#const OTHER_NEUTRAL_FORAGE 59	/* berries */
+#const OTHER_NEUTRAL_BOAR 1139	/* rhino */
+#const OTHER_NEUTRAL_SHEEP 1596 /* cow black */
+#const OTHER_NEUTRAL_DEER 1026	/* ostrich */
+#const OTHER_NEUTRAL_PREDATOR 1029 /* lion */
+#const SWAMP_FISH 1141 /* boxturtles */
+#const SWAMP_FORAGE 59 /* berries */
+#const SWAMP_PREDATOR 1031	/* crocodile */
+#const COMMON_CROCODILE 1031	/* crocodile */
+#const STANDARD_FISH_TYPE 458	/* snapper */
+#const GREAT_FISH_TYPE 61	/* dolphin */
+#const BIRD_TYPE_A 96	/* hawk */
+#const BIRD_TYPE_B 1056	/* falcon */
+#const BIRD_TYPE_C 1028	/* stork */
+#const BIRD_TYPE_D 1056	/* falcon */
+#const BIRD_TYPE_E 1305	/* vulture */
+
+
+elseif TROPICAL_MAP
+#const MAP_BASE_TERRAIN 11	/* dirt 2 */
+#const PLAYER_LAND_TERRAIN 3	/* dirt 3 */
+#const NEUTRAL_LAND_TERRAIN 76	/* dirt mud */
+#const HILL_TERRAIN 9	/* grass 3 */
+#const SHALLOWS_TYPE 4	/* shallows */
+#const SANDBANK_TERRAIN 53	/* beach white */
+#const LOW_MAP_BASE_TERRAIN 14	/* sand desert */
+
+#const PLAYER_LAND_FOREST  112	/* grassy palm forest */
+#const NEUTRAL_LAND_FOREST 17	/* jungle */
+#const MAP_BASE_FOREST 13	/* palm desert */
+#const SWAMP_FOREST_UPGRADE 1144	/* mangrove tree */
+#const SWAMP_FILLER_TREE 302	/* bush a */
+
+#const MAP_BASE_LAYER_1 0	/* grass */
+#const MAP_BASE_LAYER_2 12	/* grass 2 */
+#const HILL_MED_LAYER 12	/* grass 2 */
+#const HILL_TOP_LAYER 83	/* grass jungle */
+#const PLAYER_LAND_LAYER_1 83	/* grass jungle */
+#const PLAYER_LAND_LAYER_2 60	/* jungle grass */
+#const PLAYER_LAND_LAYER_3 12	/* grass 2 */
+#const PLAYER_LAND_LAYER_4 0	/* grass 1 */
+#const PLAYER_LAND_LAYER_5 76	/* mud */
+#const NEUTRAL_LAYER_1 83	/* grass jungle */
+#const NEUTRAL_LAYER_2 60	/* jungle grass */
+#const SWAMP_LAYER_1 111	/* muddy swamp */
+#const SWAMP_LAYER_2 95	/* green water */
+#const SWAMP_LAYER_3 111	/* muddy swamp */
+#const SWAMP_LAYER_4 58	/* azure water */
+#const SWAMP_LAYER_5 95	/* green water */
+
+#const COMMON_STRAGGELR_A 351	/* palm */
+#const COMMON_STRAGGELR_B 414	/* jungle */
+#const COMMON_STRAGGELR_C 1053	/* bush */
+#const HILL_TREE 349	/* oak */
+#const HILL_TOP_TREE 1063	/* acacia */
+#const LOWLAND_STRAGGELR_A 1349	/* olive */
+#const LOWLAND_STRAGGELR_B 351	/* palm */
+#const LOWLAND_STRAGGELR_C 1051	/* dragon */
+
+#const COMMON_FORAGE 1059 /* oranges */
+#const PLAYER_BOAR 48	/* boar */
+#const PLAYER_SHEEP 1596 /* cow black */
+#const PLAYER_DEER 65	/* deer */
+#const NEUTRAL_BOAR 1139	/* rhino */
+#const NEUTRAL_SHEEP 1243 /* goose */
+#const NEUTRAL_DEER 65	/* deer */
+#const NEUTRAL_PREDATOR 1137 /* tiger */
+#const HILL_SHEEP 594 /* sheep */
+#const HILL_DEER 1796	/* gazelle */
+#const HILL_PREDATOR 1135	/* komodo */
+#const LOWLAND_FORAGE 1059	/* fruit bush */
+#const LOWLAND_BOAR 1301	/* elephant */
+#const LOWLAND_SHEEP 1142 /* water buffalo */
+#const LOWLAND_DEER 1019	/* zebra */
+#const LOWLAND_PREDATOR 1135	/* komodo */
+#const OTHER_NEUTRAL_FORAGE 59	/* berries */
+#const OTHER_NEUTRAL_BOAR 1139	/* rhino */
+#const OTHER_NEUTRAL_SHEEP 1600 /* cow brown */
+#const OTHER_NEUTRAL_DEER 1026	/* ostrich */
+#const OTHER_NEUTRAL_PREDATOR 812 /* jaguar */
+#const SWAMP_FISH 1141 /* boxturtles */
+#const SWAMP_FORAGE 59 /* berries */
+#const SWAMP_PREDATOR 1031	/* crocodile */
+#const COMMON_CROCODILE 1031	/* crocodile */
+#const STANDARD_FISH_TYPE 455	/* dorado */
+#const GREAT_FISH_TYPE 61	/* dolphin */
+#const BIRD_TYPE_A 96	/* hawk */
+#const BIRD_TYPE_B 816	/* macaw */
+#const BIRD_TYPE_C 816	/* macaw */
+#const BIRD_TYPE_D 1056	/* falcon */
+#const BIRD_TYPE_E 816	/* macaw */
+
+
+elseif MEDITERRANEAN_MAP
+#const MAP_BASE_TERRAIN 5	/* leaves */
+#const PLAYER_LAND_TERRAIN 0	/* grass 1 */
+#const NEUTRAL_LAND_TERRAIN 9	/* grass 3 */
+#const HILL_TERRAIN 6	/* dirt 1 */
+#const SHALLOWS_TYPE 4	/* shallows */
+#const SANDBANK_TERRAIN 53	/* beach white */
+#const LOW_MAP_BASE_TERRAIN 100	/* dry grass */
+
+#const PLAYER_LAND_FOREST 88	/* mediteranean tree forest */
+#const NEUTRAL_LAND_FOREST 20	/* oak bush forest */
+#const MAP_BASE_FOREST 13	/* palm desert */
+#const SWAMP_FOREST_UPGRADE 1053	/* bush b */
+#const SWAMP_FILLER_TREE 1250	/* deadtree */
+
+#const MAP_BASE_LAYER_1 11	/* dirt 2 */
+#const MAP_BASE_LAYER_2 3	/* dirt 3 */
+#const HILL_MED_LAYER 102	/* desert gravel */
+#const HILL_TOP_LAYER 70	/* gravel */
+#const PLAYER_LAND_LAYER_1 11	/* dirt 2 */
+#const PLAYER_LAND_LAYER_2 6	/* dirt 1 */
+#const PLAYER_LAND_LAYER_3 3	/* dirt 3 */
+#const PLAYER_LAND_LAYER_4 41	/* savannah */
+#const PLAYER_LAND_LAYER_5 76	/* mud */
+#const NEUTRAL_LAYER_1 11	/* dirt 2 */
+#const NEUTRAL_LAYER_2 3	/* dirt 3 */
+#const SWAMP_LAYER_1 111	/* muddy swamp */
+#const SWAMP_LAYER_2 76	/* mud */
+#const SWAMP_LAYER_3 111	/* muddy swamp */
+#const SWAMP_LAYER_4 96	/* brown water */
+#const SWAMP_LAYER_5 90	/* reed shallows */
+
+#const COMMON_STRAGGELR_A 1349	/* olive */
+#const COMMON_STRAGGELR_B 1347	/* cypress */
+#const COMMON_STRAGGELR_C 1348	/* italian pine */
+#const HILL_TREE 1250	/* dead tree */
+#const HILL_TOP_TREE 350	/* pine */
+#const LOWLAND_STRAGGELR_A 1349	/* olive */
+#const LOWLAND_STRAGGELR_B 351	/* palm */
+#const LOWLAND_STRAGGELR_C 1051	/* dragon */
+
+#const COMMON_FORAGE 1059	/* fruit bush */
+#const PLAYER_BOAR 48	/* boar */
+#const PLAYER_SHEEP 594 /* sheep */
+#const PLAYER_DEER 65	/* deer */
+#const NEUTRAL_BOAR 822	/* javelina */
+#const NEUTRAL_SHEEP 594 /* sheep */
+#const NEUTRAL_DEER 65	/* deer */
+#const NEUTRAL_PREDATOR 126	/* wolf */
+#const HILL_SHEEP 1060 /* goat */
+#const HILL_DEER 1239	/* ibex */
+#const HILL_PREDATOR 486	/* bear */
+#const LOWLAND_FORAGE 1059	/* fruit bush */
+#const LOWLAND_BOAR 48	/* boar */
+#const LOWLAND_SHEEP 1060 /* goat */
+#const LOWLAND_DEER 1026	/* ostrich */
+#const LOWLAND_PREDATOR 126	/* wolf */
+#const OTHER_NEUTRAL_FORAGE 1059	/* fruit bush */
+#const OTHER_NEUTRAL_BOAR 48	/* boar */
+#const OTHER_NEUTRAL_SHEEP 1600 /* cow brown */
+#const OTHER_NEUTRAL_DEER 65	/* deer */
+#const OTHER_NEUTRAL_PREDATOR 486	/* bear */
+#const SWAMP_FISH 1141 /* boxturtles */
+#const SWAMP_FORAGE 59 /* berries */
+#const SWAMP_PREDATOR 1031	/* crocodile */
+#const COMMON_CROCODILE 1031	/* crocodile */
+#const STANDARD_FISH_TYPE 53	/* perch */
+#const GREAT_FISH_TYPE 61	/* dolphin */
+#const BIRD_TYPE_A 96	/* hawk */
+#const BIRD_TYPE_B 1028	/* stork */
+#const BIRD_TYPE_C 1028	/* stork */
+#const BIRD_TYPE_D 1056	/* falcon */
+#const BIRD_TYPE_E 1305	/* vulture */
+
+elseif FROZEN_MAP
+#const MAP_BASE_TERRAIN 74	/* snow strong */
+#const PLAYER_LAND_TERRAIN 73	/* snow weak */
+#const NEUTRAL_LAND_TERRAIN 72	/* underbrush snow */
+#const HILL_TERRAIN 70 /* gravel */
+#const SHALLOWS_TYPE 35	/* ice */
+#const SANDBANK_TERRAIN 26	/* ice navigable */
+#const LOW_MAP_BASE_TERRAIN 32 /* snow */
+
+#const PLAYER_LAND_FOREST 105	/* autumn forest */
+#const NEUTRAL_LAND_FOREST 21	/* snow pine forest */
+#const MAP_BASE_FOREST 106	/* dead forest */
+#const SWAMP_FOREST_UPGRADE 1054	/* snow bush */
+#const SWAMP_FILLER_TREE 1250	/* dead tree */
+
+#const MAP_BASE_LAYER_1 37	/* icy beach */	
+#const MAP_BASE_LAYER_2 59	/* azure shallows */
+#const HILL_MED_LAYER 73	/* snow weak */
+#const HILL_TOP_LAYER 74	/* snow strong */
+#const PLAYER_LAND_LAYER_1 72	/* underbrush snow */
+#const PLAYER_LAND_LAYER_2 59	/* azure shallows */
+#const PLAYER_LAND_LAYER_3 72	/* underbrush snow */
+#const PLAYER_LAND_LAYER_4 72	/* underbrush snow */
+#const PLAYER_LAND_LAYER_5 37	/* icy beach */	
+#const NEUTRAL_LAYER_1 71	/* underbrush */
+#const NEUTRAL_LAYER_2 70	/* gravel */
+#const SWAMP_LAYER_1 1	/* water */
+#const SWAMP_LAYER_2 58	/* azure water */
+#const SWAMP_LAYER_3 32	/* snow */
+#const SWAMP_LAYER_4 74	/* snow strong */
+#const SWAMP_LAYER_5 74	/* snow strong */
+
+#const COMMON_STRAGGELR_A 1249	/* autumnsnowoak */
+#const COMMON_STRAGGELR_B 413	/* snowpine */
+#const COMMON_STRAGGELR_C 1250	/* dead tree */
+#const HILL_TREE 1323	/* rock2 */
+#const HILL_TOP_TREE 623	/* rock */
+#const LOWLAND_STRAGGELR_A 1054	/* snowy bush */ 
+#const LOWLAND_STRAGGELR_B 413	/* snowpine */
+#const LOWLAND_STRAGGELR_C 1250	/* dead tree */
+
+#const COMMON_FORAGE 1054	/* snowy bush */
+#const PLAYER_BOAR 48	/* boar */
+#const PLAYER_SHEEP 305 /* llama */
+#const PLAYER_DEER 65	/* deer */
+#const NEUTRAL_BOAR 48	/* boar */
+#const NEUTRAL_SHEEP 305 /* llama */
+#const NEUTRAL_DEER 65	/* deer */
+#const NEUTRAL_PREDATOR 126	/* wolf */
+#const HILL_SHEEP 1060 /* goat */
+#const HILL_DEER 1239	/* ibex */
+#const HILL_PREDATOR 1241	/* snowleopard */
+#const LOWLAND_FORAGE 1054	/* snowy bush */
+#const LOWLAND_BOAR 48	/* boar */
+#const LOWLAND_SHEEP 1060 /* goat */
+#const LOWLAND_DEER 65	/* deer */
+#const LOWLAND_PREDATOR 486	/* bear */
+#const OTHER_NEUTRAL_FORAGE 1054	/* snowy bush */
+#const OTHER_NEUTRAL_BOAR 48	/* boar */
+#const OTHER_NEUTRAL_SHEEP 1060 /* goat */
+#const OTHER_NEUTRAL_DEER 65	/* deer */
+#const OTHER_NEUTRAL_PREDATOR 486	/* bear */
+#const SWAMP_FISH 69 /* shore fish */
+#const SWAMP_FORAGE 1054	/* snowy bush */
+#const SWAMP_PREDATOR 818	/* plant */
+#const COMMON_CROCODILE 818	/* plant */
+#const STANDARD_FISH_TYPE 457	/* tuna */
+#const GREAT_FISH_TYPE 450	/* marlin */
+#const BIRD_TYPE_A 96	/* hawk */
+#const BIRD_TYPE_B 96	/* hawk */
+#const BIRD_TYPE_C 1056	/* falcon */
+#const BIRD_TYPE_D 1056	/* falcon */
+#const BIRD_TYPE_E 96	/* hawk */
+
+elseif JUNGLE_MAP
+#const MAP_BASE_TERRAIN 0	/* grass 1 */
+#const PLAYER_LAND_TERRAIN 60	/* jungle grass */
+#const NEUTRAL_LAND_TERRAIN 83	/* grass jungle */
+#const HILL_TERRAIN 76	/* dirt mud */
+#const SHALLOWS_TYPE 4	/* shallows */
+#const SANDBANK_TERRAIN 107	/* wetbeach */
+#const LOW_MAP_BASE_TERRAIN 12	/* grass 2 */
+
+#const PLAYER_LAND_FOREST 56	/* rainforest */
+#const NEUTRAL_LAND_FOREST 17	/* jungle */
+#const MAP_BASE_FOREST 112	/* grassy palm forest */
+#const SWAMP_FOREST_UPGRADE 1144	/* mangrove tree */
+#const SWAMP_FILLER_TREE 302	/* bush a */
+
+#const MAP_BASE_LAYER_1 100	/* dry grass */
+#const MAP_BASE_LAYER_2 11	/* dirt 2 */
+#const HILL_MED_LAYER 41 /* savannah */
+#const HILL_TOP_LAYER 6	/* dirt 1 */
+#const PLAYER_LAND_LAYER_1 77	/* underbrush jungle */
+#const PLAYER_LAND_LAYER_2 71	/* underbrush */
+#const PLAYER_LAND_LAYER_3 5	/* leaves */
+#const PLAYER_LAND_LAYER_4 3	/* dirt 3 */
+#const PLAYER_LAND_LAYER_5 77	/* underbrush jungle */
+#const NEUTRAL_LAYER_1 77	/* underbrush jungle */
+#const NEUTRAL_LAYER_2 71	/* underbrush */
+#const SWAMP_LAYER_1 111	/* muddy swamp */
+#const SWAMP_LAYER_2 95	/* green water */
+#const SWAMP_LAYER_3 111	/* muddy swamp */
+#const SWAMP_LAYER_4 96	/* brown water */
+#const SWAMP_LAYER_5 95	/* green water */
+
+#const COMMON_STRAGGELR_A 1146	/* rainforest */
+#const COMMON_STRAGGELR_B 414	/* jungle */
+#const COMMON_STRAGGELR_C 1053	/* bush */
+#const HILL_TREE 1051	/* dragon */
+#const HILL_TOP_TREE 1063	/* acacia */
+#const LOWLAND_STRAGGELR_A 1053	/* bush */
+#const LOWLAND_STRAGGELR_B 351	/* palm */
+#const LOWLAND_STRAGGELR_C 414	/* jungle */
+
+#const COMMON_FORAGE 59	/* berries */
+#const PLAYER_BOAR 822	/* javelina */
+#const PLAYER_SHEEP 1142 /* water buffalo */
+#const PLAYER_DEER 65	/* deer */
+#const NEUTRAL_BOAR 1139	/* rhino */
+#const NEUTRAL_SHEEP 833 /* turkey */
+#const NEUTRAL_DEER 65	/* deer */
+#const NEUTRAL_PREDATOR 1137 /* tiger */
+#const HILL_SHEEP 1060 /* goat */
+#const HILL_DEER 1019	/* zebra */
+#const HILL_PREDATOR 1135	/* komodo */
+#const LOWLAND_FORAGE 1059	/* fruit bush */
+#const LOWLAND_BOAR 1301	/* elephant */
+#const LOWLAND_SHEEP 1142 /* water buffalo */
+#const LOWLAND_DEER 65	/* deer */
+#const LOWLAND_PREDATOR 1135	/* komodo */
+#const OTHER_NEUTRAL_FORAGE 1059 /* oranges */
+#const OTHER_NEUTRAL_BOAR 1139	/* rhino */
+#const OTHER_NEUTRAL_SHEEP 833 /* turkey */
+#const OTHER_NEUTRAL_DEER 65	/* deer */
+#const OTHER_NEUTRAL_PREDATOR 812 /* jaguar */
+#const SWAMP_FISH 1141 /* boxturtles */
+#const SWAMP_FORAGE 59 /* berries */
+#const SWAMP_PREDATOR 1031	/* crocodile */
+#const COMMON_CROCODILE 1031	/* crocodile */
+#const STANDARD_FISH_TYPE 455	/* dorado */
+#const GREAT_FISH_TYPE 61	/* dolphin */
+#const BIRD_TYPE_A 96	/* hawk */
+#const BIRD_TYPE_B 816	/* macaw */
+#const BIRD_TYPE_C 816	/* macaw */
+#const BIRD_TYPE_D 1056	/* falcon */
+#const BIRD_TYPE_E 816	/* macaw */
+
+
+elseif AUTUMN_MAP
+#const MAP_BASE_TERRAIN 9	/* grass 3 */
+#const PLAYER_LAND_TERRAIN 5	/* leaves */
+#const NEUTRAL_LAND_TERRAIN 0	/* grass 1 */
+#const HILL_TERRAIN 11	/* dirt 2 */
+#const SHALLOWS_TYPE 4	/* shallows */
+#const SANDBANK_TERRAIN 107	/* wetbeach */
+#const LOW_MAP_BASE_TERRAIN 100 /* dry grass */
+
+#const PLAYER_LAND_FOREST 104	/* autumn oak forest */
+#const NEUTRAL_LAND_FOREST 19	/* pine forest */
+#const MAP_BASE_FOREST 110	/* birch forest */
+#const SWAMP_FOREST_UPGRADE 1053	/* bush b */
+#const SWAMP_FILLER_TREE 1248	/* autumn tree */
+
+#const MAP_BASE_LAYER_1 71	/* underbrush */
+#const MAP_BASE_LAYER_2 5	/* leaves */
+#const HILL_MED_LAYER 70	/* gravel */
+#const HILL_TOP_LAYER 81	/* wet gravel */
+#const PLAYER_LAND_LAYER_1 71	/* underbrush */
+#const PLAYER_LAND_LAYER_2 12	/* grass 2 */
+#const PLAYER_LAND_LAYER_3 100	/* drygrass */
+#const PLAYER_LAND_LAYER_4 3	/* dirt 3 */
+#const PLAYER_LAND_LAYER_5 77	/* underbrush jungle */
+#const NEUTRAL_LAYER_1 3	/* dirt 3 */
+#const NEUTRAL_LAYER_2 71	/* underbrush */
+#const SWAMP_LAYER_1 111	/* muddy swamp */
+#const SWAMP_LAYER_2 76	/* mud */
+#const SWAMP_LAYER_3 111	/* muddy swamp */
+#const SWAMP_LAYER_4 96	/* brown water */
+#const SWAMP_LAYER_5 90	/* reed shallows */
+
+#const COMMON_STRAGGELR_A 1248	/* autumn oak */
+#const COMMON_STRAGGELR_B 350	/* pine */
+#const COMMON_STRAGGELR_C 1717	/* birch */
+#const HILL_TREE 1250	/* dead tree */
+#const HILL_TOP_TREE 1323	/* rock2 */
+#const LOWLAND_STRAGGELR_A 349	/* oak */
+#const LOWLAND_STRAGGELR_B 1717	/* birch */
+#const LOWLAND_STRAGGELR_C 1053	/* bush */
+
+#const COMMON_FORAGE 59 /* berries */
+#const PLAYER_BOAR 48	/* boar */
+#const PLAYER_SHEEP 594 /* sheep */
+#const PLAYER_DEER 65	/* deer */
+#const NEUTRAL_BOAR 822	/* javelina */
+#const NEUTRAL_SHEEP 594 /* sheep */
+#const NEUTRAL_DEER 65	/* deer */
+#const NEUTRAL_PREDATOR 126	/* wolf */
+#const HILL_SHEEP 1060 /* goat */
+#const HILL_DEER 1239	/* ibex */
+#const HILL_PREDATOR 486	/* bear */
+#const LOWLAND_FORAGE 59 /* berries */
+#const LOWLAND_BOAR 48	/* boar */
+#const LOWLAND_SHEEP 1596 /* cow black */
+#const LOWLAND_DEER 65	/* deer */
+#const LOWLAND_PREDATOR 126	/* wolf */
+#const OTHER_NEUTRAL_FORAGE 59	/* berries */
+#const OTHER_NEUTRAL_BOAR 48	/* boar */
+#const OTHER_NEUTRAL_SHEEP 1600 /* cow brown */
+#const OTHER_NEUTRAL_DEER 65	/* deer */
+#const OTHER_NEUTRAL_PREDATOR 486	/* bear */
+#const SWAMP_FISH 69 /* shore fish */
+#const SWAMP_FORAGE 59 /* berries */
+#const SWAMP_PREDATOR 1031	/* crocodile */
+#const COMMON_CROCODILE 1031	/* crocodile */
+#const STANDARD_FISH_TYPE 456	/* salmon */
+#const GREAT_FISH_TYPE 450	/* marlin */
+#const BIRD_TYPE_A 96	/* hawk */
+#const BIRD_TYPE_B 96	/* hawk */
+#const BIRD_TYPE_C 1056	/* falcon */
+#const BIRD_TYPE_D 1056	/* falcon */
+#const BIRD_TYPE_E 1305	/* vulture */
+
+elseif ASIAN_MAP
+#const MAP_BASE_TERRAIN 9	/* grass 3 */
+#const PLAYER_LAND_TERRAIN 12	/* grass 2 */
+#const NEUTRAL_LAND_TERRAIN 0	/* grass 1 */
+#const HILL_TERRAIN 70	/* gravel */
+#const SHALLOWS_TYPE 4	/* shallows */
+#const SANDBANK_TERRAIN 107	/* wetbeach */
+#const LOW_MAP_BASE_TERRAIN 100 /* dry grass */
+
+#const PLAYER_LAND_FOREST 18	/* bamboo forest */
+#const NEUTRAL_LAND_FOREST 19	/* pine forest */
+#const MAP_BASE_FOREST 48	/* dragon forest */
+#const SWAMP_FOREST_UPGRADE 348	/* bamboo tree */
+#const SWAMP_FILLER_TREE 1250	/* deadtree */
+
+#const MAP_BASE_LAYER_1 11	/* dirt 2 */
+#const MAP_BASE_LAYER_2 6	/* dirt */
+#const HILL_MED_LAYER 73	/* snow light */
+#const HILL_TOP_LAYER 74	/* snow heavy */
+#const PLAYER_LAND_LAYER_1 71	/* underbrush */
+#const PLAYER_LAND_LAYER_2 5	/* leaves */
+#const PLAYER_LAND_LAYER_3 100	/* drygrass */
+#const PLAYER_LAND_LAYER_4 3	/* dirt 3 */
+#const PLAYER_LAND_LAYER_5 77	/* underbrush jungle */
+#const NEUTRAL_LAYER_1 3	/* dirt 3 */
+#const NEUTRAL_LAYER_2 11	/* dirt 2 */
+#const SWAMP_LAYER_1 111	/* muddy swamp */
+#const SWAMP_LAYER_2 76	/* mud */
+#const SWAMP_LAYER_3 111	/* muddy swamp */
+#const SWAMP_LAYER_4 96	/* brown water */
+#const SWAMP_LAYER_5 90	/* reed shallows */
+
+#const COMMON_STRAGGELR_A 349	/* oak */
+#const COMMON_STRAGGELR_B 350	/* pine */
+#const COMMON_STRAGGELR_C 1717	/* birch */
+#const HILL_TREE 1250	/* dead tree */
+#const HILL_TOP_TREE 413 /* snow pine */
+#const LOWLAND_STRAGGELR_A 1349	/* olive */
+#const LOWLAND_STRAGGELR_B 1347	/* cypress */
+#const LOWLAND_STRAGGELR_C 1348	/* italian pine */
+
+#const COMMON_FORAGE 59 /* berries */
+#const PLAYER_BOAR 48	/* boar */
+#const PLAYER_SHEEP 594 /* sheep */
+#const PLAYER_DEER 65	/* deer */
+#const NEUTRAL_BOAR 48	/* boar */
+#const NEUTRAL_SHEEP 594 /* sheep */
+#const NEUTRAL_DEER 65	/* deer */
+#const NEUTRAL_PREDATOR 126	/* wolf */
+#const HILL_SHEEP 1060 /* goat */
+#const HILL_DEER 1239	/* ibex */
+#const HILL_PREDATOR 486	/* bear */
+#const LOWLAND_FORAGE 1059	/* fruit bush */
+#const LOWLAND_BOAR 48	/* boar */
+#const LOWLAND_SHEEP 1060 /* goat */
+#const LOWLAND_DEER 1796	/* gazelle */
+#const LOWLAND_PREDATOR 126	/* wolf */
+#const OTHER_NEUTRAL_FORAGE 59	/* berries */
+#const OTHER_NEUTRAL_BOAR 48	/* boar */
+#const OTHER_NEUTRAL_SHEEP 1600 /* cow brown */
+#const OTHER_NEUTRAL_DEER 65	/* deer */
+#const OTHER_NEUTRAL_PREDATOR 1137 /* tiger */
+#const SWAMP_FISH 1141 /* boxturtles */
+#const SWAMP_FORAGE 59 /* berries */
+#const SWAMP_PREDATOR 1031	/* crocodile */
+#const COMMON_CROCODILE 1031	/* crocodile */
+#const STANDARD_FISH_TYPE 53	/* perch */
+#const GREAT_FISH_TYPE 450	/* marlin */
+#const BIRD_TYPE_A 96	/* hawk */
+#const BIRD_TYPE_B 96	/* hawk */
+#const BIRD_TYPE_C 1028	/* stork */
+#const BIRD_TYPE_D 1056	/* falcon */
+#const BIRD_TYPE_E 1305	/* vulture */
+
+
+else	/* temperate map */
+#const MAP_BASE_TERRAIN 9	/* grass 3 */
+#const PLAYER_LAND_TERRAIN 12	/* grass 2 */
+#const NEUTRAL_LAND_TERRAIN 0	/* grass 1 */
+#const HILL_TERRAIN 70	/* gravel */
+#const SHALLOWS_TYPE 4	/* shallows */
+#const SANDBANK_TERRAIN 107	/* wetbeach */
+#const LOW_MAP_BASE_TERRAIN 100 /* dry grass */
+
+#const PLAYER_LAND_FOREST 20	/* oak bush forest */
+#const NEUTRAL_LAND_FOREST 19	/* pine forest */
+#const MAP_BASE_FOREST 88	/* mediteranean tree forest */
+#const SWAMP_FOREST_UPGRADE 1053	/* bush b */
+#const SWAMP_FILLER_TREE 1250	/* deadtree */
+
+#const MAP_BASE_LAYER_1 11	/* dirt 2 */
+#const MAP_BASE_LAYER_2 6	/* dirt */
+#const HILL_MED_LAYER 73	/* snow light */
+#const HILL_TOP_LAYER 74	/* snow heavy */
+#const PLAYER_LAND_LAYER_1 71	/* underbrush */
+#const PLAYER_LAND_LAYER_2 5	/* leaves */
+#const PLAYER_LAND_LAYER_3 100	/* drygrass */
+#const PLAYER_LAND_LAYER_4 3	/* dirt 3 */
+#const PLAYER_LAND_LAYER_5 77	/* underbrush jungle */
+#const NEUTRAL_LAYER_1 3	/* dirt 3 */
+#const NEUTRAL_LAYER_2 11	/* dirt 2 */
+#const SWAMP_LAYER_1 111	/* muddy swamp */
+#const SWAMP_LAYER_2 76	/* mud */
+#const SWAMP_LAYER_3 111	/* muddy swamp */
+#const SWAMP_LAYER_4 96	/* brown water */
+#const SWAMP_LAYER_5 90	/* reed shallows */
+
+#const COMMON_STRAGGELR_A 349	/* oak */
+#const COMMON_STRAGGELR_B 350	/* pine */
+#const COMMON_STRAGGELR_C 1717	/* birch */
+#const HILL_TREE 1250	/* dead tree */
+#const HILL_TOP_TREE 413 /* snow pine */
+#const LOWLAND_STRAGGELR_A 1349	/* olive */
+#const LOWLAND_STRAGGELR_B 1347	/* cypress */
+#const LOWLAND_STRAGGELR_C 1348	/* italian pine */
+
+#const COMMON_FORAGE 59 /* berries */
+#const PLAYER_BOAR 48	/* boar */
+#const PLAYER_SHEEP 594 /* sheep */
+#const PLAYER_DEER 65	/* deer */
+#const NEUTRAL_BOAR 822	/* javelina */
+#const NEUTRAL_SHEEP 594 /* sheep */
+#const NEUTRAL_DEER 65	/* deer */
+#const NEUTRAL_PREDATOR 126	/* wolf */
+#const HILL_SHEEP 1060 /* goat */
+#const HILL_DEER 1239	/* ibex */
+#const HILL_PREDATOR 486	/* bear */
+#const LOWLAND_FORAGE 1059	/* fruit bush */
+#const LOWLAND_BOAR 48	/* boar */
+#const LOWLAND_SHEEP 1060 /* goat */
+#const LOWLAND_DEER 1796	/* gazelle */
+#const LOWLAND_PREDATOR 126	/* wolf */
+#const OTHER_NEUTRAL_FORAGE 59	/* berries */
+#const OTHER_NEUTRAL_BOAR 48	/* boar */
+#const OTHER_NEUTRAL_SHEEP 1600 /* cow brown */
+#const OTHER_NEUTRAL_DEER 65	/* deer */
+#const OTHER_NEUTRAL_PREDATOR 486	/* bear */
+#const SWAMP_FISH 1141 /* boxturtles */
+#const SWAMP_FORAGE 59 /* berries */
+#const SWAMP_PREDATOR 1031	/* crocodile */
+#const COMMON_CROCODILE 1031	/* crocodile */
+#const STANDARD_FISH_TYPE 456	/* salmon */
+#const GREAT_FISH_TYPE 450	/* marlin */
+#const BIRD_TYPE_A 96	/* hawk */
+#const BIRD_TYPE_B 96	/* hawk */
+#const BIRD_TYPE_C 1028	/* stork */
+#const BIRD_TYPE_D 1056	/* falcon */
+#const BIRD_TYPE_E 1305	/* vulture */
+endif
+
+
+/* shared constants */
+
+#const LAKE_TERRAIN 1	/* water */
+#const RIVER_TERRAIN 58 /* azure water */
+#const SWAMP_TERRAIN 54	/* mangrove shallows */
+#const SWAMP_FOREST 55	/* mangrove forest */
+
+#const BEACH_WHITE 53
+#const REED_SHALLOWS 90
+#const REED_TREE 1350
+#const ONGRID_PLACEHOLDER_1 278
+
+
+/* =================================================================================================== */
+<PLAYER_SETUP>
+
+direct_placement
+behavior_version 2
+
+if NOMAD_VERSION
+	nomad_resources
+	force_nomad_treaty
+endif
+
+if NOMAD_VERSION	ai_info_map_type COASTAL 1 0 0 
+else ai_info_map_type COASTAL 0 0 0 
+endif
+
+effect_amount GAIA_UPGRADE_UNIT DLC_MANGROVE_TREE SWAMP_FOREST_UPGRADE 0
+
+/* Disabling Trade Carts and Cogs for Multi-team Games */
+if 2_TEAM_GAME
+else
+  #const TRADE_CART_ENABLER 161
+  #const TRADE_COG_ENABLER 180
+  #const TRADE_CARAVAN_ENABLER 48
+  #const HINDU_CARAVANSERAI_ENABLER 518
+  #const PERSIAN_CARAVANSERAI_ENABLER 552  
+  #const SILK_ROAD 499
+  effect_amount DISABLE_TECH TRADE_COG_ENABLER ATTR_DISABLE 180
+  effect_amount DISABLE_TECH TRADE_CART_ENABLER ATTR_DISABLE 161
+  effect_amount DISABLE_TECH TRADE_CARAVAN_ENABLER ATTR_DISABLE 48
+  effect_amount DISABLE_TECH HINDU_CARAVANSERAI_ENABLER ATTR_DISABLE 518
+  effect_amount DISABLE_TECH PERSIAN_CARAVANSERAI_ENABLER ATTR_DISABLE 552
+  effect_amount DISABLE_TECH SILK_ROAD ATTR_DISABLE 499    
+endif
+
+/* =================================================================================================== */
+<LAND_GENERATION>
+
+base_terrain MAP_BASE_TERRAIN
+
+/* give every player two towns on Ludicrous */
+
+if 8_PLAYER_GAME
+	if TINY_MAP #define TOO_MANY_PLAYERS 
+	elseif SMALL_MAP #define TOO_MANY_PLAYERS
+	elseif MEDIUM_MAP #define TOO_MANY_PLAYERS
+	elseif LARGE_MAP #define TOO_MANY_PLAYERS
+	endif
+elseif 7_PLAYER_GAME
+	if TINY_MAP #define TOO_MANY_PLAYERS 
+	elseif SMALL_MAP #define TOO_MANY_PLAYERS
+	elseif MEDIUM_MAP #define TOO_MANY_PLAYERS
+	elseif LARGE_MAP #define TOO_MANY_PLAYERS
+	endif
+elseif 6_PLAYER_GAME
+	if TINY_MAP #define TOO_MANY_PLAYERS 
+	elseif SMALL_MAP #define TOO_MANY_PLAYERS
+	elseif MEDIUM_MAP #define TOO_MANY_PLAYERS
+	endif
+elseif 5_PLAYER_GAME
+	if TINY_MAP #define TOO_MANY_PLAYERS 
+	elseif SMALL_MAP #define TOO_MANY_PLAYERS
+	elseif MEDIUM_MAP #define TOO_MANY_PLAYERS
+	endif
+elseif 4_PLAYER_GAME
+	if TINY_MAP #define TOO_MANY_PLAYERS 
+	elseif SMALL_MAP #define TOO_MANY_PLAYERS
+	endif
+elseif 3_PLAYER_GAME
+	if TINY_MAP #define TOO_MANY_PLAYERS 
+	endif
+endif
+
+create_player_lands {
+terrain_type PLAYER_LAND_TERRAIN
+land_percent rnd(19,23) 
+base_size 12
+start_random
+	percent_chance 60	base_elevation 1
+	percent_chance 25	base_elevation 2
+	percent_chance 10	base_elevation 3
+	percent_chance 5	base_elevation 4
+end_random
+base_elevation 1
+start_random
+	percent_chance 60	clumping_factor 5
+	percent_chance 20	clumping_factor 4
+	percent_chance 10	clumping_factor 3
+	percent_chance 5	clumping_factor 2
+	percent_chance 5	clumping_factor 1
+end_random
+set_zone_randomly
+other_zone_avoidance_distance 8
+if TOO_MANY_PLAYERS min_placement_distance 12
+else min_placement_distance 43 /* was 50 */
+endif
+}
+
+if LUDIKRIS_MAP
+	create_player_lands {
+	terrain_type PLAYER_LAND_TERRAIN
+	land_percent rnd(19,23) 
+	base_size 12
+	start_random
+		percent_chance 60	base_elevation 1
+		percent_chance 25	base_elevation 2
+		percent_chance 10	base_elevation 3
+		percent_chance 5	base_elevation 4
+	end_random
+	base_elevation 1
+	start_random
+		percent_chance 60	clumping_factor 5
+		percent_chance 20	clumping_factor 4
+		percent_chance 10	clumping_factor 3
+		percent_chance 5	clumping_factor 2
+		percent_chance 5	clumping_factor 1
+	end_random
+	set_zone_randomly
+	other_zone_avoidance_distance 8
+	min_placement_distance 50
+	}
+endif
+
+
+/* neutral lands */
+create_land {
+terrain_type NEUTRAL_LAND_TERRAIN
+land_percent rnd(6,12)
+base_size 0
+base_elevation 1
+clumping_factor 5
+set_zone_randomly
+other_zone_avoidance_distance 3
+min_placement_distance 15
+}
+create_land {
+terrain_type NEUTRAL_LAND_TERRAIN
+land_percent rnd(5,9)
+base_size 0
+base_elevation 1
+clumping_factor 5
+set_zone_randomly
+other_zone_avoidance_distance 3
+min_placement_distance 15
+}
+create_land {
+terrain_type NEUTRAL_LAND_TERRAIN
+land_percent rnd(4,6)
+base_size 0
+base_elevation 1
+clumping_factor 5
+set_zone_randomly
+other_zone_avoidance_distance 3
+min_placement_distance 15
+}
+
+
+/* lakes */
+create_land {
+terrain_type LAKE_TERRAIN
+land_percent rnd(1,2)
+base_size 0
+clumping_factor 30
+other_zone_avoidance_distance 8
+min_placement_distance 15
+start_random
+	percent_chance 25 top_border 50 left_border 50
+	percent_chance 25 bottom_border 50 left_border 50
+	percent_chance 25 bottom_border 50 right_border 50
+	percent_chance 25 top_border 50 right_border 50
+end_random
+}
+create_land {
+terrain_type LAKE_TERRAIN
+land_percent rnd(1,2)
+base_size 0
+clumping_factor 30
+other_zone_avoidance_distance 8
+min_placement_distance 15
+start_random
+	percent_chance 25 top_border 50 left_border 50
+	percent_chance 25 bottom_border 50 left_border 50
+	percent_chance 25 bottom_border 50 right_border 50
+	percent_chance 25 top_border 50 right_border 50
+end_random
+}
+create_land {
+terrain_type LAKE_TERRAIN
+land_percent rnd(1,2)
+base_size 0
+clumping_factor 30
+other_zone_avoidance_distance 8
+min_placement_distance 15
+start_random
+	percent_chance 25 top_border 50 left_border 50
+	percent_chance 25 bottom_border 50 left_border 50
+	percent_chance 25 bottom_border 50 right_border 50
+	percent_chance 25 top_border 50 right_border 50
+end_random
+}
+create_land {
+terrain_type LAKE_TERRAIN
+land_percent rnd(1,2)
+base_size 0
+clumping_factor 30
+other_zone_avoidance_distance 8
+min_placement_distance 15
+start_random
+	percent_chance 25 top_border 50 left_border 50
+	percent_chance 25 bottom_border 50 left_border 50
+	percent_chance 25 bottom_border 50 right_border 50
+	percent_chance 25 top_border 50 right_border 50
+end_random
+}
+create_land {
+terrain_type LAKE_TERRAIN
+land_percent rnd(1,2)
+base_size 0
+clumping_factor 30
+other_zone_avoidance_distance 8
+min_placement_distance 15
+start_random
+	percent_chance 25 top_border 50 left_border 50
+	percent_chance 25 bottom_border 50 left_border 50
+	percent_chance 25 bottom_border 50 right_border 50
+	percent_chance 25 top_border 50 right_border 50
+end_random
+}
+
+/* ocean */
+create_land {
+terrain_type LAKE_TERRAIN
+land_percent rnd(4,10)
+base_size 0
+clumping_factor 30
+other_zone_avoidance_distance 8
+min_placement_distance 15
+}
+
+/* =================================================================================================== */
+<ELEVATION_GENERATION>
+
+create_elevation 7 {
+base_terrain MAP_BASE_TERRAIN
+number_of_tiles rnd(750,1250)
+number_of_clumps rnd(16,24)
+set_scale_by_size
+enable_balanced_elevation
+}
+
+create_elevation 7 {
+base_terrain NEUTRAL_LAND_TERRAIN
+number_of_tiles rnd(750,1250)
+number_of_clumps rnd(16,24)
+set_scale_by_size
+enable_balanced_elevation
+}
+
+/* =================================================================================================== */
+<TERRAIN_GENERATION>
+
+if DESERT_MAP	color_correction CC_DESERT
+elseif SAVANNAH_MAP	color_correction CC_DESERT
+elseif TROPICAL_MAP	color_correction CC_JUNGLE
+elseif FROZEN_MAP	color_correction CC_WINTER
+elseif JUNGLE_MAP	color_correction CC_JUNGLE
+elseif AUTUMN_MAP	color_correction CC_AUTUMN
+endif
+
+/* future swamp */
+create_terrain SWAMP_TERRAIN {
+	base_terrain MAP_BASE_TERRAIN
+	spacing_to_other_terrain_types 1
+	set_flat_terrain_only
+	land_percent 100
+	number_of_clumps rnd(1,2)
+	set_scale_by_groups 
+	height_limits 0 0
+}
+create_terrain SWAMP_LAYER_1 {
+	base_terrain SWAMP_TERRAIN
+	land_percent 100
+	number_of_clumps 9320
+	set_scale_by_groups 
+	terrain_mask 1
+}
+
+/* hills */
+create_terrain HILL_TERRAIN {
+	base_terrain MAP_BASE_TERRAIN
+	land_percent 100
+	number_of_clumps 9320
+	set_scale_by_groups 	
+	height_limits 1 7
+	terrain_mask 1
+}
+create_terrain HILL_TERRAIN {
+	base_terrain MAP_BASE_TERRAIN
+	land_percent 100
+	number_of_clumps 9320
+	set_scale_by_groups 	
+	height_limits 2 7
+}
+create_terrain HILL_TERRAIN {
+	base_terrain NEUTRAL_LAND_TERRAIN
+	land_percent 100
+	number_of_clumps 9320
+	set_scale_by_groups 	
+	height_limits 2 7
+	terrain_mask 1
+}
+create_terrain HILL_TERRAIN {
+	base_terrain NEUTRAL_LAND_TERRAIN
+	land_percent 100
+	number_of_clumps 9320
+	set_scale_by_groups 	
+	height_limits 3 7
+}
+create_terrain HILL_MED_LAYER {
+	base_terrain HILL_TERRAIN
+	land_percent 100
+	number_of_clumps 9320
+	set_scale_by_groups 	
+	height_limits 5 7
+	terrain_mask 1
+}
+create_terrain HILL_TOP_LAYER {
+	base_layer HILL_MED_LAYER
+	land_percent 100
+	number_of_clumps 9320
+	set_scale_by_groups 	
+	height_limits 6 7
+	terrain_mask 1
+} 
+
+/* forest generation */
+create_terrain PLAYER_LAND_FOREST {
+	base_terrain PLAYER_LAND_TERRAIN
+	land_percent rnd(2,5)
+	number_of_clumps rnd(5,12)
+	set_scale_by_groups 	
+	set_avoid_player_start_areas 
+	terrain_mask 2
+}
+create_terrain PLAYER_LAND_FOREST {
+	base_terrain PLAYER_LAND_TERRAIN
+	land_percent rnd(1,3)
+	number_of_clumps rnd(4,10)
+	set_scale_by_groups 	
+	set_avoid_player_start_areas 
+	terrain_mask 2
+}
+
+create_terrain NEUTRAL_LAND_FOREST {
+	base_terrain NEUTRAL_LAND_TERRAIN
+	land_percent rnd(2,5)
+	number_of_clumps rnd(5,12)
+	set_scale_by_groups 	
+	set_avoid_player_start_areas
+	terrain_mask 2
+}
+create_terrain NEUTRAL_LAND_FOREST {
+	base_terrain NEUTRAL_LAND_TERRAIN
+	land_percent rnd(1,3)
+	number_of_clumps rnd(4,10)
+	set_scale_by_groups 	
+	set_avoid_player_start_areas
+	terrain_mask 2
+}
+
+/* water mixing */
+create_terrain WATER {
+	base_terrain DLC_WATER5
+	land_percent 100
+	number_of_clumps 9320
+	terrain_mask 1
+	spacing_to_other_terrain_types 1
+}
+create_terrain WATER {
+	base_terrain DLC_WATER5
+	land_percent 100
+	number_of_clumps 9320
+	spacing_to_other_terrain_types 2
+}
+create_terrain MED_WATER {
+	base_terrain WATER
+	land_percent 100
+	number_of_clumps 9320
+	terrain_mask 1
+	spacing_to_other_terrain_types 1
+}
+create_terrain MED_WATER {
+	base_terrain WATER
+	land_percent 100
+	number_of_clumps 9320
+	spacing_to_other_terrain_types 2
+}
+create_terrain DEEP_WATER {
+	base_terrain MED_WATER
+	land_percent 100
+	number_of_clumps 9320
+	spacing_to_other_terrain_types 1
+	terrain_mask 1
+}
+create_terrain DEEP_WATER {
+	base_terrain MED_WATER
+	land_percent 100
+	number_of_clumps 9320
+	spacing_to_other_terrain_types 2
+}
+create_terrain DLC_WATER4 {
+	base_terrain DEEP_WATER
+	land_percent 100
+	number_of_clumps 9320
+	spacing_to_other_terrain_types 1
+	terrain_mask 1
+}
+create_terrain DLC_WATER4 {
+	base_terrain DEEP_WATER
+	land_percent 100
+	number_of_clumps 9320
+	spacing_to_other_terrain_types 2
+}	
+
+/* swamp trees */
+create_terrain SWAMP_FOREST {
+	base_terrain SWAMP_TERRAIN
+	land_percent rnd(1,2)
+	number_of_clumps rnd(4,12)
+	set_scale_by_groups
+	spacing_to_other_terrain_types 1
+} 
+create_terrain SWAMP_FOREST {
+	base_terrain SWAMP_TERRAIN
+	land_percent 1
+	number_of_clumps rnd(3,10)
+	set_scale_by_groups
+	spacing_to_other_terrain_types 1
+} 
+create_terrain SWAMP_LAYER_3 {
+	base_terrain SWAMP_FOREST
+	land_percent 100
+	number_of_clumps 9320
+	set_scale_by_groups 
+	terrain_mask 1
+} 
+create_terrain SWAMP_LAYER_3 {
+	base_terrain SWAMP_FOREST
+	land_percent 100
+	number_of_clumps 9320
+	set_scale_by_groups 
+	terrain_mask 1
+}
+create_terrain SWAMP_LAYER_3 {
+	base_terrain SWAMP_FOREST
+	land_percent 100
+	number_of_clumps 9320
+	set_scale_by_groups 
+	terrain_mask 1
+}
+
+/* swamp terrain mixing */
+create_terrain SWAMP_LAYER_2 {
+	base_layer SWAMP_LAYER_1
+	land_percent rnd(1,2)
+	number_of_clumps rnd(2,8)
+	set_scale_by_groups 
+	terrain_mask 1
+}
+create_terrain SWAMP_LAYER_3 {
+	base_layer SWAMP_LAYER_1
+	land_percent rnd(1,2)
+	number_of_clumps rnd(2,8)
+	set_scale_by_groups 
+	terrain_mask 1
+}
+create_terrain SWAMP_LAYER_4 {
+	base_layer SWAMP_LAYER_1
+	land_percent rnd(1,2)
+	number_of_clumps rnd(2,8)
+	set_scale_by_groups 
+	terrain_mask 1
+}
+create_terrain SWAMP_LAYER_5 {
+	base_layer SWAMP_LAYER_1
+	land_percent rnd(1,2)
+	number_of_clumps rnd(2,8)
+	set_scale_by_groups 
+	terrain_mask 1
+}
+
+create_terrain LOW_MAP_BASE_TERRAIN {
+	base_terrain MAP_BASE_TERRAIN
+	land_percent 100
+	number_of_clumps 9320
+	height_limits 0 0
+	spacing_to_other_terrain_types 1
+	set_flat_terrain_only
+}
+
+/* cosmetic terrain mixing */
+create_terrain MAP_BASE_LAYER_1 {
+	base_terrain LOW_MAP_BASE_TERRAIN
+	land_percent 100
+	number_of_clumps 9320
+	spacing_to_other_terrain_types 0
+	terrain_mask 1
+}
+
+
+create_terrain PLAYER_LAND_LAYER_1 {
+	base_terrain PLAYER_LAND_TERRAIN
+	land_percent rnd(3,5)
+	number_of_clumps rnd(6,10)
+	set_scale_by_groups 
+	terrain_mask 1	
+}
+create_terrain PLAYER_LAND_LAYER_2 {
+	base_terrain PLAYER_LAND_TERRAIN
+	land_percent rnd(3,5)
+	number_of_clumps rnd(6,10)
+	set_scale_by_groups 
+	terrain_mask 1	
+}
+create_terrain PLAYER_LAND_LAYER_3 {
+	base_terrain PLAYER_LAND_TERRAIN
+	land_percent rnd(1,3)
+	number_of_clumps rnd(4,8)
+	set_scale_by_groups 
+	terrain_mask 1	
+}
+create_terrain PLAYER_LAND_LAYER_4 {
+	base_terrain PLAYER_LAND_TERRAIN
+	land_percent rnd(1,3)
+	number_of_clumps rnd(4,8)
+	set_scale_by_groups 
+	terrain_mask 1	
+}
+create_terrain PLAYER_LAND_LAYER_5 {
+	base_terrain PLAYER_LAND_TERRAIN
+	land_percent rnd(1,2)
+	number_of_clumps rnd(3,5)
+	set_scale_by_groups 
+	terrain_mask 1	
+}
+
+
+create_terrain NEUTRAL_LAYER_1 {
+	base_terrain NEUTRAL_LAND_TERRAIN
+	land_percent rnd(2,4)
+	number_of_clumps rnd(4,8)
+	set_scale_by_groups 
+	terrain_mask 1	
+}
+create_terrain NEUTRAL_LAYER_2 {
+	base_terrain NEUTRAL_LAND_TERRAIN
+	land_percent rnd(2,4)
+	number_of_clumps rnd(4,8)
+	set_scale_by_groups 
+	terrain_mask 1	
+}
+
+/* map base terrain forests */
+create_terrain MAP_BASE_FOREST {
+	base_terrain LOW_MAP_BASE_TERRAIN
+	base_layer MAP_BASE_LAYER_1
+	land_percent rnd(1,2)
+	number_of_clumps rnd(6,16)
+	set_scale_by_groups
+	spacing_to_other_terrain_types 0
+	terrain_mask 2
+}
+create_terrain MAP_BASE_FOREST {
+	base_terrain LOW_MAP_BASE_TERRAIN
+	base_layer MAP_BASE_LAYER_1
+	land_percent 1
+	number_of_clumps rnd(4,14)
+	set_scale_by_groups
+	spacing_to_other_terrain_types 0
+	terrain_mask 2
+}
+
+create_terrain MAP_BASE_LAYER_2 {
+	base_terrain LOW_MAP_BASE_TERRAIN
+	base_layer MAP_BASE_LAYER_1
+	land_percent rnd(4,8)
+	number_of_clumps rnd(6,10)
+	set_scale_by_groups 
+	terrain_mask 1	
+}
+
+/* =================================================================================================== */
+<CONNECTION_GENERATION>
+
+accumulate_connections
+
+create_connect_all_lands {
+replace_terrain SWAMP_TERRAIN LAKE_TERRAIN
+replace_terrain BEACH RIVER_TERRAIN
+replace_terrain ICYSHORE RIVER_TERRAIN
+replace_terrain LOW_MAP_BASE_TERRAIN RIVER_TERRAIN
+replace_terrain MAP_BASE_FOREST REED_SHALLOWS
+replace_terrain SWAMP_FOREST SANDBANK_TERRAIN
+
+
+terrain_cost PLAYER_LAND_TERRAIN 0
+terrain_cost PLAYER_LAND_FOREST 0
+terrain_cost NEUTRAL_LAND_TERRAIN 0
+terrain_cost NEUTRAL_LAND_FOREST 0
+terrain_cost HILL_TERRAIN 0
+
+terrain_cost MAP_BASE_TERRAIN 999
+terrain_cost LOW_MAP_BASE_TERRAIN 99
+
+terrain_cost BEACH 999
+terrain_cost ICYSHORE 999
+terrain_cost SWAMP_TERRAIN 50
+
+terrain_size SWAMP_TERRAIN 3 1
+terrain_size BEACH 0 1
+terrain_size ICYSHORE 0 1
+terrain_size MAP_BASE_TERRAIN 1 0
+}
+
+create_connect_all_lands {
+replace_terrain MAP_BASE_TERRAIN SHALLOWS_TYPE
+
+terrain_cost PLAYER_LAND_TERRAIN 0
+terrain_cost PLAYER_LAND_FOREST 0
+terrain_cost NEUTRAL_LAND_TERRAIN 0
+terrain_cost NEUTRAL_LAND_FOREST 0
+terrain_cost HILL_TERRAIN 0
+
+terrain_cost LOW_MAP_BASE_TERRAIN 0
+
+terrain_cost MAP_BASE_TERRAIN 99999
+terrain_cost BEACH 99999
+terrain_cost ICYSHORE 99999
+
+terrain_cost WATER 1
+terrain_cost RIVER_TERRAIN 50
+
+terrain_size SWAMP_TERRAIN 0 0
+terrain_size BEACH 0 0
+terrain_size ICYSHORE 0 0
+terrain_size SHALLOWS_TYPE 0 0
+terrain_size MAP_BASE_TERRAIN 1 0
+terrain_size DLC_BLACK  0 0
+}
+
+create_connect_all_lands {
+replace_terrain RIVER_TERRAIN DLC_NEWSHALLOW
+if FROZEN_MAP	replace_terrain SHALLOWS_TYPE ICE
+else	replace_terrain SHALLOWS_TYPE DLC_WETBEACH
+endif
+terrain_cost DLC_WATER4 0
+terrain_cost DEEP_WATER 0
+terrain_cost MED_WATER 0
+}
+
+/* custom beach code */
+create_connect_all_lands {
+replace_terrain BEACH SANDBANK_TERRAIN
+terrain_size PLAYER_LAND_TERRAIN 960 0
+}
+
+
+
+/* =================================================================================================== */
+<OBJECTS_GENERATION>
+
+create_object SWAMP_FILLER_TREE {
+	terrain_to_place_on SWAMP_FOREST
+	number_of_objects 9320
+	set_scaling_to_map_size
+}
+
+create_object REED_TREE {
+	terrain_to_place_on SANDBANK_TERRAIN
+	number_of_groups 9320
+	set_scaling_to_map_size
+	number_of_objects 60
+	temp_min_distance_group_placement 8
+	if DESERT_MAP	second_object PALMTREE
+	elseif SAVANNAH_MAP	second_object PALMTREE
+	elseif TROPICAL_MAP	second_object PALMTREE
+	endif
+}
+
+create_object REED_TREE {
+	terrain_to_place_on BEACH
+	number_of_groups 9320
+	set_scaling_to_map_size
+	number_of_objects 60
+	temp_min_distance_group_placement 6
+	if DESERT_MAP	second_object PALMTREE
+	elseif SAVANNAH_MAP	second_object PALMTREE
+	elseif TROPICAL_MAP	second_object PALMTREE
+	endif
+}
+create_object REED_TREE {
+	terrain_to_place_on ICYSHORE
+	number_of_groups 9320
+	set_scaling_to_map_size
+	number_of_objects 40
+	temp_min_distance_group_placement 12
+}
+
+if NOMAD_VERSION
+	create_object VILLAGER {
+		set_place_for_every_player
+		min_distance_group_placement 1
+		avoid_forest_zone 4
+		max_distance_to_other_zones 4
+		temp_min_distance_group_placement 35
+		actor_area 1
+		actor_area_radius 10
+		avoid_actor_area 1
+	}
+	create_object HORSE {
+		set_place_for_every_player
+		terrain_to_place_on PLAYER_LAND_TERRAIN
+		min_distance_group_placement 1
+		avoid_forest_zone 4
+		max_distance_to_other_zones 4
+		actor_area 2
+		actor_area_radius 10
+		avoid_actor_area 1
+		avoid_actor_area 2
+	}
+	if REGICIDE
+	create_object KING {
+		set_place_for_every_player
+		terrain_to_place_on PLAYER_LAND_TERRAIN
+		min_distance_group_placement 1
+		avoid_forest_zone 4
+		max_distance_to_other_zones 4
+		actor_area 3
+		actor_area_radius 10
+		avoid_actor_area 1
+		avoid_actor_area 2
+		avoid_actor_area 3
+	}
+	endif
+	create_object TRANSPORT_SHIP {
+		set_place_for_every_player
+		terrain_to_place_on DEEP_WATER
+		min_distance_group_placement 1
+		ignore_terrain_restrictions
+	}
+else
+	create_object TOWN_CENTER {
+		set_place_for_every_player
+		max_distance_to_players 0
+	}
+	create_object VILLAGER {
+		set_place_for_every_player
+		min_distance_to_players 5
+		max_distance_to_players 7
+		set_circular_placement
+		min_distance_group_placement 1
+	}
+	create_object HORSE {
+		set_place_for_every_player
+		min_distance_to_players 6
+		max_distance_to_players 8
+		set_circular_placement
+		min_distance_group_placement 1
+	}
+	if REGICIDE
+		create_object KING {
+			set_place_for_every_player
+			min_distance_to_players 6
+			set_circular_placement
+			find_closest
+			min_distance_group_placement 1
+		}
+		create_object VILLAGER {
+			number_of_objects 7
+			set_place_for_every_player
+			min_distance_to_players 6
+			max_distance_to_players 8
+			set_circular_placement
+		}
+		create_object CASTLE {
+			set_place_for_every_player
+			min_distance_to_players 9
+			max_distance_to_players 11
+			set_circular_placement
+			min_distance_group_placement 2
+		}
+	endif
+	create_object TRANSPORT_SHIP {
+		set_place_for_every_player
+		terrain_to_place_on DEEP_WATER
+		min_distance_group_placement 1
+		ignore_terrain_restrictions
+		find_closest
+	}
+endif
+
+create_object RELIC {
+	min_distance_group_placement 1
+	temp_min_distance_group_placement 25
+	min_distance_to_players 25
+	set_circular_placement
+	if TINY_MAP
+		number_of_objects rnd(5,7)
+	elseif SMALL_MAP
+		number_of_objects rnd(6,8)
+	elseif MEDIUM_MAP
+		number_of_objects rnd(7,9)
+	elseif LARGE_MAP
+		number_of_objects rnd(8,10)
+	elseif HUGE_MAP
+		number_of_objects rnd(9,11)
+	elseif GIGANTIC_MAP
+		number_of_objects rnd(10,14)
+	elseif LUDIKRIS_MAP
+		number_of_objects rnd(20,30)
+		temp_min_distance_group_placement 49 
+	endif
+}
+
+
+/* =================================================================================================== */
+/* player land resources */
+
+create_object COMMON_FORAGE {
+	number_of_groups 1
+	number_of_objects rnd(6,10)
+	group_variance 1
+	group_placement_radius 2
+	set_tight_grouping
+	set_gaia_object_only
+	set_place_for_every_player
+	min_distance_to_players 9
+	max_distance_to_players 25
+	set_circular_placement
+	min_distance_group_placement 1
+	temp_min_distance_group_placement 15
+	terrain_to_place_on PLAYER_LAND_TERRAIN
+}
+create_object GOLD {
+	number_of_groups 1
+	number_of_objects rnd(4,8)
+	group_variance 1
+	group_placement_radius 2
+	set_tight_grouping
+	set_gaia_object_only
+	set_place_for_every_player
+	min_distance_to_players 9
+	max_distance_to_players 25
+	set_circular_placement
+	min_distance_group_placement 1
+	temp_min_distance_group_placement 15
+	terrain_to_place_on PLAYER_LAND_TERRAIN
+}
+create_object STONE {
+	number_of_groups 1
+	number_of_objects rnd(3,7)
+	group_variance 1
+	group_placement_radius 2
+	set_tight_grouping
+	set_gaia_object_only
+	set_place_for_every_player
+	min_distance_to_players 9
+	max_distance_to_players 25
+	set_circular_placement
+	min_distance_group_placement 1
+	temp_min_distance_group_placement 15
+	terrain_to_place_on PLAYER_LAND_TERRAIN
+}
+
+create_object DLC_PIG {
+	number_of_objects rnd(4,5)
+	group_variance 1
+	set_loose_grouping
+	set_gaia_object_only
+	set_place_for_every_player
+	min_distance_to_players 3
+	set_circular_placement
+	find_closest
+	min_distance_group_placement 1
+}
+create_object PLAYER_BOAR {
+	number_of_groups rnd(1,3)
+	set_gaia_object_only
+	set_place_for_every_player
+	min_distance_to_players 15
+	max_distance_to_players 25
+	set_circular_placement
+	min_distance_group_placement 1
+	terrain_to_place_on PLAYER_LAND_TERRAIN
+}
+create_object PLAYER_SHEEP {
+	number_of_objects rnd(1,3)
+	number_of_groups rnd(1,2)
+	set_gaia_object_only
+	set_place_for_every_player
+	min_distance_to_players 15
+	max_distance_to_players 25
+	set_circular_placement
+	min_distance_group_placement 1
+	terrain_to_place_on PLAYER_LAND_TERRAIN
+}
+create_object PLAYER_DEER {
+	number_of_objects rnd(3,5)
+	number_of_groups 1
+	set_gaia_object_only
+	set_place_for_every_player
+	min_distance_to_players 15
+	max_distance_to_players 25
+	set_circular_placement
+	min_distance_group_placement 1
+	terrain_to_place_on PLAYER_LAND_TERRAIN
+}
+
+create_object COMMON_STRAGGELR_A {
+	number_of_objects 5
+	set_gaia_object_only
+	set_scaling_to_map_size
+	min_distance_to_players 3
+	set_circular_placement
+	terrain_to_place_on PLAYER_LAND_TERRAIN
+}
+create_object COMMON_STRAGGELR_B {
+	number_of_objects 5
+	set_gaia_object_only
+	set_scaling_to_map_size
+	min_distance_to_players 3
+	set_circular_placement 
+	terrain_to_place_on PLAYER_LAND_TERRAIN
+}
+create_object COMMON_STRAGGELR_C {
+	number_of_objects 5
+	set_gaia_object_only
+	set_scaling_to_map_size
+	min_distance_to_players 3
+	set_circular_placement 
+	terrain_to_place_on PLAYER_LAND_TERRAIN
+}
+
+
+/* =================================================================================================== */
+/* consistent neutral areas everywhere */
+
+create_object GOLD {
+	number_of_groups 3
+	set_scaling_to_map_size
+	number_of_objects 3
+	group_variance 1
+	group_placement_radius 2
+	set_tight_grouping
+	set_gaia_object_only
+	min_distance_group_placement 1
+	temp_min_distance_group_placement 15
+	terrain_to_place_on MAP_BASE_TERRAIN
+}
+create_object STONE {
+	number_of_groups 3
+	set_scaling_to_map_size
+	number_of_objects 3
+	group_variance 1
+	group_placement_radius 2
+	set_tight_grouping
+	set_gaia_object_only
+	min_distance_group_placement 1
+	temp_min_distance_group_placement 15
+	terrain_to_place_on MAP_BASE_TERRAIN
+}
+create_object COMMON_FORAGE {
+	number_of_groups 3
+	set_scaling_to_map_size
+	number_of_objects 1
+	group_variance 2
+	group_placement_radius 2
+	set_tight_grouping
+	set_gaia_object_only
+	min_distance_group_placement 1
+	temp_min_distance_group_placement 15
+	terrain_to_place_on MAP_BASE_TERRAIN
+}
+
+create_object NEUTRAL_BOAR {
+	number_of_groups 2
+	set_scaling_to_map_size
+	set_gaia_object_only
+	temp_min_distance_group_placement 15
+	min_distance_to_players 30
+	set_circular_placement
+	min_distance_group_placement 1
+	terrain_to_place_on MAP_BASE_TERRAIN
+}
+create_object NEUTRAL_SHEEP {
+	number_of_objects 2
+	group_variance 1
+	number_of_groups rnd(1,3)
+	set_scaling_to_map_size
+	set_loose_grouping
+	set_gaia_object_only
+	temp_min_distance_group_placement 15
+	min_distance_to_players 30
+	set_circular_placement
+	min_distance_group_placement 1
+	terrain_to_place_on MAP_BASE_TERRAIN
+}
+create_object NEUTRAL_DEER {
+	number_of_objects rnd(2,4)
+	group_variance 1
+	set_scaling_to_map_size
+	set_loose_grouping
+	set_gaia_object_only
+	temp_min_distance_group_placement 20
+	min_distance_to_players 30
+	set_circular_placement
+	min_distance_group_placement 1
+	terrain_to_place_on MAP_BASE_TERRAIN
+}
+if NOMAD_VERSION
+else
+create_object NEUTRAL_PREDATOR {
+	number_of_objects 2
+	group_variance 1
+	set_scaling_to_map_size
+	set_loose_grouping
+	set_gaia_object_only
+	temp_min_distance_group_placement 15
+	min_distance_to_players 35
+	set_circular_placement
+	min_distance_group_placement 1
+	terrain_to_place_on MAP_BASE_TERRAIN
+}
+endif
+
+create_object COMMON_STRAGGELR_A {
+	number_of_objects 5
+	set_gaia_object_only
+	set_scaling_to_map_size
+	terrain_to_place_on MAP_BASE_TERRAIN
+}
+create_object COMMON_STRAGGELR_B {
+	number_of_objects 5
+	set_gaia_object_only
+	set_scaling_to_map_size
+	terrain_to_place_on MAP_BASE_TERRAIN
+}
+create_object COMMON_STRAGGELR_C {
+	number_of_objects 5
+	set_gaia_object_only
+	set_scaling_to_map_size
+	terrain_to_place_on MAP_BASE_TERRAIN
+}
+
+
+/* =================================================================================================== */
+/* hills */
+
+create_object STONE {
+	number_of_groups 5
+	set_scaling_to_map_size
+	number_of_objects 7
+	group_variance 3
+	group_placement_radius 2
+	set_tight_grouping
+	set_gaia_object_only
+	min_distance_group_placement 1
+	temp_min_distance_group_placement 15
+	terrain_to_place_on HILL_TERRAIN
+}
+create_object GOLD {
+	number_of_groups 4
+	set_scaling_to_map_size
+	number_of_objects 6
+	group_variance 2
+	group_placement_radius 2
+	set_tight_grouping
+	set_gaia_object_only
+	min_distance_group_placement 1
+	temp_min_distance_group_placement 15
+	terrain_to_place_on HILL_TERRAIN
+}
+
+create_object HILL_SHEEP {
+	number_of_groups 3
+	set_scaling_to_map_size
+	number_of_objects 2
+	group_variance 1
+	set_loose_grouping
+	set_gaia_object_only
+	temp_min_distance_group_placement 15
+	min_distance_group_placement 1
+	terrain_to_place_on HILL_TERRAIN
+}
+create_object HILL_DEER {
+	number_of_groups 4
+	set_scaling_to_map_size
+	number_of_objects 3
+	group_variance 2
+	set_loose_grouping
+	set_gaia_object_only
+	temp_min_distance_group_placement 15
+	min_distance_group_placement 1
+	terrain_to_place_on HILL_TERRAIN
+}
+if NOMAD_VERSION
+else
+create_object HILL_PREDATOR {
+	number_of_groups 3
+	set_scaling_to_map_size
+	number_of_objects 1
+	group_variance 2
+	set_loose_grouping
+	set_gaia_object_only
+	temp_min_distance_group_placement 15
+	min_distance_group_placement 1
+	terrain_to_place_on HILL_TERRAIN
+	layer_to_place_on HILL_TOP_LAYER
+}
+endif
+
+create_object HILL_TREE {
+	number_of_objects 5
+	set_gaia_object_only
+	set_scaling_to_map_size
+	terrain_to_place_on HILL_TERRAIN
+}
+create_object HILL_TOP_TREE {
+	number_of_objects 5
+	set_gaia_object_only
+	set_scaling_to_map_size
+	terrain_to_place_on HILL_TERRAIN
+	layer_to_place_on HILL_TOP_LAYER
+}
+
+/* =================================================================================================== */
+/* inconsistent lowlands */
+
+create_object LOWLAND_FORAGE {
+	number_of_groups 2
+	set_scaling_to_map_size
+	number_of_objects 3
+	group_variance 2
+	group_placement_radius 2
+	set_tight_grouping
+	set_gaia_object_only
+	min_distance_group_placement 1
+	temp_min_distance_group_placement 15
+	terrain_to_place_on LOW_MAP_BASE_TERRAIN
+}
+create_object GOLD {
+	number_of_groups 2
+	set_scaling_to_map_size
+	number_of_objects 3
+	group_variance 2
+	group_placement_radius 2
+	set_tight_grouping
+	set_gaia_object_only
+	min_distance_group_placement 1
+	temp_min_distance_group_placement 15
+	terrain_to_place_on LOW_MAP_BASE_TERRAIN
+}
+
+create_object LOWLAND_SHEEP {
+	number_of_groups 2
+	set_scaling_to_map_size
+	number_of_objects 1
+	group_variance 2
+	group_placement_radius 2
+	set_tight_grouping
+	set_gaia_object_only
+	min_distance_group_placement 1
+	temp_min_distance_group_placement 15
+	terrain_to_place_on LOW_MAP_BASE_TERRAIN
+}
+create_object LOWLAND_DEER {
+	number_of_groups 2
+	set_scaling_to_map_size
+	number_of_objects 2
+	group_variance 1
+	group_placement_radius 2
+	set_tight_grouping
+	set_gaia_object_only
+	min_distance_group_placement 1
+	temp_min_distance_group_placement 15
+	terrain_to_place_on LOW_MAP_BASE_TERRAIN
+}
+create_object LOWLAND_BOAR {
+	number_of_groups 1
+	set_scaling_to_map_size
+	set_gaia_object_only
+	min_distance_group_placement 1
+	temp_min_distance_group_placement 20
+	terrain_to_place_on LOW_MAP_BASE_TERRAIN
+}
+if NOMAD_VERSION
+else
+create_object LOWLAND_PREDATOR {
+	number_of_groups 2
+	set_scaling_to_map_size
+	number_of_objects 1
+	group_variance 2
+	set_loose_grouping
+	set_gaia_object_only
+	temp_min_distance_group_placement 15
+	min_distance_group_placement 1
+	terrain_to_place_on LOW_MAP_BASE_TERRAIN
+}
+endif
+
+create_object LOWLAND_STRAGGELR_A {
+	number_of_objects 3
+	set_gaia_object_only
+	set_scaling_to_map_size
+	terrain_to_place_on LOW_MAP_BASE_TERRAIN
+}
+create_object LOWLAND_STRAGGELR_B {
+	number_of_objects 3
+	set_gaia_object_only
+	set_scaling_to_map_size
+	terrain_to_place_on LOW_MAP_BASE_TERRAIN
+}
+create_object LOWLAND_STRAGGELR_C {
+	number_of_objects 2
+	set_gaia_object_only
+	set_scaling_to_map_size
+	terrain_to_place_on LOW_MAP_BASE_TERRAIN
+}
+
+
+/* =================================================================================================== */
+/* inconsistent neutral areas */
+
+create_object GOLD {
+	number_of_groups 3
+	set_scaling_to_map_size
+	number_of_objects 3
+	group_variance 1
+	group_placement_radius 2
+	set_tight_grouping
+	set_gaia_object_only
+	min_distance_group_placement 1
+	temp_min_distance_group_placement 15
+	terrain_to_place_on NEUTRAL_LAND_TERRAIN
+}
+create_object STONE {
+	number_of_groups 3
+	set_scaling_to_map_size
+	number_of_objects 3
+	group_variance 1
+	group_placement_radius 2
+	set_tight_grouping
+	set_gaia_object_only
+	min_distance_group_placement 1
+	temp_min_distance_group_placement 15
+	terrain_to_place_on NEUTRAL_LAND_TERRAIN
+}
+create_object OTHER_NEUTRAL_FORAGE {
+	number_of_groups 3
+	set_scaling_to_map_size
+	number_of_objects 1
+	group_variance 2
+	group_placement_radius 2
+	set_tight_grouping
+	set_gaia_object_only
+	min_distance_group_placement 1
+	temp_min_distance_group_placement 15
+	terrain_to_place_on NEUTRAL_LAND_TERRAIN
+}
+
+create_object OTHER_NEUTRAL_SHEEP {
+	number_of_groups 2
+	set_scaling_to_map_size
+	number_of_objects 1
+	group_variance 2
+	group_placement_radius 2
+	set_tight_grouping
+	set_gaia_object_only
+	min_distance_group_placement 1
+	temp_min_distance_group_placement 15
+	terrain_to_place_on NEUTRAL_LAND_TERRAIN
+}
+create_object OTHER_NEUTRAL_DEER {
+	number_of_groups 2
+	set_scaling_to_map_size
+	number_of_objects 2
+	group_variance 1
+	group_placement_radius 2
+	set_tight_grouping
+	set_gaia_object_only
+	min_distance_group_placement 1
+	temp_min_distance_group_placement 15
+	terrain_to_place_on NEUTRAL_LAND_TERRAIN
+}
+create_object OTHER_NEUTRAL_BOAR {
+	number_of_groups 1
+	set_scaling_to_map_size
+	set_gaia_object_only
+	min_distance_group_placement 1
+	temp_min_distance_group_placement 20
+	terrain_to_place_on NEUTRAL_LAND_TERRAIN
+}
+if NOMAD_VERSION
+else
+create_object OTHER_NEUTRAL_PREDATOR {
+	number_of_groups 2
+	set_scaling_to_map_size
+	number_of_objects 1
+	group_variance 2
+	set_loose_grouping
+	set_gaia_object_only
+	temp_min_distance_group_placement 15
+	min_distance_group_placement 1
+	terrain_to_place_on NEUTRAL_LAND_TERRAIN
+}
+endif
+
+create_object COMMON_STRAGGELR_A {
+	number_of_objects 5
+	set_gaia_object_only
+	set_scaling_to_map_size
+	terrain_to_place_on NEUTRAL_LAND_TERRAIN
+}
+create_object COMMON_STRAGGELR_B {
+	number_of_objects 5
+	set_gaia_object_only
+	set_scaling_to_map_size
+	terrain_to_place_on NEUTRAL_LAND_TERRAIN
+}
+create_object COMMON_STRAGGELR_C {
+	number_of_objects 5
+	set_gaia_object_only
+	set_scaling_to_map_size
+	terrain_to_place_on NEUTRAL_LAND_TERRAIN
+}
+
+
+/* =================================================================================================== */
+/* sawmp */
+
+create_object SWAMP_FORAGE {
+	number_of_groups 8
+	set_scaling_to_map_size
+	number_of_objects 5
+	group_variance 3
+	group_placement_radius 2
+	set_tight_grouping
+	set_gaia_object_only
+	min_distance_group_placement 1
+	temp_min_distance_group_placement 15
+	terrain_to_place_on SWAMP_TERRAIN
+}
+
+create_object ONGRID_PLACEHOLDER_1 {
+	second_object SWAMP_FISH
+	number_of_groups 3
+	set_scaling_to_map_size
+	set_gaia_object_only
+	temp_min_distance_group_placement 5
+	terrain_to_place_on SWAMP_TERRAIN
+}
+
+create_object DLC_GOOSE {
+	number_of_groups 2
+	set_scaling_to_map_size
+	number_of_objects 2
+	group_variance 2
+	group_placement_radius 2
+	set_tight_grouping
+	set_gaia_object_only
+	min_distance_group_placement 1
+	temp_min_distance_group_placement 15
+	terrain_to_place_on SWAMP_TERRAIN
+}
+create_object BOAR {
+	number_of_groups 3
+	set_scaling_to_map_size
+	set_gaia_object_only
+	min_distance_group_placement 1
+	temp_min_distance_group_placement 12
+	terrain_to_place_on SWAMP_TERRAIN
+}
+if NOMAD_VERSION
+else
+create_object SWAMP_PREDATOR {
+	number_of_groups 3
+	set_scaling_to_map_size
+	number_of_objects 2
+	group_variance 1
+	set_loose_grouping
+	set_gaia_object_only
+	temp_min_distance_group_placement 12
+	min_distance_group_placement 1
+	terrain_to_place_on SWAMP_TERRAIN
+}
+endif
+
+create_object SWAMP_FOREST_UPGRADE {
+	number_of_objects 5
+	set_gaia_object_only
+	set_scaling_to_map_size
+	terrain_to_place_on SWAMP_TERRAIN
+}
+
+
+/* =================================================================================================== */
+/* watery areas */
+
+create_object SHORE_FISH {
+	number_of_groups 10
+	set_scaling_to_map_size
+	set_gaia_object_only
+	temp_min_distance_group_placement 5
+}
+
+create_object GREAT_FISH_TYPE {
+	number_of_objects 2
+	set_scaling_to_map_size
+	set_gaia_object_only
+	temp_min_distance_group_placement 10
+	terrain_to_place_on DLC_WATER4
+}
+
+create_object STANDARD_FISH_TYPE {
+	number_of_objects 10
+	set_scaling_to_map_size
+	set_gaia_object_only
+	temp_min_distance_group_placement 5
+}
+
+if NOMAD_VERSION
+else
+create_object COMMON_CROCODILE {
+	number_of_groups 5
+	set_scaling_to_map_size
+	set_gaia_object_only
+	temp_min_distance_group_placement 12
+	terrain_to_place_on SHALLOW
+	min_distance_to_players 30
+	set_circular_placement
+}
+endif
+
+create_object DLC_GOOSE {
+	number_of_groups 5
+	set_scaling_to_map_size
+	set_gaia_object_only
+	temp_min_distance_group_placement 12
+	terrain_to_place_on DLC_WETBEACH
+	min_distance_to_players 30
+	set_circular_placement
+}
+create_object DLC_GOOSE {
+	number_of_groups 4
+	set_scaling_to_map_size
+	set_gaia_object_only
+	temp_min_distance_group_placement 13
+	terrain_to_place_on ICYSHORE
+	min_distance_to_players 30
+	set_circular_placement
+}
+create_object DLC_GOOSE {
+	number_of_groups 4
+	set_scaling_to_map_size
+	set_gaia_object_only
+	temp_min_distance_group_placement 13
+	terrain_to_place_on BEACH_WHITE
+	min_distance_to_players 30
+	set_circular_placement
+}
+
+/* birds */
+create_object BIRD_TYPE_A {
+	number_of_objects 1
+	set_scaling_to_map_size
+}
+create_object BIRD_TYPE_B {
+	number_of_objects 1
+	set_scaling_to_map_size
+}
+create_object BIRD_TYPE_C {
+	number_of_objects 1
+	set_scaling_to_map_size
+}
+create_object BIRD_TYPE_D {
+	number_of_objects 1
+	set_scaling_to_map_size
+}
+create_object BIRD_TYPE_E {
+	number_of_objects 1
+	set_scaling_to_map_size
+}

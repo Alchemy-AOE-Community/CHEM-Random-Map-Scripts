@@ -1,0 +1,299 @@
+/* Uplift Nomad */
+
+/*
+Version 1.0
+
+Most recent update: 07 May 2020
+
+By: Zetnus 
+Zetnus@outlook.com
+
+Learn about random map scripting: https://docs.google.com/document/d/e/2PACX-1vR_I1I9u-hI2FFm-EYyjoM_-9dNJFOfTaIgr05wXNbdpv9tI18b6r18ARULy3Jqyvlq6-lc2VjX6xP4/pub
+
+This map was harvested from a mod in the official AOE2DE mod center, whose licensing agreement with Microsoft supersedes any Github restrictions: https://www.microsoft.com/en-us/servicesagreement
+
+*/
+
+/* =================================================================================================== */
+<PLAYER_SETUP>
+random_placement
+nomad_resources
+ai_info_map_type CUSTOM 1 0 0
+behavior_version 1
+
+/* Disabling Trade Carts and Cogs for Multi-team Games */
+if 2_TEAM_GAME
+else
+  #const TRADE_CART_ENABLER 161
+  #const TRADE_COG_ENABLER 180
+  #const TRADE_CARAVAN_ENABLER 48
+  #const HINDU_CARAVANSERAI_ENABLER 518
+  #const PERSIAN_CARAVANSERAI_ENABLER 552  
+  #const SILK_ROAD 499
+  effect_amount DISABLE_TECH TRADE_COG_ENABLER ATTR_DISABLE 180
+  effect_amount DISABLE_TECH TRADE_CART_ENABLER ATTR_DISABLE 161
+  effect_amount DISABLE_TECH TRADE_CARAVAN_ENABLER ATTR_DISABLE 48
+  effect_amount DISABLE_TECH HINDU_CARAVANSERAI_ENABLER ATTR_DISABLE 518
+  effect_amount DISABLE_TECH PERSIAN_CARAVANSERAI_ENABLER ATTR_DISABLE 552
+  effect_amount DISABLE_TECH SILK_ROAD ATTR_DISABLE 499    
+endif
+
+/* =================================================================================================== */
+<LAND_GENERATION>
+
+base_terrain GRASS
+
+create_player_lands {
+	terrain_type GRASS
+	land_percent 0
+	base_size 0
+	left_border 90
+	top_border 40
+	bottom_border 40
+}
+
+/* =================================================================================================== */
+<ELEVATION_GENERATION>
+create_elevation 7 {
+	base_terrain GRASS
+	if TINY_MAP
+		number_of_tiles 8000
+		number_of_clumps 8000
+	elseif SMALL_MAP
+		number_of_tiles 12000
+		number_of_clumps 12000
+	elseif MEDIUM_MAP
+		number_of_tiles 16500
+		number_of_clumps 16500
+	elseif LARGE_MAP
+		number_of_tiles 24000
+		number_of_clumps 24000
+	elseif HUGE_MAP
+		number_of_tiles 30000
+		number_of_clumps 30000
+	elseif GIGANTIC_MAP
+		number_of_tiles 35000
+		number_of_clumps 35000
+	elseif LUDIKRIS_MAP
+		number_of_tiles 140000
+		number_of_clumps 140000
+	endif
+}
+
+/* =================================================================================================== */
+<TERRAIN_GENERATION>
+
+create_terrain DIRT2 {
+	base_terrain GRASS
+	land_percent 100
+	number_of_clumps 9320
+	set_scale_by_groups
+	height_limits 1 7
+}
+create_terrain DLC_ROCK {
+	base_terrain DIRT2
+	land_percent 100
+	number_of_clumps 9320
+	set_scale_by_groups
+	height_limits 3 7
+}
+create_terrain DESERT {
+	base_terrain DLC_ROCK
+	land_percent 100
+	number_of_clumps 9320
+	set_scale_by_groups
+	height_limits 6 7
+}
+
+/* forests */
+create_terrain FOREST {
+	base_terrain GRASS
+	land_percent 10
+	number_of_clumps 30
+	set_scale_by_groups
+}
+
+create_terrain PALM_DESERT {
+	base_terrain DESERT
+	land_percent 4
+	number_of_clumps 16
+	set_scale_by_groups
+}
+
+/* terrain mixing */
+create_terrain GRASS2 {
+	base_terrain GRASS
+	land_percent 15
+	number_of_clumps 15
+	set_scale_by_groups
+	terrain_mask 1
+}
+create_terrain DIRT {
+	base_terrain DESERT
+	land_percent 30
+	number_of_clumps 30
+	set_scale_by_groups
+	terrain_mask 1
+}
+
+/* =================================================================================================== */
+<OBJECTS_GENERATION>
+
+create_object VILLAGER {
+	set_place_for_every_player
+	terrain_to_place_on GRASS
+	temp_min_distance_group_placement 15
+	min_distance_group_placement 3
+	avoid_forest_zone 2
+	actor_area 1
+	actor_area_radius 7
+	avoid_actor_area 1
+}
+
+if REGICIDE
+	create_object KING {
+		set_place_for_every_player
+		terrain_to_place_on GRASS
+		min_distance_group_placement 3
+		avoid_forest_zone 2
+	}
+endif
+
+/* DE relic balance */
+create_object RELIC {
+	terrain_to_place_on DLC_ROCK
+	min_distance_group_placement 1
+	if TINY_MAP
+		number_of_objects 5
+		temp_min_distance_group_placement 35
+	elseif SMALL_MAP
+		number_of_objects 5
+		temp_min_distance_group_placement 38
+	elseif MEDIUM_MAP
+		number_of_objects 5
+		temp_min_distance_group_placement 38
+	elseif LARGE_MAP
+		number_of_objects 7
+		temp_min_distance_group_placement 48
+	elseif HUGE_MAP
+		number_of_objects 8
+		temp_min_distance_group_placement 52
+	else
+		number_of_objects 999
+		temp_min_distance_group_placement 52 
+	endif
+}
+
+create_object FORAGE {
+	terrain_to_place_on GRASS
+	number_of_objects 5
+	number_of_groups 999
+	set_tight_grouping
+	temp_min_distance_group_placement 16
+	min_distance_group_placement 3
+	avoid_forest_zone 2
+	}
+	
+create_object DLC_ORANGEBUSH {
+	terrain_to_place_on DESERT
+	number_of_objects 3
+	number_of_groups 999
+	set_tight_grouping
+	temp_min_distance_group_placement 30
+	min_distance_group_placement 3
+	avoid_forest_zone 2
+	}
+	
+create_object GOLD {
+	terrain_to_place_on GRASS
+	number_of_objects 3
+	number_of_groups 999
+	set_tight_grouping
+	temp_min_distance_group_placement 24
+	min_distance_group_placement 3
+	avoid_forest_zone 2
+	}
+	
+create_object GOLD {
+	terrain_to_place_on DESERT
+	number_of_objects 6
+	number_of_groups 999
+	set_tight_grouping
+	temp_min_distance_group_placement 24
+	min_distance_group_placement 3
+	avoid_forest_zone 2
+	}
+	
+create_object STONE {
+	terrain_to_place_on GRASS
+	number_of_objects 2
+	number_of_groups 999
+	set_tight_grouping
+	temp_min_distance_group_placement 26
+	min_distance_group_placement 3
+	avoid_forest_zone 2
+	}
+	
+create_object STONE {
+	terrain_to_place_on DESERT
+	number_of_objects 5
+	number_of_groups 999
+	set_tight_grouping
+	temp_min_distance_group_placement 26
+	min_distance_group_placement 3
+	avoid_forest_zone 2
+	}
+	
+create_object BOAR {
+	terrain_to_place_on GRASS
+	number_of_groups 999
+	temp_min_distance_group_placement 19
+	min_distance_group_placement 1
+	}
+	
+create_object DLC_COW {
+	terrain_to_place_on GRASS
+	number_of_groups 999
+	temp_min_distance_group_placement 16
+	min_distance_group_placement 1
+	}
+	
+create_object DLC_GOAT {
+	terrain_to_place_on DESERT
+	number_of_groups 999
+	temp_min_distance_group_placement 22
+	min_distance_group_placement 1
+	}
+	
+create_object GAZELLE {
+	terrain_to_place_on GRASS
+	number_of_groups 999
+	number_of_objects 2
+	group_variance 2
+	group_placement_radius 3
+	temp_min_distance_group_placement 14
+	}
+	
+create_object DLC_OSTRICH {
+	terrain_to_place_on DESERT
+	number_of_groups 999
+	number_of_objects 2
+	group_variance 2
+	group_placement_radius 3
+	temp_min_distance_group_placement 20
+	}
+
+/* birds */
+create_object HAWK {
+	number_of_objects 6
+	set_scaling_to_map_size
+}
+	
+	
+	
+	
+
+
+
+
+

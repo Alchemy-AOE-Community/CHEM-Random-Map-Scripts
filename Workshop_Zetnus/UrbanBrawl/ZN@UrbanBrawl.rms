@@ -1,0 +1,1071 @@
+/*
+Urban Brawl
+
+Created: 05 April 2022
+Updated: 06 May 2022
+by Zetnus
+zetnus@outlook.com
+Zetnus#6414 on Discord
+
+Learn about random map scripting: https://docs.google.com/document/d/e/2PACX-1vR_I1I9u-hI2FFm-EYyjoM_-9dNJFOfTaIgr05wXNbdpv9tI18b6r18ARULy3Jqyvlq6-lc2VjX6xP4/pub
+
+This map was harvested from a mod in the official AOE2DE mod center, whose licensing agreement with Microsoft supersedes any Github restrictions: https://www.microsoft.com/en-us/servicesagreement
+
+fix wrong resource from trade workshop
+*/
+
+
+
+
+#const OAK_BUSH_FOREST 20
+#const ROAD_FUNGUS 39
+#const GRAVEL_DEFAULT 70
+#const DIRT_MUD 76
+#const ROAD_GRAVEL 78
+
+#const ONGRID_PLACEHOLDER 278	/* dead fish trap */
+
+/* =================================================================================================== */
+<PLAYER_SETUP>
+
+random_placement
+ai_info_map_type CUSTOM 0 0 0
+behavior_version 1
+
+/* upgrade from walls so units don't attack by default */
+
+/* houses spawn stone when destroyed */
+#const SPAWN_HOUSE 72
+effect_amount GAIA_UPGRADE_UNIT SPAWN_HOUSE HOUSE 0
+#const RUBBLE_HOUSE_D 1403
+effect_amount GAIA_SET_ATTRIBUTE RUBBLE_HOUSE_D ATTR_STORAGE_VALUE 1
+effect_amount GAIA_SET_ATTRIBUTE RUBBLE_HOUSE_D ATTR_DEAD_ID 102
+effect_amount GAIA_SET_ATTRIBUTE SPAWN_HOUSE ATTR_BLOOD_ID 864
+
+#const SPAWN_HUT_E 117
+effect_amount GAIA_UPGRADE_UNIT SPAWN_HUT_E DLC_AFRICANHUT_E 0
+#const RUBBLE_HUT_E 1459
+effect_amount GAIA_SET_ATTRIBUTE RUBBLE_HUT_E ATTR_STORAGE_VALUE 1
+effect_amount GAIA_SET_ATTRIBUTE RUBBLE_HUT_E ATTR_DEAD_ID 102
+effect_amount GAIA_SET_ATTRIBUTE SPAWN_HUT_E ATTR_BLOOD_ID 864
+
+#const SPAWN_HOUSE_F 119
+effect_amount GAIA_UPGRADE_UNIT SPAWN_HOUSE_F HOUSE_F 0
+#const RUBBLE_HOUSE_F 1434
+effect_amount GAIA_SET_ATTRIBUTE RUBBLE_HOUSE_F ATTR_STORAGE_VALUE 1
+effect_amount GAIA_SET_ATTRIBUTE RUBBLE_HOUSE_F ATTR_DEAD_ID 102
+effect_amount GAIA_SET_ATTRIBUTE SPAWN_HOUSE_F ATTR_BLOOD_ID 864
+
+#const SPAWN_HOUSE_C 155
+effect_amount GAIA_UPGRADE_UNIT SPAWN_HOUSE_C HOUSE_C 0
+#const RUBBLE_HOUSE_C 1435
+effect_amount GAIA_SET_ATTRIBUTE RUBBLE_HOUSE_C ATTR_STORAGE_VALUE 1
+effect_amount GAIA_SET_ATTRIBUTE RUBBLE_HOUSE_C ATTR_DEAD_ID 102
+effect_amount GAIA_SET_ATTRIBUTE SPAWN_HOUSE_C ATTR_BLOOD_ID 864
+
+/* monasteries spawn a relic when destroyed */
+#const SPAWN_MONASTERY 208
+effect_amount GAIA_UPGRADE_UNIT SPAWN_MONASTERY MONASTERY 0
+#const RUBBLE_MONASTERY 1421
+effect_amount GAIA_SET_ATTRIBUTE RUBBLE_MONASTERY ATTR_STORAGE_VALUE 1
+effect_amount GAIA_SET_ATTRIBUTE RUBBLE_MONASTERY ATTR_DEAD_ID 285
+effect_amount GAIA_SET_ATTRIBUTE SPAWN_MONASTERY ATTR_BLOOD_ID 865
+
+/* trade workshops spawn gold when destroyed */
+#const SPAWN_TRADE_WORKSHOP 231
+effect_amount GAIA_UPGRADE_UNIT SPAWN_TRADE_WORKSHOP TRADE_WORKSHOP 0
+#const RUBBLE_TRADE_WORKSHOP 1429
+effect_amount GAIA_SET_ATTRIBUTE RUBBLE_TRADE_WORKSHOP ATTR_STORAGE_VALUE 1
+effect_amount GAIA_SET_ATTRIBUTE RUBBLE_TRADE_WORKSHOP ATTR_DEAD_ID 66
+effect_amount GAIA_SET_ATTRIBUTE SPAWN_TRADE_WORKSHOP ATTR_BLOOD_ID 865
+
+#const SPAWN_MARKET 370
+effect_amount GAIA_UPGRADE_UNIT SPAWN_MARKET MARKET 0
+#const RUBBLE_MARKET 1422
+effect_amount GAIA_SET_ATTRIBUTE RUBBLE_MARKET ATTR_STORAGE_VALUE 1
+effect_amount GAIA_SET_ATTRIBUTE RUBBLE_MARKET ATTR_DEAD_ID 66
+effect_amount GAIA_SET_ATTRIBUTE SPAWN_MARKET ATTR_BLOOD_ID 865
+
+#const SPAWN_MARKET_C 788
+effect_amount GAIA_UPGRADE_UNIT SPAWN_MARKET_C MARKET_C 0
+#const RUBBLE_MARKET_C 1423
+effect_amount GAIA_SET_ATTRIBUTE RUBBLE_MARKET_C ATTR_STORAGE_VALUE 1
+effect_amount GAIA_SET_ATTRIBUTE RUBBLE_MARKET_C ATTR_DEAD_ID 66
+effect_amount GAIA_SET_ATTRIBUTE SPAWN_MARKET_C ATTR_BLOOD_ID 865
+
+/* other buildings spawn stone when destroyed */
+#const FORTRESS_CASTLE 33
+#const SPAWN_FORTRESS_CASTLE 888
+effect_amount GAIA_UPGRADE_UNIT SPAWN_FORTRESS_CASTLE FORTRESS_CASTLE 0
+#const RUBBLE_FORTRESS 1486
+effect_amount GAIA_SET_ATTRIBUTE RUBBLE_FORTRESS ATTR_STORAGE_VALUE 1
+effect_amount GAIA_SET_ATTRIBUTE RUBBLE_FORTRESS ATTR_DEAD_ID 102
+effect_amount GAIA_SET_ATTRIBUTE SPAWN_FORTRESS_CASTLE ATTR_BLOOD_ID 865
+effect_amount GAIA_SET_ATTRIBUTE FORTRESS_CASTLE ATTR_MAX_RANGE 0
+
+#const SPAWN_UNIVERSITY 889
+effect_amount GAIA_UPGRADE_UNIT SPAWN_UNIVERSITY UNIVERSITY 0
+#const RUBBLE_UNIVERSITY 1427
+effect_amount GAIA_SET_ATTRIBUTE RUBBLE_UNIVERSITY ATTR_STORAGE_VALUE 1
+effect_amount GAIA_SET_ATTRIBUTE RUBBLE_UNIVERSITY ATTR_DEAD_ID 102
+effect_amount GAIA_SET_ATTRIBUTE SPAWN_UNIVERSITY ATTR_BLOOD_ID 865
+
+#const SPAWN_SIEGE_WORKSHOP 890
+effect_amount GAIA_UPGRADE_UNIT SPAWN_SIEGE_WORKSHOP SIEGE_WORKSHOP 0
+#const RUBBLE_SIEGE_WORKSHOP 1426
+effect_amount GAIA_SET_ATTRIBUTE RUBBLE_SIEGE_WORKSHOP ATTR_STORAGE_VALUE 1
+effect_amount GAIA_SET_ATTRIBUTE RUBBLE_SIEGE_WORKSHOP ATTR_DEAD_ID 102
+effect_amount GAIA_SET_ATTRIBUTE SPAWN_SIEGE_WORKSHOP ATTR_BLOOD_ID 865
+
+#const SPAWN_BLACKSMITH_C 1062
+effect_amount GAIA_UPGRADE_UNIT SPAWN_BLACKSMITH_C BLACKSMITH_C 0
+#const RUBBLE_BLACKSMITH_C 1420
+effect_amount GAIA_SET_ATTRIBUTE RUBBLE_BLACKSMITH_C ATTR_STORAGE_VALUE 1
+effect_amount GAIA_SET_ATTRIBUTE RUBBLE_BLACKSMITH_C ATTR_DEAD_ID 102
+effect_amount GAIA_SET_ATTRIBUTE SPAWN_BLACKSMITH_C ATTR_BLOOD_ID 865
+
+#const SPAWN_BARRACKS_C 1118
+effect_amount GAIA_UPGRADE_UNIT SPAWN_BARRACKS_C BARRACKS_C 0
+#const RUBBLE_BARRACKS_C 1414
+effect_amount GAIA_SET_ATTRIBUTE RUBBLE_BARRACKS_C ATTR_STORAGE_VALUE 1
+effect_amount GAIA_SET_ATTRIBUTE RUBBLE_BARRACKS_C ATTR_DEAD_ID 102
+effect_amount GAIA_SET_ATTRIBUTE SPAWN_BARRACKS_C ATTR_BLOOD_ID 865
+
+#const SPAWN_STABLE_C 1640
+effect_amount GAIA_UPGRADE_UNIT SPAWN_STABLE_C STABLE_C 0
+#const RUBBLE_STABLE_C 1418
+effect_amount GAIA_SET_ATTRIBUTE RUBBLE_STABLE_C ATTR_STORAGE_VALUE 1
+effect_amount GAIA_SET_ATTRIBUTE RUBBLE_STABLE_C ATTR_DEAD_ID 102
+effect_amount GAIA_SET_ATTRIBUTE SPAWN_STABLE_C ATTR_BLOOD_ID 865
+
+#const SPAWN_BLACKSMITH_F 1641
+effect_amount GAIA_UPGRADE_UNIT SPAWN_BLACKSMITH_F BLACKSMITH_F 0
+#const RUBBLE_BLACKSMITH_F 1429
+effect_amount GAIA_SET_ATTRIBUTE RUBBLE_BLACKSMITH_F ATTR_STORAGE_VALUE 1
+effect_amount GAIA_SET_ATTRIBUTE RUBBLE_BLACKSMITH_F ATTR_DEAD_ID 102
+effect_amount GAIA_SET_ATTRIBUTE SPAWN_BLACKSMITH_F ATTR_BLOOD_ID 865
+
+#const SPAWN_STABLE_F 1642
+effect_amount GAIA_UPGRADE_UNIT SPAWN_STABLE_F STABLE 0
+#const RUBBLE_STABLE_F 1417
+effect_amount GAIA_SET_ATTRIBUTE RUBBLE_STABLE_F ATTR_STORAGE_VALUE 1
+effect_amount GAIA_SET_ATTRIBUTE RUBBLE_STABLE_F ATTR_DEAD_ID 102
+effect_amount GAIA_SET_ATTRIBUTE SPAWN_STABLE_F ATTR_BLOOD_ID 865
+
+#const SPAWN_BARRACKS_F 1643
+effect_amount GAIA_UPGRADE_UNIT SPAWN_BARRACKS_F BARRACKS_F 0
+#const RUBBLE_BARRACKS_F 1413
+effect_amount GAIA_SET_ATTRIBUTE RUBBLE_BARRACKS_F ATTR_STORAGE_VALUE 1
+effect_amount GAIA_SET_ATTRIBUTE RUBBLE_BARRACKS_F ATTR_DEAD_ID 102
+effect_amount GAIA_SET_ATTRIBUTE SPAWN_BARRACKS_F ATTR_BLOOD_ID 865
+
+#const SPAWN_ARCHERY_RANGE 1644
+effect_amount GAIA_UPGRADE_UNIT SPAWN_ARCHERY_RANGE ARCHERY_RANGE 0
+#const RUBBLE_ARCHERY_RANGE 1415
+effect_amount GAIA_SET_ATTRIBUTE RUBBLE_ARCHERY_RANGE ATTR_STORAGE_VALUE 1
+effect_amount GAIA_SET_ATTRIBUTE RUBBLE_ARCHERY_RANGE ATTR_DEAD_ID 102
+effect_amount GAIA_SET_ATTRIBUTE SPAWN_ARCHERY_RANGE ATTR_BLOOD_ID 865
+
+#const SPAWN_BARRACKS 1645
+effect_amount GAIA_UPGRADE_UNIT SPAWN_BARRACKS BARRACKS 0
+#const RUBBLE_BARRACKS 1402
+effect_amount GAIA_SET_ATTRIBUTE RUBBLE_BARRACKS ATTR_STORAGE_VALUE 1
+effect_amount GAIA_SET_ATTRIBUTE RUBBLE_BARRACKS ATTR_DEAD_ID 102
+effect_amount GAIA_SET_ATTRIBUTE SPAWN_BARRACKS ATTR_BLOOD_ID 865
+
+#const FOLWARK 1734
+#const SPAWN_FOLWARK 1654
+effect_amount GAIA_UPGRADE_UNIT SPAWN_FOLWARK FOLWARK 0
+#const RUBBLE_FOLWARK 1528
+effect_amount GAIA_SET_ATTRIBUTE RUBBLE_FOLWARK ATTR_STORAGE_VALUE 1
+effect_amount GAIA_SET_ATTRIBUTE RUBBLE_FOLWARK ATTR_DEAD_ID 102
+effect_amount GAIA_SET_ATTRIBUTE SPAWN_FOLWARK ATTR_BLOOD_ID 865
+
+#const SPAWN_MILL_F 1693
+effect_amount GAIA_UPGRADE_UNIT SPAWN_MILL_F MILL_F 0
+#const RUBBLE_MILL_F 1411
+effect_amount GAIA_SET_ATTRIBUTE RUBBLE_MILL_F ATTR_STORAGE_VALUE 1
+effect_amount GAIA_SET_ATTRIBUTE RUBBLE_MILL_F ATTR_DEAD_ID 102
+effect_amount GAIA_SET_ATTRIBUTE SPAWN_MILL_F ATTR_BLOOD_ID 864
+
+#const SPAWN_MILL 1694
+effect_amount GAIA_UPGRADE_UNIT SPAWN_MILL MILL 0
+#const RUBBLE_MILL 1404
+effect_amount GAIA_SET_ATTRIBUTE RUBBLE_MILL ATTR_STORAGE_VALUE 1
+effect_amount GAIA_SET_ATTRIBUTE RUBBLE_MILL ATTR_DEAD_ID 102
+effect_amount GAIA_SET_ATTRIBUTE SPAWN_MILL ATTR_BLOOD_ID 864
+
+#const SPAWN_GUARD_TOWER 1695
+effect_amount GAIA_UPGRADE_UNIT SPAWN_GUARD_TOWER GUARD_TOWER 0
+#const RUBBLE_GUARD_TOWER 1437
+effect_amount GAIA_SET_ATTRIBUTE RUBBLE_GUARD_TOWER ATTR_STORAGE_VALUE 1
+effect_amount GAIA_SET_ATTRIBUTE RUBBLE_GUARD_TOWER ATTR_DEAD_ID 102
+effect_amount GAIA_SET_ATTRIBUTE SPAWN_GUARD_TOWER ATTR_BLOOD_ID 863
+effect_amount GAIA_SET_ATTRIBUTE SPAWN_GUARD_TOWER ATTR_MAX_RANGE 0
+
+#const SPAWN_WATCH_TOWER 1696
+effect_amount GAIA_UPGRADE_UNIT SPAWN_WATCH_TOWER WATCH_TOWER 0
+#const RUBBLE_WATCH_TOWER 1436
+effect_amount GAIA_SET_ATTRIBUTE RUBBLE_WATCH_TOWER ATTR_STORAGE_VALUE 1
+effect_amount GAIA_SET_ATTRIBUTE RUBBLE_WATCH_TOWER ATTR_DEAD_ID 102
+effect_amount GAIA_SET_ATTRIBUTE SPAWN_WATCH_TOWER ATTR_BLOOD_ID 863
+effect_amount GAIA_SET_ATTRIBUTE SPAWN_WATCH_TOWER ATTR_MAX_RANGE 0
+
+#const SPAWN_OUTPOST 1700
+effect_amount GAIA_UPGRADE_UNIT SPAWN_OUTPOST OUTPOST 0
+#const RUBBLE_OUTPOST 1405
+effect_amount GAIA_SET_ATTRIBUTE RUBBLE_OUTPOST ATTR_STORAGE_VALUE 1
+effect_amount GAIA_SET_ATTRIBUTE RUBBLE_OUTPOST ATTR_DEAD_ID 102
+effect_amount GAIA_SET_ATTRIBUTE SPAWN_OUTPOST ATTR_BLOOD_ID 863
+
+
+
+/* only 100 stone */
+effect_amount GAIA_SET_ATTRIBUTE STONE ATTR_STORAGE_VALUE 50
+
+/* 3000 gold */
+effect_amount GAIA_SET_ATTRIBUTE GOLD ATTR_STORAGE_VALUE 3000
+
+/* monument resources */
+if KING_OT_HILL
+else
+effect_percent MOD_RESOURCE AMOUNT_MONUMENT_TRICKLE_FOOD ATTR_SET 100
+effect_percent MOD_RESOURCE AMOUNT_MONUMENT_TRICKLE_WOOD ATTR_SET 100
+effect_percent MOD_RESOURCE AMOUNT_MONUMENT_TRICKLE_STONE ATTR_SET 100
+effect_percent MOD_RESOURCE AMOUNT_MONUMENT_TRICKLE_GOLD ATTR_SET 100
+endif
+
+/* Disabling Trade Carts and Cogs for Multi-team Games */
+if 2_TEAM_GAME
+else
+  #const TRADE_CART_ENABLER 161
+  #const TRADE_COG_ENABLER 180
+  #const TRADE_CARAVAN_ENABLER 48
+  #const HINDU_CARAVANSERAI_ENABLER 518
+  #const PERSIAN_CARAVANSERAI_ENABLER 552  
+  #const SILK_ROAD 499
+  effect_amount DISABLE_TECH TRADE_COG_ENABLER ATTR_DISABLE 180
+  effect_amount DISABLE_TECH TRADE_CART_ENABLER ATTR_DISABLE 161
+  effect_amount DISABLE_TECH TRADE_CARAVAN_ENABLER ATTR_DISABLE 48
+  effect_amount DISABLE_TECH HINDU_CARAVANSERAI_ENABLER ATTR_DISABLE 518
+  effect_amount DISABLE_TECH PERSIAN_CARAVANSERAI_ENABLER ATTR_DISABLE 552
+  effect_amount DISABLE_TECH SILK_ROAD ATTR_DISABLE 499    
+endif
+
+/* =================================================================================================== */
+<LAND_GENERATION> 
+
+base_terrain GRASS
+
+
+create_land {
+	terrain_type DLC_JUNGLEROAD
+	land_percent 8
+	base_size 5
+	clumping_factor -50000
+
+	left_border 10 right_border 50 top_border 10 bottom_border 50
+	if HUGE_MAP	land_position 47 47	base_size 6
+	elseif GIGANTIC_MAP	land_position 47 47	base_size 7
+	elseif LUDIKRIS_MAP	land_position 47 47	base_size 17
+	else	land_position 48 48	base_size 5
+	endif
+	land_id 1
+}
+
+create_land {
+	terrain_type DLC_JUNGLEROAD
+	land_percent 9
+	base_size 5
+	clumping_factor -50000
+
+	left_border 50 right_border 10 top_border 50 bottom_border 10
+	land_position 52 52
+	if HUGE_MAP	land_position 53 53	base_size 6
+	elseif GIGANTIC_MAP	land_position 53 53	base_size 7
+	elseif LUDIKRIS_MAP	land_position 53 53	base_size 17
+	else	land_position 52 52	base_size 5
+	endif
+	land_id 2
+}
+
+create_land {
+	terrain_type DLC_JUNGLEROAD
+	land_percent 9
+	base_size 5
+	clumping_factor -50000
+
+	left_border 10 right_border 50 top_border 50 bottom_border 10
+	if HUGE_MAP	land_position 47 53	base_size 6
+	elseif GIGANTIC_MAP	land_position 47 53	base_size 7
+	elseif LUDIKRIS_MAP	land_position 47 53	base_size 17
+	else	land_position 48 52	base_size 5
+	endif
+	land_id 3
+}
+
+create_land {
+	terrain_type DLC_JUNGLEROAD
+	land_percent 9
+	clumping_factor -50000
+
+	left_border 50 right_border 10 top_border 10 bottom_border 50
+	if HUGE_MAP	land_position 53 47	base_size 6
+	elseif GIGANTIC_MAP	land_position 53 47	base_size 7
+	elseif LUDIKRIS_MAP	land_position 53 47	base_size 17
+	else	land_position 52 48	base_size 5
+	endif
+	land_id 4
+}
+
+create_player_lands {
+	terrain_type DIRT_MUD
+	land_percent 0
+	base_size 7
+	clumping_factor 0
+	circle_radius 35 0
+	left_border 10 right_border 10 top_border 10 bottom_border 10
+}
+
+create_land {
+	terrain_type OAK_BUSH_FOREST
+	land_percent 100
+	base_size 1
+	left_border 95
+	border_fuzziness 5
+	land_position 97 50
+}
+
+create_land {
+	terrain_type OAK_BUSH_FOREST
+	land_percent 100
+	base_size 1
+	top_border 95
+	border_fuzziness 5
+	land_position 50 97
+}
+
+create_land {
+	terrain_type OAK_BUSH_FOREST
+	land_percent 100
+	base_size 1
+	right_border 95
+	border_fuzziness 5
+	land_position 3 50
+}
+
+create_land {
+	terrain_type OAK_BUSH_FOREST
+	land_percent 100
+	base_size 1
+	bottom_border 95
+	border_fuzziness 5
+	land_position 50 3
+}
+
+/* =================================================================================================== */
+<TERRAIN_GENERATION>
+
+create_terrain DIRT {
+	base_terrain DIRT_MUD
+	land_percent 100
+	number_of_clumps 9320
+	terrain_mask 1
+}
+
+
+/* =================================================================================================== */
+<CONNECTION_GENERATION> 
+
+accumulate_connections
+
+create_connect_all_lands {
+	replace_terrain DLC_JUNGLEROAD ROAD
+	replace_terrain GRASS ROAD_GRAVEL
+	
+	terrain_cost DIRT_MUD 0
+	terrain_cost OAK_BUSH_FOREST 0
+	
+	if TINY_MAP	terrain_size DLC_JUNGLEROAD 15 0
+	elseif SMALL_MAP	terrain_size DLC_JUNGLEROAD 19 0
+	elseif MEDIUM_MAP	terrain_size DLC_JUNGLEROAD 22 0
+	elseif LARGE_MAP	terrain_size DLC_JUNGLEROAD 24 0
+	elseif HUGE_MAP	terrain_size DLC_JUNGLEROAD 28 0
+	elseif GIGANTIC_MAP	terrain_size DLC_JUNGLEROAD 32 0
+	elseif LUDIKRIS_MAP	terrain_size DLC_JUNGLEROAD 80 0
+	endif
+}
+
+create_connect_all_lands {
+	replace_terrain DLC_JUNGLEROAD ROAD2
+	replace_terrain GRASS DLC_ROADGRAVEL
+	
+	terrain_cost DIRT_MUD 0
+	terrain_cost OAK_BUSH_FOREST 0
+	
+	if TINY_MAP	terrain_size ROAD 25 0
+	elseif SMALL_MAP	terrain_size ROAD 30 0
+	elseif MEDIUM_MAP	terrain_size ROAD 32 0
+	elseif LARGE_MAP	terrain_size ROAD 40 0
+	elseif HUGE_MAP	terrain_size ROAD 46 0
+	elseif GIGANTIC_MAP	terrain_size ROAD 50 0
+	elseif LUDIKRIS_MAP	terrain_size ROAD 115 0
+	endif
+}
+
+create_connect_all_lands {
+	replace_terrain DLC_JUNGLEROAD ROAD_FUNGUS
+	replace_terrain GRASS DIRT_MUD
+	
+	terrain_cost DIRT_MUD 0
+	terrain_cost OAK_BUSH_FOREST 0
+	
+	if TINY_MAP	terrain_size ROAD 36 0
+	elseif SMALL_MAP	terrain_size ROAD 44 0
+	elseif MEDIUM_MAP	terrain_size ROAD 50 0
+	elseif LARGE_MAP	terrain_size ROAD 62 0
+	elseif HUGE_MAP	terrain_size ROAD 70 0
+	elseif GIGANTIC_MAP	terrain_size ROAD 75 0
+	elseif LUDIKRIS_MAP	terrain_size ROAD 150 0
+	endif
+}
+
+create_connect_all_lands {
+/*	replace_terrain DLC_JUNGLEROAD DIRT_MUD */
+	replace_terrain GRASS DLC_DRYGRASS
+	
+	terrain_cost DIRT_MUD 0
+	terrain_cost OAK_BUSH_FOREST 0
+	
+	terrain_size ROAD 420 0
+}
+
+create_connect_all_lands {
+	replace_terrain ROAD DLC_ROCK
+	
+	terrain_cost DIRT_MUD 0
+	terrain_cost OAK_BUSH_FOREST 0
+	
+	terrain_size ROAD 5 0
+}
+
+create_connect_all_lands {
+	replace_terrain ROAD DLC_DRYROAD
+	replace_terrain ROAD_GRAVEL DLC_DRYROAD
+	replace_terrain DLC_ROADGRAVEL DLC_DRYROAD
+	replace_terrain ROAD2 DLC_DRYROAD
+	replace_terrain ROAD_FUNGUS DLC_DRYROAD
+	replace_terrain DIRT_MUD DLC_DRYROAD
+	replace_terrain DLC_DRYGRASS DLC_DRYROAD
+	replace_terrain DLC_JUNGLEROAD DLC_DRYROAD
+	
+	replace_terrain ROAD_GRAVEL DLC_DRYROAD
+	replace_terrain DLC_DESERTGRAVEL DLC_DRYROAD
+	replace_terrain DIRT_MUD DLC_DRYROAD
+	
+	terrain_cost ROAD 5
+	terrain_cost ROAD_GRAVEL 5
+	terrain_cost DLC_ROADGRAVEL 5
+	terrain_cost ROAD2 5
+	terrain_cost ROAD_FUNGUS 5
+	terrain_cost DIRT_MUD 5
+	terrain_cost DLC_DRYGRASS 5
+	terrain_cost DLC_JUNGLEROAD 5
+	
+	terrain_cost OAK_BUSH_FOREST 0
+	
+	terrain_size DLC_DRYROAD 0 0
+	terrain_size ICE 0 0
+	
+	terrain_size ROAD 2 0
+	terrain_size ROAD_GRAVEL 2 0
+	terrain_size DLC_ROADGRAVEL 2 0
+	terrain_size ROAD2 2 0
+	terrain_size ROAD_FUNGUS 2 0
+	terrain_size DIRT_MUD 2 0
+}
+
+create_connect_all_lands {
+	replace_terrain DLC_DRYROAD ROAD 
+
+	terrain_cost OAK_BUSH_FOREST 0
+	terrain_cost DLC_DRYROAD 0
+	
+	if TINY_MAP	terrain_size DLC_ROCK 21 0
+	elseif SMALL_MAP	terrain_size DLC_ROCK 23 0
+	elseif MEDIUM_MAP	terrain_size DLC_ROCK 25 0
+	elseif LARGE_MAP	terrain_size DLC_ROCK 32 0
+	elseif HUGE_MAP	terrain_size DLC_ROCK 36 0
+	elseif GIGANTIC_MAP	terrain_size DLC_ROCK 40 0
+	elseif LUDIKRIS_MAP	terrain_size DLC_ROCK 100 0
+	endif
+}
+
+
+
+/* =================================================================================================== */
+<OBJECTS_GENERATION>
+	
+create_object TOWN_CENTER {
+	set_place_for_every_player
+	max_distance_to_players 0
+}
+
+/* starting villagers */
+create_object VILLAGER {
+	set_place_for_every_player
+	min_distance_to_players 5
+	max_distance_to_players 7
+	set_circular_placement
+	min_distance_group_placement 1
+}
+
+create_object SCOUT {
+	set_place_for_every_player
+	min_distance_to_players 6
+	max_distance_to_players 8
+	set_circular_placement
+	min_distance_group_placement 1
+}
+
+if REGICIDE
+	create_object KING {
+		set_place_for_every_player
+		min_distance_to_players 6
+		set_circular_placement
+		find_closest
+		min_distance_group_placement 1
+	}
+	create_object VILLAGER {
+		number_of_objects 7
+		set_place_for_every_player
+		min_distance_to_players 6
+		max_distance_to_players 8
+		set_circular_placement
+	}
+	create_object CASTLE {
+		set_place_for_every_player
+		min_distance_to_players 8
+		set_circular_placement
+		find_closest
+		min_distance_group_placement 4
+		terrain_to_place_on ROAD
+	}
+endif
+
+create_object SHEEP {
+	number_of_objects 4
+	set_loose_grouping
+	set_gaia_object_only
+	set_place_for_every_player
+	min_distance_to_players 7
+	set_circular_placement
+	find_closest
+	avoid_forest_zone 2
+}
+
+create_object FARM {
+	number_of_objects 4
+	set_place_for_every_player 
+	find_closest
+	terrain_to_place_on DIRT_MUD
+}
+
+create_object HOUSE {
+	set_place_for_every_player 
+	find_closest
+	number_of_objects 2
+	temp_min_distance_group_placement 8
+	terrain_to_place_on DIRT_MUD
+	min_distance_to_players 9
+	set_circular_placement
+}
+
+/* near gold */
+create_object GOLD {
+	number_of_objects 3
+	number_of_groups 2
+	group_placement_radius 2
+	set_tight_grouping
+	set_gaia_object_only
+	set_place_for_every_player
+	min_distance_to_players 12
+	set_circular_placement
+	find_closest
+	temp_min_distance_group_placement 14
+	terrain_to_place_on DLC_JUNGLEROAD
+	min_distance_group_placement 4
+	max_distance_to_other_zones 4
+	avoid_forest_zone 3
+	actor_area 87
+	actor_area_radius 7
+	ignore_terrain_restrictions
+	resource_delta -2200
+}
+
+/* near stone */
+create_object STONE {
+	number_of_objects 2 
+	set_tight_grouping 
+	set_gaia_object_only
+	set_place_for_every_player
+	min_distance_to_players 10
+	set_circular_placement
+	find_closest
+	min_distance_group_placement 4
+	avoid_forest_zone 2
+	avoid_actor_area 87
+	avoid_actor_area 88
+	actor_area 89
+	actor_area_radius 9
+	ignore_terrain_restrictions
+	resource_delta 300
+	terrain_to_place_on DLC_JUNGLEROAD
+}
+
+create_object DLC_PIG {
+	number_of_objects 2
+	number_of_groups 2
+	min_distance_group_placement 1
+	temp_min_distance_group_placement 15
+	set_loose_grouping
+	set_gaia_object_only
+	set_place_for_every_player
+	start_random
+		percent_chance 20
+			min_distance_to_players 14
+			find_closest
+		percent_chance 20
+			min_distance_to_players 18
+			find_closest
+		percent_chance 20
+			min_distance_to_players 20
+			find_closest
+		percent_chance 20
+			min_distance_to_players 24
+			find_closest
+		percent_chance 20
+			min_distance_to_players 27
+			find_closest
+	end_random
+	set_circular_placement
+	avoid_forest_zone 2
+	terrain_to_place_on DLC_JUNGLEROAD
+}
+
+create_object DEER {
+	start_random
+		percent_chance 50	number_of_objects 4
+		percent_chance 50	number_of_objects 3
+	end_random
+	number_of_groups 1
+	group_placement_radius 3
+	set_loose_grouping
+	set_gaia_object_only
+	set_place_for_every_player
+	avoid_forest_zone 1
+	avoid_actor_area 11
+	start_random
+		percent_chance 20
+			min_distance_to_players 14
+			max_distance_to_players 17
+		percent_chance 20
+			min_distance_to_players 18
+			max_distance_to_players 21
+		percent_chance 20
+			min_distance_to_players 21
+			max_distance_to_players 24
+		percent_chance 20
+			min_distance_to_players 24
+			max_distance_to_players 27
+		percent_chance 20
+			min_distance_to_players 27
+			max_distance_to_players 30
+	end_random
+	set_circular_placement
+	terrain_to_place_on DLC_DRYGRASS
+}
+
+create_object BOAR {
+	number_of_groups 2
+	set_gaia_object_only
+	set_place_for_every_player
+	avoid_forest_zone 2
+	min_distance_to_players 16
+	set_circular_placement
+	find_closest
+	terrain_to_place_on DLC_JUNGLEROAD
+	temp_min_distance_group_placement 10
+}
+
+/* extra bushes */
+create_object FORAGE {
+    number_of_groups 9320
+    group_placement_radius 2
+    set_tight_grouping
+    set_gaia_object_only
+	min_distance_group_placement 4
+	number_of_objects 4
+	min_distance_to_players 35
+	set_circular_placement
+	temp_min_distance_group_placement 30
+	avoid_forest_zone 3
+	terrain_to_place_on DLC_DRYGRASS
+}
+
+create_object DEER {
+    number_of_groups 9320
+    set_gaia_object_only
+	min_distance_group_placement 1
+	number_of_objects 1
+	min_distance_to_players 40
+	set_circular_placement
+	temp_min_distance_group_placement 15
+	place_on_forest_zone
+}
+
+create_object WOLF {
+    number_of_groups 9320
+    set_gaia_object_only
+	min_distance_group_placement 1
+	number_of_objects 1
+	min_distance_to_players 40
+	set_circular_placement
+	temp_min_distance_group_placement 20
+	terrain_to_place_on DLC_JUNGLEROAD
+}
+
+
+/* the city */
+
+create_object MAP_REVEALER {
+	terrain_to_place_on DLC_ROCK
+	number_of_objects 25
+	temp_min_distance_group_placement 1
+	set_place_for_every_player
+}
+
+if KING_OT_HILL
+else
+create_object MONUMENT {
+	terrain_to_place_on DLC_ROCK
+	place_on_specific_land_id 3
+	/* temporary until the pup is official */
+	if ATTR_FOG_FLAG 
+		find_closest_to_map_center
+	else
+		find_closest
+	endif
+}
+endif
+
+create_object LONG_SWORDSMAN {
+	terrain_to_place_on DLC_ROCK
+	number_of_objects 25
+	temp_min_distance_group_placement 1
+	set_gaia_object_only
+	set_gaia_unconvertible
+}
+
+/* inner district */
+create_object SPAWN_MONASTERY {
+	terrain_to_place_on ROAD_GRAVEL
+	set_gaia_object_only
+	set_gaia_unconvertible
+	number_of_objects 1
+	set_scaling_to_player_number
+	temp_min_distance_group_placement 25
+	actor_area 2
+	actor_area_radius 3
+}
+create_object RELIC {
+	set_place_for_every_player
+	find_closest
+	set_gaia_object_only
+	actor_area_to_place_in 2
+	min_distance_group_placement 1
+}	
+create_object SPAWN_MARKET_C {
+	number_of_objects 1
+	set_scaling_to_player_number
+	terrain_to_place_on ROAD_GRAVEL
+	set_gaia_object_only
+	set_gaia_unconvertible
+	temp_min_distance_group_placement 20
+}
+create_object SPAWN_TRADE_WORKSHOP {
+	number_of_objects 1
+	set_scaling_to_player_number
+	terrain_to_place_on ROAD_GRAVEL
+	set_gaia_object_only
+	set_gaia_unconvertible
+	temp_min_distance_group_placement 20
+}
+create_object SPAWN_FORTRESS_CASTLE {
+	number_of_objects 1
+	set_scaling_to_player_number
+	terrain_to_place_on ROAD_GRAVEL
+	set_gaia_object_only
+	set_gaia_unconvertible
+	temp_min_distance_group_placement 25
+}
+create_object SPAWN_UNIVERSITY {
+	number_of_objects 1
+	set_scaling_to_player_number
+	terrain_to_place_on ROAD_GRAVEL
+	set_gaia_object_only
+	set_gaia_unconvertible
+	temp_min_distance_group_placement 20
+}
+create_object SPAWN_SIEGE_WORKSHOP {
+	number_of_objects 1
+	set_scaling_to_player_number
+	terrain_to_place_on ROAD_GRAVEL
+	set_gaia_object_only
+	set_gaia_unconvertible
+	temp_min_distance_group_placement 20
+}
+create_object SPAWN_BLACKSMITH {
+	number_of_objects 1
+	set_scaling_to_player_number
+	terrain_to_place_on ROAD_GRAVEL
+	set_gaia_object_only
+	set_gaia_unconvertible
+	temp_min_distance_group_placement 15
+}
+create_object SPAWN_BARRACKS_C {
+	number_of_objects 1
+	set_scaling_to_player_number
+	terrain_to_place_on ROAD_GRAVEL
+	set_gaia_object_only
+	set_gaia_unconvertible
+	temp_min_distance_group_placement 15
+}
+create_object SPAWN_STABLE_C {
+	number_of_objects 1
+	set_scaling_to_player_number
+	terrain_to_place_on ROAD_GRAVEL
+	set_gaia_object_only
+	set_gaia_unconvertible
+	temp_min_distance_group_placement 15
+}
+
+/* middle district */
+create_object SPAWN_TRADE_WORKSHOP {
+	number_of_objects 1
+	set_scaling_to_player_number
+	terrain_to_place_on DLC_ROADGRAVEL
+	set_gaia_object_only
+	set_gaia_unconvertible
+	temp_min_distance_group_placement 20
+}
+create_object SPAWN_BLACKSMITH_F {
+	number_of_objects 1
+	set_scaling_to_player_number
+	terrain_to_place_on DLC_ROADGRAVEL
+	set_gaia_object_only
+	set_gaia_unconvertible
+	temp_min_distance_group_placement 15
+}
+create_object SPAWN_STABLE_F {
+	number_of_objects 1
+	set_scaling_to_player_number
+	terrain_to_place_on DLC_ROADGRAVEL
+	set_gaia_object_only
+	set_gaia_unconvertible
+	temp_min_distance_group_placement 15
+}
+create_object SPAWN_BARRACKS_F {
+	number_of_objects 1
+	set_scaling_to_player_number
+	terrain_to_place_on DLC_ROADGRAVEL
+	set_gaia_object_only
+	set_gaia_unconvertible
+	temp_min_distance_group_placement 15
+}
+create_object SPAWN_ARCHERY_RANGE {
+	number_of_objects 1
+	set_scaling_to_player_number
+	terrain_to_place_on DLC_ROADGRAVEL
+	set_gaia_object_only
+	set_gaia_unconvertible
+	temp_min_distance_group_placement 15
+}
+
+/* outskirts */
+create_object SPAWN_MARKET {
+	number_of_objects 2
+	set_scaling_to_player_number
+	terrain_to_place_on DIRT_MUD
+	set_gaia_object_only
+	set_gaia_unconvertible
+	temp_min_distance_group_placement 20
+	min_distance_to_players 15
+}
+create_object SPAWN_BARRACKS {
+	number_of_objects 2
+	set_scaling_to_player_number
+	terrain_to_place_on DIRT_MUD
+	set_gaia_object_only
+	set_gaia_unconvertible
+	temp_min_distance_group_placement 15
+	min_distance_to_players 15
+}
+create_object SPAWN_STABLE {
+	number_of_objects 2
+	set_scaling_to_player_number
+	terrain_to_place_on DIRT_MUD
+	set_gaia_object_only
+	set_gaia_unconvertible
+	temp_min_distance_group_placement 15
+	min_distance_to_players 15
+}
+
+create_object FOLWARK {
+	number_of_objects 3
+	set_scaling_to_player_number
+	terrain_to_place_on DIRT_MUD
+	set_gaia_object_only
+	set_gaia_unconvertible
+	temp_min_distance_group_placement 10
+	min_distance_to_players 15
+}
+create_object SPAWN_MILL_F {
+	number_of_objects 2
+	set_scaling_to_player_number
+	terrain_to_place_on DIRT_MUD
+	set_gaia_object_only
+	set_gaia_unconvertible
+	temp_min_distance_group_placement 15
+	min_distance_to_players 15
+}
+create_object SPAWN_MILL {
+	number_of_objects 2
+	set_scaling_to_player_number
+	terrain_to_place_on DIRT_MUD
+	set_gaia_object_only
+	set_gaia_unconvertible
+	temp_min_distance_group_placement 15
+	min_distance_to_players 15
+}
+
+/* fill with towers and houses */
+
+create_object SPAWN_HOUSE_C {
+	number_of_objects 9320
+	set_scaling_to_map_size 
+	terrain_to_place_on ROAD_GRAVEL
+	set_gaia_object_only
+	set_gaia_unconvertible
+	temp_min_distance_group_placement 2
+}
+create_object SPAWN_HOUSE_F {
+	number_of_objects 9320
+	set_scaling_to_map_size 
+	terrain_to_place_on ROAD_GRAVEL
+	set_gaia_object_only
+	set_gaia_unconvertible
+	temp_min_distance_group_placement 0
+}
+create_object SPAWN_GUARD_TOWER {
+	number_of_objects 3
+	set_scaling_to_player_number
+	terrain_to_place_on ROAD_GRAVEL
+	set_gaia_object_only
+	set_gaia_unconvertible
+	temp_min_distance_group_placement 10
+}
+
+
+create_object SPAWN_HOUSE_F  {
+	number_of_objects 9320
+	set_scaling_to_map_size 
+	terrain_to_place_on DLC_ROADGRAVEL
+	set_gaia_object_only
+	set_gaia_unconvertible
+}
+create_object SPAWN_WATCH_TOWER {
+	number_of_objects 3
+	set_scaling_to_player_number
+	terrain_to_place_on DLC_ROADGRAVEL
+	set_gaia_object_only
+	set_gaia_unconvertible
+	temp_min_distance_group_placement 10
+	min_distance_to_players 15
+}
+
+create_object SPAWN_HOUSE_F  {
+	number_of_objects 9320
+	set_scaling_to_map_size 
+	terrain_to_place_on DIRT_MUD
+	set_gaia_object_only
+	set_gaia_unconvertible
+	min_distance_to_players 12
+	temp_min_distance_group_placement 6
+}
+create_object SPAWN_HOUSE {
+	number_of_objects 9320
+	set_scaling_to_map_size 
+	terrain_to_place_on DIRT_MUD
+	set_gaia_object_only
+	set_gaia_unconvertible
+	min_distance_to_players 12
+	temp_min_distance_group_placement 3
+}
+create_object SPAWN_HUT_E {
+	number_of_objects 9320
+	set_scaling_to_map_size 
+	terrain_to_place_on DIRT_MUD
+	set_gaia_object_only
+	set_gaia_unconvertible
+	min_distance_to_players 12
+	temp_min_distance_group_placement 0
+}
+create_object SPAWN_WATCH_TOWER {
+	number_of_objects 3
+	set_scaling_to_player_number
+	terrain_to_place_on DIRT_MUD
+	set_gaia_object_only
+	set_gaia_unconvertible
+	temp_min_distance_group_placement 10
+	min_distance_to_players 15
+}
+create_object SPAWN_OUTPOST {
+	number_of_objects 3
+	set_scaling_to_player_number
+	terrain_to_place_on DIRT_MUD
+	set_gaia_object_only
+	set_gaia_unconvertible
+	temp_min_distance_group_placement 10
+	min_distance_to_players 15
+}
+
+
+
+
+
+create_object ONGRID_PLACEHOLDER {
+	second_object OAKTREE
+	number_of_objects 20
+	set_scaling_to_map_size
+	temp_min_distance_group_placement 1
+	ignore_terrain_restrictions
+	terrain_to_place_on DLC_JUNGLEROAD
+}
+create_object ONGRID_PLACEHOLDER {
+	second_object OAKTREE
+	number_of_objects 10
+	set_scaling_to_map_size
+	temp_min_distance_group_placement 1
+	ignore_terrain_restrictions
+	terrain_to_place_on ROAD_FUNGUS
+}
+
+
+
+/* birds */
+create_object DLC_VULTURE {
+	number_of_objects 6
+	set_scaling_to_map_size
+}
+

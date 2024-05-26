@@ -1,0 +1,633 @@
+/* Kraken
+
+Author: Zetnus   zetnus@outlook.com
+Date created:  10 November 2018
+Last edit: 05 May 2022
+by: Zetnus
+Zetnus@outlook.com
+Zetnus#6414 on Discord
+
+v1.3
+-DE is now supported
+
+WK is not supported
+on UP, KoTH will automatically include regicide
+DE is now supported too
+
+
+Learn about random map scripting: https://docs.google.com/document/d/e/2PACX-1vR_I1I9u-hI2FFm-EYyjoM_-9dNJFOfTaIgr05wXNbdpv9tI18b6r18ARULy3Jqyvlq6-lc2VjX6xP4/pub
+
+This map was harvested from a mod in the official AOE2DE mod center, whose licensing agreement with Microsoft supersedes any Github restrictions: https://www.microsoft.com/en-us/servicesagreement
+
+*/
+
+/* define additional useful terrains */
+#const SNOW_DIRT2 36
+#const PLACEHOLDER 16
+#const ICE_OTHER 26
+#const ICE_BEACH 37
+
+/* =================================================================================================== */
+<PLAYER_SETUP>
+behavior_version 1
+
+/* the AI will fail anyway because it can't build bases on other islands */
+ai_info_map_type MIGRATION 0 0 0
+
+/* nomad resources to allow players to build up on multiple islands more quickly - will not apply IF you picked regicide in the lobby */
+nomad_resources
+random_placement
+
+/* storms - either rainstorm or snowstorm - requires UP1.5 */
+/* removed terrain shading because it looks bad on non-native resolution */
+if UP_EXTENSION
+start_random
+percent_chance 25
+	weather_type -3 0 0 -1
+percent_chance 25
+	weather_type 3 0 0 1
+percent_chance 25
+	weather_type -4 0 0 -1
+percent_chance 25
+	weather_type 4 0 0 1
+end_random
+endif
+
+/* force regicide IF king of the hill is selected and UP1.5 is available or on DE */	
+if REGICIDE	
+    #define KINGGAME
+elseif UP_EXTENSION	
+	if KING_OT_HILL
+		#define KINGGAME	
+		#define GUARDSTATE_KING	
+	endif
+endif	
+
+if GUARDSTATE_KING	
+	#const AMOUNT_GOLD 3
+	#const ATTR_SET 0
+	#const GAIA_SET_PLAYER_DATA -10    
+	#const DATA_MODE_FLAGS 1
+    guard_state KING AMOUNT_GOLD 0 1	/* don't lose your king */
+	effect_amount GAIA_SET_PLAYER_DATA DATA_MODE_FLAGS ATTR_SET 3	/* treason */
+endif
+
+/* Disabling Trade Carts and Cogs for Multi-team Games */
+if 2_TEAM_GAME
+else
+  #const TRADE_CART_ENABLER 161
+  #const TRADE_COG_ENABLER 180
+  #const TRADE_CARAVAN_ENABLER 48
+  #const HINDU_CARAVANSERAI_ENABLER 518
+  #const PERSIAN_CARAVANSERAI_ENABLER 552  
+  #const SILK_ROAD 499
+  effect_amount DISABLE_TECH TRADE_COG_ENABLER ATTR_DISABLE 180
+  effect_amount DISABLE_TECH TRADE_CART_ENABLER ATTR_DISABLE 161
+  effect_amount DISABLE_TECH TRADE_CARAVAN_ENABLER ATTR_DISABLE 48
+  effect_amount DISABLE_TECH HINDU_CARAVANSERAI_ENABLER ATTR_DISABLE 518
+  effect_amount DISABLE_TECH PERSIAN_CARAVANSERAI_ENABLER ATTR_DISABLE 552
+  effect_amount DISABLE_TECH SILK_ROAD ATTR_DISABLE 499    
+endif
+
+/* =================================================================================================== */
+<LAND_GENERATION>
+base_terrain PLACEHOLDER
+
+/* these 'lands' are only being created for some cliff magic */
+create_player_lands
+{
+	terrain_type DEEP_WATER
+	land_percent 100
+	base_size 8
+	set_zone_by_team
+	if TINY_MAP
+		other_zone_avoidance_distance 8
+	elseif SMALL_MAP
+		other_zone_avoidance_distance 12
+	elseif MEDIUM_MAP
+		other_zone_avoidance_distance 10
+	else
+		other_zone_avoidance_distance 12
+	endif
+}
+
+/* central mountain/glacier for monument - ice so people can't build there */
+create_land
+{
+	terrain_type ICE
+	land_percent 100   /* higher than it has space for */
+	if TINY_MAP
+		base_size 12
+		top_border 48
+		bottom_border 48
+		left_border  48
+		right_border 48
+		border_fuzziness 2
+	elseif SMALL_MAP
+		base_size 13
+		top_border 48
+		bottom_border 48
+		left_border  48
+		right_border 48
+		border_fuzziness 2
+	elseif MEDIUM_MAP
+		base_size 14
+		top_border 47
+		bottom_border 47
+		left_border  47
+		right_border 47
+		border_fuzziness 1
+	else
+		base_size 15
+		top_border 46
+		bottom_border 46
+		left_border  46
+		right_border 46		
+		border_fuzziness 1
+	endif
+	zone 1
+	land_position 50 50
+	land_id 1
+}
+
+/* =================================================================================================== */
+<ELEVATION_GENERATION>
+
+/* for the center */
+create_elevation  7
+{
+	base_terrain ICE
+	number_of_tiles 30000
+	number_of_clumps 300
+	set_scale_by_size
+}
+
+/* =================================================================================================== */
+<CLIFF_GENERATION>
+/* as many as will fit */
+min_number_of_cliffs 9320
+max_number_of_cliffs 9320
+min_length_of_cliff 3
+max_length_of_cliff 8
+cliff_curliness 25
+min_distance_cliffs 1
+min_terrain_distance 0
+cliff_type CT_SNOW
+
+
+/* =================================================================================================== */
+<TERRAIN_GENERATION>
+
+if DE_AVAILABLE	color_correction CC_WINTER	endif
+
+
+/* special terrain for the top of the center so we can place stuff on it */
+create_terrain ICE_OTHER
+{
+	base_terrain ICE
+	land_percent 100
+	number_of_clumps 9320
+	height_limits 7 7
+}
+
+/* get rid of the placeholder land */
+create_terrain MED_WATER {	base_terrain PLACEHOLDER	land_percent 100	number_of_clumps 9320	}
+
+/* a bunch more times to get rid of those nastily persistant grass patches */
+create_terrain MED_WATER {	base_terrain PLACEHOLDER	land_percent 100	number_of_clumps 9320	}
+create_terrain MED_WATER {	base_terrain PLACEHOLDER	land_percent 100	number_of_clumps 9320	}
+create_terrain MED_WATER {	base_terrain PLACEHOLDER	land_percent 100	number_of_clumps 9320	}
+create_terrain MED_WATER {	base_terrain PLACEHOLDER	land_percent 100	number_of_clumps 9320	}
+create_terrain MED_WATER {	base_terrain PLACEHOLDER	land_percent 100	number_of_clumps 9320	}
+create_terrain MED_WATER {	base_terrain PLACEHOLDER	land_percent 100	number_of_clumps 9320	}
+create_terrain MED_WATER {	base_terrain PLACEHOLDER	land_percent 100	number_of_clumps 9320	}
+create_terrain MED_WATER {	base_terrain PLACEHOLDER	land_percent 100	number_of_clumps 9320	}
+create_terrain MED_WATER {	base_terrain PLACEHOLDER	land_percent 100	number_of_clumps 9320	}
+/* good enough - doesn't need to be 100 perfect */
+
+
+/* the actual islands come now */
+/* starting islands */
+create_terrain WATER
+{
+	base_terrain DEEP_WATER
+	land_percent 100
+	number_of_clumps 9320
+	set_avoid_player_start_areas 13
+}	
+create_terrain DIRT_SNOW
+{
+	base_terrain DEEP_WATER
+	land_percent 100
+	number_of_clumps 9320
+	spacing_to_other_terrain_types 0
+}
+	
+	
+/* and some more islands - made successively to prevent them from clumping together into larger islands */
+create_terrain DEEP_WATER { base_terrain WATER number_of_tiles 1200 number_of_clumps 3 set_scale_by_groups spacing_to_other_terrain_types 2 clumping_factor 25 }
+create_terrain SNOW { base_terrain DEEP_WATER land_percent 100 number_of_clumps 9320 clumping_factor 25 spacing_to_other_terrain_types 0 }
+
+create_terrain DEEP_WATER { base_terrain WATER number_of_tiles 1200 number_of_clumps 3 set_scale_by_groups spacing_to_other_terrain_types 2 clumping_factor 25 }
+create_terrain SNOW { base_terrain DEEP_WATER land_percent 100 number_of_clumps 9320 clumping_factor 25 spacing_to_other_terrain_types 0 }
+
+create_terrain DEEP_WATER { base_terrain WATER number_of_tiles 1200 number_of_clumps 3 set_scale_by_groups spacing_to_other_terrain_types 2 clumping_factor 25 }
+create_terrain SNOW { base_terrain DEEP_WATER land_percent 100 number_of_clumps 9320 clumping_factor 25 spacing_to_other_terrain_types 0 }
+
+create_terrain DEEP_WATER { base_terrain WATER number_of_tiles 1200 number_of_clumps 3 set_scale_by_groups spacing_to_other_terrain_types 2 clumping_factor 25 }
+create_terrain SNOW { base_terrain DEEP_WATER land_percent 100 number_of_clumps 9320 clumping_factor 25 spacing_to_other_terrain_types 0 }
+
+
+/* now for a bit of mixing for asthetics */
+create_terrain MED_WATER
+{
+	base_terrain WATER
+	land_percent 100
+	number_of_clumps 9320
+	spacing_to_other_terrain_types 1
+}
+create_terrain DEEP_WATER
+{
+	base_terrain MED_WATER
+	land_percent 100
+	number_of_clumps 9320
+	spacing_to_other_terrain_types 1
+}
+
+
+/* and finally some wood */
+create_terrain GRASS_SNOW
+{
+	base_terrain SNOW
+	land_percent 100
+	number_of_clumps 9320
+	spacing_to_other_terrain_types 3
+}
+create_terrain SNOW_FOREST
+{
+	base_terrain GRASS_SNOW
+	land_percent 100
+	number_of_clumps 9320
+	spacing_to_other_terrain_types 2
+}
+/* This will create forests just far enough away from shore so you can build a TC on a new island */
+
+/* DE terrain mixing */
+if DE_AVAILABLE
+	create_terrain SNOW {
+		base_terrain ICE
+		land_percent 100
+		number_of_clumps 9320
+		terrain_mask 1
+	}
+	create_terrain SNOW {
+		base_terrain ICE_OTHER
+		land_percent 100
+		number_of_clumps 9320
+		terrain_mask 1
+	}
+endif
+
+
+/* =================================================================================================== */
+<OBJECTS_GENERATION>
+
+/* more forests on the extra islands - in clumps so you can build inbetween */
+create_object SNOW_PINE_TREE
+{
+	number_of_objects 16
+	number_of_groups 9320
+	group_placement_radius 2
+	set_scaling_to_map_size
+	terrain_to_place_on GRASS_SNOW
+	temp_min_distance_group_placement 8
+	resource_delta 400
+}
+
+
+/* player start buildings */
+create_object TOWN_CENTER
+{
+	set_place_for_every_player
+	max_distance_to_players 0
+}
+if KINGGAME
+create_object CASTLE
+{
+	set_place_for_every_player
+	min_distance_to_players 5
+	min_distance_group_placement 4
+}
+endif
+
+/* starting mineral resources */
+create_object GOLD
+{
+	number_of_objects 10
+	group_placement_radius 3
+	set_tight_grouping
+	set_gaia_object_only
+	set_place_for_every_player
+	min_distance_to_players 7
+	set_circular_placement
+	min_distance_group_placement 4
+}
+
+create_object STONE
+{
+	number_of_objects 10
+	group_placement_radius 3
+	set_tight_grouping
+	set_gaia_object_only
+	set_place_for_every_player
+	min_distance_to_players 7
+	set_circular_placement
+	min_distance_group_placement 4
+}
+
+if KINGGAME
+create_object KING
+{
+	set_place_for_every_player
+	min_distance_to_players 1
+	if DE_AVAILABLE
+		find_closest
+	else
+		max_distance_to_players 6
+	endif
+}
+create_object VILLAGER
+{
+	number_of_objects 7
+	set_place_for_every_player
+	min_distance_to_players 1
+	max_distance_to_players 7
+	set_circular_placement
+}
+endif
+
+/* normal villagers */
+create_object VILLAGER
+{
+	set_place_for_every_player
+	min_distance_to_players 1
+	max_distance_to_players 7
+	set_circular_placement
+}
+
+/* tansport ships instead of scout */
+#const ONGRID_PLACEHOLDER 278
+if DE_AVAILABLE
+	create_object TRANSPORT_SHIP
+	{
+		number_of_objects 1
+		set_place_for_every_player
+		terrain_to_place_on WATER
+		find_closest
+		min_distance_group_placement 1
+		ignore_terrain_restrictions
+	}
+else
+create_object TRANSPORT_SHIP
+{
+	number_of_objects 1
+	set_place_for_every_player
+	max_distance_to_players 10
+	min_distance_group_placement 1
+}
+endif
+
+/* a bit of wood at home */
+create_object SNOW_PINE_TREE
+{
+	number_of_objects 2
+	set_gaia_object_only
+	set_place_for_every_player
+	min_distance_to_players 4
+	max_distance_to_players 5
+	set_circular_placement
+	min_distance_group_placement 1
+	resource_delta 400
+}
+create_object SNOW_PINE_TREE
+{
+	number_of_objects 3
+	set_gaia_object_only
+	set_place_for_every_player
+	min_distance_to_players 6
+	max_distance_to_players 8
+	set_circular_placement
+	min_distance_group_placement 1
+	resource_delta 400
+}
+
+/* A few animals - when those are gone, it is time to fish */
+create_object BOAR
+{
+	number_of_groups 2
+	set_gaia_object_only
+	set_place_for_every_player
+	min_distance_to_players 6
+	set_circular_placement
+}
+/* the island is crowded and you start with more food in regicide, so no sheep */
+if KINGGAME
+else
+create_object SHEEP
+{
+	number_of_objects 1
+	number_of_groups 6
+	set_gaia_object_only
+	set_place_for_every_player
+	min_distance_to_players 4
+	set_circular_placement
+	terrain_to_place_on DIRT_SNOW
+}
+endif
+
+/* One relic per player - all in the center - evenly spaced */
+create_object RELIC
+{
+	number_of_objects 1
+	set_scaling_to_player_number
+	place_on_specific_land_id 1
+	min_distance_to_players 6
+	if 2_PLAYER_GAME
+		temp_min_distance_group_placement 10
+		max_distance_to_players 6
+	elseif 3_PLAYER_GAME
+		temp_min_distance_group_placement 9
+		max_distance_to_players 6
+	elseif 4_PLAYER_GAME
+		temp_min_distance_group_placement 6
+		max_distance_to_players 6
+	elseif 5_PLAYER_GAME
+		temp_min_distance_group_placement 5
+		max_distance_to_players 6
+	elseif 6_PLAYER_GAME
+		temp_min_distance_group_placement 5
+		max_distance_to_players 6
+	elseif 7_PLAYER_GAME
+		temp_min_distance_group_placement 4
+		max_distance_to_players 6
+	elseif 8_PLAYER_GAME
+		temp_min_distance_group_placement 4
+		max_distance_to_players 8
+	else  /* when not in UP/DE */
+		temp_min_distance_group_placement 4
+		max_distance_to_players 8
+	endif
+}
+
+/* top of the center is revealed, so you know when someone is stealing the relics */
+create_object MAP_REVEALER
+{
+	number_of_objects 50
+	set_place_for_every_player
+	temp_min_distance_group_placement 1
+	terrain_to_place_on ICE_OTHER
+}	
+/* eyecandy.  Also to block fish from spawning up there */
+create_object GRAVE
+{
+	number_of_objects 50
+	set_gaia_object_only
+	temp_min_distance_group_placement 4
+	place_on_specific_land_id 1
+	terrain_to_place_on ICE_OTHER
+}	
+#const DLC_PENGUIN 639
+if DE_AVAILABLE	/* agressive gaia penguins */
+	create_object DLC_PENGUIN
+	{
+		number_of_objects 50
+		set_gaia_object_only
+		set_gaia_unconvertible
+		temp_min_distance_group_placement 4
+		place_on_specific_land_id 1
+		max_distance_to_players 25
+		set_circular_placement
+	}	
+endif
+create_object SKELETON
+{
+	number_of_objects 50
+	set_gaia_object_only
+	min_distance_group_placement 3
+	place_on_specific_land_id 1
+	terrain_to_place_on ICE_OTHER
+}	
+
+/* gold and stone across the map */
+create_object GOLD
+{
+	number_of_objects 4
+	number_of_groups 9320
+	group_variance 1
+	group_placement_radius 3
+	set_tight_grouping
+	set_gaia_object_only
+	min_distance_to_players 12
+	set_circular_placement
+	min_distance_group_placement 3
+	temp_min_distance_group_placement  20
+	terrain_to_place_on SNOW
+	max_distance_to_other_zones 1
+}
+
+create_object STONE
+{
+	number_of_objects 4
+	number_of_groups 9320
+	group_variance 1
+	group_placement_radius 3
+	set_tight_grouping
+	set_gaia_object_only
+	min_distance_to_players 12
+	set_circular_placement
+	min_distance_group_placement 3
+	temp_min_distance_group_placement  25
+	terrain_to_place_on SNOW
+	max_distance_to_other_zones 1
+}
+
+
+/* =================================================================================================== */
+
+/* candy for the eyes */
+
+/* place shipwrecks on the tiny bits of beach that are still left over */
+create_object SHIPWRECK
+{
+	number_of_objects 9320
+	temp_min_distance_group_placement 30
+	min_distance_group_placement  1
+	terrain_to_place_on BEACH
+}
+create_object SHIPWRECK2
+{
+	number_of_objects 9320
+	temp_min_distance_group_placement 30
+	min_distance_group_placement  1
+	terrain_to_place_on BEACH
+}	
+
+/* and a bit of ice */
+#const ICE_PATCH 728
+create_object ICE_PATCH
+{
+	number_of_objects 9320
+	temp_min_distance_group_placement 6
+	terrain_to_place_on GRASS_SNOW
+}	
+
+
+/* fish */
+create_object MARLIN1
+{
+	number_of_objects 500
+	set_scaling_to_map_size 
+	set_gaia_object_only
+	terrain_to_place_on DEEP_WATER
+	min_distance_group_placement 5
+	temp_min_distance_group_placement 15
+}
+create_object MARLIN2
+{
+	number_of_objects 500
+	set_scaling_to_map_size 
+	set_gaia_object_only
+	terrain_to_place_on DEEP_WATER
+	min_distance_group_placement 5
+	temp_min_distance_group_placement 15
+}
+create_object SALMON
+{
+	number_of_objects 9320
+	terrain_to_place_on WATER
+	set_scaling_to_map_size
+	set_gaia_object_only
+	min_distance_group_placement 4
+	temp_min_distance_group_placement 10
+}
+create_object SHORE_FISH
+{
+	number_of_objects 9320
+	set_scaling_to_map_size
+	set_gaia_object_only
+	temp_min_distance_group_placement 8
+} 
+
+
+/* birds */
+create_object HAWK
+{
+	number_of_objects 4
+	set_scaling_to_map_size
+}
+
+´
+
+
+
+

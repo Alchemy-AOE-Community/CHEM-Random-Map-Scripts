@@ -1,0 +1,665 @@
+/*
+Battle Royale Cornucopia
+by Zetnus
+Created: 18 Nov 2020
+Most recent update: 05 May 2022
+
+Only supports Battle Royale in DE
+
+-Based on my old 75th Hunger Games map
+-Start with two villagers but negative stone, so you can build anything that does not require stone
+-Decide whether to fight for the middle immediately, or flee to the outside and return to the center with a strong army
+
+Learn about random map scripting: https://docs.google.com/document/d/e/2PACX-1vR_I1I9u-hI2FFm-EYyjoM_-9dNJFOfTaIgr05wXNbdpv9tI18b6r18ARULy3Jqyvlq6-lc2VjX6xP4/pub
+
+This map was harvested from a mod in the official AOE2DE mod center, whose licensing agreement with Microsoft supersedes any Github restrictions: https://www.microsoft.com/en-us/servicesagreement
+
+*/
+
+#const EVIL_FOG 69
+#const WET_SAND 80
+#const WET_GRAVEL 81
+
+#const ONGRID_PLACEHOLDER 278
+#const BLANKOBJECT 647
+
+#const FLARE 112
+
+#const FORTIFIED_PALISADE_WALL 119
+#const NEW_TRADE_WORKSHOP 1647
+
+
+<PLAYER_SETUP>
+random_placement
+ai_info_map_type CUSTOM 0 0 0
+set_gaia_civilization 9
+behavior_version 1
+
+#const FLEMISH_REVOLUTION 755
+#const FIRST_CRUSADE 756
+#const DONJON_ENABLER 775
+#const TRADE_COG_ENABLER 180
+#const FISH_TRAP_ENABLER 357
+effect_amount DISABLE_TECH FLEMISH_REVOLUTION ATTR_DISABLE 755
+effect_amount DISABLE_TECH FIRST_CRUSADE ATTR_DISABLE 756
+effect_amount DISABLE_TECH DONJON_ENABLER ATTR_DISABLE 775
+effect_amount DISABLE_TECH TRADE_COG_ENABLER ATTR_DISABLE 180
+effect_amount DISABLE_TECH FISH_TRAP_ENABLER ATTR_DISABLE 357
+effect_amount ENABLE_OBJECT FISHING_SHIP ATTR_DISABLE 0
+	
+effect_amount MOD_RESOURCE AMOUNT_FOOD_GENERATION ATTR_ADD 15
+effect_amount MOD_RESOURCE AMOUNT_WOOD_GENERATION ATTR_ADD 15
+effect_amount MOD_RESOURCE AMOUNT_GOLD_GENERATION ATTR_ADD 15
+effect_amount MOD_RESOURCE AMOUNT_STARTING_STONE ATTR_ADD -99999
+
+effect_amount SET_ATTRIBUTE BUILDING_CLASS ATTR_TRAIN_LOCATION 0
+effect_amount SET_ATTRIBUTE FARM_CLASS ATTR_TRAIN_LOCATION 0
+effect_amount SET_ATTRIBUTE TOWER_CLASS ATTR_TRAIN_LOCATION 0
+
+
+/* Disabling Trade Carts and Cogs for Multi-team Games */
+if 2_TEAM_GAME
+else
+  #const TRADE_CART_ENABLER 161
+  #const TRADE_COG_ENABLER 180
+  #const TRADE_CARAVAN_ENABLER 48
+  #const HINDU_CARAVANSERAI_ENABLER 518
+  #const PERSIAN_CARAVANSERAI_ENABLER 552  
+  #const SILK_ROAD 499
+  effect_amount DISABLE_TECH TRADE_COG_ENABLER ATTR_DISABLE 180
+  effect_amount DISABLE_TECH TRADE_CART_ENABLER ATTR_DISABLE 161
+  effect_amount DISABLE_TECH TRADE_CARAVAN_ENABLER ATTR_DISABLE 48
+  effect_amount DISABLE_TECH HINDU_CARAVANSERAI_ENABLER ATTR_DISABLE 518
+  effect_amount DISABLE_TECH PERSIAN_CARAVANSERAI_ENABLER ATTR_DISABLE 552
+  effect_amount DISABLE_TECH SILK_ROAD ATTR_DISABLE 499    
+endif
+
+<LAND_GENERATION>
+
+base_terrain WATER
+
+create_land {
+	terrain_type WET_GRAVEL
+	land_position 50 50
+	top_border 45 bottom_border 45 left_border 45 right_border 45
+	border_fuzziness 100
+	base_elevation 1
+	land_id 1
+	zone 1
+}
+
+create_player_lands {
+	terrain_type WET_SAND
+	base_size 1
+	number_of_tiles 0
+	circle_radius 10
+	base_elevation 0
+	zone 1
+}
+create_player_lands {
+	terrain_type SNOW
+	base_size 1
+	number_of_tiles 0
+	base_elevation 0
+	zone 1
+}
+
+/* outside */
+create_land {
+	terrain_type GRASS
+	base_size 1
+	land_percent 100
+	zone 2
+	land_position 75 75
+	other_zone_avoidance_distance 25
+	land_id 2
+}
+create_land {
+	terrain_type GRASS
+	base_size 1
+	land_percent 100
+	zone 2
+	land_position 25 25
+	other_zone_avoidance_distance 25
+	land_id 2
+}
+create_land {
+	terrain_type GRASS
+	base_size 1
+	land_percent 100
+	zone 2
+	land_position 75 25
+	other_zone_avoidance_distance 25
+	land_id 2
+}
+create_land {
+	terrain_type GRASS
+	base_size 1
+	land_percent 100
+	zone 2
+	land_position 25 75
+	other_zone_avoidance_distance 25
+	land_id 2
+}
+create_land {
+	terrain_type GRASS
+	base_size 1
+	land_percent 100
+	zone 2
+	land_position 15 50
+	other_zone_avoidance_distance 25
+	land_id 2
+}
+create_land {
+	terrain_type GRASS
+	base_size 1
+	land_percent 100
+	zone 2
+	land_position 50 15
+	other_zone_avoidance_distance 25
+	land_id 2
+}
+create_land {
+	terrain_type GRASS
+	base_size 1
+	land_percent 100
+	zone 2
+	land_position 50 85
+	other_zone_avoidance_distance 25
+	land_id 2
+}
+create_land {
+	terrain_type GRASS
+	base_size 1
+	land_percent 100
+	zone 2
+	land_position 85 50
+	other_zone_avoidance_distance 25
+	land_id 2
+}
+
+
+<ELEVATION_GENERATION>
+
+create_elevation 2 {
+	base_terrain WET_GRAVEL
+	number_of_tiles 9320
+	number_of_clumps 1
+	enable_balanced_elevation
+}
+create_elevation 2 {
+	base_terrain WET_GRAVEL
+	number_of_tiles 9320
+	set_scale_by_size
+	number_of_clumps 9320
+	enable_balanced_elevation
+}
+
+
+create_elevation 2 {
+	base_terrain GRASS
+	number_of_tiles 9320
+	set_scale_by_size
+	number_of_clumps 9320
+	enable_balanced_elevation
+}
+
+
+
+/* no cliffs */
+
+
+<TERRAIN_GENERATION>
+
+create_terrain DIRT2 {
+	base_terrain GRASS
+	land_percent 1000
+	number_of_clumps 9320
+	set_scale_by_groups
+	height_limits 0 1
+}
+
+
+create_terrain DLC_RAINFOREST {
+	base_terrain GRASS
+	land_percent 8
+	number_of_clumps 15
+	set_scale_by_groups
+	set_avoid_player_start_areas
+	spacing_to_other_terrain_types 3
+}
+
+create_terrain DLC_JUNGLEGRASS {
+	base_terrain GRASS
+	land_percent 15
+	number_of_clumps 10
+	set_scale_by_groups
+	terrain_mask 1
+}
+create_terrain LEAVES {
+	base_terrain GRASS
+	land_percent 15
+	number_of_clumps 10
+	set_scale_by_groups
+	terrain_mask 1
+}
+create_terrain DLC_DRYGRASS {
+	base_terrain GRASS
+	land_percent 15
+	number_of_clumps 10
+	set_scale_by_groups
+	terrain_mask 1
+}
+
+<CONNECTION_GENERATION>
+
+create_connect_all_lands {
+	replace_terrain WATER SHALLOW
+	
+	terrain_cost ICE 0
+	terrain_cost SNOW 0
+	terrain_cost WET_SAND 0
+	terrain_size WATER 1 0
+}
+
+create_connect_all_players_land {
+	replace_terrain WATER DLC_MANGROVESHALLOW
+	
+	terrain_cost WET_GRAVEL 0
+	terrain_cost WATER 99999
+	
+	terrain_size WATER 1 0
+}
+
+
+
+
+<OBJECTS_GENERATION>
+/*
+if BATTLE_ROYALE
+create_object FLARE {
+	number_of_objects 200
+	set_place_for_every_player
+	temp_min_distance_group_placement 2
+	set_scaling_to_map_size
+	terrain_to_place_on WET_GRAVEL
+}
+endif
+*/
+/*
+create_object MONUMENT {
+	second_object MONUMENT
+	set_gaia_object_only
+	set_gaia_unconvertible
+	place_on_specific_land_id 1
+	max_distance_to_players 0
+}
+*/
+
+create_object PATH_3 {
+	set_gaia_object_only
+	place_on_specific_land_id 1
+	max_distance_to_players 0
+}
+
+start_random
+	percent_chance 5 #define BASM #define B1 #define A2 #define S3 #define M4
+	percent_chance 5 #define BAMS #define B1 #define A2 #define M3 #define S4
+	percent_chance 5 #define BSAM #define B1 #define S2 #define A3 #define M4
+	percent_chance 5 #define BSMA #define B1 #define S2 #define M3 #define A4
+	percent_chance 4 #define BMAS #define B1 #define M2 #define A3 #define S4
+	percent_chance 4 #define BMSA #define B1 #define M2 #define S3 #define A4
+	percent_chance 4 #define ABSM #define A1 #define B2 #define S3 #define M4
+	percent_chance 4 #define ABMS #define A1 #define B2 #define M3 #define S4
+	percent_chance 4 #define ASBM #define A1 #define S2 #define B3 #define M4
+	percent_chance 4 #define ASMB #define A1 #define S2 #define M3 #define B4
+	percent_chance 4 #define AMBS #define A1 #define M2 #define B3 #define S4
+	percent_chance 4 #define AMSB #define A1 #define M2 #define S3 #define B4
+	percent_chance 4 #define SBAM #define S1 #define B2 #define A3 #define M4
+	percent_chance 4 #define SBMA #define S1 #define B2 #define M3 #define A4
+	percent_chance 4 #define SABM #define S1 #define A2 #define B3 #define M4
+	percent_chance 4 #define SAMB #define S1 #define A2 #define M3 #define B4
+	percent_chance 4 #define SMBA #define S1 #define M2 #define B3 #define A4
+	percent_chance 4 #define SMAB #define S1 #define M2 #define A3 #define B4
+	percent_chance 4 #define MBAS #define M1 #define B2 #define A3 #define S4
+	percent_chance 4 #define MBSA #define M1 #define B2 #define S3 #define A4
+	percent_chance 4 #define MABS #define M1 #define A2 #define B3 #define S4
+	percent_chance 4 #define MASB #define M1 #define A2 #define S3 #define B4
+	percent_chance 4 #define MSBA #define M1 #define S2 #define B3 #define A4
+	percent_chance 4 #define MSAB #define M1 #define S2 #define A3 #define B4
+end_random
+
+if B1 create_object BARRACKS 
+elseif A1 create_object ARCHERY_RANGE
+elseif S1 create_object STABLE
+elseif M1 create_object MONASTERY
+endif
+{
+	set_gaia_object_only
+	place_on_specific_land_id 1
+	min_distance_to_players 5
+	find_closest
+	actor_area 20
+	actor_area_radius 3
+}
+
+if B2 create_object BARRACKS 
+elseif A2 create_object ARCHERY_RANGE
+elseif S2 create_object STABLE
+elseif M2 create_object MONASTERY
+endif
+{
+	set_gaia_object_only
+	place_on_specific_land_id 1
+	min_distance_to_players 5
+	find_closest
+	actor_area 21
+	actor_area_radius 3
+}
+
+if B3 create_object BARRACKS 
+elseif A3 create_object ARCHERY_RANGE
+elseif S3 create_object STABLE
+elseif M3 create_object MONASTERY
+endif
+{
+	set_gaia_object_only
+	place_on_specific_land_id 1
+	min_distance_to_players 5
+	find_closest
+	actor_area 22
+	actor_area_radius 3
+}
+
+if B4 create_object BARRACKS 
+elseif A4 create_object ARCHERY_RANGE
+elseif S4 create_object STABLE
+elseif M4 create_object MONASTERY
+endif
+{
+	set_gaia_object_only
+	place_on_specific_land_id 1
+	min_distance_to_players 5
+	find_closest
+	actor_area 23
+	actor_area_radius 3
+}
+/*
+create_object NEW_TRADE_WORKSHOP {
+	set_gaia_object_only
+	place_on_specific_land_id 1
+	min_distance_to_players 5
+	find_closest
+	number_of_objects 4
+	temp_min_distance_group_placement 4
+	avoid_actor_area 20
+	avoid_actor_area 21
+	avoid_actor_area 22
+	avoid_actor_area 23
+}
+*/
+
+/*
+create_object NEW_TRADE_WORKSHOP {
+	set_gaia_object_only
+	place_on_specific_land_id 1
+	max_distance_to_players 0
+}
+*/
+
+create_object SKIRMISHER {
+	set_gaia_object_only
+	set_gaia_unconvertible
+	place_on_specific_land_id 1
+	min_distance_to_players 3
+	find_closest
+	number_of_objects 8
+	temp_min_distance_group_placement 1
+}
+
+/* center done */
+
+create_object VILLAGER_HUNTER_M {
+	set_place_for_every_player
+	terrain_to_place_on WET_SAND
+	max_distance_to_players 0
+	second_object OUTPOST
+}
+create_object VILLAGER_HUNTER_F  {
+	set_place_for_every_player
+	terrain_to_place_on SNOW
+	max_distance_to_players 0
+	second_object OUTPOST
+}
+/* maybe only include this for AI players */
+create_object SCYTHIAN_SCOUT {
+	set_place_for_every_player
+	max_distance_to_players 1
+}
+
+
+
+/* outside towns */
+create_object CASTLE {
+	place_on_specific_land_id 2
+	find_closest
+	max_distance_to_players 8
+	set_gaia_object_only
+	actor_area 1020
+	actor_area_radius 20
+}
+/*
+create_object FORTIFIED_PALISADE_WALL {
+	place_on_specific_land_id 2
+	number_of_objects 1000
+	set_gaia_object_only
+	set_gaia_unconvertible
+	min_distance_to_players 8
+	max_distance_to_players 8
+}
+*/
+
+create_object NEW_TRADE_WORKSHOP {
+	place_on_specific_land_id 2
+	find_closest
+	max_distance_to_players 8
+	set_gaia_object_only
+}
+create_object SIEGE_WORKSHOP {
+	place_on_specific_land_id 2
+	find_closest
+	max_distance_to_players 8
+	set_gaia_object_only
+}
+create_object HEAVY_SCORPION {
+	place_on_specific_land_id 2
+	find_closest
+	max_distance_to_players 8
+	set_gaia_object_only
+	set_gaia_unconvertible
+	avoid_forest_zone 2
+}
+create_object HALBERDIER {
+	number_of_objects 12
+	place_on_specific_land_id 2
+	find_closest
+	max_distance_to_players 8
+	set_circular_placement
+	set_gaia_object_only
+	set_gaia_unconvertible
+	temp_min_distance_group_placement 1
+	min_distance_group_placement 1
+	avoid_forest_zone 2
+}
+create_object HUNTING_WOLF {
+	number_of_objects 4
+	place_on_specific_land_id 2
+	find_closest
+	max_distance_to_players 8
+	set_circular_placement
+	set_gaia_object_only
+	set_gaia_unconvertible
+	temp_min_distance_group_placement 2
+	min_distance_group_placement 1
+	avoid_forest_zone 2
+}
+create_object ELITE_SKIRMISHER {
+	number_of_objects 12
+	place_on_specific_land_id 2
+	find_closest
+	max_distance_to_players 8
+	set_circular_placement
+	set_gaia_object_only
+	set_gaia_unconvertible
+	temp_min_distance_group_placement 2
+	avoid_forest_zone 2
+}
+
+
+/* scattered stuff */
+
+create_object DOCK {
+	number_of_objects 9320
+	min_distance_to_players 12
+	set_gaia_object_only
+	temp_min_distance_group_placement 10
+	min_distance_group_placement 2
+}
+
+create_object NEW_TRADE_WORKSHOP {
+	number_of_objects 9320
+	min_distance_to_players 20
+	avoid_actor_area 1020
+	avoid_forest_zone 1
+	max_distance_to_other_zones 3
+	set_gaia_object_only
+	temp_min_distance_group_placement 34
+	min_distance_group_placement 4
+}
+
+create_object BARRACKS {
+	number_of_objects 9320
+	min_distance_to_players 20
+	avoid_actor_area 1020
+	avoid_forest_zone 1
+	max_distance_to_other_zones 3
+	set_gaia_object_only
+	temp_min_distance_group_placement 30
+	min_distance_group_placement 2
+}
+create_object ARCHERY_RANGE {
+	number_of_objects 9320
+	min_distance_to_players 20
+	avoid_actor_area 1020
+	avoid_forest_zone 1
+	max_distance_to_other_zones 3
+	set_gaia_object_only
+	temp_min_distance_group_placement 30
+	min_distance_group_placement 2
+}
+create_object STABLE {
+	number_of_objects 9320
+	min_distance_to_players 20
+	avoid_actor_area 1020
+	avoid_forest_zone 1
+	max_distance_to_other_zones 3
+	set_gaia_object_only
+	temp_min_distance_group_placement 30
+	min_distance_group_placement 2
+}
+
+create_object MONASTERY {
+	number_of_objects 9320
+	min_distance_to_players 20
+	avoid_actor_area 1020
+	avoid_forest_zone 1
+	max_distance_to_other_zones 3
+	set_gaia_object_only
+	temp_min_distance_group_placement 45
+	min_distance_group_placement 2
+}
+
+create_object GOLD {
+	number_of_groups 9320
+	number_of_objects 4
+	set_tight_grouping
+	group_placement_radius 
+	min_distance_to_players 20
+	avoid_actor_area 1020
+	avoid_forest_zone 1
+	max_distance_to_other_zones 3
+	set_gaia_object_only
+	temp_min_distance_group_placement 35
+	actor_area 400
+	actor_area_radius 1
+}
+create_object MINING_CAMP {
+	number_of_objects 9320
+	actor_area_to_place_in 400
+	set_gaia_object_only
+	temp_min_distance_group_placement 15
+	min_distance_group_placement 2
+}
+
+
+create_object FORAGE {
+	number_of_groups 9320
+	number_of_objects 4
+	set_tight_grouping
+	group_placement_radius 
+	min_distance_to_players 20
+	avoid_actor_area 1020
+	avoid_forest_zone 1
+	max_distance_to_other_zones 3
+	set_gaia_object_only
+	temp_min_distance_group_placement 35
+	actor_area 401
+	actor_area_radius 1
+}
+create_object MILL {
+	number_of_objects 9320
+	actor_area_to_place_in 401
+	set_gaia_object_only
+	temp_min_distance_group_placement 15
+	min_distance_group_placement 2
+}
+
+create_object LUMBER_CAMP {
+	number_of_objects 9320
+	place_on_forest_zone
+	set_gaia_object_only
+	temp_min_distance_group_placement 35
+	min_distance_group_placement 2
+}
+
+
+/*
+create_object OUTPOST {
+	number_of_objects 9320
+	min_distance_to_players 20
+	avoid_actor_area 1020
+	avoid_forest_zone 1
+	set_gaia_object_only
+	temp_min_distance_group_placement 30
+}
+*/	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

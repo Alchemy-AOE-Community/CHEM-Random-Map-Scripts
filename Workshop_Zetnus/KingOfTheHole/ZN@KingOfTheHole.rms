@@ -1,0 +1,344 @@
+/*
+KING OF THE HOLE 
+
+Most recent update: 05 May 2022
+By: Zetnus 
+Zetnus@outlook.com
+
+
+suggested settings:
+-king of the hill 
+-tiny map size
+-free for fall
+
+
+Learn about random map scripting: https://docs.google.com/document/d/e/2PACX-1vR_I1I9u-hI2FFm-EYyjoM_-9dNJFOfTaIgr05wXNbdpv9tI18b6r18ARULy3Jqyvlq6-lc2VjX6xP4/pub
+
+This map was harvested from a mod in the official AOE2DE mod center, whose licensing agreement with Microsoft supersedes any Github restrictions: https://www.microsoft.com/en-us/servicesagreement
+
+*/
+
+#const ROCK_KOTH 40
+
+#const OUTLAW 158
+#const MONKEY_BOY 860
+
+/* =================================================================================================== */
+<PLAYER_SETUP>
+random_placement
+ai_info_map_type SOCOTRA 0 0 0
+behavior_version 1
+
+/* Disabling Trade Carts and Cogs for Multi-team Games */
+if 2_TEAM_GAME
+else
+  #const TRADE_CART_ENABLER 161
+  #const TRADE_COG_ENABLER 180
+  #const TRADE_CARAVAN_ENABLER 48
+  #const HINDU_CARAVANSERAI_ENABLER 518
+  #const PERSIAN_CARAVANSERAI_ENABLER 552  
+  #const SILK_ROAD 499
+  effect_amount DISABLE_TECH TRADE_COG_ENABLER ATTR_DISABLE 180
+  effect_amount DISABLE_TECH TRADE_CART_ENABLER ATTR_DISABLE 161
+  effect_amount DISABLE_TECH TRADE_CARAVAN_ENABLER ATTR_DISABLE 48
+  effect_amount DISABLE_TECH HINDU_CARAVANSERAI_ENABLER ATTR_DISABLE 518
+  effect_amount DISABLE_TECH PERSIAN_CARAVANSERAI_ENABLER ATTR_DISABLE 552
+  effect_amount DISABLE_TECH SILK_ROAD ATTR_DISABLE 499    
+endif
+
+/* =================================================================================================== */
+<LAND_GENERATION>
+
+base_terrain DLC_SAVANNAH
+
+create_player_lands {
+	terrain_type DLC_CRACKED
+	land_percent 100
+	base_size 8
+	top_border 19
+	right_border 19
+	left_border 19
+	bottom_border 19
+	zone 1
+	base_elevation 5
+	circle_radius 24 0
+}
+
+create_land {
+	terrain_type ROCK_KOTH
+	land_percent 0
+	base_size 12
+	land_position 50 50
+	zone 1
+	land_id 10
+}
+
+/* =================================================================================================== */
+<ELEVATION_GENERATION>
+
+create_elevation 5 {
+	base_terrain DLC_CRACKED
+	number_of_tiles 9320
+	number_of_clumps 99
+	set_scale_by_size
+	enable_balanced_elevation
+}
+
+create_elevation 7 {
+	base_terrain DLC_SAVANNAH
+	number_of_tiles 9320
+	number_of_clumps 99
+	set_scale_by_size
+	enable_balanced_elevation
+}
+
+/* =================================================================================================== */
+<TERRAIN_GENERATION>
+
+create_terrain DLC_DRAGONFOREST {
+	base_terrain DLC_SAVANNAH
+	land_percent 100
+	number_of_clumps 999
+	height_limits 7 8
+}
+
+create_terrain DLC_QUICKSAND {
+	base_terrain ROCK_KOTH
+	land_percent 100
+	number_of_clumps 999
+	height_limits 2 4
+	terrain_mask 2
+}
+
+create_terrain DESERT {
+	base_terrain DLC_QUICKSAND
+	land_percent 100
+	number_of_clumps 999
+	height_limits 4 5
+	terrain_mask 2
+}
+
+create_terrain DLC_DIRT4 {
+	base_terrain DLC_CRACKED
+	land_percent 10
+	number_of_clumps 5
+	set_scale_by_groups
+	terrain_mask 1
+}
+
+
+/* =================================================================================================== */
+<OBJECTS_GENERATION>
+
+/* ring around the center */
+create_object DLC_BAOBABTREE {
+	number_of_objects 9320
+	terrain_to_place_on DESERT
+	resource_delta -190
+}
+
+create_object TOWN_CENTER {
+	set_place_for_every_player
+	max_distance_to_players 0
+}
+
+/* center */
+create_object MAP_REVEALER {
+	set_place_for_every_player
+	number_of_objects 9320
+	terrain_to_place_on ROCK_KOTH
+}
+create_object MONKEY_BOY {
+	place_on_specific_land_id 10
+	terrain_to_place_on ROCK_KOTH
+	number_of_objects 8
+	set_scaling_to_player_number
+	set_gaia_object_only
+	min_distance_to_players 6
+	max_distance_to_players 6
+	temp_min_distance_group_placement 4
+}
+create_object IRON_BOAR {
+	place_on_specific_land_id 10
+	terrain_to_place_on ROCK_KOTH
+	number_of_objects 12
+	set_scaling_to_player_number
+	set_gaia_object_only
+	min_distance_to_players 6
+	temp_min_distance_group_placement 3
+}
+create_object RABID_WOLF {
+	place_on_specific_land_id 10
+	terrain_to_place_on ROCK_KOTH
+	number_of_objects 16
+	set_scaling_to_player_number
+	set_gaia_object_only
+	min_distance_to_players 6
+	temp_min_distance_group_placement 2
+}
+create_object OUTLAW {
+	place_on_specific_land_id 10
+	terrain_to_place_on ROCK_KOTH
+	number_of_objects 16
+	set_scaling_to_player_number
+	set_gaia_object_only
+	min_distance_to_players 6
+	max_distance_to_players 8
+	temp_min_distance_group_placement 1
+}
+create_object DLC_LION {
+	place_on_specific_land_id 10
+	terrain_to_place_on ROCK_KOTH
+	number_of_objects 16
+	set_scaling_to_player_number
+	set_gaia_object_only
+	min_distance_to_players 6
+	temp_min_distance_group_placement 1
+}
+create_object DIRE_WOLF {
+	place_on_specific_land_id 10
+	terrain_to_place_on ROCK_KOTH
+	number_of_objects 16
+	set_scaling_to_player_number
+	set_gaia_object_only
+	min_distance_to_players 6
+	temp_min_distance_group_placement 1
+}
+
+create_object VILLAGER {
+	set_place_for_every_player
+	min_distance_to_players 3
+	max_distance_to_players 6
+}
+
+/* Regicide support */
+if REGICIDE
+	create_object KING {
+		set_place_for_every_player
+		min_distance_to_players 3
+		max_distance_to_players 5
+		set_circular_placement
+	}
+endif
+
+create_object RELIC {
+	set_place_for_every_player 
+	number_of_objects 2
+	set_gaia_object_only 
+	min_distance_to_players 4
+	max_distance_to_players 6
+	set_circular_placement
+}
+
+/* more resources */
+create_object DLC_ORANGEBUSH {
+	number_of_objects 5
+	number_of_groups 2
+	group_placement_radius 2
+	set_tight_grouping
+	set_gaia_object_only
+	set_place_for_every_player
+	min_distance_to_players 6
+	max_distance_to_players 12
+	set_circular_placement
+	min_distance_group_placement 2
+	temp_min_distance_group_placement 6
+}
+create_object GOLD {
+	number_of_objects 5
+	number_of_groups 2
+	group_placement_radius 2
+	set_tight_grouping
+	set_gaia_object_only
+	set_place_for_every_player
+	min_distance_to_players 7
+	max_distance_to_players 12
+	set_circular_placement
+	min_distance_group_placement 2
+	temp_min_distance_group_placement 6
+}
+create_object STONE {
+	number_of_objects 4
+	number_of_groups 2
+	group_placement_radius 2
+	set_tight_grouping
+	set_gaia_object_only
+	set_place_for_every_player
+	min_distance_to_players 7
+	max_distance_to_players 12
+	set_circular_placement
+	min_distance_group_placement 2
+	temp_min_distance_group_placement 6
+}
+
+create_object DLC_ELEPHANT {
+	number_of_objects 2
+	set_gaia_object_only
+	set_place_for_every_player
+	min_distance_to_players 7
+	max_distance_to_players 12
+	set_circular_placement
+	temp_min_distance_group_placement 4
+}
+
+create_object DLC_GOAT {
+	terrain_to_place_on DLC_CRACKED
+	number_of_objects 3
+	set_gaia_object_only
+	set_place_for_every_player
+	min_distance_to_players 8
+	max_distance_to_players 14
+	set_circular_placement
+}
+
+create_object GAZELLE {
+	number_of_objects 8
+	set_gaia_object_only
+	set_place_for_every_player
+	min_distance_to_players 10
+	max_distance_to_players 19
+	set_circular_placement
+	avoid_actor_area 13
+}
+
+
+/* scattered resources */
+create_object DLC_ORANGEBUSH {
+	number_of_objects 4
+	number_of_groups 2
+	group_placement_radius 2
+	set_tight_grouping
+	set_gaia_object_only
+	set_scaling_to_player_number
+	min_distance_to_players 20
+	set_circular_placement
+	min_distance_group_placement 2
+	temp_min_distance_group_placement 20
+}
+create_object GOLD {
+	number_of_objects 4
+	number_of_groups 2
+	group_placement_radius 2
+	set_tight_grouping
+	set_gaia_object_only
+	set_scaling_to_player_number
+	min_distance_to_players 20
+	set_circular_placement
+	min_distance_group_placement 2
+	temp_min_distance_group_placement 20
+}
+create_object STONE {
+	number_of_objects 3
+	number_of_groups 2
+	group_placement_radius 2
+	set_tight_grouping
+	set_gaia_object_only
+	set_scaling_to_player_number
+	min_distance_to_players 20
+	set_circular_placement
+	min_distance_group_placement 2
+	temp_min_distance_group_placement 20
+}
+
+
+

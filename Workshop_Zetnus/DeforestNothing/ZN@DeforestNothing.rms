@@ -1,0 +1,102 @@
+
+/*
+Deforest Nothing
+
+created 27 July 2021
+by Zetnus
+zetnus@outlook.com
+Zetnus#6414 on Discord
+
+Forest Nothing with regrowing trees!
+
+Learn about random map scripting: https://docs.google.com/document/d/e/2PACX-1vR_I1I9u-hI2FFm-EYyjoM_-9dNJFOfTaIgr05wXNbdpv9tI18b6r18ARULy3Jqyvlq6-lc2VjX6xP4/pub
+
+This map was harvested from a mod in the official AOE2DE mod center, whose licensing agreement with Microsoft supersedes any Github restrictions: https://www.microsoft.com/en-us/servicesagreement
+
+*/
+
+
+/* =================================================================================================== */
+<PLAYER_SETUP>
+grouped_by_team
+ai_info_map_type CUSTOM 0 1 0
+behavior_version 1
+
+#const TREE_STUMP 415
+effect_amount SET_ATTRIBUTE TREE_STUMP ATTR_DEAD_ID 413 /* snow pine tree */
+
+
+/* Disabling Trade Carts and Cogs for Multi-team Games */
+if 2_TEAM_GAME
+else
+  #const TRADE_CART_ENABLER 161
+  #const TRADE_COG_ENABLER 180
+  #const TRADE_CARAVAN_ENABLER 48
+  #const HINDU_CARAVANSERAI_ENABLER 518
+  #const PERSIAN_CARAVANSERAI_ENABLER 552  
+  #const SILK_ROAD 499
+  effect_amount DISABLE_TECH TRADE_COG_ENABLER ATTR_DISABLE 180
+  effect_amount DISABLE_TECH TRADE_CART_ENABLER ATTR_DISABLE 161
+  effect_amount DISABLE_TECH TRADE_CARAVAN_ENABLER ATTR_DISABLE 48
+  effect_amount DISABLE_TECH HINDU_CARAVANSERAI_ENABLER ATTR_DISABLE 518
+  effect_amount DISABLE_TECH PERSIAN_CARAVANSERAI_ENABLER ATTR_DISABLE 552
+  effect_amount DISABLE_TECH SILK_ROAD ATTR_DISABLE 499    
+endif
+
+<LAND_GENERATION>
+base_terrain GRASS
+create_player_lands
+{
+    terrain_type GRASS
+    number_of_tiles 100
+	base_size 22
+	circle_radius 40 0
+}
+
+
+<TERRAIN_GENERATION>
+create_terrain FOREST
+{
+	base_terrain GRASS
+	land_percent 100
+	number_of_clumps 9320
+	set_avoid_player_start_areas
+}
+
+create_terrain LEAVES
+{
+	base_terrain GRASS
+	land_percent 100
+	number_of_clumps 9320
+	spacing_to_other_terrain_types 4
+}
+
+create_terrain FOREST
+{
+	base_terrain GRASS
+	land_percent 100
+	number_of_clumps 9320
+}
+
+<OBJECTS_GENERATION>
+
+create_object TOWN_CENTER
+{
+	set_place_for_every_player
+	max_distance_to_players 0
+}
+
+create_object VILLAGER
+{	
+	set_place_for_every_player
+	find_closest
+}
+
+if REGICIDE
+create_object KING
+{	
+	set_place_for_every_player
+	find_closest
+}
+endif
+

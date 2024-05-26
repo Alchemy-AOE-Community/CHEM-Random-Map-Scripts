@@ -1,0 +1,1037 @@
+/* Pag
+archipelago off the coast of Croatia
+
+by Zetnus
+zetnus@outlook.com
+Zetnus#6414 on Discord
+
+If the "Team Positions" lobby tickbox is enabled and teams are balanced, players are set up like this:
+7
+5
+3
+1
+
+2
+4
+6
+8
+with colors 1 and 2 being closest to the center.  (The layout can be flipped vertically)
+Disable the "Team Positions" tickbox to have player order on each team be random.
+
+Resources are close to players.  Only 1 boar and reduced starting stone.
+Stone, gold and relics can be found on the islands in the west.
+Large forests and a bit of stone can be found on the mainland in the east.
+Fish density is relatively low, but water control will still be important.
+
+Updates:
+-fixed berry spawns
+
+This map was harvested from a mod in the official AOE2DE mod center, whose licensing agreement with Microsoft supersedes any Github restrictions: https://www.microsoft.com/en-us/servicesagreement
+
+*/
+
+/* terrains */
+#const GRAVEL 70
+#const BEACH_BUILDABLE 80
+
+/* =================================================================================================== */
+<PLAYER_SETUP>
+direct_placement
+ai_info_map_type CUSTOM 0 0 0 
+behavior_version 1
+
+/* Disabling Trade Carts and Cogs for Multi-team Games */
+if 2_TEAM_GAME
+else
+  #const TRADE_CART_ENABLER 161
+  #const TRADE_COG_ENABLER 180
+  #const TRADE_CARAVAN_ENABLER 48
+  #const HINDU_CARAVANSERAI_ENABLER 518
+  #const PERSIAN_CARAVANSERAI_ENABLER 552  
+  #const SILK_ROAD 499
+  effect_amount DISABLE_TECH TRADE_COG_ENABLER ATTR_DISABLE 180
+  effect_amount DISABLE_TECH TRADE_CART_ENABLER ATTR_DISABLE 161
+  effect_amount DISABLE_TECH TRADE_CARAVAN_ENABLER ATTR_DISABLE 48
+  effect_amount DISABLE_TECH HINDU_CARAVANSERAI_ENABLER ATTR_DISABLE 518
+  effect_amount DISABLE_TECH PERSIAN_CARAVANSERAI_ENABLER ATTR_DISABLE 552
+  effect_amount DISABLE_TECH SILK_ROAD ATTR_DISABLE 499    
+endif
+
+/* =================================================================================================== */
+<LAND_GENERATION> 
+
+base_terrain DLC_WATER5
+
+if 2_TEAM_GAME 
+	start_random 
+		percent_chance 50 #define T1_UP
+		percent_chance 50 #define T1_DOWN
+	end_random
+	if FIXED_POSITIONS
+		if 4_PLAYER_GAME
+			if TEAM1_SIZE2
+				#define BALANCED_TEAMS
+			endif
+		elseif 6_PLAYER_GAME
+			if TEAM1_SIZE3
+				if TEAM2_SIZE3
+					#define BALANCED_TEAMS
+				endif
+			endif
+		elseif 8_PLAYER_GAME
+			if TEAM1_SIZE4
+				if TEAM2_SIZE4
+					#define BALANCED_TEAMS
+				endif
+			endif
+		endif
+	endif
+endif
+
+
+if 1_PLAYER_GAME
+	#define ASSIGN_LAND_5
+elseif 2_PLAYER_GAME
+	#define ASSIGN_LAND_3
+	#define ASSIGN_LAND_7
+elseif 3_PLAYER_GAME
+	#define ASSIGN_LAND_2
+	#define ASSIGN_LAND_5
+	#define ASSIGN_LAND_8
+elseif 4_PLAYER_GAME
+	#define ASSIGN_LAND_2
+	#define ASSIGN_LAND_4
+	#define ASSIGN_LAND_6
+	#define ASSIGN_LAND_8
+elseif 5_PLAYER_GAME
+	#define ASSIGN_LAND_1
+	#define ASSIGN_LAND_3
+	#define ASSIGN_LAND_5
+	#define ASSIGN_LAND_7
+	#define ASSIGN_LAND_9
+elseif 6_PLAYER_GAME
+	#define ASSIGN_LAND_2
+	#define ASSIGN_LAND_3
+	#define ASSIGN_LAND_4
+	#define ASSIGN_LAND_6
+	#define ASSIGN_LAND_7
+	#define ASSIGN_LAND_8
+elseif 7_PLAYER_GAME
+	#define ASSIGN_LAND_2
+	#define ASSIGN_LAND_3
+	#define ASSIGN_LAND_4
+	#define ASSIGN_LAND_5
+	#define ASSIGN_LAND_6
+	#define ASSIGN_LAND_7
+	#define ASSIGN_LAND_8
+elseif 8_PLAYER_GAME
+	#define ASSIGN_LAND_1
+	#define ASSIGN_LAND_2
+	#define ASSIGN_LAND_3
+	#define ASSIGN_LAND_4
+	#define ASSIGN_LAND_6
+	#define ASSIGN_LAND_7
+	#define ASSIGN_LAND_8
+	#define ASSIGN_LAND_9
+endif
+
+
+/* island made of 9 lands */
+create_land {
+	terrain_type DESERT 
+	if TINY_MAP land_percent 5
+	elseif SMALL_MAP land_percent 5
+	else land_percent 4
+	endif
+	base_size 12
+	land_position 90 10
+	left_border 70
+	bottom_border 70
+	border_fuzziness 5
+	clumping_factor 5
+	zone 1
+	other_zone_avoidance_distance 6
+	if ASSIGN_LAND_1
+		if BALANCED_TEAMS
+			if T1_UP
+				if TEAM_POSITIONS assign_to AT_COLOR 7 0 0
+				else assign_to AT_TEAM 1 0 0
+				endif
+			elseif T1_DOWN 
+				if TEAM_POSITIONS assign_to AT_COLOR 8 0 0
+				else assign_to AT_TEAM 2 0 0
+				endif
+			endif
+		else assign_to AT_TEAM -10 0 0
+		endif
+	endif
+}
+create_land {
+	terrain_type DESERT 
+	if TINY_MAP land_percent 6
+	elseif SMALL_MAP land_percent 5
+	else land_percent 4
+	endif
+	base_size 12
+	land_position 80 20
+	left_border 60
+	bottom_border 60
+	border_fuzziness 5
+	clumping_factor 5
+	zone 1
+	other_zone_avoidance_distance 6
+	if ASSIGN_LAND_2
+		if BALANCED_TEAMS
+			if T1_UP
+				if TEAM_POSITIONS
+					if 4_PLAYER_GAME assign_to AT_COLOR 3 0 0
+					else assign_to AT_COLOR 5 0 0
+					endif
+				else assign_to AT_TEAM 1 0 0
+				endif
+			elseif T1_DOWN 
+				if TEAM_POSITIONS
+					if 4_PLAYER_GAME assign_to AT_COLOR 4 0 0
+					else assign_to AT_COLOR 6 0 0
+					endif
+				else assign_to AT_TEAM 2 0 0
+				endif
+			endif
+		else assign_to AT_TEAM -10 0 0
+		endif
+	endif
+}
+create_land {
+	terrain_type DESERT 
+	if TINY_MAP land_percent 5
+	elseif SMALL_MAP land_percent 5
+	else land_percent 4
+	endif
+	base_size 12
+	land_position 70 30
+	right_border 10
+	top_border 10
+	left_border 50
+	bottom_border 50
+	border_fuzziness 5
+	clumping_factor 5
+	zone 1
+	other_zone_avoidance_distance 6
+	if ASSIGN_LAND_3
+		if BALANCED_TEAMS
+			if T1_UP
+				if TEAM_POSITIONS assign_to AT_COLOR 3 0 0
+				else assign_to AT_TEAM 1 0 0
+				endif
+			elseif T1_DOWN 
+				if TEAM_POSITIONS assign_to AT_COLOR 4 0 0
+				else assign_to AT_TEAM 2 0 0
+				endif
+			endif
+		else assign_to AT_TEAM -10 0 0
+		endif
+	endif
+}
+create_land {
+	terrain_type DESERT 
+	if TINY_MAP land_percent 6
+	elseif SMALL_MAP land_percent 5
+	else land_percent 4
+	endif
+	base_size 12
+	land_position 60 40
+	right_border 20
+	top_border 20
+	left_border 40
+	bottom_border 40
+	border_fuzziness 5
+	clumping_factor 5
+	zone 1
+	other_zone_avoidance_distance 6
+	if ASSIGN_LAND_4
+		if BALANCED_TEAMS
+			if T1_UP
+				if TEAM_POSITIONS assign_to AT_COLOR 1 0 0
+				else assign_to AT_TEAM 1 0 0
+				endif
+			elseif T1_DOWN 
+				if TEAM_POSITIONS assign_to AT_COLOR 2 0 0
+				else assign_to AT_TEAM 2 0 0
+				endif
+			endif
+		else assign_to AT_TEAM -10 0 0
+		endif
+	endif
+}
+/* central island part */
+create_land {
+	terrain_type DESERT 
+	if TINY_MAP land_percent 5
+	elseif SMALL_MAP land_percent 5
+	else land_percent 4
+	endif
+	base_size 12
+	land_position 50 50
+	right_border 30
+	top_border 30
+	left_border 30
+	bottom_border 30
+	border_fuzziness 5
+	clumping_factor 5
+	zone 1
+	other_zone_avoidance_distance 6
+	if ASSIGN_LAND_5 assign_to AT_TEAM -10 0 0 endif
+}
+create_land {
+	terrain_type DESERT 
+	if TINY_MAP land_percent 6
+	elseif SMALL_MAP land_percent 5
+	else land_percent 4
+	endif
+	base_size 12
+	land_position 40 60
+	right_border 40
+	top_border 40
+	left_border 20
+	bottom_border 20
+	border_fuzziness 5
+	clumping_factor 5
+	zone 1
+	other_zone_avoidance_distance 6
+	if ASSIGN_LAND_6
+		if BALANCED_TEAMS
+			if T1_UP
+				if TEAM_POSITIONS assign_to AT_COLOR 2 0 0
+				else assign_to AT_TEAM 2 0 0
+				endif
+			elseif T1_DOWN 
+				if TEAM_POSITIONS assign_to AT_COLOR 1 0 0
+				else assign_to AT_TEAM 1 0 0
+				endif
+			endif
+		else assign_to AT_TEAM -10 0 0
+		endif
+	endif
+}
+create_land {
+	terrain_type DESERT 
+	if TINY_MAP land_percent 5
+	elseif SMALL_MAP land_percent 5
+	else land_percent 4
+	endif
+	base_size 12
+	land_position 30 70
+	right_border 50
+	top_border 50
+	left_border 10
+	bottom_border 10
+	border_fuzziness 5
+	clumping_factor 5
+	zone 1
+	other_zone_avoidance_distance 6
+	if ASSIGN_LAND_7
+		if BALANCED_TEAMS
+			if T1_UP
+				if TEAM_POSITIONS assign_to AT_COLOR 4 0 0
+				else assign_to AT_TEAM 2 0 0
+				endif
+			elseif T1_DOWN 
+				if TEAM_POSITIONS assign_to AT_COLOR 3 0 0
+				else assign_to AT_TEAM 1 0 0
+				endif
+			endif
+		else assign_to AT_TEAM -10 0 0
+		endif
+	endif
+}
+create_land {
+	terrain_type DESERT 
+	if TINY_MAP land_percent 6
+	elseif SMALL_MAP land_percent 5
+	else land_percent 4
+	endif
+	base_size 12
+	land_position 20 80
+	right_border 60
+	top_border 60
+	border_fuzziness 5
+	clumping_factor 5
+	zone 1
+	other_zone_avoidance_distance 6
+	if ASSIGN_LAND_8
+		if BALANCED_TEAMS
+			if T1_UP
+				if TEAM_POSITIONS
+					if 4_PLAYER_GAME assign_to AT_COLOR 4 0 0
+					else assign_to AT_COLOR 6 0 0
+					endif
+				else assign_to AT_TEAM 2 0 0
+				endif
+			elseif T1_DOWN 
+				if TEAM_POSITIONS
+					if 4_PLAYER_GAME assign_to AT_COLOR 3 0 0
+					else assign_to AT_COLOR 5 0 0
+					endif
+				else assign_to AT_TEAM 1 0 0
+				endif
+			endif
+		else assign_to AT_TEAM -10 0 0
+		endif
+	endif
+}
+create_land {
+	terrain_type DESERT 
+	if TINY_MAP land_percent 5
+	elseif SMALL_MAP land_percent 5
+	else land_percent 4
+	endif
+	base_size 12
+	land_position 10 90
+	right_border 70
+	top_border 70
+	border_fuzziness 5
+	clumping_factor 5
+	zone 1
+	other_zone_avoidance_distance 6
+	if ASSIGN_LAND_9
+		if BALANCED_TEAMS
+			if T1_UP
+				if TEAM_POSITIONS assign_to AT_COLOR 8 0 0
+				else assign_to AT_TEAM 2 0 0
+				endif
+			elseif T1_DOWN 
+				if TEAM_POSITIONS assign_to AT_COLOR 7 0 0
+				else assign_to AT_TEAM 1 0 0
+				endif
+			endif
+		else assign_to AT_TEAM -10 0 0
+		endif
+	endif
+}
+
+/* the mainland */
+create_land {
+	terrain_type GRASS
+	land_percent 30
+	base_size 12
+	land_position 90 90
+	left_border 65
+	top_border 65
+	border_fuzziness 80
+	clumping_factor 80
+	zone 2
+	other_zone_avoidance_distance 6
+}
+create_land {
+	terrain_type GRASS
+	land_percent 30
+	base_size 4
+	land_position 60 95
+	left_border 50
+	top_border 80
+	border_fuzziness 10
+	clumping_factor 10
+	zone 2
+	other_zone_avoidance_distance 6
+}
+create_land {
+	terrain_type GRASS
+	land_percent 30
+	base_size 4
+	land_position 95 60
+	left_border 80
+	top_border 50
+	border_fuzziness 10
+	clumping_factor 10
+	zone 2
+	other_zone_avoidance_distance 6
+}
+
+/* the connection */
+create_land {
+	terrain_type SHALLOW
+	land_percent 100
+	base_size 1
+	land_position 95 35
+	left_border 95
+	bottom_border 33
+	border_fuzziness 10
+	clumping_factor 10
+	zone 2
+	other_zone_avoidance_distance 0	
+}
+create_land {
+	terrain_type SHALLOW
+	land_percent 100
+	base_size 1
+	land_position 55 95
+	top_border 95
+	right_border 33
+	border_fuzziness 10
+	clumping_factor 10
+	zone 2
+	other_zone_avoidance_distance 0	
+}
+
+/* small islands further out */
+create_land {
+	terrain_type BEACH_BUILDABLE
+	land_percent 1
+	base_size 1
+	right_border 60
+	bottom_border 60
+	clumping_factor 0
+	zone 3
+	land_id 3
+	other_zone_avoidance_distance 6
+	min_placement_distance 12
+}
+create_land {
+	terrain_type BEACH_BUILDABLE
+	land_percent 1
+	base_size 1
+	right_border 60
+	bottom_border 60
+	clumping_factor 0
+	zone 3
+	land_id 3
+	other_zone_avoidance_distance 6
+	min_placement_distance 12
+}
+create_land {
+	terrain_type BEACH_BUILDABLE
+	land_percent 1
+	base_size 1
+	right_border 60
+	bottom_border 60
+	clumping_factor 0
+	zone 4
+	land_id 4
+	other_zone_avoidance_distance 6
+	min_placement_distance 12
+}
+create_land {
+	terrain_type BEACH_BUILDABLE
+	land_percent 1
+	base_size 1
+	right_border 60
+	bottom_border 60
+	clumping_factor 0
+	zone 5
+	land_id 5
+	other_zone_avoidance_distance 6
+	min_placement_distance 12
+}
+create_land {
+	terrain_type BEACH_BUILDABLE
+	land_percent 1
+	base_size 1
+	right_border 60
+	bottom_border 60
+	clumping_factor 0
+	zone 6
+	land_id 6
+	other_zone_avoidance_distance 6
+	min_placement_distance 12
+}
+
+
+/* =================================================================================================== */
+<ELEVATION_GENERATION> 
+
+create_elevation 2 {
+	base_terrain DESERT
+	number_of_clumps 45
+	if TINY_MAP number_of_tiles 2000
+	elseif SMALL_MAP number_of_tiles 3000
+	elseif MEDIUM_MAP number_of_tiles 4000
+	elseif LARGE_MAP number_of_tiles 5712
+	elseif HUGE_MAP number_of_tiles 6854
+	elseif GIGANTIC_MAP number_of_tiles 8282
+	elseif LUDIKRIS_MAP number_of_tiles 32844
+	endif
+	set_scale_by_groups
+	enable_balanced_elevation
+}
+
+/* for the mainland */
+create_elevation 7 { base_terrain GRASS number_of_clumps 1 number_of_tiles 230400 }
+create_elevation 7 { base_terrain GRASS number_of_clumps 1 number_of_tiles 230400 }
+create_elevation 7 { base_terrain GRASS number_of_clumps 1 number_of_tiles 230400 }
+create_elevation 7 { base_terrain GRASS number_of_clumps 1 number_of_tiles 230400 }
+create_elevation 7 { base_terrain GRASS number_of_clumps 1 number_of_tiles 230400 }
+
+/* =================================================================================================== */
+<TERRAIN_GENERATION>
+
+color_correction CC_DESERT
+
+create_terrain GRAVEL { base_terrain BEACH_BUILDABLE land_percent 100 number_of_clumps 9320 terrain_mask 2 }
+
+create_terrain DLC_BEACH2 { base_terrain SHALLOW land_percent 100 number_of_clumps 9320 terrain_mask 1 }
+
+create_terrain DLC_DESERTGRAVEL { base_terrain GRASS land_percent 100 number_of_clumps 9320 height_limits 0 3 }
+create_terrain DLC_DESERTGRAVEL { base_terrain GRASS land_percent 100 number_of_clumps 9320 height_limits 0 6 terrain_mask 2 }
+
+create_terrain LEAVES { base_terrain GRASS land_percent 1 spacing_to_other_terrain_types 4 }
+create_terrain MEDITERRANEAN_FOREST { base_terrain LEAVES land_percent 100 number_of_clumps 9320 spacing_to_other_terrain_types 0 }
+create_terrain LEAVES { base_terrain GRASS land_percent 1 spacing_to_other_terrain_types 4 }
+create_terrain MEDITERRANEAN_FOREST { base_terrain LEAVES land_percent 100 number_of_clumps 9320 spacing_to_other_terrain_types 0 }
+create_terrain LEAVES { base_terrain GRASS land_percent 1 spacing_to_other_terrain_types 4 }
+create_terrain MEDITERRANEAN_FOREST { base_terrain LEAVES land_percent 100 number_of_clumps 9320 spacing_to_other_terrain_types 0 }
+create_terrain LEAVES { base_terrain GRASS land_percent 1 spacing_to_other_terrain_types 4 }
+create_terrain MEDITERRANEAN_FOREST { base_terrain LEAVES land_percent 100 number_of_clumps 9320 spacing_to_other_terrain_types 0 }
+create_terrain LEAVES { base_terrain GRASS land_percent 1 spacing_to_other_terrain_types 4 }
+create_terrain MEDITERRANEAN_FOREST { base_terrain LEAVES land_percent 100 number_of_clumps 9320 spacing_to_other_terrain_types 0 }
+create_terrain LEAVES { base_terrain GRASS land_percent 1 spacing_to_other_terrain_types 4 }
+create_terrain MEDITERRANEAN_FOREST { base_terrain LEAVES land_percent 100 number_of_clumps 9320 spacing_to_other_terrain_types 0 }
+create_terrain LEAVES { base_terrain GRASS land_percent 1 spacing_to_other_terrain_types 4 }
+create_terrain MEDITERRANEAN_FOREST { base_terrain LEAVES land_percent 100 number_of_clumps 9320 spacing_to_other_terrain_types 0 }
+create_terrain LEAVES { base_terrain GRASS land_percent 1 spacing_to_other_terrain_types 4 }
+create_terrain MEDITERRANEAN_FOREST { base_terrain LEAVES land_percent 100 number_of_clumps 9320 spacing_to_other_terrain_types 0 }
+create_terrain LEAVES { base_terrain GRASS land_percent 1 spacing_to_other_terrain_types 4 }
+create_terrain MEDITERRANEAN_FOREST { base_terrain LEAVES land_percent 100 number_of_clumps 9320 spacing_to_other_terrain_types 0 }
+create_terrain LEAVES { base_terrain GRASS land_percent 1 spacing_to_other_terrain_types 4 }
+create_terrain MEDITERRANEAN_FOREST { base_terrain LEAVES land_percent 100 number_of_clumps 9320 spacing_to_other_terrain_types 0 }
+create_terrain LEAVES { base_terrain GRASS land_percent 1 spacing_to_other_terrain_types 4 }
+create_terrain MEDITERRANEAN_FOREST { base_terrain LEAVES land_percent 100 number_of_clumps 9320 spacing_to_other_terrain_types 0 }
+create_terrain LEAVES { base_terrain GRASS land_percent 1 spacing_to_other_terrain_types 4 }
+create_terrain MEDITERRANEAN_FOREST { base_terrain LEAVES land_percent 100 number_of_clumps 9320 spacing_to_other_terrain_types 0 }
+create_terrain LEAVES { base_terrain GRASS land_percent 1 spacing_to_other_terrain_types 4 }
+create_terrain MEDITERRANEAN_FOREST { base_terrain LEAVES land_percent 100 number_of_clumps 9320 spacing_to_other_terrain_types 0 }
+create_terrain LEAVES { base_terrain GRASS land_percent 1 spacing_to_other_terrain_types 4 }
+create_terrain MEDITERRANEAN_FOREST { base_terrain LEAVES land_percent 100 number_of_clumps 9320 spacing_to_other_terrain_types 0 }
+create_terrain LEAVES { base_terrain GRASS land_percent 1 spacing_to_other_terrain_types 4 }
+create_terrain MEDITERRANEAN_FOREST { base_terrain LEAVES land_percent 100 number_of_clumps 9320 spacing_to_other_terrain_types 0 }
+
+/* player island terrains */
+create_terrain DIRT { base_terrain DESERT land_percent 100 number_of_clumps 9320 spacing_to_other_terrain_types 5 terrain_mask 1 }
+create_terrain DLC_DRYGRASS { base_terrain DESERT land_percent 5 number_of_clumps 12 set_scale_by_size terrain_mask 1 }
+
+create_terrain DLC_ACACIAFOREST { base_terrain DESERT land_percent 5 number_of_clumps 40 set_scale_by_groups spacing_to_other_terrain_types 2 set_avoid_player_start_areas }
+
+/* water mixing */
+create_terrain WATER {
+	base_terrain DLC_WATER5
+	land_percent 100
+	number_of_clumps 9320
+	terrain_mask 1
+	spacing_to_other_terrain_types 2
+}
+create_terrain WATER {
+	base_terrain DLC_WATER5
+	land_percent 100
+	number_of_clumps 9320
+	spacing_to_other_terrain_types 4
+}
+create_terrain MED_WATER {
+	base_terrain WATER
+	land_percent 100
+	number_of_clumps 9320
+	terrain_mask 1
+	spacing_to_other_terrain_types 2
+}
+create_terrain MED_WATER {
+	base_terrain WATER
+	land_percent 100
+	number_of_clumps 9320
+	spacing_to_other_terrain_types 4
+}
+create_terrain DEEP_WATER {
+	base_terrain MED_WATER
+	land_percent 100
+	number_of_clumps 9320
+	spacing_to_other_terrain_types 2
+	terrain_mask 1
+}
+create_terrain DEEP_WATER {
+	base_terrain MED_WATER
+	land_percent 100
+	number_of_clumps 9320
+	spacing_to_other_terrain_types 4
+}
+create_terrain DLC_WATER4 {
+	base_terrain DEEP_WATER
+	land_percent 100
+	number_of_clumps 9320
+	spacing_to_other_terrain_types 2
+	terrain_mask 1
+}
+create_terrain DLC_WATER4 {
+	base_terrain DEEP_WATER
+	land_percent 100
+	number_of_clumps 9320
+	spacing_to_other_terrain_types 4
+}	
+
+/* =================================================================================================== */
+<CONNECTION_GENERATION>
+
+/* make sure the mainland is connected to itself */
+create_connect_all_lands {
+replace_terrain DLC_WATER5 DLC_NEWSHALLOW
+replace_terrain WATER DLC_NEWSHALLOW
+replace_terrain MED_WATER WATER
+replace_terrain DEEP_WATER WATER
+replace_terrain DLC_WATER4 WATER
+terrain_cost DESERT 0
+terrain_cost DIRT 0
+terrain_cost SHALLOW 0
+terrain_size DLC_WATER5 6 0
+}
+/* make sure the connections are connected to the mainland */
+create_connect_all_lands {
+replace_terrain DLC_WATER5 DLC_NEWSHALLOW
+terrain_cost DESERT 0
+terrain_cost DIRT 0
+terrain_cost BEACH_BUILDABLE 0
+terrain_cost WATER 0
+terrain_cost DLC_WATER5 999999999
+terrain_cost BEACH 999999999
+terrain_size DLC_WATER5 1 0
+}
+/* dirt ridge */
+create_connect_all_lands {
+replace_terrain DESERT DIRT
+replace_terrain BEACH DLC_BEACH3
+replace_terrain DLC_ACACIAFOREST DLC_DIRT4
+terrain_cost DLC_WATER5 0
+terrain_cost BEACH 0
+terrain_cost SHALLOW 0
+if TINY_MAP terrain_size DESERT 6 2
+elseif SMALL_MAP terrain_size DESERT 6 2
+elseif MEDIUM_MAP terrain_size DESERT 7 2
+elseif LARGE_MAP terrain_size DESERT 8 2
+elseif HUGE_MAP terrain_size DESERT 10 2
+elseif GIGANTIC_MAP terrain_size DESERT 12 2
+elseif LUDIKRIS_MAP terrain_size DESERT 25 2
+endif
+}
+/* roads */
+if BALANCED_TEAMS
+create_connect_teams_lands {
+replace_terrain DESERT DLC_DRYROAD
+replace_terrain DLC_ACACIAFOREST DLC_DRYROAD
+terrain_cost DLC_WATER5 0
+terrain_cost BEACH 0
+terrain_size DESERT 0 0
+terrain_size DLC_ACACIAFOREST 0 0
+terrain_size DLC_DRYROAD 0 0
+}
+endif
+
+/* =================================================================================================== */
+<OBJECTS_GENERATION>
+
+/* fill forests */
+create_object DLC_DRAGONTREE {
+	terrain_to_place_on DLC_ACACIAFOREST
+	number_of_objects 9320
+	set_scaling_to_map_size
+}
+
+/* player starting objects */
+create_object TOWN_CENTER {
+	set_place_for_every_player
+	max_distance_to_players 0
+}
+
+create_object VILLAGER {
+	set_place_for_every_player
+	min_distance_to_players 5
+	max_distance_to_players 7
+	set_circular_placement
+	min_distance_group_placement 1
+}
+
+create_object SCOUT {
+	set_place_for_every_player
+	min_distance_to_players 6
+	max_distance_to_players 8
+	set_circular_placement
+	min_distance_group_placement 1
+}
+
+if REGICIDE
+	create_object KING {
+		set_place_for_every_player
+		min_distance_to_players 6
+		set_circular_placement
+		find_closest
+		min_distance_group_placement 1
+	}
+endif
+
+/* near forage */
+create_object DLC_ORANGEBUSH {
+	number_of_objects 6
+	group_placement_radius 2
+	set_tight_grouping
+	set_gaia_object_only
+	set_place_for_every_player
+	min_distance_to_players 10
+	max_distance_to_players 12
+	set_circular_placement
+	min_distance_group_placement 4
+	avoid_forest_zone 3
+	actor_area 14
+	actor_area_radius 8
+}
+
+/* near gold */
+create_object GOLD {
+	number_of_objects 7
+	group_placement_radius 2
+	set_tight_grouping
+	set_gaia_object_only
+	set_place_for_every_player
+	min_distance_to_players 10
+	set_circular_placement
+	find_closest
+	min_distance_group_placement 4
+	max_distance_to_other_zones 4
+	avoid_forest_zone 2
+	terrain_to_place_on DIRT
+	avoid_actor_area 14 /* berries */
+	actor_area 15
+	actor_area_radius 9
+	
+}
+
+/* medium and far gold */
+create_object GOLD {
+	number_of_objects 4
+	group_placement_radius 2
+	number_of_groups 2
+	set_tight_grouping
+	set_gaia_object_only
+	set_place_for_every_player
+	min_distance_to_players 12
+	set_circular_placement
+	find_closest
+	min_distance_group_placement 4
+	temp_min_distance_group_placement 9
+	max_distance_to_other_zones 3
+	avoid_forest_zone 2
+	avoid_actor_area 14
+	avoid_actor_area 15
+	terrain_to_place_on DESERT
+}
+
+/* reduced near stone */
+create_object STONE {
+	number_of_objects 2
+	group_placement_radius 2  
+	number_of_groups 2
+	set_tight_grouping 
+	set_gaia_object_only
+	set_place_for_every_player
+	min_distance_to_players 13
+	set_circular_placement
+	find_closest
+	min_distance_group_placement 3
+	max_distance_to_other_zones 3
+	avoid_forest_zone 2
+}
+
+create_object BOAR {
+	number_of_objects 1
+	set_gaia_object_only
+	set_place_for_every_player
+	avoid_forest_zone 2
+	max_distance_to_other_zones 2
+	min_distance_group_placement 1
+	min_distance_to_players 10
+	set_circular_placement
+	find_closest
+}
+
+create_object SHEEP {
+	number_of_objects 4
+	set_loose_grouping
+	set_gaia_object_only
+	set_place_for_every_player
+	min_distance_to_players 6
+	set_circular_placement
+	find_closest
+	avoid_forest_zone 2
+	min_distance_group_placement 1
+}
+create_object SHEEP {
+	number_of_objects 2
+	number_of_groups 2
+	set_loose_grouping
+	set_gaia_object_only
+	set_place_for_every_player
+	min_distance_to_players 8
+	set_circular_placement
+	find_closest
+	max_distance_to_other_zones 2
+	min_distance_group_placement 2
+	temp_min_distance_group_placement 6
+}
+
+create_object DLC_IBEX {
+	number_of_objects 2
+	number_of_groups 2
+	group_placement_radius 3
+	set_loose_grouping
+	set_gaia_object_only
+	set_place_for_every_player
+	min_distance_group_placement 2
+	temp_min_distance_group_placement 10
+	avoid_actor_area 14 /* berries */
+	terrain_to_place_on DESERT
+	min_distance_to_players 15
+	find_closest
+	set_circular_placement
+}
+
+create_object DLC_DEADTREE {
+	number_of_objects 3
+	set_gaia_object_only
+	set_place_for_every_player
+	min_distance_to_players 4
+	set_circular_placement
+	find_closest
+	min_distance_group_placement 1
+}
+
+
+/* scattered objects */
+
+create_object STONE {
+	number_of_objects 4
+	group_variance 1
+	set_tight_grouping
+	group_placement_radius 2
+	number_of_groups 2
+	set_scaling_to_player_number
+	max_distance_to_other_zones 1
+	min_distance_group_placement 3
+	temp_min_distance_group_placement 10
+	layer_to_place_on BEACH_BUILDABLE
+}
+
+create_object STONE {
+	number_of_objects 1
+	number_of_groups 3
+	set_scaling_to_player_number
+	max_distance_to_other_zones 2
+	min_distance_group_placement 2
+	temp_min_distance_group_placement 15
+	terrain_to_place_on DLC_DESERTGRAVEL
+}
+
+create_object GOLD {
+	number_of_objects 1
+	number_of_groups 3000
+	set_scaling_to_player_number
+	max_distance_to_other_zones 0
+	min_distance_group_placement 2
+	min_distance_to_players 20
+	set_circular_placement
+	temp_min_distance_group_placement 18
+	terrain_to_place_on DESERT
+}
+
+create_object RELIC {
+	number_of_objects 5
+	max_distance_to_other_zones 1
+	min_distance_group_placement 1
+	temp_min_distance_group_placement 10
+	layer_to_place_on BEACH_BUILDABLE
+}
+
+create_object GOLD {
+	number_of_objects 2
+	set_tight_grouping
+	group_placement_radius 1
+	number_of_groups 2
+	set_scaling_to_player_number
+	max_distance_to_other_zones 1
+	min_distance_group_placement 2
+	temp_min_distance_group_placement 10
+	layer_to_place_on BEACH_BUILDABLE
+}
+
+create_object DLC_BEAR {
+	number_of_objects 2
+	set_scaling_to_player_number
+	temp_min_distance_group_placement 13
+	terrain_to_place_on GRASS
+}
+
+create_object DEER {
+	number_of_objects 2
+	number_of_groups 2
+	set_scaling_to_player_number
+	temp_min_distance_group_placement 16
+	terrain_to_place_on GRASS
+}
+
+/* scattered stragglers */
+create_object OLIVE_TREE {
+	number_of_objects 10
+	set_gaia_object_only
+	set_scaling_to_map_size
+	min_distance_group_placement 1
+	temp_min_distance_group_placement 12
+	avoid_forest_zone 2
+	layer_to_place_on GRASS
+}
+create_object CYPRESS_TREE {
+	number_of_objects 10
+	set_gaia_object_only
+	set_scaling_to_map_size
+	min_distance_group_placement 1
+	temp_min_distance_group_placement 12
+	avoid_forest_zone 2
+	layer_to_place_on GRASS
+}
+create_object ITALIAN_PINETREE {
+	number_of_objects 10
+	set_gaia_object_only
+	set_scaling_to_map_size
+	min_distance_group_placement 1
+	temp_min_distance_group_placement 12
+	avoid_forest_zone 2
+	layer_to_place_on GRASS
+}
+
+create_object DLC_STORK {
+	number_of_objects 4
+	set_scaling_to_map_size
+}
+
+/* =================================================================================================== */
+/* fish */
+
+create_object DLC_BOXTURTLE {
+	number_of_objects 9320
+	set_gaia_object_only
+	min_distance_group_placement  4
+	temp_min_distance_group_placement 12
+}
+create_object FISH_PERCH {
+	number_of_objects 9320
+	set_gaia_object_only
+	max_distance_to_other_zones 5
+	min_distance_group_placement 4
+	temp_min_distance_group_placement 12
+}
+
+
+
+
+
+
+
+
+
+
+
+	
+	
+	
+	

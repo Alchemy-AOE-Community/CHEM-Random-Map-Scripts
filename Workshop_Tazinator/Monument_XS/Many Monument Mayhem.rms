@@ -1,0 +1,60 @@
+ /* king dies into wonder */ 
+
+#includeXS monument_fix.xs
+
+effect_amount SET_ATTRIBUTE KING ATTR_DEAD_ID 826
+  effect_amount SET_ATTRIBUTE MONUMENT ATTR_CREATION_TIME 0  
+
+  effect_amount SET_ATTRIBUTE WONDER ATTR_CREATION_TIME 0  
+     /* effect_amount UPGRADE_UNIT WONDER STABLE 0     */ 
+ /* effect_amount SET_ATTRIBUTE MONUMENT ATTR_STORAGE_VALUE 0 */ 
+
+
+#include_drs F_seasons.inc
+
+<PLAYER_SETUP>
+  random_placement 
+	ai_info_map_type BLACK_FOREST 0 0 0
+
+<LAND_GENERATION>
+base_terrain WATER
+	enable_waves 0
+
+ /* create_land { terrain_type DESERT base_size 4 land_percent 0 	top_border 45
+	left_border 45
+	right_border 45
+	bottom_border 45
+}
+ */ create_player_lands
+{
+	terrain_type LAYER_A
+	clumping_factor 20
+	base_size 13
+	land_percent 50
+	circle_radius 15 0
+	other_zone_avoidance_distance 8
+	top_border 20
+	left_border 20
+	right_border 20
+	bottom_border 20
+}
+
+<OBJECTS_GENERATION>
+#const WCT 566
+create_object TOWN_CENTER { set_place_for_every_player min_distance_to_players 0 max_distance_to_players 0 }
+create_object CASTLE { set_place_for_every_player min_distance_to_players 10 max_distance_to_players 12 }
+create_object VILLAGER { set_place_for_every_player set_scaling_to_map_size min_distance_to_players 6 max_distance_to_players 6 }
+create_object MONK { set_place_for_every_player set_scaling_to_map_size min_distance_to_players 6 max_distance_to_players 6 }
+create_object KING { set_place_for_every_player min_distance_to_players 8 max_distance_to_players 8 }
+create_object KING { set_place_for_every_player min_distance_to_players 8 max_distance_to_players 8 }
+create_object KING { set_place_for_every_player min_distance_to_players 8 max_distance_to_players 8 }
+create_object KING { set_place_for_every_player min_distance_to_players 8 max_distance_to_players 8 }
+create_object MONUMENT { set_place_for_every_player min_distance_to_players 16 max_distance_to_players 24 }
+ /* create_object MONUMENT { set_place_for_every_player min_distance_to_players 16 max_distance_to_players 24 } */ 
+
+#const AUTO_CONVERTIBLE_ROCK_CHURCH 1378
+ /* #const WCTW_TWR 1801 */ 
+ /* create_object WCTW_TWR { make_indestructible set_building_capturable set_gaia_object_only terrain_to_place_on DESERT }   */ 
+create_object CASTLE { set_gaia_object_only min_distance_to_players 20 max_distance_to_players 60 }
+
+ /* create_object AUTO_CONVERTIBLE_ROCK_CHURCH { set_gaia_object_only terrain_to_place_on LAYER_A ignore_terrain_restrictions }   */ 

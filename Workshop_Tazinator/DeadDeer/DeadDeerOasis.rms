@@ -1,0 +1,527 @@
+/* Compatibility: Definitive Edition */
+/* Dead Deer.rms */
+/* Made by xThomas */
+/* EW resources based on GeneratingObjectsCleanWithEW.inc */
+
+/* MAR 15 2023
+ * The middle contains many dead deer
+ * It is in the style of many Empire Wars maps
+ * It may encourage a villager war during the Dark Age
+*/
+
+
+<PLAYER_SETUP>
+random_placement
+behavior_version 1
+#const BLANKOBJECT 647 /* invisible placeholder object */
+#const D_DEER 65
+effect_amount SET_ATTRIBUTE D_DEER ATTR_HITPOINTS 0
+#const FORAGE 59
+/* #define TWO_TC_START */
+<LAND_GENERATION>
+base_terrain GRASS3
+
+
+create_land
+{
+    terrain_type GRASS2
+    left_border 42
+    right_border 42
+    top_border 42
+    bottom_border 42
+    base_elevation 4
+    land_position 50 50
+    land_id 420
+}
+
+create_player_lands 
+{
+    base_elevation 2
+    terrain_type GRASS
+    land_percent 100
+    base_size 9
+    clumping_factor 10
+/*    border_fuzziness 25 */
+    if TINY_MAP
+        left_border 13
+        right_border 13
+        top_border 13
+        bottom_border 13
+    else
+        left_border   11
+        right_border  11
+        top_border    11
+        bottom_border 11
+    endif
+    if TINY_MAP
+        circle_radius 29 0
+    elseif MEDIUM_MAP
+        circle_radius 24 0
+    else
+        circle_radius 26 0
+    endif
+}
+
+<TERRAIN_GENERATION>
+create_terrain FOREST
+{
+    base_terrain GRASS3
+    set_avoid_player_start_areas
+    land_percent 99
+    number_of_clumps 9999
+    set_scale_by_groups
+    height_limits 0 1
+    spacing_to_other_terrain_types 4
+}
+
+create_terrain FOREST
+{
+    base_terrain GRASS
+    set_avoid_player_start_areas
+    land_percent 5
+    number_of_clumps 12
+    set_scale_by_groups
+}
+create_terrain OAK_FOREST
+{
+    base_terrain GRASS
+    set_avoid_player_start_areas
+    land_percent 2
+    number_of_clumps 18
+    set_scale_by_groups
+}
+
+create_terrain GRASS3
+{
+    base_terrain GRASS
+    number_of_clumps 8
+    land_percent 8
+    spacing_to_other_terrain_types 4
+}
+create_terrain PALM_DESERT
+{
+    base_terrain DESERT
+    number_of_clumps 100
+    land_percent 100
+    height_limits 0 3
+/*    spacing_to_other_terrain_types 8 */
+}
+/*
+create_terrain WATER
+{
+    base_terrain PALM_DESERT
+    land_percent 20
+    number_of_clumps 4
+    spacing_to_other_terrain_types 6
+}
+*/
+
+/* create treewall in middle */
+create_terrain DIRT
+{
+    base_terrain GRASS2
+    number_of_clumps 88
+    land_percent 8
+    spacing_to_other_terrain_types 1
+}
+create_terrain DIRT
+{
+    base_terrain GRASS2
+    number_of_clumps 88
+    land_percent 8
+    spacing_to_other_terrain_types 1
+}
+create_terrain JUNGLE
+{
+    base_terrain DIRT
+    number_of_clumps 99
+    land_percent 2
+}
+<OBJECTS_GENERATION>
+create_object ROCK
+{
+   number_of_objects  1
+   set_gaia_object_only
+   terrain_to_place_on     BEACH
+}
+create_object BIRD
+{
+   number_of_objects  99
+   set_gaia_object_only
+}
+create_object FALCON
+{
+   number_of_objects  2
+   set_gaia_object_only
+}
+create_object D_DEER
+{
+    terrain_to_place_on GRASS2
+    number_of_groups 20
+    number_of_objects 2
+    group_variance 1
+    set_scaling_to_map_size
+    set_tight_grouping
+    set_gaia_object_only
+    temp_min_distance_group_placement 2
+} 
+effect_amount SET_ATTRIBUTE MAP_REVEALER ATTR_HITPOINTS 0
+create_object MAP_REVEALER
+{
+    terrain_to_place_on GRASS2
+    set_place_for_every_player
+    number_of_objects 100
+} 
+
+create_object TOWN_CENTER 
+{  
+    min_distance_to_players   0
+    max_distance_to_players   0
+    set_place_for_every_player
+}
+create_object FORAGE
+{
+    number_of_objects 6
+    group_placement_radius 3
+    set_tight_grouping
+    set_gaia_object_only
+    set_place_for_every_player
+    min_distance_to_players 10
+    max_distance_to_players 25
+    find_closest
+    avoid_actor_area 6009
+    avoid_forest_zone 4
+    avoid_cliff_zone 3
+    actor_area 14
+    if EMPIRE_WARS
+        actor_area_radius 1
+    else
+        actor_area_radius 4
+        min_distance_group_placement 2
+    endif
+}
+
+
+create_object RELIC {
+    number_of_objects 5
+    set_gaia_object_only
+    min_distance_group_placement 1
+    if TINY_MAP
+    temp_min_distance_group_placement 14
+    elseif SMALL_MAP
+    temp_min_distance_group_placement 14
+    elseif MEDIUM_MAP
+    temp_min_distance_group_placement 18
+    else
+    temp_min_distance_group_placement 20
+    endif
+    set_gaia_object_only
+    avoid_forest_zone 2
+    if TINY_MAP
+    min_distance_to_players 14
+    elseif SMALL_MAP
+    min_distance_to_players 16
+    elseif MEDIUM_MAP
+    min_distance_to_players 16
+    else
+    min_distance_to_players 16
+    endif
+}
+
+if EMPIRE_WARS
+create_object MILL
+{
+    set_place_for_every_player
+    actor_area_to_place_in 14 /* dead deer */
+    find_closest
+    actor_area 40
+    actor_area_radius 6
+}
+create_object VILLAGER
+{
+    set_place_for_every_player
+    number_of_objects 4
+    actor_area_to_place_in 14 /* dead deer */
+    actor_area 94
+    actor_area_radius 6
+    force_placement
+    find_closest
+}
+endif
+
+
+/* idle villagers under the TC - this code is required to prevent them from going to a resource */
+#const UNDERTCVILL 1285
+effect_amount SET_ATTRIBUTE UNDERTCVILL ATTR_DEAD_ID 83
+effect_amount SET_ATTRIBUTE UNDERTCVILL ATTR_HITPOINTS 0
+if EMPIRE_WARS
+create_object BLANKOBJECT
+{
+    set_place_for_every_player
+    number_of_objects 6
+    second_object UNDERTCVILL
+    max_distance_to_players 2
+    find_closest
+}
+else /* normal villagers */
+create_object VILLAGER
+{
+    set_place_for_every_player
+    min_distance_to_players 6
+    max_distance_to_players 7
+    min_distance_group_placement 2
+}
+endif
+
+/* Regicide buildings - 7 villagers, king, castle */
+if REGICIDE
+create_object VILLAGER
+{
+    number_of_objects 7
+    set_place_for_every_player
+    min_distance_to_players 6
+    max_distance_to_players 7
+    force_placement
+}
+create_object KING
+{
+    set_place_for_every_player
+    min_distance_to_players 6
+    find_closest
+}
+endif
+/* Regicide end */
+
+
+create_object SCOUT
+{
+    set_place_for_every_player
+    if EMPIRE_WARS
+        min_distance_to_players 12
+        max_distance_to_players 16
+        avoid_forest_zone 1
+    else
+        min_distance_to_players 7
+        max_distance_to_players 9
+    endif
+    min_distance_group_placement 2
+}
+create_object PETARD
+{
+    set_place_for_every_player
+    if EMPIRE_WARS
+        min_distance_to_players 12
+        max_distance_to_players 16
+        avoid_forest_zone 1
+    else
+        min_distance_to_players 7
+        max_distance_to_players 9
+    endif
+    min_distance_group_placement 2
+}
+
+
+if EMPIRE_WARS
+create_object MILL
+{
+    set_place_for_every_player
+    actor_area_to_place_in 14 /* berries */
+    find_closest
+    actor_area 40
+    actor_area_radius 6
+}
+create_object VILLAGER
+{
+    set_place_for_every_player
+    number_of_objects 4
+    actor_area_to_place_in 14 /* berries */
+    actor_area 94
+    actor_area_radius 6
+    force_placement
+    find_closest
+}
+endif
+
+
+/* This section copied from ES_Moats */
+
+/* NEAR GOLD */
+
+create_object GOLD
+{
+  number_of_objects          7
+  group_placement_radius     3
+  set_tight_grouping
+  set_gaia_object_only
+  set_place_for_every_player
+  min_distance_to_players    12
+  max_distance_to_players    16
+  min_distance_group_placement  7
+  max_distance_to_other_zones  7
+}
+
+/* MEDIUM GOLD */
+
+create_object GOLD
+{
+  number_of_objects          4
+  group_placement_radius     3
+  set_tight_grouping
+  set_gaia_object_only
+  set_place_for_every_player
+  min_distance_to_players    18
+  max_distance_to_players    26
+  min_distance_group_placement  7
+  max_distance_to_other_zones  7
+}
+
+/* FAR GOLD */
+
+create_object GOLD
+{
+  number_of_objects          4
+  group_placement_radius     3
+  set_tight_grouping
+  set_gaia_object_only
+  set_place_for_every_player
+  min_distance_to_players    25
+  max_distance_to_players    35
+  min_distance_group_placement  7
+  max_distance_to_other_zones  7
+}
+
+/* NEAR STONE */
+
+create_object STONE
+{
+  number_of_objects          5
+  group_placement_radius     2  
+  set_tight_grouping 
+  set_gaia_object_only
+  set_place_for_every_player
+  min_distance_to_players    14
+  max_distance_to_players    18
+  min_distance_group_placement  7
+  max_distance_to_other_zones  7
+}
+
+/* FAR STONE */
+
+create_object STONE
+{
+  number_of_objects          4
+  group_placement_radius     2  
+  set_tight_grouping 
+  set_gaia_object_only
+  set_place_for_every_player
+  min_distance_to_players    20
+  max_distance_to_players    26
+  min_distance_group_placement  7
+  max_distance_to_other_zones  7
+}
+
+/* BAA BAA */
+
+create_object SHEEP
+{
+   number_of_objects 4
+   set_loose_grouping
+   set_gaia_object_only
+   set_place_for_every_player
+   min_distance_to_players    10
+   max_distance_to_players    12
+} 
+create_object SHEEP
+{
+   number_of_objects 2
+   number_of_groups 2
+   set_loose_grouping
+   set_gaia_object_only
+   set_place_for_every_player
+   min_distance_to_players    14
+   max_distance_to_players    30
+}
+
+create_object BOAR
+{
+  number_of_objects          1
+  set_loose_grouping  
+  set_gaia_object_only
+  set_place_for_every_player
+  min_distance_to_players    16
+  max_distance_to_players    22
+}
+
+create_object BOAR
+{
+  number_of_objects          1
+  set_gaia_object_only
+  set_place_for_every_player
+  min_distance_to_players    16
+  max_distance_to_players    22
+}
+
+create_object OAKTREE
+{
+  number_of_objects          20
+  set_gaia_object_only
+  set_scaling_to_map_size
+  min_distance_to_players    8
+}
+
+/* Close Straggler Trees */
+create_object PALMTREE
+{
+  number_of_objects             2
+  set_gaia_object_only
+  set_place_for_every_player
+  min_distance_to_players       4
+  max_distance_to_players       5
+  min_distance_group_placement  2
+}
+create_object OAKTREE
+{
+  number_of_objects             3
+  set_gaia_object_only
+  set_place_for_every_player
+  min_distance_to_players       6
+  max_distance_to_players       8
+  min_distance_group_placement  2
+}
+
+<CONNECTION_GENERATION>
+accumulate_connections
+
+create_connect_all_lands
+{
+replace_terrain MED_WATER     GRASS
+replace_terrain BEACH       GRASS
+replace_terrain FOREST       GRASS
+terrain_cost    MED_WATER     2
+terrain_cost    BEACH       2
+terrain_cost    DIRT       10
+replace_terrain DIRT       DIRT3
+terrain_size    MED_WATER     3       0
+terrain_size    BEACH       3       0
+terrain_size    FOREST       3       0
+terrain_cost    FOREST     3
+
+}
+
+
+
+<ELEVATION_GENERATION>
+create_elevation        5
+{
+  base_terrain                     GRASS
+  number_of_clumps      99
+  number_of_tiles 1000
+  enable_balanced_elevation
+}
+
+create_elevation        3
+{
+  base_terrain                     DIRT
+  number_of_clumps      1
+  number_of_tiles 100
+}

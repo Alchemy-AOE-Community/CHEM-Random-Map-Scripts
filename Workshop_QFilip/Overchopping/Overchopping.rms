@@ -1,0 +1,230 @@
+/* Compatibility: Definitive Edition */
+
+<PLAYER_SETUP>
+
+
+<LAND_GENERATION>
+base_terrain FOREST
+#const PLACEHOLDER 278
+#const TERRAIN_BLOCKER 1613
+#const STUMP 415
+
+create_player_lands { 
+    terrain_type GRASS 
+    circle_radius 30 
+    clumping_factor 25
+    other_zone_avoidance_distance 1
+}
+
+create_land { terrain_type LEAVES land_position 50 99 land_percent 100 top_border 98 right_border 5 left_border 4 border_fuzziness 100 base_size 1 }
+create_land { terrain_type LEAVES land_position 50 1 land_percent 100 bottom_border 99 right_border 5 left_border 4 border_fuzziness 100 base_size 1 }
+create_land { terrain_type LEAVES land_position 1 50 land_percent 100 right_border 99 top_border 0 bottom_border 0 border_fuzziness 100 base_size 1 }
+create_land { terrain_type LEAVES land_position 99 50 land_percent 100 left_border 98 top_border 0 bottom_border 0 border_fuzziness 100 base_size 1 }
+
+<TERRAIN_GENERATION>
+
+create_terrain FOREST {
+    base_terrain GRASS
+    number_of_tiles 1700
+    number_of_clumps 9999
+    spacing_to_other_terrain_types 20
+    set_avoid_player_start_areas
+}
+
+create_terrain FOREST {
+    base_terrain GRASS
+    number_of_tiles 300
+    number_of_clumps 10
+    spacing_to_other_terrain_types 20
+    set_avoid_player_start_areas
+}
+
+
+create_terrain DLC_FORESTAUTUMN {
+    base_terrain FOREST
+    number_of_tiles 600
+    number_of_clumps 25
+}
+
+create_terrain BIRCH_FOREST {
+    base_terrain FOREST
+    number_of_tiles 200
+    number_of_clumps 30
+}
+
+create_terrain DLC_DRYGRASS {
+    base_terrain GRASS
+    number_of_tiles 2000
+    number_of_clumps 30
+    terrain_mask 1
+}
+
+create_terrain GRASS3 {
+    base_terrain GRASS
+    number_of_tiles 2000
+    number_of_clumps 30
+    terrain_mask 1
+}
+
+<CONNECTION_GENERATION>
+
+create_connect_all_players_land {
+    replace_terrain FOREST LEAVES
+    replace_terrain DLC_FORESTAUTUMN LEAVES
+    replace_terrain BIRCH_FOREST LEAVES
+    terrain_size FOREST 7 0
+    terrain_size DLC_FORESTAUTUMN 7 0
+    terrain_size BIRCH_FOREST 7 0
+}
+
+
+<OBJECTS_GENERATION>
+
+create_actor_area 50 50 20 40 /* to avoid center of the map */
+
+create_object TOWN_CENTER {
+    set_place_for_every_player
+    min_distance_to_players 0 
+    max_distance_to_players 0
+    actor_area 1
+    actor_area_radius 0
+}
+
+create_object VILLAGER { set_place_for_every_player min_distance_to_players 3 max_distance_to_players 6 }
+create_object SCOUT { set_place_for_every_player min_distance_to_players 3 max_distance_to_players 6 }
+
+create_object PLACEHOLDER { set_place_for_every_player actor_area_to_place_in 1 actor_area 2 actor_area_radius 8 }
+create_object PLACEHOLDER { set_place_for_every_player actor_area_to_place_in 1 actor_area 3 actor_area_radius 11 }
+
+create_object PLACEHOLDER { set_place_for_every_player actor_area_to_place_in 1 actor_area 4 actor_area_radius 12 }
+create_object PLACEHOLDER { set_place_for_every_player actor_area_to_place_in 1 actor_area 5 actor_area_radius 15 }
+
+create_object PLACEHOLDER { set_place_for_every_player actor_area_to_place_in 1 actor_area 6 actor_area_radius 20 }
+create_object PLACEHOLDER { set_place_for_every_player actor_area_to_place_in 1 actor_area 7 actor_area_radius 40 }
+
+create_object PLACEHOLDER { set_place_for_every_player actor_area_to_place_in 1 actor_area 8 actor_area_radius 10 }
+create_object PLACEHOLDER { set_place_for_every_player actor_area_to_place_in 1 actor_area 9 actor_area_radius 12 }
+
+create_object PLACEHOLDER { set_place_for_every_player actor_area_to_place_in 1 actor_area 11 actor_area_radius 23 }
+create_object PLACEHOLDER { set_place_for_every_player actor_area_to_place_in 1 actor_area 13 actor_area_radius 50 }
+
+create_object PLACEHOLDER { set_place_for_every_player actor_area_to_place_in 1 actor_area 14 actor_area_radius 20 }
+create_object PLACEHOLDER { set_place_for_every_player actor_area_to_place_in 1 actor_area 15 actor_area_radius 12 }
+
+create_object PLACEHOLDER { set_place_for_every_player actor_area_to_place_in 1 actor_area 16 actor_area_radius 30 }
+create_object PLACEHOLDER { set_place_for_every_player actor_area_to_place_in 1 actor_area 17 actor_area_radius 50 }
+
+create_object STUMP {
+    number_of_objects 9999
+    terrain_to_place_on LEAVES
+}
+
+create_object DLC_AUTUMNTREE {
+    number_of_objects 5
+    set_place_for_every_player
+    set_gaia_object_only
+    min_distance_to_players 5
+	max_distance_to_players 7
+}
+
+create_object SHEEP {
+	number_of_objects 4
+	set_loose_grouping
+	set_place_for_every_player
+	min_distance_to_players 7
+	max_distance_to_players  7
+} 
+
+create_object BOAR {
+    number_of_groups 2
+    set_gaia_object_only
+    set_place_for_every_player
+    actor_area_to_place_in 9
+    avoid_actor_area 8
+    temp_min_distance_group_placement 10
+}
+
+create_object GOLD {
+    set_tight_grouping
+    number_of_objects 4
+    number_of_groups 3
+    set_gaia_object_only
+    set_place_for_every_player
+    min_distance_to_players 15
+    max_distance_to_players 25
+    actor_area 12
+    actor_area_radius 7
+    temp_min_distance_group_placement 20
+    avoid_forest_zone 2
+    terrain_to_place_on GRASS
+}
+
+/* create_object STONE {
+    set_tight_grouping
+    number_of_objects 4
+    number_of_groups 2
+    set_gaia_object_only
+    set_place_for_every_player
+    min_distance_to_players 20
+    max_distance_to_players 25
+    avoid_actor_area 12
+    temp_min_distance_group_placement 20
+    max_distance_to_other_zones 10 
+    avoid_forest_zone 5
+} */
+
+create_object STONE {
+    set_tight_grouping
+    number_of_objects 4
+    number_of_groups 7
+    min_distance_to_players 20
+    set_gaia_object_only
+    terrain_to_place_on LEAVES
+    temp_min_distance_group_placement 30
+    find_closest_to_map_edge
+    actor_area 21
+    actor_area_radius 2
+    avoid_actor_area 20
+}
+
+create_object GOLD {
+    set_tight_grouping
+    number_of_objects 4
+    number_of_groups 7
+    min_distance_to_players 20
+    set_gaia_object_only
+    terrain_to_place_on LEAVES
+    temp_min_distance_group_placement 30
+    find_closest_to_map_edge
+    avoid_actor_area 21 
+    avoid_actor_area 20
+}
+
+create_object FORAGE { 
+    set_tight_grouping 
+    number_of_objects 6 
+    set_place_for_every_player 
+    avoid_actor_area 8
+    actor_area_to_place_in 9
+    avoid_actor_area 12
+    set_gaia_object_only 
+    avoid_forest_zone 1
+}
+
+create_object RELIC {
+    number_of_objects 1
+    set_gaia_object_only
+    set_place_for_every_player
+    min_distance_to_players 15
+    max_distance_to_players 25
+    avoid_forest_zone 2
+}
+
+
+<ELEVATION_GENERATION>
+
+create_elevation 2 {
+    enable_balanced_elevation
+    number_of_clumps 50
+    number_of_tiles 1000
+}

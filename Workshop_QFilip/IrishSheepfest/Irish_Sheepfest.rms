@@ -1,0 +1,594 @@
+/* Compatibility: Definitive Edition */
+
+<PLAYER_SETUP>
+grouped_by_team
+#const MONUMENT 826
+
+effect_amount ENABLE_OBJECT SHEEP ATTR_ENABLE 0
+effect_amount SET_ATTRIBUTE SHEEP ATTR_TRAIN_LOCATION 826
+effect_amount SET_ATTRIBUTE SHEEP ATTR_RESOURCE_COST 0
+effect_amount MUL_ATTRIBUTE SHEEP ATTR_WOOD_COST -1
+effect_amount SET_ATTRIBUTE SHEEP ATTR_FOOD_COST 0
+effect_amount SET_ATTRIBUTE SHEEP ATTR_WOOD_COST 20
+effect_amount SET_ATTRIBUTE SHEEP ATTR_CREATION_TIME 25
+
+effect_amount SET_ATTRIBUTE SHEEP ATTR_NAME_ID 5498
+effect_amount SET_ATTRIBUTE SHEEP ATTR_TRAIN_BUTTON 1
+effect_amount SET_ATTRIBUTE SHEEP ATTR_HOTKEY_ID 16099
+
+effect_amount SET_ATTRIBUTE MONUMENT ATTR_ICON_ID 19
+effect_amount SET_ATTRIBUTE MONUMENT ATTR_NAME_ID 5157
+effect_amount SET_ATTRIBUTE MONUMENT ATTR_RADIUS_1 2
+effect_amount SET_ATTRIBUTE MONUMENT ATTR_RADIUS_2 2
+effect_amount UPGRADE_UNIT MONUMENT MILL_F 0
+
+<LAND_GENERATION>
+#const ROAD_FUNGUS 75
+
+
+base_terrain ROAD_FUNGUS
+
+create_land { terrain_type DLC_MOORLAND circle_radius 45 clumping_factor 14 
+    if TINY_MAP
+        base_size 10
+    elseif SMALL_MAP
+        base_size 15
+    elseif MEDIUM_MAP 
+        base_size 20
+    else
+        base_size 25
+    endif 
+    assign_to_player 1 
+}
+create_land { terrain_type GRASS2 circle_radius 45 clumping_factor 14 
+    if TINY_MAP
+        base_size 10
+    elseif SMALL_MAP
+        base_size 15
+    elseif MEDIUM_MAP 
+        base_size 20
+    else
+        base_size 25
+    endif
+    assign_to_player 2 
+    } 
+create_land { terrain_type GRASS3 circle_radius 45 clumping_factor 14 if TINY_MAP
+        base_size 10
+    elseif SMALL_MAP
+        base_size 15
+    elseif MEDIUM_MAP 
+        base_size 20
+    else
+        base_size 25
+    endif assign_to_player 3 } 
+create_land { terrain_type DIRT circle_radius 45 clumping_factor 14 if TINY_MAP
+        base_size 10
+    elseif SMALL_MAP
+        base_size 15
+    elseif MEDIUM_MAP 
+        base_size 20
+    else
+        base_size 25
+    endif assign_to_player 4 }
+create_land { terrain_type DIRT2 circle_radius 45 clumping_factor 14 if TINY_MAP
+        base_size 10
+    elseif SMALL_MAP
+        base_size 15
+    elseif MEDIUM_MAP 
+        base_size 20
+    else
+        base_size 25
+    endif assign_to_player 5 }
+create_land { terrain_type DIRT3 circle_radius 45 clumping_factor 14 if TINY_MAP
+        base_size 10
+    elseif SMALL_MAP
+        base_size 15
+    elseif MEDIUM_MAP 
+        base_size 20
+    else
+        base_size 25
+    endif assign_to_player 6 }
+create_land { terrain_type DESERT circle_radius 45 clumping_factor 14 if TINY_MAP
+        base_size 10
+    elseif SMALL_MAP
+        base_size 15
+    elseif MEDIUM_MAP 
+        base_size 20
+    else
+        base_size 25
+    endif assign_to_player 7 }
+create_land { terrain_type DLC_DRYGRASS circle_radius 45 clumping_factor 14 if TINY_MAP
+        base_size 10
+    elseif SMALL_MAP
+        base_size 15
+    elseif MEDIUM_MAP 
+        base_size 20
+    else
+        base_size 25
+    endif assign_to_player 8 }
+
+
+
+
+<OBJECTS_GENERATION>
+create_object TOWN_CENTER {
+    max_distance_to_players 0
+    set_place_for_every_player
+    actor_area 2
+    actor_area_radius 0
+}
+
+#const OFF 649
+
+create_object OFF { set_place_for_every_player actor_area_to_place_in 2 actor_area 9 actor_area_radius 30 }
+create_object OFF { set_place_for_every_player actor_area_to_place_in 2 actor_area 10 actor_area_radius 45 }
+create_object OFF { set_place_for_every_player actor_area_to_place_in 2 actor_area 11 actor_area_radius 9 }
+create_object OFF { set_place_for_every_player actor_area_to_place_in 2 actor_area 12 actor_area_radius 20 }
+
+create_object OFF { set_place_for_every_player actor_area_to_place_in 2 actor_area 13 actor_area_radius 11 }
+create_object OFF { set_place_for_every_player actor_area_to_place_in 2 actor_area 14 actor_area_radius 14 }
+
+create_object VILLAGER {
+  set_place_for_every_player
+  min_distance_to_players       6
+  max_distance_to_players       6
+  temp_min_distance_group_placement  2
+}
+
+create_object SCOUT {
+	set_place_for_every_player
+    min_distance_to_players 7
+	max_distance_to_players  9
+}
+
+create_object SHEEP {
+	number_of_objects 2
+	set_loose_grouping
+	set_place_for_every_player
+	min_distance_to_players 7
+	max_distance_to_players  7
+} 
+
+create_object BOAR {
+	number_of_objects 1
+	set_gaia_object_only
+	set_place_for_every_player
+	min_distance_to_players 10
+	max_distance_to_players 19
+    actor_area 4
+    actor_area_radius 2
+}
+
+create_object DEER {
+	number_of_objects 1
+    number_of_groups 2
+    temp_min_distance_group_placement 5
+	set_gaia_object_only
+	set_place_for_every_player
+	min_distance_to_players 20
+	max_distance_to_players 25
+    avoid_forest_zone 2
+    actor_area 2
+    actor_area_radius 2
+}
+
+create_object GOLD {
+    number_of_objects 7
+    set_tight_grouping
+    set_place_for_every_player
+    set_gaia_object_only
+    min_distance_to_players 11
+	max_distance_to_players  13
+    actor_area 5
+    actor_area_radius 3
+    avoid_actor_area 4
+    min_distance_to_map_edge 7
+}
+
+create_object MONUMENT {
+    number_of_objects 1
+    make_indestructible
+    set_place_for_every_player
+    actor_area_to_place_in 10
+    avoid_actor_area 9
+    actor_area 1
+    actor_area_radius 5
+    min_distance_to_map_edge 4
+    avoid_forest_zone 2
+}
+
+create_object GOLD {
+    number_of_objects 4
+    number_of_groups 3
+    set_tight_grouping
+    set_place_for_every_player
+    set_gaia_object_only
+    min_distance_to_players 25
+	max_distance_to_players  50
+    actor_area 7
+    actor_area_radius 2
+    avoid_actor_area 1
+    avoid_forest_zone 2
+    min_distance_to_map_edge 2
+}
+
+create_object STONE {
+    number_of_objects 3
+    number_of_groups 2
+    set_tight_grouping
+    set_place_for_every_player
+    set_gaia_object_only
+    min_distance_to_players 25
+	max_distance_to_players  50
+    actor_area 8
+    actor_area_radius 2
+    avoid_actor_area 7
+    avoid_actor_area 1
+    avoid_forest_zone 2
+    min_distance_to_map_edge 2
+}
+
+create_object STONE {
+    number_of_objects 5
+    set_tight_grouping
+    set_place_for_every_player
+    set_gaia_object_only
+    min_distance_to_players 11
+	max_distance_to_players  13
+    actor_area 6
+    actor_area_radius 3
+    avoid_actor_area 5
+    avoid_actor_area 4
+    min_distance_to_map_edge 7
+}
+
+create_object DLC_AUTUMNTREE {
+    number_of_objects 5
+    set_place_for_every_player
+    set_gaia_object_only
+    min_distance_to_players 5
+	max_distance_to_players  7
+}
+
+create_object SHEEP {
+    number_of_objects 1
+    set_place_for_every_player
+    set_gaia_object_only
+    actor_area_to_place_in 1
+}
+
+
+create_object HAWK {
+    number_of_objects 4
+}
+
+create_object DLC_FORTIFIED_PALISADE_WALL {
+	set_gaia_object_only
+	set_gaia_unconvertible
+    number_of_objects 4
+    if TINY_MAP
+        number_of_groups 14
+    elseif SMALL_MAP
+        number_of_groups 21
+    elseif MEDIUM_MAP
+        number_of_groups 28
+    else
+        number_of_groups 40
+    endif
+    avoid_actor_area 1
+    avoid_actor_area 2
+    avoid_actor_area 4
+    avoid_actor_area 5
+    avoid_actor_area 6
+    avoid_actor_area 7
+    avoid_actor_area 8
+    avoid_actor_area 12
+}
+
+create_object WALL {
+	set_gaia_object_only
+	set_gaia_unconvertible
+    number_of_objects 4
+    if TINY_MAP
+        number_of_groups 14
+    elseif SMALL_MAP
+        number_of_groups 21
+    elseif MEDIUM_MAP
+        number_of_groups 28
+    else
+        number_of_groups 40
+    endif
+    avoid_actor_area 1
+    avoid_actor_area 2
+    avoid_actor_area 4
+    avoid_actor_area 5
+    avoid_actor_area 6
+    avoid_actor_area 7
+    avoid_actor_area 8
+    avoid_actor_area 12
+}
+
+create_object DLC_FENCE {
+	set_gaia_object_only
+	set_gaia_unconvertible
+    number_of_objects 4
+    if TINY_MAP
+        number_of_groups 14
+    elseif SMALL_MAP
+        number_of_groups 21
+    elseif MEDIUM_MAP
+        number_of_groups 28
+    else
+        number_of_groups 40
+    endif
+    avoid_actor_area 1
+    avoid_actor_area 2
+    avoid_actor_area 4
+    avoid_actor_area 5
+    avoid_actor_area 6
+    avoid_actor_area 7
+    avoid_actor_area 8
+    avoid_actor_area 12
+}
+
+
+create_object RELIC {
+    number_of_objects 1
+    set_gaia_object_only
+    set_place_for_every_player
+    min_distance_to_players 20
+    max_distance_to_players 40
+}
+
+<ELEVATION_GENERATION>
+create_elevation 2 {
+    base_terrain DESERT
+    enable_balanced_elevation
+   number_of_clumps 25
+    set_scale_by_groups
+    if TINY_MAP
+        number_of_tiles 70
+    elseif SMALL_MAP
+        number_of_tiles 105
+    elseif MEDIUM_MAP
+        number_of_tiles 140
+    else
+        number_of_tiles 200
+    endif
+}
+create_elevation 2 {
+    base_terrain GRASS2
+    enable_balanced_elevation
+   number_of_clumps 25
+    set_scale_by_groups
+    if TINY_MAP
+        number_of_tiles 70
+    elseif SMALL_MAP
+        number_of_tiles 105
+    elseif MEDIUM_MAP
+        number_of_tiles 140
+    else
+        number_of_tiles 200
+    endif
+}
+create_elevation 2 {
+    base_terrain GRASS3
+    enable_balanced_elevation
+   number_of_clumps 25
+    set_scale_by_groups
+    if TINY_MAP
+        number_of_tiles 70
+    elseif SMALL_MAP
+        number_of_tiles 105
+    elseif MEDIUM_MAP
+        number_of_tiles 140
+    else
+        number_of_tiles 200
+    endif
+}
+create_elevation 2 {
+    base_terrain DIRT
+    enable_balanced_elevation
+   number_of_clumps 25
+    set_scale_by_groups
+    if TINY_MAP
+        number_of_tiles 70
+    elseif SMALL_MAP
+        number_of_tiles 105
+    elseif MEDIUM_MAP
+        number_of_tiles 140
+    else
+        number_of_tiles 200
+    endif
+}
+create_elevation 2 {
+    base_terrain DIRT2
+    enable_balanced_elevation
+   number_of_clumps 25
+    set_scale_by_groups
+    if TINY_MAP
+        number_of_tiles 70
+    elseif SMALL_MAP
+        number_of_tiles 105
+    elseif MEDIUM_MAP
+        number_of_tiles 140
+    else
+        number_of_tiles 200
+    endif
+}
+create_elevation 2 {
+    base_terrain DIRT3
+    enable_balanced_elevation
+   number_of_clumps 25
+    set_scale_by_groups
+    if TINY_MAP
+        number_of_tiles 70
+    elseif SMALL_MAP
+        number_of_tiles 105
+    elseif MEDIUM_MAP
+        number_of_tiles 140
+    else
+        number_of_tiles 200
+    endif
+}
+
+create_elevation 2 {
+    base_terrain DLC_DRYGRASS
+    enable_balanced_elevation
+   number_of_clumps 25
+    set_scale_by_groups
+    if TINY_MAP
+        number_of_tiles 70
+    elseif SMALL_MAP
+        number_of_tiles 105
+    elseif MEDIUM_MAP
+        number_of_tiles 140
+    else
+        number_of_tiles 200
+    endif
+}
+
+create_elevation 2 {
+    base_terrain DLC_MOORLAND
+    enable_balanced_elevation
+    number_of_clumps 25
+    set_scale_by_groups
+    if TINY_MAP
+        number_of_tiles 70
+    elseif SMALL_MAP
+        number_of_tiles 105
+    elseif MEDIUM_MAP
+        number_of_tiles 140
+    else
+        number_of_tiles 200
+    endif
+}
+
+<TERRAIN_GENERATION>
+create_terrain GRASS { base_terrain DESERT land_percent 100 number_of_clumps 9320 spacing_to_other_terrain_types 1 }
+create_terrain GRASS { base_terrain GRASS2 land_percent 100 number_of_clumps 9320  spacing_to_other_terrain_types 1 }
+create_terrain GRASS { base_terrain GRASS3 land_percent 100 number_of_clumps 9320  spacing_to_other_terrain_types 1 }
+create_terrain GRASS { base_terrain DIRT land_percent 100 number_of_clumps 9320  spacing_to_other_terrain_types 1 }
+create_terrain GRASS { base_terrain DIRT2 land_percent 100 number_of_clumps 9320  spacing_to_other_terrain_types 1 }
+create_terrain GRASS { base_terrain DIRT3 land_percent 100 number_of_clumps 9320  spacing_to_other_terrain_types 1 }
+create_terrain GRASS { base_terrain DLC_DRYGRASS land_percent 100 number_of_clumps 9320  spacing_to_other_terrain_types 1 }
+create_terrain GRASS { base_terrain DLC_MOORLAND land_percent 100 number_of_clumps 9320  spacing_to_other_terrain_types 1 }
+
+create_terrain ROAD_FUNGUS { base_terrain DESERT land_percent 100 number_of_clumps 9320  }
+create_terrain ROAD_FUNGUS { base_terrain GRASS2 land_percent 100 number_of_clumps 9320  }
+create_terrain ROAD_FUNGUS { base_terrain GRASS3 land_percent 100 number_of_clumps 9320  }
+create_terrain ROAD_FUNGUS { base_terrain DIRT land_percent 100 number_of_clumps 9320  }
+create_terrain ROAD_FUNGUS { base_terrain DIRT2 land_percent 100 number_of_clumps 9320  }
+create_terrain ROAD_FUNGUS { base_terrain DIRT3 land_percent 100 number_of_clumps 9320  }
+create_terrain ROAD_FUNGUS { base_terrain DLC_DRYGRASS land_percent 100 number_of_clumps 9320  }
+create_terrain ROAD_FUNGUS { base_terrain DLC_MOORLAND land_percent 100 number_of_clumps 9320  }
+
+create_terrain DLC_ROCK {
+    base_terrain ROAD_FUNGUS
+    land_percent 100
+    number_of_clumps 9320
+    terrain_mask 2
+}
+
+create_terrain DLC_JUNGLEROAD {
+    base_terrain ROAD_FUNGUS
+    number_of_tiles 100
+    number_of_clumps 100
+    terrain_mask 2
+    set_avoid_player_start_areas
+    set_scale_by_groups
+}
+
+create_terrain ROAD_FUNGUS {
+    base_terrain GRASS
+    number_of_tiles 700
+    number_of_clumps 100
+    terrain_mask 2
+    set_avoid_player_start_areas
+    set_scale_by_groups
+}
+
+create_terrain ROAD {
+    base_terrain GRASS
+    number_of_tiles 300
+    number_of_clumps 10
+    terrain_mask 2
+    set_avoid_player_start_areas
+    set_scale_by_groups
+}
+
+create_terrain ROAD_FUNGUS {
+    base_terrain GRASS
+    number_of_tiles 200
+    number_of_clumps 100
+    terrain_mask 1
+    set_scale_by_groups
+}
+
+create_terrain DLC_DESERTGRAVEL {
+    base_terrain DLC_ROCK
+    number_of_tiles 10000
+    number_of_clumps 9320
+    terrain_mask 1
+    set_avoid_player_start_areas
+    set_scale_by_groups
+}
+
+create_terrain DLC_DESERTGRAVEL {
+    base_terrain GRASS
+    number_of_tiles 300
+    number_of_clumps 10
+    terrain_mask 1
+    set_scale_by_groups
+}
+
+create_terrain GRASS2 {
+    base_terrain GRASS
+    number_of_tiles 200
+    number_of_clumps 10
+    terrain_mask 1
+    set_scale_by_groups
+}
+
+create_terrain GRASS3 {
+    base_terrain GRASS
+    number_of_tiles 200
+    number_of_clumps 10
+    terrain_mask 1
+    set_scale_by_groups
+}
+
+create_terrain PINE_FOREST {
+    base_terrain GRASS
+    number_of_tiles 600
+    number_of_clumps 50
+    set_avoid_player_start_areas
+    set_scale_by_groups
+    clumping_factor 20
+}
+
+create_terrain DLC_FORESTAUTUMN {
+    base_terrain GRASS
+    number_of_tiles 600
+    number_of_clumps 50
+    set_avoid_player_start_areas
+    set_scale_by_groups
+    clumping_factor 20
+}
+
+
+create_terrain FOREST {
+    base_terrain GRASS
+    number_of_tiles 600
+    number_of_clumps 50
+    set_avoid_player_start_areas
+    set_scale_by_groups
+    clumping_factor 20
+}
+
+
+
+
+
+
+

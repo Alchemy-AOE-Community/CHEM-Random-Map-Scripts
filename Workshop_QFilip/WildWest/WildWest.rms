@@ -1,0 +1,397 @@
+/* Compatibility: Definitive Edition */
+
+<PLAYER_SETUP>
+#const PLACEHOLDER 647
+effect_amount SET_ATTRIBUTE PLACEHOLDER ATTR_STORAGE_VALUE 0
+
+
+<LAND_GENERATION>
+base_terrain ROAD
+
+create_player_lands { 
+    terrain_type GRASS 
+    other_zone_avoidance_distance 15
+    land_percent 100
+}
+
+
+
+<TERRAIN_GENERATION>
+create_terrain ROAD2 {
+    base_terrain ROAD
+    land_percent 100
+    spacing_to_other_terrain_types 3
+    terrain_mask 2
+}
+
+create_terrain DIRT3 {
+    number_of_tiles 9999
+    number_of_clumps 9999
+    base_terrain GRASS
+    land_percent 100
+    spacing_to_other_terrain_types 10
+}
+
+create_terrain DIRT3 {
+    number_of_tiles 9999
+    number_of_clumps 9999
+    base_terrain DESERT
+    land_percent 100
+    spacing_to_other_terrain_types 10
+    terrain_mask 1
+}
+
+create_terrain MEDITERRANEAN_FOREST {
+    base_terrain DIRT3
+    number_of_tiles 350
+    number_of_clumps 35
+    clumping_factor 20
+    set_avoid_player_start_areas 15
+    set_scale_by_size
+}
+
+create_terrain MEDITERRANEAN_FOREST {
+    base_terrain GRASS
+    number_of_tiles 300
+    number_of_clumps 30
+    clumping_factor 20
+    set_avoid_player_start_areas 15
+    set_scale_by_size
+}
+
+create_terrain BIRCH_FOREST {
+    base_terrain MEDITERRANEAN_FOREST
+    number_of_tiles 20
+    number_of_clumps 15
+}
+
+create_terrain DLC_ACACIAFOREST {
+    base_terrain MEDITERRANEAN_FOREST
+    number_of_tiles 60
+    number_of_clumps 30
+}
+
+create_terrain DIRT3 {
+    number_of_tiles 9999
+    number_of_clumps 9999
+    land_percent 100
+    base_terrain GRASS
+    terrain_mask 1
+}
+
+create_terrain DESERT {
+    number_of_tiles 9999
+    number_of_clumps 9999
+    land_percent 100
+    base_terrain DIRT3
+    terrain_mask 1
+}
+
+create_terrain DESERT {
+    number_of_tiles 300
+    number_of_clumps 20
+    base_terrain GRASS
+    terrain_mask 2
+}
+
+create_terrain DESERT {
+    number_of_tiles 500
+    number_of_clumps 20
+    base_terrain DIRT3
+    terrain_mask 2
+}
+
+create_terrain DIRT3 {
+    number_of_tiles 2000
+    number_of_clumps 20
+    base_terrain GRASS
+    terrain_mask 1
+}
+
+create_terrain DLC_DRYROAD {
+    base_terrain ROAD
+    number_of_tiles 200
+    number_of_clumps 20
+    terrain_mask 1
+}
+
+create_terrain DLC_DRYROAD {
+    base_terrain ROAD2
+    number_of_tiles 200
+    number_of_clumps 20
+    terrain_mask 1
+}
+
+create_terrain DLC_DRYGRASS {
+    base_terrain ROAD
+    number_of_tiles 2000
+    number_of_clumps 30
+    terrain_mask 1
+}
+
+
+<CONNECTION_GENERATION>
+
+<OBJECTS_GENERATION>
+
+create_object TOWN_CENTER {
+    set_place_for_every_player
+    min_distance_to_players 0
+    max_distance_to_players 0
+    actor_area 1
+    actor_area_radius 0
+}
+
+create_object VILLAGER { set_place_for_every_player min_distance_to_players 3 max_distance_to_players 6 }
+create_object SCOUT { set_place_for_every_player min_distance_to_players 3 max_distance_to_players 6 }
+
+if REGICIDE create_object KING { set_place_for_every_player find_closest } else endif
+
+create_object PLACEHOLDER { set_place_for_every_player actor_area_to_place_in 1 actor_area 2 actor_area_radius 8 }
+create_object PLACEHOLDER { set_place_for_every_player actor_area_to_place_in 1 actor_area 3 actor_area_radius 11 }
+
+create_object PLACEHOLDER { set_place_for_every_player actor_area_to_place_in 1 actor_area 4 actor_area_radius 12 }
+create_object PLACEHOLDER { set_place_for_every_player actor_area_to_place_in 1 actor_area 5 actor_area_radius 15 }
+
+create_object PLACEHOLDER { set_place_for_every_player actor_area_to_place_in 1 actor_area 6 actor_area_radius 20 }
+create_object PLACEHOLDER { set_place_for_every_player actor_area_to_place_in 1 actor_area 7 actor_area_radius 40 }
+
+create_object PLACEHOLDER { set_place_for_every_player actor_area_to_place_in 1 actor_area 8 actor_area_radius 10 }
+create_object PLACEHOLDER { set_place_for_every_player actor_area_to_place_in 1 actor_area 9 actor_area_radius 12 }
+
+create_object PLACEHOLDER { set_place_for_every_player actor_area_to_place_in 1 actor_area 11 actor_area_radius 23 }
+create_object PLACEHOLDER { set_place_for_every_player actor_area_to_place_in 1 actor_area 13 actor_area_radius 50 }
+
+create_object PLACEHOLDER { set_place_for_every_player actor_area_to_place_in 1 actor_area 14 actor_area_radius 20 }
+create_object PLACEHOLDER { set_place_for_every_player actor_area_to_place_in 1 actor_area 15 actor_area_radius 12 }
+
+create_object PLACEHOLDER { set_place_for_every_player actor_area_to_place_in 1 actor_area 16 actor_area_radius 30 }
+create_object PLACEHOLDER { set_place_for_every_player actor_area_to_place_in 1 actor_area 17 actor_area_radius 50 }
+
+#const IMP_HOUSE 464
+create_object IMP_HOUSE {
+    number_of_objects 1
+    number_of_groups 50
+    terrain_to_place_on ROAD
+    min_distance_to_map_edge 35
+    temp_min_distance_group_placement 2
+    set_gaia_object_only
+    set_gaia_unconvertible
+    actor_area 20
+    actor_area_radius 4
+}
+
+create_object MONASTERY {
+    set_place_for_every_player
+    set_gaia_object_only
+    set_building_capturable
+    min_distance_to_players 20
+    max_distance_to_players 45
+    actor_area 21
+    actor_area_radius 5
+    avoid_actor_area 20
+    terrain_to_place_on DIRT3
+    min_distance_to_map_edge 7
+    avoid_forest_zone 5
+    min_distance_to_players 15
+}
+
+create_object PLACEHOLDER { set_place_for_every_player actor_area_to_place_in 21 actor_area 22 actor_area_radius 0 }
+create_object PLACEHOLDER { set_place_for_every_player actor_area_to_place_in 22 actor_area 23 actor_area_radius 5 }
+create_object PLACEHOLDER { set_place_for_every_player actor_area_to_place_in 22 actor_area 24 actor_area_radius 6 }
+
+create_object PLACEHOLDER {
+    number_of_objects 9999
+    number_of_groups 9999
+    set_place_for_every_player
+    set_gaia_object_only
+    set_gaia_unconvertible
+    actor_area_to_place_in 24
+    avoid_actor_area 23
+    second_object DLC_FENCE
+}
+
+create_object PLACEHOLDER {
+    number_of_objects 1
+    set_gaia_object_only
+    set_place_for_every_player
+    actor_area_to_place_in 23
+    temp_min_distance_group_placement 20
+    second_object RELIC
+}
+
+create_object GOLD {
+    number_of_objects 1
+    number_of_groups 12
+    set_gaia_object_only
+    set_place_for_every_player
+    actor_area_to_place_in 23
+}
+
+create_object GRAVE {
+    number_of_objects 100
+    set_place_for_every_player
+    set_gaia_object_only
+    actor_area_to_place_in 23
+}
+
+create_object STATUE {
+    number_of_groups 2
+    temp_min_distance_group_placement 4
+    set_place_for_every_player
+    set_gaia_object_only
+    actor_area_to_place_in 23
+}
+
+create_object DLC_COW {
+    set_tight_grouping
+    number_of_groups 10
+    number_of_objects 3
+    temp_min_distance_group_placement 10
+    terrain_to_place_on ROAD2
+}
+
+
+create_object GOLD { 
+    set_tight_grouping 
+    number_of_objects 5 
+    set_place_for_every_player 
+    actor_area_to_place_in 3
+    avoid_actor_area 2
+    set_gaia_object_only 
+    max_distance_to_other_zones 2
+    actor_area 10
+    actor_area_radius 5
+}
+
+create_object STONE { 
+    set_tight_grouping 
+    number_of_objects 3 
+    set_place_for_every_player 
+    actor_area_to_place_in 5
+    avoid_actor_area 4
+    avoid_actor_area 10
+    set_gaia_object_only 
+    max_distance_to_other_zones 2 
+    avoid_actor_area 23
+}
+
+create_object DLC_COW {
+	number_of_objects 2
+	set_loose_grouping
+	set_place_for_every_player
+	min_distance_to_players 7
+	max_distance_to_players  7
+    max_distance_to_other_zones 5
+} 
+
+create_object BOAR {
+    number_of_objects 2
+    set_gaia_object_only
+    set_place_for_every_player
+    actor_area_to_place_in 9
+    avoid_actor_area 8
+    max_distance_to_other_zones 5
+}
+
+create_object GOLD {
+    set_tight_grouping
+    number_of_objects 2
+    number_of_groups 3
+    set_gaia_object_only
+    set_place_for_every_player
+    actor_area_to_place_in 13
+    avoid_actor_area 11
+    actor_area 12
+    actor_area_radius 7
+    temp_min_distance_group_placement 20
+    max_distance_to_other_zones 10 
+    avoid_forest_zone 5
+    avoid_actor_area 21
+    min_distance_to_map_edge 2
+}
+
+create_object STONE {
+    set_tight_grouping
+    number_of_objects 4
+    number_of_groups 5
+    set_gaia_object_only
+    set_place_for_every_player
+    actor_area_to_place_in 13
+    avoid_actor_area 11
+    avoid_actor_area 12
+    temp_min_distance_group_placement 20
+    max_distance_to_other_zones 10 
+    avoid_forest_zone 5
+    min_distance_to_map_edge 2
+    avoid_actor_area 21
+}
+
+create_object STONE {
+    set_tight_grouping
+    number_of_objects 1
+    number_of_groups 5
+    set_gaia_object_only
+    set_place_for_every_player
+    avoid_actor_area 11
+    avoid_actor_area 12
+    temp_min_distance_group_placement 20
+    max_distance_to_other_zones 10 
+    avoid_forest_zone 5
+    min_distance_to_map_edge 2
+    min_distance_to_players 30
+}
+
+create_object GOLD {
+    set_tight_grouping
+    number_of_objects 1
+    number_of_groups 5
+    set_gaia_object_only
+    set_place_for_every_player
+    avoid_actor_area 11
+    avoid_actor_area 12
+    temp_min_distance_group_placement 20
+    max_distance_to_other_zones 10 
+    avoid_forest_zone 5
+    min_distance_to_map_edge 2
+    min_distance_to_players 30
+}
+
+create_object FORAGE { 
+    set_tight_grouping 
+    number_of_objects 8
+    set_place_for_every_player 
+    actor_area_to_place_in 5
+    avoid_actor_area 4
+    avoid_actor_area 12
+    set_gaia_object_only 
+    max_distance_to_other_zones 10 
+    avoid_forest_zone 2
+}
+
+create_object ITALIAN_PINETREE {
+    number_of_objects 4
+    set_place_for_every_player
+    set_gaia_object_only
+    min_distance_to_players 5
+	max_distance_to_players 7
+}
+
+create_object OLIVE_TREE {
+    number_of_objects 4
+    set_place_for_every_player
+    set_gaia_object_only
+    min_distance_to_players 5
+	max_distance_to_players 7
+}
+
+
+
+<ELEVATION_GENERATION>
+
+create_elevation 2 {
+    base_terrain GRASS
+    number_of_tiles 700
+    number_of_clumps 50
+    enable_balanced_elevation
+}

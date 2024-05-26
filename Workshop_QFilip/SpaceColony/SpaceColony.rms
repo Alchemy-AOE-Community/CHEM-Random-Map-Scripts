@@ -1,0 +1,291 @@
+/* Compatibility: Definitive Edition */
+<PLAYER_SETUP>
+#const FARM_TECH 216
+effect_amount SET_ATTRIBUTE FARM ATTR_TRAIN_LOCATION 0
+#const DEAD_FARM 357
+effect_amount DISABLE_TECH FARM_TECH ATTR_DISABLE 216
+effect_amount SET_ATTRIBUTE FARM ATTR_WOOD_COST 32767
+effect_amount SET_ATTRIBUTE DEAD_FARM ATTR_DEAD_ID 50
+effect_amount SET_ATTRIBUTE DEAD_FARM ATTR_STORAGE_VALUE 0
+#const PLACEHOLDER 278
+#const DEAD_FARM_TERRAIN 8
+<LAND_GENERATION>
+base_terrain GRASS
+
+create_land {
+    terrain_type DEAD_FARM_TERRAIN
+    top_border 30
+    bottom_border 30
+    left_border 30
+    right_border 30
+    border_fuzziness 100 
+    land_position 50 50
+    base_size 2
+    land_percent 100
+    base_elevation 2
+}
+
+create_player_lands {
+    terrain_type DIRT
+    circle_radius 30
+    land_percent 30
+}
+
+<OBJECTS_GENERATION>
+
+create_object FARM {
+    number_of_objects 9999
+    terrain_to_place_on DEAD_FARM_TERRAIN
+    set_building_capturable
+}
+
+create_object PLACEHOLDER {
+    resource_delta -60
+    set_place_for_every_player
+    max_distance_to_players 0
+    second_object TOWN_CENTER
+    actor_area 1
+    actor_area_radius 0
+}
+
+create_object PLACEHOLDER { resource_delta -60 set_place_for_every_player actor_area_to_place_in 1 actor_area 2 actor_area_radius 10 }
+create_object PLACEHOLDER { resource_delta -60 set_place_for_every_player actor_area_to_place_in 1 actor_area 3 actor_area_radius 13 }
+
+create_object PLACEHOLDER { resource_delta -60 set_place_for_every_player actor_area_to_place_in 1 actor_area 4 actor_area_radius 12 }
+create_object PLACEHOLDER { resource_delta -60 set_place_for_every_player actor_area_to_place_in 1 actor_area 5 actor_area_radius 15 }
+
+create_object PLACEHOLDER { resource_delta -60 set_place_for_every_player actor_area_to_place_in 1 actor_area 6 actor_area_radius 20 }
+create_object PLACEHOLDER { resource_delta -60 set_place_for_every_player actor_area_to_place_in 1 actor_area 7 actor_area_radius 40 }
+
+create_object PLACEHOLDER { resource_delta -60 set_place_for_every_player actor_area_to_place_in 1 actor_area 8 actor_area_radius 14 }
+create_object PLACEHOLDER { resource_delta -60 set_place_for_every_player actor_area_to_place_in 1 actor_area 9 actor_area_radius 17 }
+
+create_object PLACEHOLDER { resource_delta -60 set_place_for_every_player actor_area_to_place_in 1 actor_area 11 actor_area_radius 30 }
+create_object PLACEHOLDER { resource_delta -60 set_place_for_every_player actor_area_to_place_in 1 actor_area 51 actor_area_radius 35 }
+create_object PLACEHOLDER { resource_delta -60 set_place_for_every_player actor_area_to_place_in 1 actor_area 52 actor_area_radius 27 }
+create_object PLACEHOLDER { resource_delta -60 set_place_for_every_player actor_area_to_place_in 1 actor_area 13 actor_area_radius 45 }
+create_object PLACEHOLDER { resource_delta -60 set_place_for_every_player actor_area_to_place_in 1 actor_area 14 actor_area_radius 24 }
+create_object PLACEHOLDER { resource_delta -60 set_place_for_every_player actor_area_to_place_in 1 actor_area 969 actor_area_radius 60 }
+
+create_object PLACEHOLDER { resource_delta -60 set_place_for_every_player actor_area_to_place_in 1 actor_area 15 actor_area_radius 3 }
+create_object PLACEHOLDER { resource_delta -60 set_place_for_every_player actor_area_to_place_in 1 actor_area 16 actor_area_radius 4 } 
+
+create_object PLACEHOLDER {
+    terrain_to_place_on SHALLOW
+    temp_min_distance_group_placement 1
+    number_of_groups 1000
+    second_object SHORE_FISH
+    actor_area 966
+    actor_area_radius 20
+}
+
+create_object VILLAGER { 
+    set_place_for_every_player 
+    actor_area_to_place_in 16
+    avoid_actor_area 15
+}
+create_object SCOUT { 
+    set_place_for_every_player
+    max_distance_to_players 6
+    actor_area_to_place_in 16
+    avoid_actor_area 15
+}
+
+create_object GOLD {
+    number_of_objects 8
+    set_tight_grouping
+    set_place_for_every_player
+    set_gaia_object_only
+    actor_area 17
+    actor_area_radius 5
+    actor_area_to_place_in 8
+    avoid_actor_area 4
+    avoid_forest_zone 2
+    ignore_terrain_restrictions
+    avoid_actor_area 966
+}
+
+create_object STONE {
+    number_of_objects 4
+    number_of_groups 1
+    set_tight_grouping
+    set_place_for_every_player
+    set_gaia_object_only
+    avoid_forest_zone 2
+    min_distance_to_map_edge 2
+    avoid_actor_area 8
+    actor_area_to_place_in 9
+    actor_area 18
+    actor_area_radius 2
+    ignore_terrain_restrictions
+    avoid_actor_area 966
+    avoid_actor_area 17
+}
+
+create_object FORAGE {
+    number_of_groups 1
+    number_of_objects 5
+    set_tight_grouping
+    set_gaia_object_only
+    set_place_for_every_player
+    actor_area_to_place_in 3
+    avoid_actor_area 2
+    ignore_terrain_restrictions
+    avoid_actor_area 17
+    avoid_actor_area 18
+}
+
+create_object SHEEP {
+	number_of_objects 4
+	set_tight_grouping
+	set_place_for_every_player
+	actor_area_to_place_in 16
+    avoid_actor_area 15
+    avoid_forest_zone 2
+    ignore_terrain_restrictions
+} 
+
+create_object SHEEP {
+    number_of_objects 2
+    number_of_groups 2
+    set_tight_grouping
+    set_gaia_object_only
+    set_place_for_every_player
+    actor_area_to_place_in 6
+    avoid_actor_area 9
+    temp_min_distance_group_placement 3
+    avoid_forest_zone 2
+    ignore_terrain_restrictions
+}
+
+create_object BOAR {
+	number_of_groups 2
+	set_gaia_object_only
+	set_place_for_every_player
+    actor_area_to_place_in 6
+    avoid_actor_area 9
+    find_closest_to_map_edge
+    temp_min_distance_group_placement 5
+    ignore_terrain_restrictions
+}
+
+create_object GOLD {
+    number_of_objects 3
+    number_of_groups 3
+    set_tight_grouping
+    set_gaia_object_only
+    set_place_for_every_player
+    min_distance_to_map_edge 2
+    terrain_to_place_on GRASS
+    ignore_terrain_restrictions
+    temp_min_distance_group_placement 7
+    actor_area_to_place_in 51
+    avoid_actor_area 52
+    avoid_actor_area 966
+    actor_area 968
+    actor_area_radius 5
+}
+
+
+create_object TUNA {
+    terrain_to_place_on MED_WATER
+    temp_min_distance_group_placement 7
+    number_of_groups 1000
+    actor_area 967
+    actor_area_radius 10
+}
+
+
+create_object RELIC {
+    number_of_objects 1
+    number_of_groups 2
+    temp_min_distance_group_placement 40
+    set_tight_grouping
+    set_gaia_object_only
+    terrain_to_place_on GRASS
+    ignore_terrain_restrictions
+    actor_area_to_place_in 967
+}
+
+create_object GOLD {
+    number_of_objects 5
+    number_of_groups 2
+    temp_min_distance_group_placement 40
+    set_tight_grouping
+    set_gaia_object_only
+    terrain_to_place_on GRASS
+    ignore_terrain_restrictions
+    actor_area_to_place_in 967
+    actor_area 970
+    actor_area_radius 3
+}
+
+create_object STONE {
+    number_of_objects 4
+    number_of_groups 4
+    set_tight_grouping
+    set_gaia_object_only
+    set_place_for_every_player
+    min_distance_to_map_edge 2
+    terrain_to_place_on GRASS
+    ignore_terrain_restrictions
+    temp_min_distance_group_placement 7
+    max_distance_to_other_zones 1
+    actor_area_to_place_in 969
+    avoid_actor_area 51
+    avoid_actor_area 966
+    avoid_actor_area 968
+    avoid_actor_area 970
+}
+
+create_object WOLF {
+    number_of_objects 1
+    number_of_groups 2
+    temp_min_distance_group_placement 8
+    set_gaia_object_only
+    ignore_terrain_restrictions
+    actor_area_to_place_in 966
+}
+
+
+create_object SEA_ROCKS_1 {
+    number_of_objects 1
+    number_of_groups 9999
+    temp_min_distance_group_placement 20
+    terrain_to_place_on MED_WATER
+}
+
+create_object SEA_ROCKS_2 {
+    number_of_objects 1
+    number_of_groups 9999
+    temp_min_distance_group_placement 20
+    terrain_to_place_on MED_WATER
+}
+
+create_object HAWK {
+    number_of_objects 1
+    number_of_groups 2
+    temp_min_distance_group_placement 20
+}
+
+create_object DLC_AUTUMNTREE {
+    number_of_objects 5
+    set_place_for_every_player
+    set_gaia_object_only
+	actor_area_to_place_in 16
+    avoid_actor_area 15
+}
+
+
+<ELEVATION_GENERATION>
+create_elevation 2 {
+    number_of_tiles 400
+    number_of_clumps 20
+    base_terrain DIRT
+    enable_balanced_elevation
+}
+
+<TERRAIN_GENERATION>
+
+
+<CONNECTION_GENERATION>

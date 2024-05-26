@@ -1,0 +1,1 @@
+Players start close to each other with a private lake on the back of their base. Lakes aren't dockable from players sides.

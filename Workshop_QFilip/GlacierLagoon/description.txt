@@ -1,0 +1,2 @@
+Map inspired by Jökulsárlón. Players start close too enemy separated by water. It can be traversed through ice on the sides of the map. TCs are almost on the beach so water aggression is expected.
+Suitable for: 1v1, 2v2.

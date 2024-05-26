@@ -1,0 +1,1372 @@
+/* SpaceColony */
+/* A Concept by TechChariot and QFilip 2024-01-19 */
+
+<PLAYER_SETUP>
+
+#const L 32 /* Defining Land Creation Command */
+behavior_version 1
+random_placement
+nomad_resources
+ai_info_map_type 141 1 0 0
+
+/* Defining Terrains */
+#const FRM 7
+#const BT 82
+
+#const INFRAS 24
+
+#const V 70
+
+/* Defining Player Terrains */
+#const PT1 24
+#const PT2 24
+#const PT3 24
+#const PT4 24
+#const PT5 24
+#const PT6 24
+#const PT7 24
+#const PT8 24
+
+/* Allow Berries to Spawn Anywhere */
+effect_amount GAIA_SET_ATTRIBUTE FORAGE ATTR_TERRAIN_ID 0
+
+#const PGU 789
+
+
+/* Remove Visual Effect of Dead Fish Trap */
+#const ON_GRID 278
+effect_amount GAIA_SET_ATTRIBUTE ON_GRID ATTR_STORAGE_VALUE 0
+
+/* Configuring Building Blocker */
+#const BLOCKER 1654
+effect_percent GAIA_SET_ATTRIBUTE BLOCKER ATTR_RADIUS_1 50
+effect_percent GAIA_SET_ATTRIBUTE BLOCKER ATTR_RADIUS_2 50
+effect_percent GAIA_MOD_RESOURCE AMOUNT_BUILDING_TRICKLE_WOOD  ATTR_SET 0
+effect_percent GAIA_MOD_RESOURCE AMOUNT_BUILDING_TRICKLE_FOOD  ATTR_SET 0
+effect_percent GAIA_MOD_RESOURCE AMOUNT_BUILDING_TRICKLE_GOLD  ATTR_SET 0
+effect_percent GAIA_MOD_RESOURCE AMOUNT_BUILDING_TRICKLE_STONE ATTR_SET 0
+
+/* Making Solid Eye-Candy Semi-Transparent */
+#const ROCK2 1323
+effect_amount GAIA_SET_ATTRIBUTE ROCK ATTR_OCCLUSION_MODE 2
+effect_amount GAIA_SET_ATTRIBUTE ROCK2 ATTR_OCCLUSION_MODE 2
+
+if 2_TEAM_GAME elseif 2_PLAYER_GAME else #define DISABLE_TRADE endif
+
+if DISABLE_TRADE
+  #const TRADE_CART_ENABLER 161
+  #const TRADE_COG_ENABLER 180
+  #const TRADE_CARAVAN_ENABLER 48
+  #const HINDU_CARAVANSERAI_ENABLER 518
+  #const PERSIAN_CARAVANSERAI_ENABLER 552  
+  #const SILK_ROAD 499
+  effect_amount DISABLE_TECH TRADE_COG_ENABLER ATTR_DISABLE 180
+  effect_amount DISABLE_TECH TRADE_CART_ENABLER ATTR_DISABLE 161
+  effect_amount DISABLE_TECH TRADE_CARAVAN_ENABLER ATTR_DISABLE 48
+  effect_amount DISABLE_TECH HINDU_CARAVANSERAI_ENABLER ATTR_DISABLE 518
+  effect_amount DISABLE_TECH PERSIAN_CARAVANSERAI_ENABLER ATTR_DISABLE 552
+  effect_amount DISABLE_TECH SILK_ROAD ATTR_DISABLE 499    
+endif
+
+<ELEVATION_GENERATION>
+
+
+<TERRAIN_GENERATION>
+
+#define PLAYER_LAND_CIRCULARITY
+if PLAYER_LAND_CIRCULARITY
+    /* Initial Circular Shape */
+    create_terrain BT { base_terrain GRASS number_of_clumps 9320 land_percent 100 set_scale_by_groups set_avoid_player_start_areas 14 }
+    create_terrain BT { base_terrain GRASS number_of_clumps 9320 land_percent 100 set_scale_by_groups set_avoid_player_start_areas 14 }
+    create_terrain BT { base_terrain GRASS number_of_clumps 9320 land_percent 100 set_scale_by_groups set_avoid_player_start_areas 14 }
+    create_terrain BT { base_terrain GRASS number_of_clumps 9320 land_percent 100 set_scale_by_groups set_avoid_player_start_areas 14 }    
+    create_terrain BT { base_terrain GRASS number_of_clumps 9320 land_percent 100 set_scale_by_groups set_avoid_player_start_areas 14 }
+    create_terrain BT { base_terrain GRASS number_of_clumps 9320 land_percent 100 set_scale_by_groups set_avoid_player_start_areas 14 }
+    create_terrain BT { base_terrain GRASS number_of_clumps 9320 land_percent 100 set_scale_by_groups set_avoid_player_start_areas 14 }
+    create_terrain BT { base_terrain GRASS number_of_clumps 9320 land_percent 100 set_scale_by_groups set_avoid_player_start_areas 14 }
+    /* Application of Placeholder Terrain */
+    create_terrain DLC_BLACK { base_terrain BT number_of_clumps 9320 land_percent 100 set_scale_by_groups set_avoid_player_start_areas 19 }
+    create_terrain DLC_BLACK { base_terrain BT number_of_clumps 9320 land_percent 100 set_scale_by_groups set_avoid_player_start_areas 19 }
+    create_terrain DLC_BLACK { base_terrain BT number_of_clumps 9320 land_percent 100 set_scale_by_groups set_avoid_player_start_areas 19 }
+    create_terrain DLC_BLACK { base_terrain BT number_of_clumps 9320 land_percent 100 set_scale_by_groups set_avoid_player_start_areas 19 }
+    create_terrain DLC_BLACK { base_terrain BT number_of_clumps 9320 land_percent 100 set_scale_by_groups set_avoid_player_start_areas 19 }
+    create_terrain DLC_BLACK { base_terrain BT number_of_clumps 9320 land_percent 100 set_scale_by_groups set_avoid_player_start_areas 19 }
+    create_terrain DLC_BLACK { base_terrain BT number_of_clumps 9320 land_percent 100 set_scale_by_groups set_avoid_player_start_areas 19 }
+    create_terrain DLC_BLACK { base_terrain BT number_of_clumps 9320 land_percent 100 set_scale_by_groups set_avoid_player_start_areas 19 }
+    /* Conversion of Ring Terrain to Base Terrain */
+    create_terrain BT { base_terrain INFRAS number_of_clumps 9320 land_percent 100 set_scale_by_groups }
+    create_terrain BT { base_terrain INFRAS number_of_clumps 9320 land_percent 100 set_scale_by_groups }
+    create_terrain BT { base_terrain INFRAS number_of_clumps 9320 land_percent 100 set_scale_by_groups }
+    create_terrain BT { base_terrain INFRAS number_of_clumps 9320 land_percent 100 set_scale_by_groups }
+    create_terrain BT { base_terrain INFRAS number_of_clumps 9320 land_percent 100 set_scale_by_groups }
+    create_terrain BT { base_terrain INFRAS number_of_clumps 9320 land_percent 100 set_scale_by_groups }
+    create_terrain BT { base_terrain INFRAS number_of_clumps 9320 land_percent 100 set_scale_by_groups }
+    create_terrain BT { base_terrain INFRAS number_of_clumps 9320 land_percent 100 set_scale_by_groups }
+    /* Smoothing */
+    create_terrain GRASS { base_terrain BT number_of_clumps 9320 land_percent 100 set_scale_by_groups spacing_to_other_terrain_types 2 }
+    create_terrain GRASS { base_terrain BT number_of_clumps 9320 land_percent 100 set_scale_by_groups spacing_to_other_terrain_types 2 }
+    create_terrain GRASS { base_terrain BT number_of_clumps 9320 land_percent 100 set_scale_by_groups spacing_to_other_terrain_types 2 }
+    create_terrain GRASS { base_terrain BT number_of_clumps 9320 land_percent 100 set_scale_by_groups spacing_to_other_terrain_types 2 }
+    /* Reverting Placeholder */
+    create_terrain BT { base_terrain DLC_BLACK number_of_clumps 9320 land_percent 100 set_scale_by_groups }
+    create_terrain BT { base_terrain DLC_BLACK number_of_clumps 9320 land_percent 100 set_scale_by_groups }
+    create_terrain BT { base_terrain DLC_BLACK number_of_clumps 9320 land_percent 100 set_scale_by_groups }
+    create_terrain BT { base_terrain DLC_BLACK number_of_clumps 9320 land_percent 100 set_scale_by_groups }
+    create_terrain BT { base_terrain DLC_BLACK number_of_clumps 9320 land_percent 100 set_scale_by_groups }
+    create_terrain BT { base_terrain DLC_BLACK number_of_clumps 9320 land_percent 100 set_scale_by_groups }
+    create_terrain BT { base_terrain DLC_BLACK number_of_clumps 9320 land_percent 100 set_scale_by_groups }
+    create_terrain BT { base_terrain DLC_BLACK number_of_clumps 9320 land_percent 100 set_scale_by_groups }
+    /* Converting Grass to Infrastructure Terrain */
+    create_terrain INFRAS { base_terrain GRASS number_of_clumps 9320 land_percent 100 set_scale_by_groups }
+    create_terrain INFRAS { base_terrain GRASS number_of_clumps 9320 land_percent 100 set_scale_by_groups }
+    create_terrain INFRAS { base_terrain GRASS number_of_clumps 9320 land_percent 100 set_scale_by_groups }
+    create_terrain INFRAS { base_terrain GRASS number_of_clumps 9320 land_percent 100 set_scale_by_groups }
+    /* Converting Distant Infrastructure Terrain to Placeholder */
+    create_terrain DLC_BLACK { base_terrain INFRAS number_of_clumps 9320 land_percent 100 set_scale_by_groups set_avoid_player_start_areas 18 }
+    create_terrain DLC_BLACK { base_terrain INFRAS number_of_clumps 9320 land_percent 100 set_scale_by_groups set_avoid_player_start_areas 18 }
+    create_terrain DLC_BLACK { base_terrain INFRAS number_of_clumps 9320 land_percent 100 set_scale_by_groups set_avoid_player_start_areas 18 }
+    create_terrain DLC_BLACK { base_terrain INFRAS number_of_clumps 9320 land_percent 100 set_scale_by_groups set_avoid_player_start_areas 18 }
+    create_terrain DLC_BLACK { base_terrain INFRAS number_of_clumps 9320 land_percent 100 set_scale_by_groups set_avoid_player_start_areas 18 }
+    create_terrain DLC_BLACK { base_terrain INFRAS number_of_clumps 9320 land_percent 100 set_scale_by_groups set_avoid_player_start_areas 18 }
+    create_terrain DLC_BLACK { base_terrain INFRAS number_of_clumps 9320 land_percent 100 set_scale_by_groups set_avoid_player_start_areas 18 }
+    create_terrain DLC_BLACK { base_terrain INFRAS number_of_clumps 9320 land_percent 100 set_scale_by_groups set_avoid_player_start_areas 18 }
+    create_terrain DLC_BLACK { base_terrain INFRAS number_of_clumps 9320 land_percent 100 set_scale_by_groups set_avoid_player_start_areas 18 }
+    create_terrain DLC_BLACK { base_terrain INFRAS number_of_clumps 9320 land_percent 100 set_scale_by_groups set_avoid_player_start_areas 18 }
+    create_terrain DLC_BLACK { base_terrain INFRAS number_of_clumps 9320 land_percent 100 set_scale_by_groups set_avoid_player_start_areas 18 }
+    create_terrain DLC_BLACK { base_terrain INFRAS number_of_clumps 9320 land_percent 100 set_scale_by_groups set_avoid_player_start_areas 18 }
+    create_terrain DLC_BLACK { base_terrain INFRAS number_of_clumps 9320 land_percent 100 set_scale_by_groups set_avoid_player_start_areas 18 }
+    create_terrain DLC_BLACK { base_terrain INFRAS number_of_clumps 9320 land_percent 100 set_scale_by_groups set_avoid_player_start_areas 18 }
+    create_terrain DLC_BLACK { base_terrain INFRAS number_of_clumps 9320 land_percent 100 set_scale_by_groups set_avoid_player_start_areas 18 }
+    create_terrain DLC_BLACK { base_terrain INFRAS number_of_clumps 9320 land_percent 100 set_scale_by_groups set_avoid_player_start_areas 18 }
+
+endif     
+
+#define PLAYER_ASSIGNED_FORESTS
+if PLAYER_ASSIGNED_FORESTS
+    /* Creating Forests For Player 1 */
+    create_terrain DLC_DIRT4   { base_terrain INFRAS number_of_clumps 1 land_percent 100 }
+    create_terrain JUNGLE      { base_terrain DLC_DIRT4 number_of_clumps 3 number_of_tiles 30 clumping_factor 40 set_avoid_player_start_areas 11 spacing_to_other_terrain_types 1 } 
+    create_terrain GRASS       { base_terrain DLC_DIRT4 number_of_clumps 9320 land_percent 100 set_scale_by_groups }
+    /* Creating Forests For Player 2 */
+    create_terrain DLC_DIRT4   { base_terrain INFRAS number_of_clumps 1 land_percent 100 }
+    create_terrain JUNGLE      { base_terrain DLC_DIRT4 number_of_clumps 3 number_of_tiles 30 clumping_factor 40 set_avoid_player_start_areas 11 spacing_to_other_terrain_types 1 } 
+    create_terrain GRASS       { base_terrain DLC_DIRT4 number_of_clumps 9320 land_percent 100 set_scale_by_groups }
+    /* Creating Forests For Player 3 */
+    create_terrain DLC_DIRT4   { base_terrain INFRAS number_of_clumps 1 land_percent 100 }
+    create_terrain JUNGLE      { base_terrain DLC_DIRT4 number_of_clumps 3 number_of_tiles 30 clumping_factor 40 set_avoid_player_start_areas 11 spacing_to_other_terrain_types 1 } 
+    create_terrain GRASS       { base_terrain DLC_DIRT4 number_of_clumps 9320 land_percent 100 set_scale_by_groups }
+    /* Creating Forests For Player 4 */
+    create_terrain DLC_DIRT4   { base_terrain INFRAS number_of_clumps 1 land_percent 100 }
+    create_terrain JUNGLE      { base_terrain DLC_DIRT4 number_of_clumps 3 number_of_tiles 30 clumping_factor 40 set_avoid_player_start_areas 11 spacing_to_other_terrain_types 1 } 
+    create_terrain GRASS       { base_terrain DLC_DIRT4 number_of_clumps 9320 land_percent 100 set_scale_by_groups }
+    /* Creating Forests For Player 5 */
+    create_terrain DLC_DIRT4   { base_terrain INFRAS number_of_clumps 1 land_percent 100 }
+    create_terrain JUNGLE      { base_terrain DLC_DIRT4 number_of_clumps 3 number_of_tiles 30 clumping_factor 40 set_avoid_player_start_areas 11 spacing_to_other_terrain_types 1 } 
+    create_terrain GRASS       { base_terrain DLC_DIRT4 number_of_clumps 9320 land_percent 100 set_scale_by_groups }
+    /* Creating Forests For Player 6 */
+    create_terrain DLC_DIRT4   { base_terrain INFRAS number_of_clumps 1 land_percent 100 }
+    create_terrain JUNGLE      { base_terrain DLC_DIRT4 number_of_clumps 3 number_of_tiles 30 clumping_factor 40 set_avoid_player_start_areas 11 spacing_to_other_terrain_types 1 } 
+    create_terrain GRASS       { base_terrain DLC_DIRT4 number_of_clumps 9320 land_percent 100 set_scale_by_groups }
+    /* Creating Forests For Player 7 */
+    create_terrain DLC_DIRT4   { base_terrain INFRAS number_of_clumps 1 land_percent 100 }
+    create_terrain JUNGLE      { base_terrain DLC_DIRT4 number_of_clumps 3 number_of_tiles 30 clumping_factor 40 set_avoid_player_start_areas 11 spacing_to_other_terrain_types 1 } 
+    create_terrain GRASS       { base_terrain DLC_DIRT4 number_of_clumps 9320 land_percent 100 set_scale_by_groups }
+    /* Creating Forests For Player 8 */
+    create_terrain DLC_DIRT4   { base_terrain INFRAS number_of_clumps 1 land_percent 100 }
+    create_terrain JUNGLE      { base_terrain DLC_DIRT4 number_of_clumps 3 number_of_tiles 30 clumping_factor 40 set_avoid_player_start_areas 11 spacing_to_other_terrain_types 1 } 
+    create_terrain GRASS       { base_terrain DLC_DIRT4 number_of_clumps 9320 land_percent 100 set_scale_by_groups }
+    /* Reverting Remaining Placeholder */
+    create_terrain GRASS     { base_terrain DLC_BLACK number_of_clumps 9320 land_percent 100 set_scale_by_groups }
+    create_terrain GRASS     { base_terrain DLC_BLACK number_of_clumps 9320 land_percent 100 set_scale_by_groups }
+    create_terrain GRASS     { base_terrain DLC_BLACK number_of_clumps 9320 land_percent 100 set_scale_by_groups }
+    create_terrain GRASS     { base_terrain DLC_BLACK number_of_clumps 9320 land_percent 100 set_scale_by_groups }
+
+endif
+
+#define GREENHOUSE_BORDER
+if GREENHOUSE_BORDER
+    /* Application of Placeholder Terrain */
+    create_terrain DLC_BLACK     { base_terrain BT number_of_clumps 9320 land_percent 100 set_scale_by_groups spacing_to_other_terrain_types 1 }
+    create_terrain DLC_BLACK     { base_terrain BT number_of_clumps 9320 land_percent 100 set_scale_by_groups spacing_to_other_terrain_types 1 }
+    create_terrain DLC_BLACK     { base_terrain BT number_of_clumps 9320 land_percent 100 set_scale_by_groups spacing_to_other_terrain_types 1 }
+    create_terrain DLC_BLACK     { base_terrain BT number_of_clumps 9320 land_percent 100 set_scale_by_groups spacing_to_other_terrain_types 1 }
+    /* Application of Infrastructure Terrain */
+    create_terrain INFRAS        { base_terrain BT number_of_clumps 9320 land_percent 100 set_scale_by_groups }
+    create_terrain INFRAS        { base_terrain BT number_of_clumps 9320 land_percent 100 set_scale_by_groups }
+    create_terrain INFRAS        { base_terrain BT number_of_clumps 9320 land_percent 100 set_scale_by_groups }
+    create_terrain INFRAS        { base_terrain BT number_of_clumps 9320 land_percent 100 set_scale_by_groups }
+    /* Restoration of Base Terrain */
+    create_terrain BT     { base_terrain DLC_BLACK number_of_clumps 9320 land_percent 100 set_scale_by_groups }
+    create_terrain BT     { base_terrain DLC_BLACK number_of_clumps 9320 land_percent 100 set_scale_by_groups }
+    create_terrain BT     { base_terrain DLC_BLACK number_of_clumps 9320 land_percent 100 set_scale_by_groups }
+    create_terrain BT     { base_terrain DLC_BLACK number_of_clumps 9320 land_percent 100 set_scale_by_groups }
+endif
+
+#define SHORTCUTS
+if SHORTCUTS
+    /* Create Shortcuts */
+    create_terrain DIRT    { base_terrain GRASS number_of_clumps 9320 land_percent 100 set_scale_by_groups set_avoid_player_start_areas 18 }
+    create_terrain DIRT    { base_terrain GRASS number_of_clumps 9320 land_percent 100 set_scale_by_groups set_avoid_player_start_areas 18 }
+    create_terrain DIRT    { base_terrain GRASS number_of_clumps 9320 land_percent 100 set_scale_by_groups set_avoid_player_start_areas 18 }
+    create_terrain DIRT    { base_terrain GRASS number_of_clumps 9320 land_percent 100 set_scale_by_groups set_avoid_player_start_areas 18 }
+
+    create_terrain GRASS2    { base_terrain DIRT number_of_clumps 9320 land_percent 100 set_scale_by_groups set_avoid_player_start_areas 22 }
+    create_terrain GRASS2    { base_terrain DIRT number_of_clumps 9320 land_percent 100 set_scale_by_groups set_avoid_player_start_areas 22 }
+    create_terrain GRASS2    { base_terrain DIRT number_of_clumps 9320 land_percent 100 set_scale_by_groups set_avoid_player_start_areas 22 }
+    create_terrain GRASS2    { base_terrain DIRT number_of_clumps 9320 land_percent 100 set_scale_by_groups set_avoid_player_start_areas 22 }
+
+    create_terrain DIRT    { base_terrain GRASS2 number_of_clumps 9320 land_percent 100 set_scale_by_groups set_avoid_player_start_areas 30 }
+    create_terrain DIRT    { base_terrain GRASS2 number_of_clumps 9320 land_percent 100 set_scale_by_groups set_avoid_player_start_areas 30 }
+    create_terrain DIRT    { base_terrain GRASS2 number_of_clumps 9320 land_percent 100 set_scale_by_groups set_avoid_player_start_areas 30 }
+    create_terrain DIRT    { base_terrain GRASS2 number_of_clumps 9320 land_percent 100 set_scale_by_groups set_avoid_player_start_areas 30 }
+
+    create_terrain GRASS2    { base_terrain DIRT number_of_clumps 9320 land_percent 100 set_scale_by_groups set_avoid_player_start_areas 34 }
+    create_terrain GRASS2    { base_terrain DIRT number_of_clumps 9320 land_percent 100 set_scale_by_groups set_avoid_player_start_areas 34 }
+    create_terrain GRASS2    { base_terrain DIRT number_of_clumps 9320 land_percent 100 set_scale_by_groups set_avoid_player_start_areas 34 }
+    create_terrain GRASS2    { base_terrain DIRT number_of_clumps 9320 land_percent 100 set_scale_by_groups set_avoid_player_start_areas 34 }
+
+    create_terrain DIRT    { base_terrain GRASS2 number_of_clumps 9320 land_percent 100 set_scale_by_groups set_avoid_player_start_areas 42 }
+    create_terrain DIRT    { base_terrain GRASS2 number_of_clumps 9320 land_percent 100 set_scale_by_groups set_avoid_player_start_areas 42 }
+    create_terrain DIRT    { base_terrain GRASS2 number_of_clumps 9320 land_percent 100 set_scale_by_groups set_avoid_player_start_areas 42 }
+    create_terrain DIRT    { base_terrain GRASS2 number_of_clumps 9320 land_percent 100 set_scale_by_groups set_avoid_player_start_areas 42 }
+
+    create_terrain GRASS2    { base_terrain DIRT number_of_clumps 9320 land_percent 100 set_scale_by_groups set_avoid_player_start_areas 46 }
+    create_terrain GRASS2    { base_terrain DIRT number_of_clumps 9320 land_percent 100 set_scale_by_groups set_avoid_player_start_areas 46 }
+    create_terrain GRASS2    { base_terrain DIRT number_of_clumps 9320 land_percent 100 set_scale_by_groups set_avoid_player_start_areas 46 }
+    create_terrain GRASS2    { base_terrain DIRT number_of_clumps 9320 land_percent 100 set_scale_by_groups set_avoid_player_start_areas 46 }
+
+    create_terrain DIRT    { base_terrain GRASS2 number_of_clumps 9320 land_percent 100 set_scale_by_groups set_avoid_player_start_areas 54 }
+    create_terrain DIRT    { base_terrain GRASS2 number_of_clumps 9320 land_percent 100 set_scale_by_groups set_avoid_player_start_areas 54 }
+    create_terrain DIRT    { base_terrain GRASS2 number_of_clumps 9320 land_percent 100 set_scale_by_groups set_avoid_player_start_areas 54 }
+    create_terrain DIRT    { base_terrain GRASS2 number_of_clumps 9320 land_percent 100 set_scale_by_groups set_avoid_player_start_areas 54 }
+
+    create_terrain GRASS2    { base_terrain DIRT number_of_clumps 9320 land_percent 100 set_scale_by_groups set_avoid_player_start_areas 58 }
+    create_terrain GRASS2    { base_terrain DIRT number_of_clumps 9320 land_percent 100 set_scale_by_groups set_avoid_player_start_areas 58 }
+    create_terrain GRASS2    { base_terrain DIRT number_of_clumps 9320 land_percent 100 set_scale_by_groups set_avoid_player_start_areas 58 }
+    create_terrain GRASS2    { base_terrain DIRT number_of_clumps 9320 land_percent 100 set_scale_by_groups set_avoid_player_start_areas 58 }
+
+    create_terrain DIRT    { base_terrain GRASS2 number_of_clumps 9320 land_percent 100 set_scale_by_groups set_avoid_player_start_areas 66 }
+    create_terrain DIRT    { base_terrain GRASS2 number_of_clumps 9320 land_percent 100 set_scale_by_groups set_avoid_player_start_areas 66 }
+    create_terrain DIRT    { base_terrain GRASS2 number_of_clumps 9320 land_percent 100 set_scale_by_groups set_avoid_player_start_areas 66 }
+    create_terrain DIRT    { base_terrain GRASS2 number_of_clumps 9320 land_percent 100 set_scale_by_groups set_avoid_player_start_areas 66 }
+
+    create_terrain GRASS2    { base_terrain DIRT number_of_clumps 9320 land_percent 100 set_scale_by_groups set_avoid_player_start_areas 70 }
+    create_terrain GRASS2    { base_terrain DIRT number_of_clumps 9320 land_percent 100 set_scale_by_groups set_avoid_player_start_areas 70 }
+    create_terrain GRASS2    { base_terrain DIRT number_of_clumps 9320 land_percent 100 set_scale_by_groups set_avoid_player_start_areas 70 }
+    create_terrain GRASS2    { base_terrain DIRT number_of_clumps 9320 land_percent 100 set_scale_by_groups set_avoid_player_start_areas 70 }
+
+    /* Reinforce Splotches */
+    create_terrain GRASS    { base_terrain GRASS2 number_of_clumps 9320 land_percent 100 set_scale_by_groups spacing_to_other_terrain_types 1 }
+    create_terrain GRASS    { base_terrain GRASS2 number_of_clumps 9320 land_percent 100 set_scale_by_groups spacing_to_other_terrain_types 1 }    
+    create_terrain GRASS    { base_terrain GRASS2 number_of_clumps 9320 land_percent 100 set_scale_by_groups spacing_to_other_terrain_types 1 }
+    create_terrain GRASS    { base_terrain GRASS2 number_of_clumps 9320 land_percent 100 set_scale_by_groups spacing_to_other_terrain_types 1 }
+
+    /* Remove Residual Terrain */
+    create_terrain DIRT     { base_terrain GRASS2 number_of_clumps 9320 land_percent 100 set_scale_by_groups }
+    create_terrain DIRT     { base_terrain GRASS2 number_of_clumps 9320 land_percent 100 set_scale_by_groups }
+    create_terrain DIRT     { base_terrain GRASS2 number_of_clumps 9320 land_percent 100 set_scale_by_groups }
+    create_terrain DIRT     { base_terrain GRASS2 number_of_clumps 9320 land_percent 100 set_scale_by_groups }
+
+    /* Re-Application of Residual Terrain */
+    create_terrain GRASS2    { base_terrain DIRT number_of_clumps 9320 land_percent 100 set_scale_by_groups spacing_to_other_terrain_types 1 }
+    create_terrain GRASS2    { base_terrain DIRT number_of_clumps 9320 land_percent 100 set_scale_by_groups spacing_to_other_terrain_types 1 }
+    create_terrain GRASS2    { base_terrain DIRT number_of_clumps 9320 land_percent 100 set_scale_by_groups spacing_to_other_terrain_types 1 }
+    create_terrain GRASS2    { base_terrain DIRT number_of_clumps 9320 land_percent 100 set_scale_by_groups spacing_to_other_terrain_types 1 }
+
+    /* Reverting Second Grass to Grass */
+    create_terrain GRASS    { base_terrain GRASS2 number_of_clumps 9320 land_percent 100 set_scale_by_groups }
+    create_terrain GRASS    { base_terrain GRASS2 number_of_clumps 9320 land_percent 100 set_scale_by_groups }
+    create_terrain GRASS    { base_terrain GRASS2 number_of_clumps 9320 land_percent 100 set_scale_by_groups }
+    create_terrain GRASS    { base_terrain GRASS2 number_of_clumps 9320 land_percent 100 set_scale_by_groups }
+
+    /* Reverting Dirt to Infrastructure Terrain */
+    create_terrain INFRAS    { base_terrain DIRT number_of_clumps 9320 land_percent 100 set_scale_by_groups }
+    create_terrain INFRAS    { base_terrain DIRT number_of_clumps 9320 land_percent 100 set_scale_by_groups }
+    create_terrain INFRAS    { base_terrain DIRT number_of_clumps 9320 land_percent 100 set_scale_by_groups }
+    create_terrain INFRAS    { base_terrain DIRT number_of_clumps 9320 land_percent 100 set_scale_by_groups }
+
+endif
+
+#define NEUTRAL_FORESTS
+if NEUTRAL_FORESTS
+    create_terrain JUNGLE    { base_terrain GRASS number_of_clumps 72 land_percent 4 set_scale_by_groups set_avoid_player_start_areas 20 }
+endif
+
+
+<CONNECTION_GENERATION>
+create_connect_all_players_land
+{
+	replace_terrain BT INFRAS
+	/* replace_terrain BEACH SHALLOW_TERRAIN */
+    terrain_cost GRASS 15
+    terrain_cost INFRAS 9
+    terrain_cost BT 7
+    terrain_size BT 2 0
+}
+
+
+<OBJECTS_GENERATION>
+/* BEGIN_OBJECTS_AUTOSCRIBE */
+#const OFF_GRID 647
+if TINY_MAP
+create_actor_area rnd(60,60) rnd(80,80) 1 rnd(2,2)
+create_actor_area rnd(60,60) rnd(40,40) 2 rnd(2,2)
+elseif SMALL_MAP
+create_actor_area rnd(72,72) rnd(96,96) 1 rnd(2,2)
+create_actor_area rnd(72,72) rnd(48,48) 2 rnd(2,2)
+elseif MEDIUM_MAP
+create_actor_area rnd(84,84) rnd(113,113) 1 rnd(2,2)
+create_actor_area rnd(84,84) rnd(55,55) 2 rnd(2,2)
+elseif LARGE_MAP
+create_actor_area rnd(100,100) rnd(134,134) 1 rnd(2,2)
+create_actor_area rnd(100,100) rnd(66,66) 2 rnd(2,2)
+elseif HUGE_MAP
+create_actor_area rnd(110,110) rnd(147,147) 1 rnd(2,2)
+create_actor_area rnd(110,110) rnd(73,73) 2 rnd(2,2)
+elseif GIGANTIC_MAP
+create_actor_area rnd(120,120) rnd(161,161) 1 rnd(2,2)
+create_actor_area rnd(120,120) rnd(79,79) 2 rnd(2,2)
+endif
+create_object OFF_GRID
+{
+set_gaia_object_only
+set_gaia_unconvertible
+terrain_to_place_on INFRAS
+second_object FLAG_A
+actor_area 3
+if TINY_MAP actor_area_radius 19 elseif SMALL_MAP actor_area_radius 23 elseif MEDIUM_MAP actor_area_radius 27 elseif LARGE_MAP actor_area_radius 30 elseif HUGE_MAP actor_area_radius 34 else actor_area_radius 38 endif
+actor_area_to_place_in 2
+}
+create_object OFF_GRID
+{
+set_gaia_object_only
+set_gaia_unconvertible
+terrain_to_place_on INFRAS
+second_object FLAG_A
+actor_area 4
+if TINY_MAP actor_area_radius 19 elseif SMALL_MAP actor_area_radius 23 elseif MEDIUM_MAP actor_area_radius 27 elseif LARGE_MAP actor_area_radius 30 elseif HUGE_MAP actor_area_radius 34 else actor_area_radius 38 endif
+actor_area_to_place_in 1
+}
+create_object FLAG_B
+{
+set_gaia_object_only
+set_gaia_unconvertible
+number_of_groups 9320
+set_scaling_to_map_size
+terrain_to_place_on INFRAS
+temp_min_distance_group_placement 1
+actor_area 5
+actor_area_radius 0
+}
+#const PH5_1 647
+create_object PH5_1
+{
+number_of_groups 9320
+set_scaling_to_map_size
+actor_area 6
+actor_area_radius 4
+actor_area_to_place_in 5
+force_placement
+find_closest
+}
+#const PH6_1 647
+create_object PH6_1
+{
+number_of_groups 9320
+set_scaling_to_map_size
+actor_area 7
+actor_area_radius 3
+actor_area_to_place_in 5
+force_placement
+find_closest
+}
+create_object OFF_GRID
+{
+set_gaia_object_only
+set_gaia_unconvertible
+number_of_groups 9320
+set_scaling_to_map_size
+terrain_to_place_on FRM
+second_object FORAGE
+actor_area 8
+actor_area_radius 0
+avoid_actor_area 3
+avoid_actor_area 4
+avoid_actor_area 6
+find_closest
+}
+#const PH8_2 647
+create_object PH8_2
+{
+number_of_groups 9320
+set_scaling_to_map_size
+actor_area 9
+actor_area_radius 1
+actor_area_to_place_in 8
+force_placement
+find_closest
+}
+#const PH9_2 647
+create_object PH9_2
+{
+number_of_groups 9320
+set_scaling_to_map_size
+actor_area 10
+actor_area_radius 2
+actor_area_to_place_in 8
+force_placement
+find_closest
+}
+create_object OFF_GRID
+{
+set_gaia_object_only
+set_gaia_unconvertible
+number_of_groups 9320
+set_scaling_to_map_size
+terrain_to_place_on FRM
+second_object FORAGE
+actor_area 11
+actor_area_radius 0
+actor_area_to_place_in 10
+avoid_actor_area 7
+avoid_actor_area 9
+}
+#const PH11_3 647
+create_object PH11_3
+{
+number_of_groups 9320
+set_scaling_to_map_size
+actor_area 12
+actor_area_radius 1
+actor_area_to_place_in 11
+force_placement
+find_closest
+}
+#const PH12_3 647
+create_object PH12_3
+{
+number_of_groups 9320
+set_scaling_to_map_size
+actor_area 13
+actor_area_radius 2
+actor_area_to_place_in 11
+force_placement
+find_closest
+}
+create_object OFF_GRID
+{
+set_gaia_object_only
+set_gaia_unconvertible
+number_of_groups 9320
+set_scaling_to_map_size
+terrain_to_place_on FRM
+second_object FORAGE
+actor_area 14
+actor_area_radius 0
+actor_area_to_place_in 13
+avoid_actor_area 7
+avoid_actor_area 12
+}
+#const PH14_4 647
+create_object PH14_4
+{
+number_of_groups 9320
+set_scaling_to_map_size
+actor_area 15
+actor_area_radius 1
+actor_area_to_place_in 14
+force_placement
+find_closest
+}
+#const PH15_4 647
+create_object PH15_4
+{
+number_of_groups 9320
+set_scaling_to_map_size
+actor_area 16
+actor_area_radius 2
+actor_area_to_place_in 14
+force_placement
+find_closest
+}
+create_object OFF_GRID
+{
+set_gaia_object_only
+set_gaia_unconvertible
+number_of_groups 9320
+set_scaling_to_map_size
+terrain_to_place_on FRM
+second_object FORAGE
+actor_area 17
+actor_area_radius 0
+actor_area_to_place_in 16
+avoid_actor_area 7
+avoid_actor_area 15
+}
+#const PH17_5 647
+create_object PH17_5
+{
+number_of_groups 9320
+set_scaling_to_map_size
+actor_area 18
+actor_area_radius 1
+actor_area_to_place_in 17
+force_placement
+find_closest
+}
+#const PH18_5 647
+create_object PH18_5
+{
+number_of_groups 9320
+set_scaling_to_map_size
+actor_area 19
+actor_area_radius 2
+actor_area_to_place_in 17
+force_placement
+find_closest
+}
+create_object OFF_GRID
+{
+set_gaia_object_only
+set_gaia_unconvertible
+number_of_groups 9320
+set_scaling_to_map_size
+terrain_to_place_on FRM
+second_object FORAGE
+actor_area 20
+actor_area_radius 0
+actor_area_to_place_in 19
+avoid_actor_area 7
+avoid_actor_area 18
+}
+#const PH20_6 647
+create_object PH20_6
+{
+number_of_groups 9320
+set_scaling_to_map_size
+actor_area 21
+actor_area_radius 1
+actor_area_to_place_in 20
+force_placement
+find_closest
+}
+#const PH21_6 647
+create_object PH21_6
+{
+number_of_groups 9320
+set_scaling_to_map_size
+actor_area 22
+actor_area_radius 2
+actor_area_to_place_in 20
+force_placement
+find_closest
+}
+create_object OFF_GRID
+{
+set_gaia_object_only
+set_gaia_unconvertible
+number_of_groups 9320
+set_scaling_to_map_size
+terrain_to_place_on FRM
+second_object FORAGE
+actor_area 23
+actor_area_radius 0
+actor_area_to_place_in 22
+avoid_actor_area 7
+avoid_actor_area 21
+}
+#const PH23_7 647
+create_object PH23_7
+{
+number_of_groups 9320
+set_scaling_to_map_size
+actor_area 24
+actor_area_radius 1
+actor_area_to_place_in 23
+force_placement
+find_closest
+}
+#const PH24_7 647
+create_object PH24_7
+{
+number_of_groups 9320
+set_scaling_to_map_size
+actor_area 25
+actor_area_radius 2
+actor_area_to_place_in 23
+force_placement
+find_closest
+}
+create_object OFF_GRID
+{
+set_gaia_object_only
+set_gaia_unconvertible
+number_of_groups 9320
+set_scaling_to_map_size
+terrain_to_place_on FRM
+second_object FORAGE
+actor_area 26
+actor_area_radius 0
+actor_area_to_place_in 25
+avoid_actor_area 7
+avoid_actor_area 24
+}
+#const PH26_8 647
+create_object PH26_8
+{
+number_of_groups 9320
+set_scaling_to_map_size
+actor_area 27
+actor_area_radius 1
+actor_area_to_place_in 26
+force_placement
+find_closest
+}
+#const PH27_8 647
+create_object PH27_8
+{
+number_of_groups 9320
+set_scaling_to_map_size
+actor_area 28
+actor_area_radius 2
+actor_area_to_place_in 26
+force_placement
+find_closest
+}
+create_object OFF_GRID
+{
+set_gaia_object_only
+set_gaia_unconvertible
+number_of_groups 9320
+set_scaling_to_map_size
+terrain_to_place_on FRM
+second_object FORAGE
+actor_area 29
+actor_area_radius 0
+actor_area_to_place_in 28
+avoid_actor_area 7
+avoid_actor_area 27
+}
+#const PH29_9 647
+create_object PH29_9
+{
+number_of_groups 9320
+set_scaling_to_map_size
+actor_area 30
+actor_area_radius 1
+actor_area_to_place_in 29
+force_placement
+find_closest
+}
+#const PH30_9 647
+create_object PH30_9
+{
+number_of_groups 9320
+set_scaling_to_map_size
+actor_area 31
+actor_area_radius 2
+actor_area_to_place_in 29
+force_placement
+find_closest
+}
+create_object OFF_GRID
+{
+set_gaia_object_only
+set_gaia_unconvertible
+number_of_groups 9320
+set_scaling_to_map_size
+terrain_to_place_on FRM
+second_object FORAGE
+actor_area 32
+actor_area_radius 0
+actor_area_to_place_in 31
+avoid_actor_area 7
+avoid_actor_area 30
+}
+#const PH32_10 647
+create_object PH32_10
+{
+number_of_groups 9320
+set_scaling_to_map_size
+actor_area 33
+actor_area_radius 1
+actor_area_to_place_in 32
+force_placement
+find_closest
+}
+#const PH33_10 647
+create_object PH33_10
+{
+number_of_groups 9320
+set_scaling_to_map_size
+actor_area 34
+actor_area_radius 2
+actor_area_to_place_in 32
+force_placement
+find_closest
+}
+create_object OFF_GRID
+{
+set_gaia_object_only
+set_gaia_unconvertible
+number_of_groups 9320
+set_scaling_to_map_size
+terrain_to_place_on FRM
+second_object FORAGE
+actor_area 35
+actor_area_radius 0
+actor_area_to_place_in 34
+avoid_actor_area 7
+avoid_actor_area 33
+}
+#const PH35_11 647
+create_object PH35_11
+{
+number_of_groups 9320
+set_scaling_to_map_size
+actor_area 36
+actor_area_radius 1
+actor_area_to_place_in 35
+force_placement
+find_closest
+}
+#const PH36_11 647
+create_object PH36_11
+{
+number_of_groups 9320
+set_scaling_to_map_size
+actor_area 37
+actor_area_radius 2
+actor_area_to_place_in 35
+force_placement
+find_closest
+}
+create_object OFF_GRID
+{
+set_gaia_object_only
+set_gaia_unconvertible
+number_of_groups 9320
+set_scaling_to_map_size
+terrain_to_place_on FRM
+second_object FORAGE
+actor_area 38
+actor_area_radius 0
+actor_area_to_place_in 37
+avoid_actor_area 7
+avoid_actor_area 36
+}
+#const PH38_12 647
+create_object PH38_12
+{
+number_of_groups 9320
+set_scaling_to_map_size
+actor_area 39
+actor_area_radius 1
+actor_area_to_place_in 38
+force_placement
+find_closest
+}
+#const PH39_12 647
+create_object PH39_12
+{
+number_of_groups 9320
+set_scaling_to_map_size
+actor_area 40
+actor_area_radius 2
+actor_area_to_place_in 38
+force_placement
+find_closest
+}
+create_object OFF_GRID
+{
+set_gaia_object_only
+set_gaia_unconvertible
+number_of_groups 9320
+set_scaling_to_map_size
+terrain_to_place_on FRM
+second_object FORAGE
+actor_area 41
+actor_area_radius 0
+actor_area_to_place_in 40
+avoid_actor_area 7
+avoid_actor_area 39
+}
+#const PH41_13 647
+create_object PH41_13
+{
+number_of_groups 9320
+set_scaling_to_map_size
+actor_area 42
+actor_area_radius 1
+actor_area_to_place_in 41
+force_placement
+find_closest
+}
+#const PH42_13 647
+create_object PH42_13
+{
+number_of_groups 9320
+set_scaling_to_map_size
+actor_area 43
+actor_area_radius 2
+actor_area_to_place_in 41
+force_placement
+find_closest
+}
+create_object OFF_GRID
+{
+set_gaia_object_only
+set_gaia_unconvertible
+number_of_groups 9320
+set_scaling_to_map_size
+terrain_to_place_on FRM
+second_object FORAGE
+actor_area 44
+actor_area_radius 0
+actor_area_to_place_in 43
+avoid_actor_area 7
+avoid_actor_area 42
+}
+#const PH44_14 647
+create_object PH44_14
+{
+number_of_groups 9320
+set_scaling_to_map_size
+actor_area 45
+actor_area_radius 1
+actor_area_to_place_in 44
+force_placement
+find_closest
+}
+#const PH45_14 647
+create_object PH45_14
+{
+number_of_groups 9320
+set_scaling_to_map_size
+actor_area 46
+actor_area_radius 2
+actor_area_to_place_in 44
+force_placement
+find_closest
+}
+create_object OFF_GRID
+{
+set_gaia_object_only
+set_gaia_unconvertible
+number_of_groups 9320
+set_scaling_to_map_size
+terrain_to_place_on FRM
+second_object FORAGE
+actor_area 47
+actor_area_radius 0
+actor_area_to_place_in 46
+avoid_actor_area 7
+avoid_actor_area 45
+}
+#const PH47_15 647
+create_object PH47_15
+{
+number_of_groups 9320
+set_scaling_to_map_size
+actor_area 48
+actor_area_radius 1
+actor_area_to_place_in 47
+force_placement
+find_closest
+}
+#const PH48_15 647
+create_object PH48_15
+{
+number_of_groups 9320
+set_scaling_to_map_size
+actor_area 49
+actor_area_radius 2
+actor_area_to_place_in 47
+force_placement
+find_closest
+}
+create_object OFF_GRID
+{
+set_gaia_object_only
+set_gaia_unconvertible
+number_of_groups 9320
+set_scaling_to_map_size
+terrain_to_place_on FRM
+second_object FORAGE
+actor_area 50
+actor_area_radius 0
+actor_area_to_place_in 49
+avoid_actor_area 7
+avoid_actor_area 48
+}
+#const PH50_16 647
+create_object PH50_16
+{
+number_of_groups 9320
+set_scaling_to_map_size
+actor_area 51
+actor_area_radius 1
+actor_area_to_place_in 50
+force_placement
+find_closest
+}
+#const PH51_16 647
+create_object PH51_16
+{
+number_of_groups 9320
+set_scaling_to_map_size
+actor_area 52
+actor_area_radius 2
+actor_area_to_place_in 50
+force_placement
+find_closest
+}
+create_object OFF_GRID
+{
+set_gaia_object_only
+set_gaia_unconvertible
+number_of_groups 9320
+set_scaling_to_map_size
+terrain_to_place_on FRM
+second_object FORAGE
+actor_area 53
+actor_area_radius 0
+actor_area_to_place_in 52
+avoid_actor_area 7
+avoid_actor_area 51
+}
+#const PH53_17 647
+create_object PH53_17
+{
+number_of_groups 9320
+set_scaling_to_map_size
+actor_area 54
+actor_area_radius 1
+actor_area_to_place_in 53
+force_placement
+find_closest
+}
+#const PH54_17 647
+create_object PH54_17
+{
+number_of_groups 9320
+set_scaling_to_map_size
+actor_area 55
+actor_area_radius 2
+actor_area_to_place_in 53
+force_placement
+find_closest
+}
+create_object OFF_GRID
+{
+set_gaia_object_only
+set_gaia_unconvertible
+number_of_groups 9320
+set_scaling_to_map_size
+terrain_to_place_on FRM
+second_object FORAGE
+actor_area 56
+actor_area_radius 0
+actor_area_to_place_in 55
+avoid_actor_area 7
+avoid_actor_area 54
+}
+#const PH56_18 647
+create_object PH56_18
+{
+number_of_groups 9320
+set_scaling_to_map_size
+actor_area 57
+actor_area_radius 1
+actor_area_to_place_in 56
+force_placement
+find_closest
+}
+#const PH57_18 647
+create_object PH57_18
+{
+number_of_groups 9320
+set_scaling_to_map_size
+actor_area 58
+actor_area_radius 2
+actor_area_to_place_in 56
+force_placement
+find_closest
+}
+create_object OFF_GRID
+{
+set_gaia_object_only
+set_gaia_unconvertible
+number_of_groups 9320
+set_scaling_to_map_size
+terrain_to_place_on FRM
+second_object FORAGE
+actor_area_to_place_in 58
+avoid_actor_area 7
+avoid_actor_area 57
+}
+/* END_OBJECTS_AUTOSCRIBE */
+if REGICIDE create_object KING { set_place_for_every_player avoid_forest_zone 3 find_closest } endif
+<LAND_GENERATION>
+base_terrain BT
+/* Player Land Creation */
+
+/* LAND_AUTOSCRIBE */
+L {  terrain_type  FRM base_size 2 number_of_tiles 0 land_position 64 46  }
+L {  terrain_type  FRM base_size 2 number_of_tiles 0 land_position 54 65  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 63 83  }
+L {  terrain_type  FRM base_size 2 number_of_tiles 0 land_position 35 49  }
+L {  terrain_type  FRM base_size 2 number_of_tiles 0 land_position 65 49  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 20 32  }
+L {  terrain_type  FRM base_size 2 number_of_tiles 0 land_position 65 48  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 63 18  }
+L {  terrain_type  FRM base_size 2 number_of_tiles 0 land_position 45 64  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 35 82  }
+L {  terrain_type  FRM base_size 2 number_of_tiles 0 land_position 37 57  }
+L {  terrain_type  FRM base_size 2 number_of_tiles 0 land_position 61 39  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 20 68  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 15 50  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 55 85  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 19 33  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 77 72  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 81 67  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 44 84  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 84 41  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 54 85  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 43 16  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 16 44  }
+L {  terrain_type  FRM base_size 2 number_of_tiles 0 land_position 56 64  }
+L {  terrain_type  FRM base_size 2 number_of_tiles 0 land_position 35 53  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 16 60  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 84 57  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 83 60  }
+L {  terrain_type  FRM base_size 2 number_of_tiles 0 land_position 53 35  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 18 63  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 48 15  }
+L {  terrain_type  FRM base_size 2 number_of_tiles 0 land_position 60 61  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 15 52  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 84 59  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 29 22  }
+L {  terrain_type  FRM base_size 2 number_of_tiles 0 land_position 44 64  }
+L {  terrain_type  FRM base_size 2 number_of_tiles 0 land_position 37 58  }
+L {  terrain_type  FRM base_size 2 number_of_tiles 0 land_position 46 36  }
+L {  terrain_type  FRM base_size 2 number_of_tiles 0 land_position 63 42  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 16 40  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 19 66  }
+L {  terrain_type  FRM base_size 2 number_of_tiles 0 land_position 39 60  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 35 19  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 53 15  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 83 61  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 19 34  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 26 24  }
+L {  terrain_type  FRM base_size 2 number_of_tiles 0 land_position 38 58  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 73 24  }
+L {  terrain_type  FRM base_size 2 number_of_tiles 0 land_position 64 56  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 51 85  }
+L {  terrain_type  FRM base_size 2 number_of_tiles 0 land_position 58 37  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 50 85  }
+L {  terrain_type  FRM base_size 2 number_of_tiles 0 land_position 35 54  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 15 49  }
+L {  terrain_type  FRM base_size 2 number_of_tiles 0 land_position 63 58  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 47 15  }
+L {  terrain_type  FRM base_size 2 number_of_tiles 0 land_position 35 48  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 25 25  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 15 54  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 33 80  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 78 71  }
+L {  terrain_type  FRM base_size 2 number_of_tiles 0 land_position 36 46  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 54 15  }
+L {  terrain_type  FRM base_size 2 number_of_tiles 0 land_position 50 65  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 85 49  }
+L {  terrain_type  FRM base_size 2 number_of_tiles 0 land_position 65 51  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 75 25  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 17 63  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 83 62  }
+L {  terrain_type  FRM base_size 2 number_of_tiles 0 land_position 48 65  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 84 40  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 83 40  }
+L {  terrain_type  FRM base_size 2 number_of_tiles 0 land_position 42 38  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 84 58  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 30 21  }
+L {  terrain_type  FRM base_size 2 number_of_tiles 0 land_position 49 35  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 81 66  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 83 63  }
+L {  terrain_type  FRM base_size 2 number_of_tiles 0 land_position 50 35  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 81 34  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 52 15  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 35 18  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 25 74  }
+L {  terrain_type  FRM base_size 2 number_of_tiles 0 land_position 63 43  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 40 84  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 22 72  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 49 85  }
+L {  terrain_type  FRM base_size 2 number_of_tiles 0 land_position 44 36  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 74 24  }
+L {  terrain_type  FRM base_size 2 number_of_tiles 0 land_position 46 35  }
+L {  terrain_type  FRM base_size 2 number_of_tiles 0 land_position 39 39  }
+L {  terrain_type  FRM base_size 2 number_of_tiles 0 land_position 41 62  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 85 51  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 15 45  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 77 28  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 26 75  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 60 17  }
+L {  terrain_type  FRM base_size 2 number_of_tiles 0 land_position 51 35  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 31 20  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 39 17  }
+L {  terrain_type  FRM base_size 2 number_of_tiles 0 land_position 57 37  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 26 25  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 21 31  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 45 15  }
+L {  terrain_type  FRM base_size 2 number_of_tiles 0 land_position 64 44  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 83 38  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 81 35  }
+L {  terrain_type  FRM base_size 2 number_of_tiles 0 land_position 64 54  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 82 37  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 40 83  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 24 73  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 33 20  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 26 76  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 69 79  }
+L {  terrain_type  FRM base_size 2 number_of_tiles 0 land_position 36 44  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 16 57  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 69 20  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 38 17  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 57 84  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 67 81  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 75 74  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 80 32  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 56 84  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 36 18  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 82 36  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 78 72  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 84 60  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 48 85  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 25 75  }
+L {  terrain_type  FRM base_size 2 number_of_tiles 0 land_position 65 47  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 16 56  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 64 82  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 68 80  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 79 69  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 66 19  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 76 27  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 28 77  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 15 48  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 20 33  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 37 83  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 31 79  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 85 48  }
+L {  terrain_type  FRM base_size 2 number_of_tiles 0 land_position 42 37  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 17 61  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 20 69  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 19 67  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 40 17  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 34 81  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 81 33  }
+L {  terrain_type  FRM base_size 2 number_of_tiles 0 land_position 64 45  }
+L {  terrain_type  FRM base_size 2 number_of_tiles 0 land_position 57 63  }
+L {  terrain_type  FRM base_size 2 number_of_tiles 0 land_position 46 65  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 57 16  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 33 81  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 24 27  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 42 84  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 17 39  }
+L {  terrain_type  FRM base_size 0 land_position 50 50  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 41 16  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 36 82  }
+L {  terrain_type  FRM base_size 2 number_of_tiles 0 land_position 35 46  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 18 64  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 84 44  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 60 83  }
+L {  terrain_type  FRM base_size 2 number_of_tiles 0 land_position 58 63  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 20 31  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 75 26  }
+L {  terrain_type  FRM base_size 2 number_of_tiles 0 land_position 35 50  }
+L {  terrain_type  FRM base_size 2 number_of_tiles 0 land_position 38 41  }
+L {  terrain_type  FRM base_size 2 number_of_tiles 0 land_position 41 38  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 59 16  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 18 37  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 34 19  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 69 80  }
+L {  terrain_type  FRM base_size 2 number_of_tiles 0 land_position 54 35  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 30 79  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 63 82  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 29 78  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 22 29  }
+L {  terrain_type  FRM base_size 2 number_of_tiles 0 land_position 47 35  }
+L {  terrain_type  FRM base_size 2 number_of_tiles 0 land_position 62 42  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 58 84  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 52 85  }
+L {  terrain_type  FRM base_size 2 number_of_tiles 0 land_position 60 39  }
+L {  terrain_type  FRM base_size 2 number_of_tiles 0 land_position 38 59  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 24 74  }
+L {  terrain_type  FRM base_size 2 number_of_tiles 0 land_position 52 35  }
+L {  terrain_type  FRM base_size 2 number_of_tiles 0 land_position 58 38  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 37 17  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 27 24  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 22 71  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 61 17  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 31 80  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 21 30  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 82 64  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 47 85  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 80 69  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 28 22  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 65 81  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 72 22  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 50 15  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 19 35  }
+L {  terrain_type  FRM base_size 2 number_of_tiles 0 land_position 59 62  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 23 28  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 56 16  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 84 43  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 84 42  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 16 58  }
+L {  terrain_type  FRM base_size 2 number_of_tiles 0 land_position 35 52  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 60 16  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 27 76  }
+L {  terrain_type  FRM base_size 2 number_of_tiles 0 land_position 65 53  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 42 16  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 76 74  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 79 30  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 15 55  }
+L {  terrain_type  FRM base_size 2 number_of_tiles 0 land_position 48 35  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 16 41  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 35 81  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 65 82  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 69 21  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 74 76  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 82 65  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 24 26  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 70 79  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 17 62  }
+L {  terrain_type  FRM base_size 2 number_of_tiles 0 land_position 35 51  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 18 65  }
+L {  terrain_type  FRM base_size 2 number_of_tiles 0 land_position 58 62  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 72 77  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 74 75  }
+L {  terrain_type  FRM base_size 2 number_of_tiles 0 land_position 46 64  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 41 84  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 80 31  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 80 68  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 62 17  }
+L {  terrain_type  FRM base_size 2 number_of_tiles 0 land_position 63 57  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 84 56  }
+L {  terrain_type  FRM base_size 2 number_of_tiles 0 land_position 54 64  }
+L {  terrain_type  FRM base_size 2 number_of_tiles 0 land_position 65 46  }
+L {  terrain_type  FRM base_size 2 number_of_tiles 0 land_position 36 54  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 76 73  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 38 83  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 80 33  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 23 72  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 68 20  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 53 85  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 17 37  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 75 75  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 85 45  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 65 19  }
+L {  terrain_type  FRM base_size 2 number_of_tiles 0 land_position 54 36  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 15 51  }
+L {  terrain_type  FRM base_size 2 number_of_tiles 0 land_position 56 36  }
+L {  terrain_type  FRM base_size 2 number_of_tiles 0 land_position 65 54  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 82 63  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 83 39  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 40 16  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 61 83  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 67 19  }
+L {  terrain_type  FRM base_size 2 number_of_tiles 0 land_position 62 59  }
+L {  terrain_type  FRM base_size 2 number_of_tiles 0 land_position 61 40  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 64 18  }
+L {  terrain_type  FRM base_size 2 number_of_tiles 0 land_position 62 58  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 46 15  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 18 35  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 37 18  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 39 83  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 25 26  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 71 78  }
+L {  terrain_type  FRM base_size 2 number_of_tiles 0 land_position 36 45  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 17 38  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 22 28  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 17 40  }
+L {  terrain_type  FRM base_size 2 number_of_tiles 0 land_position 55 36  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 15 46  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 63 17  }
+L {  terrain_type  FRM base_size 2 number_of_tiles 0 land_position 37 43  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 49 15  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 43 84  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 33 19  }
+L {  terrain_type  FRM base_size 2 number_of_tiles 0 land_position 52 65  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 76 26  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 21 70  }
+L {  terrain_type  FRM base_size 2 number_of_tiles 0 land_position 53 65  }
+L {  terrain_type  FRM base_size 2 number_of_tiles 0 land_position 51 65  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 16 59  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 37 82  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 32 20  }
+L {  terrain_type  FRM base_size 2 number_of_tiles 0 land_position 39 40  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 55 15  }
+L {  terrain_type  FRM base_size 2 number_of_tiles 0 land_position 40 61  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 85 53  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 28 23  }
+L {  terrain_type  FRM base_size 2 number_of_tiles 0 land_position 64 55  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 85 46  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 16 43  }
+L {  terrain_type  FRM base_size 2 number_of_tiles 0 land_position 35 47  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 74 25  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 19 65  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 83 37  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 58 16  }
+L {  terrain_type  FRM base_size 2 number_of_tiles 0 land_position 37 42  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 28 78  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 31 21  }
+L {  terrain_type  FRM base_size 2 number_of_tiles 0 land_position 42 63  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 21 69  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 85 52  }
+L {  terrain_type  FRM base_size 2 number_of_tiles 0 land_position 49 65  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 18 36  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 45 85  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 79 31  }
+L {  terrain_type  FRM base_size 2 number_of_tiles 0 land_position 65 50  }
+L {  terrain_type  FRM base_size 2 number_of_tiles 0 land_position 38 42  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 85 54  }
+L {  terrain_type  FRM base_size 2 number_of_tiles 0 land_position 61 61  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 62 83  }
+L {  terrain_type  FRM base_size 2 number_of_tiles 0 land_position 62 41  }
+L {  terrain_type  FRM base_size 2 number_of_tiles 0 land_position 47 65  }
+L {  terrain_type  FRM base_size 2 number_of_tiles 0 land_position 42 62  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 32 80  }
+L {  terrain_type  FRM base_size 2 number_of_tiles 0 land_position 61 60  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 79 70  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 59 84  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 46 85  }
+L {  terrain_type  FRM base_size 2 number_of_tiles 0 land_position 55 64  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 15 47  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 85 47  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 78 28  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 51 15  }
+L {  terrain_type  FRM base_size 2 number_of_tiles 0 land_position 45 36  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 82 35  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 65 18  }
+L {  terrain_type  FRM base_size 2 number_of_tiles 0 land_position 65 52  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 85 50  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 72 23  }
+L {  terrain_type  FRM base_size 2 number_of_tiles 0 land_position 43 63  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 15 53  }
+L {  terrain_type  FRM base_size 2 number_of_tiles 0 land_position 59 38  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 16 42  }
+L {  terrain_type  FRM base_size 2 number_of_tiles 0 land_position 39 61  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 78 29  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 17 60  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 71 22  }
+L {  terrain_type  FRM base_size 2 number_of_tiles 0 land_position 40 39  }
+L {  terrain_type  FRM base_size 2 number_of_tiles 0 land_position 36 56  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 70 21  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 85 55  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 73 76  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 66 81  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 72 78  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 60 84  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 81 65  }
+L {  terrain_type  INFRAS base_size 4 number_of_tiles 0 land_position 44 16  }
+L {  terrain_type  FRM base_size 2 number_of_tiles 0 land_position 36 55  }
+L {  terrain_type  FRM base_size 2 number_of_tiles 0 land_position 43 37  }
+create_player_lands { base_size 10 land_percent 0 circle_radius 35 0 } 

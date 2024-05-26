@@ -1,0 +1,519 @@
+/* Compatibility: Definitive Edition */
+<PLAYER_SETUP>
+#const MONKEY 860
+#const TERRAIN_BLOCKER 1613
+effect_amount SET_ATTRIBUTE TERRAIN_BLOCKER ATTR_HITPOINTS 1
+
+effect_amount GAIA_UPGRADE_UNIT WOLF MONKEY 0
+effect_amount GAIA_SET_ATTRIBUTE WOLF ATTR_HITPOINTS 25
+effect_amount GAIA_SET_ATTRIBUTE WOLF ATTR_LINE_OF_SIGHT 5
+effect_amount GAIA_SET_ATTRIBUTE WOLF ATTR_SEARCH_RADIUS 5
+effect_amount GAIA_SET_ATTRIBUTE WOLF ATTR_ATTACK 5377
+effect_amount GAIA_SET_ATTRIBUTE WOLF ATTR_ATTACK 1025
+effect_amount GAIA_SET_ATTRIBUTE WOLF ATTR_SHOWN_ATTACK 0
+effect_amount GAIA_SET_ATTRIBUTE WOLF ATTR_ARMOR 1024
+effect_amount GAIA_SET_ATTRIBUTE WOLF ATTR_ARMOR 768
+effect_amount GAIA_SET_ATTRIBUTE WOLF ATTR_SHOWN_MELEE_ARMOR 0
+effect_amount GAIA_SET_ATTRIBUTE WOLF ATTR_SHOWN_PIERCE_ARMOR 0
+
+effect_amount GAIA_SET_ATTRIBUTE PINETREE ATTR_TERRAIN_ID 19
+
+<LAND_GENERATION>
+#const PLACEHOLDER 278
+#const TERRAIN_BLOCKER 1613
+#const SNOW_STRONG 74
+#const SNOW_LIGHT 73
+#const GRAVEL_ROAD 78
+base_terrain GRAVEL_ROAD
+create_player_lands { 
+    terrain_type DESERT 
+    circle_radius 19 0
+    other_zone_avoidance_distance 11
+    base_size 10 
+}
+
+create_land {
+    terrain_type DIRT
+    bottom_border 70
+    left_border 70
+    border_fuzziness 100
+    zone 1
+}
+
+create_land {
+    terrain_type DIRT2
+    top_border 70
+    right_border 70
+    border_fuzziness 100
+    zone 1
+}
+
+create_land {
+    terrain_type DLC_DESERTGRAVEL
+    top_border 70
+    left_border 70
+    border_fuzziness 100
+    zone 2
+}
+
+create_land {
+    terrain_type DLC_SAVANNAH
+    bottom_border 70
+    right_border 70
+    border_fuzziness 100
+    zone 2
+}
+
+<OBJECTS_GENERATION>
+
+create_object PLACEHOLDER {
+    resource_delta -60 
+    set_place_for_every_player
+    min_distance_to_players 0 
+    max_distance_to_players 0
+    second_object TOWN_CENTER
+    actor_area 1
+    actor_area_radius 0
+}
+
+create_object VILLAGER { set_place_for_every_player min_distance_to_players 3 max_distance_to_players 6 }
+create_object SCOUT { set_place_for_every_player min_distance_to_players 3 max_distance_to_players 6 }
+
+create_object PLACEHOLDER { resource_delta -60 set_place_for_every_player actor_area_to_place_in 1 actor_area 2 actor_area_radius 10 }
+create_object PLACEHOLDER { resource_delta -60 set_place_for_every_player actor_area_to_place_in 1 actor_area 3 actor_area_radius 13 }
+
+create_object PLACEHOLDER { resource_delta -60 set_place_for_every_player actor_area_to_place_in 1 actor_area 4 actor_area_radius 12 }
+create_object PLACEHOLDER { resource_delta -60 set_place_for_every_player actor_area_to_place_in 1 actor_area 5 actor_area_radius 15 }
+
+create_object PLACEHOLDER { resource_delta -60 set_place_for_every_player actor_area_to_place_in 1 actor_area 6 actor_area_radius 20 }
+create_object PLACEHOLDER { resource_delta -60 set_place_for_every_player actor_area_to_place_in 1 actor_area 7 actor_area_radius 40 }
+
+create_object PLACEHOLDER { resource_delta -60 set_place_for_every_player actor_area_to_place_in 1 actor_area 8 actor_area_radius 14 }
+create_object PLACEHOLDER { resource_delta -60 set_place_for_every_player actor_area_to_place_in 1 actor_area 9 actor_area_radius 17 }
+
+create_object PLACEHOLDER { resource_delta -60 set_place_for_every_player actor_area_to_place_in 1 actor_area 11 actor_area_radius 25 }
+create_object PLACEHOLDER { resource_delta -60 set_place_for_every_player actor_area_to_place_in 1 actor_area 13 actor_area_radius 70 }
+
+create_object TERRAIN_BLOCKER { number_of_objects 9999 terrain_to_place_on DLC_BLACK }
+
+#const COLUMN 1322
+create_object COLUMN { 
+    number_of_objects 1000 
+    terrain_to_place_on GRAVEL_ROAD
+    actor_area 77
+    actor_area_radius 5
+}
+
+create_object TORCH {
+    terrain_to_place_on GRAVEL_ROAD
+	number_of_objects 200
+	set_gaia_object_only
+	set_gaia_unconvertible
+    actor_area 56
+    actor_area_radius 3
+}
+
+create_object ROCK { 
+    number_of_groups 200 
+    number_of_objects 1
+    temp_min_distance_group_placement 1
+    terrain_to_place_on GRAVEL_ROAD
+    actor_area 57
+    actor_area_radius 3
+}
+
+create_object TORCH {
+    terrain_to_place_on GRAVEL_ROAD
+	number_of_objects 200
+	set_gaia_object_only
+	set_gaia_unconvertible
+}
+
+create_object GOLD { 
+    set_tight_grouping 
+    number_of_objects 5 
+    set_place_for_every_player 
+    actor_area_to_place_in 3
+    avoid_actor_area 2
+    set_gaia_object_only 
+    actor_area 10
+    actor_area_radius 5
+    avoid_actor_area 77
+}
+
+create_object STONE { 
+    set_tight_grouping 
+    number_of_objects 3 
+    set_place_for_every_player 
+    actor_area_to_place_in 5
+    avoid_actor_area 4
+    avoid_actor_area 10
+    set_gaia_object_only 
+    terrain_to_place_on DESERT
+    avoid_actor_area 56
+}
+
+create_object SHEEP {
+	number_of_objects 4
+	set_loose_grouping
+	set_place_for_every_player
+	min_distance_to_players 7
+	max_distance_to_players  7
+    max_distance_to_other_zones 7
+    terrain_to_place_on DESERT
+} 
+
+create_object SHEEP {
+    number_of_objects 2
+    number_of_groups 2
+    set_tight_grouping
+    set_gaia_object_only
+    set_place_for_every_player
+    min_distance_to_players 10
+    max_distance_to_players 18
+    temp_min_distance_group_placement 10
+    max_distance_to_other_zones 7 
+    terrain_to_place_on DESERT
+}
+
+if REGICIDE create_object KING { set_place_for_every_player find_closest } else endif
+
+create_object BOAR {
+    number_of_objects 1
+    number_of_groups 2
+    set_gaia_object_only
+    set_place_for_every_player
+    actor_area_to_place_in 9
+    avoid_actor_area 8
+    temp_min_distance_group_placement 10
+    terrain_to_place_on DESERT
+    avoid_actor_area 57
+    avoid_actor_area 56
+}
+
+create_object GOLD {
+    set_tight_grouping
+    number_of_objects 2
+    number_of_groups 2
+    set_gaia_object_only
+    set_place_for_every_player
+    actor_area_to_place_in 13
+    avoid_actor_area 11
+    actor_area 12
+    actor_area_radius 7
+    temp_min_distance_group_placement 10
+    avoid_forest_zone 2
+    min_distance_to_map_edge 2
+    terrain_to_place_on DESERT
+    actor_area 78
+    actor_area_radius 2
+    avoid_actor_area 77
+}
+
+create_object STONE {
+    set_tight_grouping
+    number_of_objects 2
+    number_of_groups 2
+    set_gaia_object_only
+    set_place_for_every_player
+    actor_area_to_place_in 13
+    avoid_actor_area 11
+    avoid_actor_area 12
+    temp_min_distance_group_placement 10
+    avoid_forest_zone 1
+    min_distance_to_map_edge 2
+    terrain_to_place_on DESERT
+    actor_area 79
+    avoid_actor_area 78
+    actor_area_radius 2
+    avoid_actor_area 56
+    avoid_actor_area 57
+}
+
+create_object DLC_DEADTREE {
+    number_of_objects 5
+    set_place_for_every_player
+    set_gaia_object_only
+    min_distance_to_players 5
+	max_distance_to_players 7
+}
+
+create_object DLC_DEADTREE {
+    number_of_objects 5
+    set_place_for_every_player
+    set_gaia_object_only
+    min_distance_to_players 5
+	max_distance_to_players 7
+}
+
+create_object DLC_DEADTREE {
+    number_of_groups 9999
+    number_of_objects 1
+    terrain_to_place_on PINE_FOREST
+}
+
+create_object SKELETON { terrain_to_place_on DIRT number_of_groups 200 temp_min_distance_group_placement 5 number_of_objects 3 }
+create_object GOLD { avoid_forest_zone 2 actor_area 80 actor_area_radius 3 terrain_to_place_on DIRT 
+    if TINY_MAP
+        number_of_groups 5
+    elseif SMALL_MAP
+        number_of_groups 5
+    elseif MEDIUM_MAP
+        number_of_groups 7
+    elseif LARGE_MAP
+        number_of_groups 8
+    else
+        number_of_groups 8
+    endif 
+    number_of_objects 4 set_gaia_object_only set_tight_grouping temp_min_distance_group_placement 10 avoid_actor_area 77 }
+create_object RUBBLE_1_X_1 { terrain_to_place_on DIRT number_of_groups 20 number_of_objects 4 set_gaia_object_only set_tight_grouping temp_min_distance_group_placement 10 avoid_actor_area 77 }
+create_object ROMAN_RUINS { terrain_to_place_on DIRT number_of_groups 3 number_of_objects 1 set_gaia_object_only set_tight_grouping temp_min_distance_group_placement 10 avoid_actor_area 77 }
+create_object WOLF { actor_area 81 actor_area_radius 3 terrain_to_place_on DIRT 
+    if TINY_MAP
+        number_of_groups 5
+    elseif SMALL_MAP
+        number_of_groups 5
+    elseif MEDIUM_MAP
+        number_of_groups 7
+    elseif LARGE_MAP
+        number_of_groups 8
+    else
+        number_of_groups 8
+    endif 
+    number_of_objects 1 set_gaia_object_only set_tight_grouping temp_min_distance_group_placement 10 avoid_actor_area 77 }
+create_object RELIC { actor_area 82 actor_area_radius 3 terrain_to_place_on DIRT set_tight_grouping number_of_objects 1 set_gaia_object_only avoid_actor_area 77 }
+
+create_object SKELETON { terrain_to_place_on DIRT2 number_of_groups 200 temp_min_distance_group_placement 5 number_of_objects 3 }
+create_object GOLD { avoid_forest_zone 2 actor_area 83 actor_area_radius 3 terrain_to_place_on DIRT2 
+    if TINY_MAP
+        number_of_groups 5
+    elseif SMALL_MAP
+        number_of_groups 5
+    elseif MEDIUM_MAP
+        number_of_groups 7
+    elseif LARGE_MAP
+        number_of_groups 8
+    else
+        number_of_groups 8
+    endif 
+    number_of_objects 4 set_gaia_object_only set_tight_grouping temp_min_distance_group_placement 10 avoid_actor_area 77 }
+create_object RUBBLE_1_X_1 { terrain_to_place_on DIRT2 number_of_groups 20 number_of_objects 4 set_gaia_object_only set_tight_grouping temp_min_distance_group_placement 10 avoid_actor_area 77 }
+create_object ROMAN_RUINS { terrain_to_place_on DIRT2 number_of_groups 3 number_of_objects 1 set_gaia_object_only set_tight_grouping temp_min_distance_group_placement 10 avoid_actor_area 77 }
+create_object WOLF { actor_area 84 actor_area_radius 3 terrain_to_place_on DIRT2
+    if TINY_MAP
+        number_of_groups 5
+    elseif SMALL_MAP
+        number_of_groups 5
+    elseif MEDIUM_MAP
+        number_of_groups 7
+    elseif LARGE_MAP
+        number_of_groups 8
+    else
+        number_of_groups 8
+    endif 
+    number_of_objects 1 set_gaia_object_only set_tight_grouping temp_min_distance_group_placement 10 avoid_actor_area 77 }
+create_object RELIC { actor_area 85 actor_area_radius 3 terrain_to_place_on DIRT2 set_tight_grouping number_of_objects 1 set_gaia_object_only avoid_actor_area 77 }
+
+
+create_object SKELETON { terrain_to_place_on DLC_DESERTGRAVEL number_of_groups 200 temp_min_distance_group_placement 5 number_of_objects 3 }
+create_object STONE { avoid_forest_zone 2 actor_area 86 actor_area_radius 3 terrain_to_place_on DLC_DESERTGRAVEL
+    if TINY_MAP
+        number_of_groups 5
+    elseif SMALL_MAP
+        number_of_groups 5
+    elseif MEDIUM_MAP
+        number_of_groups 7
+    elseif LARGE_MAP
+        number_of_groups 8
+    else
+        number_of_groups 8
+    endif 
+    number_of_objects 3 set_gaia_object_only set_tight_grouping temp_min_distance_group_placement 10 avoid_actor_area 77 }
+create_object RUBBLE_1_X_1 { terrain_to_place_on DLC_DESERTGRAVEL number_of_groups 20 number_of_objects 4 set_gaia_object_only set_tight_grouping temp_min_distance_group_placement 10 avoid_actor_area 77 }
+create_object ROMAN_RUINS { terrain_to_place_on DLC_DESERTGRAVEL number_of_groups 3 number_of_objects 1 set_gaia_object_only set_tight_grouping temp_min_distance_group_placement 10 avoid_actor_area 77 }
+create_object WOLF { actor_area 87 actor_area_radius 3 terrain_to_place_on DLC_DESERTGRAVEL 
+    if TINY_MAP
+        number_of_groups 5
+    elseif SMALL_MAP
+        number_of_groups 5
+    elseif MEDIUM_MAP
+        number_of_groups 7
+    elseif LARGE_MAP
+        number_of_groups 8
+    else
+        number_of_groups 8
+    endif 
+    number_of_objects 1 set_gaia_object_only set_tight_grouping temp_min_distance_group_placement 10 avoid_actor_area 77 }
+create_object RELIC { actor_area 88 actor_area_radius 3 terrain_to_place_on DLC_DESERTGRAVEL set_tight_grouping number_of_objects 1 set_gaia_object_only avoid_actor_area 77 }
+
+create_object SKELETON { terrain_to_place_on DLC_SAVANNAH number_of_groups 200 temp_min_distance_group_placement 5 number_of_objects 3 }
+create_object STONE { avoid_forest_zone 2 actor_area 89 actor_area_radius 3 terrain_to_place_on DLC_SAVANNAH 
+    if TINY_MAP
+        number_of_groups 5
+    elseif SMALL_MAP
+        number_of_groups 5
+    elseif MEDIUM_MAP
+        number_of_groups 7
+    elseif LARGE_MAP
+        number_of_groups 8
+    else
+        number_of_groups 8
+    endif 
+    number_of_objects 3 set_gaia_object_only set_tight_grouping temp_min_distance_group_placement 10 avoid_actor_area 77 }
+create_object RUBBLE_1_X_1 { terrain_to_place_on DLC_SAVANNAH number_of_groups 20 number_of_objects 4 set_gaia_object_only set_tight_grouping temp_min_distance_group_placement 10 avoid_actor_area 77 }
+create_object ROMAN_RUINS { terrain_to_place_on DLC_SAVANNAH number_of_groups 3 number_of_objects 1 set_gaia_object_only set_tight_grouping temp_min_distance_group_placement 10 avoid_actor_area 77 }
+create_object WOLF { actor_area 90 actor_area_radius 3 terrain_to_place_on DLC_SAVANNAH 
+    if TINY_MAP
+        number_of_groups 5
+    elseif SMALL_MAP
+        number_of_groups 5
+    elseif MEDIUM_MAP
+        number_of_groups 7
+    elseif LARGE_MAP
+        number_of_groups 8
+    else
+        number_of_groups 8
+    endif 
+    number_of_objects 1 set_gaia_object_only set_tight_grouping temp_min_distance_group_placement 10 avoid_actor_area 77 }
+create_object RELIC { actor_area 91 actor_area_radius 3 terrain_to_place_on DLC_SAVANNAH set_tight_grouping number_of_objects 1 set_gaia_object_only avoid_actor_area 77 }
+
+#const WELL 1567
+create_object WELL {
+    number_of_objects 1
+}
+
+<ELEVATION_GENERATION>
+<TERRAIN_GENERATION>
+
+create_terrain DLC_BLACK {
+    base_terrain GRAVEL_ROAD
+    number_of_clumps 9999
+    number_of_tiles 9999
+    spacing_to_other_terrain_types 1
+}
+
+create_terrain ROAD {
+    base_terrain DESERT
+    number_of_clumps 20
+    number_of_tiles 200
+    terrain_mask 1
+}
+
+create_terrain ROAD {
+    base_terrain DIRT
+    number_of_clumps 20
+    number_of_tiles 200
+    terrain_mask 1
+}
+
+create_terrain ROAD {
+    base_terrain DIRT2
+    number_of_clumps 20
+    number_of_tiles 200
+    terrain_mask 1
+}
+
+create_terrain DLC_ROADGRAVEL {
+    base_terrain DLC_DESERTGRAVEL
+    number_of_clumps 9999
+    number_of_tiles 9999
+    terrain_mask 1
+}
+
+create_terrain DLC_DESERTGRAVEL {
+    base_terrain DESERT
+    number_of_clumps 9999
+    number_of_tiles 9999
+    terrain_mask 1
+}
+
+create_terrain DLC_ROADGRAVEL {
+    base_terrain DIRT
+    number_of_clumps 9999
+    number_of_tiles 9999
+    terrain_mask 1
+}
+
+create_terrain DLC_ROADGRAVEL {
+    base_terrain DIRT2
+    number_of_clumps 9999
+    number_of_tiles 9999
+    terrain_mask 1
+}
+
+create_terrain DLC_ROADGRAVEL {
+    base_terrain DLC_DESERTGRAVEL
+    number_of_clumps 9999
+    number_of_tiles 9999
+    terrain_mask 1
+}
+
+create_terrain DLC_ROADGRAVEL {
+    base_terrain DLC_SAVANNAH
+    number_of_clumps 9999
+    number_of_tiles 9999
+    terrain_mask 1
+}
+
+create_terrain PINE_FOREST {
+    base_terrain DESERT
+    number_of_clumps 20
+    number_of_tiles 400
+    terrain_mask 2
+    set_avoid_player_start_areas 20
+    set_scale_by_size
+}
+
+create_terrain PINE_FOREST {
+    base_terrain DIRT
+    number_of_clumps 10
+    number_of_tiles 80
+    terrain_mask 2
+    set_scale_by_size
+}
+
+create_terrain PINE_FOREST {
+    base_terrain DIRT2
+    number_of_clumps 10
+    number_of_tiles 80
+    terrain_mask 2
+    set_scale_by_size
+}
+
+create_terrain PINE_FOREST {
+    base_terrain DLC_SAVANNAH
+    number_of_clumps 10
+    number_of_tiles 80
+    terrain_mask 2
+    set_scale_by_size
+}
+
+create_terrain PINE_FOREST {
+    base_terrain DLC_DESERTGRAVEL
+    number_of_clumps 10
+    number_of_tiles 80
+    terrain_mask 2
+    set_scale_by_size
+}
+
+
+
+
+
+<CONNECTION_GENERATION>
+
+create_connect_same_land_zones {
+    default_terrain_replacement DLC_ROCK
+    replace_terrain GRASS GRASS
+    replace_terrain DIRT DIRT
+    replace_terrain DIRT2 DIRT2
+    replace_terrain DLC_DESERTGRAVEL DLC_DESERTGRAVEL
+    replace_terrain DLC_SAVANNAH DLC_SAVANNAH
+    replace_terrain DESERT DESERT
+    terrain_size DESERT 0 2
+    terrain_size DIRT 0 2
+    terrain_size DIRT2 0 2
+    terrain_size DLC_DESERTGRAVEL 0 2
+    terrain_size DLC_SAVANNAH 0 2
+    terrain_cost PINE_FOREST 15
+}

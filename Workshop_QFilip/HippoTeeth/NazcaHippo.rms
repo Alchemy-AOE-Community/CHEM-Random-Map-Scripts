@@ -1,0 +1,1105 @@
+/* Compatibility: Definitive Edition */
+
+/* 9 villager start example */
+/* you do not need to use this exact implementation, but it should have the same starting resources overall */
+
+/* use two different different herdables so that you aren't giving all sheep 70 food */
+#const HERDABLE_A 1245 /* Pig */
+#const HERDABLE_B 594 /* Sheep */
+
+/* palceholders used for positioning */
+#const PH_NEUTRAL_OFF 346 /* Off-Grid Object - only used for gaia objects */
+#const PH_PLAYER_OFF 647 /* Off-Grid Object - only used for player objects */
+
+/* used to spawn 6 villagers in exact positions under the TC */
+#const LAZY_VILLAGER 1285 /* FE Flag */
+
+/* used to explore tiles around the TC */
+#const EW_REVEALER 851 /* ES Flag */
+
+
+<PLAYER_SETUP>
+direct_placement
+
+#const PLACEHOLDER 647
+effect_amount SET_ATTRIBUTE PLACEHOLDER ATTR_STORAGE_VALUE 0
+/* creates the villagers from the flags under the TC */
+effect_amount SET_ATTRIBUTE LAZY_VILLAGER ATTR_DEAD_ID 83
+effect_amount SET_ATTRIBUTE LAZY_VILLAGER ATTR_HITPOINTS 0
+
+/* adjust starting resources */
+effect_amount MOD_RESOURCE AMOUNT_STARTING_WOOD ATTR_ADD -30
+effect_amount MOD_RESOURCE AMOUNT_STARTING_FOOD ATTR_ADD -100
+
+/* make the herdable under the TC die and only have 70 food */
+/* note that you should NOT place this herdable type for gaia anywhere else */
+effect_amount GAIA_ADD_ATTRIBUTE HERDABLE_A ATTR_STORAGE_VALUE -30	
+effect_amount GAIA_SET_ATTRIBUTE HERDABLE_A ATTR_HITPOINTS 0
+
+/* revealer line of sight */
+effect_amount SET_ATTRIBUTE EW_REVEALER ATTR_LINE_OF_SIGHT 18
+effect_amount SET_ATTRIBUTE EW_REVEALER ATTR_HITPOINTS 0
+
+
+#const FARM_67 31
+
+<LAND_GENERATION>
+base_terrain DLC_ACACIAFOREST
+base_elevation 1
+
+start_random
+	percent_chance 50 #define PLAYER_1_TOP
+end_random
+
+create_land {
+	terrain_type DESERT
+	land_position 10 90
+	assign_to_player 1
+	land_percent 0
+	base_size 45
+	other_zone_avoidance_distance 7
+	zone 1
+	clumping_factor 20
+	base_elevation 1
+}
+
+create_land {
+	terrain_type DLC_DESERTGRAVEL
+	land_position 90 90
+	assign_to_player 2
+	land_percent 0
+	base_size 45
+	other_zone_avoidance_distance 7
+	zone 2
+	clumping_factor 20
+	base_elevation 1
+}
+
+create_land create_land {
+	terrain_type FARM_67
+	land_position 50 90
+	base_size 0
+	base_elevation 1
+}
+
+create_land create_land {
+	terrain_type GRASS2
+	land_position 50 55
+	base_elevation 1
+}
+
+create_land create_land {
+	terrain_type GRASS2
+	land_position 50 0
+	land_percent 0
+	base_size 62
+	base_elevation 1
+}
+
+create_land { terrain_type DLC_SAVANNAH land_position 17 19 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 18 19 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 19 19 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 20 19 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 21 19 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 22 19 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 23 19 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 24 19 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 25 19 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 15 20 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 16 20 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 17 20 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 24 20 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 25 20 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 26 20 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 27 20 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 28 20 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 29 20 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 13 21 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 14 21 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 15 21 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 29 21 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 30 21 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 31 21 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 32 21 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 12 22 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 13 22 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 32 22 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 33 22 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 34 22 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 11 23 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 12 23 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 34 23 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 35 23 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 36 23 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 10 24 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 11 24 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 36 24 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 37 24 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 9 25 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 10 25 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 37 25 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 38 25 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 39 25 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 8 26 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 9 26 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 38 26 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 39 26 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 40 26 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 7 27 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 8 27 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 39 27 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 40 27 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 41 27 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 7 28 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 40 28 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 41 28 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 6 29 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 7 29 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 41 29 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 42 29 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 5 30 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 6 30 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 42 30 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 43 30 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 5 31 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 6 31 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 43 31 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 44 31 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 5 32 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 44 32 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 4 33 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 5 33 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 44 33 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 45 33 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 4 34 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 45 34 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 46 34 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 4 35 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 46 35 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 47 35 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 4 36 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 46 36 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 47 36 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 48 36 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 3 37 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 4 37 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 47 37 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 48 37 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 49 37 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 3 38 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 48 38 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 49 38 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 50 38 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 68 38 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 69 38 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 70 38 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 71 38 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 3 39 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 50 39 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 51 39 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 52 39 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 67 39 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 68 39 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 71 39 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 72 39 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 84 39 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 85 39 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 86 39 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 3 40 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 52 40 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 53 40 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 54 40 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 55 40 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 66 40 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 67 40 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 72 40 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 73 40 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 81 40 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 82 40 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 83 40 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 84 40 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 86 40 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 87 40 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 88 40 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 89 40 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 3 41 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 4 41 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 13 41 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 14 41 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 54 41 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 55 41 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 56 41 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 57 41 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 58 41 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 59 41 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 60 41 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 61 41 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 62 41 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 66 41 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 73 41 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 80 41 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 81 41 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 82 41 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 89 41 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 90 41 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 3 42 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 4 42 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 13 42 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 14 42 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 62 42 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 63 42 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 64 42 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 65 42 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 66 42 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 73 42 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 79 42 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 80 42 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 81 42 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 90 42 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 91 42 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 4 43 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 13 43 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 14 43 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 15 43 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 64 43 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 65 43 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 66 43 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 73 43 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 74 43 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 76 43 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 77 43 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 78 43 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 79 43 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 91 43 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 92 43 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 4 44 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 13 44 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 15 44 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 73 44 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 74 44 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 75 44 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 76 44 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 77 44 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 92 44 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 93 44 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 4 45 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 5 45 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 13 45 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 15 45 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 16 45 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 93 45 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 4 46 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 5 46 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 13 46 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 15 46 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 16 46 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 93 46 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 94 46 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 5 47 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 13 47 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 16 47 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 94 47 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 5 48 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 6 48 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 13 48 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 16 48 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 17 48 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 94 48 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 95 48 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 6 49 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 7 49 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 13 49 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 17 49 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 94 49 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 95 49 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 7 50 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 13 50 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 14 50 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 17 50 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 18 50 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 95 50 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 7 51 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 8 51 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 14 51 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 18 51 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 95 51 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 8 52 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 9 52 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 14 52 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 15 52 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 18 52 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 19 52 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 95 52 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 96 52 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 9 53 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 10 53 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 14 53 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 15 53 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 19 53 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 20 53 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 95 53 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 96 53 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 10 54 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 11 54 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 12 54 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 15 54 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 20 54 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 21 54 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 22 54 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 96 54 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 12 55 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 13 55 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 14 55 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 15 55 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 22 55 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 23 55 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 96 55 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 23 56 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 24 56 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 25 56 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 95 56 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 96 56 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 25 57 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 26 57 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 27 57 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 78 57 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 79 57 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 80 57 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 95 57 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 96 57 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 27 58 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 28 58 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 29 58 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 76 58 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 77 58 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 78 58 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 79 58 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 80 58 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 81 58 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 82 58 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 83 58 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 95 58 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 29 59 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 30 59 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 75 59 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 76 59 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 82 59 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 83 59 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 84 59 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 85 59 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 94 59 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 95 59 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 28 60 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 29 60 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 30 60 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 74 60 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 75 60 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 85 60 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 86 60 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 87 60 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 93 60 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 94 60 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 27 61 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 28 61 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 29 61 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 41 61 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 42 61 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 43 61 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 73 61 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 74 61 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 87 61 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 88 61 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 89 61 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 90 61 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 91 61 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 92 61 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 93 61 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 26 62 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 27 62 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 40 62 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 41 62 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 42 62 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 43 62 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 72 62 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 73 62 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 84 62 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 85 62 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 25 63 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 26 63 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 38 63 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 39 63 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 40 63 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 43 63 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 72 63 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 73 63 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 83 63 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 84 63 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 85 63 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 86 63 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 24 64 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 25 64 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 37 64 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 38 64 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 39 64 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 42 64 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 43 64 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 57 64 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 58 64 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 59 64 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 60 64 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 61 64 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 62 64 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 63 64 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 71 64 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 72 64 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 83 64 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 84 64 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 23 65 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 24 65 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 36 65 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 37 65 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 41 65 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 42 65 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 54 65 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 55 65 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 56 65 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 57 65 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 58 65 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 62 65 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 63 65 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 64 65 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 65 65 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 71 65 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 72 65 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 22 66 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 23 66 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 35 66 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 36 66 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 39 66 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 40 66 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 41 66 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 52 66 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 53 66 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 54 66 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 65 66 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 66 66 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 71 66 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 74 66 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 75 66 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 76 66 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 77 66 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 22 67 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 34 67 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 35 67 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 38 67 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 39 67 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 50 67 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 51 67 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 52 67 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 66 67 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 67 67 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 71 67 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 73 67 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 74 67 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 76 67 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 77 67 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 22 68 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 33 68 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 34 68 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 35 68 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 36 68 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 37 68 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 38 68 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 48 68 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 49 68 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 50 68 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 67 68 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 71 68 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 73 68 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 75 68 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 76 68 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 22 69 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 23 69 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 32 69 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 33 69 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 34 69 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 35 69 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 36 69 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 47 69 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 48 69 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 67 69 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 68 69 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 70 69 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 71 69 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 73 69 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 74 69 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 75 69 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 23 70 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 24 70 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 32 70 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 33 70 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 34 70 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 35 70 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 46 70 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 47 70 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 68 70 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 69 70 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 70 70 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 24 71 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 25 71 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 31 71 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 32 71 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 33 71 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 34 71 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 45 71 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 46 71 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 25 72 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 26 72 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 27 72 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 29 72 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 30 72 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 31 72 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 33 72 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 44 72 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 45 72 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 27 73 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 28 73 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 29 73 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 33 73 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 43 73 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 44 73 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 33 74 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 42 74 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 43 74 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 33 75 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 41 75 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 42 75 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 33 76 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 41 76 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 42 76 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 33 77 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 34 77 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 40 77 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 41 77 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 34 78 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 35 78 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 40 78 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 35 79 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 36 79 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 39 79 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 40 79 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 36 80 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 37 80 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 38 80 base_size 1 land_percent 0 base_elevation 0  }
+create_land { terrain_type DLC_SAVANNAH land_position 39 80 base_size 1 land_percent 0 base_elevation 0  }
+
+
+
+<ELEVATION_GENERATION>
+
+
+<TERRAIN_GENERATION>
+
+create_terrain GRASS2 {
+	base_terrain DESERT
+	set_avoid_player_start_areas 25
+	number_of_tiles 9999
+	number_of_clumps 9999
+}
+
+create_terrain DLC_ACACIAFOREST {
+	base_terrain DESERT
+	set_avoid_player_start_areas 15
+	number_of_clumps 4
+	number_of_tiles 100
+}
+
+create_terrain DIRT3 {
+	base_terrain DLC_DESERTGRAVEL
+	set_avoid_player_start_areas 25
+	number_of_tiles 9999
+	number_of_clumps 9999
+}
+
+create_terrain DLC_ACACIAFOREST {
+	base_terrain DLC_DESERTGRAVEL
+	set_avoid_player_start_areas 15
+	number_of_clumps 4
+	number_of_tiles 100
+}
+
+create_terrain GRASS2 {
+	base_terrain DIRT3
+	number_of_tiles 9999
+	number_of_clumps 9999
+}
+
+create_terrain DESERT {
+	base_terrain DLC_DESERTGRAVEL
+	number_of_clumps 9999
+	number_of_tiles 9999
+}
+
+create_terrain DIRT {
+	base_terrain DLC_SAVANNAH
+	number_of_clumps 9999
+	number_of_tiles 9999
+	spacing_to_other_terrain_types 1
+}
+
+create_terrain DESERT {
+	base_terrain GRASS2
+	number_of_clumps 9999
+	number_of_tiles 9999
+}
+
+create_terrain DESERT {
+	base_terrain GRASS2
+	number_of_clumps 9999
+	number_of_tiles 9999
+}
+
+create_terrain DESERT {
+	base_terrain GRASS2
+	number_of_clumps 9999
+	number_of_tiles 9999
+}
+
+create_terrain DESERT {
+	base_terrain GRASS2
+	number_of_clumps 9999
+	number_of_tiles 9999
+}
+
+create_terrain DESERT {
+	base_terrain GRASS2
+	number_of_clumps 9999
+	number_of_tiles 9999
+}
+
+create_terrain DESERT {
+	base_terrain GRASS2
+	number_of_clumps 9999
+	number_of_tiles 9999
+}
+
+create_terrain DLC_SAVANNAH {
+	base_terrain DESERT
+	number_of_clumps 9999
+	number_of_tiles 9999
+	spacing_to_other_terrain_types 1
+	terrain_mask 1
+} 
+
+create_terrain DLC_ACACIAFOREST {
+	number_of_tiles 400
+	number_of_clumps 35
+	base_terrain DESERT
+	set_avoid_player_start_areas 30
+}
+
+create_terrain DLC_DESERTGRAVEL {
+	base_terrain DESERT
+	number_of_tiles 5000
+	number_of_clumps 200
+	terrain_mask 1
+}
+
+create_terrain DLC_DESERTGRAVEL {
+	base_terrain DLC_SAVANNAH
+	number_of_tiles 99999
+	number_of_clumps 9999
+	terrain_mask 2
+}
+
+create_terrain PALM_DESERT {
+	base_terrain DLC_ACACIAFOREST
+	number_of_tiles 70
+	number_of_clumps 30
+}
+
+
+<OBJECTS_GENERATION>
+
+create_object ROCK {
+	number_of_objects 9999
+	number_of_groups 9999
+	terrain_to_place_on FARM_67
+}
+
+create_object GOLD {
+	set_tight_grouping
+	set_gaia_object_only
+	number_of_objects 3
+	number_of_groups 999
+	terrain_to_place_on DIRT
+	set_circular_placement
+	temp_min_distance_group_placement 10
+	actor_area 40
+	actor_area_radius 3
+}
+
+create_object STONE {
+	set_tight_grouping
+	set_gaia_object_only
+	number_of_objects 5
+	number_of_groups 2
+	set_place_for_every_player
+	max_distance_to_players 60
+	terrain_to_place_on DESERT
+	find_closest_to_map_center
+	set_circular_placement
+	temp_min_distance_group_placement 10
+	avoid_actor_area 40
+}
+
+/* explore the area around the TC */
+create_object EW_REVEALER
+{
+	set_place_for_every_player
+	max_distance_to_players 0
+}
+
+create_object TOWN_CENTER {
+	set_place_for_every_player
+	max_distance_to_players 0
+    actor_area 31
+	actor_area_radius 0
+}
+
+create_object PLACEHOLDER { set_place_for_every_player actor_area_to_place_in 31 actor_area 32 actor_area_radius 70 }
+create_object PLACEHOLDER { set_place_for_every_player actor_area_to_place_in 31 actor_area 33 actor_area_radius 20 }
+create_object PLACEHOLDER { set_place_for_every_player actor_area_to_place_in 31 actor_area 34 actor_area_radius 20 }
+create_object PLACEHOLDER { set_place_for_every_player actor_area_to_place_in 31 actor_area 35 actor_area_radius 30 }
+create_object PLACEHOLDER { set_place_for_every_player actor_area_to_place_in 31 actor_area 36 actor_area_radius 40 }
+create_object PLACEHOLDER { set_place_for_every_player actor_area_to_place_in 31 actor_area 37 actor_area_radius 55 }
+
+create_object ROCK {
+	number_of_objects 1
+	number_of_groups 30
+	terrain_to_place_on DESERT
+	avoid_actor_area 36
+	temp_min_distance_group_placement 20
+}
+
+create_object DLC_BOULDER_A {
+	number_of_objects 1
+	number_of_groups 7
+	terrain_to_place_on DESERT
+	avoid_actor_area 36
+	temp_min_distance_group_placement 20
+}
+
+create_object DLC_BOULDER_B {
+	number_of_objects 1
+	number_of_groups 7
+	terrain_to_place_on DESERT
+	avoid_actor_area 36
+	temp_min_distance_group_placement 20
+}
+
+
+create_object CACTUS {
+	number_of_objects 1
+	number_of_groups 14
+	terrain_to_place_on DESERT
+	avoid_actor_area 35
+	temp_min_distance_group_placement 20
+}
+
+create_object DEER {
+	set_tight_grouping
+	set_gaia_object_only
+	number_of_objects 3
+	number_of_groups 10
+	terrain_to_place_on DESERT
+	min_distance_to_players 40
+	set_circular_placement
+	temp_min_distance_group_placement 15
+	avoid_actor_area 32
+}
+
+create_object SCOUT
+{
+	set_place_for_every_player
+	min_distance_to_players 6
+	max_distance_to_players 7
+	set_circular_placement
+	min_distance_group_placement 1
+}
+
+/* these actor areas are used to help position the villagers under the TC */
+create_object PH_NEUTRAL_OFF /* Near Positioner */
+{
+	set_place_for_every_player
+	set_gaia_object_only
+	number_of_objects 5
+	min_distance_to_players 1
+	max_distance_to_players 1
+	find_closest
+	actor_area 5100
+	actor_area_radius 0
+}
+create_object PH_NEUTRAL_OFF /* Villager Avoider */
+{
+	set_place_for_every_player
+	set_gaia_object_only
+	min_distance_to_players 1
+	max_distance_to_players 1
+	find_closest
+	actor_area 5101
+	actor_area_radius 0
+	avoid_actor_area 5100 /* Near Positioner */
+}
+create_object PH_NEUTRAL_OFF /* Far Positioner */
+{
+	set_place_for_every_player
+	set_gaia_object_only
+	number_of_objects 5
+	min_distance_to_players 2
+	max_distance_to_players 2
+	temp_min_distance_group_placement 1
+	find_closest
+	actor_area 5103
+	actor_area_radius 1
+}
+create_object PH_NEUTRAL_OFF /* Blocking Seventh Villager */
+{
+	set_place_for_every_player
+	set_gaia_object_only
+	min_distance_to_players 2
+	max_distance_to_players 2
+	find_closest
+	actor_area 5104
+	actor_area_radius 0
+	avoid_actor_area 5103 /* Far Positioner */
+}
+
+
+/* this is the sheep under the TC */
+create_object PH_NEUTRAL_OFF
+{
+	set_place_for_every_player
+	second_object HERDABLE_A
+	set_gaia_object_only
+	min_distance_to_players 1
+	max_distance_to_players 1
+	actor_area_radius 1
+	avoid_actor_area 5100 /* Herdable Positioner */
+	find_closest
+	actor_area 20
+}
+
+/* the other 3 starting sheep */
+create_object HERDABLE_A
+{
+	set_place_for_every_player
+	number_of_objects 3
+	set_loose_grouping
+	group_placement_radius 2
+	min_distance_to_players 5
+	max_distance_to_players 6
+	set_circular_placement
+	actor_area 1113
+	actor_area_radius 3
+}
+
+/* these are the sheep that are outside of the explored area - note that we only have 2 total */
+/* this should NOT be the same herdable as is used for the decaying 70 food herdable under the TC */
+create_object HERDABLE_B
+{
+	set_place_for_every_player
+	set_gaia_object_only
+	number_of_objects 2
+	number_of_groups 1
+	set_loose_grouping
+	group_placement_radius 1
+	min_distance_group_placement 2
+	max_distance_to_other_zones 4
+	avoid_forest_zone 2
+	avoid_cliff_zone 2
+	min_distance_to_players 22
+	max_distance_to_players 24
+	set_circular_placement
+}
+
+/* this code is used to place 6 villagers under the TC in exactly optimal positions around the sheep */
+create_object PH_PLAYER_OFF { second_object LAZY_VILLAGER set_place_for_every_player min_distance_to_players 1 find_closest
+	actor_area_to_place_in 20 actor_area 2 actor_area_radius 0 avoid_actor_area 2 avoid_actor_area 5101 avoid_actor_area 5104 }
+create_object PH_PLAYER_OFF { second_object LAZY_VILLAGER set_place_for_every_player min_distance_to_players 1 find_closest
+	actor_area_to_place_in 20 actor_area 2 actor_area_radius 0 avoid_actor_area 2 avoid_actor_area 5101 avoid_actor_area 5104 }
+create_object PH_PLAYER_OFF { second_object LAZY_VILLAGER set_place_for_every_player min_distance_to_players 1 find_closest
+	actor_area_to_place_in 20 actor_area 2 actor_area_radius 0 avoid_actor_area 2 avoid_actor_area 5101 avoid_actor_area 5104 }
+create_object PH_PLAYER_OFF { second_object LAZY_VILLAGER set_place_for_every_player min_distance_to_players 1 find_closest
+	actor_area_to_place_in 20 actor_area 2 actor_area_radius 0 avoid_actor_area 2 avoid_actor_area 5101 avoid_actor_area 5104 }
+create_object PH_PLAYER_OFF { second_object LAZY_VILLAGER set_place_for_every_player min_distance_to_players 1 find_closest
+	actor_area_to_place_in 20 actor_area 2 actor_area_radius 0 avoid_actor_area 2 avoid_actor_area 5101 avoid_actor_area 5104 }
+create_object PH_PLAYER_OFF { second_object LAZY_VILLAGER set_place_for_every_player min_distance_to_players 1 find_closest
+	actor_area_to_place_in 20 actor_area 2 actor_area_radius 0 avoid_actor_area 2 avoid_actor_area 5101 avoid_actor_area 5104 }
+create_object PH_PLAYER_OFF { second_object LAZY_VILLAGER set_place_for_every_player min_distance_to_players 1 find_closest
+	actor_area_to_place_in 20 actor_area 2 actor_area_radius 0 avoid_actor_area 2 avoid_actor_area 5101 avoid_actor_area 5104 }
+create_object PH_PLAYER_OFF { second_object LAZY_VILLAGER set_place_for_every_player min_distance_to_players 1 find_closest
+	actor_area_to_place_in 20 actor_area 2 actor_area_radius 0 avoid_actor_area 2 avoid_actor_area 5101 avoid_actor_area 5104 }
+create_object PH_PLAYER_OFF { second_object LAZY_VILLAGER set_place_for_every_player min_distance_to_players 1 find_closest
+	actor_area_to_place_in 20 actor_area 2 actor_area_radius 0 avoid_actor_area 2 avoid_actor_area 5101 avoid_actor_area 5104 }
+create_object PH_PLAYER_OFF { second_object LAZY_VILLAGER set_place_for_every_player min_distance_to_players 1 find_closest
+	actor_area_to_place_in 20 actor_area 2 actor_area_radius 0 avoid_actor_area 2 avoid_actor_area 5101 avoid_actor_area 5104 }
+create_object PH_PLAYER_OFF { second_object LAZY_VILLAGER set_place_for_every_player min_distance_to_players 1 find_closest
+	actor_area_to_place_in 20 actor_area 2 actor_area_radius 0 avoid_actor_area 2 avoid_actor_area 5101 avoid_actor_area 5104 }
+create_object PH_PLAYER_OFF { second_object LAZY_VILLAGER set_place_for_every_player min_distance_to_players 1 find_closest
+	actor_area_to_place_in 20 actor_area 2 actor_area_radius 0 avoid_actor_area 2 avoid_actor_area 5101 avoid_actor_area 5104 }
+create_object PH_PLAYER_OFF { second_object LAZY_VILLAGER set_place_for_every_player min_distance_to_players 1 find_closest
+	actor_area_to_place_in 20 actor_area 2 actor_area_radius 0 avoid_actor_area 2 avoid_actor_area 5101 avoid_actor_area 5104 }
+create_object PH_PLAYER_OFF { second_object LAZY_VILLAGER set_place_for_every_player min_distance_to_players 1 find_closest
+	actor_area_to_place_in 20 actor_area 2 actor_area_radius 0 avoid_actor_area 2 avoid_actor_area 5101 avoid_actor_area 5104 }
+create_object PH_PLAYER_OFF { second_object LAZY_VILLAGER set_place_for_every_player min_distance_to_players 1 find_closest
+	actor_area_to_place_in 20 actor_area 2 actor_area_radius 0 avoid_actor_area 2 avoid_actor_area 5101 avoid_actor_area 5104 }
+create_object PH_PLAYER_OFF { second_object LAZY_VILLAGER set_place_for_every_player min_distance_to_players 1 find_closest
+	actor_area_to_place_in 20 actor_area 2 actor_area_radius 0 avoid_actor_area 2 avoid_actor_area 5101 avoid_actor_area 5104 }
+create_object PH_PLAYER_OFF { second_object LAZY_VILLAGER set_place_for_every_player min_distance_to_players 1 find_closest
+	actor_area_to_place_in 20 actor_area 2 actor_area_radius 0 avoid_actor_area 2 avoid_actor_area 5101 avoid_actor_area 5104 }
+create_object PH_PLAYER_OFF { second_object LAZY_VILLAGER set_place_for_every_player min_distance_to_players 1 find_closest
+	actor_area_to_place_in 20 actor_area 2 actor_area_radius 0 avoid_actor_area 2 avoid_actor_area 5101 avoid_actor_area 5104 }
+create_object PH_PLAYER_OFF { second_object LAZY_VILLAGER set_place_for_every_player min_distance_to_players 1 find_closest
+	actor_area_to_place_in 20 actor_area 2 actor_area_radius 0 avoid_actor_area 2 avoid_actor_area 5101 avoid_actor_area 5104 }
+create_object PH_PLAYER_OFF { second_object LAZY_VILLAGER set_place_for_every_player min_distance_to_players 1 find_closest
+	actor_area_to_place_in 20 actor_area 2 actor_area_radius 0 avoid_actor_area 2 avoid_actor_area 5101 avoid_actor_area 5104 }
+create_object PH_PLAYER_OFF { second_object LAZY_VILLAGER set_place_for_every_player min_distance_to_players 1 find_closest
+	actor_area_to_place_in 20 actor_area 2 actor_area_radius 0 avoid_actor_area 2 avoid_actor_area 5101 avoid_actor_area 5104 }
+create_object PH_PLAYER_OFF { second_object LAZY_VILLAGER set_place_for_every_player min_distance_to_players 1 find_closest
+	actor_area_to_place_in 20 actor_area 2 actor_area_radius 0 avoid_actor_area 2 avoid_actor_area 5101 avoid_actor_area 5104 }
+create_object PH_PLAYER_OFF { second_object LAZY_VILLAGER set_place_for_every_player min_distance_to_players 1 find_closest
+	actor_area_to_place_in 20 actor_area 2 actor_area_radius 0 avoid_actor_area 2 avoid_actor_area 5101 avoid_actor_area 5104 }
+create_object PH_PLAYER_OFF { second_object LAZY_VILLAGER set_place_for_every_player min_distance_to_players 1 find_closest
+	actor_area_to_place_in 20 actor_area 2 actor_area_radius 0 avoid_actor_area 2 avoid_actor_area 5101 avoid_actor_area 5104 }
+create_object PH_PLAYER_OFF { second_object LAZY_VILLAGER set_place_for_every_player min_distance_to_players 1 find_closest
+	actor_area_to_place_in 20 actor_area 2 actor_area_radius 0 avoid_actor_area 2 avoid_actor_area 5101 avoid_actor_area 5104 }
+create_object PH_PLAYER_OFF { second_object LAZY_VILLAGER set_place_for_every_player min_distance_to_players 1 find_closest
+	actor_area_to_place_in 20 actor_area 2 actor_area_radius 0 avoid_actor_area 2 avoid_actor_area 5101 avoid_actor_area 5104 }
+
+/* this straggler will have 3 villagers near it */
+create_object DLC_ACACIATREE
+{
+	set_place_for_every_player
+	set_gaia_object_only
+	find_closest
+	actor_area 11
+	actor_area_radius 1
+	min_distance_to_players 5
+	avoid_actor_area 1113
+}
+
+/* 3 villagers */
+create_object VILLAGER
+{
+	number_of_objects 3
+	set_place_for_every_player
+	actor_area_to_place_in 11 /* Straggler */
+	place_on_forest_zone
+}
+
+/* 2 starting houses */
+create_object HOUSE
+{
+	set_place_for_every_player
+	number_of_objects 2
+	find_closest
+	max_distance_to_other_zones 4
+	avoid_forest_zone 2
+	min_distance_to_players 7
+	avoid_actor_area 1113
+	min_distance_group_placement 3
+}
+
+create_object GOLD {
+	avoid_forest_zone 2
+	set_tight_grouping
+	set_place_for_every_player
+	set_gaia_object_only
+	number_of_objects 7
+	min_distance_to_players 11
+	max_distance_to_players 12
+	actor_area 66
+	actor_area_radius 3
+	set_circular_placement
+}
+
+create_object STONE {
+	avoid_forest_zone 2
+	set_tight_grouping
+	set_place_for_every_player
+	set_gaia_object_only
+	number_of_objects 5
+	min_distance_to_players 12
+	max_distance_to_players 14
+	avoid_actor_area 66
+	actor_area 69
+	actor_area_radius 3
+	set_circular_placement
+}
+
+create_object BOAR {
+	avoid_forest_zone 2
+	set_place_for_every_player
+	set_gaia_object_only
+	number_of_objects 1
+	min_distance_to_players 16
+	max_distance_to_players 18	
+	avoid_actor_area 66
+	set_circular_placement
+	actor_area 68
+	actor_area_radius 3
+}
+
+create_object BOAR {
+	avoid_forest_zone 2
+	set_place_for_every_player
+	set_gaia_object_only
+	number_of_objects 1
+	min_distance_to_players 16
+	max_distance_to_players 18
+	avoid_actor_area 66
+	avoid_actor_area 68
+	set_circular_placement
+}
+
+create_object FORAGE {
+	set_tight_grouping
+	avoid_forest_zone 2
+	set_place_for_every_player
+	set_gaia_object_only
+	number_of_objects 6
+	min_distance_to_players 10
+	max_distance_to_players 20
+	avoid_actor_area 66
+	avoid_actor_area 68
+	avoid_actor_area 69
+	set_circular_placement
+}
+
+create_object DEER {
+	set_tight_grouping
+	avoid_forest_zone 2
+	set_place_for_every_player
+	set_gaia_object_only
+	number_of_objects 3
+	avoid_actor_area 34
+	actor_area_to_place_in 35
+	avoid_actor_area 66
+	avoid_actor_area 68
+	avoid_actor_area 69
+	set_circular_placement
+}
+
+create_object WOLF {
+	set_place_for_every_player
+	set_gaia_object_only
+	number_of_objects 1
+	actor_area_to_place_in 37
+	avoid_actor_area 36
+	set_circular_placement
+}
+
+create_object HAWK {
+	number_of_objects 2
+}

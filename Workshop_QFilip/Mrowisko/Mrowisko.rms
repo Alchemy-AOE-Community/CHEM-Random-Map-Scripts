@@ -1,0 +1,468 @@
+/* Compatibility: Definitive Edition */
+/* ANThill */
+
+<PLAYER_SETUP>
+grouped_by_team
+
+<LAND_GENERATION>
+base_terrain GRASS
+#const PLACEHOLDER 278
+#const TERRAIN_BLOCKER 1613
+#const MUD 76
+
+create_player_lands { 
+    terrain_type DLC_DRYGRASS 
+    circle_radius 40 0
+    base_size 15
+    land_percent 0
+}
+
+
+create_land { terrain_type MUD land_position 65 50 base_size 1 land_percent 0 base_elevation 5 land_id 2 }
+create_land { terrain_type MUD land_position 64 51 base_size 1 land_percent 0 base_elevation 5 land_id 2 }
+create_land { terrain_type MUD land_position 64 53 base_size 1 land_percent 0 base_elevation 5 land_id 2 }
+create_land { terrain_type MUD land_position 63 55 base_size 1 land_percent 0 base_elevation 5 land_id 2 }
+create_land { terrain_type MUD land_position 63 57 base_size 1 land_percent 0 base_elevation 5 land_id 2 }
+create_land { terrain_type MUD land_position 62 58 base_size 1 land_percent 0 base_elevation 5 land_id 2 }
+create_land { terrain_type MUD land_position 60 60 base_size 1 land_percent 0 base_elevation 5 land_id 2 }
+create_land { terrain_type MUD land_position 59 61 base_size 1 land_percent 0 base_elevation 5 land_id 2 }
+create_land { terrain_type MUD land_position 58 62 base_size 1 land_percent 0 base_elevation 5 land_id 2 }
+create_land { terrain_type MUD land_position 56 63 base_size 1 land_percent 0 base_elevation 5 land_id 2 }
+create_land { terrain_type MUD land_position 54 64 base_size 1 land_percent 0 base_elevation 5 land_id 2 }
+create_land { terrain_type MUD land_position 52 64 base_size 1 land_percent 0 base_elevation 5 land_id 2 }
+create_land { terrain_type MUD land_position 50 64 base_size 1 land_percent 0 base_elevation 5 land_id 2 }
+create_land { terrain_type MUD land_position 49 64 base_size 1 land_percent 0 base_elevation 5 land_id 2 }
+create_land { terrain_type MUD land_position 47 64 base_size 1 land_percent 0 base_elevation 5 land_id 2 }
+create_land { terrain_type MUD land_position 45 64 base_size 1 land_percent 0 base_elevation 5 land_id 2 }
+create_land { terrain_type MUD land_position 43 63 base_size 1 land_percent 0 base_elevation 5 land_id 2 }
+create_land { terrain_type MUD land_position 41 62 base_size 1 land_percent 0 base_elevation 5 land_id 2 }
+create_land { terrain_type MUD land_position 40 61 base_size 1 land_percent 0 base_elevation 5 land_id 2 }
+create_land { terrain_type MUD land_position 39 60 base_size 1 land_percent 0 base_elevation 5 land_id 2 }
+create_land { terrain_type MUD land_position 37 58 base_size 1 land_percent 0 base_elevation 5 land_id 2 }
+create_land { terrain_type MUD land_position 36 57 base_size 1 land_percent 0 base_elevation 5 land_id 2 }
+create_land { terrain_type MUD land_position 36 55 base_size 1 land_percent 0 base_elevation 5 land_id 2 }
+create_land { terrain_type MUD land_position 35 53 base_size 1 land_percent 0 base_elevation 5 land_id 2 }
+create_land { terrain_type MUD land_position 35 51 base_size 1 land_percent 0 base_elevation 5 land_id 2 }
+create_land { terrain_type MUD land_position 35 49 base_size 1 land_percent 0 base_elevation 5 land_id 2 }
+create_land { terrain_type MUD land_position 35 48 base_size 1 land_percent 0 base_elevation 5 land_id 2 }
+create_land { terrain_type MUD land_position 35 46 base_size 1 land_percent 0 base_elevation 5 land_id 2 }
+create_land { terrain_type MUD land_position 36 44 base_size 1 land_percent 0 base_elevation 5 land_id 2 }
+create_land { terrain_type MUD land_position 36 42 base_size 1 land_percent 0 base_elevation 5 land_id 2 }
+create_land { terrain_type MUD land_position 37 41 base_size 1 land_percent 0 base_elevation 5 land_id 2 }
+create_land { terrain_type MUD land_position 39 39 base_size 1 land_percent 0 base_elevation 5 land_id 2 }
+create_land { terrain_type MUD land_position 40 38 base_size 1 land_percent 0 base_elevation 5 land_id 2 }
+create_land { terrain_type MUD land_position 41 37 base_size 1 land_percent 0 base_elevation 5 land_id 2 }
+create_land { terrain_type MUD land_position 43 36 base_size 1 land_percent 0 base_elevation 5 land_id 2 }
+create_land { terrain_type MUD land_position 45 35 base_size 1 land_percent 0 base_elevation 5 land_id 2 }
+create_land { terrain_type MUD land_position 47 35 base_size 1 land_percent 0 base_elevation 5 land_id 2 }
+create_land { terrain_type MUD land_position 49 35 base_size 1 land_percent 0 base_elevation 5 land_id 2 }
+create_land { terrain_type MUD land_position 50 35 base_size 1 land_percent 0 base_elevation 5 land_id 2 }
+create_land { terrain_type MUD land_position 52 35 base_size 1 land_percent 0 base_elevation 5 land_id 2 }
+create_land { terrain_type MUD land_position 54 35 base_size 1 land_percent 0 base_elevation 5 land_id 2 }
+create_land { terrain_type MUD land_position 56 36 base_size 1 land_percent 0 base_elevation 5 land_id 2 }
+create_land { terrain_type MUD land_position 58 37 base_size 1 land_percent 0 base_elevation 5 land_id 2 }
+create_land { terrain_type MUD land_position 59 38 base_size 1 land_percent 0 base_elevation 5 land_id 2 }
+create_land { terrain_type MUD land_position 60 39 base_size 1 land_percent 0 base_elevation 5 land_id 2 }
+create_land { terrain_type MUD land_position 62 41 base_size 1 land_percent 0 base_elevation 5 land_id 2 }
+create_land { terrain_type MUD land_position 63 42 base_size 1 land_percent 0 base_elevation 5 land_id 2 }
+create_land { terrain_type MUD land_position 63 44 base_size 1 land_percent 0 base_elevation 5 land_id 2 }
+create_land { terrain_type MUD land_position 64 46 base_size 1 land_percent 0 base_elevation 5 land_id 2 }
+create_land { terrain_type MUD land_position 64 48 base_size 1 land_percent 0 base_elevation 5 land_id 2 }
+
+
+create_land { terrain_type MUD land_position 50 50 base_elevation 3 land_id 2 }
+
+
+
+<OBJECTS_GENERATION>
+
+create_object FORAGE {
+    terrain_to_place_on GRASS2
+    number_of_groups 9999
+    number_of_objects 4
+    temp_min_distance_group_placement 5
+}
+
+create_object STONE {
+    set_tight_grouping
+    terrain_to_place_on GRASS3
+    number_of_groups 9999
+    number_of_objects 4
+    temp_min_distance_group_placement 5
+}
+
+create_object PLACEHOLDER {
+    resource_delta -60
+    set_place_for_every_player
+    min_distance_to_players 0 
+    max_distance_to_players 0
+    second_object TOWN_CENTER
+    actor_area 1
+    actor_area_radius 0
+}
+
+create_object VILLAGER { set_place_for_every_player min_distance_to_players 3 max_distance_to_players 6 }
+create_object SCOUT { set_place_for_every_player min_distance_to_players 3 max_distance_to_players 6 }
+
+create_object PLACEHOLDER { resource_delta -60 set_place_for_every_player actor_area_to_place_in 1 actor_area 2 actor_area_radius 10 }
+create_object PLACEHOLDER { resource_delta -60 set_place_for_every_player actor_area_to_place_in 1 actor_area 3 actor_area_radius 13 }
+
+create_object PLACEHOLDER { resource_delta -60 set_place_for_every_player actor_area_to_place_in 1 actor_area 4 actor_area_radius 12 }
+create_object PLACEHOLDER { resource_delta -60 set_place_for_every_player actor_area_to_place_in 1 actor_area 5 actor_area_radius 15 }
+
+create_object PLACEHOLDER { resource_delta -60 set_place_for_every_player actor_area_to_place_in 1 actor_area 6 actor_area_radius 20 }
+create_object PLACEHOLDER { resource_delta -60 set_place_for_every_player actor_area_to_place_in 1 actor_area 7 actor_area_radius 40 }
+
+create_object PLACEHOLDER { resource_delta -60 set_place_for_every_player actor_area_to_place_in 1 actor_area 8 actor_area_radius 14 }
+create_object PLACEHOLDER { resource_delta -60 set_place_for_every_player actor_area_to_place_in 1 actor_area 9 actor_area_radius 17 }
+
+create_object PLACEHOLDER { resource_delta -60 set_place_for_every_player actor_area_to_place_in 1 actor_area 11 actor_area_radius 30 }
+create_object PLACEHOLDER { resource_delta -60 set_place_for_every_player actor_area_to_place_in 1 actor_area 13 actor_area_radius 45 }
+create_object PLACEHOLDER { resource_delta -60 set_place_for_every_player actor_area_to_place_in 1 actor_area 14 actor_area_radius 24 }
+
+create_object GOLD { 
+    set_tight_grouping 
+    number_of_objects 7 
+    set_place_for_every_player 
+    actor_area_to_place_in 3
+    avoid_actor_area 2
+    set_gaia_object_only 
+    max_distance_to_other_zones 10
+    actor_area 10
+    actor_area_radius 5
+    terrain_to_place_on GRASS
+    min_distance_to_map_edge 2
+    avoid_forest_zone 3
+}
+
+create_object STONE { 
+    set_tight_grouping 
+    number_of_objects 5 
+    set_place_for_every_player 
+    actor_area_to_place_in 5
+    avoid_actor_area 4
+    avoid_actor_area 10
+    set_gaia_object_only 
+    max_distance_to_other_zones 10 
+    terrain_to_place_on GRASS
+    min_distance_to_map_edge 2
+    avoid_forest_zone 3
+    find_closest
+}
+
+create_object DEER { 
+    set_tight_grouping 
+    number_of_objects 4
+    number_of_groups 1 
+    set_place_for_every_player 
+    avoid_actor_area 6
+    actor_area_to_place_in 14
+    temp_min_distance_group_placement 20
+    set_gaia_object_only 
+    max_distance_to_other_zones 10 
+    terrain_to_place_on GRASS
+    min_distance_to_map_edge 2
+}
+
+create_object RELIC { 
+    set_tight_grouping
+    set_tight_grouping 
+    number_of_objects 1
+    number_of_groups 2 
+    set_place_for_every_player 
+    avoid_actor_area 6
+    actor_area_to_place_in 7
+    temp_min_distance_group_placement 15
+    set_gaia_object_only 
+    terrain_to_place_on MUD
+    find_closest_to_map_center
+}
+
+create_object SHEEP {
+	number_of_objects 4
+	set_loose_grouping
+	set_place_for_every_player
+	min_distance_to_players 7
+	max_distance_to_players  9
+    avoid_forest_zone 2
+} 
+
+create_object SHEEP {
+    number_of_objects 2
+    number_of_groups 2
+    set_tight_grouping
+    set_gaia_object_only
+    set_place_for_every_player
+    min_distance_to_players 10
+    max_distance_to_players 18
+    temp_min_distance_group_placement 10
+    max_distance_to_other_zones 7 
+    terrain_to_place_on GRASS
+    avoid_forest_zone 2
+}
+
+create_object BOAR {
+    number_of_objects 1
+    number_of_groups 2
+    set_gaia_object_only
+    set_place_for_every_player
+    actor_area_to_place_in 9
+    avoid_actor_area 8
+    temp_min_distance_group_placement 10
+    max_distance_to_other_zones 7 
+    terrain_to_place_on GRASS
+}
+
+create_object DLC_BEAR {
+    number_of_objects 1
+    number_of_groups 2
+    set_gaia_object_only
+    set_place_for_every_player
+    actor_area_to_place_in 7
+    avoid_actor_area 11
+    find_closest_to_map_center
+    terrain_to_place_on MUD
+    temp_min_distance_group_placement 10
+    max_distance_to_other_zones 7 
+}
+
+create_object GOLD {
+    set_tight_grouping
+    number_of_objects 4
+    number_of_groups 2
+    set_gaia_object_only
+    set_place_for_every_player
+    actor_area_to_place_in 13
+    avoid_actor_area 11
+    actor_area 12
+    actor_area_radius 7
+    temp_min_distance_group_placement 10
+    max_distance_to_other_zones 10 
+    avoid_forest_zone 2
+    min_distance_to_map_edge 2
+    terrain_to_place_on GRASS
+}
+
+create_object GOLD {
+    set_tight_grouping
+    number_of_objects 4
+    number_of_groups 2
+    set_gaia_object_only
+    avoid_actor_area 12
+    min_distance_to_players 25
+    temp_min_distance_group_placement 30
+    max_distance_to_other_zones 10 
+    avoid_forest_zone 2
+    min_distance_to_map_edge 2
+    terrain_to_place_on GRASS
+}
+
+
+create_object STONE {
+    set_tight_grouping
+    number_of_objects 4
+    number_of_groups 2
+    set_gaia_object_only
+    set_place_for_every_player
+    actor_area_to_place_in 13
+    avoid_actor_area 11
+    avoid_actor_area 12
+    temp_min_distance_group_placement 10
+    max_distance_to_other_zones 10 
+    avoid_forest_zone 2
+    min_distance_to_map_edge 2
+    terrain_to_place_on GRASS
+}
+
+create_object TERRAIN_BLOCKER { number_of_objects 9999 terrain_to_place_on ICYSHORE }
+
+
+<ELEVATION_GENERATION>
+create_elevation 1 {
+    enable_balanced_elevation
+    base_terrain GRASS
+    number_of_tiles 1000
+    number_of_clumps 400
+}
+
+<TERRAIN_GENERATION>
+
+create_terrain DIRT {
+    base_terrain DLC_DRYGRASS
+    number_of_tiles 9999
+    number_of_clumps 1
+    set_avoid_player_start_areas 11
+}
+
+create_terrain DIRT2 {
+    base_terrain DLC_DRYGRASS
+    number_of_tiles 9999
+    number_of_clumps 1
+    set_avoid_player_start_areas 11
+}
+
+create_terrain GRASS {
+    base_terrain DIRT
+    number_of_tiles 9999
+    number_of_clumps 9999
+    set_avoid_player_start_areas 16
+}
+
+create_terrain GRASS {
+    base_terrain DIRT2
+    number_of_tiles 9999
+    number_of_clumps 9999
+    set_avoid_player_start_areas 16
+}
+
+create_terrain SNOW_FOREST {
+    base_terrain DIRT
+    number_of_tiles 100
+    number_of_clumps 2
+}
+
+create_terrain SNOW_FOREST {
+    base_terrain DIRT2
+    number_of_tiles 100
+    number_of_clumps 2
+}
+
+create_terrain MUD {
+    base_terrain GRASS
+    height_limits 2 7
+    number_of_clumps 9999
+    number_of_tiles 9999
+}
+
+create_terrain MUD {
+    base_terrain GRASS
+    height_limits 2 7
+    number_of_clumps 9999
+    number_of_tiles 9999
+}
+
+create_terrain GRASS2 {
+    base_terrain MUD
+    height_limits 2 3
+    number_of_clumps 9999
+    number_of_tiles 9999
+    terrain_mask 2
+}
+
+create_terrain MUD {
+    base_terrain GRASS2
+    number_of_clumps 9999
+    number_of_tiles 9999
+    set_flat_terrain_only
+    spacing_to_other_terrain_types 1
+    terrain_mask 2
+}
+
+
+create_terrain GRASS3 {
+    base_terrain MUD
+    number_of_clumps 9999
+    number_of_tiles 9999
+    set_flat_terrain_only
+    height_limits 3 3
+    spacing_to_other_terrain_types 1
+    terrain_mask 2
+}
+
+create_terrain BIRCH_FOREST {
+    base_terrain GRASS
+    set_avoid_player_start_areas 30
+    set_flat_terrain_only
+    number_of_clumps 40
+    number_of_tiles 1500
+}
+
+create_terrain BIRCH_FOREST {
+    base_terrain SNOW_FOREST
+    number_of_clumps 9999
+    number_of_tiles 9999
+}
+
+create_terrain GRASS {
+    base_terrain DIRT
+    number_of_clumps 9999
+    number_of_tiles 9999
+}
+
+create_terrain GRASS {
+    base_terrain DIRT
+    number_of_clumps 9999
+    number_of_tiles 9999
+}
+
+create_terrain GRASS {
+    base_terrain DIRT
+    number_of_clumps 9999
+    number_of_tiles 9999
+}
+
+create_terrain GRASS {
+    base_terrain DIRT
+    number_of_clumps 9999
+    number_of_tiles 9999
+}
+
+create_terrain GRASS {
+    base_terrain DIRT2
+    number_of_clumps 9999
+    number_of_tiles 9999
+}
+create_terrain GRASS {
+    base_terrain DIRT2
+    number_of_clumps 9999
+    number_of_tiles 9999
+}
+create_terrain GRASS {
+    base_terrain DIRT2
+    number_of_clumps 9999
+    number_of_tiles 9999
+}
+
+create_terrain GRASS {
+    base_terrain DIRT2
+    number_of_clumps 9999
+    number_of_tiles 9999
+}
+
+create_terrain GRASS {
+    base_terrain DLC_DRYGRASS
+    number_of_clumps 9999
+    number_of_tiles 9999
+    terrain_mask 1
+}
+
+
+create_terrain DLC_DRYGRASS {
+    base_terrain GRASS
+    number_of_clumps 50
+    number_of_tiles 1000
+    terrain_mask 1
+}
+
+create_terrain DIRT2 {
+    base_terrain GRASS
+    number_of_clumps 50
+    number_of_tiles 1000
+    terrain_mask 1
+}
+
+create_terrain DLC_FORESTAUTUMN {
+    base_terrain BIRCH_FOREST
+    number_of_clumps 25
+    number_of_tiles 250
+}
+
+
+create_terrain MEDITERRANEAN_FOREST {
+    base_terrain BIRCH_FOREST
+    number_of_clumps 20
+    number_of_tiles 150
+}
+
+
+<CONNECTION_GENERATION>

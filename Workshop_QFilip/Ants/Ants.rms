@@ -1,0 +1,2138 @@
+/* Compatibility: Definitive Edition */
+<PLAYER_SETUP>
+direct_placement
+<LAND_GENERATION>
+base_terrain GRASS
+create_land { terrain_type DIRT land_position 59 10 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 60 10 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 61 10 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 57 11 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 58 11 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 59 11 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 60 11 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 61 11 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 62 11 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 63 11 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 56 12 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 57 12 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 58 12 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 59 12 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 60 12 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 61 12 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 62 12 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 63 12 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 55 13 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 56 13 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 61 13 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 62 13 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 63 13 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 53 14 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 54 14 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 61 14 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 62 14 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 63 14 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 52 15 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 53 15 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 62 15 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 63 15 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 41 16 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 42 16 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 43 16 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 44 16 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 45 16 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 46 16 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 39 17 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 40 17 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 41 17 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 42 17 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 43 17 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 44 17 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 45 17 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 46 17 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 47 17 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 48 17 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 37 18 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 38 18 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 39 18 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 40 18 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 41 18 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 42 18 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 43 18 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 44 18 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 45 18 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 46 18 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 47 18 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 50 18 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 36 19 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 37 19 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 38 19 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 39 19 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 40 19 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 41 19 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 42 19 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 43 19 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 44 19 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 45 19 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 46 19 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 49 19 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 50 19 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 51 19 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 57 19 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 59 19 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 60 19 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 61 19 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 62 19 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 63 19 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 35 20 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 36 20 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 37 20 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 38 20 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 39 20 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 40 20 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 41 20 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 42 20 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 43 20 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 44 20 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 46 20 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 47 20 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 48 20 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 49 20 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 50 20 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 51 20 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 55 20 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 56 20 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 57 20 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 60 20 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 61 20 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 62 20 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 63 20 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 64 20 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 65 20 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 34 21 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 35 21 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 36 21 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 37 21 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 38 21 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 39 21 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 40 21 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 41 21 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 42 21 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 43 21 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 44 21 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 46 21 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 47 21 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 48 21 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 49 21 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 50 21 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 51 21 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 52 21 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 62 21 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 63 21 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 64 21 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 65 21 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 34 22 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 35 22 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 36 22 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 37 22 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 38 22 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 39 22 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 40 22 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 41 22 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 42 22 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 43 22 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 44 22 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 45 22 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 46 22 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 47 22 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 48 22 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 50 22 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 51 22 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 52 22 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 63 22 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 64 22 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 65 22 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 33 23 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 34 23 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 35 23 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 36 23 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 37 23 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 38 23 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 39 23 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 40 23 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 41 23 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 42 23 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 43 23 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 44 23 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 45 23 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 46 23 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 47 23 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 48 23 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 50 23 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 51 23 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 52 23 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 63 23 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 64 23 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 65 23 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 33 24 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 34 24 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 35 24 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 36 24 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 37 24 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 38 24 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 39 24 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 40 24 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 42 24 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 43 24 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 44 24 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 45 24 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 46 24 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 47 24 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 48 24 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 49 24 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 50 24 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 51 24 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 52 24 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 63 24 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 64 24 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 33 25 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 34 25 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 35 25 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 36 25 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 37 25 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 38 25 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 39 25 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 40 25 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 42 25 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 47 25 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 48 25 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 49 25 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 50 25 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 51 25 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 52 25 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 63 25 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 32 26 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 33 26 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 34 26 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 35 26 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 36 26 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 37 26 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 38 26 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 39 26 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 40 26 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 42 26 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 47 26 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 48 26 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 50 26 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 51 26 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 52 26 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 32 27 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 33 27 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 34 27 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 35 27 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 36 27 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 37 27 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 38 27 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 39 27 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 40 27 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 47 27 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 48 27 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 49 27 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 50 27 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 51 27 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 52 27 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 32 28 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 33 28 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 34 28 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 35 28 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 36 28 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 37 28 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 38 28 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 39 28 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 40 28 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 41 28 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 42 28 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 47 28 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 48 28 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 49 28 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 50 28 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 51 28 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 52 28 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 20 29 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 21 29 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 22 29 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 29 29 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 30 29 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 32 29 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 33 29 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 34 29 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 35 29 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 36 29 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 37 29 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 38 29 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 39 29 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 40 29 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 41 29 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 42 29 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 43 29 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 44 29 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 45 29 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 46 29 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 47 29 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 48 29 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 49 29 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 50 29 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 51 29 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 52 29 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 16 30 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 17 30 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 18 30 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 19 30 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 20 30 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 21 30 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 22 30 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 23 30 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 24 30 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 25 30 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 28 30 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 29 30 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 30 30 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 32 30 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 33 30 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 34 30 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 35 30 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 36 30 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 37 30 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 38 30 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 39 30 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 40 30 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 41 30 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 42 30 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 43 30 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 44 30 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 45 30 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 46 30 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 47 30 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 48 30 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 49 30 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 50 30 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 51 30 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 52 30 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 15 31 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 16 31 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 17 31 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 18 31 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 19 31 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 20 31 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 21 31 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 22 31 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 23 31 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 24 31 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 25 31 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 26 31 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 28 31 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 29 31 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 30 31 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 31 31 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 32 31 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 33 31 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 34 31 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 35 31 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 36 31 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 37 31 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 38 31 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 39 31 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 40 31 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 41 31 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 42 31 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 43 31 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 44 31 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 45 31 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 46 31 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 47 31 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 48 31 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 49 31 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 50 31 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 51 31 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 52 31 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 14 32 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 15 32 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 16 32 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 17 32 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 18 32 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 19 32 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 20 32 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 21 32 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 22 32 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 23 32 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 24 32 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 25 32 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 26 32 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 27 32 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 29 32 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 30 32 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 31 32 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 33 32 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 34 32 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 35 32 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 36 32 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 38 32 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 39 32 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 40 32 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 41 32 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 42 32 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 43 32 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 44 32 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 45 32 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 46 32 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 47 32 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 48 32 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 49 32 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 50 32 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 51 32 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 13 33 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 14 33 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 15 33 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 16 33 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 17 33 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 18 33 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 19 33 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 20 33 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 21 33 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 22 33 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 23 33 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 24 33 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 25 33 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 26 33 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 27 33 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 29 33 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 30 33 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 31 33 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 33 33 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 34 33 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 35 33 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 36 33 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 37 33 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 38 33 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 39 33 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 40 33 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 41 33 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 42 33 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 43 33 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 44 33 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 45 33 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 46 33 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 47 33 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 48 33 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 49 33 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 50 33 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 51 33 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 13 34 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 14 34 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 15 34 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 16 34 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 17 34 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 18 34 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 19 34 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 20 34 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 21 34 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 22 34 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 23 34 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 24 34 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 25 34 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 26 34 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 27 34 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 29 34 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 30 34 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 31 34 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 33 34 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 34 34 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 35 34 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 36 34 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 37 34 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 39 34 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 40 34 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 41 34 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 42 34 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 43 34 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 44 34 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 45 34 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 46 34 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 47 34 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 48 34 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 49 34 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 50 34 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 75 34 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 76 34 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 77 34 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 78 34 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 79 34 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 12 35 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 13 35 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 14 35 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 15 35 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 16 35 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 17 35 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 18 35 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 19 35 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 20 35 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 22 35 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 23 35 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 24 35 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 25 35 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 26 35 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 27 35 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 28 35 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 29 35 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 30 35 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 31 35 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 32 35 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 34 35 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 35 35 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 36 35 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 37 35 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 39 35 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 40 35 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 41 35 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 42 35 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 43 35 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 44 35 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 45 35 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 46 35 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 47 35 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 48 35 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 49 35 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 50 35 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 74 35 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 75 35 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 76 35 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 77 35 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 78 35 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 79 35 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 12 36 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 13 36 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 14 36 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 15 36 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 16 36 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 17 36 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 18 36 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 19 36 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 20 36 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 21 36 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 22 36 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 23 36 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 24 36 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 25 36 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 26 36 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 27 36 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 29 36 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 30 36 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 31 36 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 32 36 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 35 36 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 36 36 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 37 36 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 38 36 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 39 36 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 40 36 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 41 36 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 42 36 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 43 36 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 44 36 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 45 36 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 46 36 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 47 36 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 48 36 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 49 36 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 74 36 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 75 36 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 76 36 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 77 36 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 78 36 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 79 36 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 80 36 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 84 36 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 85 36 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 86 36 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 87 36 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 88 36 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 12 37 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 13 37 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 14 37 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 15 37 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 16 37 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 17 37 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 18 37 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 19 37 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 20 37 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 21 37 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 22 37 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 23 37 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 24 37 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 25 37 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 26 37 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 27 37 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 29 37 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 30 37 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 31 37 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 36 37 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 37 37 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 38 37 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 40 37 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 41 37 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 42 37 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 43 37 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 44 37 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 45 37 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 46 37 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 47 37 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 48 37 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 49 37 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 78 37 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 79 37 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 80 37 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 84 37 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 85 37 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 86 37 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 87 37 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 88 37 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 12 38 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 13 38 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 14 38 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 15 38 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 16 38 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 17 38 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 21 38 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 22 38 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 23 38 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 24 38 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 25 38 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 26 38 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 27 38 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 30 38 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 38 38 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 39 38 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 41 38 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 42 38 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 43 38 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 44 38 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 45 38 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 46 38 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 47 38 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 48 38 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 79 38 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 80 38 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 84 38 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 85 38 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 86 38 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 87 38 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 88 38 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 89 38 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 12 39 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 13 39 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 14 39 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 15 39 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 16 39 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 17 39 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 18 39 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 19 39 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 20 39 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 21 39 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 22 39 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 23 39 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 24 39 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 25 39 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 26 39 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 30 39 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 42 39 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 43 39 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 44 39 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 45 39 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 46 39 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 47 39 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 79 39 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 80 39 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 87 39 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 88 39 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 89 39 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 10 40 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 12 40 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 13 40 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 14 40 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 15 40 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 16 40 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 17 40 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 18 40 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 19 40 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 20 40 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 21 40 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 22 40 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 23 40 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 24 40 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 25 40 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 29 40 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 30 40 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 44 40 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 46 40 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 79 40 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 80 40 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 87 40 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 88 40 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 9 41 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 10 41 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 12 41 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 13 41 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 14 41 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 15 41 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 16 41 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 17 41 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 18 41 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 19 41 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 20 41 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 21 41 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 22 41 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 23 41 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 24 41 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 25 41 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 26 41 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 29 41 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 30 41 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 79 41 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 87 41 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 88 41 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 8 42 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 9 42 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 10 42 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 11 42 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 13 42 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 14 42 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 15 42 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 16 42 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 17 42 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 18 42 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 19 42 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 20 42 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 21 42 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 22 42 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 23 42 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 24 42 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 25 42 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 29 42 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 30 42 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 79 42 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 86 42 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 87 42 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 8 43 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 9 43 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 10 43 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 11 43 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 14 43 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 15 43 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 16 43 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 17 43 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 18 43 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 19 43 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 20 43 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 21 43 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 22 43 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 27 43 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 29 43 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 30 43 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 32 43 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 33 43 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 79 43 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 86 43 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 87 43 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 8 44 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 9 44 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 10 44 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 11 44 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 12 44 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 15 44 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 16 44 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 17 44 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 18 44 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 19 44 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 20 44 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 26 44 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 27 44 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 29 44 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 30 44 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 32 44 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 33 44 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 85 44 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 86 44 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 9 45 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 10 45 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 11 45 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 12 45 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 13 45 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 22 45 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 26 45 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 27 45 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 28 45 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 29 45 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 30 45 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 31 45 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 32 45 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 33 45 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 34 45 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 35 45 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 36 45 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 85 45 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 86 45 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 8 46 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 9 46 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 10 46 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 11 46 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 12 46 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 13 46 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 14 46 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 15 46 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 16 46 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 18 46 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 19 46 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 20 46 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 21 46 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 22 46 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 26 46 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 27 46 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 28 46 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 29 46 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 30 46 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 31 46 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 32 46 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 34 46 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 35 46 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 36 46 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 37 46 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 38 46 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 39 46 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 40 46 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 41 46 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 42 46 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 43 46 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 44 46 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 45 46 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 46 46 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 47 46 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 84 46 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 85 46 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 7 47 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 8 47 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 9 47 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 10 47 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 11 47 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 12 47 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 13 47 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 14 47 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 15 47 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 16 47 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 17 47 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 18 47 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 19 47 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 20 47 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 21 47 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 26 47 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 31 47 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 33 47 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 34 47 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 36 47 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 37 47 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 38 47 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 39 47 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 40 47 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 41 47 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 42 47 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 43 47 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 44 47 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 45 47 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 46 47 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 47 47 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 48 47 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 68 47 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 70 47 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 71 47 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 72 47 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 73 47 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 74 47 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 75 47 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 76 47 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 77 47 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 78 47 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 84 47 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 6 48 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 7 48 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 10 48 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 11 48 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 12 48 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 13 48 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 14 48 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 15 48 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 16 48 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 17 48 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 18 48 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 19 48 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 20 48 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 31 48 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 36 48 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 37 48 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 42 48 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 43 48 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 44 48 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 45 48 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 46 48 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 47 48 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 48 48 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 49 48 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 66 48 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 67 48 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 68 48 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 69 48 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 70 48 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 71 48 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 72 48 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 73 48 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 74 48 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 75 48 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 76 48 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 77 48 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 78 48 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 79 48 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 80 48 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 83 48 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 5 49 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 6 49 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 10 49 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 11 49 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 12 49 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 13 49 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 14 49 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 15 49 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 16 49 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 17 49 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 18 49 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 31 49 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 40 49 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 41 49 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 48 49 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 64 49 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 65 49 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 66 49 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 67 49 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 68 49 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 69 49 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 70 49 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 71 49 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 72 49 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 73 49 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 74 49 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 76 49 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 77 49 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 78 49 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 79 49 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 80 49 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 4 50 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 5 50 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 10 50 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 12 50 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 13 50 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 14 50 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 15 50 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 16 50 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 43 50 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 44 50 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 45 50 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 50 50 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 51 50 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 62 50 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 63 50 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 64 50 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 65 50 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 66 50 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 67 50 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 68 50 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 69 50 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 70 50 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 71 50 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 72 50 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 73 50 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 74 50 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 75 50 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 79 50 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 80 50 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 0 51 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 1 51 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 2 51 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 3 51 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 4 51 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 9 51 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 10 51 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 50 51 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 51 51 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 52 51 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 61 51 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 62 51 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 63 51 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 64 51 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 65 51 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 66 51 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 67 51 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 68 51 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 69 51 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 70 51 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 71 51 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 72 51 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 73 51 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 74 51 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 75 51 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 76 51 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 77 51 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 78 51 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 79 51 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 81 51 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 82 51 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 0 52 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 1 52 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 2 52 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 3 52 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 8 52 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 9 52 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 49 52 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 51 52 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 52 52 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 60 52 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 61 52 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 62 52 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 63 52 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 64 52 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 65 52 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 66 52 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 67 52 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 68 52 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 69 52 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 70 52 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 71 52 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 72 52 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 73 52 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 74 52 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 75 52 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 76 52 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 77 52 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 78 52 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 79 52 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 80 52 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 81 52 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 82 52 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 0 53 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 1 53 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 2 53 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 3 53 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 4 53 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 7 53 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 8 53 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 49 53 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 51 53 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 52 53 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 53 53 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 60 53 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 61 53 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 62 53 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 63 53 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 64 53 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 65 53 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 66 53 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 67 53 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 68 53 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 69 53 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 70 53 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 72 53 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 73 53 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 75 53 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 76 53 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 77 53 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 78 53 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 79 53 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 80 53 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 81 53 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 82 53 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 83 53 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 1 54 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 2 54 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 3 54 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 4 54 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 6 54 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 7 54 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 8 54 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 49 54 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 51 54 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 52 54 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 53 54 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 59 54 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 60 54 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 61 54 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 62 54 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 63 54 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 64 54 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 65 54 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 66 54 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 67 54 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 68 54 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 69 54 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 70 54 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 75 54 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 76 54 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 77 54 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 79 54 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 80 54 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 81 54 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 82 54 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 83 54 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 1 55 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 2 55 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 3 55 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 4 55 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 5 55 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 6 55 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 49 55 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 51 55 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 52 55 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 53 55 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 59 55 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 60 55 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 61 55 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 62 55 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 63 55 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 64 55 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 65 55 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 66 55 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 67 55 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 68 55 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 69 55 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 70 55 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 75 55 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 76 55 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 77 55 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 78 55 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 79 55 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 80 55 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 81 55 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 82 55 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 83 55 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 4 56 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 5 56 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 6 56 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 7 56 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 8 56 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 49 56 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 51 56 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 52 56 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 53 56 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 60 56 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 61 56 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 62 56 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 63 56 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 64 56 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 65 56 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 66 56 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 67 56 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 68 56 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 69 56 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 70 56 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 75 56 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 76 56 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 77 56 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 78 56 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 79 56 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 80 56 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 81 56 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 82 56 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 83 56 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 5 57 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 6 57 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 7 57 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 8 57 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 52 57 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 53 57 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 60 57 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 61 57 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 62 57 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 63 57 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 64 57 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 65 57 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 66 57 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 67 57 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 68 57 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 69 57 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 70 57 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 71 57 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 73 57 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 74 57 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 75 57 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 76 57 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 77 57 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 78 57 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 79 57 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 80 57 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 81 57 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 82 57 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 83 57 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 6 58 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 7 58 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 8 58 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 50 58 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 52 58 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 53 58 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 61 58 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 62 58 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 63 58 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 64 58 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 65 58 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 66 58 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 67 58 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 68 58 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 69 58 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 70 58 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 71 58 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type GRASS land_position 73 58 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type GRASS land_position 74 58 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 75 58 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 76 58 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 77 58 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 78 58 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 79 58 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 80 58 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 81 58 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 82 58 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 83 58 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 50 59 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 52 59 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 53 59 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 62 59 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 63 59 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 64 59 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 65 59 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 66 59 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 67 59 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 68 59 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 69 59 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 70 59 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 71 59 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 72 59 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 73 59 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 74 59 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 75 59 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 76 59 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 77 59 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 78 59 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 79 59 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 80 59 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 81 59 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 82 59 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 50 60 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 52 60 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 53 60 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 61 60 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 64 60 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 65 60 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 66 60 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 67 60 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 68 60 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 69 60 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 70 60 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 71 60 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 72 60 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 73 60 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 74 60 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 75 60 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 76 60 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 77 60 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 78 60 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 79 60 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 80 60 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 81 60 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 82 60 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 52 61 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 53 61 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 61 61 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 62 61 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 63 61 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 66 61 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 67 61 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 68 61 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 69 61 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 70 61 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 71 61 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 72 61 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 73 61 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 74 61 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 75 61 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 76 61 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 77 61 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 78 61 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 79 61 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 80 61 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 81 61 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 52 62 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 53 62 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 54 62 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 61 62 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 62 62 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 63 62 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 64 62 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 65 62 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 66 62 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 68 62 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 69 62 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 70 62 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 71 62 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 72 62 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 73 62 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 74 62 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 75 62 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 76 62 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 77 62 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 78 62 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 79 62 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 80 62 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 51 63 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 52 63 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 53 63 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 54 63 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 62 63 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 63 63 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 64 63 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 65 63 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 66 63 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 67 63 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 68 63 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 69 63 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 70 63 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 71 63 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 72 63 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 73 63 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 74 63 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 75 63 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 76 63 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 77 63 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 78 63 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 79 63 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 51 64 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 53 64 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 54 64 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 63 64 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 64 64 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 65 64 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 66 64 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 67 64 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 68 64 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 69 64 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 70 64 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 71 64 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 72 64 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 73 64 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 74 64 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 75 64 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 76 64 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 77 64 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 78 64 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 51 65 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 52 65 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 53 65 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 54 65 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 64 65 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 65 65 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 66 65 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 67 65 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 68 65 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 69 65 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 70 65 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 71 65 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 72 65 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 73 65 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 74 65 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 75 65 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 76 65 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 77 65 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 54 66 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 55 66 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 65 66 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 66 66 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 67 66 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 68 66 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 69 66 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 70 66 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 71 66 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 72 66 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 73 66 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 74 66 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 75 66 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 52 67 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 53 67 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 54 67 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 55 67 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 62 67 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 63 67 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 64 67 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 65 67 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 66 67 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 69 67 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 70 67 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 71 67 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 72 67 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 73 67 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 51 68 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 52 68 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 53 68 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 54 68 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 62 68 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 63 68 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 64 68 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 65 68 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 66 68 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 67 68 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 68 68 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 69 68 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 53 69 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 54 69 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 55 69 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 56 69 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 57 69 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 58 69 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 59 69 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 60 69 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 61 69 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 62 69 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 63 69 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 64 69 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 65 69 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 66 69 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 67 69 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 68 69 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 69 69 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 53 70 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 54 70 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 56 70 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 57 70 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 58 70 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 59 70 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 62 70 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 63 70 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 64 70 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 65 70 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 66 70 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 67 70 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 68 70 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 69 70 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 70 70 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 53 71 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 54 71 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 62 71 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 63 71 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 67 71 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 68 71 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 69 71 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 53 72 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 54 72 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 55 72 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 61 72 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 62 72 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 63 72 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 64 72 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 65 72 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 66 72 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 67 72 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 52 73 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 53 73 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 54 73 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 55 73 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 58 73 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 59 73 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 60 73 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 61 73 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 62 73 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 63 73 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 64 73 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 65 73 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 66 73 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 67 73 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 68 73 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 57 74 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 58 74 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 59 74 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 60 74 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 61 74 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 62 74 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 63 74 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 64 74 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 65 74 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 66 74 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 67 74 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 68 74 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 69 74 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 57 75 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 58 75 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 59 75 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 60 75 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 61 75 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 62 75 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 63 75 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 64 75 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 65 75 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 66 75 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 67 75 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 68 75 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 69 75 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 53 76 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 54 76 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 56 76 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 57 76 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 58 76 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 59 76 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 60 76 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 61 76 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 62 76 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 63 76 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 64 76 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 65 76 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 66 76 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 67 76 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 68 76 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 69 76 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 53 77 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 54 77 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 56 77 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 57 77 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 58 77 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 59 77 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 60 77 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 61 77 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 62 77 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 63 77 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 64 77 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 65 77 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 66 77 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 67 77 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 68 77 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 69 77 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 70 77 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 52 78 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 53 78 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 55 78 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 56 78 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 57 78 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 58 78 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 59 78 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 60 78 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 62 78 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 63 78 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 65 78 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 66 78 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 67 78 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 68 78 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 69 78 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 70 78 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 51 79 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 52 79 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 53 79 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 55 79 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 56 79 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 57 79 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 58 79 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 59 79 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 60 79 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 62 79 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 63 79 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 65 79 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 66 79 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 67 79 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 68 79 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 69 79 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 51 80 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 52 80 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 55 80 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 56 80 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 57 80 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 58 80 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 59 80 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 60 80 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 62 80 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 63 80 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 65 80 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 66 80 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 67 80 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 68 80 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 69 80 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 50 81 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 51 81 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 52 81 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 55 81 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 56 81 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 57 81 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 58 81 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 59 81 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 60 81 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 62 81 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 63 81 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 64 81 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 65 81 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 66 81 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 67 81 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 68 81 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 69 81 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 50 82 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 51 82 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 52 82 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 53 82 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 55 82 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 56 82 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 57 82 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 58 82 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 59 82 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 60 82 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 61 82 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 62 82 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 63 82 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 64 82 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 65 82 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 66 82 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 67 82 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 68 82 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 69 82 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 49 83 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 50 83 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 51 83 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 52 83 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 53 83 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 55 83 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 56 83 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 57 83 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 58 83 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 59 83 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 60 83 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 61 83 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 62 83 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 63 83 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 64 83 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 65 83 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 66 83 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 67 83 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 68 83 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 49 84 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 50 84 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 51 84 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 52 84 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 53 84 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 56 84 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 57 84 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 58 84 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 59 84 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 60 84 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 61 84 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 62 84 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 63 84 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 64 84 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 65 84 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 66 84 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 67 84 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 68 84 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 49 85 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 50 85 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 51 85 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 52 85 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 53 85 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 56 85 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 57 85 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 58 85 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 59 85 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 60 85 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 61 85 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 62 85 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 63 85 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 64 85 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 65 85 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 66 85 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 67 85 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 49 86 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 50 86 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 51 86 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 52 86 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 53 86 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 54 86 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 57 86 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 58 86 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 59 86 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 60 86 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 61 86 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 62 86 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 63 86 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 64 86 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 65 86 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 66 86 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 49 87 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 50 87 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 51 87 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 52 87 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 53 87 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 54 87 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 55 87 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 57 87 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 58 87 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 59 87 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 60 87 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 61 87 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 62 87 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 63 87 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 64 87 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 48 88 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 50 88 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 51 88 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 52 88 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 53 88 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 54 88 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 55 88 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 56 88 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 59 88 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 48 89 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 50 89 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 51 89 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 52 89 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 53 89 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 54 89 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 55 89 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 56 89 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 57 89 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 58 89 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 59 89 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 47 90 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 48 90 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 51 90 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 52 90 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 53 90 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 54 90 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 55 90 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 56 90 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 57 90 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 58 90 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 41 91 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 42 91 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 43 91 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 46 91 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 47 91 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 51 91 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 52 91 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 53 91 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 55 91 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 56 91 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 41 92 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 42 92 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 43 92 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 45 92 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 46 92 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 51 92 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 52 92 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 41 93 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 42 93 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 43 93 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 44 93 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 45 93 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 50 93 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 51 93 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 42 94 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 43 94 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 44 94 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 49 94 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 50 94 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 43 95 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 44 95 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 45 95 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 46 95 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 48 95 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 49 95 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 44 96 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 45 96 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 46 96 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 47 96 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 48 96 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 49 96 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 44 97 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 45 97 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 46 97 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 47 97 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 48 97 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 44 98 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 45 98 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 46 98 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 47 98 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 48 98 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 45 99 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 46 99 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 47 99 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 48 99 base_size 1 land_percent 0 base_elevation 0 }
+create_land { terrain_type DIRT land_position 50 69 base_size 2 land_percent 0 base_elevation 0 }
+
+create_land { terrain_type WATER top_border 75 right_border 75 border_fuzziness 2 }
+create_land { terrain_type WATER left_border 75 bottom_border 75 border_fuzziness 2 }
+create_land { terrain_type GRASS land_position 45 54 base_size 2 land_percent 0 base_elevation 0 }
+create_land { terrain_type GRASS land_position 46 54 base_size 2 land_percent 0 base_elevation 0 }
+create_land { terrain_type GRASS land_position 45 53 base_size 2 land_percent 0 base_elevation 0 }
+
+start_random 
+	percent_chance 50 #define PLAYER_ONE_RIGHT
+end_random
+
+create_land {
+    terrain_type GRASS3
+    if PLAYER_ONE_RIGHT
+        assign_to_player 1
+    else
+        assign_to_player 2
+    endif
+    land_position 80 75
+    base_size 6
+    base_elevation 3
+    land_percent 0
+}
+
+create_land {
+    terrain_type GRASS3
+    if PLAYER_ONE_RIGHT
+        assign_to_player 2
+    else
+        assign_to_player 1
+    endif
+    land_position 24 19
+    base_size 6
+    base_elevation 3
+    land_percent 0
+}
+
+<OBJECTS_GENERATION>
+#const PLACEHOLDER 278
+create_object PLACEHOLDER {
+    resource_delta -60
+    set_place_for_every_player
+    min_distance_to_players 0 
+    max_distance_to_players 0
+    second_object TOWN_CENTER
+    actor_area 1
+    actor_area_radius 0
+}
+
+create_object VILLAGER { set_place_for_every_player min_distance_to_players 3 max_distance_to_players 6 }
+create_object SCOUT { set_place_for_every_player min_distance_to_players 3 max_distance_to_players 6 }
+
+create_object PLACEHOLDER { resource_delta -60 set_place_for_every_player actor_area_to_place_in 1 actor_area 2 actor_area_radius 10 }
+create_object PLACEHOLDER { resource_delta -60 set_place_for_every_player actor_area_to_place_in 1 actor_area 3 actor_area_radius 13 }
+
+create_object PLACEHOLDER { resource_delta -60 set_place_for_every_player actor_area_to_place_in 1 actor_area 4 actor_area_radius 12 }
+create_object PLACEHOLDER { resource_delta -60 set_place_for_every_player actor_area_to_place_in 1 actor_area 5 actor_area_radius 15 }
+
+create_object PLACEHOLDER { resource_delta -60 set_place_for_every_player actor_area_to_place_in 1 actor_area 6 actor_area_radius 20 }
+create_object PLACEHOLDER { resource_delta -60 set_place_for_every_player actor_area_to_place_in 1 actor_area 7 actor_area_radius 40 }
+
+create_object PLACEHOLDER { resource_delta -60 set_place_for_every_player actor_area_to_place_in 1 actor_area 8 actor_area_radius 14 }
+create_object PLACEHOLDER { resource_delta -60 set_place_for_every_player actor_area_to_place_in 1 actor_area 9 actor_area_radius 17 }
+
+create_object PLACEHOLDER { resource_delta -60 set_place_for_every_player actor_area_to_place_in 1 actor_area 11 actor_area_radius 30 }
+create_object PLACEHOLDER { resource_delta -60 set_place_for_every_player actor_area_to_place_in 1 actor_area 51 actor_area_radius 35 }
+create_object PLACEHOLDER { resource_delta -60 set_place_for_every_player actor_area_to_place_in 1 actor_area 52 actor_area_radius 27 }
+create_object PLACEHOLDER { resource_delta -60 set_place_for_every_player actor_area_to_place_in 1 actor_area 13 actor_area_radius 45 }
+create_object PLACEHOLDER { resource_delta -60 set_place_for_every_player actor_area_to_place_in 1 actor_area 14 actor_area_radius 24 }
+
+create_object PLACEHOLDER { resource_delta -60 set_place_for_every_player actor_area_to_place_in 1 actor_area 15 actor_area_radius 3 }
+create_object PLACEHOLDER { resource_delta -60 set_place_for_every_player actor_area_to_place_in 1 actor_area 16 actor_area_radius 4 }
+
+create_object GOLD {
+    number_of_objects 10
+    set_tight_grouping
+    set_place_for_every_player
+    set_gaia_object_only
+    min_distance_to_players 12
+	max_distance_to_players  14
+    actor_area 17
+    actor_area_radius 5
+    avoid_forest_zone 2
+    ignore_terrain_restrictions
+}
+
+create_object FORAGE {
+    number_of_groups 2
+    number_of_objects 3
+    set_tight_grouping
+    temp_min_distance_group_placement 3
+    set_place_for_every_player
+    set_gaia_object_only
+    actor_area_to_place_in 16
+    avoid_actor_area 15
+    find_closest
+}
+
+create_object STONE {
+    number_of_objects 4
+    number_of_groups 1
+    set_tight_grouping
+    set_place_for_every_player
+    set_gaia_object_only
+    avoid_forest_zone 2
+    min_distance_to_map_edge 2
+    avoid_actor_area 17
+    actor_area_to_place_in 6
+    terrain_to_place_on DIRT
+    find_closest_to_map_center
+    actor_area 18
+    actor_area_radius 10
+    ignore_terrain_restrictions
+}
+
+create_object RELIC {
+    number_of_objects 1
+    number_of_groups 1
+    temp_min_distance_group_placement 2
+    set_tight_grouping
+    set_place_for_every_player
+    set_gaia_object_only
+    terrain_to_place_on GRASS
+    find_closest_to_map_center
+    actor_area 20
+    actor_area_radius 15
+}
+
+create_object STONE {
+    number_of_objects 5
+    number_of_groups 2
+    temp_min_distance_group_placement 20
+    set_tight_grouping
+    set_place_for_every_player
+    set_gaia_object_only
+    avoid_forest_zone 2
+    min_distance_to_map_edge 2
+    avoid_actor_area 18
+    avoid_actor_area 52
+    avoid_actor_area 6
+    actor_area 25
+    actor_area_radius 5
+    actor_area_to_place_in 51
+    avoid_actor_area 20
+    terrain_to_place_on DIRT
+    ignore_terrain_restrictions
+}
+
+create_object GOLD {
+    number_of_objects 3
+    number_of_groups 50
+    set_tight_grouping
+    set_gaia_object_only
+    avoid_forest_zone 2
+    min_distance_to_map_edge 2
+    terrain_to_place_on GRASS
+    temp_min_distance_group_placement 7
+    actor_area_to_place_in 20
+}
+
+create_object DLC_BEAR {
+    number_of_objects 1
+    number_of_groups 50
+    set_tight_grouping
+    set_gaia_object_only
+    avoid_forest_zone 2
+    min_distance_to_map_edge 2
+    terrain_to_place_on GRASS
+    temp_min_distance_group_placement 12
+    actor_area_to_place_in 20
+}
+
+
+create_object ROCK {
+    terrain_to_place_on DIRT
+    number_of_groups 50
+    temp_min_distance_group_placement 15
+    avoid_actor_area
+    avoid_actor_area 18
+    avoid_actor_area 19
+    avoid_actor_area 25
+}
+
+create_object SHEEP {
+	number_of_objects 4
+	set_loose_grouping
+	set_place_for_every_player
+	min_distance_to_players 7
+	max_distance_to_players  8
+    avoid_forest_zone 2
+    ignore_terrain_restrictions
+} 
+
+create_object SHEEP {
+    number_of_objects 2
+    number_of_groups 2
+    set_loose_grouping
+    set_gaia_object_only
+    set_place_for_every_player
+    min_distance_to_players 12
+    max_distance_to_players 18
+    temp_min_distance_group_placement 3
+    avoid_forest_zone 2
+    ignore_terrain_restrictions
+}
+
+create_object SHEEP {
+    number_of_objects 2
+    number_of_groups 8
+    set_loose_grouping
+    set_gaia_object_only
+    terrain_to_place_on GRASS3
+    min_distance_to_players 40
+    temp_min_distance_group_placement 30
+    avoid_forest_zone 2
+    ignore_terrain_restrictions
+}
+
+create_object BOAR {
+	number_of_groups 2
+	set_gaia_object_only
+	set_place_for_every_player
+	min_distance_to_players 11
+	max_distance_to_players 15
+    temp_min_distance_group_placement 10
+    ignore_terrain_restrictions
+}
+
+create_object DEER {
+	number_of_objects 3
+    number_of_groups 1
+    temp_min_distance_group_placement 3
+	set_gaia_object_only
+	set_place_for_every_player
+    terrain_to_place_on GRASS
+    find_closest_to_map_center
+    set_loose_grouping
+}
+
+
+create_object TUNA {
+    terrain_to_place_on MED_WATER
+    temp_min_distance_group_placement 7
+    number_of_groups 100
+}
+
+create_object SHORE_FISH {
+    terrain_to_place_on WATER
+    temp_min_distance_group_placement 6
+    number_of_groups 1000
+}
+
+
+create_object SEA_ROCKS_1 {
+    number_of_objects 1
+    number_of_groups 9999
+    temp_min_distance_group_placement 20
+    terrain_to_place_on MED_WATER
+}
+
+create_object SEA_ROCKS_2 {
+    number_of_objects 1
+    number_of_groups 9999
+    temp_min_distance_group_placement 20
+    terrain_to_place_on MED_WATER
+}
+
+create_object HAWK {
+    number_of_objects 1
+    number_of_groups 2
+    temp_min_distance_group_placement 20
+}
+
+create_object DLC_AUTUMNTREE {
+    number_of_objects 5
+    set_place_for_every_player
+    set_gaia_object_only
+    min_distance_to_players 5
+	max_distance_to_players 7
+}
+
+
+<ELEVATION_GENERATION>
+create_elevation 2 {
+    number_of_tiles 400
+    number_of_clumps 10
+    base_terrain DIRT
+}
+
+<TERRAIN_GENERATION>
+
+create_terrain DLC_ROCK {
+    base_terrain GRASS 
+    number_of_clumps 9999
+    number_of_tiles 9999
+    height_limits 1 2
+}
+
+create_terrain FOREST {
+    number_of_clumps 50
+    number_of_tiles 1000
+    set_avoid_player_start_areas 20
+    spacing_to_other_terrain_types 3
+    base_terrain GRASS
+}
+
+create_terrain BIRCH_FOREST {
+    number_of_clumps 20
+    number_of_tiles 100
+    base_terrain FOREST
+}
+
+create_terrain DLC_FORESTAUTUMN {
+    number_of_clumps 30
+    number_of_tiles 400
+    base_terrain FOREST
+}
+
+create_terrain MED_WATER {
+    number_of_clumps 9999
+    number_of_tiles 10000
+    spacing_to_other_terrain_types 2
+    base_terrain WATER
+    terrain_mask 2
+}
+
+create_terrain DLC_DRYGRASS {
+    base_terrain DIRT
+    terrain_mask 1
+    number_of_clumps 30
+    number_of_tiles 600
+}
+
+create_terrain GRASS {
+    base_terrain DIRT
+    terrain_mask 1
+    number_of_clumps 30
+    number_of_tiles 600
+}
+
+create_terrain DLC_DRYGRASS {
+    base_terrain GRASS
+    terrain_mask 1
+    number_of_clumps 100
+    number_of_tiles 600
+}
+
+create_terrain DIRT3 {
+    base_terrain GRASS
+    terrain_mask 1
+    number_of_clumps 100
+    number_of_tiles 600
+}
+
+create_terrain GRASS3 {
+    number_of_clumps 9999
+    number_of_tiles 9999
+    base_terrain DLC_ROCK
+    terrain_mask 1
+}
+
+
+<CONNECTION_GENERATION>
+create_connect_all_players_land {
+    default_terrain_replacement DLC_ROCK
+    replace_terrain GRASS3 GRASS3
+}

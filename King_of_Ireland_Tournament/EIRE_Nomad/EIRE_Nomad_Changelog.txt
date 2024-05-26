@@ -1,0 +1,50 @@
+EIRE_Nomad
+CHANGES MADE ON (DD/MM/YY) 01.10.21:
+    • <ELEVATION_GENERATION>  (Reduced number of hills to make starting town center easier to place)
+    • Excepting the creation of elevation 1, reduced “number of tiles” for all “create_elevation” commands by 25%, rounded down.
+    • <OBJECTS_GENERATION> Removal of Villager and Fishing Ship manual object scribe. Included in Object_Database.ods:
+        ◦ Added Row #49 VILLAGER_BASE_F with the following parameters:
+            ▪ Object Type: Player Assigned Player Owned
+            ▪ Group Quantity: 3
+            ▪ Grouping Type: Tight
+            ▪ Scaling Type: None
+            ▪ Min Distance Group Placement 16
+            ▪ Temp Min Distance Group Placement 32
+            ▪ Rows to Avoid: 8,9,10,11   (all fish: shore, water, med_water, & deep_water)
+            ▪ Avoidance Distance: 8,8,8,8
+            ▪ Force Placement: Yes
+            ▪ Manually removed “find_closest” from auto-generated code
+        ◦ Added Row #50 FISHING_SHIP with the following parameters:
+            ▪ Object Type: Player Assigned Player Owned
+            ▪ Grouping Type: Tight
+            ▪ Scaling Type: None
+            ▪ Min Distance Group Placement 16
+            ▪ Force Placement: Yes
+            ▪ Manually removed “find_closest” from auto-generated code
+CHANGES MADE ON (DD/MM/YY) 13.10.21:
+Nature/Reason:
+    • Current code allows villagers to be trapped inside forests, which is unacceptable since players could start with a different number of use-able villagers. This change will give all starting villagers forest avoidance, so it is impossible for them to become trapped. 
+    • Kings may spawn on the water, making them vulnerable to being trapped and sniped by enemy units. This change forces kings to spawn on beach terrain.
+    • Rather than having a free fishing ship (which may not sufficiently nerf Persians and Malians), all civilizations are given +50 starting wood so they can at least afford the dock and town center. A free transport ship with reduced vision is instead given to each player to encourage relic collection and sneak landings.
+    • On some larger generations of the previous map revision, cosmetic defects would be present – grass would be left where terrain layering should have converted it to rock. This change removes these visual bugs by improving the probability that the correct terrain is applied uniformly. 
+Details:
+    • <PLAYER_SETUP>
+        ◦ After the effect_amount setting wood amount contained by trees, but before <ELEVATION_GENERATION> added the following lines of code:
+/* Modify Player Starting Resources */
+	effect_amount MOD_RESOURCE AMOUNT_STARTING_WOOD ATTR_ADD 50
+	/* Setting Transport Ship LOS */
+	#const SFTS 1735 /* Sicilian Free Transport Ship */
+	effect_amount SET_ATTRIBUTE SFTS ATTR_LINE_OF_SIGHT 1
+    • <ELEVATION_GENERATION>
+        ◦ Under “create_elevation 1”
+            ▪ “number_of_clumps” revised FROM “9320” TO “40”.
+    • <TERRAIN_GENERATION>
+        ◦ Increase the number of instances of “create_terrain NNRB” FROM 1 TO 2. All other parameter kept the same. 
+    • <OBJECTS_GENERATION> 
+        ◦ Added forest avoidance of villagers through ObjectDatabase.ods
+            ▪ Row 49 Column T (Forest Distance): Added “2”.
+            ▪ Updated by running ObjectAutoscribeV5.m, instead of ObjectAutoscribeV4.m
+        ◦ Before “/* BEGIN_OBJECTS_AUTOSCRIBE */”, in king creation script for regicide, added the following text after “set_place_for_every_player”: “terrain_to_place_on NNRB”
+        ◦ Modified starting units thusly through ObjectDatabase.ods
+            ▪ Row 50, Column B (First Object) revised FROM “FISHING_SHIP” TO “SFTS”
+                • Housekeeping: Manually removed “find_closest” from auto-generated code.

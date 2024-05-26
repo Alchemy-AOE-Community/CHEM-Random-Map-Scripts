@@ -1,0 +1,145 @@
+EIRE_Tara
+CHANGES MADE ON (DD/MM/YY) 01.10.21:
+    • Tara.m (Changes to allow ring of forest around map border)
+        ◦ Reduced the player starting group radius FROM “r = [75 80 85];” TO “r = [74 78 82];”
+        ◦ Added following lines of code to Grid_Forest variable, prior to its processing against other auto-generated lands:
+Grid_Forest = [Grid_Forest; LandScribeV5([{'S'}],[{0}],{0 -49},{00},{'0*x'},{1},{1},[-50 50])];
+          Grid_Forest = [Grid_Forest; LandScribeV5([{'S'}],[{0}],{0 -49},{90},{'0*x'},{1},{1},[-50 50])];
+          Grid_Forest = [Grid_Forest; LandScribeV5([{'S'}],[{0}],{0 +48},{00},{'0*x'},{1},{1},[-50 50])];
+          Grid_Forest = [Grid_Forest; LandScribeV5([{'S'}],[{0}],{0 +48},{90},{'0*x'},{1},{1},[-50 50])];
+    • <LAND_GENERATION>  (Simplifications reduce filesize)
+    • Revised all land creation commands FROM “create_land { …” TO “L {…” where “L” was already predefined as create land command. Number of instances: between 16,431 and 17,034.
+    • <TERRAIN_GENERATION> (correcting for now more leaf terrain, need to decrease forest)
+    • /* Forest Creation */ … “create_terrain LEAVES” 
+        ◦ Revised FROM “land_percent 5” TO “land_percent 11”
+    • <OBJECTS_GENERATION> Issued revision to use Object_Database_V2.ods instead of Object_Database.ods (Change to improve reliability of stone spawn, make it avoid central standing stone location, and reduce number of hostile gaia priests)
+CHANGES MADE ON (DD/MM/YY) 30.10.21:
+Nature/Reason:
+    • Player starting configuration has been updated to the using the latest version of player land creation software. It will allow for a mirror arrangement, where players can be separated by the neutral stone OR the relics. This was done to improve variety on the map and reward players for scouting and adaptability. Additionally, the grid-forest is programmed with avoidance to player starting areas, improving placement flexibility and initial access fairness.
+    • Starting camp distributions were adversely affected by the previous change, which pushed players slightly closer together (to make room for a perimeter woodline). This created situations, particularly for one player, where stone and gold were on the neutral side of the unbuildable terrain ring, or lumbercamps were closer to the center, making them harder to defend. This change will improve the fairness of resource spawns for both players, and ensure that no player controlled objects can be created on the wrong side of the unbuildable ring.
+    • A new technique for spacing camps from resources has been developed by the scripting community. It will allow camps to look more like what a human player would place, instead of on corners or directly against the resource pile. This change implements such an approach for this map.
+    • Since this map was last released/updated, object placement program was still buggy, and lacked the direct object placement location feature of “create_actor_area” (added in an update to the game since the map was released). This change will ensure a more uniform villager distribution across resources (4 villagers per lumbercamp, etc.) and pushes resources away from specific keep-out zones (like the edge of the map, or too close to the center).
+    • Amount of stone in player-assigned piles has been reduced to incentivize competition over the neutral stone mound toward the center of the map.
+    • Added neutral gold and stone piles to the map, to make come-backs more possible.
+Details: 
+    • <PLAYER_SETUP>
+        ◦ After “direct_placement” but before “/* Setting Tree Wood Storage to 350 */”, ADDED:
+	ai_info_map_type ARABIA 1 0 1
+	/* Remove Visual Effect of Dead Fish Trap */
+	#const ON_GRID 278
+	effect_amount GAIA_SET_ATTRIBUTE ON_GRID ATTR_STORAGE_VALUE 0
+        ◦ After “/* Setting Tree Wood Storage to 350  */” but before “/* Giving GAIA Additional Monastery Techs & Range */”, ADDED:
+          /* Removing the Pine Trees Used for Camp Placement Spacing */
+	effect_amount GAIA_SET_ATTRIBUTE PINETREE ATTR_STORAGE_VALUE 0
+	effect_amount SET_ATTRIBUTE PINETREE ATTR_DEAD_ID 278
+	effect_amount SET_ATTRIBUTE PINETREE ATTR_HITPOINTS 0
+    • <LAND_GENERATION>  Tara.m (Changes to player starting land generation)
+        ◦ Added line in front of “off” variable definition (variable “adc” needed for version 6):
+          adc = [175 185];       %Angular Distance to Team Centroid
+        ◦ Revised line invoking player land creation function: 
+          FROM:
+          [create_player_lands] = RMS_CPL_V2({3},{'G'},{1},off,SA,b,r,e);
+          TO:
+          [create_player_lands] = RMS_CPL_V6({3},{1},{1},off,adc,SA,b,r,e);
+    • <TERRAIN_GENERATION>  Tara.rms (terrain layering changes to support new starting configuration)
+        ◦ In forest creation section,  in “create_terrain FOREST { …” 
+            ▪ Removed “clumping_factor -100” 
+            ▪ Below “set_scale_by_groups” ADDED “set_avoid_player_start_areas 12”
+            ▪ Added “spacing_to_other_terrain_types 1” under “SMALL_MAP” and “MEDIUM_MAP” options
+            ▪ Revised FROM “spacing_to_other_terrain_types 1” TO “spacing_to_other_terrain_types 2” for “LARGE_MAP”, “HUGE_MAP”, and “GIGANTIC_MAP” options.
+            ▪ Introduced seven additional copies of the “create_terrain FOREST {… ” command to ensure proper tree grid pattern.
+        ◦ After:
+          create_terrain GRASS
+	{
+	  base_terrain LEAVES
+	  land_percent 100
+	  number_of_clumps 9320
+	  set_scale_by_groups
+	  clumping_factor 100
+	}
+	But before:
+	create_terrain LEAVES
+	{
+	  base_terrain FOREST
+	  land_percent 11
+	  number_of_clumps 9320
+	  set_scale_by_groups
+	  clumping_factor 100
+	}
+	ADDED the following terrain generation:
+	create_terrain BIRCH_FOREST
+	{
+	  base_terrain FOREST
+	  land_percent 100
+	  number_of_clumps 9320
+	  set_scale_by_groups
+	  clumping_factor 100
+	  spacing_to_other_terrain_types 2
+	}
+    • Revised FROM:
+	create_terrain LEAVES
+	{
+	  base_terrain FOREST
+	  land_percent 11
+	  number_of_clumps 9320
+	  set_scale_by_groups
+	  clumping_factor 100
+	}
+	Revised TO:
+	create_terrain LEAVES
+	{
+	  base_terrain FOREST
+	  land_percent 8
+	  number_of_clumps 9320
+	  set_scale_by_groups
+	  clumping_factor 100
+	}
+    • After:
+	create_terrain LEAVES
+	{
+	  base_terrain FOREST
+	  land_percent 8
+	  number_of_clumps 9320
+	  set_scale_by_groups
+	  clumping_factor 100
+	}
+	But before:
+	create_terrain DLC_ROCK
+	{
+	  base_terrain GRASS
+	  land_percent 100
+	  number_of_clumps 9320
+	  set_scale_by_groups
+	  clumping_factor 100
+	  height_limits 5 7
+	}
+	Added the following terrain generation:
+    • <OBJECTS_GENERATION>  
+        ◦ Updated using ObjectAutoscribeV6.m, a newer and improved function with fewer bugs and direct object placement capability.
+        ◦ Issued revision to use Object_Database_V3.ods instead of Object_Database_V2.ods (Change to increase intelligence of camp spawn, distribute resources as intended, add neutral gold & stone piles, etc.) Contact TechChariot#4776 for access to either revision.
+CHANGES MADE ON (DD/MM/YY) 6.2.22:
+Nature/Reason:
+	• A bug was reported whereby the hostile gaia priests guarding the relics at the summit of the hill of Tara lacked theocracy, and the proper range. No changes were made to the code that produces this mechanic since Tara was developed, but since then a change to the game itself requires different scripting to achieve the same effect . A solution is implemented through this change that restores the priests to their original balance, making this design change "obsolescence support".     
+ 
+Details:
+    • <PLAYER_SETUP> -- Tara.rms -- Giving theocracy to gaia:
+	◦ AFTER: "#const convert_min_adj_resource 177" but 
+	  BEFORE: "effect_amount GAIA_MOD_RESOURCE atonement_resource  ATTR_SET 1"
+		Revised FROM:
+		"#const theocracy_resource   194"
+	
+		Revised TO: 
+		"#const theocracy_resource   193"
+		Whereby "194" was changed to "193".
+     • <PLAYER_SETUP> -- Tara.rms -- Giving theocracy to gaia:
+	◦ AFTER: "effect_amount GAIA_MOD_RESOURCE theocracy_resource  ATTR_SET 1" but 
+	  BEFORE: "effect_amount SET_ATTRIBUTE FRIAR_TUCK ATTR_MAX_RANGE 24"
+		Revised FROM:
+		"effect_amount SET_ATTRIBUTE DLC_AOE1_PRIEST ATTR_MAX_RANGE 12
+		 effect_amount SET_ATTRIBUTE DLC_AOE1_PRIEST ATTR_LINE_OF_SIGHT 12"
+	
+		Revised TO: 
+		"effect_amount SET_ATTRIBUTE DLC_AOE1PRIEST ATTR_MAX_RANGE 12
+		 effect_amount SET_ATTRIBUTE DLC_AOE1PRIEST ATTR_LINE_OF_SIGHT 12"
+		Whereby "DLC_AOE1_PRIEST" was changed to "DLC_AOE1PRIEST".
+	

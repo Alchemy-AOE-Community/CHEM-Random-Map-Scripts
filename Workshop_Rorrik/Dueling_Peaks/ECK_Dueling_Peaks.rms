@@ -1,0 +1,5484 @@
+/* ************ Fishbowl ************ */
+/* April 2022 */
+/* James Eck */
+/* Player Lands by TechChariot */
+/* *************************************************************************************************** */
+/* Rev 0.1 Pretty standard Arabia-like map, but meant to be played regicide with each side having a castle on a hill near the middle. */
+
+/* *************************************************************************************************** */
+
+
+<PLAYER_SETUP>
+direct_placement
+behavior_version 1
+#const L 32
+
+#const GRAVEL 70
+
+#const PT1 0
+#const PT2 0
+#const PT3 0
+#const PT4 0
+#const PT5 0
+#const PT6 0
+#const PT7 0
+#const PT8 0
+
+#const CT1 70
+#const CT2 70
+#const CT3 70
+#const CT4 70
+#const CT5 70
+#const CT6 70
+#const CT7 70
+#const CT8 70
+
+
+<ELEVATION_GENERATION>
+<TERRAIN_GENERATION>
+#define PEAK_LAYER_COLLAPSE
+if PEAK_LAYER_COLLAPSE
+    create_terrain GRAVEL { base_terrain DLC_ROCK land_percent 100 number_of_clumps 9320 set_scale_by_groups height_limits 6 7 terrain_mask 2 }
+    create_terrain ROAD { base_terrain GRAVEL land_percent 100 number_of_clumps 9320 set_scale_by_groups spacing_to_other_terrain_types 1 terrain_mask 2 }
+endif
+
+
+<OBJECTS_GENERATION>
+#const OFF_GRID 647
+create_object OFF_GRID { set_place_for_every_player find_closest second_object TOWN_CENTER }
+create_object FLAG_A { set_place_for_every_player terrain_to_place_on ROAD find_closest second_object CASTLE }
+
+<LAND_GENERATION>
+base_terrain DLC_ROCK
+
+if 1_PLAYER_GAME
+#define P12
+elseif 2_PLAYER_GAME
+#define P12
+elseif 3_PLAYER_GAME
+#define P34
+elseif 4_PLAYER_GAME
+#define P34
+elseif 5_PLAYER_GAME
+#define P56
+elseif 6_PLAYER_GAME
+#define P56
+elseif 7_PLAYER_GAME
+#define P78
+elseif 8_PLAYER_GAME
+#define P78
+endif
+
+/* LAND_AUTOSCRIBE */
+if P12
+if 1_PLAYER_GAME
+#define P2
+elseif 2_PLAYER_GAME
+#define P2
+elseif 3_PLAYER_GAME
+#define P4
+elseif 4_PLAYER_GAME
+#define P4
+elseif 5_PLAYER_GAME
+#define P6
+if TEAM_POSITIONS
+#define TP_6PG
+endif
+elseif 6_PLAYER_GAME
+#define P6
+if TEAM_POSITIONS
+#define TP_6PG
+endif
+elseif 7_PLAYER_GAME
+#define P8
+if TEAM_POSITIONS
+#define TP_8PG
+endif
+elseif 8_PLAYER_GAME
+#define P8
+if TEAM_POSITIONS
+#define TP_8PG
+endif
+endif
+if TP_8PG
+start_random
+percent_chance 25 #define C8P1
+percent_chance 25 #define C8P2
+percent_chance 25 #define C8P3
+percent_chance 25 #define C8P4
+end_random
+elseif TP_6PG
+start_random
+percent_chance 25 #define C6P1
+percent_chance 25 #define C6P2
+percent_chance 25 #define C6P3
+percent_chance 25 #define C6P4
+end_random
+endif
+start_random
+percent_chance 6  #define S1
+percent_chance 7  #define S2
+percent_chance 7  #define S3
+percent_chance 6  #define S4
+percent_chance 7  #define S5
+percent_chance 7  #define S6
+percent_chance 6  #define S7
+percent_chance 7  #define S8
+percent_chance 7  #define S9
+percent_chance 6  #define S10
+percent_chance 7  #define S11
+percent_chance 7  #define S12
+percent_chance 6  #define S13
+percent_chance 7  #define S14
+percent_chance 7  #define S15
+end_random
+L
+{
+terrain_type PT1
+base_size 0
+base_elevation 0
+number_of_tiles 0
+clumping_factor 30
+other_zone_avoidance_distance 8
+zone 1
+   
+if C8P1
+assign_to AT_COLOR 1 0 0
+elseif C8P2
+assign_to AT_COLOR 7 0 0
+elseif C8P3
+assign_to AT_COLOR 7 0 0
+elseif C8P4
+assign_to AT_COLOR 1 0 0
+elseif C6P1
+assign_to AT_COLOR 1 0 0
+elseif C6P2
+assign_to AT_COLOR 5 0 0
+elseif C6P3
+assign_to AT_COLOR 1 0 0
+elseif C6P4
+assign_to AT_COLOR 5 0 0
+else
+if 4_TEAM_GAME
+assign_to AT_TEAM 1 0 0
+elseif 3_TEAM_GAME
+assign_to AT_TEAM 1 0 0
+elseif 2_TEAM_GAME
+assign_to AT_TEAM 1 0 0
+elseif 1_TEAM_GAME
+assign_to AT_TEAM 1 0 0
+else
+assign_to AT_TEAM -10 0 0
+endif
+endif
+if P2
+if S1
+land_position rnd(43,43) rnd(69,69)
+elseif S2
+land_position rnd(32,32) rnd(58,58)
+elseif S3
+land_position rnd(31,31) rnd(43,43)
+elseif S4
+land_position rnd(50,50) rnd(70,70)
+elseif S5
+land_position rnd(36,36) rnd(64,64)
+elseif S6
+land_position rnd(30,30) rnd(50,50)
+elseif S7
+land_position rnd(57,57) rnd(69,69)
+elseif S8
+land_position rnd(42,42) rnd(68,68)
+elseif S9
+land_position rnd(31,31) rnd(57,57)
+elseif S10
+land_position rnd(43,43) rnd(69,69)
+elseif S11
+land_position rnd(32,32) rnd(58,58)
+elseif S12
+land_position rnd(31,31) rnd(43,43)
+elseif S13
+land_position rnd(57,57) rnd(69,69)
+elseif S14
+land_position rnd(42,42) rnd(68,68)
+elseif S15
+land_position rnd(31,31) rnd(57,57)
+endif
+elseif P4
+if S1
+land_position rnd(61,61) rnd(66,66)
+elseif S2
+land_position rnd(47,47) rnd(70,70)
+elseif S3
+land_position rnd(34,34) rnd(61,61)
+elseif S4
+land_position rnd(64,64) rnd(64,64)
+elseif S5
+land_position rnd(50,50) rnd(70,70)
+elseif S6
+land_position rnd(36,36) rnd(64,64)
+elseif S7
+land_position rnd(66,66) rnd(61,61)
+elseif S8
+land_position rnd(53,53) rnd(70,70)
+elseif S9
+land_position rnd(39,39) rnd(66,66)
+elseif S10
+land_position rnd(61,61) rnd(66,66)
+elseif S11
+land_position rnd(47,47) rnd(70,70)
+elseif S12
+land_position rnd(34,34) rnd(61,61)
+elseif S13
+land_position rnd(66,66) rnd(61,61)
+elseif S14
+land_position rnd(53,53) rnd(70,70)
+elseif S15
+land_position rnd(39,39) rnd(66,66)
+endif
+elseif P6
+if S1
+land_position rnd(66,66) rnd(62,62)
+elseif S2
+land_position rnd(53,53) rnd(70,70)
+elseif S3
+land_position rnd(38,38) rnd(66,66)
+elseif S4
+land_position rnd(67,67) rnd(60,60)
+elseif S5
+land_position rnd(55,55) rnd(69,69)
+elseif S6
+land_position rnd(40,40) rnd(67,67)
+elseif S7
+land_position rnd(68,68) rnd(58,58)
+elseif S8
+land_position rnd(57,57) rnd(69,69)
+elseif S9
+land_position rnd(42,42) rnd(68,68)
+elseif S10
+land_position rnd(66,66) rnd(62,62)
+elseif S11
+land_position rnd(53,53) rnd(70,70)
+elseif S12
+land_position rnd(38,38) rnd(66,66)
+elseif S13
+land_position rnd(68,68) rnd(58,58)
+elseif S14
+land_position rnd(57,57) rnd(69,69)
+elseif S15
+land_position rnd(42,42) rnd(68,68)
+endif
+else
+if S1
+land_position rnd(68,68) rnd(59,59)
+elseif S2
+land_position rnd(56,56) rnd(69,69)
+elseif S3
+land_position rnd(41,41) rnd(68,68)
+elseif S4
+land_position rnd(68,68) rnd(58,58)
+elseif S5
+land_position rnd(58,58) rnd(68,68)
+elseif S6
+land_position rnd(42,42) rnd(68,68)
+elseif S7
+land_position rnd(69,69) rnd(56,56)
+elseif S8
+land_position rnd(59,59) rnd(68,68)
+elseif S9
+land_position rnd(44,44) rnd(69,69)
+elseif S10
+land_position rnd(68,68) rnd(59,59)
+elseif S11
+land_position rnd(56,56) rnd(69,69)
+elseif S12
+land_position rnd(41,41) rnd(68,68)
+elseif S13
+land_position rnd(69,69) rnd(56,56)
+elseif S14
+land_position rnd(59,59) rnd(68,68)
+elseif S15
+land_position rnd(44,44) rnd(69,69)
+endif
+endif
+}
+L
+{
+terrain_type PT2
+base_size 0
+base_elevation 0
+number_of_tiles 0
+clumping_factor 30
+other_zone_avoidance_distance 8
+zone 2
+   
+if C8P1
+assign_to AT_COLOR 2 0 0
+elseif C8P2
+assign_to AT_COLOR 2 0 0
+elseif C8P3
+assign_to AT_COLOR 8 0 0
+elseif C8P4
+assign_to AT_COLOR 8 0 0
+elseif C6P1
+assign_to AT_COLOR 4 0 0
+elseif C6P2
+assign_to AT_COLOR 4 0 0
+elseif C6P3
+assign_to AT_COLOR 4 0 0
+elseif C6P4
+assign_to AT_COLOR 4 0 0
+else
+if 4_TEAM_GAME
+assign_to AT_TEAM 2 0 0
+elseif 3_TEAM_GAME
+assign_to AT_TEAM 2 0 0
+elseif 2_TEAM_GAME
+assign_to AT_TEAM 2 0 0
+elseif 1_TEAM_GAME
+assign_to AT_TEAM -10 0 0
+else
+assign_to AT_TEAM -10 0 0
+endif
+endif
+if P2
+if S1
+land_position rnd(43,43) rnd(31,31)
+elseif S2
+land_position rnd(58,58) rnd(32,32)
+elseif S3
+land_position rnd(69,69) rnd(43,43)
+elseif S4
+land_position rnd(50,50) rnd(30,30)
+elseif S5
+land_position rnd(64,64) rnd(36,36)
+elseif S6
+land_position rnd(70,70) rnd(50,50)
+elseif S7
+land_position rnd(57,57) rnd(31,31)
+elseif S8
+land_position rnd(68,68) rnd(42,42)
+elseif S9
+land_position rnd(69,69) rnd(57,57)
+elseif S10
+land_position rnd(43,43) rnd(31,31)
+elseif S11
+land_position rnd(58,58) rnd(32,32)
+elseif S12
+land_position rnd(69,69) rnd(43,43)
+elseif S13
+land_position rnd(57,57) rnd(31,31)
+elseif S14
+land_position rnd(68,68) rnd(42,42)
+elseif S15
+land_position rnd(69,69) rnd(57,57)
+endif
+elseif P4
+if S1
+land_position rnd(34,34) rnd(39,39)
+elseif S2
+land_position rnd(47,47) rnd(30,30)
+elseif S3
+land_position rnd(61,61) rnd(34,34)
+elseif S4
+land_position rnd(36,36) rnd(36,36)
+elseif S5
+land_position rnd(50,50) rnd(30,30)
+elseif S6
+land_position rnd(64,64) rnd(36,36)
+elseif S7
+land_position rnd(39,39) rnd(34,34)
+elseif S8
+land_position rnd(53,53) rnd(30,30)
+elseif S9
+land_position rnd(66,66) rnd(39,39)
+elseif S10
+land_position rnd(34,34) rnd(39,39)
+elseif S11
+land_position rnd(47,47) rnd(30,30)
+elseif S12
+land_position rnd(61,61) rnd(34,34)
+elseif S13
+land_position rnd(39,39) rnd(34,34)
+elseif S14
+land_position rnd(53,53) rnd(30,30)
+elseif S15
+land_position rnd(66,66) rnd(39,39)
+endif
+elseif P6
+if S1
+land_position rnd(48,48) rnd(30,30)
+elseif S2
+land_position rnd(62,62) rnd(34,34)
+elseif S3
+land_position rnd(70,70) rnd(48,48)
+elseif S4
+land_position rnd(50,50) rnd(30,30)
+elseif S5
+land_position rnd(64,64) rnd(36,36)
+elseif S6
+land_position rnd(70,70) rnd(50,50)
+elseif S7
+land_position rnd(52,52) rnd(30,30)
+elseif S8
+land_position rnd(66,66) rnd(38,38)
+elseif S9
+land_position rnd(70,70) rnd(52,52)
+elseif S10
+land_position rnd(48,48) rnd(30,30)
+elseif S11
+land_position rnd(62,62) rnd(34,34)
+elseif S12
+land_position rnd(70,70) rnd(48,48)
+elseif S13
+land_position rnd(52,52) rnd(30,30)
+elseif S14
+land_position rnd(66,66) rnd(38,38)
+elseif S15
+land_position rnd(70,70) rnd(52,52)
+endif
+else
+if S1
+land_position rnd(31,31) rnd(44,44)
+elseif S2
+land_position rnd(41,41) rnd(32,32)
+elseif S3
+land_position rnd(56,56) rnd(31,31)
+elseif S4
+land_position rnd(32,32) rnd(42,42)
+elseif S5
+land_position rnd(42,42) rnd(32,32)
+elseif S6
+land_position rnd(58,58) rnd(32,32)
+elseif S7
+land_position rnd(32,32) rnd(41,41)
+elseif S8
+land_position rnd(44,44) rnd(31,31)
+elseif S9
+land_position rnd(59,59) rnd(32,32)
+elseif S10
+land_position rnd(31,31) rnd(44,44)
+elseif S11
+land_position rnd(41,41) rnd(32,32)
+elseif S12
+land_position rnd(56,56) rnd(31,31)
+elseif S13
+land_position rnd(32,32) rnd(41,41)
+elseif S14
+land_position rnd(44,44) rnd(31,31)
+elseif S15
+land_position rnd(59,59) rnd(32,32)
+endif
+endif
+}
+L
+{
+terrain_type PT3
+base_size 0
+base_elevation 0
+number_of_tiles 0
+clumping_factor 30
+other_zone_avoidance_distance 8
+zone 3
+   
+if C8P1
+assign_to AT_COLOR 5 0 0
+elseif C8P2
+assign_to AT_COLOR 3 0 0
+elseif C8P3
+assign_to AT_COLOR 3 0 0
+elseif C8P4
+assign_to AT_COLOR 5 0 0
+elseif C6P1
+assign_to AT_COLOR 5 0 0
+elseif C6P2
+assign_to AT_COLOR 1 0 0
+elseif C6P3
+assign_to AT_COLOR 5 0 0
+elseif C6P4
+assign_to AT_COLOR 1 0 0
+else
+if 4_TEAM_GAME
+assign_to AT_TEAM 3 0 0
+elseif 3_TEAM_GAME
+assign_to AT_TEAM 3 0 0
+elseif 2_TEAM_GAME
+assign_to AT_TEAM 1 0 0
+elseif 1_TEAM_GAME
+assign_to AT_TEAM -10 0 0
+else
+assign_to AT_TEAM -10 0 0
+endif
+endif
+if P2
+if S1
+land_position rnd(43,43) rnd(31,31)
+elseif S2
+land_position rnd(58,58) rnd(32,32)
+elseif S3
+land_position rnd(69,69) rnd(43,43)
+elseif S4
+land_position rnd(50,50) rnd(30,30)
+elseif S5
+land_position rnd(64,64) rnd(36,36)
+elseif S6
+land_position rnd(70,70) rnd(50,50)
+elseif S7
+land_position rnd(57,57) rnd(31,31)
+elseif S8
+land_position rnd(68,68) rnd(42,42)
+elseif S9
+land_position rnd(69,69) rnd(57,57)
+elseif S10
+land_position rnd(43,43) rnd(31,31)
+elseif S11
+land_position rnd(58,58) rnd(32,32)
+elseif S12
+land_position rnd(69,69) rnd(43,43)
+elseif S13
+land_position rnd(57,57) rnd(31,31)
+elseif S14
+land_position rnd(68,68) rnd(42,42)
+elseif S15
+land_position rnd(69,69) rnd(57,57)
+endif
+elseif P4
+if S1
+land_position rnd(34,34) rnd(61,61)
+elseif S2
+land_position rnd(30,30) rnd(47,47)
+elseif S3
+land_position rnd(39,39) rnd(34,34)
+elseif S4
+land_position rnd(36,36) rnd(64,64)
+elseif S5
+land_position rnd(30,30) rnd(50,50)
+elseif S6
+land_position rnd(36,36) rnd(36,36)
+elseif S7
+land_position rnd(39,39) rnd(66,66)
+elseif S8
+land_position rnd(30,30) rnd(53,53)
+elseif S9
+land_position rnd(34,34) rnd(39,39)
+elseif S10
+land_position rnd(34,34) rnd(61,61)
+elseif S11
+land_position rnd(30,30) rnd(47,47)
+elseif S12
+land_position rnd(39,39) rnd(34,34)
+elseif S13
+land_position rnd(39,39) rnd(66,66)
+elseif S14
+land_position rnd(30,30) rnd(53,53)
+elseif S15
+land_position rnd(34,34) rnd(39,39)
+endif
+elseif P6
+if S1
+land_position rnd(32,32) rnd(58,58)
+elseif S2
+land_position rnd(31,31) rnd(43,43)
+elseif S3
+land_position rnd(42,42) rnd(32,32)
+elseif S4
+land_position rnd(33,33) rnd(60,60)
+elseif S5
+land_position rnd(31,31) rnd(45,45)
+elseif S6
+land_position rnd(40,40) rnd(33,33)
+elseif S7
+land_position rnd(34,34) rnd(62,62)
+elseif S8
+land_position rnd(30,30) rnd(47,47)
+elseif S9
+land_position rnd(38,38) rnd(34,34)
+elseif S10
+land_position rnd(32,32) rnd(58,58)
+elseif S11
+land_position rnd(31,31) rnd(43,43)
+elseif S12
+land_position rnd(42,42) rnd(32,32)
+elseif S13
+land_position rnd(34,34) rnd(62,62)
+elseif S14
+land_position rnd(30,30) rnd(47,47)
+elseif S15
+land_position rnd(38,38) rnd(34,34)
+endif
+else
+if S1
+land_position rnd(41,41) rnd(68,68)
+elseif S2
+land_position rnd(31,31) rnd(56,56)
+elseif S3
+land_position rnd(32,32) rnd(41,41)
+elseif S4
+land_position rnd(42,42) rnd(68,68)
+elseif S5
+land_position rnd(32,32) rnd(58,58)
+elseif S6
+land_position rnd(32,32) rnd(42,42)
+elseif S7
+land_position rnd(44,44) rnd(69,69)
+elseif S8
+land_position rnd(32,32) rnd(59,59)
+elseif S9
+land_position rnd(31,31) rnd(44,44)
+elseif S10
+land_position rnd(41,41) rnd(68,68)
+elseif S11
+land_position rnd(31,31) rnd(56,56)
+elseif S12
+land_position rnd(32,32) rnd(41,41)
+elseif S13
+land_position rnd(44,44) rnd(69,69)
+elseif S14
+land_position rnd(32,32) rnd(59,59)
+elseif S15
+land_position rnd(31,31) rnd(44,44)
+endif
+endif
+}
+L
+{
+terrain_type PT4
+base_size 0
+base_elevation 0
+number_of_tiles 0
+clumping_factor 30
+other_zone_avoidance_distance 8
+zone 4
+   
+if C8P1
+assign_to AT_COLOR 6 0 0
+elseif C8P2
+assign_to AT_COLOR 6 0 0
+elseif C8P3
+assign_to AT_COLOR 4 0 0
+elseif C8P4
+assign_to AT_COLOR 4 0 0
+elseif C6P1
+assign_to AT_COLOR 2 0 0
+elseif C6P2
+assign_to AT_COLOR 2 0 0
+elseif C6P3
+assign_to AT_COLOR 6 0 0
+elseif C6P4
+assign_to AT_COLOR 6 0 0
+else
+if 4_TEAM_GAME
+assign_to AT_TEAM 4 0 0
+elseif 3_TEAM_GAME
+assign_to AT_TEAM 2 0 0
+elseif 2_TEAM_GAME
+assign_to AT_TEAM 2 0 0
+elseif 1_TEAM_GAME
+assign_to AT_TEAM -10 0 0
+else
+assign_to AT_TEAM -10 0 0
+endif
+endif
+if P2
+if S1
+land_position rnd(43,43) rnd(31,31)
+elseif S2
+land_position rnd(58,58) rnd(32,32)
+elseif S3
+land_position rnd(69,69) rnd(43,43)
+elseif S4
+land_position rnd(50,50) rnd(30,30)
+elseif S5
+land_position rnd(64,64) rnd(36,36)
+elseif S6
+land_position rnd(70,70) rnd(50,50)
+elseif S7
+land_position rnd(57,57) rnd(31,31)
+elseif S8
+land_position rnd(68,68) rnd(42,42)
+elseif S9
+land_position rnd(69,69) rnd(57,57)
+elseif S10
+land_position rnd(43,43) rnd(31,31)
+elseif S11
+land_position rnd(58,58) rnd(32,32)
+elseif S12
+land_position rnd(69,69) rnd(43,43)
+elseif S13
+land_position rnd(57,57) rnd(31,31)
+elseif S14
+land_position rnd(68,68) rnd(42,42)
+elseif S15
+land_position rnd(69,69) rnd(57,57)
+endif
+elseif P4
+if S1
+land_position rnd(61,61) rnd(34,34)
+elseif S2
+land_position rnd(70,70) rnd(47,47)
+elseif S3
+land_position rnd(66,66) rnd(61,61)
+elseif S4
+land_position rnd(64,64) rnd(36,36)
+elseif S5
+land_position rnd(70,70) rnd(50,50)
+elseif S6
+land_position rnd(64,64) rnd(64,64)
+elseif S7
+land_position rnd(66,66) rnd(39,39)
+elseif S8
+land_position rnd(70,70) rnd(53,53)
+elseif S9
+land_position rnd(61,61) rnd(66,66)
+elseif S10
+land_position rnd(61,61) rnd(34,34)
+elseif S11
+land_position rnd(70,70) rnd(47,47)
+elseif S12
+land_position rnd(66,66) rnd(61,61)
+elseif S13
+land_position rnd(66,66) rnd(39,39)
+elseif S14
+land_position rnd(70,70) rnd(53,53)
+elseif S15
+land_position rnd(61,61) rnd(66,66)
+endif
+elseif P6
+if S1
+land_position rnd(32,32) rnd(42,42)
+elseif S2
+land_position rnd(43,43) rnd(31,31)
+elseif S3
+land_position rnd(58,58) rnd(32,32)
+elseif S4
+land_position rnd(33,33) rnd(40,40)
+elseif S5
+land_position rnd(45,45) rnd(31,31)
+elseif S6
+land_position rnd(60,60) rnd(33,33)
+elseif S7
+land_position rnd(34,34) rnd(38,38)
+elseif S8
+land_position rnd(47,47) rnd(30,30)
+elseif S9
+land_position rnd(62,62) rnd(34,34)
+elseif S10
+land_position rnd(32,32) rnd(42,42)
+elseif S11
+land_position rnd(43,43) rnd(31,31)
+elseif S12
+land_position rnd(58,58) rnd(32,32)
+elseif S13
+land_position rnd(34,34) rnd(38,38)
+elseif S14
+land_position rnd(47,47) rnd(30,30)
+elseif S15
+land_position rnd(62,62) rnd(34,34)
+endif
+else
+if S1
+land_position rnd(56,56) rnd(31,31)
+elseif S2
+land_position rnd(68,68) rnd(41,41)
+elseif S3
+land_position rnd(69,69) rnd(56,56)
+elseif S4
+land_position rnd(58,58) rnd(32,32)
+elseif S5
+land_position rnd(68,68) rnd(42,42)
+elseif S6
+land_position rnd(68,68) rnd(58,58)
+elseif S7
+land_position rnd(59,59) rnd(32,32)
+elseif S8
+land_position rnd(69,69) rnd(44,44)
+elseif S9
+land_position rnd(68,68) rnd(59,59)
+elseif S10
+land_position rnd(56,56) rnd(31,31)
+elseif S11
+land_position rnd(68,68) rnd(41,41)
+elseif S12
+land_position rnd(69,69) rnd(56,56)
+elseif S13
+land_position rnd(59,59) rnd(32,32)
+elseif S14
+land_position rnd(69,69) rnd(44,44)
+elseif S15
+land_position rnd(68,68) rnd(59,59)
+endif
+endif
+}
+L
+{
+terrain_type PT5
+base_size 0
+base_elevation 0
+number_of_tiles 0
+clumping_factor 30
+other_zone_avoidance_distance 8
+zone 5
+   
+if C8P1
+assign_to AT_COLOR 3 0 0
+elseif C8P2
+assign_to AT_COLOR 5 0 0
+elseif C8P3
+assign_to AT_COLOR 5 0 0
+elseif C8P4
+assign_to AT_COLOR 3 0 0
+elseif C6P1
+assign_to AT_COLOR 3 0 0
+elseif C6P2
+assign_to AT_COLOR 3 0 0
+elseif C6P3
+assign_to AT_COLOR 3 0 0
+elseif C6P4
+assign_to AT_COLOR 3 0 0
+else
+if 4_TEAM_GAME
+assign_to AT_TEAM 1 0 0
+elseif 3_TEAM_GAME
+assign_to AT_TEAM 1 0 0
+elseif 2_TEAM_GAME
+assign_to AT_TEAM 1 0 0
+elseif 1_TEAM_GAME
+assign_to AT_TEAM 1 0 0
+else
+assign_to AT_TEAM -10 0 0
+endif
+endif
+if P2
+if S1
+land_position rnd(43,43) rnd(31,31)
+elseif S2
+land_position rnd(58,58) rnd(32,32)
+elseif S3
+land_position rnd(69,69) rnd(43,43)
+elseif S4
+land_position rnd(50,50) rnd(30,30)
+elseif S5
+land_position rnd(64,64) rnd(36,36)
+elseif S6
+land_position rnd(70,70) rnd(50,50)
+elseif S7
+land_position rnd(57,57) rnd(31,31)
+elseif S8
+land_position rnd(68,68) rnd(42,42)
+elseif S9
+land_position rnd(69,69) rnd(57,57)
+elseif S10
+land_position rnd(43,43) rnd(31,31)
+elseif S11
+land_position rnd(58,58) rnd(32,32)
+elseif S12
+land_position rnd(69,69) rnd(43,43)
+elseif S13
+land_position rnd(57,57) rnd(31,31)
+elseif S14
+land_position rnd(68,68) rnd(42,42)
+elseif S15
+land_position rnd(69,69) rnd(57,57)
+endif
+elseif P4
+if S1
+land_position rnd(61,61) rnd(34,34)
+elseif S2
+land_position rnd(70,70) rnd(47,47)
+elseif S3
+land_position rnd(66,66) rnd(61,61)
+elseif S4
+land_position rnd(64,64) rnd(36,36)
+elseif S5
+land_position rnd(70,70) rnd(50,50)
+elseif S6
+land_position rnd(64,64) rnd(64,64)
+elseif S7
+land_position rnd(66,66) rnd(39,39)
+elseif S8
+land_position rnd(70,70) rnd(53,53)
+elseif S9
+land_position rnd(61,61) rnd(66,66)
+elseif S10
+land_position rnd(61,61) rnd(34,34)
+elseif S11
+land_position rnd(70,70) rnd(47,47)
+elseif S12
+land_position rnd(66,66) rnd(61,61)
+elseif S13
+land_position rnd(66,66) rnd(39,39)
+elseif S14
+land_position rnd(70,70) rnd(53,53)
+elseif S15
+land_position rnd(61,61) rnd(66,66)
+endif
+elseif P6
+if S1
+land_position rnd(48,48) rnd(70,70)
+elseif S2
+land_position rnd(34,34) rnd(62,62)
+elseif S3
+land_position rnd(30,30) rnd(48,48)
+elseif S4
+land_position rnd(50,50) rnd(70,70)
+elseif S5
+land_position rnd(36,36) rnd(64,64)
+elseif S6
+land_position rnd(30,30) rnd(50,50)
+elseif S7
+land_position rnd(52,52) rnd(70,70)
+elseif S8
+land_position rnd(38,38) rnd(66,66)
+elseif S9
+land_position rnd(30,30) rnd(52,52)
+elseif S10
+land_position rnd(48,48) rnd(70,70)
+elseif S11
+land_position rnd(34,34) rnd(62,62)
+elseif S12
+land_position rnd(30,30) rnd(48,48)
+elseif S13
+land_position rnd(52,52) rnd(70,70)
+elseif S14
+land_position rnd(38,38) rnd(66,66)
+elseif S15
+land_position rnd(30,30) rnd(52,52)
+endif
+else
+if S1
+land_position rnd(56,56) rnd(69,69)
+elseif S2
+land_position rnd(41,41) rnd(68,68)
+elseif S3
+land_position rnd(31,31) rnd(56,56)
+elseif S4
+land_position rnd(58,58) rnd(68,68)
+elseif S5
+land_position rnd(42,42) rnd(68,68)
+elseif S6
+land_position rnd(32,32) rnd(58,58)
+elseif S7
+land_position rnd(59,59) rnd(68,68)
+elseif S8
+land_position rnd(44,44) rnd(69,69)
+elseif S9
+land_position rnd(32,32) rnd(59,59)
+elseif S10
+land_position rnd(56,56) rnd(69,69)
+elseif S11
+land_position rnd(41,41) rnd(68,68)
+elseif S12
+land_position rnd(31,31) rnd(56,56)
+elseif S13
+land_position rnd(59,59) rnd(68,68)
+elseif S14
+land_position rnd(44,44) rnd(69,69)
+elseif S15
+land_position rnd(32,32) rnd(59,59)
+endif
+endif
+}
+L
+{
+terrain_type PT6
+base_size 0
+base_elevation 0
+number_of_tiles 0
+clumping_factor 30
+other_zone_avoidance_distance 8
+zone 6
+   
+if C8P1
+assign_to AT_COLOR 4 0 0
+elseif C8P2
+assign_to AT_COLOR 4 0 0
+elseif C8P3
+assign_to AT_COLOR 6 0 0
+elseif C8P4
+assign_to AT_COLOR 6 0 0
+elseif C6P1
+assign_to AT_COLOR 6 0 0
+elseif C6P2
+assign_to AT_COLOR 6 0 0
+elseif C6P3
+assign_to AT_COLOR 2 0 0
+elseif C6P4
+assign_to AT_COLOR 2 0 0
+else
+if 4_TEAM_GAME
+assign_to AT_TEAM 2 0 0
+elseif 3_TEAM_GAME
+assign_to AT_TEAM 2 0 0
+elseif 2_TEAM_GAME
+assign_to AT_TEAM 2 0 0
+elseif 1_TEAM_GAME
+assign_to AT_TEAM -10 0 0
+else
+assign_to AT_TEAM -10 0 0
+endif
+endif
+if P2
+if S1
+land_position rnd(43,43) rnd(31,31)
+elseif S2
+land_position rnd(58,58) rnd(32,32)
+elseif S3
+land_position rnd(69,69) rnd(43,43)
+elseif S4
+land_position rnd(50,50) rnd(30,30)
+elseif S5
+land_position rnd(64,64) rnd(36,36)
+elseif S6
+land_position rnd(70,70) rnd(50,50)
+elseif S7
+land_position rnd(57,57) rnd(31,31)
+elseif S8
+land_position rnd(68,68) rnd(42,42)
+elseif S9
+land_position rnd(69,69) rnd(57,57)
+elseif S10
+land_position rnd(43,43) rnd(31,31)
+elseif S11
+land_position rnd(58,58) rnd(32,32)
+elseif S12
+land_position rnd(69,69) rnd(43,43)
+elseif S13
+land_position rnd(57,57) rnd(31,31)
+elseif S14
+land_position rnd(68,68) rnd(42,42)
+elseif S15
+land_position rnd(69,69) rnd(57,57)
+endif
+elseif P4
+if S1
+land_position rnd(61,61) rnd(34,34)
+elseif S2
+land_position rnd(70,70) rnd(47,47)
+elseif S3
+land_position rnd(66,66) rnd(61,61)
+elseif S4
+land_position rnd(64,64) rnd(36,36)
+elseif S5
+land_position rnd(70,70) rnd(50,50)
+elseif S6
+land_position rnd(64,64) rnd(64,64)
+elseif S7
+land_position rnd(66,66) rnd(39,39)
+elseif S8
+land_position rnd(70,70) rnd(53,53)
+elseif S9
+land_position rnd(61,61) rnd(66,66)
+elseif S10
+land_position rnd(61,61) rnd(34,34)
+elseif S11
+land_position rnd(70,70) rnd(47,47)
+elseif S12
+land_position rnd(66,66) rnd(61,61)
+elseif S13
+land_position rnd(66,66) rnd(39,39)
+elseif S14
+land_position rnd(70,70) rnd(53,53)
+elseif S15
+land_position rnd(61,61) rnd(66,66)
+endif
+elseif P6
+if S1
+land_position rnd(66,66) rnd(38,38)
+elseif S2
+land_position rnd(70,70) rnd(53,53)
+elseif S3
+land_position rnd(62,62) rnd(66,66)
+elseif S4
+land_position rnd(67,67) rnd(40,40)
+elseif S5
+land_position rnd(69,69) rnd(55,55)
+elseif S6
+land_position rnd(60,60) rnd(67,67)
+elseif S7
+land_position rnd(68,68) rnd(42,42)
+elseif S8
+land_position rnd(69,69) rnd(57,57)
+elseif S9
+land_position rnd(58,58) rnd(68,68)
+elseif S10
+land_position rnd(66,66) rnd(38,38)
+elseif S11
+land_position rnd(70,70) rnd(53,53)
+elseif S12
+land_position rnd(62,62) rnd(66,66)
+elseif S13
+land_position rnd(68,68) rnd(42,42)
+elseif S14
+land_position rnd(69,69) rnd(57,57)
+elseif S15
+land_position rnd(58,58) rnd(68,68)
+endif
+else
+if S1
+land_position rnd(41,41) rnd(32,32)
+elseif S2
+land_position rnd(56,56) rnd(31,31)
+elseif S3
+land_position rnd(68,68) rnd(41,41)
+elseif S4
+land_position rnd(42,42) rnd(32,32)
+elseif S5
+land_position rnd(58,58) rnd(32,32)
+elseif S6
+land_position rnd(68,68) rnd(42,42)
+elseif S7
+land_position rnd(44,44) rnd(31,31)
+elseif S8
+land_position rnd(59,59) rnd(32,32)
+elseif S9
+land_position rnd(69,69) rnd(44,44)
+elseif S10
+land_position rnd(41,41) rnd(32,32)
+elseif S11
+land_position rnd(56,56) rnd(31,31)
+elseif S12
+land_position rnd(68,68) rnd(41,41)
+elseif S13
+land_position rnd(44,44) rnd(31,31)
+elseif S14
+land_position rnd(59,59) rnd(32,32)
+elseif S15
+land_position rnd(69,69) rnd(44,44)
+endif
+endif
+}
+L
+{
+terrain_type PT7
+base_size 0
+base_elevation 0
+number_of_tiles 0
+clumping_factor 30
+other_zone_avoidance_distance 8
+zone 7
+   
+if C8P1
+assign_to AT_COLOR 7 0 0
+elseif C8P2
+assign_to AT_COLOR 1 0 0
+elseif C8P3
+assign_to AT_COLOR 1 0 0
+elseif C8P4
+assign_to AT_COLOR 7 0 0
+else
+if 4_TEAM_GAME
+assign_to AT_TEAM 3 0 0
+elseif 3_TEAM_GAME
+assign_to AT_TEAM 3 0 0
+elseif 2_TEAM_GAME
+assign_to AT_TEAM 1 0 0
+elseif 1_TEAM_GAME
+assign_to AT_TEAM 1 0 0
+else
+assign_to AT_TEAM -10 0 0
+endif
+endif
+if P2
+if S1
+land_position rnd(43,43) rnd(31,31)
+elseif S2
+land_position rnd(58,58) rnd(32,32)
+elseif S3
+land_position rnd(69,69) rnd(43,43)
+elseif S4
+land_position rnd(50,50) rnd(30,30)
+elseif S5
+land_position rnd(64,64) rnd(36,36)
+elseif S6
+land_position rnd(70,70) rnd(50,50)
+elseif S7
+land_position rnd(57,57) rnd(31,31)
+elseif S8
+land_position rnd(68,68) rnd(42,42)
+elseif S9
+land_position rnd(69,69) rnd(57,57)
+elseif S10
+land_position rnd(43,43) rnd(31,31)
+elseif S11
+land_position rnd(58,58) rnd(32,32)
+elseif S12
+land_position rnd(69,69) rnd(43,43)
+elseif S13
+land_position rnd(57,57) rnd(31,31)
+elseif S14
+land_position rnd(68,68) rnd(42,42)
+elseif S15
+land_position rnd(69,69) rnd(57,57)
+endif
+elseif P4
+if S1
+land_position rnd(61,61) rnd(34,34)
+elseif S2
+land_position rnd(70,70) rnd(47,47)
+elseif S3
+land_position rnd(66,66) rnd(61,61)
+elseif S4
+land_position rnd(64,64) rnd(36,36)
+elseif S5
+land_position rnd(70,70) rnd(50,50)
+elseif S6
+land_position rnd(64,64) rnd(64,64)
+elseif S7
+land_position rnd(66,66) rnd(39,39)
+elseif S8
+land_position rnd(70,70) rnd(53,53)
+elseif S9
+land_position rnd(61,61) rnd(66,66)
+elseif S10
+land_position rnd(61,61) rnd(34,34)
+elseif S11
+land_position rnd(70,70) rnd(47,47)
+elseif S12
+land_position rnd(66,66) rnd(61,61)
+elseif S13
+land_position rnd(66,66) rnd(39,39)
+elseif S14
+land_position rnd(70,70) rnd(53,53)
+elseif S15
+land_position rnd(61,61) rnd(66,66)
+endif
+elseif P6
+if S1
+land_position rnd(66,66) rnd(38,38)
+elseif S2
+land_position rnd(70,70) rnd(53,53)
+elseif S3
+land_position rnd(62,62) rnd(66,66)
+elseif S4
+land_position rnd(67,67) rnd(40,40)
+elseif S5
+land_position rnd(69,69) rnd(55,55)
+elseif S6
+land_position rnd(60,60) rnd(67,67)
+elseif S7
+land_position rnd(68,68) rnd(42,42)
+elseif S8
+land_position rnd(69,69) rnd(57,57)
+elseif S9
+land_position rnd(58,58) rnd(68,68)
+elseif S10
+land_position rnd(66,66) rnd(38,38)
+elseif S11
+land_position rnd(70,70) rnd(53,53)
+elseif S12
+land_position rnd(62,62) rnd(66,66)
+elseif S13
+land_position rnd(68,68) rnd(42,42)
+elseif S14
+land_position rnd(69,69) rnd(57,57)
+elseif S15
+land_position rnd(58,58) rnd(68,68)
+endif
+else
+if S1
+land_position rnd(31,31) rnd(56,56)
+elseif S2
+land_position rnd(32,32) rnd(41,41)
+elseif S3
+land_position rnd(44,44) rnd(31,31)
+elseif S4
+land_position rnd(32,32) rnd(58,58)
+elseif S5
+land_position rnd(32,32) rnd(42,42)
+elseif S6
+land_position rnd(42,42) rnd(32,32)
+elseif S7
+land_position rnd(32,32) rnd(59,59)
+elseif S8
+land_position rnd(31,31) rnd(44,44)
+elseif S9
+land_position rnd(41,41) rnd(32,32)
+elseif S10
+land_position rnd(31,31) rnd(56,56)
+elseif S11
+land_position rnd(32,32) rnd(41,41)
+elseif S12
+land_position rnd(44,44) rnd(31,31)
+elseif S13
+land_position rnd(32,32) rnd(59,59)
+elseif S14
+land_position rnd(31,31) rnd(44,44)
+elseif S15
+land_position rnd(41,41) rnd(32,32)
+endif
+endif
+}
+L
+{
+terrain_type PT8
+base_size 0
+base_elevation 0
+number_of_tiles 0
+clumping_factor 30
+other_zone_avoidance_distance 8
+zone 8
+   
+if C8P1
+assign_to AT_COLOR 8 0 0
+elseif C8P2
+assign_to AT_COLOR 8 0 0
+elseif C8P3
+assign_to AT_COLOR 2 0 0
+elseif C8P4
+assign_to AT_COLOR 2 0 0
+else
+if 4_TEAM_GAME
+assign_to AT_TEAM 4 0 0
+elseif 3_TEAM_GAME
+assign_to AT_TEAM 2 0 0
+elseif 2_TEAM_GAME
+assign_to AT_TEAM 2 0 0
+elseif 1_TEAM_GAME
+assign_to AT_TEAM -10 0 0
+else
+assign_to AT_TEAM -10 0 0
+endif
+endif
+if P2
+if S1
+land_position rnd(43,43) rnd(31,31)
+elseif S2
+land_position rnd(58,58) rnd(32,32)
+elseif S3
+land_position rnd(69,69) rnd(43,43)
+elseif S4
+land_position rnd(50,50) rnd(30,30)
+elseif S5
+land_position rnd(64,64) rnd(36,36)
+elseif S6
+land_position rnd(70,70) rnd(50,50)
+elseif S7
+land_position rnd(57,57) rnd(31,31)
+elseif S8
+land_position rnd(68,68) rnd(42,42)
+elseif S9
+land_position rnd(69,69) rnd(57,57)
+elseif S10
+land_position rnd(43,43) rnd(31,31)
+elseif S11
+land_position rnd(58,58) rnd(32,32)
+elseif S12
+land_position rnd(69,69) rnd(43,43)
+elseif S13
+land_position rnd(57,57) rnd(31,31)
+elseif S14
+land_position rnd(68,68) rnd(42,42)
+elseif S15
+land_position rnd(69,69) rnd(57,57)
+endif
+elseif P4
+if S1
+land_position rnd(61,61) rnd(34,34)
+elseif S2
+land_position rnd(70,70) rnd(47,47)
+elseif S3
+land_position rnd(66,66) rnd(61,61)
+elseif S4
+land_position rnd(64,64) rnd(36,36)
+elseif S5
+land_position rnd(70,70) rnd(50,50)
+elseif S6
+land_position rnd(64,64) rnd(64,64)
+elseif S7
+land_position rnd(66,66) rnd(39,39)
+elseif S8
+land_position rnd(70,70) rnd(53,53)
+elseif S9
+land_position rnd(61,61) rnd(66,66)
+elseif S10
+land_position rnd(61,61) rnd(34,34)
+elseif S11
+land_position rnd(70,70) rnd(47,47)
+elseif S12
+land_position rnd(66,66) rnd(61,61)
+elseif S13
+land_position rnd(66,66) rnd(39,39)
+elseif S14
+land_position rnd(70,70) rnd(53,53)
+elseif S15
+land_position rnd(61,61) rnd(66,66)
+endif
+elseif P6
+if S1
+land_position rnd(66,66) rnd(38,38)
+elseif S2
+land_position rnd(70,70) rnd(53,53)
+elseif S3
+land_position rnd(62,62) rnd(66,66)
+elseif S4
+land_position rnd(67,67) rnd(40,40)
+elseif S5
+land_position rnd(69,69) rnd(55,55)
+elseif S6
+land_position rnd(60,60) rnd(67,67)
+elseif S7
+land_position rnd(68,68) rnd(42,42)
+elseif S8
+land_position rnd(69,69) rnd(57,57)
+elseif S9
+land_position rnd(58,58) rnd(68,68)
+elseif S10
+land_position rnd(66,66) rnd(38,38)
+elseif S11
+land_position rnd(70,70) rnd(53,53)
+elseif S12
+land_position rnd(62,62) rnd(66,66)
+elseif S13
+land_position rnd(68,68) rnd(42,42)
+elseif S14
+land_position rnd(69,69) rnd(57,57)
+elseif S15
+land_position rnd(58,58) rnd(68,68)
+endif
+else
+if S1
+land_position rnd(68,68) rnd(41,41)
+elseif S2
+land_position rnd(69,69) rnd(56,56)
+elseif S3
+land_position rnd(59,59) rnd(68,68)
+elseif S4
+land_position rnd(68,68) rnd(42,42)
+elseif S5
+land_position rnd(68,68) rnd(58,58)
+elseif S6
+land_position rnd(58,58) rnd(68,68)
+elseif S7
+land_position rnd(69,69) rnd(44,44)
+elseif S8
+land_position rnd(68,68) rnd(59,59)
+elseif S9
+land_position rnd(56,56) rnd(69,69)
+elseif S10
+land_position rnd(68,68) rnd(41,41)
+elseif S11
+land_position rnd(69,69) rnd(56,56)
+elseif S12
+land_position rnd(59,59) rnd(68,68)
+elseif S13
+land_position rnd(69,69) rnd(44,44)
+elseif S14
+land_position rnd(68,68) rnd(59,59)
+elseif S15
+land_position rnd(56,56) rnd(69,69)
+endif
+endif
+}
+if 1_PLAYER_GAME
+#define P2
+elseif 2_PLAYER_GAME
+#define P2
+elseif 3_PLAYER_GAME
+#define P4
+elseif 4_PLAYER_GAME
+#define P4
+elseif 5_PLAYER_GAME
+#define P6
+if TEAM_POSITIONS
+#define TP_6PG
+endif
+elseif 6_PLAYER_GAME
+#define P6
+if TEAM_POSITIONS
+#define TP_6PG
+endif
+elseif 7_PLAYER_GAME
+#define P8
+if TEAM_POSITIONS
+#define TP_8PG
+endif
+elseif 8_PLAYER_GAME
+#define P8
+if TEAM_POSITIONS
+#define TP_8PG
+endif
+endif
+if TP_8PG
+start_random
+percent_chance 25 #define C8P1
+percent_chance 25 #define C8P2
+percent_chance 25 #define C8P3
+percent_chance 25 #define C8P4
+end_random
+elseif TP_6PG
+start_random
+percent_chance 25 #define C6P1
+percent_chance 25 #define C6P2
+percent_chance 25 #define C6P3
+percent_chance 25 #define C6P4
+end_random
+endif
+L
+{
+terrain_type CT1
+base_size 0
+base_elevation 7
+number_of_tiles 0
+clumping_factor 30
+   
+if P2
+if S1
+land_position rnd(48,48) rnd(57,57)
+elseif S2
+land_position rnd(44,44) rnd(53,53)
+elseif S3
+land_position rnd(43,43) rnd(48,48)
+elseif S4
+land_position rnd(50,50) rnd(57,57)
+elseif S5
+land_position rnd(45,45) rnd(55,55)
+elseif S6
+land_position rnd(43,43) rnd(50,50)
+elseif S7
+land_position rnd(52,52) rnd(57,57)
+elseif S8
+land_position rnd(47,47) rnd(56,56)
+elseif S9
+land_position rnd(43,43) rnd(52,52)
+elseif S10
+land_position rnd(52,52) rnd(57,57)
+elseif S11
+land_position rnd(47,47) rnd(56,56)
+elseif S12
+land_position rnd(43,43) rnd(52,52)
+elseif S13
+land_position rnd(48,48) rnd(57,57)
+elseif S14
+land_position rnd(44,44) rnd(53,53)
+elseif S15
+land_position rnd(43,43) rnd(48,48)
+endif
+elseif P4
+if S1
+land_position rnd(54,54) rnd(56,56)
+elseif S2
+land_position rnd(49,49) rnd(57,57)
+elseif S3
+land_position rnd(44,44) rnd(54,54)
+elseif S4
+land_position rnd(55,55) rnd(55,55)
+elseif S5
+land_position rnd(50,50) rnd(57,57)
+elseif S6
+land_position rnd(45,45) rnd(55,55)
+elseif S7
+land_position rnd(56,56) rnd(54,54)
+elseif S8
+land_position rnd(51,51) rnd(57,57)
+elseif S9
+land_position rnd(46,46) rnd(56,56)
+elseif S10
+land_position rnd(56,56) rnd(54,54)
+elseif S11
+land_position rnd(51,51) rnd(57,57)
+elseif S12
+land_position rnd(46,46) rnd(56,56)
+elseif S13
+land_position rnd(54,54) rnd(56,56)
+elseif S14
+land_position rnd(49,49) rnd(57,57)
+elseif S15
+land_position rnd(44,44) rnd(54,54)
+endif
+elseif P6
+if S1
+land_position rnd(56,56) rnd(54,54)
+elseif S2
+land_position rnd(51,51) rnd(57,57)
+elseif S3
+land_position rnd(46,46) rnd(56,56)
+elseif S4
+land_position rnd(56,56) rnd(54,54)
+elseif S5
+land_position rnd(52,52) rnd(57,57)
+elseif S6
+land_position rnd(47,47) rnd(56,56)
+elseif S7
+land_position rnd(56,56) rnd(53,53)
+elseif S8
+land_position rnd(53,53) rnd(57,57)
+elseif S9
+land_position rnd(47,47) rnd(56,56)
+elseif S10
+land_position rnd(56,56) rnd(53,53)
+elseif S11
+land_position rnd(53,53) rnd(57,57)
+elseif S12
+land_position rnd(47,47) rnd(56,56)
+elseif S13
+land_position rnd(56,56) rnd(54,54)
+elseif S14
+land_position rnd(51,51) rnd(57,57)
+elseif S15
+land_position rnd(46,46) rnd(56,56)
+endif
+else
+if S1
+land_position rnd(56,56) rnd(53,53)
+elseif S2
+land_position rnd(52,52) rnd(57,57)
+elseif S3
+land_position rnd(47,47) rnd(56,56)
+elseif S4
+land_position rnd(56,56) rnd(53,53)
+elseif S5
+land_position rnd(53,53) rnd(56,56)
+elseif S6
+land_position rnd(47,47) rnd(56,56)
+elseif S7
+land_position rnd(57,57) rnd(52,52)
+elseif S8
+land_position rnd(53,53) rnd(56,56)
+elseif S9
+land_position rnd(48,48) rnd(57,57)
+elseif S10
+land_position rnd(57,57) rnd(52,52)
+elseif S11
+land_position rnd(53,53) rnd(56,56)
+elseif S12
+land_position rnd(48,48) rnd(57,57)
+elseif S13
+land_position rnd(56,56) rnd(53,53)
+elseif S14
+land_position rnd(52,52) rnd(57,57)
+elseif S15
+land_position rnd(47,47) rnd(56,56)
+endif
+endif
+}
+L
+{
+terrain_type CT2
+base_size 0
+base_elevation 7
+number_of_tiles 0
+clumping_factor 30
+   
+if P2
+if S1
+land_position rnd(48,48) rnd(43,43)
+elseif S2
+land_position rnd(53,53) rnd(44,44)
+elseif S3
+land_position rnd(57,57) rnd(48,48)
+elseif S4
+land_position rnd(50,50) rnd(43,43)
+elseif S5
+land_position rnd(55,55) rnd(45,45)
+elseif S6
+land_position rnd(57,57) rnd(50,50)
+elseif S7
+land_position rnd(52,52) rnd(43,43)
+elseif S8
+land_position rnd(56,56) rnd(47,47)
+elseif S9
+land_position rnd(57,57) rnd(52,52)
+elseif S10
+land_position rnd(52,52) rnd(43,43)
+elseif S11
+land_position rnd(56,56) rnd(47,47)
+elseif S12
+land_position rnd(57,57) rnd(52,52)
+elseif S13
+land_position rnd(48,48) rnd(43,43)
+elseif S14
+land_position rnd(53,53) rnd(44,44)
+elseif S15
+land_position rnd(57,57) rnd(48,48)
+endif
+elseif P4
+if S1
+land_position rnd(44,44) rnd(46,46)
+elseif S2
+land_position rnd(49,49) rnd(43,43)
+elseif S3
+land_position rnd(54,54) rnd(44,44)
+elseif S4
+land_position rnd(45,45) rnd(45,45)
+elseif S5
+land_position rnd(50,50) rnd(43,43)
+elseif S6
+land_position rnd(55,55) rnd(45,45)
+elseif S7
+land_position rnd(46,46) rnd(44,44)
+elseif S8
+land_position rnd(51,51) rnd(43,43)
+elseif S9
+land_position rnd(56,56) rnd(46,46)
+elseif S10
+land_position rnd(46,46) rnd(44,44)
+elseif S11
+land_position rnd(51,51) rnd(43,43)
+elseif S12
+land_position rnd(56,56) rnd(46,46)
+elseif S13
+land_position rnd(44,44) rnd(46,46)
+elseif S14
+land_position rnd(49,49) rnd(43,43)
+elseif S15
+land_position rnd(54,54) rnd(44,44)
+endif
+elseif P6
+if S1
+land_position rnd(49,49) rnd(43,43)
+elseif S2
+land_position rnd(54,54) rnd(45,45)
+elseif S3
+land_position rnd(57,57) rnd(49,49)
+elseif S4
+land_position rnd(50,50) rnd(43,43)
+elseif S5
+land_position rnd(55,55) rnd(45,45)
+elseif S6
+land_position rnd(57,57) rnd(50,50)
+elseif S7
+land_position rnd(51,51) rnd(43,43)
+elseif S8
+land_position rnd(55,55) rnd(46,46)
+elseif S9
+land_position rnd(57,57) rnd(51,51)
+elseif S10
+land_position rnd(51,51) rnd(43,43)
+elseif S11
+land_position rnd(55,55) rnd(46,46)
+elseif S12
+land_position rnd(57,57) rnd(51,51)
+elseif S13
+land_position rnd(49,49) rnd(43,43)
+elseif S14
+land_position rnd(54,54) rnd(45,45)
+elseif S15
+land_position rnd(57,57) rnd(49,49)
+endif
+else
+if S1
+land_position rnd(43,43) rnd(48,48)
+elseif S2
+land_position rnd(47,47) rnd(44,44)
+elseif S3
+land_position rnd(52,52) rnd(43,43)
+elseif S4
+land_position rnd(44,44) rnd(47,47)
+elseif S5
+land_position rnd(47,47) rnd(44,44)
+elseif S6
+land_position rnd(53,53) rnd(44,44)
+elseif S7
+land_position rnd(44,44) rnd(47,47)
+elseif S8
+land_position rnd(48,48) rnd(43,43)
+elseif S9
+land_position rnd(53,53) rnd(44,44)
+elseif S10
+land_position rnd(44,44) rnd(47,47)
+elseif S11
+land_position rnd(48,48) rnd(43,43)
+elseif S12
+land_position rnd(53,53) rnd(44,44)
+elseif S13
+land_position rnd(43,43) rnd(48,48)
+elseif S14
+land_position rnd(47,47) rnd(44,44)
+elseif S15
+land_position rnd(52,52) rnd(43,43)
+endif
+endif
+}
+L
+{
+terrain_type CT3
+base_size 0
+base_elevation 7
+number_of_tiles 0
+clumping_factor 30
+   
+if P2
+if S1
+land_position rnd(48,48) rnd(43,43)
+elseif S2
+land_position rnd(53,53) rnd(44,44)
+elseif S3
+land_position rnd(57,57) rnd(48,48)
+elseif S4
+land_position rnd(50,50) rnd(43,43)
+elseif S5
+land_position rnd(55,55) rnd(45,45)
+elseif S6
+land_position rnd(57,57) rnd(50,50)
+elseif S7
+land_position rnd(52,52) rnd(43,43)
+elseif S8
+land_position rnd(56,56) rnd(47,47)
+elseif S9
+land_position rnd(57,57) rnd(52,52)
+elseif S10
+land_position rnd(52,52) rnd(43,43)
+elseif S11
+land_position rnd(56,56) rnd(47,47)
+elseif S12
+land_position rnd(57,57) rnd(52,52)
+elseif S13
+land_position rnd(48,48) rnd(43,43)
+elseif S14
+land_position rnd(53,53) rnd(44,44)
+elseif S15
+land_position rnd(57,57) rnd(48,48)
+endif
+elseif P4
+if S1
+land_position rnd(44,44) rnd(54,54)
+elseif S2
+land_position rnd(43,43) rnd(49,49)
+elseif S3
+land_position rnd(46,46) rnd(44,44)
+elseif S4
+land_position rnd(45,45) rnd(55,55)
+elseif S5
+land_position rnd(43,43) rnd(50,50)
+elseif S6
+land_position rnd(45,45) rnd(45,45)
+elseif S7
+land_position rnd(46,46) rnd(56,56)
+elseif S8
+land_position rnd(43,43) rnd(51,51)
+elseif S9
+land_position rnd(44,44) rnd(46,46)
+elseif S10
+land_position rnd(46,46) rnd(56,56)
+elseif S11
+land_position rnd(43,43) rnd(51,51)
+elseif S12
+land_position rnd(44,44) rnd(46,46)
+elseif S13
+land_position rnd(44,44) rnd(54,54)
+elseif S14
+land_position rnd(43,43) rnd(49,49)
+elseif S15
+land_position rnd(46,46) rnd(44,44)
+endif
+elseif P6
+if S1
+land_position rnd(44,44) rnd(53,53)
+elseif S2
+land_position rnd(43,43) rnd(47,47)
+elseif S3
+land_position rnd(47,47) rnd(44,44)
+elseif S4
+land_position rnd(44,44) rnd(54,54)
+elseif S5
+land_position rnd(43,43) rnd(48,48)
+elseif S6
+land_position rnd(47,47) rnd(44,44)
+elseif S7
+land_position rnd(44,44) rnd(54,54)
+elseif S8
+land_position rnd(43,43) rnd(49,49)
+elseif S9
+land_position rnd(46,46) rnd(44,44)
+elseif S10
+land_position rnd(44,44) rnd(54,54)
+elseif S11
+land_position rnd(43,43) rnd(49,49)
+elseif S12
+land_position rnd(46,46) rnd(44,44)
+elseif S13
+land_position rnd(44,44) rnd(53,53)
+elseif S14
+land_position rnd(43,43) rnd(47,47)
+elseif S15
+land_position rnd(47,47) rnd(44,44)
+endif
+else
+if S1
+land_position rnd(47,47) rnd(56,56)
+elseif S2
+land_position rnd(43,43) rnd(52,52)
+elseif S3
+land_position rnd(44,44) rnd(47,47)
+elseif S4
+land_position rnd(47,47) rnd(56,56)
+elseif S5
+land_position rnd(44,44) rnd(53,53)
+elseif S6
+land_position rnd(44,44) rnd(47,47)
+elseif S7
+land_position rnd(48,48) rnd(57,57)
+elseif S8
+land_position rnd(44,44) rnd(53,53)
+elseif S9
+land_position rnd(43,43) rnd(48,48)
+elseif S10
+land_position rnd(48,48) rnd(57,57)
+elseif S11
+land_position rnd(44,44) rnd(53,53)
+elseif S12
+land_position rnd(43,43) rnd(48,48)
+elseif S13
+land_position rnd(47,47) rnd(56,56)
+elseif S14
+land_position rnd(43,43) rnd(52,52)
+elseif S15
+land_position rnd(44,44) rnd(47,47)
+endif
+endif
+}
+L
+{
+terrain_type CT4
+base_size 0
+base_elevation 7
+number_of_tiles 0
+clumping_factor 30
+   
+if P2
+if S1
+land_position rnd(48,48) rnd(43,43)
+elseif S2
+land_position rnd(53,53) rnd(44,44)
+elseif S3
+land_position rnd(57,57) rnd(48,48)
+elseif S4
+land_position rnd(50,50) rnd(43,43)
+elseif S5
+land_position rnd(55,55) rnd(45,45)
+elseif S6
+land_position rnd(57,57) rnd(50,50)
+elseif S7
+land_position rnd(52,52) rnd(43,43)
+elseif S8
+land_position rnd(56,56) rnd(47,47)
+elseif S9
+land_position rnd(57,57) rnd(52,52)
+elseif S10
+land_position rnd(52,52) rnd(43,43)
+elseif S11
+land_position rnd(56,56) rnd(47,47)
+elseif S12
+land_position rnd(57,57) rnd(52,52)
+elseif S13
+land_position rnd(48,48) rnd(43,43)
+elseif S14
+land_position rnd(53,53) rnd(44,44)
+elseif S15
+land_position rnd(57,57) rnd(48,48)
+endif
+elseif P4
+if S1
+land_position rnd(54,54) rnd(44,44)
+elseif S2
+land_position rnd(57,57) rnd(49,49)
+elseif S3
+land_position rnd(56,56) rnd(54,54)
+elseif S4
+land_position rnd(55,55) rnd(45,45)
+elseif S5
+land_position rnd(57,57) rnd(50,50)
+elseif S6
+land_position rnd(55,55) rnd(55,55)
+elseif S7
+land_position rnd(56,56) rnd(46,46)
+elseif S8
+land_position rnd(57,57) rnd(51,51)
+elseif S9
+land_position rnd(54,54) rnd(56,56)
+elseif S10
+land_position rnd(56,56) rnd(46,46)
+elseif S11
+land_position rnd(57,57) rnd(51,51)
+elseif S12
+land_position rnd(54,54) rnd(56,56)
+elseif S13
+land_position rnd(54,54) rnd(44,44)
+elseif S14
+land_position rnd(57,57) rnd(49,49)
+elseif S15
+land_position rnd(56,56) rnd(54,54)
+endif
+elseif P6
+if S1
+land_position rnd(44,44) rnd(47,47)
+elseif S2
+land_position rnd(47,47) rnd(43,43)
+elseif S3
+land_position rnd(53,53) rnd(44,44)
+elseif S4
+land_position rnd(44,44) rnd(47,47)
+elseif S5
+land_position rnd(48,48) rnd(43,43)
+elseif S6
+land_position rnd(54,54) rnd(44,44)
+elseif S7
+land_position rnd(44,44) rnd(46,46)
+elseif S8
+land_position rnd(49,49) rnd(43,43)
+elseif S9
+land_position rnd(54,54) rnd(44,44)
+elseif S10
+land_position rnd(44,44) rnd(46,46)
+elseif S11
+land_position rnd(49,49) rnd(43,43)
+elseif S12
+land_position rnd(54,54) rnd(44,44)
+elseif S13
+land_position rnd(44,44) rnd(47,47)
+elseif S14
+land_position rnd(47,47) rnd(43,43)
+elseif S15
+land_position rnd(53,53) rnd(44,44)
+endif
+else
+if S1
+land_position rnd(52,52) rnd(43,43)
+elseif S2
+land_position rnd(56,56) rnd(47,47)
+elseif S3
+land_position rnd(57,57) rnd(52,52)
+elseif S4
+land_position rnd(53,53) rnd(44,44)
+elseif S5
+land_position rnd(56,56) rnd(47,47)
+elseif S6
+land_position rnd(56,56) rnd(53,53)
+elseif S7
+land_position rnd(53,53) rnd(44,44)
+elseif S8
+land_position rnd(57,57) rnd(48,48)
+elseif S9
+land_position rnd(56,56) rnd(53,53)
+elseif S10
+land_position rnd(53,53) rnd(44,44)
+elseif S11
+land_position rnd(57,57) rnd(48,48)
+elseif S12
+land_position rnd(56,56) rnd(53,53)
+elseif S13
+land_position rnd(52,52) rnd(43,43)
+elseif S14
+land_position rnd(56,56) rnd(47,47)
+elseif S15
+land_position rnd(57,57) rnd(52,52)
+endif
+endif
+}
+L
+{
+terrain_type CT5
+base_size 0
+base_elevation 7
+number_of_tiles 0
+clumping_factor 30
+   
+if P2
+if S1
+land_position rnd(48,48) rnd(43,43)
+elseif S2
+land_position rnd(53,53) rnd(44,44)
+elseif S3
+land_position rnd(57,57) rnd(48,48)
+elseif S4
+land_position rnd(50,50) rnd(43,43)
+elseif S5
+land_position rnd(55,55) rnd(45,45)
+elseif S6
+land_position rnd(57,57) rnd(50,50)
+elseif S7
+land_position rnd(52,52) rnd(43,43)
+elseif S8
+land_position rnd(56,56) rnd(47,47)
+elseif S9
+land_position rnd(57,57) rnd(52,52)
+elseif S10
+land_position rnd(52,52) rnd(43,43)
+elseif S11
+land_position rnd(56,56) rnd(47,47)
+elseif S12
+land_position rnd(57,57) rnd(52,52)
+elseif S13
+land_position rnd(48,48) rnd(43,43)
+elseif S14
+land_position rnd(53,53) rnd(44,44)
+elseif S15
+land_position rnd(57,57) rnd(48,48)
+endif
+elseif P4
+if S1
+land_position rnd(54,54) rnd(44,44)
+elseif S2
+land_position rnd(57,57) rnd(49,49)
+elseif S3
+land_position rnd(56,56) rnd(54,54)
+elseif S4
+land_position rnd(55,55) rnd(45,45)
+elseif S5
+land_position rnd(57,57) rnd(50,50)
+elseif S6
+land_position rnd(55,55) rnd(55,55)
+elseif S7
+land_position rnd(56,56) rnd(46,46)
+elseif S8
+land_position rnd(57,57) rnd(51,51)
+elseif S9
+land_position rnd(54,54) rnd(56,56)
+elseif S10
+land_position rnd(56,56) rnd(46,46)
+elseif S11
+land_position rnd(57,57) rnd(51,51)
+elseif S12
+land_position rnd(54,54) rnd(56,56)
+elseif S13
+land_position rnd(54,54) rnd(44,44)
+elseif S14
+land_position rnd(57,57) rnd(49,49)
+elseif S15
+land_position rnd(56,56) rnd(54,54)
+endif
+elseif P6
+if S1
+land_position rnd(49,49) rnd(57,57)
+elseif S2
+land_position rnd(45,45) rnd(54,54)
+elseif S3
+land_position rnd(43,43) rnd(49,49)
+elseif S4
+land_position rnd(50,50) rnd(57,57)
+elseif S5
+land_position rnd(45,45) rnd(55,55)
+elseif S6
+land_position rnd(43,43) rnd(50,50)
+elseif S7
+land_position rnd(51,51) rnd(57,57)
+elseif S8
+land_position rnd(46,46) rnd(55,55)
+elseif S9
+land_position rnd(43,43) rnd(51,51)
+elseif S10
+land_position rnd(51,51) rnd(57,57)
+elseif S11
+land_position rnd(46,46) rnd(55,55)
+elseif S12
+land_position rnd(43,43) rnd(51,51)
+elseif S13
+land_position rnd(49,49) rnd(57,57)
+elseif S14
+land_position rnd(45,45) rnd(54,54)
+elseif S15
+land_position rnd(43,43) rnd(49,49)
+endif
+else
+if S1
+land_position rnd(52,52) rnd(57,57)
+elseif S2
+land_position rnd(47,47) rnd(56,56)
+elseif S3
+land_position rnd(43,43) rnd(52,52)
+elseif S4
+land_position rnd(53,53) rnd(56,56)
+elseif S5
+land_position rnd(47,47) rnd(56,56)
+elseif S6
+land_position rnd(44,44) rnd(53,53)
+elseif S7
+land_position rnd(53,53) rnd(56,56)
+elseif S8
+land_position rnd(48,48) rnd(57,57)
+elseif S9
+land_position rnd(44,44) rnd(53,53)
+elseif S10
+land_position rnd(53,53) rnd(56,56)
+elseif S11
+land_position rnd(48,48) rnd(57,57)
+elseif S12
+land_position rnd(44,44) rnd(53,53)
+elseif S13
+land_position rnd(52,52) rnd(57,57)
+elseif S14
+land_position rnd(47,47) rnd(56,56)
+elseif S15
+land_position rnd(43,43) rnd(52,52)
+endif
+endif
+}
+L
+{
+terrain_type CT6
+base_size 0
+base_elevation 7
+number_of_tiles 0
+clumping_factor 30
+   
+if P2
+if S1
+land_position rnd(48,48) rnd(43,43)
+elseif S2
+land_position rnd(53,53) rnd(44,44)
+elseif S3
+land_position rnd(57,57) rnd(48,48)
+elseif S4
+land_position rnd(50,50) rnd(43,43)
+elseif S5
+land_position rnd(55,55) rnd(45,45)
+elseif S6
+land_position rnd(57,57) rnd(50,50)
+elseif S7
+land_position rnd(52,52) rnd(43,43)
+elseif S8
+land_position rnd(56,56) rnd(47,47)
+elseif S9
+land_position rnd(57,57) rnd(52,52)
+elseif S10
+land_position rnd(52,52) rnd(43,43)
+elseif S11
+land_position rnd(56,56) rnd(47,47)
+elseif S12
+land_position rnd(57,57) rnd(52,52)
+elseif S13
+land_position rnd(48,48) rnd(43,43)
+elseif S14
+land_position rnd(53,53) rnd(44,44)
+elseif S15
+land_position rnd(57,57) rnd(48,48)
+endif
+elseif P4
+if S1
+land_position rnd(54,54) rnd(44,44)
+elseif S2
+land_position rnd(57,57) rnd(49,49)
+elseif S3
+land_position rnd(56,56) rnd(54,54)
+elseif S4
+land_position rnd(55,55) rnd(45,45)
+elseif S5
+land_position rnd(57,57) rnd(50,50)
+elseif S6
+land_position rnd(55,55) rnd(55,55)
+elseif S7
+land_position rnd(56,56) rnd(46,46)
+elseif S8
+land_position rnd(57,57) rnd(51,51)
+elseif S9
+land_position rnd(54,54) rnd(56,56)
+elseif S10
+land_position rnd(56,56) rnd(46,46)
+elseif S11
+land_position rnd(57,57) rnd(51,51)
+elseif S12
+land_position rnd(54,54) rnd(56,56)
+elseif S13
+land_position rnd(54,54) rnd(44,44)
+elseif S14
+land_position rnd(57,57) rnd(49,49)
+elseif S15
+land_position rnd(56,56) rnd(54,54)
+endif
+elseif P6
+if S1
+land_position rnd(56,56) rnd(46,46)
+elseif S2
+land_position rnd(57,57) rnd(51,51)
+elseif S3
+land_position rnd(54,54) rnd(56,56)
+elseif S4
+land_position rnd(56,56) rnd(47,47)
+elseif S5
+land_position rnd(57,57) rnd(52,52)
+elseif S6
+land_position rnd(54,54) rnd(56,56)
+elseif S7
+land_position rnd(56,56) rnd(47,47)
+elseif S8
+land_position rnd(57,57) rnd(53,53)
+elseif S9
+land_position rnd(53,53) rnd(56,56)
+elseif S10
+land_position rnd(56,56) rnd(47,47)
+elseif S11
+land_position rnd(57,57) rnd(53,53)
+elseif S12
+land_position rnd(53,53) rnd(56,56)
+elseif S13
+land_position rnd(56,56) rnd(46,46)
+elseif S14
+land_position rnd(57,57) rnd(51,51)
+elseif S15
+land_position rnd(54,54) rnd(56,56)
+endif
+else
+if S1
+land_position rnd(47,47) rnd(44,44)
+elseif S2
+land_position rnd(52,52) rnd(43,43)
+elseif S3
+land_position rnd(56,56) rnd(47,47)
+elseif S4
+land_position rnd(47,47) rnd(44,44)
+elseif S5
+land_position rnd(53,53) rnd(44,44)
+elseif S6
+land_position rnd(56,56) rnd(47,47)
+elseif S7
+land_position rnd(48,48) rnd(43,43)
+elseif S8
+land_position rnd(53,53) rnd(44,44)
+elseif S9
+land_position rnd(57,57) rnd(48,48)
+elseif S10
+land_position rnd(48,48) rnd(43,43)
+elseif S11
+land_position rnd(53,53) rnd(44,44)
+elseif S12
+land_position rnd(57,57) rnd(48,48)
+elseif S13
+land_position rnd(47,47) rnd(44,44)
+elseif S14
+land_position rnd(52,52) rnd(43,43)
+elseif S15
+land_position rnd(56,56) rnd(47,47)
+endif
+endif
+}
+L
+{
+terrain_type CT7
+base_size 0
+base_elevation 7
+number_of_tiles 0
+clumping_factor 30
+   
+if P2
+if S1
+land_position rnd(48,48) rnd(43,43)
+elseif S2
+land_position rnd(53,53) rnd(44,44)
+elseif S3
+land_position rnd(57,57) rnd(48,48)
+elseif S4
+land_position rnd(50,50) rnd(43,43)
+elseif S5
+land_position rnd(55,55) rnd(45,45)
+elseif S6
+land_position rnd(57,57) rnd(50,50)
+elseif S7
+land_position rnd(52,52) rnd(43,43)
+elseif S8
+land_position rnd(56,56) rnd(47,47)
+elseif S9
+land_position rnd(57,57) rnd(52,52)
+elseif S10
+land_position rnd(52,52) rnd(43,43)
+elseif S11
+land_position rnd(56,56) rnd(47,47)
+elseif S12
+land_position rnd(57,57) rnd(52,52)
+elseif S13
+land_position rnd(48,48) rnd(43,43)
+elseif S14
+land_position rnd(53,53) rnd(44,44)
+elseif S15
+land_position rnd(57,57) rnd(48,48)
+endif
+elseif P4
+if S1
+land_position rnd(54,54) rnd(44,44)
+elseif S2
+land_position rnd(57,57) rnd(49,49)
+elseif S3
+land_position rnd(56,56) rnd(54,54)
+elseif S4
+land_position rnd(55,55) rnd(45,45)
+elseif S5
+land_position rnd(57,57) rnd(50,50)
+elseif S6
+land_position rnd(55,55) rnd(55,55)
+elseif S7
+land_position rnd(56,56) rnd(46,46)
+elseif S8
+land_position rnd(57,57) rnd(51,51)
+elseif S9
+land_position rnd(54,54) rnd(56,56)
+elseif S10
+land_position rnd(56,56) rnd(46,46)
+elseif S11
+land_position rnd(57,57) rnd(51,51)
+elseif S12
+land_position rnd(54,54) rnd(56,56)
+elseif S13
+land_position rnd(54,54) rnd(44,44)
+elseif S14
+land_position rnd(57,57) rnd(49,49)
+elseif S15
+land_position rnd(56,56) rnd(54,54)
+endif
+elseif P6
+if S1
+land_position rnd(56,56) rnd(46,46)
+elseif S2
+land_position rnd(57,57) rnd(51,51)
+elseif S3
+land_position rnd(54,54) rnd(56,56)
+elseif S4
+land_position rnd(56,56) rnd(47,47)
+elseif S5
+land_position rnd(57,57) rnd(52,52)
+elseif S6
+land_position rnd(54,54) rnd(56,56)
+elseif S7
+land_position rnd(56,56) rnd(47,47)
+elseif S8
+land_position rnd(57,57) rnd(53,53)
+elseif S9
+land_position rnd(53,53) rnd(56,56)
+elseif S10
+land_position rnd(56,56) rnd(47,47)
+elseif S11
+land_position rnd(57,57) rnd(53,53)
+elseif S12
+land_position rnd(53,53) rnd(56,56)
+elseif S13
+land_position rnd(56,56) rnd(46,46)
+elseif S14
+land_position rnd(57,57) rnd(51,51)
+elseif S15
+land_position rnd(54,54) rnd(56,56)
+endif
+else
+if S1
+land_position rnd(43,43) rnd(52,52)
+elseif S2
+land_position rnd(44,44) rnd(47,47)
+elseif S3
+land_position rnd(48,48) rnd(43,43)
+elseif S4
+land_position rnd(44,44) rnd(53,53)
+elseif S5
+land_position rnd(44,44) rnd(47,47)
+elseif S6
+land_position rnd(47,47) rnd(44,44)
+elseif S7
+land_position rnd(44,44) rnd(53,53)
+elseif S8
+land_position rnd(43,43) rnd(48,48)
+elseif S9
+land_position rnd(47,47) rnd(44,44)
+elseif S10
+land_position rnd(44,44) rnd(53,53)
+elseif S11
+land_position rnd(43,43) rnd(48,48)
+elseif S12
+land_position rnd(47,47) rnd(44,44)
+elseif S13
+land_position rnd(43,43) rnd(52,52)
+elseif S14
+land_position rnd(44,44) rnd(47,47)
+elseif S15
+land_position rnd(48,48) rnd(43,43)
+endif
+endif
+}
+L
+{
+terrain_type CT8
+base_size 0
+base_elevation 7
+number_of_tiles 0
+clumping_factor 30
+   
+if P2
+if S1
+land_position rnd(48,48) rnd(43,43)
+elseif S2
+land_position rnd(53,53) rnd(44,44)
+elseif S3
+land_position rnd(57,57) rnd(48,48)
+elseif S4
+land_position rnd(50,50) rnd(43,43)
+elseif S5
+land_position rnd(55,55) rnd(45,45)
+elseif S6
+land_position rnd(57,57) rnd(50,50)
+elseif S7
+land_position rnd(52,52) rnd(43,43)
+elseif S8
+land_position rnd(56,56) rnd(47,47)
+elseif S9
+land_position rnd(57,57) rnd(52,52)
+elseif S10
+land_position rnd(52,52) rnd(43,43)
+elseif S11
+land_position rnd(56,56) rnd(47,47)
+elseif S12
+land_position rnd(57,57) rnd(52,52)
+elseif S13
+land_position rnd(48,48) rnd(43,43)
+elseif S14
+land_position rnd(53,53) rnd(44,44)
+elseif S15
+land_position rnd(57,57) rnd(48,48)
+endif
+elseif P4
+if S1
+land_position rnd(54,54) rnd(44,44)
+elseif S2
+land_position rnd(57,57) rnd(49,49)
+elseif S3
+land_position rnd(56,56) rnd(54,54)
+elseif S4
+land_position rnd(55,55) rnd(45,45)
+elseif S5
+land_position rnd(57,57) rnd(50,50)
+elseif S6
+land_position rnd(55,55) rnd(55,55)
+elseif S7
+land_position rnd(56,56) rnd(46,46)
+elseif S8
+land_position rnd(57,57) rnd(51,51)
+elseif S9
+land_position rnd(54,54) rnd(56,56)
+elseif S10
+land_position rnd(56,56) rnd(46,46)
+elseif S11
+land_position rnd(57,57) rnd(51,51)
+elseif S12
+land_position rnd(54,54) rnd(56,56)
+elseif S13
+land_position rnd(54,54) rnd(44,44)
+elseif S14
+land_position rnd(57,57) rnd(49,49)
+elseif S15
+land_position rnd(56,56) rnd(54,54)
+endif
+elseif P6
+if S1
+land_position rnd(56,56) rnd(46,46)
+elseif S2
+land_position rnd(57,57) rnd(51,51)
+elseif S3
+land_position rnd(54,54) rnd(56,56)
+elseif S4
+land_position rnd(56,56) rnd(47,47)
+elseif S5
+land_position rnd(57,57) rnd(52,52)
+elseif S6
+land_position rnd(54,54) rnd(56,56)
+elseif S7
+land_position rnd(56,56) rnd(47,47)
+elseif S8
+land_position rnd(57,57) rnd(53,53)
+elseif S9
+land_position rnd(53,53) rnd(56,56)
+elseif S10
+land_position rnd(56,56) rnd(47,47)
+elseif S11
+land_position rnd(57,57) rnd(53,53)
+elseif S12
+land_position rnd(53,53) rnd(56,56)
+elseif S13
+land_position rnd(56,56) rnd(46,46)
+elseif S14
+land_position rnd(57,57) rnd(51,51)
+elseif S15
+land_position rnd(54,54) rnd(56,56)
+endif
+else
+if S1
+land_position rnd(56,56) rnd(47,47)
+elseif S2
+land_position rnd(57,57) rnd(52,52)
+elseif S3
+land_position rnd(53,53) rnd(56,56)
+elseif S4
+land_position rnd(56,56) rnd(47,47)
+elseif S5
+land_position rnd(56,56) rnd(53,53)
+elseif S6
+land_position rnd(53,53) rnd(56,56)
+elseif S7
+land_position rnd(57,57) rnd(48,48)
+elseif S8
+land_position rnd(56,56) rnd(53,53)
+elseif S9
+land_position rnd(52,52) rnd(57,57)
+elseif S10
+land_position rnd(57,57) rnd(48,48)
+elseif S11
+land_position rnd(56,56) rnd(53,53)
+elseif S12
+land_position rnd(52,52) rnd(57,57)
+elseif S13
+land_position rnd(56,56) rnd(47,47)
+elseif S14
+land_position rnd(57,57) rnd(52,52)
+elseif S15
+land_position rnd(53,53) rnd(56,56)
+endif
+endif
+}
+elseif P34
+if 1_PLAYER_GAME
+#define P2
+elseif 2_PLAYER_GAME
+#define P2
+elseif 3_PLAYER_GAME
+#define P4
+elseif 4_PLAYER_GAME
+#define P4
+elseif 5_PLAYER_GAME
+#define P6
+if TEAM_POSITIONS
+#define TP_6PG
+endif
+elseif 6_PLAYER_GAME
+#define P6
+if TEAM_POSITIONS
+#define TP_6PG
+endif
+elseif 7_PLAYER_GAME
+#define P8
+if TEAM_POSITIONS
+#define TP_8PG
+endif
+elseif 8_PLAYER_GAME
+#define P8
+if TEAM_POSITIONS
+#define TP_8PG
+endif
+endif
+if TP_8PG
+start_random
+percent_chance 25 #define C8P1
+percent_chance 25 #define C8P2
+percent_chance 25 #define C8P3
+percent_chance 25 #define C8P4
+end_random
+elseif TP_6PG
+start_random
+percent_chance 25 #define C6P1
+percent_chance 25 #define C6P2
+percent_chance 25 #define C6P3
+percent_chance 25 #define C6P4
+end_random
+endif
+start_random
+percent_chance 50  #define S1
+percent_chance 50  #define S2
+end_random
+L
+{
+terrain_type PT1
+base_size 0
+base_elevation 0
+number_of_tiles 0
+clumping_factor 30
+other_zone_avoidance_distance 8
+zone 1
+   
+if C8P1
+assign_to AT_COLOR 1 0 0
+elseif C8P2
+assign_to AT_COLOR 7 0 0
+elseif C8P3
+assign_to AT_COLOR 7 0 0
+elseif C8P4
+assign_to AT_COLOR 1 0 0
+elseif C6P1
+assign_to AT_COLOR 1 0 0
+elseif C6P2
+assign_to AT_COLOR 5 0 0
+elseif C6P3
+assign_to AT_COLOR 1 0 0
+elseif C6P4
+assign_to AT_COLOR 5 0 0
+else
+if 4_TEAM_GAME
+assign_to AT_TEAM 1 0 0
+elseif 3_TEAM_GAME
+assign_to AT_TEAM 1 0 0
+elseif 2_TEAM_GAME
+assign_to AT_TEAM 1 0 0
+elseif 1_TEAM_GAME
+assign_to AT_TEAM 1 0 0
+else
+assign_to AT_TEAM -10 0 0
+endif
+endif
+if P2
+if S1
+land_position rnd(50,50) rnd(69,69)
+elseif S2
+land_position rnd(37,37) rnd(63,63)
+endif
+elseif P4
+if S1
+land_position rnd(63,63) rnd(63,63)
+elseif S2
+land_position rnd(50,50) rnd(69,69)
+endif
+elseif P6
+if S1
+land_position rnd(66,66) rnd(60,60)
+elseif S2
+land_position rnd(55,55) rnd(68,68)
+endif
+else
+if S1
+land_position rnd(68,68) rnd(57,57)
+elseif S2
+land_position rnd(57,57) rnd(68,68)
+endif
+endif
+}
+L
+{
+terrain_type PT2
+base_size 0
+base_elevation 0
+number_of_tiles 0
+clumping_factor 30
+other_zone_avoidance_distance 8
+zone 2
+   
+if C8P1
+assign_to AT_COLOR 2 0 0
+elseif C8P2
+assign_to AT_COLOR 2 0 0
+elseif C8P3
+assign_to AT_COLOR 8 0 0
+elseif C8P4
+assign_to AT_COLOR 8 0 0
+elseif C6P1
+assign_to AT_COLOR 4 0 0
+elseif C6P2
+assign_to AT_COLOR 4 0 0
+elseif C6P3
+assign_to AT_COLOR 4 0 0
+elseif C6P4
+assign_to AT_COLOR 4 0 0
+else
+if 4_TEAM_GAME
+assign_to AT_TEAM 2 0 0
+elseif 3_TEAM_GAME
+assign_to AT_TEAM 2 0 0
+elseif 2_TEAM_GAME
+assign_to AT_TEAM 2 0 0
+elseif 1_TEAM_GAME
+assign_to AT_TEAM -10 0 0
+else
+assign_to AT_TEAM -10 0 0
+endif
+endif
+if P2
+if S1
+land_position rnd(50,50) rnd(31,31)
+elseif S2
+land_position rnd(63,63) rnd(37,37)
+endif
+elseif P4
+if S1
+land_position rnd(37,37) rnd(37,37)
+elseif S2
+land_position rnd(50,50) rnd(31,31)
+endif
+elseif P6
+if S1
+land_position rnd(50,50) rnd(31,31)
+elseif S2
+land_position rnd(63,63) rnd(37,37)
+endif
+else
+if S1
+land_position rnd(32,32) rnd(43,43)
+elseif S2
+land_position rnd(43,43) rnd(32,32)
+endif
+endif
+}
+L
+{
+terrain_type PT3
+base_size 0
+base_elevation 0
+number_of_tiles 0
+clumping_factor 30
+other_zone_avoidance_distance 8
+zone 3
+   
+if C8P1
+assign_to AT_COLOR 5 0 0
+elseif C8P2
+assign_to AT_COLOR 3 0 0
+elseif C8P3
+assign_to AT_COLOR 3 0 0
+elseif C8P4
+assign_to AT_COLOR 5 0 0
+elseif C6P1
+assign_to AT_COLOR 5 0 0
+elseif C6P2
+assign_to AT_COLOR 1 0 0
+elseif C6P3
+assign_to AT_COLOR 5 0 0
+elseif C6P4
+assign_to AT_COLOR 1 0 0
+else
+if 4_TEAM_GAME
+assign_to AT_TEAM 3 0 0
+elseif 3_TEAM_GAME
+assign_to AT_TEAM 3 0 0
+elseif 2_TEAM_GAME
+assign_to AT_TEAM 1 0 0
+elseif 1_TEAM_GAME
+assign_to AT_TEAM -10 0 0
+else
+assign_to AT_TEAM -10 0 0
+endif
+endif
+if P2
+if S1
+land_position rnd(50,50) rnd(31,31)
+elseif S2
+land_position rnd(63,63) rnd(37,37)
+endif
+elseif P4
+if S1
+land_position rnd(37,37) rnd(63,63)
+elseif S2
+land_position rnd(31,31) rnd(50,50)
+endif
+elseif P6
+if S1
+land_position rnd(34,34) rnd(60,60)
+elseif S2
+land_position rnd(32,32) rnd(45,45)
+endif
+else
+if S1
+land_position rnd(43,43) rnd(68,68)
+elseif S2
+land_position rnd(32,32) rnd(57,57)
+endif
+endif
+}
+L
+{
+terrain_type PT4
+base_size 0
+base_elevation 0
+number_of_tiles 0
+clumping_factor 30
+other_zone_avoidance_distance 8
+zone 4
+   
+if C8P1
+assign_to AT_COLOR 6 0 0
+elseif C8P2
+assign_to AT_COLOR 6 0 0
+elseif C8P3
+assign_to AT_COLOR 4 0 0
+elseif C8P4
+assign_to AT_COLOR 4 0 0
+elseif C6P1
+assign_to AT_COLOR 2 0 0
+elseif C6P2
+assign_to AT_COLOR 2 0 0
+elseif C6P3
+assign_to AT_COLOR 6 0 0
+elseif C6P4
+assign_to AT_COLOR 6 0 0
+else
+if 4_TEAM_GAME
+assign_to AT_TEAM 4 0 0
+elseif 3_TEAM_GAME
+assign_to AT_TEAM 2 0 0
+elseif 2_TEAM_GAME
+assign_to AT_TEAM 2 0 0
+elseif 1_TEAM_GAME
+assign_to AT_TEAM -10 0 0
+else
+assign_to AT_TEAM -10 0 0
+endif
+endif
+if P2
+if S1
+land_position rnd(50,50) rnd(31,31)
+elseif S2
+land_position rnd(63,63) rnd(37,37)
+endif
+elseif P4
+if S1
+land_position rnd(63,63) rnd(37,37)
+elseif S2
+land_position rnd(69,69) rnd(50,50)
+endif
+elseif P6
+if S1
+land_position rnd(34,34) rnd(41,41)
+elseif S2
+land_position rnd(45,45) rnd(32,32)
+endif
+else
+if S1
+land_position rnd(57,57) rnd(32,32)
+elseif S2
+land_position rnd(68,68) rnd(43,43)
+endif
+endif
+}
+L
+{
+terrain_type PT5
+base_size 0
+base_elevation 0
+number_of_tiles 0
+clumping_factor 30
+other_zone_avoidance_distance 8
+zone 5
+   
+if C8P1
+assign_to AT_COLOR 3 0 0
+elseif C8P2
+assign_to AT_COLOR 5 0 0
+elseif C8P3
+assign_to AT_COLOR 5 0 0
+elseif C8P4
+assign_to AT_COLOR 3 0 0
+elseif C6P1
+assign_to AT_COLOR 3 0 0
+elseif C6P2
+assign_to AT_COLOR 3 0 0
+elseif C6P3
+assign_to AT_COLOR 3 0 0
+elseif C6P4
+assign_to AT_COLOR 3 0 0
+else
+if 4_TEAM_GAME
+assign_to AT_TEAM 1 0 0
+elseif 3_TEAM_GAME
+assign_to AT_TEAM 1 0 0
+elseif 2_TEAM_GAME
+assign_to AT_TEAM 1 0 0
+elseif 1_TEAM_GAME
+assign_to AT_TEAM 1 0 0
+else
+assign_to AT_TEAM -10 0 0
+endif
+endif
+if P2
+if S1
+land_position rnd(50,50) rnd(31,31)
+elseif S2
+land_position rnd(63,63) rnd(37,37)
+endif
+elseif P4
+if S1
+land_position rnd(63,63) rnd(37,37)
+elseif S2
+land_position rnd(69,69) rnd(50,50)
+endif
+elseif P6
+if S1
+land_position rnd(50,50) rnd(69,69)
+elseif S2
+land_position rnd(37,37) rnd(63,63)
+endif
+else
+if S1
+land_position rnd(57,57) rnd(68,68)
+elseif S2
+land_position rnd(43,43) rnd(68,68)
+endif
+endif
+}
+L
+{
+terrain_type PT6
+base_size 0
+base_elevation 0
+number_of_tiles 0
+clumping_factor 30
+other_zone_avoidance_distance 8
+zone 6
+   
+if C8P1
+assign_to AT_COLOR 4 0 0
+elseif C8P2
+assign_to AT_COLOR 4 0 0
+elseif C8P3
+assign_to AT_COLOR 6 0 0
+elseif C8P4
+assign_to AT_COLOR 6 0 0
+elseif C6P1
+assign_to AT_COLOR 6 0 0
+elseif C6P2
+assign_to AT_COLOR 6 0 0
+elseif C6P3
+assign_to AT_COLOR 2 0 0
+elseif C6P4
+assign_to AT_COLOR 2 0 0
+else
+if 4_TEAM_GAME
+assign_to AT_TEAM 2 0 0
+elseif 3_TEAM_GAME
+assign_to AT_TEAM 2 0 0
+elseif 2_TEAM_GAME
+assign_to AT_TEAM 2 0 0
+elseif 1_TEAM_GAME
+assign_to AT_TEAM -10 0 0
+else
+assign_to AT_TEAM -10 0 0
+endif
+endif
+if P2
+if S1
+land_position rnd(50,50) rnd(31,31)
+elseif S2
+land_position rnd(63,63) rnd(37,37)
+endif
+elseif P4
+if S1
+land_position rnd(63,63) rnd(37,37)
+elseif S2
+land_position rnd(69,69) rnd(50,50)
+endif
+elseif P6
+if S1
+land_position rnd(66,66) rnd(41,41)
+elseif S2
+land_position rnd(68,68) rnd(55,55)
+endif
+else
+if S1
+land_position rnd(43,43) rnd(32,32)
+elseif S2
+land_position rnd(57,57) rnd(32,32)
+endif
+endif
+}
+L
+{
+terrain_type PT7
+base_size 0
+base_elevation 0
+number_of_tiles 0
+clumping_factor 30
+other_zone_avoidance_distance 8
+zone 7
+   
+if C8P1
+assign_to AT_COLOR 7 0 0
+elseif C8P2
+assign_to AT_COLOR 1 0 0
+elseif C8P3
+assign_to AT_COLOR 1 0 0
+elseif C8P4
+assign_to AT_COLOR 7 0 0
+else
+if 4_TEAM_GAME
+assign_to AT_TEAM 3 0 0
+elseif 3_TEAM_GAME
+assign_to AT_TEAM 3 0 0
+elseif 2_TEAM_GAME
+assign_to AT_TEAM 1 0 0
+elseif 1_TEAM_GAME
+assign_to AT_TEAM 1 0 0
+else
+assign_to AT_TEAM -10 0 0
+endif
+endif
+if P2
+if S1
+land_position rnd(50,50) rnd(31,31)
+elseif S2
+land_position rnd(63,63) rnd(37,37)
+endif
+elseif P4
+if S1
+land_position rnd(63,63) rnd(37,37)
+elseif S2
+land_position rnd(69,69) rnd(50,50)
+endif
+elseif P6
+if S1
+land_position rnd(66,66) rnd(41,41)
+elseif S2
+land_position rnd(68,68) rnd(55,55)
+endif
+else
+if S1
+land_position rnd(32,32) rnd(57,57)
+elseif S2
+land_position rnd(32,32) rnd(43,43)
+endif
+endif
+}
+L
+{
+terrain_type PT8
+base_size 0
+base_elevation 0
+number_of_tiles 0
+clumping_factor 30
+other_zone_avoidance_distance 8
+zone 8
+   
+if C8P1
+assign_to AT_COLOR 8 0 0
+elseif C8P2
+assign_to AT_COLOR 8 0 0
+elseif C8P3
+assign_to AT_COLOR 2 0 0
+elseif C8P4
+assign_to AT_COLOR 2 0 0
+else
+if 4_TEAM_GAME
+assign_to AT_TEAM 4 0 0
+elseif 3_TEAM_GAME
+assign_to AT_TEAM 2 0 0
+elseif 2_TEAM_GAME
+assign_to AT_TEAM 2 0 0
+elseif 1_TEAM_GAME
+assign_to AT_TEAM -10 0 0
+else
+assign_to AT_TEAM -10 0 0
+endif
+endif
+if P2
+if S1
+land_position rnd(50,50) rnd(31,31)
+elseif S2
+land_position rnd(63,63) rnd(37,37)
+endif
+elseif P4
+if S1
+land_position rnd(63,63) rnd(37,37)
+elseif S2
+land_position rnd(69,69) rnd(50,50)
+endif
+elseif P6
+if S1
+land_position rnd(66,66) rnd(41,41)
+elseif S2
+land_position rnd(68,68) rnd(55,55)
+endif
+else
+if S1
+land_position rnd(68,68) rnd(43,43)
+elseif S2
+land_position rnd(68,68) rnd(57,57)
+endif
+endif
+}
+if 1_PLAYER_GAME
+#define P2
+elseif 2_PLAYER_GAME
+#define P2
+elseif 3_PLAYER_GAME
+#define P4
+elseif 4_PLAYER_GAME
+#define P4
+elseif 5_PLAYER_GAME
+#define P6
+if TEAM_POSITIONS
+#define TP_6PG
+endif
+elseif 6_PLAYER_GAME
+#define P6
+if TEAM_POSITIONS
+#define TP_6PG
+endif
+elseif 7_PLAYER_GAME
+#define P8
+if TEAM_POSITIONS
+#define TP_8PG
+endif
+elseif 8_PLAYER_GAME
+#define P8
+if TEAM_POSITIONS
+#define TP_8PG
+endif
+endif
+if TP_8PG
+start_random
+percent_chance 25 #define C8P1
+percent_chance 25 #define C8P2
+percent_chance 25 #define C8P3
+percent_chance 25 #define C8P4
+end_random
+elseif TP_6PG
+start_random
+percent_chance 25 #define C6P1
+percent_chance 25 #define C6P2
+percent_chance 25 #define C6P3
+percent_chance 25 #define C6P4
+end_random
+endif
+L
+{
+terrain_type CT1
+base_size 0
+base_elevation 7
+number_of_tiles 0
+clumping_factor 30
+   
+if P2
+if S1
+land_position rnd(50,50) rnd(58,58)
+elseif S2
+land_position rnd(44,44) rnd(56,56)
+endif
+elseif P4
+if S1
+land_position rnd(56,56) rnd(56,56)
+elseif S2
+land_position rnd(50,50) rnd(58,58)
+endif
+elseif P6
+if S1
+land_position rnd(57,57) rnd(54,54)
+elseif S2
+land_position rnd(52,52) rnd(58,58)
+endif
+else
+if S1
+land_position rnd(57,57) rnd(53,53)
+elseif S2
+land_position rnd(53,53) rnd(57,57)
+endif
+endif
+}
+L
+{
+terrain_type CT2
+base_size 0
+base_elevation 7
+number_of_tiles 0
+clumping_factor 30
+   
+if P2
+if S1
+land_position rnd(50,50) rnd(42,42)
+elseif S2
+land_position rnd(56,56) rnd(44,44)
+endif
+elseif P4
+if S1
+land_position rnd(44,44) rnd(44,44)
+elseif S2
+land_position rnd(50,50) rnd(42,42)
+endif
+elseif P6
+if S1
+land_position rnd(50,50) rnd(42,42)
+elseif S2
+land_position rnd(56,56) rnd(44,44)
+endif
+else
+if S1
+land_position rnd(43,43) rnd(47,47)
+elseif S2
+land_position rnd(47,47) rnd(43,43)
+endif
+endif
+}
+L
+{
+terrain_type CT3
+base_size 0
+base_elevation 7
+number_of_tiles 0
+clumping_factor 30
+   
+if P2
+if S1
+land_position rnd(50,50) rnd(42,42)
+elseif S2
+land_position rnd(56,56) rnd(44,44)
+endif
+elseif P4
+if S1
+land_position rnd(44,44) rnd(56,56)
+elseif S2
+land_position rnd(42,42) rnd(50,50)
+endif
+elseif P6
+if S1
+land_position rnd(43,43) rnd(54,54)
+elseif S2
+land_position rnd(42,42) rnd(48,48)
+endif
+else
+if S1
+land_position rnd(47,47) rnd(57,57)
+elseif S2
+land_position rnd(43,43) rnd(53,53)
+endif
+endif
+}
+L
+{
+terrain_type CT4
+base_size 0
+base_elevation 7
+number_of_tiles 0
+clumping_factor 30
+   
+if P2
+if S1
+land_position rnd(50,50) rnd(42,42)
+elseif S2
+land_position rnd(56,56) rnd(44,44)
+endif
+elseif P4
+if S1
+land_position rnd(56,56) rnd(44,44)
+elseif S2
+land_position rnd(58,58) rnd(50,50)
+endif
+elseif P6
+if S1
+land_position rnd(43,43) rnd(46,46)
+elseif S2
+land_position rnd(48,48) rnd(42,42)
+endif
+else
+if S1
+land_position rnd(53,53) rnd(43,43)
+elseif S2
+land_position rnd(57,57) rnd(47,47)
+endif
+endif
+}
+L
+{
+terrain_type CT5
+base_size 0
+base_elevation 7
+number_of_tiles 0
+clumping_factor 30
+   
+if P2
+if S1
+land_position rnd(50,50) rnd(42,42)
+elseif S2
+land_position rnd(56,56) rnd(44,44)
+endif
+elseif P4
+if S1
+land_position rnd(56,56) rnd(44,44)
+elseif S2
+land_position rnd(58,58) rnd(50,50)
+endif
+elseif P6
+if S1
+land_position rnd(50,50) rnd(58,58)
+elseif S2
+land_position rnd(44,44) rnd(56,56)
+endif
+else
+if S1
+land_position rnd(53,53) rnd(57,57)
+elseif S2
+land_position rnd(47,47) rnd(57,57)
+endif
+endif
+}
+L
+{
+terrain_type CT6
+base_size 0
+base_elevation 7
+number_of_tiles 0
+clumping_factor 30
+   
+if P2
+if S1
+land_position rnd(50,50) rnd(42,42)
+elseif S2
+land_position rnd(56,56) rnd(44,44)
+endif
+elseif P4
+if S1
+land_position rnd(56,56) rnd(44,44)
+elseif S2
+land_position rnd(58,58) rnd(50,50)
+endif
+elseif P6
+if S1
+land_position rnd(57,57) rnd(46,46)
+elseif S2
+land_position rnd(58,58) rnd(52,52)
+endif
+else
+if S1
+land_position rnd(47,47) rnd(43,43)
+elseif S2
+land_position rnd(53,53) rnd(43,43)
+endif
+endif
+}
+L
+{
+terrain_type CT7
+base_size 0
+base_elevation 7
+number_of_tiles 0
+clumping_factor 30
+   
+if P2
+if S1
+land_position rnd(50,50) rnd(42,42)
+elseif S2
+land_position rnd(56,56) rnd(44,44)
+endif
+elseif P4
+if S1
+land_position rnd(56,56) rnd(44,44)
+elseif S2
+land_position rnd(58,58) rnd(50,50)
+endif
+elseif P6
+if S1
+land_position rnd(57,57) rnd(46,46)
+elseif S2
+land_position rnd(58,58) rnd(52,52)
+endif
+else
+if S1
+land_position rnd(43,43) rnd(53,53)
+elseif S2
+land_position rnd(43,43) rnd(47,47)
+endif
+endif
+}
+L
+{
+terrain_type CT8
+base_size 0
+base_elevation 7
+number_of_tiles 0
+clumping_factor 30
+   
+if P2
+if S1
+land_position rnd(50,50) rnd(42,42)
+elseif S2
+land_position rnd(56,56) rnd(44,44)
+endif
+elseif P4
+if S1
+land_position rnd(56,56) rnd(44,44)
+elseif S2
+land_position rnd(58,58) rnd(50,50)
+endif
+elseif P6
+if S1
+land_position rnd(57,57) rnd(46,46)
+elseif S2
+land_position rnd(58,58) rnd(52,52)
+endif
+else
+if S1
+land_position rnd(57,57) rnd(47,47)
+elseif S2
+land_position rnd(57,57) rnd(53,53)
+endif
+endif
+}
+elseif P56
+if 1_PLAYER_GAME
+#define P2
+elseif 2_PLAYER_GAME
+#define P2
+elseif 3_PLAYER_GAME
+#define P4
+elseif 4_PLAYER_GAME
+#define P4
+elseif 5_PLAYER_GAME
+#define P6
+if TEAM_POSITIONS
+#define TP_6PG
+endif
+elseif 6_PLAYER_GAME
+#define P6
+if TEAM_POSITIONS
+#define TP_6PG
+endif
+elseif 7_PLAYER_GAME
+#define P8
+if TEAM_POSITIONS
+#define TP_8PG
+endif
+elseif 8_PLAYER_GAME
+#define P8
+if TEAM_POSITIONS
+#define TP_8PG
+endif
+endif
+if TP_8PG
+start_random
+percent_chance 25 #define C8P1
+percent_chance 25 #define C8P2
+percent_chance 25 #define C8P3
+percent_chance 25 #define C8P4
+end_random
+elseif TP_6PG
+start_random
+percent_chance 25 #define C6P1
+percent_chance 25 #define C6P2
+percent_chance 25 #define C6P3
+percent_chance 25 #define C6P4
+end_random
+endif
+start_random
+percent_chance 33  #define S1
+percent_chance 33  #define S2
+percent_chance 34  #define S3
+end_random
+L
+{
+terrain_type PT1
+base_size 0
+base_elevation 0
+number_of_tiles 0
+clumping_factor 30
+other_zone_avoidance_distance 8
+zone 1
+   
+if C8P1
+assign_to AT_COLOR 1 0 0
+elseif C8P2
+assign_to AT_COLOR 7 0 0
+elseif C8P3
+assign_to AT_COLOR 7 0 0
+elseif C8P4
+assign_to AT_COLOR 1 0 0
+elseif C6P1
+assign_to AT_COLOR 1 0 0
+elseif C6P2
+assign_to AT_COLOR 5 0 0
+elseif C6P3
+assign_to AT_COLOR 1 0 0
+elseif C6P4
+assign_to AT_COLOR 5 0 0
+else
+if 4_TEAM_GAME
+assign_to AT_TEAM 1 0 0
+elseif 3_TEAM_GAME
+assign_to AT_TEAM 1 0 0
+elseif 2_TEAM_GAME
+assign_to AT_TEAM 1 0 0
+elseif 1_TEAM_GAME
+assign_to AT_TEAM 1 0 0
+else
+assign_to AT_TEAM -10 0 0
+endif
+endif
+if P2
+if S1
+land_position rnd(50,50) rnd(68,68)
+elseif S2
+land_position rnd(37,37) rnd(63,63)
+elseif S3
+land_position rnd(32,32) rnd(50,50)
+endif
+elseif P4
+if S1
+land_position rnd(63,63) rnd(63,63)
+elseif S2
+land_position rnd(50,50) rnd(68,68)
+elseif S3
+land_position rnd(37,37) rnd(63,63)
+endif
+elseif P6
+if S1
+land_position rnd(66,66) rnd(59,59)
+elseif S2
+land_position rnd(55,55) rnd(67,67)
+elseif S3
+land_position rnd(41,41) rnd(66,66)
+endif
+else
+if S1
+land_position rnd(67,67) rnd(57,57)
+elseif S2
+land_position rnd(57,57) rnd(67,67)
+elseif S3
+land_position rnd(43,43) rnd(67,67)
+endif
+endif
+}
+L
+{
+terrain_type PT2
+base_size 0
+base_elevation 0
+number_of_tiles 0
+clumping_factor 30
+other_zone_avoidance_distance 8
+zone 2
+   
+if C8P1
+assign_to AT_COLOR 2 0 0
+elseif C8P2
+assign_to AT_COLOR 2 0 0
+elseif C8P3
+assign_to AT_COLOR 8 0 0
+elseif C8P4
+assign_to AT_COLOR 8 0 0
+elseif C6P1
+assign_to AT_COLOR 4 0 0
+elseif C6P2
+assign_to AT_COLOR 4 0 0
+elseif C6P3
+assign_to AT_COLOR 4 0 0
+elseif C6P4
+assign_to AT_COLOR 4 0 0
+else
+if 4_TEAM_GAME
+assign_to AT_TEAM 2 0 0
+elseif 3_TEAM_GAME
+assign_to AT_TEAM 2 0 0
+elseif 2_TEAM_GAME
+assign_to AT_TEAM 2 0 0
+elseif 1_TEAM_GAME
+assign_to AT_TEAM -10 0 0
+else
+assign_to AT_TEAM -10 0 0
+endif
+endif
+if P2
+if S1
+land_position rnd(50,50) rnd(32,32)
+elseif S2
+land_position rnd(63,63) rnd(37,37)
+elseif S3
+land_position rnd(68,68) rnd(50,50)
+endif
+elseif P4
+if S1
+land_position rnd(37,37) rnd(37,37)
+elseif S2
+land_position rnd(50,50) rnd(32,32)
+elseif S3
+land_position rnd(63,63) rnd(37,37)
+endif
+elseif P6
+if S1
+land_position rnd(50,50) rnd(32,32)
+elseif S2
+land_position rnd(63,63) rnd(37,37)
+elseif S3
+land_position rnd(68,68) rnd(50,50)
+endif
+else
+if S1
+land_position rnd(33,33) rnd(43,43)
+elseif S2
+land_position rnd(43,43) rnd(33,33)
+elseif S3
+land_position rnd(57,57) rnd(33,33)
+endif
+endif
+}
+L
+{
+terrain_type PT3
+base_size 0
+base_elevation 0
+number_of_tiles 0
+clumping_factor 30
+other_zone_avoidance_distance 8
+zone 3
+   
+if C8P1
+assign_to AT_COLOR 5 0 0
+elseif C8P2
+assign_to AT_COLOR 3 0 0
+elseif C8P3
+assign_to AT_COLOR 3 0 0
+elseif C8P4
+assign_to AT_COLOR 5 0 0
+elseif C6P1
+assign_to AT_COLOR 5 0 0
+elseif C6P2
+assign_to AT_COLOR 1 0 0
+elseif C6P3
+assign_to AT_COLOR 5 0 0
+elseif C6P4
+assign_to AT_COLOR 1 0 0
+else
+if 4_TEAM_GAME
+assign_to AT_TEAM 3 0 0
+elseif 3_TEAM_GAME
+assign_to AT_TEAM 3 0 0
+elseif 2_TEAM_GAME
+assign_to AT_TEAM 1 0 0
+elseif 1_TEAM_GAME
+assign_to AT_TEAM -10 0 0
+else
+assign_to AT_TEAM -10 0 0
+endif
+endif
+if P2
+if S1
+land_position rnd(50,50) rnd(32,32)
+elseif S2
+land_position rnd(63,63) rnd(37,37)
+elseif S3
+land_position rnd(68,68) rnd(50,50)
+endif
+elseif P4
+if S1
+land_position rnd(37,37) rnd(63,63)
+elseif S2
+land_position rnd(32,32) rnd(50,50)
+elseif S3
+land_position rnd(37,37) rnd(37,37)
+endif
+elseif P6
+if S1
+land_position rnd(34,34) rnd(59,59)
+elseif S2
+land_position rnd(33,33) rnd(45,45)
+elseif S3
+land_position rnd(41,41) rnd(34,34)
+endif
+else
+if S1
+land_position rnd(43,43) rnd(67,67)
+elseif S2
+land_position rnd(33,33) rnd(57,57)
+elseif S3
+land_position rnd(33,33) rnd(43,43)
+endif
+endif
+}
+L
+{
+terrain_type PT4
+base_size 0
+base_elevation 0
+number_of_tiles 0
+clumping_factor 30
+other_zone_avoidance_distance 8
+zone 4
+   
+if C8P1
+assign_to AT_COLOR 6 0 0
+elseif C8P2
+assign_to AT_COLOR 6 0 0
+elseif C8P3
+assign_to AT_COLOR 4 0 0
+elseif C8P4
+assign_to AT_COLOR 4 0 0
+elseif C6P1
+assign_to AT_COLOR 2 0 0
+elseif C6P2
+assign_to AT_COLOR 2 0 0
+elseif C6P3
+assign_to AT_COLOR 6 0 0
+elseif C6P4
+assign_to AT_COLOR 6 0 0
+else
+if 4_TEAM_GAME
+assign_to AT_TEAM 4 0 0
+elseif 3_TEAM_GAME
+assign_to AT_TEAM 2 0 0
+elseif 2_TEAM_GAME
+assign_to AT_TEAM 2 0 0
+elseif 1_TEAM_GAME
+assign_to AT_TEAM -10 0 0
+else
+assign_to AT_TEAM -10 0 0
+endif
+endif
+if P2
+if S1
+land_position rnd(50,50) rnd(32,32)
+elseif S2
+land_position rnd(63,63) rnd(37,37)
+elseif S3
+land_position rnd(68,68) rnd(50,50)
+endif
+elseif P4
+if S1
+land_position rnd(63,63) rnd(37,37)
+elseif S2
+land_position rnd(68,68) rnd(50,50)
+elseif S3
+land_position rnd(63,63) rnd(63,63)
+endif
+elseif P6
+if S1
+land_position rnd(34,34) rnd(41,41)
+elseif S2
+land_position rnd(45,45) rnd(33,33)
+elseif S3
+land_position rnd(59,59) rnd(34,34)
+endif
+else
+if S1
+land_position rnd(57,57) rnd(33,33)
+elseif S2
+land_position rnd(67,67) rnd(43,43)
+elseif S3
+land_position rnd(67,67) rnd(57,57)
+endif
+endif
+}
+L
+{
+terrain_type PT5
+base_size 0
+base_elevation 0
+number_of_tiles 0
+clumping_factor 30
+other_zone_avoidance_distance 8
+zone 5
+   
+if C8P1
+assign_to AT_COLOR 3 0 0
+elseif C8P2
+assign_to AT_COLOR 5 0 0
+elseif C8P3
+assign_to AT_COLOR 5 0 0
+elseif C8P4
+assign_to AT_COLOR 3 0 0
+elseif C6P1
+assign_to AT_COLOR 3 0 0
+elseif C6P2
+assign_to AT_COLOR 3 0 0
+elseif C6P3
+assign_to AT_COLOR 3 0 0
+elseif C6P4
+assign_to AT_COLOR 3 0 0
+else
+if 4_TEAM_GAME
+assign_to AT_TEAM 1 0 0
+elseif 3_TEAM_GAME
+assign_to AT_TEAM 1 0 0
+elseif 2_TEAM_GAME
+assign_to AT_TEAM 1 0 0
+elseif 1_TEAM_GAME
+assign_to AT_TEAM 1 0 0
+else
+assign_to AT_TEAM -10 0 0
+endif
+endif
+if P2
+if S1
+land_position rnd(50,50) rnd(32,32)
+elseif S2
+land_position rnd(63,63) rnd(37,37)
+elseif S3
+land_position rnd(68,68) rnd(50,50)
+endif
+elseif P4
+if S1
+land_position rnd(63,63) rnd(37,37)
+elseif S2
+land_position rnd(68,68) rnd(50,50)
+elseif S3
+land_position rnd(63,63) rnd(63,63)
+endif
+elseif P6
+if S1
+land_position rnd(50,50) rnd(68,68)
+elseif S2
+land_position rnd(37,37) rnd(63,63)
+elseif S3
+land_position rnd(32,32) rnd(50,50)
+endif
+else
+if S1
+land_position rnd(57,57) rnd(67,67)
+elseif S2
+land_position rnd(43,43) rnd(67,67)
+elseif S3
+land_position rnd(33,33) rnd(57,57)
+endif
+endif
+}
+L
+{
+terrain_type PT6
+base_size 0
+base_elevation 0
+number_of_tiles 0
+clumping_factor 30
+other_zone_avoidance_distance 8
+zone 6
+   
+if C8P1
+assign_to AT_COLOR 4 0 0
+elseif C8P2
+assign_to AT_COLOR 4 0 0
+elseif C8P3
+assign_to AT_COLOR 6 0 0
+elseif C8P4
+assign_to AT_COLOR 6 0 0
+elseif C6P1
+assign_to AT_COLOR 6 0 0
+elseif C6P2
+assign_to AT_COLOR 6 0 0
+elseif C6P3
+assign_to AT_COLOR 2 0 0
+elseif C6P4
+assign_to AT_COLOR 2 0 0
+else
+if 4_TEAM_GAME
+assign_to AT_TEAM 2 0 0
+elseif 3_TEAM_GAME
+assign_to AT_TEAM 2 0 0
+elseif 2_TEAM_GAME
+assign_to AT_TEAM 2 0 0
+elseif 1_TEAM_GAME
+assign_to AT_TEAM -10 0 0
+else
+assign_to AT_TEAM -10 0 0
+endif
+endif
+if P2
+if S1
+land_position rnd(50,50) rnd(32,32)
+elseif S2
+land_position rnd(63,63) rnd(37,37)
+elseif S3
+land_position rnd(68,68) rnd(50,50)
+endif
+elseif P4
+if S1
+land_position rnd(63,63) rnd(37,37)
+elseif S2
+land_position rnd(68,68) rnd(50,50)
+elseif S3
+land_position rnd(63,63) rnd(63,63)
+endif
+elseif P6
+if S1
+land_position rnd(66,66) rnd(41,41)
+elseif S2
+land_position rnd(67,67) rnd(55,55)
+elseif S3
+land_position rnd(59,59) rnd(66,66)
+endif
+else
+if S1
+land_position rnd(43,43) rnd(33,33)
+elseif S2
+land_position rnd(57,57) rnd(33,33)
+elseif S3
+land_position rnd(67,67) rnd(43,43)
+endif
+endif
+}
+L
+{
+terrain_type PT7
+base_size 0
+base_elevation 0
+number_of_tiles 0
+clumping_factor 30
+other_zone_avoidance_distance 8
+zone 7
+   
+if C8P1
+assign_to AT_COLOR 7 0 0
+elseif C8P2
+assign_to AT_COLOR 1 0 0
+elseif C8P3
+assign_to AT_COLOR 1 0 0
+elseif C8P4
+assign_to AT_COLOR 7 0 0
+else
+if 4_TEAM_GAME
+assign_to AT_TEAM 3 0 0
+elseif 3_TEAM_GAME
+assign_to AT_TEAM 3 0 0
+elseif 2_TEAM_GAME
+assign_to AT_TEAM 1 0 0
+elseif 1_TEAM_GAME
+assign_to AT_TEAM 1 0 0
+else
+assign_to AT_TEAM -10 0 0
+endif
+endif
+if P2
+if S1
+land_position rnd(50,50) rnd(32,32)
+elseif S2
+land_position rnd(63,63) rnd(37,37)
+elseif S3
+land_position rnd(68,68) rnd(50,50)
+endif
+elseif P4
+if S1
+land_position rnd(63,63) rnd(37,37)
+elseif S2
+land_position rnd(68,68) rnd(50,50)
+elseif S3
+land_position rnd(63,63) rnd(63,63)
+endif
+elseif P6
+if S1
+land_position rnd(66,66) rnd(41,41)
+elseif S2
+land_position rnd(67,67) rnd(55,55)
+elseif S3
+land_position rnd(59,59) rnd(66,66)
+endif
+else
+if S1
+land_position rnd(33,33) rnd(57,57)
+elseif S2
+land_position rnd(33,33) rnd(43,43)
+elseif S3
+land_position rnd(43,43) rnd(33,33)
+endif
+endif
+}
+L
+{
+terrain_type PT8
+base_size 0
+base_elevation 0
+number_of_tiles 0
+clumping_factor 30
+other_zone_avoidance_distance 8
+zone 8
+   
+if C8P1
+assign_to AT_COLOR 8 0 0
+elseif C8P2
+assign_to AT_COLOR 8 0 0
+elseif C8P3
+assign_to AT_COLOR 2 0 0
+elseif C8P4
+assign_to AT_COLOR 2 0 0
+else
+if 4_TEAM_GAME
+assign_to AT_TEAM 4 0 0
+elseif 3_TEAM_GAME
+assign_to AT_TEAM 2 0 0
+elseif 2_TEAM_GAME
+assign_to AT_TEAM 2 0 0
+elseif 1_TEAM_GAME
+assign_to AT_TEAM -10 0 0
+else
+assign_to AT_TEAM -10 0 0
+endif
+endif
+if P2
+if S1
+land_position rnd(50,50) rnd(32,32)
+elseif S2
+land_position rnd(63,63) rnd(37,37)
+elseif S3
+land_position rnd(68,68) rnd(50,50)
+endif
+elseif P4
+if S1
+land_position rnd(63,63) rnd(37,37)
+elseif S2
+land_position rnd(68,68) rnd(50,50)
+elseif S3
+land_position rnd(63,63) rnd(63,63)
+endif
+elseif P6
+if S1
+land_position rnd(66,66) rnd(41,41)
+elseif S2
+land_position rnd(67,67) rnd(55,55)
+elseif S3
+land_position rnd(59,59) rnd(66,66)
+endif
+else
+if S1
+land_position rnd(67,67) rnd(43,43)
+elseif S2
+land_position rnd(67,67) rnd(57,57)
+elseif S3
+land_position rnd(57,57) rnd(67,67)
+endif
+endif
+}
+if 1_PLAYER_GAME
+#define P2
+elseif 2_PLAYER_GAME
+#define P2
+elseif 3_PLAYER_GAME
+#define P4
+elseif 4_PLAYER_GAME
+#define P4
+elseif 5_PLAYER_GAME
+#define P6
+if TEAM_POSITIONS
+#define TP_6PG
+endif
+elseif 6_PLAYER_GAME
+#define P6
+if TEAM_POSITIONS
+#define TP_6PG
+endif
+elseif 7_PLAYER_GAME
+#define P8
+if TEAM_POSITIONS
+#define TP_8PG
+endif
+elseif 8_PLAYER_GAME
+#define P8
+if TEAM_POSITIONS
+#define TP_8PG
+endif
+endif
+if TP_8PG
+start_random
+percent_chance 25 #define C8P1
+percent_chance 25 #define C8P2
+percent_chance 25 #define C8P3
+percent_chance 25 #define C8P4
+end_random
+elseif TP_6PG
+start_random
+percent_chance 25 #define C6P1
+percent_chance 25 #define C6P2
+percent_chance 25 #define C6P3
+percent_chance 25 #define C6P4
+end_random
+endif
+L
+{
+terrain_type CT1
+base_size 0
+base_elevation 7
+number_of_tiles 0
+clumping_factor 30
+   
+if P2
+if S1
+land_position rnd(50,50) rnd(59,59)
+elseif S2
+land_position rnd(44,44) rnd(56,56)
+elseif S3
+land_position rnd(41,41) rnd(50,50)
+endif
+elseif P4
+if S1
+land_position rnd(56,56) rnd(56,56)
+elseif S2
+land_position rnd(50,50) rnd(59,59)
+elseif S3
+land_position rnd(44,44) rnd(56,56)
+endif
+elseif P6
+if S1
+land_position rnd(58,58) rnd(55,55)
+elseif S2
+land_position rnd(52,52) rnd(59,59)
+elseif S3
+land_position rnd(46,46) rnd(58,58)
+endif
+else
+if S1
+land_position rnd(58,58) rnd(53,53)
+elseif S2
+land_position rnd(53,53) rnd(58,58)
+elseif S3
+land_position rnd(47,47) rnd(58,58)
+endif
+endif
+}
+L
+{
+terrain_type CT2
+base_size 0
+base_elevation 7
+number_of_tiles 0
+clumping_factor 30
+   
+if P2
+if S1
+land_position rnd(50,50) rnd(41,41)
+elseif S2
+land_position rnd(56,56) rnd(44,44)
+elseif S3
+land_position rnd(59,59) rnd(50,50)
+endif
+elseif P4
+if S1
+land_position rnd(44,44) rnd(44,44)
+elseif S2
+land_position rnd(50,50) rnd(41,41)
+elseif S3
+land_position rnd(56,56) rnd(44,44)
+endif
+elseif P6
+if S1
+land_position rnd(50,50) rnd(41,41)
+elseif S2
+land_position rnd(56,56) rnd(44,44)
+elseif S3
+land_position rnd(59,59) rnd(50,50)
+endif
+else
+if S1
+land_position rnd(42,42) rnd(47,47)
+elseif S2
+land_position rnd(47,47) rnd(42,42)
+elseif S3
+land_position rnd(53,53) rnd(42,42)
+endif
+endif
+}
+L
+{
+terrain_type CT3
+base_size 0
+base_elevation 7
+number_of_tiles 0
+clumping_factor 30
+   
+if P2
+if S1
+land_position rnd(50,50) rnd(41,41)
+elseif S2
+land_position rnd(56,56) rnd(44,44)
+elseif S3
+land_position rnd(59,59) rnd(50,50)
+endif
+elseif P4
+if S1
+land_position rnd(44,44) rnd(56,56)
+elseif S2
+land_position rnd(41,41) rnd(50,50)
+elseif S3
+land_position rnd(44,44) rnd(44,44)
+endif
+elseif P6
+if S1
+land_position rnd(42,42) rnd(55,55)
+elseif S2
+land_position rnd(41,41) rnd(48,48)
+elseif S3
+land_position rnd(46,46) rnd(42,42)
+endif
+else
+if S1
+land_position rnd(47,47) rnd(58,58)
+elseif S2
+land_position rnd(42,42) rnd(53,53)
+elseif S3
+land_position rnd(42,42) rnd(47,47)
+endif
+endif
+}
+L
+{
+terrain_type CT4
+base_size 0
+base_elevation 7
+number_of_tiles 0
+clumping_factor 30
+   
+if P2
+if S1
+land_position rnd(50,50) rnd(41,41)
+elseif S2
+land_position rnd(56,56) rnd(44,44)
+elseif S3
+land_position rnd(59,59) rnd(50,50)
+endif
+elseif P4
+if S1
+land_position rnd(56,56) rnd(44,44)
+elseif S2
+land_position rnd(59,59) rnd(50,50)
+elseif S3
+land_position rnd(56,56) rnd(56,56)
+endif
+elseif P6
+if S1
+land_position rnd(42,42) rnd(46,46)
+elseif S2
+land_position rnd(48,48) rnd(41,41)
+elseif S3
+land_position rnd(55,55) rnd(42,42)
+endif
+else
+if S1
+land_position rnd(53,53) rnd(42,42)
+elseif S2
+land_position rnd(58,58) rnd(47,47)
+elseif S3
+land_position rnd(58,58) rnd(53,53)
+endif
+endif
+}
+L
+{
+terrain_type CT5
+base_size 0
+base_elevation 7
+number_of_tiles 0
+clumping_factor 30
+   
+if P2
+if S1
+land_position rnd(50,50) rnd(41,41)
+elseif S2
+land_position rnd(56,56) rnd(44,44)
+elseif S3
+land_position rnd(59,59) rnd(50,50)
+endif
+elseif P4
+if S1
+land_position rnd(56,56) rnd(44,44)
+elseif S2
+land_position rnd(59,59) rnd(50,50)
+elseif S3
+land_position rnd(56,56) rnd(56,56)
+endif
+elseif P6
+if S1
+land_position rnd(50,50) rnd(59,59)
+elseif S2
+land_position rnd(44,44) rnd(56,56)
+elseif S3
+land_position rnd(41,41) rnd(50,50)
+endif
+else
+if S1
+land_position rnd(53,53) rnd(58,58)
+elseif S2
+land_position rnd(47,47) rnd(58,58)
+elseif S3
+land_position rnd(42,42) rnd(53,53)
+endif
+endif
+}
+L
+{
+terrain_type CT6
+base_size 0
+base_elevation 7
+number_of_tiles 0
+clumping_factor 30
+   
+if P2
+if S1
+land_position rnd(50,50) rnd(41,41)
+elseif S2
+land_position rnd(56,56) rnd(44,44)
+elseif S3
+land_position rnd(59,59) rnd(50,50)
+endif
+elseif P4
+if S1
+land_position rnd(56,56) rnd(44,44)
+elseif S2
+land_position rnd(59,59) rnd(50,50)
+elseif S3
+land_position rnd(56,56) rnd(56,56)
+endif
+elseif P6
+if S1
+land_position rnd(58,58) rnd(46,46)
+elseif S2
+land_position rnd(59,59) rnd(52,52)
+elseif S3
+land_position rnd(55,55) rnd(58,58)
+endif
+else
+if S1
+land_position rnd(47,47) rnd(42,42)
+elseif S2
+land_position rnd(53,53) rnd(42,42)
+elseif S3
+land_position rnd(58,58) rnd(47,47)
+endif
+endif
+}
+L
+{
+terrain_type CT7
+base_size 0
+base_elevation 7
+number_of_tiles 0
+clumping_factor 30
+   
+if P2
+if S1
+land_position rnd(50,50) rnd(41,41)
+elseif S2
+land_position rnd(56,56) rnd(44,44)
+elseif S3
+land_position rnd(59,59) rnd(50,50)
+endif
+elseif P4
+if S1
+land_position rnd(56,56) rnd(44,44)
+elseif S2
+land_position rnd(59,59) rnd(50,50)
+elseif S3
+land_position rnd(56,56) rnd(56,56)
+endif
+elseif P6
+if S1
+land_position rnd(58,58) rnd(46,46)
+elseif S2
+land_position rnd(59,59) rnd(52,52)
+elseif S3
+land_position rnd(55,55) rnd(58,58)
+endif
+else
+if S1
+land_position rnd(42,42) rnd(53,53)
+elseif S2
+land_position rnd(42,42) rnd(47,47)
+elseif S3
+land_position rnd(47,47) rnd(42,42)
+endif
+endif
+}
+L
+{
+terrain_type CT8
+base_size 0
+base_elevation 7
+number_of_tiles 0
+clumping_factor 30
+   
+if P2
+if S1
+land_position rnd(50,50) rnd(41,41)
+elseif S2
+land_position rnd(56,56) rnd(44,44)
+elseif S3
+land_position rnd(59,59) rnd(50,50)
+endif
+elseif P4
+if S1
+land_position rnd(56,56) rnd(44,44)
+elseif S2
+land_position rnd(59,59) rnd(50,50)
+elseif S3
+land_position rnd(56,56) rnd(56,56)
+endif
+elseif P6
+if S1
+land_position rnd(58,58) rnd(46,46)
+elseif S2
+land_position rnd(59,59) rnd(52,52)
+elseif S3
+land_position rnd(55,55) rnd(58,58)
+endif
+else
+if S1
+land_position rnd(58,58) rnd(47,47)
+elseif S2
+land_position rnd(58,58) rnd(53,53)
+elseif S3
+land_position rnd(53,53) rnd(58,58)
+endif
+endif
+}
+elseif P78
+if 1_PLAYER_GAME
+#define P2
+elseif 2_PLAYER_GAME
+#define P2
+elseif 3_PLAYER_GAME
+#define P4
+elseif 4_PLAYER_GAME
+#define P4
+elseif 5_PLAYER_GAME
+#define P6
+if TEAM_POSITIONS
+#define TP_6PG
+endif
+elseif 6_PLAYER_GAME
+#define P6
+if TEAM_POSITIONS
+#define TP_6PG
+endif
+elseif 7_PLAYER_GAME
+#define P8
+if TEAM_POSITIONS
+#define TP_8PG
+endif
+elseif 8_PLAYER_GAME
+#define P8
+if TEAM_POSITIONS
+#define TP_8PG
+endif
+endif
+if TP_8PG
+start_random
+percent_chance 25 #define C8P1
+percent_chance 25 #define C8P2
+percent_chance 25 #define C8P3
+percent_chance 25 #define C8P4
+end_random
+elseif TP_6PG
+start_random
+percent_chance 25 #define C6P1
+percent_chance 25 #define C6P2
+percent_chance 25 #define C6P3
+percent_chance 25 #define C6P4
+end_random
+endif
+start_random
+percent_chance 33  #define S1
+percent_chance 33  #define S2
+percent_chance 34  #define S3
+end_random
+L
+{
+terrain_type PT1
+base_size 0
+base_elevation 0
+number_of_tiles 0
+clumping_factor 30
+other_zone_avoidance_distance 8
+zone 1
+   
+if C8P1
+assign_to AT_COLOR 1 0 0
+elseif C8P2
+assign_to AT_COLOR 7 0 0
+elseif C8P3
+assign_to AT_COLOR 7 0 0
+elseif C8P4
+assign_to AT_COLOR 1 0 0
+elseif C6P1
+assign_to AT_COLOR 1 0 0
+elseif C6P2
+assign_to AT_COLOR 5 0 0
+elseif C6P3
+assign_to AT_COLOR 1 0 0
+elseif C6P4
+assign_to AT_COLOR 5 0 0
+else
+if 4_TEAM_GAME
+assign_to AT_TEAM 1 0 0
+elseif 3_TEAM_GAME
+assign_to AT_TEAM 1 0 0
+elseif 2_TEAM_GAME
+assign_to AT_TEAM 1 0 0
+elseif 1_TEAM_GAME
+assign_to AT_TEAM 1 0 0
+else
+assign_to AT_TEAM -10 0 0
+endif
+endif
+if P2
+if S1
+land_position rnd(50,50) rnd(68,68)
+elseif S2
+land_position rnd(37,37) rnd(63,63)
+elseif S3
+land_position rnd(32,32) rnd(50,50)
+endif
+elseif P4
+if S1
+land_position rnd(63,63) rnd(63,63)
+elseif S2
+land_position rnd(50,50) rnd(68,68)
+elseif S3
+land_position rnd(37,37) rnd(63,63)
+endif
+elseif P6
+if S1
+land_position rnd(66,66) rnd(59,59)
+elseif S2
+land_position rnd(55,55) rnd(67,67)
+elseif S3
+land_position rnd(41,41) rnd(66,66)
+endif
+else
+if S1
+land_position rnd(67,67) rnd(57,57)
+elseif S2
+land_position rnd(57,57) rnd(67,67)
+elseif S3
+land_position rnd(43,43) rnd(67,67)
+endif
+endif
+}
+L
+{
+terrain_type PT2
+base_size 0
+base_elevation 0
+number_of_tiles 0
+clumping_factor 30
+other_zone_avoidance_distance 8
+zone 2
+   
+if C8P1
+assign_to AT_COLOR 2 0 0
+elseif C8P2
+assign_to AT_COLOR 2 0 0
+elseif C8P3
+assign_to AT_COLOR 8 0 0
+elseif C8P4
+assign_to AT_COLOR 8 0 0
+elseif C6P1
+assign_to AT_COLOR 4 0 0
+elseif C6P2
+assign_to AT_COLOR 4 0 0
+elseif C6P3
+assign_to AT_COLOR 4 0 0
+elseif C6P4
+assign_to AT_COLOR 4 0 0
+else
+if 4_TEAM_GAME
+assign_to AT_TEAM 2 0 0
+elseif 3_TEAM_GAME
+assign_to AT_TEAM 2 0 0
+elseif 2_TEAM_GAME
+assign_to AT_TEAM 2 0 0
+elseif 1_TEAM_GAME
+assign_to AT_TEAM -10 0 0
+else
+assign_to AT_TEAM -10 0 0
+endif
+endif
+if P2
+if S1
+land_position rnd(50,50) rnd(32,32)
+elseif S2
+land_position rnd(63,63) rnd(37,37)
+elseif S3
+land_position rnd(68,68) rnd(50,50)
+endif
+elseif P4
+if S1
+land_position rnd(37,37) rnd(37,37)
+elseif S2
+land_position rnd(50,50) rnd(32,32)
+elseif S3
+land_position rnd(63,63) rnd(37,37)
+endif
+elseif P6
+if S1
+land_position rnd(50,50) rnd(32,32)
+elseif S2
+land_position rnd(63,63) rnd(37,37)
+elseif S3
+land_position rnd(68,68) rnd(50,50)
+endif
+else
+if S1
+land_position rnd(33,33) rnd(43,43)
+elseif S2
+land_position rnd(43,43) rnd(33,33)
+elseif S3
+land_position rnd(57,57) rnd(33,33)
+endif
+endif
+}
+L
+{
+terrain_type PT3
+base_size 0
+base_elevation 0
+number_of_tiles 0
+clumping_factor 30
+other_zone_avoidance_distance 8
+zone 3
+   
+if C8P1
+assign_to AT_COLOR 5 0 0
+elseif C8P2
+assign_to AT_COLOR 3 0 0
+elseif C8P3
+assign_to AT_COLOR 3 0 0
+elseif C8P4
+assign_to AT_COLOR 5 0 0
+elseif C6P1
+assign_to AT_COLOR 5 0 0
+elseif C6P2
+assign_to AT_COLOR 1 0 0
+elseif C6P3
+assign_to AT_COLOR 5 0 0
+elseif C6P4
+assign_to AT_COLOR 1 0 0
+else
+if 4_TEAM_GAME
+assign_to AT_TEAM 3 0 0
+elseif 3_TEAM_GAME
+assign_to AT_TEAM 3 0 0
+elseif 2_TEAM_GAME
+assign_to AT_TEAM 1 0 0
+elseif 1_TEAM_GAME
+assign_to AT_TEAM -10 0 0
+else
+assign_to AT_TEAM -10 0 0
+endif
+endif
+if P2
+if S1
+land_position rnd(50,50) rnd(32,32)
+elseif S2
+land_position rnd(63,63) rnd(37,37)
+elseif S3
+land_position rnd(68,68) rnd(50,50)
+endif
+elseif P4
+if S1
+land_position rnd(37,37) rnd(63,63)
+elseif S2
+land_position rnd(32,32) rnd(50,50)
+elseif S3
+land_position rnd(37,37) rnd(37,37)
+endif
+elseif P6
+if S1
+land_position rnd(34,34) rnd(59,59)
+elseif S2
+land_position rnd(33,33) rnd(45,45)
+elseif S3
+land_position rnd(41,41) rnd(34,34)
+endif
+else
+if S1
+land_position rnd(43,43) rnd(67,67)
+elseif S2
+land_position rnd(33,33) rnd(57,57)
+elseif S3
+land_position rnd(33,33) rnd(43,43)
+endif
+endif
+}
+L
+{
+terrain_type PT4
+base_size 0
+base_elevation 0
+number_of_tiles 0
+clumping_factor 30
+other_zone_avoidance_distance 8
+zone 4
+   
+if C8P1
+assign_to AT_COLOR 6 0 0
+elseif C8P2
+assign_to AT_COLOR 6 0 0
+elseif C8P3
+assign_to AT_COLOR 4 0 0
+elseif C8P4
+assign_to AT_COLOR 4 0 0
+elseif C6P1
+assign_to AT_COLOR 2 0 0
+elseif C6P2
+assign_to AT_COLOR 2 0 0
+elseif C6P3
+assign_to AT_COLOR 6 0 0
+elseif C6P4
+assign_to AT_COLOR 6 0 0
+else
+if 4_TEAM_GAME
+assign_to AT_TEAM 4 0 0
+elseif 3_TEAM_GAME
+assign_to AT_TEAM 2 0 0
+elseif 2_TEAM_GAME
+assign_to AT_TEAM 2 0 0
+elseif 1_TEAM_GAME
+assign_to AT_TEAM -10 0 0
+else
+assign_to AT_TEAM -10 0 0
+endif
+endif
+if P2
+if S1
+land_position rnd(50,50) rnd(32,32)
+elseif S2
+land_position rnd(63,63) rnd(37,37)
+elseif S3
+land_position rnd(68,68) rnd(50,50)
+endif
+elseif P4
+if S1
+land_position rnd(63,63) rnd(37,37)
+elseif S2
+land_position rnd(68,68) rnd(50,50)
+elseif S3
+land_position rnd(63,63) rnd(63,63)
+endif
+elseif P6
+if S1
+land_position rnd(34,34) rnd(41,41)
+elseif S2
+land_position rnd(45,45) rnd(33,33)
+elseif S3
+land_position rnd(59,59) rnd(34,34)
+endif
+else
+if S1
+land_position rnd(57,57) rnd(33,33)
+elseif S2
+land_position rnd(67,67) rnd(43,43)
+elseif S3
+land_position rnd(67,67) rnd(57,57)
+endif
+endif
+}
+L
+{
+terrain_type PT5
+base_size 0
+base_elevation 0
+number_of_tiles 0
+clumping_factor 30
+other_zone_avoidance_distance 8
+zone 5
+   
+if C8P1
+assign_to AT_COLOR 3 0 0
+elseif C8P2
+assign_to AT_COLOR 5 0 0
+elseif C8P3
+assign_to AT_COLOR 5 0 0
+elseif C8P4
+assign_to AT_COLOR 3 0 0
+elseif C6P1
+assign_to AT_COLOR 3 0 0
+elseif C6P2
+assign_to AT_COLOR 3 0 0
+elseif C6P3
+assign_to AT_COLOR 3 0 0
+elseif C6P4
+assign_to AT_COLOR 3 0 0
+else
+if 4_TEAM_GAME
+assign_to AT_TEAM 1 0 0
+elseif 3_TEAM_GAME
+assign_to AT_TEAM 1 0 0
+elseif 2_TEAM_GAME
+assign_to AT_TEAM 1 0 0
+elseif 1_TEAM_GAME
+assign_to AT_TEAM 1 0 0
+else
+assign_to AT_TEAM -10 0 0
+endif
+endif
+if P2
+if S1
+land_position rnd(50,50) rnd(32,32)
+elseif S2
+land_position rnd(63,63) rnd(37,37)
+elseif S3
+land_position rnd(68,68) rnd(50,50)
+endif
+elseif P4
+if S1
+land_position rnd(63,63) rnd(37,37)
+elseif S2
+land_position rnd(68,68) rnd(50,50)
+elseif S3
+land_position rnd(63,63) rnd(63,63)
+endif
+elseif P6
+if S1
+land_position rnd(50,50) rnd(68,68)
+elseif S2
+land_position rnd(37,37) rnd(63,63)
+elseif S3
+land_position rnd(32,32) rnd(50,50)
+endif
+else
+if S1
+land_position rnd(57,57) rnd(67,67)
+elseif S2
+land_position rnd(43,43) rnd(67,67)
+elseif S3
+land_position rnd(33,33) rnd(57,57)
+endif
+endif
+}
+L
+{
+terrain_type PT6
+base_size 0
+base_elevation 0
+number_of_tiles 0
+clumping_factor 30
+other_zone_avoidance_distance 8
+zone 6
+   
+if C8P1
+assign_to AT_COLOR 4 0 0
+elseif C8P2
+assign_to AT_COLOR 4 0 0
+elseif C8P3
+assign_to AT_COLOR 6 0 0
+elseif C8P4
+assign_to AT_COLOR 6 0 0
+elseif C6P1
+assign_to AT_COLOR 6 0 0
+elseif C6P2
+assign_to AT_COLOR 6 0 0
+elseif C6P3
+assign_to AT_COLOR 2 0 0
+elseif C6P4
+assign_to AT_COLOR 2 0 0
+else
+if 4_TEAM_GAME
+assign_to AT_TEAM 2 0 0
+elseif 3_TEAM_GAME
+assign_to AT_TEAM 2 0 0
+elseif 2_TEAM_GAME
+assign_to AT_TEAM 2 0 0
+elseif 1_TEAM_GAME
+assign_to AT_TEAM -10 0 0
+else
+assign_to AT_TEAM -10 0 0
+endif
+endif
+if P2
+if S1
+land_position rnd(50,50) rnd(32,32)
+elseif S2
+land_position rnd(63,63) rnd(37,37)
+elseif S3
+land_position rnd(68,68) rnd(50,50)
+endif
+elseif P4
+if S1
+land_position rnd(63,63) rnd(37,37)
+elseif S2
+land_position rnd(68,68) rnd(50,50)
+elseif S3
+land_position rnd(63,63) rnd(63,63)
+endif
+elseif P6
+if S1
+land_position rnd(66,66) rnd(41,41)
+elseif S2
+land_position rnd(67,67) rnd(55,55)
+elseif S3
+land_position rnd(59,59) rnd(66,66)
+endif
+else
+if S1
+land_position rnd(43,43) rnd(33,33)
+elseif S2
+land_position rnd(57,57) rnd(33,33)
+elseif S3
+land_position rnd(67,67) rnd(43,43)
+endif
+endif
+}
+L
+{
+terrain_type PT7
+base_size 0
+base_elevation 0
+number_of_tiles 0
+clumping_factor 30
+other_zone_avoidance_distance 8
+zone 7
+   
+if C8P1
+assign_to AT_COLOR 7 0 0
+elseif C8P2
+assign_to AT_COLOR 1 0 0
+elseif C8P3
+assign_to AT_COLOR 1 0 0
+elseif C8P4
+assign_to AT_COLOR 7 0 0
+else
+if 4_TEAM_GAME
+assign_to AT_TEAM 3 0 0
+elseif 3_TEAM_GAME
+assign_to AT_TEAM 3 0 0
+elseif 2_TEAM_GAME
+assign_to AT_TEAM 1 0 0
+elseif 1_TEAM_GAME
+assign_to AT_TEAM 1 0 0
+else
+assign_to AT_TEAM -10 0 0
+endif
+endif
+if P2
+if S1
+land_position rnd(50,50) rnd(32,32)
+elseif S2
+land_position rnd(63,63) rnd(37,37)
+elseif S3
+land_position rnd(68,68) rnd(50,50)
+endif
+elseif P4
+if S1
+land_position rnd(63,63) rnd(37,37)
+elseif S2
+land_position rnd(68,68) rnd(50,50)
+elseif S3
+land_position rnd(63,63) rnd(63,63)
+endif
+elseif P6
+if S1
+land_position rnd(66,66) rnd(41,41)
+elseif S2
+land_position rnd(67,67) rnd(55,55)
+elseif S3
+land_position rnd(59,59) rnd(66,66)
+endif
+else
+if S1
+land_position rnd(33,33) rnd(57,57)
+elseif S2
+land_position rnd(33,33) rnd(43,43)
+elseif S3
+land_position rnd(43,43) rnd(33,33)
+endif
+endif
+}
+L
+{
+terrain_type PT8
+base_size 0
+base_elevation 0
+number_of_tiles 0
+clumping_factor 30
+other_zone_avoidance_distance 8
+zone 8
+   
+if C8P1
+assign_to AT_COLOR 8 0 0
+elseif C8P2
+assign_to AT_COLOR 8 0 0
+elseif C8P3
+assign_to AT_COLOR 2 0 0
+elseif C8P4
+assign_to AT_COLOR 2 0 0
+else
+if 4_TEAM_GAME
+assign_to AT_TEAM 4 0 0
+elseif 3_TEAM_GAME
+assign_to AT_TEAM 2 0 0
+elseif 2_TEAM_GAME
+assign_to AT_TEAM 2 0 0
+elseif 1_TEAM_GAME
+assign_to AT_TEAM -10 0 0
+else
+assign_to AT_TEAM -10 0 0
+endif
+endif
+if P2
+if S1
+land_position rnd(50,50) rnd(32,32)
+elseif S2
+land_position rnd(63,63) rnd(37,37)
+elseif S3
+land_position rnd(68,68) rnd(50,50)
+endif
+elseif P4
+if S1
+land_position rnd(63,63) rnd(37,37)
+elseif S2
+land_position rnd(68,68) rnd(50,50)
+elseif S3
+land_position rnd(63,63) rnd(63,63)
+endif
+elseif P6
+if S1
+land_position rnd(66,66) rnd(41,41)
+elseif S2
+land_position rnd(67,67) rnd(55,55)
+elseif S3
+land_position rnd(59,59) rnd(66,66)
+endif
+else
+if S1
+land_position rnd(67,67) rnd(43,43)
+elseif S2
+land_position rnd(67,67) rnd(57,57)
+elseif S3
+land_position rnd(57,57) rnd(67,67)
+endif
+endif
+}
+if 1_PLAYER_GAME
+#define P2
+elseif 2_PLAYER_GAME
+#define P2
+elseif 3_PLAYER_GAME
+#define P4
+elseif 4_PLAYER_GAME
+#define P4
+elseif 5_PLAYER_GAME
+#define P6
+if TEAM_POSITIONS
+#define TP_6PG
+endif
+elseif 6_PLAYER_GAME
+#define P6
+if TEAM_POSITIONS
+#define TP_6PG
+endif
+elseif 7_PLAYER_GAME
+#define P8
+if TEAM_POSITIONS
+#define TP_8PG
+endif
+elseif 8_PLAYER_GAME
+#define P8
+if TEAM_POSITIONS
+#define TP_8PG
+endif
+endif
+if TP_8PG
+start_random
+percent_chance 25 #define C8P1
+percent_chance 25 #define C8P2
+percent_chance 25 #define C8P3
+percent_chance 25 #define C8P4
+end_random
+elseif TP_6PG
+start_random
+percent_chance 25 #define C6P1
+percent_chance 25 #define C6P2
+percent_chance 25 #define C6P3
+percent_chance 25 #define C6P4
+end_random
+endif
+L
+{
+terrain_type CT1
+base_size 0
+base_elevation 7
+number_of_tiles 0
+clumping_factor 30
+   
+if P2
+if S1
+land_position rnd(50,50) rnd(61,61)
+elseif S2
+land_position rnd(42,42) rnd(58,58)
+elseif S3
+land_position rnd(39,39) rnd(50,50)
+endif
+elseif P4
+if S1
+land_position rnd(58,58) rnd(58,58)
+elseif S2
+land_position rnd(50,50) rnd(61,61)
+elseif S3
+land_position rnd(42,42) rnd(58,58)
+endif
+elseif P6
+if S1
+land_position rnd(60,60) rnd(56,56)
+elseif S2
+land_position rnd(53,53) rnd(61,61)
+elseif S3
+land_position rnd(45,45) rnd(60,60)
+endif
+else
+if S1
+land_position rnd(60,60) rnd(54,54)
+elseif S2
+land_position rnd(54,54) rnd(60,60)
+elseif S3
+land_position rnd(46,46) rnd(60,60)
+endif
+endif
+}
+L
+{
+terrain_type CT2
+base_size 0
+base_elevation 7
+number_of_tiles 0
+clumping_factor 30
+   
+if P2
+if S1
+land_position rnd(50,50) rnd(39,39)
+elseif S2
+land_position rnd(58,58) rnd(42,42)
+elseif S3
+land_position rnd(61,61) rnd(50,50)
+endif
+elseif P4
+if S1
+land_position rnd(42,42) rnd(42,42)
+elseif S2
+land_position rnd(50,50) rnd(39,39)
+elseif S3
+land_position rnd(58,58) rnd(42,42)
+endif
+elseif P6
+if S1
+land_position rnd(50,50) rnd(39,39)
+elseif S2
+land_position rnd(58,58) rnd(42,42)
+elseif S3
+land_position rnd(61,61) rnd(50,50)
+endif
+else
+if S1
+land_position rnd(40,40) rnd(46,46)
+elseif S2
+land_position rnd(46,46) rnd(40,40)
+elseif S3
+land_position rnd(54,54) rnd(40,40)
+endif
+endif
+}
+L
+{
+terrain_type CT3
+base_size 0
+base_elevation 7
+number_of_tiles 0
+clumping_factor 30
+   
+if P2
+if S1
+land_position rnd(50,50) rnd(39,39)
+elseif S2
+land_position rnd(58,58) rnd(42,42)
+elseif S3
+land_position rnd(61,61) rnd(50,50)
+endif
+elseif P4
+if S1
+land_position rnd(42,42) rnd(58,58)
+elseif S2
+land_position rnd(39,39) rnd(50,50)
+elseif S3
+land_position rnd(42,42) rnd(42,42)
+endif
+elseif P6
+if S1
+land_position rnd(40,40) rnd(56,56)
+elseif S2
+land_position rnd(39,39) rnd(47,47)
+elseif S3
+land_position rnd(45,45) rnd(40,40)
+endif
+else
+if S1
+land_position rnd(46,46) rnd(60,60)
+elseif S2
+land_position rnd(40,40) rnd(54,54)
+elseif S3
+land_position rnd(40,40) rnd(46,46)
+endif
+endif
+}
+L
+{
+terrain_type CT4
+base_size 0
+base_elevation 7
+number_of_tiles 0
+clumping_factor 30
+   
+if P2
+if S1
+land_position rnd(50,50) rnd(39,39)
+elseif S2
+land_position rnd(58,58) rnd(42,42)
+elseif S3
+land_position rnd(61,61) rnd(50,50)
+endif
+elseif P4
+if S1
+land_position rnd(58,58) rnd(42,42)
+elseif S2
+land_position rnd(61,61) rnd(50,50)
+elseif S3
+land_position rnd(58,58) rnd(58,58)
+endif
+elseif P6
+if S1
+land_position rnd(40,40) rnd(45,45)
+elseif S2
+land_position rnd(47,47) rnd(39,39)
+elseif S3
+land_position rnd(56,56) rnd(40,40)
+endif
+else
+if S1
+land_position rnd(54,54) rnd(40,40)
+elseif S2
+land_position rnd(60,60) rnd(46,46)
+elseif S3
+land_position rnd(60,60) rnd(54,54)
+endif
+endif
+}
+L
+{
+terrain_type CT5
+base_size 0
+base_elevation 7
+number_of_tiles 0
+clumping_factor 30
+   
+if P2
+if S1
+land_position rnd(50,50) rnd(39,39)
+elseif S2
+land_position rnd(58,58) rnd(42,42)
+elseif S3
+land_position rnd(61,61) rnd(50,50)
+endif
+elseif P4
+if S1
+land_position rnd(58,58) rnd(42,42)
+elseif S2
+land_position rnd(61,61) rnd(50,50)
+elseif S3
+land_position rnd(58,58) rnd(58,58)
+endif
+elseif P6
+if S1
+land_position rnd(50,50) rnd(61,61)
+elseif S2
+land_position rnd(42,42) rnd(58,58)
+elseif S3
+land_position rnd(39,39) rnd(50,50)
+endif
+else
+if S1
+land_position rnd(54,54) rnd(60,60)
+elseif S2
+land_position rnd(46,46) rnd(60,60)
+elseif S3
+land_position rnd(40,40) rnd(54,54)
+endif
+endif
+}
+L
+{
+terrain_type CT6
+base_size 0
+base_elevation 7
+number_of_tiles 0
+clumping_factor 30
+   
+if P2
+if S1
+land_position rnd(50,50) rnd(39,39)
+elseif S2
+land_position rnd(58,58) rnd(42,42)
+elseif S3
+land_position rnd(61,61) rnd(50,50)
+endif
+elseif P4
+if S1
+land_position rnd(58,58) rnd(42,42)
+elseif S2
+land_position rnd(61,61) rnd(50,50)
+elseif S3
+land_position rnd(58,58) rnd(58,58)
+endif
+elseif P6
+if S1
+land_position rnd(60,60) rnd(45,45)
+elseif S2
+land_position rnd(61,61) rnd(53,53)
+elseif S3
+land_position rnd(56,56) rnd(60,60)
+endif
+else
+if S1
+land_position rnd(46,46) rnd(40,40)
+elseif S2
+land_position rnd(54,54) rnd(40,40)
+elseif S3
+land_position rnd(60,60) rnd(46,46)
+endif
+endif
+}
+L
+{
+terrain_type CT7
+base_size 0
+base_elevation 7
+number_of_tiles 0
+clumping_factor 30
+   
+if P2
+if S1
+land_position rnd(50,50) rnd(39,39)
+elseif S2
+land_position rnd(58,58) rnd(42,42)
+elseif S3
+land_position rnd(61,61) rnd(50,50)
+endif
+elseif P4
+if S1
+land_position rnd(58,58) rnd(42,42)
+elseif S2
+land_position rnd(61,61) rnd(50,50)
+elseif S3
+land_position rnd(58,58) rnd(58,58)
+endif
+elseif P6
+if S1
+land_position rnd(60,60) rnd(45,45)
+elseif S2
+land_position rnd(61,61) rnd(53,53)
+elseif S3
+land_position rnd(56,56) rnd(60,60)
+endif
+else
+if S1
+land_position rnd(40,40) rnd(54,54)
+elseif S2
+land_position rnd(40,40) rnd(46,46)
+elseif S3
+land_position rnd(46,46) rnd(40,40)
+endif
+endif
+}
+L
+{
+terrain_type CT8
+base_size 0
+base_elevation 7
+number_of_tiles 0
+clumping_factor 30
+   
+if P2
+if S1
+land_position rnd(50,50) rnd(39,39)
+elseif S2
+land_position rnd(58,58) rnd(42,42)
+elseif S3
+land_position rnd(61,61) rnd(50,50)
+endif
+elseif P4
+if S1
+land_position rnd(58,58) rnd(42,42)
+elseif S2
+land_position rnd(61,61) rnd(50,50)
+elseif S3
+land_position rnd(58,58) rnd(58,58)
+endif
+elseif P6
+if S1
+land_position rnd(60,60) rnd(45,45)
+elseif S2
+land_position rnd(61,61) rnd(53,53)
+elseif S3
+land_position rnd(56,56) rnd(60,60)
+endif
+else
+if S1
+land_position rnd(60,60) rnd(46,46)
+elseif S2
+land_position rnd(60,60) rnd(54,54)
+elseif S3
+land_position rnd(54,54) rnd(60,60)
+endif
+endif
+}
+endif

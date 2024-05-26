@@ -1,0 +1,1415 @@
+/* ************************************ */
+/* Bloody Knoll */
+/* By General Zuma */
+/* ************************************ */
+
+#include_drs random_map.def 
+#const DLC_CROCODILE 1031
+#const STORKIE 1028
+#const ELEPHANT 936
+#const ZEBRA 1019
+#const DLC_PIG 1245
+#const DLC_GOOSE 1243
+#const DLC_SNOWLEOPARD 1241
+#const DLC_IBEX 1239
+#const DLC_DROMEDARY 1237
+#const OSTRICH 1026
+#const ORANGEBUSH 1059
+#const LION 1029
+#const GOATEE 1060
+#const DLC_BOULDER_B 1049
+#const DLC_KOMODO 1135
+#const DLC_TIGER 1137
+#const DLC_BOXTURTLE 1141
+#const DLC_FORESTAUTUMN 104
+#const DLC_FORESTSNOWAUTUMN 105
+
+
+<PLAYER_SETUP>
+
+random_placement
+ai_info_map_type ARABIA 0 0 0
+
+<LAND_GENERATION>
+
+start_random
+percent_chance 10
+#define DESERT_MAP
+percent_chance 10
+#define NORDIC_MAP
+percent_chance 10
+#define ASIAN_MAP
+percent_chance 10
+#define AFRICAN_MAP
+percent_chance 10
+#define CHINA_MAP
+percent_chance 10
+#define PINE_MAP
+percent_chance 10
+#define BADLANDS_MAP
+percent_chance 0
+#define WETLANDS_MAP
+percent_chance 10
+#define MOORLAND_MAP
+percent_chance 10
+#define GALATIA_MAP
+percent_chance 10
+end_random
+
+ if DESERT_MAP
+base_terrain DIRT2
+elseif NORDIC_MAP
+base_terrain SNOW
+elseif ASIAN_MAP
+base_terrain DLC_JUNGLEGRASS
+elseif AFRICAN_MAP
+base_terrain DESERT
+elseif PINE_MAP
+base_terrain GRASS_SNOW
+elseif BADLANDS_MAP
+base_terrain DLC_CRACKED
+elseif WETLANDS_MAP
+base_terrain DLC_JUNGLEGRASS
+elseif MOORLAND_MAP
+base_terrain DLC_MOORLAND
+elseif GALATIA_MAP
+base_terrain DIRT3
+else
+base_terrain GRASS
+endif
+
+create_player_lands 
+{ 
+ if DESERT_MAP
+terrain_type DIRT
+elseif NORDIC_MAP
+terrain_type GRASS2
+elseif ASIAN_MAP
+terrain_type DLC_MOORLAND
+elseif AFRICAN_MAP
+terrain_type DIRT2
+elseif PINE_MAP
+terrain_type GRASS3
+elseif BADLANDS_MAP
+terrain_type DIRT3
+elseif WETLANDS_MAP
+terrain_type DLC_JUNGLELEAVES
+elseif MOORLAND_MAP
+terrain_type DLC_DIRT4
+elseif GALATIA_MAP
+terrain_type DIRT
+else
+terrain_type GRASS3
+endif
+number_of_tiles 150
+base_size 13
+/* this was 8 */
+if WETLANDS_MAP
+base_elevation 1
+elseif NORDIC_MAP
+base_elevation 3
+elseif GALATIA_MAP
+base_elevation 3
+else
+base_elevation 2
+endif
+right_border 9
+top_border 9
+left_border 9
+bottom_border 9
+}
+
+<TERRAIN_GENERATION>
+
+if DESERT_MAP
+create_terrain PALM_DESERT
+elseif NORDIC_MAP
+create_terrain SNOW_FOREST
+elseif ASIAN_MAP
+create_terrain DLC_RAINFOREST
+elseif AFRICAN_MAP
+create_terrain DLC_BAOBABFOREST
+elseif CHINA_MAP
+create_terrain BAMBOO
+elseif PINE_MAP
+create_terrain PINE_FOREST
+elseif BADLANDS_MAP
+create_terrain DLC_FORESTDEAD
+elseif WETLANDS_MAP
+create_terrain FOREST
+elseif MOORLAND_MAP
+create_terrain FOREST
+elseif GALATIA_MAP
+create_terrain DLC_DRAGONFOREST
+else
+create_terrain DLC_FORESTAUTUMN
+endif
+{
+         if DESERT_MAP
+base_terrain DIRT2
+elseif NORDIC_MAP
+base_terrain SNOW
+elseif ASIAN_MAP
+base_terrain DLC_JUNGLEGRASS
+elseif AFRICAN_MAP
+base_terrain DESERT
+elseif PINE_MAP
+base_terrain GRASS_SNOW
+elseif BADLANDS_MAP
+base_terrain DLC_CRACKED
+elseif WETLANDS_MAP
+base_terrain DLC_JUNGLEGRASS
+elseif MOORLAND_MAP
+base_terrain DLC_MOORLAND
+elseif GALATIA_MAP
+base_terrain DIRT3
+else
+base_terrain GRASS
+endif
+spacing_to_other_terrain_types 8
+land_percent 13
+number_of_clumps 18
+set_avoid_player_start_areas     
+set_scale_by_groups
+clumping_factor 90
+}
+
+
+    if DESERT_MAP
+create_terrain DESERT
+elseif NORDIC_MAP
+create_terrain GRASS_SNOW
+elseif ASIAN_MAP
+create_terrain DLC_JUNGLELEAVES
+elseif AFRICAN_MAP
+create_terrain DLC_DIRT4
+elseif PINE_MAP
+create_terrain SNOW
+elseif BADLANDS_MAP
+create_terrain DESERT
+elseif WETLANDS_MAP
+create_terrain DLC_BOGLAND
+elseif MOORLAND_MAP
+create_terrain DLC_DIRT4
+elseif GALATIA_MAP
+create_terrain GRASS3
+else
+create_terrain LEAVES
+endif
+{
+   if DESERT_MAP
+base_terrain DIRT2
+elseif NORDIC_MAP
+base_terrain SNOW
+elseif ASIAN_MAP
+base_terrain DLC_JUNGLEGRASS
+elseif AFRICAN_MAP
+base_terrain DESERT
+elseif PINE_MAP
+base_terrain GRASS_SNOW
+elseif BADLANDS_MAP
+base_terrain DLC_CRACKED
+elseif WETLANDS_MAP
+base_terrain DLC_JUNGLEGRASS
+elseif MOORLAND_MAP
+base_terrain DLC_MOORLAND
+elseif GALATIA_MAP
+base_terrain DIRT3
+else
+base_terrain GRASS
+endif
+number_of_clumps 26
+spacing_to_other_terrain_types 1
+land_percent 9
+set_scale_by_size
+}
+
+if DESERT_MAP
+create_terrain FOREST
+elseif NORDIC_MAP
+create_terrain PINE_FOREST
+elseif ASIAN_MAP
+create_terrain JUNGLE
+elseif AFRICAN_MAP
+create_terrain DLC_ACACIAFOREST
+elseif CHINA_MAP
+create_terrain JUNGLE
+elseif PINE_MAP
+create_terrain FOREST
+elseif BADLANDS_MAP
+create_terrain DLC_DRAGONFOREST
+elseif WETLANDS_MAP
+create_terrain BAMBOO
+elseif MOORLAND_MAP
+create_terrain DLC_RAINFOREST
+elseif GALATIA_MAP
+create_terrain FOREST
+else
+create_terrain PINE_FOREST
+endif
+{
+   if DESERT_MAP
+base_terrain DIRT2
+elseif NORDIC_MAP
+base_terrain SNOW
+elseif ASIAN_MAP
+base_terrain DLC_JUNGLEGRASS
+elseif AFRICAN_MAP
+base_terrain DESERT
+elseif PINE_MAP
+base_terrain GRASS_SNOW
+elseif BADLANDS_MAP
+base_terrain DLC_CRACKED
+elseif WETLANDS_MAP
+base_terrain DLC_JUNGLEGRASS
+elseif MOORLAND_MAP
+base_terrain DLC_MOORLAND
+elseif GALATIA_MAP
+base_terrain DIRT3
+else
+base_terrain GRASS
+endif
+spacing_to_other_terrain_types 6
+land_percent 2
+number_of_clumps 10
+set_avoid_player_start_areas     
+set_scale_by_groups
+clumping_factor 90
+}
+
+if DESERT_MAP
+create_terrain PALM_DESERT
+elseif NORDIC_MAP
+create_terrain SNOW_FOREST
+elseif ASIAN_MAP
+create_terrain JUNGLE
+elseif AFRICAN_MAP
+create_terrain DLC_BAOBABFOREST
+elseif CHINA_MAP
+create_terrain BAMBOO
+elseif PINE_MAP
+create_terrain PINE_FOREST
+elseif BADLANDS_MAP
+create_terrain DLC_FORESTDEAD
+elseif WETLANDS_MAP
+create_terrain BAMBOO
+elseif MOORLAND_MAP
+create_terrain DLC_RAINFOREST
+elseif GALATIA_MAP
+create_terrain DLC_DRAGONFOREST
+else
+create_terrain FORESTSNOWAUTUMN 
+endif
+{
+   if DESERT_MAP
+base_terrain DIRT
+elseif NORDIC_MAP
+base_terrain GRASS2
+elseif ASIAN_MAP
+base_terrain DLC_MOORLAND
+elseif AFRICAN_MAP
+base_terrain DIRT2
+elseif PINE_MAP
+base_terrain GRASS3
+elseif BADLANDS_MAP
+base_terrain DIRT3
+elseif WETLANDS_MAP
+base_terrain DLC_JUNGLELEAVES
+elseif MOORLAND_MAP
+base_terrain DLC_DIRT4
+elseif GALATIA_MAP
+base_terrain DIRT
+else
+base_terrain GRASS3
+endif
+spacing_to_other_terrain_types 3
+land_percent 1
+number_of_clumps 6
+set_avoid_player_start_areas
+set_scale_by_groups
+clumping_factor 35
+}
+
+    if DESERT_MAP
+create_terrain DLC_DRYGRASS
+elseif NORDIC_MAP
+create_terrain DIRT_SNOW
+elseif ASIAN_MAP
+create_terrain DIRT3
+elseif AFRICAN_MAP
+create_terrain DLC_DRYGRASS
+elseif PINE_MAP
+create_terrain GRASS2
+elseif BADLANDS_MAP
+create_terrain DLC_DIRT4
+elseif WETLANDS_MAP
+create_terrain DLC_MOORLAND
+elseif MOORLAND_MAP
+create_terrain DLC_JUNGLEGRASS
+elseif GALATIA_MAP
+create_terrain DLC_CRACKED
+else
+create_terrain DIRT2
+endif
+{
+   if DESERT_MAP
+base_terrain DIRT2
+elseif NORDIC_MAP
+base_terrain SNOW
+elseif ASIAN_MAP
+base_terrain DLC_JUNGLEGRASS
+elseif AFRICAN_MAP
+base_terrain DESERT
+elseif PINE_MAP
+base_terrain GRASS_SNOW
+elseif BADLANDS_MAP
+base_terrain DLC_CRACKED
+elseif WETLANDS_MAP
+base_terrain DLC_JUNGLEGRASS
+elseif MOORLAND_MAP
+base_terrain DLC_MOORLAND
+elseif GALATIA_MAP
+base_terrain DIRT3
+else
+base_terrain GRASS
+endif
+number_of_clumps 24
+spacing_to_other_terrain_types 1
+land_percent 2
+set_scale_by_size
+}
+
+
+    if DESERT_MAP
+create_terrain DLC_CRACKED
+elseif NORDIC_MAP
+create_terrain DIRT2
+elseif ASIAN_MAP
+create_terrain DLC_DIRT4
+elseif AFRICAN_MAP
+create_terrain DLC_SAVANNAH
+elseif PINE_MAP
+create_terrain DIRT2
+elseif BADLANDS_MAP
+create_terrain DIRT
+elseif WETLANDS_MAP
+create_terrain DLC_MOORLAND
+elseif MOORLAND_MAP
+create_terrain DLC_JUNGLELEAVES
+elseif GALATIA_MAP
+create_terrain DIRT2
+else
+create_terrain GRASS2
+endif
+{
+   if DESERT_MAP
+base_terrain DIRT2
+elseif NORDIC_MAP
+base_terrain SNOW
+elseif ASIAN_MAP
+base_terrain DLC_JUNGLEGRASS
+elseif AFRICAN_MAP
+base_terrain DESERT
+elseif PINE_MAP
+base_terrain GRASS_SNOW
+elseif BADLANDS_MAP
+base_terrain DLC_CRACKED
+elseif WETLANDS_MAP
+base_terrain DLC_JUNGLEGRASS
+elseif MOORLAND_MAP
+base_terrain DLC_MOORLAND
+elseif GALATIA_MAP
+base_terrain DIRT3
+else
+base_terrain GRASS
+endif
+number_of_clumps 30
+spacing_to_other_terrain_types 1
+land_percent 2
+set_scale_by_size
+}
+
+if DESERT_MAP
+create_terrain WATER
+elseif ASIAN_MAP
+create_terrain WATER
+elseif AFRICAN_MAP
+create_terrain WATER
+elseif WETLANDS_MAP
+create_terrain DLC_WATER5
+else
+endif
+{
+if DESERT_MAP
+base_terrain PALM_DESERT
+elseif ASIAN_MAP
+base_terrain DLC_RAINFOREST
+elseif AFRICAN_MAP
+base_terrain DLC_BAOBABFOREST
+elseif WETLANDS_MAP
+base_terrain DLC_RAINFOREST
+endif
+spacing_to_other_terrain_types 0
+number_of_tiles 32
+number_of_clumps 10
+set_avoid_player_start_areas
+set_flat_terrain_only     
+set_scale_by_groups
+}
+
+
+
+
+
+<OBJECTS_GENERATION>
+
+if DESERT_MAP
+
+create_object PALMTREE
+{
+number_of_objects 3
+set_gaia_object_only
+set_place_for_every_player
+min_distance_to_players 4
+max_distance_to_players 5
+min_distance_group_placement 2
+}
+
+create_object PALMTREE
+{
+number_of_objects 8
+set_gaia_object_only
+set_place_for_every_player
+min_distance_to_players 6
+max_distance_to_players 8
+group_placement_radius 2
+set_tight_grouping
+}
+
+create_object PALMTREE
+{
+  number_of_objects          30
+  set_gaia_object_only
+  set_scaling_to_map_size
+  min_distance_to_players    8
+}
+
+elseif NORDIC_MAP
+
+create_object SNOWPINETREE
+{
+number_of_objects 3
+set_gaia_object_only
+set_place_for_every_player
+min_distance_to_players 4
+max_distance_to_players 5
+min_distance_group_placement 2
+}
+
+create_object SNOWPINETREE
+{
+number_of_objects 8
+set_gaia_object_only
+set_place_for_every_player
+min_distance_to_players 6
+max_distance_to_players 8
+group_placement_radius 2
+set_tight_grouping
+}
+
+create_object SNOWPINETREE
+{
+  number_of_objects          30
+  set_gaia_object_only
+  set_scaling_to_map_size
+  min_distance_to_players    8
+}
+
+elseif ASIAN_MAP
+
+create_object DLC_RAINTREE
+{
+number_of_objects 11
+set_gaia_object_only
+set_place_for_every_player
+min_distance_to_players 5
+max_distance_to_players 8
+group_placement_radius 3
+set_tight_grouping
+}
+
+create_object DLC_RAINTREE
+{
+  number_of_objects          30
+  set_gaia_object_only
+  set_scaling_to_map_size
+  min_distance_to_players    8
+}
+
+elseif AFRICAN_MAP
+
+create_object DLC_BAOBABTREE
+{
+number_of_objects 3
+set_gaia_object_only
+set_place_for_every_player
+min_distance_to_players 4
+max_distance_to_players 5
+min_distance_group_placement 2
+}
+
+create_object DLC_BAOBABTREE
+{
+number_of_objects 4
+set_gaia_object_only
+set_place_for_every_player
+min_distance_to_players 6
+max_distance_to_players 8
+min_distance_group_placement 2
+}
+
+create_object DLC_BAOBABTREE
+{
+  number_of_objects          30
+  set_gaia_object_only
+  set_scaling_to_map_size
+  min_distance_to_players    8
+}
+
+elseif CHINA_MAP
+
+create_object BAMBOO_TREE
+{
+number_of_objects 3
+set_gaia_object_only
+set_place_for_every_player
+min_distance_to_players 4
+max_distance_to_players 5
+min_distance_group_placement 2
+}
+
+create_object BAMBOO_TREE
+{
+number_of_objects 8
+set_gaia_object_only
+set_place_for_every_player
+min_distance_to_players 6
+max_distance_to_players 8
+group_placement_radius 2
+set_tight_grouping
+}
+
+create_object BAMBOO_TREE
+{
+  number_of_objects          30
+  set_gaia_object_only
+  set_scaling_to_map_size
+  min_distance_to_players    8
+}
+
+elseif PINE_MAP
+
+create_object PINETREE
+{
+number_of_objects 3
+set_gaia_object_only
+set_place_for_every_player
+min_distance_to_players 4
+max_distance_to_players 5
+min_distance_group_placement 2
+}
+
+create_object PINETREE
+{
+number_of_objects 8
+set_gaia_object_only
+set_place_for_every_player
+min_distance_to_players 6
+max_distance_to_players 8
+group_placement_radius 2
+set_tight_grouping
+}
+
+create_object PINETREE
+{
+  number_of_objects          30
+  set_gaia_object_only
+  set_scaling_to_map_size
+  min_distance_to_players    8
+}
+elseif BADLANDS_MAP
+
+create_object TREE_F
+{
+number_of_objects 3
+set_gaia_object_only
+set_place_for_every_player
+min_distance_to_players 4
+max_distance_to_players 5
+min_distance_group_placement 2
+}
+
+create_object TREE_F
+{
+number_of_objects 8
+set_gaia_object_only
+set_place_for_every_player
+min_distance_to_players 6
+max_distance_to_players 8
+group_placement_radius 2
+set_tight_grouping
+}
+
+create_object TREE_I
+{
+  number_of_objects          30
+  set_gaia_object_only
+  set_scaling_to_map_size
+  min_distance_to_players    8
+}
+
+elseif WETLANDS_MAP
+
+create_object DLC_RAINTREE
+{
+number_of_objects 11
+set_gaia_object_only
+set_place_for_every_player
+min_distance_to_players 5
+max_distance_to_players 8
+group_placement_radius 3
+set_tight_grouping
+}
+
+create_object DLC_RAINTREE
+{
+  number_of_objects          30
+  set_gaia_object_only
+  set_scaling_to_map_size
+  min_distance_to_players    8
+}
+
+elseif MOORLAND_MAP
+
+create_object DLC_RAINTREE
+{
+number_of_objects 11
+set_gaia_object_only
+set_place_for_every_player
+min_distance_to_players 5
+max_distance_to_players 8
+group_placement_radius 3
+set_tight_grouping
+}
+
+create_object DLC_RAINTREE
+{
+  number_of_objects          30
+  set_gaia_object_only
+  set_scaling_to_map_size
+  min_distance_to_players    8
+}
+
+elseif GALATIA_MAP
+
+create_object TREE_K
+{
+number_of_objects 3
+set_gaia_object_only
+set_place_for_every_player
+min_distance_to_players 4
+max_distance_to_players 5
+min_distance_group_placement 2
+}
+
+create_object TREE_K
+{
+number_of_objects 8
+set_gaia_object_only
+set_place_for_every_player
+min_distance_to_players 6
+max_distance_to_players 8
+group_placement_radius 2
+set_tight_grouping
+}
+
+create_object TREE_K
+{
+  number_of_objects          30
+  set_gaia_object_only
+  set_scaling_to_map_size
+  min_distance_to_players    8
+}
+
+
+else
+
+create_object DLC_AUTUMNTREE
+{
+number_of_objects 3
+set_gaia_object_only
+set_place_for_every_player
+min_distance_to_players 4
+max_distance_to_players 5
+min_distance_group_placement 2
+}
+
+create_object DLC_AUTUMNTREE
+{
+number_of_objects 8
+set_gaia_object_only
+set_place_for_every_player
+min_distance_to_players 6
+max_distance_to_players 8
+group_placement_radius 2
+set_tight_grouping
+}
+
+create_object DLC_AUTUMNTREE
+{
+  number_of_objects          30
+  set_gaia_object_only
+  set_scaling_to_map_size
+  min_distance_to_players    8
+}
+
+endif
+
+create_object TOWN_CENTER
+{
+set_place_for_every_player
+group_placement_radius 18
+min_distance_to_players 0
+max_distance_to_players 0
+}
+
+create_object VILLAGER
+{
+set_place_for_every_player
+min_distance_to_players 7
+max_distance_to_players 8
+avoid_forest_zone 1
+}
+
+create_object SCOUT
+{
+number_of_objects 1
+set_place_for_every_player
+min_distance_to_players 9
+max_distance_to_players 10
+avoid_forest_zone 1
+}
+
+if REGICIDE
+
+create_object VILLAGER
+{
+number_of_objects 7
+set_place_for_every_player
+min_distance_to_players 6
+max_distance_to_players 8
+avoid_forest_zone 1
+}
+
+create_object KING
+{
+set_place_for_every_player
+min_distance_to_players 6
+max_distance_to_players 7
+avoid_forest_zone 1
+}
+
+create_object CASTLE
+{
+set_place_for_every_player
+min_distance_to_players 10
+max_distance_to_players 11
+}
+
+endif
+
+if DESERT_MAP
+create_object SHEEP
+elseif NORDIC_MAP
+create_object DLC_LLAMA
+elseif ASIAN_MAP
+create_object DLC_WATERBUFFALO
+elseif AFRICAN_MAP
+create_object DLC_GOAT
+elseif CHINA_MAP
+create_object TURKEY
+elseif PINE_MAP
+create_object SHEEP
+elseif BADLANDS_MAP
+create_object SHEEP
+elseif WETLANDS_MAP
+create_object GOOSE
+elseif MOORLAND_MAP
+create_object DLC_WATERBUFFALO
+elseif GALATIA_MAP
+create_object SHEEP
+else
+create_object DLC_COW
+endif
+{
+if BADLANDS_MAP
+number_of_objects 9
+min_distance_to_players 5
+max_distance_to_players 6
+else
+number_of_objects 2
+min_distance_to_players 10
+max_distance_to_players 12
+endif
+set_loose_grouping
+set_gaia_object_only
+set_place_for_every_player
+avoid_forest_zone 2
+
+}
+
+if DESERT_MAP
+create_object SHEEP
+elseif NORDIC_MAP
+create_object DLC_LLAMA
+elseif ASIAN_MAP
+create_object DLC_WATERBUFFALO
+elseif AFRICAN_MAP
+create_object DLC_GOAT
+elseif CHINA_MAP
+create_object TURKEY
+elseif PINE_MAP
+create_object SHEEP
+elseif BADLANDS_MAP
+create_object DLC_GOAT
+elseif WETLANDS_MAP
+create_object GOOSE
+elseif MOORLAND_MAP
+create_object DLC_WATERBUFFALO
+elseif GALATIA_MAP
+create_object SHEEP
+else
+create_object DLC_COW
+endif
+{
+number_of_objects 2
+set_loose_grouping
+set_gaia_object_only
+set_place_for_every_player
+min_distance_to_players 9
+max_distance_to_players 10
+avoid_forest_zone 2
+}
+
+if DESERT_MAP
+create_object SHEEP
+elseif NORDIC_MAP
+create_object SHEEP
+elseif ASIAN_MAP
+create_object TURKEY
+elseif AFRICAN_MAP
+create_object DLC_GOAT
+elseif CHINA_MAP
+create_object DLC_WATERBUFFALO
+elseif PINE_MAP
+create_object SHEEP
+elseif BADLANDS_MAP
+create_object DLC_GOAT
+elseif WETLANDS_MAP
+create_object GOOSE
+elseif MOORLAND_MAP
+create_object GOOSE
+elseif GALATIA_MAP
+create_object SHEEP
+else
+create_object DLC_PIG
+endif
+{
+number_of_objects 2
+number_of_groups  2
+set_loose_grouping
+set_gaia_object_only
+set_place_for_every_player
+min_distance_to_players 17
+max_distance_to_players 20
+min_distance_group_placement 3
+avoid_forest_zone 2
+}
+
+if AFRICAN_MAP
+create_object ZEBRA
+elseif BADLANDS_MAP
+create_object ZEBRA
+elseif MOORLAND_MAP
+create_object ZEBRA
+elseif NORDIC_MAP
+create_object DLC_IBEX
+else
+create_object DEER
+endif
+{
+number_of_objects 4
+group_placement_radius 3
+set_loose_grouping
+set_gaia_object_only
+set_place_for_every_player
+min_distance_to_players 15
+max_distance_to_players 15
+min_distance_group_placement 4
+avoid_forest_zone 2
+}
+
+if AFRICAN_MAP
+create_object ZEBRA
+elseif BADLANDS_MAP
+create_object ZEBRA
+elseif MOORLAND_MAP
+create_object ZEBRA
+elseif NORDIC_MAP
+create_object DLC_IBEX
+else
+create_object DEER
+endif
+{
+number_of_objects 1
+number_of_groups 5
+group_placement_radius 3
+set_loose_grouping
+set_gaia_object_only
+set_place_for_every_player
+min_distance_to_players 24
+max_distance_to_players 30
+temp_min_distance_group_placement 12
+avoid_forest_zone 2
+}
+
+if ASIAN_MAP
+create_object ELEPHANT
+elseif DESERT_MAP
+create_object ELEPHANT
+elseif AFRICAN_MAP
+create_object DLC_RHINO
+elseif BADLANDS_MAP
+create_object DLC_RHINO
+else
+create_object BOAR
+endif
+{
+number_of_objects 1
+set_loose_grouping  
+set_gaia_object_only
+set_place_for_every_player
+min_distance_to_players 16
+max_distance_to_players 17
+min_distance_group_placement 3
+avoid_forest_zone 2
+}
+
+if ASIAN_MAP
+create_object DLC_RHINO
+elseif DESERT_MAP
+create_object ELEPHANT
+elseif AFRICAN_MAP
+create_object ELEPHANT
+elseif BADLANDS_MAP
+create_object DLC_RHINO
+elseif CHINA_MAP
+create_object ELEPHANT
+else
+create_object BOAR
+endif
+{
+number_of_objects 1
+set_gaia_object_only
+set_place_for_every_player
+min_distance_to_players 18
+max_distance_to_players 19
+min_distance_group_placement 3
+avoid_forest_zone 2
+}
+
+if DESERT_MAP
+create_object ORANGEBUSH
+elseif ASIAN_MAP
+create_object ORANGEBUSH
+elseif AFRICAN_MAP
+create_object ORANGEBUSH
+elseif BADLANDS_MAP
+create_object CRACKS
+elseif MOORLAND_MAP
+create_object ORANGEBUSH
+else
+create_object FORAGE
+endif
+{
+if DESERT_MAP
+number_of_objects 3
+elseif NORDIC_MAP
+number_of_objects 4
+elseif ASIAN_MAP
+number_of_objects 1
+elseif AFRICAN_MAP
+number_of_objects 3
+elseif CHINA_MAP
+number_of_objects 4
+elseif PINE_MAP
+number_of_objects 4
+elseif BADLANDS_MAP
+number_of_objects 0
+elseif WETLANDS_MAP
+number_of_objects 4
+elseif MOORLAND_MAP
+number_of_objects 3
+elseif GALATIA_MAP
+number_of_objects 4
+else
+number_of_objects 2
+endif
+group_placement_radius 5
+set_tight_grouping
+set_gaia_object_only
+set_place_for_every_player
+min_distance_to_players 10
+max_distance_to_players 11
+min_distance_group_placement 5
+avoid_forest_zone 2
+}
+
+if DESERT_MAP
+create_object ORANGEBUSH
+elseif ASIAN_MAP
+create_object ORANGEBUSH
+elseif AFRICAN_MAP
+create_object ORANGEBUSH
+elseif BADLANDS_MAP
+create_object CRACKS
+elseif MOORLAND_MAP
+create_object ORANGEBUSH
+else
+create_object FORAGE
+endif
+{
+if BADLANDS_MAP
+number_of_objects 1
+else
+number_of_objects 2
+endif
+group_placement_radius 3
+set_tight_grouping
+set_gaia_object_only
+set_place_for_every_player
+min_distance_to_players 1
+max_distance_to_players 2
+min_distance_group_placement 1
+avoid_forest_zone 2
+}
+
+create_object GOLD
+{
+number_of_objects 4
+number_of_groups 2
+group_placement_radius 4
+set_tight_grouping
+set_gaia_object_only
+set_place_for_every_player
+min_distance_to_players 14
+max_distance_to_players 16
+min_distance_group_placement 8
+max_distance_to_other_zones 7
+avoid_forest_zone 2
+}
+
+create_object STONE
+{
+number_of_objects 3
+group_placement_radius 4
+set_tight_grouping
+set_gaia_object_only
+set_place_for_every_player
+min_distance_to_players 14
+max_distance_to_players 19
+min_distance_group_placement 8
+max_distance_to_other_zones 7
+avoid_forest_zone 2
+}
+
+create_object STONE
+{
+number_of_objects 3
+group_placement_radius 3
+set_tight_grouping
+set_gaia_object_only
+set_place_for_every_player
+min_distance_to_players 21
+max_distance_to_players 25
+min_distance_group_placement 8
+max_distance_to_other_zones 7
+avoid_forest_zone 2
+}
+
+create_object GOLD
+{
+number_of_objects 3
+number_of_groups 2
+group_placement_radius 3
+set_tight_grouping
+set_gaia_object_only
+set_place_for_every_player
+min_distance_to_players 19
+max_distance_to_players 24
+min_distance_group_placement 7
+max_distance_to_other_zones 7
+avoid_forest_zone 2
+}
+
+create_object GOLD
+{
+number_of_objects 2
+group_placement_radius 2
+set_tight_grouping
+set_gaia_object_only
+set_place_for_every_player
+min_distance_to_players 25
+max_distance_to_players 30
+min_distance_group_placement 7
+max_distance_to_other_zones 7
+avoid_forest_zone 2
+}
+
+create_object STONE
+{
+number_of_objects 3
+group_placement_radius 3
+set_tight_grouping
+set_gaia_object_only
+set_place_for_every_player
+min_distance_to_players 25
+max_distance_to_players 28
+min_distance_group_placement 7
+max_distance_to_other_zones 7
+avoid_forest_zone 2
+}
+
+create_object GOLD
+{
+number_of_objects 2
+number_of_groups 3
+group_placement_radius 2
+set_tight_grouping
+set_gaia_object_only
+min_distance_to_players 45
+set_scaling_to_map_size
+temp_min_distance_group_placement 15
+min_distance_group_placement 10
+avoid_forest_zone 2
+}
+
+create_object STONE
+{
+number_of_objects 2
+number_of_groups 1    
+group_placement_radius 2
+set_tight_grouping
+set_gaia_object_only
+min_distance_to_players 45
+set_scaling_to_map_size
+temp_min_distance_group_placement 20
+min_distance_group_placement 10
+avoid_forest_zone 2
+}
+
+create_object STONE
+{
+number_of_objects 1
+number_of_groups 1    
+group_placement_radius 2
+set_tight_grouping
+set_gaia_object_only
+min_distance_to_players 45
+set_scaling_to_map_size
+temp_min_distance_group_placement 30
+min_distance_group_placement 12
+avoid_forest_zone 2
+}
+
+if ASIAN_MAP
+create_object DLC_TIGER
+elseif AFRICAN_MAP
+create_object LION
+elseif CHINA_MAP
+create_object DLC_TIGER
+elseif MOORLAND_MAP
+create_object LION
+elseif PINE_MAP
+create_object DLC_BEAR
+elseif NORDIC_MAP
+create_object DLC_SNOWLEOPARD
+elseif WETLANDS_MAP
+create_object DLC_CROCODILE
+else
+create_object WOLF
+endif
+{
+number_of_objects 2
+set_gaia_object_only
+set_place_for_every_player
+min_distance_to_players 38
+max_distance_to_players 45
+temp_min_distance_group_placement 12
+}
+
+if ASIAN_MAP
+create_object DLC_KOMODO
+elseif AFRICAN_MAP
+create_object LION
+elseif CHINA_MAP
+create_object DLC_TIGER
+elseif MOORLAND_MAP
+create_object LION
+else
+create_object WOLF
+endif
+{
+number_of_groups 2
+number_of_objects 1
+set_loose_grouping
+set_scaling_to_map_size
+set_gaia_object_only
+temp_min_distance_group_placement 20
+min_distance_to_players 40
+} 
+
+create_object RELIC
+{
+number_of_objects 4
+min_distance_to_players 30
+min_distance_group_placement 5
+set_scaling_to_map_size
+temp_min_distance_group_placement 25
+avoid_forest_zone 1
+}
+
+create_object SHORE_FISH
+{
+number_of_objects 15
+set_scaling_to_map_size
+set_gaia_object_only
+temp_min_distance_group_placement 5
+min_distance_group_placement 3
+}
+
+<ELEVATION_GENERATION>
+
+
+
+create_elevation 7
+{
+ if DESERT_MAP
+base_terrain DIRT2
+elseif NORDIC_MAP
+base_terrain SNOW
+elseif ASIAN_MAP
+base_terrain DLC_JUNGLEGRASS
+elseif AFRICAN_MAP
+base_terrain DESERT
+elseif PINE_MAP
+base_terrain GRASS_SNOW
+elseif BADLANDS_MAP
+base_terrain DLC_CRACKED
+elseif MOORLAND_MAP
+base_terrain DLC_MOORLAND
+elseif GALATIA_MAP
+base_terrain DIRT3
+else
+base_terrain GRASS
+endif
+number_of_clumps 10
+start_random
+percent_chance 50
+number_of_tiles 2500
+percent_chance 25
+number_of_tiles 2200
+percent_chance 25
+number_of_tiles 1900
+end_random
+set_scale_by_groups
+set_scale_by_size           
+}
+
+create_elevation 5
+{
+ if DESERT_MAP
+base_terrain DIRT2
+elseif NORDIC_MAP
+base_terrain SNOW
+elseif ASIAN_MAP
+base_terrain DLC_JUNGLEGRASS
+elseif AFRICAN_MAP
+base_terrain DESERT
+elseif PINE_MAP
+base_terrain GRASS_SNOW
+elseif BADLANDS_MAP
+base_terrain DLC_CRACKED
+elseif MOORLAND_MAP
+base_terrain DLC_MOORLAND
+elseif GALATIA_MAP
+base_terrain DIRT3
+else
+base_terrain GRASS
+endif
+number_of_clumps 10
+number_of_tiles 2000
+set_scale_by_groups
+set_scale_by_size           
+}
+
+create_elevation 3
+{
+if NORDIC_MAP
+base_terrain GRASS2
+elseif GALATIA_MAP
+base_terrain DIRT
+else
+endif
+number_of_clumps 3
+number_of_tiles 100
+set_scale_by_groups
+set_scale_by_size           
+}
+
+create_elevation 2
+{
+ if DESERT_MAP
+base_terrain DIRT
+elseif ASIAN_MAP
+base_terrain DLC_MOORLAND
+elseif AFRICAN_MAP
+base_terrain DIRT2
+elseif PINE_MAP
+base_terrain GRASS3
+elseif BADLANDS_MAP
+base_terrain DIRT3
+elseif MOORLAND_MAP
+base_terrain DLC_DIRT4
+else
+base_terrain GRASS3
+endif
+number_of_clumps 3
+number_of_tiles 100
+set_scale_by_groups
+set_scale_by_size           
+}
+
+create_elevation 1
+{
+if WETLANDS_MAP
+base_terrain DLC_JUNGLELEAVES
+else
+endif
+number_of_clumps 3
+number_of_tiles 100
+set_scale_by_groups
+set_scale_by_size           
+}
+
+ 

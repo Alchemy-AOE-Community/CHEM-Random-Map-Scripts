@@ -1,0 +1,688 @@
+/* ************ Zagreb ************ */
+/* In honor of Daut */
+/* By General Zuma */
+
+#include_drs random_map.def 
+#const DLC_CROCODILE 1031
+#const STORKIE 1028
+#const ELEPHANT 936
+#const ZEBRA 1019
+#const DLC_PIG 1245
+#const DLC_GOOSE 1243
+#const DLC_SNOWLEOPARD 1241
+#const DLC_IBEX 1239
+#const DLC_DROMEDARY 1237
+#const OSTRICH 1026
+#const ORANGEBUSH 1059
+#const LION 1029
+#const GOATEE 1060
+#const DLC_BOULDER_B 1049
+#const DLC_KOMODO 1135
+#const DLC_TIGER 1137
+#const DLC_BOXTURTLE 1141
+#const DLC_FORESTAUTUMN 104
+#const DLC_FORESTSNOWAUTUMN 105
+
+/* ************************************************************************** */
+<PLAYER_SETUP>
+
+random_placement
+ai_info_map_type BUDAPEST 0 0 0
+
+
+/* ************************************************************************** */
+
+<LAND_GENERATION>
+
+base_terrain WATER
+
+create_player_lands
+{
+
+terrain_type GRASS2
+    land_percent 60
+  base_size 11 
+  
+    circle_radius                    28 2
+  other_zone_avoidance_distance 11
+  set_zone_by_team
+  border_fuzziness 9
+
+  start_random
+    percent_chance 100 /* Removes the river on the main island */
+    zone 1
+    percent_chance 0 /* Keeps the river */
+  end_random
+}
+
+create_player_lands
+{
+terrain_type GRASS2
+    land_percent 60
+  base_size 11 
+  
+    circle_radius                    28 2
+  other_zone_avoidance_distance 11
+  set_zone_by_team
+  border_fuzziness 9
+
+  start_random
+    percent_chance 100 /* Removes the river on the main island */
+    zone 1
+    percent_chance 0 /* Keeps the river */
+  end_random
+}
+
+create_player_lands
+{
+terrain_type GRASS2
+    land_percent 60
+  base_size 11 
+      circle_radius                    28 2
+  other_zone_avoidance_distance 11
+  set_zone_by_team
+  border_fuzziness 9
+  start_random
+    percent_chance 100 /* Removes the river on the main island */
+    zone 1
+    percent_chance 0 /* Keeps the river */
+  end_random
+}
+
+create_player_lands
+{
+terrain_type GRASS2
+    land_percent 60
+  base_size 11 
+  
+    circle_radius                    28 2
+  other_zone_avoidance_distance 11
+  set_zone_by_team
+  border_fuzziness 9
+
+  start_random
+    percent_chance 100 /* Removes the river on the main island */
+    zone 1
+    percent_chance 0 /* Keeps the river */
+  end_random
+}
+
+create_player_lands
+{
+terrain_type GRASS2
+    land_percent 60
+  base_size 11 
+  
+    circle_radius                    28 2
+  other_zone_avoidance_distance 11
+  set_zone_by_team
+  border_fuzziness 9
+
+  start_random
+    percent_chance 100 /* Removes the river on the main island */
+    zone 1
+    percent_chance 0 /* Keeps the river */
+  end_random
+}
+
+create_player_lands
+{
+terrain_type GRASS2
+    land_percent 60
+  
+    circle_radius                    28 2
+  other_zone_avoidance_distance 11
+  set_zone_by_team
+  border_fuzziness 9
+  start_random
+    percent_chance 100 /* Removes the river on the main island */
+    zone 1
+    percent_chance 0 /* Keeps the river */
+  end_random
+}
+
+
+  
+create_land
+{
+terrain_type GRASS_SNOW
+
+   land_percent 20
+    right_border 92
+    left_border 0
+    top_border 20
+    bottom_border 20
+    border_fuzziness 15
+    clumping_factor 5
+}
+
+create_land
+{
+terrain_type GRASS_SNOW
+    land_percent 20
+    right_border 0
+    left_border 92
+    top_border 20
+    bottom_border 20
+    border_fuzziness 15
+    clumping_factor 5
+}
+
+create_land
+{
+terrain_type SNOW
+    land_percent 20
+    right_border 20
+    left_border 20
+    top_border 92
+    bottom_border 0
+    border_fuzziness 15
+    clumping_factor 5
+}
+
+create_land
+{
+terrain_type SNOW
+    land_percent 20
+    right_border 20
+    left_border 20
+    top_border 0
+    bottom_border 92
+    border_fuzziness 15
+    clumping_factor 5
+}
+
+/* Forest in Corners */
+
+create_land
+{
+
+terrain_type SNOW_FOREST
+
+land_percent 100
+top_border 82
+bottom_border 0
+right_border 82
+left_border 0
+zone 1
+}
+
+create_land
+{
+
+terrain_type SNOW_FOREST
+
+land_percent 100
+top_border 82
+bottom_border 0
+right_border 0
+left_border 82
+}
+
+create_land
+{
+
+terrain_type SNOW_FOREST
+
+land_percent 100
+top_border 0
+bottom_border 82
+right_border 82
+left_border 0
+}
+
+create_land
+{
+
+terrain_type SNOW_FOREST
+land_percent 100
+top_border 0
+bottom_border 82
+right_border 0
+left_border 82
+}
+
+create_land
+{
+
+terrain_type DLC_MOORLAND
+land_percent 100
+top_border 42
+bottom_border 42
+right_border 42
+left_border 42
+
+zone 1
+}
+
+/* ************************************************************************** */
+<ELEVATION_GENERATION>
+
+create_elevation 4
+{
+  base_terrain GRASS
+  number_of_clumps 20
+  number_of_tiles 3500
+  set_scale_by_groups
+  set_scale_by_size
+}
+
+
+/* ************************************************************************** */
+<TERRAIN_GENERATION>
+
+create_terrain PINE_FOREST
+{
+     base_terrain GRASS2
+     spacing_to_other_terrain_types 8
+     land_percent 2
+     number_of_clumps 9
+     set_scale_by_groups
+     set_avoid_player_start_areas
+     clumping_factor 90
+}
+
+create_terrain FOREST
+{
+     base_terrain GRASS2
+     spacing_to_other_terrain_types 8
+     land_percent 1
+     number_of_clumps 2
+     set_scale_by_groups
+     set_avoid_player_start_areas
+     clumping_factor 90
+}
+
+
+create_terrain GRASS
+{
+  base_terrain GRASS2
+  number_of_clumps 80
+  spacing_to_other_terrain_types 0
+start_random
+percent_chance 50
+  land_percent 20
+percent_chance 50
+  land_percent 16
+end_random
+  set_scale_by_size
+}
+
+create_terrain DIRT_SNOW
+{
+  base_terrain SNOW_FOREST
+  number_of_clumps 80
+  spacing_to_other_terrain_types 0
+
+  land_percent 8
+
+  set_scale_by_size
+}
+
+  create_terrain DIRT3
+{
+  base_terrain GRASS
+  number_of_clumps 50
+  spacing_to_other_terrain_types 0
+start_random
+percent_chance 50
+  land_percent 12
+percent_chance 50
+  land_percent 8
+end_random
+  set_scale_by_size
+}
+
+ create_terrain SHALLOW
+{
+  base_terrain DLC_MOORLAND
+  number_of_clumps 50
+  spacing_to_other_terrain_types 0
+number_of_tiles 11
+  set_scale_by_size
+}
+
+create_terrain MED_WATER
+{
+base_terrain WATER
+land_percent 40
+number_of_clumps 6
+spacing_to_other_terrain_types 3
+}
+
+create_terrain DEEP_WATER
+{
+base_terrain MED_WATER
+land_percent 5
+number_of_clumps 6
+spacing_to_other_terrain_types 2
+}
+
+create_terrain MED_WATER
+{
+base_terrain WATER
+land_percent 40
+number_of_clumps 6
+spacing_to_other_terrain_types 3
+}
+
+create_terrain DEEP_WATER
+{
+base_terrain MED_WATER
+land_percent 5
+number_of_clumps 6
+spacing_to_other_terrain_types 2
+}
+
+
+create_terrain MED_WATER
+{
+base_terrain WATER
+land_percent 40
+number_of_clumps 6
+spacing_to_other_terrain_types 3
+}
+
+create_terrain DEEP_WATER
+{
+base_terrain MED_WATER
+land_percent 5
+number_of_clumps 6
+spacing_to_other_terrain_types 2
+}
+
+
+create_terrain MED_WATER
+{
+base_terrain WATER
+land_percent 40
+number_of_clumps 6
+spacing_to_other_terrain_types 3
+}
+
+create_terrain DEEP_WATER
+{
+base_terrain MED_WATER
+land_percent 5
+number_of_clumps 6
+spacing_to_other_terrain_types 2
+}
+
+
+/* ************************************************************************** */
+<OBJECTS_GENERATION>
+
+create_object TOWN_CENTER
+{
+     set_place_for_every_player
+     group_placement_radius 18
+     min_distance_to_players 0
+     max_distance_to_players 0
+}
+
+create_object VILLAGER
+{
+     set_place_for_every_player
+     min_distance_to_players 6
+     max_distance_to_players 6
+}
+
+create_object SCOUT
+{
+     number_of_objects 1
+     set_place_for_every_player
+     min_distance_to_players 7
+     max_distance_to_players 9
+}
+
+if REGICIDE
+
+  create_object KING {
+    set_place_for_every_player
+    min_distance_to_players 6
+    max_distance_to_players 6
+  }
+
+endif
+
+create_object SHEEP
+{
+number_of_objects 1
+min_distance_to_players 5
+max_distance_to_players 6
+set_loose_grouping
+set_gaia_object_only
+set_place_for_every_player
+avoid_forest_zone 2
+}
+
+create_object DEER
+
+{
+number_of_objects 4
+group_placement_radius 3
+set_loose_grouping
+set_gaia_object_only
+set_place_for_every_player
+min_distance_to_players 15
+max_distance_to_players 15
+min_distance_group_placement 10
+avoid_forest_zone 2
+}
+
+create_object DEER
+
+{
+number_of_objects 1
+number_of_groups 10
+group_placement_radius 3
+set_loose_grouping
+set_gaia_object_only
+set_place_for_every_player
+min_distance_to_players 24
+max_distance_to_players 30
+temp_min_distance_group_placement 12
+avoid_forest_zone 2
+}
+
+create_object BOAR
+{
+     number_of_objects          1
+     number_of_groups 		4
+     set_loose_grouping
+     set_gaia_object_only
+     set_place_for_every_player
+     min_distance_to_players    23
+     max_distance_to_players    25
+ min_distance_group_placement 10
+avoid_forest_zone 2
+}
+
+create_object GOLD
+{
+number_of_objects 3
+number_of_groups 2
+group_placement_radius 3
+set_tight_grouping
+set_gaia_object_only
+set_place_for_every_player
+min_distance_to_players 19
+max_distance_to_players 24
+min_distance_group_placement 7
+max_distance_to_other_zones 7
+avoid_forest_zone 2
+}
+
+create_object GOLD
+{
+number_of_objects 1
+group_placement_radius 2
+set_tight_grouping
+set_gaia_object_only
+set_place_for_every_player
+min_distance_to_players 25
+max_distance_to_players 30
+min_distance_group_placement 7
+max_distance_to_other_zones 7
+avoid_forest_zone 2
+}
+
+create_object GOLD
+{
+number_of_objects 8
+number_of_groups 3
+group_placement_radius 8
+set_scaling_to_map_size
+set_tight_grouping
+set_gaia_object_only
+min_distance_to_players 25
+min_distance_group_placement 2
+max_distance_to_other_zones 2
+terrain_to_place_on DLC_MOORLAND
+}
+
+create_object GOLD
+{
+number_of_objects 3
+number_of_groups 3
+group_placement_radius 3
+set_scaling_to_map_size
+set_tight_grouping
+set_gaia_object_only
+min_distance_to_players 25
+min_distance_group_placement 4
+max_distance_to_other_zones 5
+terrain_to_place_on DLC_MOORLAND
+}
+
+create_object STONE
+{
+number_of_objects 5
+number_of_groups 6    
+group_placement_radius 2
+set_tight_grouping
+set_gaia_object_only
+min_distance_to_players 30
+terrain_to_place_on SNOW
+set_scaling_to_map_size
+temp_min_distance_group_placement 15
+min_distance_group_placement 7
+avoid_forest_zone 2
+}
+
+
+create_object SNOWPINETREE
+{
+number_of_objects 6
+number_of_groups 2
+set_gaia_object_only
+set_place_for_every_player
+min_distance_to_players 4
+max_distance_to_players 5
+group_placement_radius 2
+set_tight_grouping
+temp_min_distance_group_placement 4
+}
+
+create_object SNOWPINETREE
+{
+  number_of_objects          30
+  set_gaia_object_only
+  set_scaling_to_map_size
+  min_distance_to_players    8
+}
+
+
+
+create_object SALMON
+{
+  number_of_objects 25
+  set_scaling_to_map_size
+  set_gaia_object_only
+  max_distance_to_other_zones 5
+     min_distance_group_placement 4
+terrain_to_place_on WATER
+}
+
+create_object SNAPPER
+{
+  number_of_objects 25
+  set_scaling_to_map_size
+  set_gaia_object_only
+  max_distance_to_other_zones 4
+     min_distance_group_placement 3
+terrain_to_place_on WATER
+}
+
+create_object SALMON
+{
+  number_of_objects 25
+  set_scaling_to_map_size
+  set_gaia_object_only
+  max_distance_to_other_zones 5
+     min_distance_group_placement 4
+terrain_to_place_on MED_WATER
+}
+
+create_object SNAPPER
+{
+  number_of_objects 25
+  set_scaling_to_map_size
+  set_gaia_object_only
+  max_distance_to_other_zones 5
+     min_distance_group_placement 4
+terrain_to_place_on DEEP_WATER
+}
+
+create_object SHORE_FISH
+{
+  number_of_objects                   45
+  set_scaling_to_map_size
+  set_gaia_object_only
+ min_distance_group_placement  2
+}
+
+create_object RELIC
+{
+   number_of_objects            8
+   set_scaling_to_map_size
+   min_distance_to_players     25
+   terrain_to_place_on      GRASS_SNOW
+   temp_min_distance_group_placement 20
+}
+
+create_object DLC_SNOWLEOPARD
+{
+number_of_objects 2
+set_gaia_object_only
+set_place_for_every_player
+min_distance_to_players 30
+max_distance_to_players 45
+temp_min_distance_group_placement 12
+}
+
+<ELEVATION_GENERATION>
+
+create_elevation 3
+{
+
+base_terrain GRASS2
+
+number_of_clumps 12
+number_of_tiles 2000
+set_scale_by_groups
+set_scale_by_size           
+}
+
+create_elevation 2
+{
+
+base_terrain GRASS2
+
+number_of_clumps 12
+number_of_tiles 1000
+set_scale_by_groups
+set_scale_by_size           
+}
+
+

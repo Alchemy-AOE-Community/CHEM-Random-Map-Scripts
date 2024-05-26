@@ -1,0 +1,451 @@
+/* ************************************ */
+/* Kievan Rus */
+/* By General Zuma */
+/* ************************************ */
+
+#include_drs random_map.def 
+#const DLC_CROCODILE 1031
+#const STORKIE 1028
+#const ELEPHANT 936
+#const ZEBRA 1019
+#const DLC_PIG 1245
+#const DLC_GOOSE 1243
+#const DLC_SNOWLEOPARD 1241
+#const DLC_IBEX 1239
+#const DLC_DROMEDARY 1237
+#const OSTRICH 1026
+#const ORANGEBUSH 1059
+#const LION 1029
+#const GOATEE 1060
+#const DLC_BOULDER_B 1049
+#const DLC_KOMODO 1135
+#const DLC_TIGER 1137
+#const DLC_BOXTURTLE 1141
+#const DLC_FORESTAUTUMN 104
+#const DLC_FORESTSNOWAUTUMN 105
+
+
+<PLAYER_SETUP>
+
+random_placement
+ai_info_map_type ARENA 0 0 0
+
+<LAND_GENERATION>
+
+base_terrain SNOW
+
+create_land
+{
+terrain_type DIRT_SNOW
+land_percent 100
+left_border 42
+right_border 42
+top_border 42
+bottom_border 42
+clumping_factor 90
+}
+
+create_land
+{            
+terrain_type                     PINE_FOREST
+land_percent                  100
+left_border                   0
+right_border                  96
+top_border                    0
+bottom_border                 0
+}
+
+create_land
+{            
+terrain_type                     PINE_FOREST
+land_percent                  100
+left_border                   0
+right_border                  0
+top_border                    0
+bottom_border                 96
+}
+
+create_land
+{            
+terrain_type                     PINE_FOREST
+land_percent                  100
+left_border                   0
+right_border                  0
+top_border                    96
+bottom_border                 0
+}
+
+create_land
+{            
+terrain_type                     PINE_FOREST
+land_percent                  100
+left_border                   96
+right_border                  0
+top_border                    0
+bottom_border                 0
+}
+
+create_player_lands 
+{ 
+terrain_type GRASS3
+number_of_tiles 150
+base_size 8
+base_elevation 3
+right_border 15
+top_border 15
+left_border 15
+bottom_border 15
+circle_radius                    20 2
+}
+
+<TERRAIN_GENERATION>
+
+
+<OBJECTS_GENERATION>
+
+create_object PINETREE
+{
+number_of_objects 7
+set_gaia_object_only
+set_place_for_every_player
+min_distance_to_players 4
+max_distance_to_players 5
+set_tight_grouping
+}
+
+create_object PINETREE
+{
+number_of_objects 15
+set_gaia_object_only
+set_place_for_every_player
+min_distance_to_players 6
+max_distance_to_players 8
+group_placement_radius 2
+set_tight_grouping
+}
+
+create_object PINETREE
+{
+  number_of_objects          210
+  set_gaia_object_only
+  set_scaling_to_map_size
+  min_distance_to_players    12
+}
+
+
+create_object TOWN_CENTER
+{
+set_place_for_every_player
+group_placement_radius 18
+min_distance_to_players 0
+max_distance_to_players 0
+}
+
+create_object VILLAGER
+{
+set_place_for_every_player
+min_distance_to_players 2
+max_distance_to_players 3
+avoid_forest_zone 1
+}
+
+create_object SCOUT
+{
+number_of_objects 1
+set_place_for_every_player
+min_distance_to_players 2
+max_distance_to_players 3
+avoid_forest_zone 1
+}
+
+create_object BARRACKS
+{
+set_place_for_every_player
+min_distance_to_players 7
+max_distance_to_players 8
+avoid_forest_zone 1
+}
+
+create_object WALL
+{
+  set_place_for_every_player
+  number_of_objects    9999
+  min_distance_to_players       11
+  max_distance_to_players       11
+}
+
+if REGICIDE
+
+create_object VILLAGER
+{
+number_of_objects 7
+set_place_for_every_player
+min_distance_to_players 6
+max_distance_to_players 8
+avoid_forest_zone 1
+}
+
+create_object KING
+{
+set_place_for_every_player
+min_distance_to_players 6
+max_distance_to_players 7
+avoid_forest_zone 1
+}
+
+create_object WATCH_TOWER
+{
+set_place_for_every_player
+min_distance_to_players 7
+max_distance_to_players 8
+}
+
+endif
+
+
+create_object DEER
+
+{
+number_of_objects 4
+group_placement_radius 3
+set_loose_grouping
+set_gaia_object_only
+set_place_for_every_player
+min_distance_to_players 8
+max_distance_to_players 8
+min_distance_group_placement 4
+avoid_forest_zone 2
+}
+
+
+create_object DEER
+
+{
+number_of_objects 1
+number_of_groups 5
+group_placement_radius 3
+set_loose_grouping
+set_gaia_object_only
+set_place_for_every_player
+min_distance_to_players 9
+max_distance_to_players 9
+avoid_forest_zone 2
+}
+
+create_object BOAR
+
+{
+number_of_objects 1
+set_loose_grouping  
+set_gaia_object_only
+set_place_for_every_player
+min_distance_to_players 2
+max_distance_to_players 3
+avoid_forest_zone 2
+}
+
+create_object BOAR
+{
+number_of_objects 3
+number_of_groups
+set_gaia_object_only
+set_place_for_every_player
+min_distance_to_players 8
+max_distance_to_players 9
+avoid_forest_zone 2
+}
+
+create_object STONE
+{
+number_of_objects 4
+number_of_groups 4
+group_placement_radius 2
+set_tight_grouping
+set_gaia_object_only
+min_distance_to_players 13
+set_scaling_to_map_size
+temp_min_distance_group_placement 7
+min_distance_group_placement 4
+avoid_forest_zone 2
+terrain_to_place_on DIRT_SNOW
+}
+
+
+create_object GOLD
+{
+number_of_objects 4
+number_of_groups 2
+group_placement_radius 4
+set_tight_grouping
+set_gaia_object_only
+set_place_for_every_player
+min_distance_to_players 15
+max_distance_to_players 16
+min_distance_group_placement 12
+max_distance_to_other_zones 7
+avoid_forest_zone 2
+}
+
+create_object GOLD
+{
+number_of_objects 3
+number_of_groups 1
+group_placement_radius 3
+set_tight_grouping
+set_gaia_object_only
+set_place_for_every_player
+min_distance_to_players 2
+max_distance_to_players 2
+max_distance_to_other_zones 7
+avoid_forest_zone 2
+}
+
+create_object GOLD
+{
+number_of_objects 3
+number_of_groups 2
+group_placement_radius 3
+set_tight_grouping
+set_gaia_object_only
+set_place_for_every_player
+min_distance_to_players 20
+max_distance_to_players 20
+min_distance_group_placement 7
+max_distance_to_other_zones 7
+avoid_forest_zone 2
+}
+
+create_object GOLD
+{
+number_of_objects 2
+group_placement_radius 2
+set_tight_grouping
+set_gaia_object_only
+set_place_for_every_player
+min_distance_to_players 25
+max_distance_to_players 27
+min_distance_group_placement 7
+max_distance_to_other_zones 7
+avoid_forest_zone 2
+}
+
+create_object GOLD
+{
+number_of_objects 2
+number_of_groups 5
+group_placement_radius 2
+set_tight_grouping
+set_gaia_object_only
+min_distance_to_players 45
+set_scaling_to_map_size
+temp_min_distance_group_placement 20
+min_distance_group_placement 15
+avoid_forest_zone 6
+}
+
+
+
+
+
+create_object DLC_BEAR
+{
+number_of_objects 4
+set_gaia_object_only
+set_place_for_every_player
+min_distance_to_players 30
+max_distance_to_players 50
+temp_min_distance_group_placement 12
+terrain_to_place_on SNOW
+}
+
+create_object WOLF
+{
+number_of_groups 8
+number_of_objects 4
+set_loose_grouping
+set_scaling_to_map_size
+set_gaia_object_only
+temp_min_distance_group_placement 18
+min_distance_to_players 30
+terrain_to_place_on SNOW
+} 
+
+create_object WOLF
+{
+number_of_groups 16
+number_of_objects 1
+set_loose_grouping
+set_scaling_to_map_size
+set_gaia_object_only
+temp_min_distance_group_placement 11
+min_distance_to_players 18
+terrain_to_place_on SNOW
+}
+
+create_object RELIC
+{
+number_of_objects 4
+min_distance_to_players 30
+min_distance_group_placement 5
+set_scaling_to_map_size
+temp_min_distance_group_placement 35
+avoid_forest_zone 3
+}
+
+
+<ELEVATION_GENERATION>
+
+
+
+create_elevation 2
+{
+ base_terrain SNOW
+number_of_clumps 12
+if TINY_MAP
+		number_of_tiles 6500
+	elseif SMALL_MAP
+		number_of_tiles 7000
+	elseif MEDIUM_MAP
+		number_of_tiles 9000
+	elseif LARGE_MAP
+		number_of_tiles 12000
+	elseif HUGE_MAP
+		number_of_tiles 14000
+	elseif GIGANTIC_MAP
+		number_of_tiles 18000
+	endif
+set_scale_by_groups
+set_scale_by_size           
+}
+
+create_elevation 5
+{
+base_terrain SNOW
+number_of_clumps 3
+number_of_tiles 1500
+set_scale_by_groups
+set_scale_by_size           
+}
+
+create_elevation 1
+{
+base_terrain SNOW
+number_of_clumps 3
+number_of_tiles 500
+set_scale_by_groups
+set_scale_by_size           
+}
+
+create_elevation 3
+{
+ 
+base_terrain GRASS3
+number_of_clumps 3
+number_of_tiles 150
+set_scale_by_groups
+set_scale_by_size           
+}
+
+
+
+ 

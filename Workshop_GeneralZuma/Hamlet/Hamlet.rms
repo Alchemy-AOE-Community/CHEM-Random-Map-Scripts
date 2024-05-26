@@ -1,0 +1,607 @@
+/* ************************************ */
+/* Hamlet */
+/* By General Zuma */
+/* ************************************ */
+
+#include_drs random_map.def 
+#const DLC_CROCODILE 1031
+#const STORKIE 1028
+#const ELEPHANT 936
+#const ZEBRA 1019
+#const DLC_PIG 1245
+#const DLC_GOOSE 1243
+#const DLC_GRASS2LEOPARD 1241
+#const DLC_IBEX 1239
+#const DLC_DROMEDARY 1237
+#const OSTRICH 1026
+#const ORANGEBUSH 1059
+#const LION 1029
+#const GOATEE 1060
+#const DLC_BOULDER_B 1049
+#const DLC_KOMODO 1135
+#const DLC_TIGER 1137
+#const DLC_BOXTURTLE 1141
+#const DLC_DLC_DRAGONFORESTAUTUMN 104
+#const DLC_DLC_DRAGONFORESTGRASS2AUTUMN 105
+#const DOLPHIN 61
+
+
+<PLAYER_SETUP>
+
+random_placement
+ai_info_map_type ARABIA 0 0 0
+
+<LAND_GENERATION>
+
+base_terrain DLC_DRAGONFOREST
+
+create_land
+{            
+terrain_type                     WATER
+land_percent                  100
+left_border                   0
+if TINY_MAP
+		right_border 90
+	elseif SMALL_MAP
+		right_border 91
+	elseif MEDIUM_MAP
+		right_border 92
+	elseif LARGE_MAP
+		right_border 93
+	elseif HUGE_MAP
+		right_border 94
+	elseif GIGANTIC_MAP
+		right_border 95
+	endif
+top_border                    0
+bottom_border                 0
+other_zone_avoidance_distance 2
+}
+
+create_land
+{            
+terrain_type                     WATER
+land_percent                  100
+left_border                   0
+right_border                  0
+top_border                    0
+                 
+if TINY_MAP
+		bottom_border 90
+	elseif SMALL_MAP
+		bottom_border 91
+	elseif MEDIUM_MAP
+		bottom_border 92
+	elseif LARGE_MAP
+		bottom_border 93
+	elseif HUGE_MAP
+		bottom_border 94
+	elseif GIGANTIC_MAP
+		bottom_border 95
+	endif
+other_zone_avoidance_distance 2
+}
+
+create_land
+{            
+terrain_type                     WATER
+land_percent                  100
+if TINY_MAP
+		left_border                   90
+	elseif SMALL_MAP
+		left_border                   91
+	elseif MEDIUM_MAP
+		left_border                   92
+	elseif LARGE_MAP
+		left_border                   93
+	elseif HUGE_MAP
+		left_border                   94
+	elseif GIGANTIC_MAP
+		left_border                   95
+	endif
+right_border                  0
+top_border                    0
+bottom_border                 0
+other_zone_avoidance_distance 2
+}
+
+create_land
+{            
+terrain_type                     WATER
+land_percent                  100
+left_border                   0
+right_border                  0
+if TINY_MAP
+		top_border 90
+	elseif SMALL_MAP
+		top_border 91
+	elseif MEDIUM_MAP
+		top_border 92
+	elseif LARGE_MAP
+		top_border 93
+	elseif HUGE_MAP
+		top_border 94
+	elseif GIGANTIC_MAP
+		top_border 95
+	endif
+                    
+bottom_border                 0
+other_zone_avoidance_distance 2
+}
+
+create_player_lands 
+{ 
+terrain_type GRASS2
+land_percent                  100
+base_size 12
+right_border 7
+top_border 7
+left_border 7
+bottom_border 7
+if TINY_MAP
+		circle_radius                    15 0
+	elseif SMALL_MAP
+		circle_radius                    16 0
+	elseif MEDIUM_MAP
+		circle_radius                    19 0
+	elseif LARGE_MAP
+		circle_radius                    22 0
+	elseif HUGE_MAP
+		circle_radius                    23 0
+	elseif GIGANTIC_MAP
+		circle_radius                    27 0
+	endif
+clumping_factor 99
+other_zone_avoidance_distance 3
+}
+
+<TERRAIN_GENERATION>
+
+create_terrain DESERT
+{
+  base_terrain                   GRASS2
+  number_of_clumps               20
+  spacing_to_other_terrain_types 0
+  land_percent                   100
+  set_scale_by_size
+  terrain_mask 2      
+}
+
+create_terrain DESERT
+{
+  base_terrain                   GRASS2
+  number_of_clumps               20
+  spacing_to_other_terrain_types 0
+  land_percent                   100
+  set_scale_by_size
+  terrain_mask 2      
+}
+
+create_terrain DESERT
+{
+  base_terrain                   GRASS2
+  number_of_clumps               20
+  spacing_to_other_terrain_types 0
+  land_percent                   100
+  set_scale_by_size
+  terrain_mask 2      
+}
+
+create_terrain DESERT
+{
+  base_terrain                   GRASS2
+  number_of_clumps               20
+  spacing_to_other_terrain_types 0
+  land_percent                   100
+  set_scale_by_size
+  terrain_mask 2      
+}
+
+create_terrain MED_WATER
+{
+base_terrain WATER
+number_of_clumps 999
+land_percent 100
+spacing_to_other_terrain_types 3
+set_scale_by_groups
+}
+
+create_terrain DEEP_WATER
+{
+base_terrain MED_WATER
+number_of_clumps 999
+land_percent 100
+spacing_to_other_terrain_types 1
+set_scale_by_groups
+}
+
+create_terrain MED_WATER
+{
+base_terrain WATER
+number_of_clumps 9
+land_percent 10
+spacing_to_other_terrain_types 1
+set_scale_by_groups
+}
+
+
+
+<OBJECTS_GENERATION>
+
+create_object DLC_BAOBABTREE
+{
+number_of_objects 7
+set_gaia_object_only
+set_place_for_every_player
+min_distance_to_players 4
+max_distance_to_players 5
+set_tight_grouping
+resource_delta +50
+}
+
+create_object DLC_BAOBABTREE
+{
+number_of_objects 15
+set_gaia_object_only
+set_place_for_every_player
+min_distance_to_players 6
+max_distance_to_players 8
+group_placement_radius 2
+set_tight_grouping
+resource_delta +100
+}
+
+create_object DLC_BAOBABTREE
+{
+number_of_objects 10
+set_gaia_object_only
+set_place_for_every_player
+min_distance_to_players 14
+max_distance_to_players 15
+group_placement_radius 2
+set_tight_grouping
+resource_delta +100
+}
+
+create_object DLC_BAOBABTREE
+{
+number_of_objects 10
+set_gaia_object_only
+set_place_for_every_player
+min_distance_to_players 18
+max_distance_to_players 18
+group_placement_radius 2
+set_tight_grouping
+resource_delta +200
+}
+
+create_object DLC_AFRICANBUSH
+{
+  number_of_objects          15
+  set_gaia_object_only
+  set_scaling_to_map_size
+  min_distance_to_players    12
+}
+create_object DLC_ACACIATREE
+{
+  number_of_objects          20
+  set_gaia_object_only
+  set_scaling_to_map_size
+  min_distance_to_players    12
+}
+create_object DLC_BAOBABTREE
+
+{
+  number_of_objects          35
+  set_gaia_object_only
+  set_scaling_to_map_size
+  min_distance_to_players    12
+}
+
+
+create_object TOWN_CENTER
+{
+set_place_for_every_player
+group_placement_radius 18
+min_distance_to_players 0
+max_distance_to_players 0
+}
+
+create_object VILLAGER
+{
+set_place_for_every_player
+min_distance_to_players 2
+max_distance_to_players 3
+avoid_forest_zone 1
+}
+
+create_object TRADE_CART
+{
+number_of_objects 1
+set_place_for_every_player
+min_distance_to_players 2
+max_distance_to_players 3
+avoid_forest_zone 1
+}
+
+create_object MARKET
+{
+set_place_for_every_player
+min_distance_to_players 9
+max_distance_to_players 10
+avoid_forest_zone 1
+min_distance_group_placement 3
+temp_min_distance_group_placement 3
+}
+
+create_object TRADE_WORKSHOP
+{
+set_place_for_every_player
+min_distance_to_players 10
+max_distance_to_players 11
+avoid_forest_zone 1
+min_distance_group_placement 3
+temp_min_distance_group_placement 3
+}
+
+create_object DLC_STORAGE
+{
+set_place_for_every_player
+min_distance_to_players 12
+max_distance_to_players 12
+avoid_forest_zone 1
+number_of_objects 2
+min_distance_group_placement 3
+temp_min_distance_group_placement 3
+}
+
+create_object DLC_GRANARY
+{
+set_place_for_every_player
+min_distance_to_players 12
+max_distance_to_players 12
+avoid_forest_zone 1
+number_of_objects 1
+min_distance_group_placement 3
+temp_min_distance_group_placement 3
+}
+
+create_object RELIC
+{
+if TINY_MAP
+number_of_objects 3
+elseif SMALL_MAP
+number_of_objects 4
+else
+number_of_objects 0
+endif
+set_place_for_every_player
+min_distance_to_players 8
+max_distance_to_players 9
+set_gaia_object_only
+avoid_forest_zone 3
+}
+
+if REGICIDE
+
+create_object VILLAGER
+{
+number_of_objects 7
+set_place_for_every_player
+min_distance_to_players 6
+max_distance_to_players 8
+avoid_forest_zone 1
+}
+
+create_object KING
+{
+set_place_for_every_player
+min_distance_to_players 6
+max_distance_to_players 7
+avoid_forest_zone 1
+}
+
+create_object WATCH_TOWER
+{
+set_place_for_every_player
+min_distance_to_players 7
+max_distance_to_players 8
+}
+
+endif
+
+create_object DLC_ORANGEBUSH
+
+{
+number_of_objects 6
+group_placement_radius 2
+set_tight_grouping
+set_gaia_object_only
+set_place_for_every_player
+min_distance_to_players 5
+max_distance_to_players 5
+min_distance_group_placement 1
+avoid_forest_zone 2
+resource_delta -25
+}
+
+
+create_object DLC_ORANGEBUSH
+
+{
+number_of_objects 4
+number_of_groups 24
+group_placement_radius 1
+set_tight_grouping
+set_gaia_object_only
+min_distance_to_players 30
+min_distance_group_placement 4
+temp_min_distance_group_placement 12
+avoid_forest_zone 2
+}
+
+create_object DEER
+
+{
+number_of_objects 1
+number_of_groups 9
+group_placement_radius 3
+set_loose_grouping
+set_gaia_object_only
+set_place_for_every_player
+min_distance_to_players 23
+max_distance_to_players 24
+avoid_forest_zone 2
+min_distance_group_placement 4
+temp_min_distance_group_placement 7
+resource_delta +60
+}
+
+create_object BOAR
+
+{
+number_of_objects 1
+set_loose_grouping  
+set_gaia_object_only
+set_place_for_every_player
+min_distance_to_players 11
+max_distance_to_players 12
+avoid_forest_zone 2
+}
+
+create_object BOAR
+{
+number_of_objects 1
+number_of_groups 3
+number_of_groups
+set_gaia_object_only
+set_place_for_every_player
+min_distance_to_players 23
+max_distance_to_players 25
+avoid_forest_zone 2
+temp_min_distance_group_placement 7
+min_distance_group_placement 7
+avoid_forest_zone 2
+}
+
+create_object SHORE_FISH
+{
+number_of_objects 35
+set_scaling_to_map_size
+set_gaia_object_only
+temp_min_distance_group_placement 2
+min_distance_group_placement 1
+}
+
+create_object DOLPHIN
+{
+number_of_objects 100
+set_scaling_to_map_size
+set_gaia_object_only
+temp_min_distance_group_placement 3
+min_distance_group_placement 2
+terrain_to_place_on DEEP_WATER
+}
+
+create_object SNAPPER
+{
+number_of_objects 100
+set_scaling_to_map_size
+set_gaia_object_only
+temp_min_distance_group_placement 1
+min_distance_group_placement 1
+terrain_to_place_on MED_WATER
+}
+
+create_object TUNA
+{
+number_of_objects 100
+set_scaling_to_map_size
+set_gaia_object_only
+temp_min_distance_group_placement 3
+min_distance_group_placement 2
+terrain_to_place_on DEEP_WATER
+}
+
+create_object STONE
+{
+number_of_objects 1
+number_of_groups 11
+group_placement_radius 2
+set_tight_grouping
+set_gaia_object_only
+min_distance_to_players 30
+set_scaling_to_map_size
+temp_min_distance_group_placement 12
+min_distance_group_placement 3
+avoid_forest_zone 2
+}
+
+
+create_object WOLF
+{
+number_of_groups 4
+number_of_objects 4
+set_loose_grouping
+set_scaling_to_map_size
+set_gaia_object_only
+temp_min_distance_group_placement 18
+min_distance_to_players 40
+
+} 
+
+create_object WOLF
+{
+number_of_groups 16
+number_of_objects 1
+set_loose_grouping
+set_scaling_to_map_size
+set_gaia_object_only
+temp_min_distance_group_placement 11
+min_distance_to_players 40
+
+}
+
+
+
+
+<ELEVATION_GENERATION>
+
+
+<CONNECTION_GENERATION>
+
+
+
+create_connect_all_players_land 
+{
+	
+replace_terrain 	DLC_DRAGONFOREST	DESERT
+terrain_cost 	DLC_DRAGONFOREST	5
+if TINY_MAP
+		terrain_size    	DLC_DRAGONFOREST 30 0
+	elseif SMALL_MAP
+		terrain_size    	DLC_DRAGONFOREST 33 0
+	elseif MEDIUM_MAP
+		terrain_size    	DLC_DRAGONFOREST 35 0
+	elseif LARGE_MAP
+		terrain_size    	DLC_DRAGONFOREST 37 0
+	elseif HUGE_MAP
+		terrain_size    	DLC_DRAGONFOREST 50 0
+	elseif GIGANTIC_MAP
+		terrain_size    	DLC_DRAGONFOREST 55 0
+	endif
+
+}
+
+create_connect_teams_lands
+
+{
+	 
+replace_terrain 	DESERT DLC_DRYROAD
+terrain_cost 	GRASS2	1
+terrain_size    	GRASS2 1 0
+}
+
+
+
+ 

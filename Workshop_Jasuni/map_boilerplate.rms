@@ -220,33 +220,96 @@ endif
 
 #const ON_GRID 278 /* dead fish trap */
 effect_amount GAIA_SET_ATTRIBUTE ON_GRID ATTR_STORAGE_VALUE 0
-
+<LAND_GENERATION>
+create_player_lands {
+    terrain_type DIRT2
+}
 <OBJECTS_GENERATION>
 
 /* TODO add standard starting player resources/units/buildings, including king for regicide games. */
+create_object TOWN_CENTER {
+    set_place_for_every_player
+    max_distance_to_players 0
+}
+create_object VILLAGER {
+    set_place_for_every_player
+    min_distance_to_players 6
+    max_distance_to_players 6
+    temp_min_distance_group_placement 2
+}
+#define REGICIDE
+if REGICIDE 
+    create_object KING {
+        set_place_for_every_player
+        min_distance_to_players 7
+        find_closest
+    }
+    create_object DLC_FORTIFIED_TOWER { /* my preferred choice of tower */
+        set_place_for_every_player
+        find_closest_to_map_center
+        max_distance_to_players 9
+        set_circular_placement
+    }
+else
+    create_object SCOUT {
+        set_place_for_every_player
+        min_distance_to_players 7
+        max_distance_to_players 9
+    }
+endif
 
 
 /* neutral resources: may want to adjust */
 if AT_LEAST_LARGE
     create_object FORAGE {
         set_gaia_object_only
-        avoid_actor_area 40
+        min_distance_to_players   40
         number_of_objects 4
         number_of_groups 99
         temp_min_distance_group_placement 70
         min_distance_group_placement 2
         set_tight_grouping
-        /* no avoid_forest_zone - I don't particularly care if these get trapped or if a few of them spawn with less bushes. */
+        avoid_forest_zone 1
+        avoid_cliff_zone 1
     }
 endif
+/* 
+create_object FLAG_A {
+    temp_min_distance_group_placement 1
+    avoid_forest_zone 1
+    avoid_cliff_zone 1
+    set_gaia_object_only
+    number_of_objects 9320
+    set_circular_placement /* helps guarantee placement, since the corners of the squares aren't blocked off. */
+    if MAPSIZE_MINI
+        min_distance_to_players 20
+    elseif MAPSIZE_TINY
+        min_distance_to_players 30
+    elseif MAPSIZE_SMALL
+        min_distance_to_players 30
+    elseif MAPSIZE_MEDIUM
+        min_distance_to_players 40
+    elseif MAPSIZE_NORMAL    
+        min_distance_to_players 40
+    else
+        min_distance_to_players   44
+    endif
+}
+For relics, placement is very tight in 8-player stress tests for mini/tiny map sizes, but does seem to generate consistently. Generations may be a bit unbalanced (especially if a relic is placed behind a corner base), but is probably as good as I'm going to get. 
+*/
 create_object RELIC {
     temp_min_distance_group_placement 40
+    avoid_forest_zone 1
+    avoid_cliff_zone 1
+    set_gaia_object_only
+    min_distance_to_players 30
+    set_circular_placement
     if MAPSIZE_MINI
         number_of_objects 4
-        temp_min_distance_group_placement 30
+        temp_min_distance_group_placement 30 /* these are about as high as I can get while passing the 8 player stress test */
+        min_distance_to_players 20 
     elseif MAPSIZE_TINY
         number_of_objects 5
-        temp_min_distance_group_placement 36
     elseif MAPSIZE_SMALL
         number_of_objects 5
     elseif MAPSIZE_MEDIUM
@@ -280,22 +343,26 @@ create_object RELIC {
         number_of_objects 30
         temp_min_distance_group_placement 90
     endif
-    set_gaia_object_only
-    avoid_actor_area 30
 }
 create_object GOLD {
     temp_min_distance_group_placement 40
     min_distance_group_placement 10
-    if AT_MOST_TINY
-        avoid_actor_area 30
+    set_circular_placement
+    if MAPSIZE_MINI
+        min_distance_to_players 20
+    elseif MAPSIZE_TINY
+        min_distance_to_players 26
+    elseif MAPSIZE_SMALL
+        min_distance_to_players 30
     else
-        avoid_actor_area 44
+        min_distance_to_players   44
     endif
     set_tight_grouping
-    avoid_forest_zone
+    avoid_forest_zone 1
+    avoid_cliff_zone 1
     actor_area 100
     actor_area_radius 16
-    avoid_actor_area 100
+    avoid_actor_area   100
     if AT_MOST_NORMAL
         number_of_objects 3
     else
@@ -344,16 +411,22 @@ create_object GOLD {
 create_object STONE {
     temp_min_distance_group_placement 40
     min_distance_group_placement 10
-    if AT_MOST_TINY
-        avoid_actor_area 30
+    set_circular_placement
+    if MAPSIZE_MINI
+        min_distance_to_players 20
+    elseif MAPSIZE_TINY
+        min_distance_to_players 26
+    elseif MAPSIZE_SMALL
+        min_distance_to_players 30
     else
-        avoid_actor_area 44
+        min_distance_to_players   44
     endif
     set_tight_grouping
-    avoid_forest_zone
+    avoid_forest_zone 1
+    avoid_cliff_zone 1
     actor_area 100
     actor_area_radius 16
-    avoid_actor_area 100
+    avoid_actor_area   100
     if AT_MOST_SMALL
         number_of_objects 2
     elseif AT_LEAST_NORMAL

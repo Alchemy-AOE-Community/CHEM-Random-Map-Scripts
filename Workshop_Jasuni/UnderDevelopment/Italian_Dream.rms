@@ -1,0 +1,97 @@
+/* water map, players start with a university, a dock (or two), and there is a fair amount of fish. Could I prolong the game by starting players off with a resource-generating building? A sea wall splitting the map might also be helpful, since Italian bonuses don't really kick off until castle (and would help with taking advantage of their cheaper fishing ships). would want trade in the corners, but would still need regular gold mines (since that bonus is an imp tech, and players will need gold long before then).
+
+Spanish Dream: trade is only source of gold?. Players start with an unbuilt market and unbuilt castle instead of a TC, and are required to trade for gold. This does mean a nomad start.
+
+Lithuanian Dream: players start 4 relics in base and maybe a monastery (I think this would work well). Also start with a knight and a priest (0 range, reduced hp - just enough for a Lithuanian knight to 1-shot or 2-shot exactly with a +4 atk bonus) instead of a scout. include a house to offset extra pop space.
+
+Sicilian: can I use the transport ship cheaper cost somehow (perhaps no wood to gather on own island, or so far away that it is difficult to find and takes a while to chop)
+
+Aztec: start with a monastery, have a way to train a priest (costs 150 gold), lots of relics on map, no gold mines
+
+*/
+
+<PLAYER_SETUP>
+random_placement
+behavior_version 2
+
+<OBJECTS_GENERATION>
+/* actor area for neutral markets in the corners */
+create_actor_area 0 0 1 0
+if TINY_MAP
+    create_actor_area 118 0 2 0
+    create_actor_area 0 118 3 0
+    create_actor_area 118 118 4 0
+elseif SMALL_MAP
+    create_actor_area 142 0 2 0
+    create_actor_area 0 142 3 0
+    create_actor_area 142 142 4 0
+elseif MEDIUM_MAP
+    create_actor_area 166 0 2 0
+    create_actor_area 0 166 3 0
+    create_actor_area 166 166 4 0
+elseif LARGE_MAP
+    create_actor_area 198 0 2 0
+    create_actor_area 0 198 3 0
+    create_actor_area 198 198 4 0
+elseif HUGE_MAP
+    create_actor_area 218 0 2 0
+    create_actor_area 0 218 3 0
+    create_actor_area 218 218 4 0
+elseif GIGANTIC_MAP
+    create_actor_area 238 0 2 0
+    create_actor_area 0 238 3 0
+    create_actor_area 238 238 4 0
+else /* ludikrus map */
+    create_actor_area 478 0 2 0
+    create_actor_area 0 478 3 0
+    create_actor_area 478 478 4 0
+endif
+
+#const TRADING_POST 1646
+#const FLARE 112
+create_object FLARE {
+    set_place_for_every_player
+    actor_area_to_place_in 1
+}
+create_object FLARE {
+    set_place_for_every_player
+    actor_area_to_place_in 2
+}
+create_object FLARE {
+    set_place_for_every_player
+    actor_area_to_place_in 3
+}
+create_object FLARE {
+    set_place_for_every_player
+    actor_area_to_place_in 4
+}
+create_object TRADING_POST {
+    actor_area_to_place_in 1
+    set_place_for_every_player
+    set_gaia_object_only
+    actor_area 6
+    actor_area_radius 5
+}
+create_object TRADING_POST {
+    actor_area_to_place_in 2
+    set_place_for_every_player
+    set_gaia_object_only
+    actor_area 6
+    actor_area_radius 5
+}
+create_object TRADING_POST {
+    actor_area_to_place_in 3
+    set_place_for_every_player
+    set_gaia_object_only
+    actor_area 6
+    actor_area_radius 5
+}
+create_object TRADING_POST {
+    actor_area_to_place_in 4
+    set_place_for_every_player
+    set_gaia_object_only
+    actor_area 6
+    actor_area_radius 5
+}
+
+

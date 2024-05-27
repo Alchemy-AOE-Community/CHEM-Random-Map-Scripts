@@ -1,0 +1,126 @@
+/*
+A map intended to pave the way for the Magyars for victory. The Magyars will benefit from the insane number of wolves, which are buffed up so that they would kill other civ's vils (even after loom). I'll need to experiment to see how the bonus works, and if it will allow vils to one-shot wolves with a ridiculously high amount of hp. If so, then I can place 9999-hp wolves with 1000 food each on them near each player's TC. That will change how the game plays and provide them with a significant eco bonus.
+
+Magyars are good at early scout rushes, but have mediocre defenses. So I think that I'll want to make an open map, with plenty of potential for raiding. The main catch is that an abundance of wolves will give players trouble, though the Magyars themselves will enjoy the food they provide.
+
+TODO make less reliant on find_closest, so that there is more randomization in placement
+TODO add a house?
+TODO starting wolves have less food? absolutely neccesary. Far too easy to scout rush into fast castle as spanish.
+
+idea: for khmer, start with farms far away from any drop-off point (but close to vils)
+*/
+
+<PLAYER_SETUP>
+random_placement
+behavior_version 2
+
+/*
+effect_amount SET_ATTRIBUTE WOLF ATTR_DEAD_ID WOLF
+and add food
+*/
+effect_amount SET_ATTRIBUTE WOLF ATTR_HITPOINTS 63
+/* Magyar vils deal 63 damage to wolves, normal vils 3. This means that wolves will take 21 hits from an ordinary villager, but only one from a Magyar vil. Meanwhile, vils with loom take 20 hits from a wolf. */
+
+<LAND_GENERATION>
+base_terrain GRASS2
+
+create_player_lands {
+    terrain_type GRASS2
+    circle_radius 30 0
+}
+
+<TERRAIN_GENERATION>
+
+create_terrain FOREST {
+    base_terrain GRASS2
+    number_of_clumps 64
+    land_percent 8
+    set_avoid_player_start_areas 13
+}
+
+<OBJECTS_GENERATION>
+create_object TOWN_CENTER {
+    find_closest
+    set_place_for_every_player
+}
+
+create_object VILLAGER {
+    min_distance_to_players 6
+    max_distance_to_players 6
+    set_place_for_every_player
+}
+if REGICIDE
+    create_object KING {
+        min_distance_to_players 9
+        find_closest
+        set_place_for_every_player
+        avoid_forest_zone
+    }
+else
+    create_object SCOUT {
+        min_distance_to_players 9
+        find_closest
+        set_place_for_every_player
+        avoid_forest_zone
+    }
+endif
+create_object STABLE {
+    number_of_objects 2
+    set_place_for_every_player
+    min_distance_to_players 15
+    min_distance_group_placement 3
+    temp_min_distance_group_placement 13
+    find_closest
+    avoid_forest_zone
+}
+create_object GOLD {
+    set_place_for_every_player
+    set_gaia_object_only
+    set_tight_grouping
+    min_distance_to_players 20
+    number_of_groups 2
+    number_of_objects 8
+    temp_min_distance_group_placement 30
+    find_closest
+    min_distance_group_placement 3
+    avoid_forest_zone 2
+}
+create_object STONE {
+    set_place_for_every_player
+    set_gaia_object_only
+    set_tight_grouping
+    min_distance_to_players 20
+    number_of_groups 2
+    number_of_objects 4
+    temp_min_distance_group_placement 30
+    find_closest
+    min_distance_group_placement 3
+    avoid_forest_zone 2
+}
+create_object WOLF {
+    min_distance_to_players 7
+    max_distance_to_players 8
+    number_of_objects 5
+    min_distance_group_placement 3
+    resource_delta 1000
+    set_place_for_every_player
+    set_gaia_object_only
+}
+create_object WOLF {
+    min_distance_to_players 9
+    temp_min_distance_group_placement 9
+    min_distance_group_placement 3
+    number_of_objects 9320
+    resource_delta 1000
+}
+create_object GOLD {
+    set_gaia_object_only
+    set_tight_grouping
+    min_distance_to_players 25
+    number_of_groups 4
+    number_of_objects 4
+    temp_min_distance_group_placement 50
+    find_closest
+    min_distance_group_placement 3
+    avoid_forest_zone 2
+}

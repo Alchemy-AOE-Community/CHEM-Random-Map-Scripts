@@ -35,7 +35,7 @@ not really usable as a base terrain: DLC_ROCK, ICE, MUDDY_SHALLOW
 forest terrains: JUNGLE, BAMBOO, etc.
 
 
-TODO adjust planet sizes so that each terrain has a more equal share (right not the leftmost planet has extra space, while the rightmost seems to have the least)
+TODO redo terrain generation sections: each planetary biome will need to be checked to see if they're still working correctly.
 
 terrains made/used: 
 Farmland
@@ -102,44 +102,216 @@ if DISABLE_TRADE
   effect_amount DISABLE_TECH SILK_ROAD ATTR_DISABLE 499    
 endif
 
-#define SNOWMAN_PLANET_SHAPE
-
-/* AT_LEAST_TINY is currently unused. */
-if TINY_MAP
-	#define AT_LEAST_TINY
-elseif SMALL_MAP
-	#define AT_LEAST_TINY
+if MAPSIZE_MINI
+    /* AT_MOST_MINI can simply use MAPSIZE_MINI */
+    #define AT_MOST_TINY
+    #define AT_MOST_SMALL
+    #define AT_MOST_MEDIUM
+    #define AT_MOST_NORMAL
+    #define AT_MOST_LARGE
+    #define AT_MOST_HUGE
+    #define AT_MOST_GIANT
+    #define AT_MOST_MASSIVE
+    #define AT_MOST_ENORMOUS
+    #define AT_MOST_COLOSSAL
+    #define AT_MOST_INCREDIBLE
+    #define AT_MOST_MONSTROUS
+    /* and AT_MOST_LUDCROUS is always true */
+elseif MAPSIZE_TINY
+    #define AT_LEAST_TINY
+    
+    #define AT_MOST_TINY
+    #define AT_MOST_SMALL
+    #define AT_MOST_MEDIUM
+    #define AT_MOST_NORMAL
+    #define AT_MOST_LARGE
+    #define AT_MOST_HUGE
+    #define AT_MOST_GIANT
+    #define AT_MOST_MASSIVE
+    #define AT_MOST_ENORMOUS
+    #define AT_MOST_COLOSSAL
+    #define AT_MOST_INCREDIBLE
+    #define AT_MOST_MONSTROUS
+elseif MAPSIZE_SMALL
+    #define AT_LEAST_TINY
     #define AT_LEAST_SMALL
-elseif MEDIUM_MAP
-	#define AT_LEAST_TINY
+    
+    #define AT_MOST_SMALL
+    #define AT_MOST_MEDIUM
+    #define AT_MOST_NORMAL
+    #define AT_MOST_LARGE
+    #define AT_MOST_HUGE
+    #define AT_MOST_GIANT
+    #define AT_MOST_MASSIVE
+    #define AT_MOST_ENORMOUS
+    #define AT_MOST_COLOSSAL
+    #define AT_MOST_INCREDIBLE
+    #define AT_MOST_MONSTROUS
+elseif MAPSIZE_MEDIUM
+    #define AT_LEAST_TINY
     #define AT_LEAST_SMALL
     #define AT_LEAST_MEDIUM
-elseif LARGE_MAP
-	#define AT_LEAST_TINY
+    
+    #define AT_MOST_MEDIUM
+    #define AT_MOST_NORMAL
+    #define AT_MOST_LARGE
+    #define AT_MOST_HUGE
+    #define AT_MOST_GIANT
+    #define AT_MOST_MASSIVE
+    #define AT_MOST_ENORMOUS
+    #define AT_MOST_COLOSSAL
+    #define AT_MOST_INCREDIBLE
+    #define AT_MOST_MONSTROUS
+elseif MAPSIZE_NORMAL
+    #define AT_LEAST_TINY
     #define AT_LEAST_SMALL
     #define AT_LEAST_MEDIUM
+    #define AT_LEAST_NORMAL
+    
+    #define AT_MOST_NORMAL
+    #define AT_MOST_LARGE
+    #define AT_MOST_HUGE
+    #define AT_MOST_GIANT
+    #define AT_MOST_MASSIVE
+    #define AT_MOST_ENORMOUS
+    #define AT_MOST_COLOSSAL
+    #define AT_MOST_INCREDIBLE
+    #define AT_MOST_MONSTROUS
+elseif MAPSIZE_LARGE
+    #define AT_LEAST_TINY
+    #define AT_LEAST_SMALL
+    #define AT_LEAST_MEDIUM
+    #define AT_LEAST_NORMAL
     #define AT_LEAST_LARGE
-elseif HUGE_MAP
-	#define AT_LEAST_TINY
+    
+    #define AT_MOST_LARGE
+    #define AT_MOST_HUGE
+    #define AT_MOST_GIANT
+    #define AT_MOST_MASSIVE
+    #define AT_MOST_ENORMOUS
+    #define AT_MOST_COLOSSAL
+    #define AT_MOST_INCREDIBLE
+    #define AT_MOST_MONSTROUS
+elseif MAPSIZE_HUGE
+    #define AT_LEAST_TINY
     #define AT_LEAST_SMALL
     #define AT_LEAST_MEDIUM
+    #define AT_LEAST_NORMAL
     #define AT_LEAST_LARGE
     #define AT_LEAST_HUGE
-elseif GIGANTIC_MAP
-	#define AT_LEAST_TINY
+    
+    #define AT_MOST_HUGE
+    #define AT_MOST_GIANT
+    #define AT_MOST_MASSIVE
+    #define AT_MOST_ENORMOUS
+    #define AT_MOST_COLOSSAL
+    #define AT_MOST_INCREDIBLE
+    #define AT_MOST_MONSTROUS
+elseif MAPSIZE_GIANT
+    #define AT_LEAST_TINY
     #define AT_LEAST_SMALL
     #define AT_LEAST_MEDIUM
+    #define AT_LEAST_NORMAL
     #define AT_LEAST_LARGE
     #define AT_LEAST_HUGE
-    #define AT_LEAST_GIGANTIC
-elseif LUDIKRIS_MAP
-	#define AT_LEAST_TINY
+    #define AT_LEAST_GIANT
+    
+    #define AT_MOST_GIANT
+    #define AT_MOST_MASSIVE
+    #define AT_MOST_ENORMOUS
+    #define AT_MOST_COLOSSAL
+    #define AT_MOST_INCREDIBLE
+    #define AT_MOST_MONSTROUS
+elseif MAPSIZE_MASSIVE
+    #define AT_LEAST_TINY
     #define AT_LEAST_SMALL
     #define AT_LEAST_MEDIUM
+    #define AT_LEAST_NORMAL
     #define AT_LEAST_LARGE
     #define AT_LEAST_HUGE
-    #define AT_LEAST_GIGANTIC
-    /* LUDIKRIS_MAP */
+    #define AT_LEAST_GIANT
+    #define AT_LEAST_MASSIVE
+    
+    #define AT_MOST_MASSIVE
+    #define AT_MOST_ENORMOUS
+    #define AT_MOST_COLOSSAL
+    #define AT_MOST_INCREDIBLE
+    #define AT_MOST_MONSTROUS
+elseif MAPSIZE_ENORMOUS
+    #define AT_LEAST_TINY
+    #define AT_LEAST_SMALL
+    #define AT_LEAST_MEDIUM
+    #define AT_LEAST_NORMAL
+    #define AT_LEAST_LARGE
+    #define AT_LEAST_HUGE
+    #define AT_LEAST_GIANT
+    #define AT_LEAST_MASSIVE
+    #define AT_LEAST_ENORMOUS
+    
+    #define AT_MOST_ENORMOUS
+    #define AT_MOST_COLOSSAL
+    #define AT_MOST_INCREDIBLE
+    #define AT_MOST_MONSTROUS
+elseif MAPSIZE_COLOSSAL
+    #define AT_LEAST_TINY
+    #define AT_LEAST_SMALL
+    #define AT_LEAST_MEDIUM
+    #define AT_LEAST_NORMAL
+    #define AT_LEAST_LARGE
+    #define AT_LEAST_HUGE
+    #define AT_LEAST_GIANT
+    #define AT_LEAST_MASSIVE
+    #define AT_LEAST_ENORMOUS
+    #define AT_LEAST_COLOSSAL
+    
+    #define AT_MOST_COLOSSAL
+    #define AT_MOST_INCREDIBLE
+    #define AT_MOST_MONSTROUS
+elseif MAPSIZE_INCREDIBLE
+    #define AT_LEAST_TINY
+    #define AT_LEAST_SMALL
+    #define AT_LEAST_MEDIUM
+    #define AT_LEAST_NORMAL
+    #define AT_LEAST_LARGE
+    #define AT_LEAST_HUGE
+    #define AT_LEAST_GIANT
+    #define AT_LEAST_MASSIVE
+    #define AT_LEAST_ENORMOUS
+    #define AT_LEAST_COLOSSAL
+    #define AT_LEAST_INCREDIBLE
+    
+    #define AT_MOST_INCREDIBLE
+    #define AT_MOST_MONSTROUS
+elseif MAPSIZE_MONSTROUS
+    #define AT_LEAST_TINY
+    #define AT_LEAST_SMALL
+    #define AT_LEAST_MEDIUM
+    #define AT_LEAST_NORMAL
+    #define AT_LEAST_LARGE
+    #define AT_LEAST_HUGE
+    #define AT_LEAST_GIANT
+    #define AT_LEAST_MASSIVE
+    #define AT_LEAST_ENORMOUS
+    #define AT_LEAST_COLOSSAL
+    #define AT_LEAST_INCREDIBLE
+    #define AT_LEAST_MONSTROUS
+    
+    #define AT_MOST_MONSTROUS
+elseif MAPSIZE_LUDICROUS
+    /* AT_LEAST_MINI is always true */
+    #define AT_LEAST_TINY
+    #define AT_LEAST_SMALL
+    #define AT_LEAST_MEDIUM
+    #define AT_LEAST_NORMAL
+    #define AT_LEAST_LARGE
+    #define AT_LEAST_HUGE
+    #define AT_LEAST_GIANT
+    #define AT_LEAST_MASSIVE
+    #define AT_LEAST_ENORMOUS
+    #define AT_LEAST_COLOSSAL
+    #define AT_LEAST_INCREDIBLE
+    #define AT_LEAST_MONSTROUS
+    /* and AT_LEAST_LUDCROUS - can simply use MAP_SIZE_LUDICROUS */
 endif
 /* TODO: adjust the map sizes to use at-least-XXX rather than current values; best to avoid confusion by only using the new map sizes.
 if MAPSIZE_MINI
@@ -1035,7 +1207,10 @@ if DIRT4_PLANET
 	end_random
 endif
 <TERRAIN_GENERATION>
+/*
 #define BORDER_CLEANUP
+from testing, border cleanup does seem to result in some terrain getting far from its designated planet
+*/
 if BORDER_CLEANUP
 	/* PLANET 1 */
 	create_terrain DLC_BLACK { base_terrain PN1 land_percent 100 number_of_clumps 9320 set_scale_by_size spacing_to_other_terrain_types 3 }
@@ -1477,9 +1652,10 @@ if PLANET_TO_ELEVATION_0 /* downside: transitions between planets becomes ugly, 
 		number_of_clumps 9320
 		spacing_to_other_terrain_types 1
 		set_flat_terrain_only
+		height_limits 0 0
 	}
 	
-	create_terrain DLC_ROCK { /* basically want some terrain to fill in for the planet intersections. - much more noticeable with SNOWMAN_PLANET_SHAPE - repeat to ensure water is filled in. */
+	create_terrain DLC_ROCK { /* basically want some terrain to fill in for the planet intersections. - repeat to ensure water is filled in. */
 		base_terrain WATER
 		land_percent 100
 		number_of_clumps 9320
@@ -4035,602 +4211,686 @@ L {
 }
 
 base_terrain WATER
-/*
+/* 
+Generated with MadLands v5.9.xlsm: I 2, R 17, XO/YO:25, OA:0, XS/YS:1, A/F/SF:0, CT: disabled
+note: did delete some duplicate create_land statements in this and other planet generations
+ */
+create_land { base_size 2 land_position 92 75 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 92 76 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 92 77 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 92 78 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 92 79 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 91 79 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 91 80 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 91 81 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 91 82 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 90 82 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 90 83 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 90 84 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 89 84 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 89 85 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 88 85 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 88 86 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 87 87 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 86 88 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 85 88 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 85 89 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 84 89 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 84 90 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 83 90 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 82 90 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 82 91 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 81 91 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 80 91 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 79 91 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 79 92 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 78 92 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 77 92 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 76 92 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 75 92 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 74 92 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 73 92 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 72 92 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 71 92 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 71 91 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 70 91 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 69 91 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 68 91 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 68 90 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 67 90 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 66 89 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 65 89 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 65 88 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 64 88 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 63 87 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 62 86 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 62 85 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 61 85 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 61 84 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 60 84 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 60 83 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 60 82 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 59 82 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 59 81 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 59 80 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 59 79 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 58 79 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 58 78 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 58 77 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 58 76 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 58 75 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 58 74 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 58 73 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 58 72 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 58 71 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 59 71 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 59 70 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 59 69 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 59 68 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 60 68 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 60 67 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 61 66 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 61 65 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 62 65 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 62 64 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 63 63 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 64 62 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 65 62 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 65 61 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 66 61 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 67 60 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 67 60 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 68 60 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 68 59 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 69 59 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 70 59 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 71 59 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 71 58 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 72 58 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 73 58 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 74 58 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 75 58 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 76 58 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 77 58 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 78 58 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 79 58 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 79 59 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 80 59 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 81 59 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 82 59 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 82 60 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 83 60 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 84 60 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 84 61 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 85 61 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 85 62 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 86 62 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 87 63 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 88 64 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 88 65 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 89 65 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 89 66 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 90 67 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 90 68 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 91 68 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 91 69 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 91 70 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 91 71 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 92 71 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 92 72 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 92 73 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 92 74 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
 
-TODO redo with consistent thickness disabled: I think that will make for a rounder planet. but will extend the planet out a little longer, which will require redoing the madlands generation (which is not something I have time for right now). Might be able to fudge things a little by increasing map size
-TODO make new cuts for sizes other than tiny. Only functioning for tiny map size right now 
-Planets are in order from top to bottom. Higher planets are smaller in radius. This current setup works for tiny map size, but could use some smoothing out. Larger map sizes will require additional lands to ensure that the planets connect to each other.  
-*/
+L { land_position 80 80 land_percent 10 base_elevation 2 terrain_type PN1 land_id 1 }
 
-/* Generated with MadLands v5.9.xlsm: I: 3 R: 13 XO: 30 YO: 30 OA: 0 XS: 1 YS: 1 A: 0 F: 0 SF: 0 */
-L { base_size 3 land_position 93 80 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
-L { base_size 3 land_position 93 81 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
-L { base_size 3 land_position 93 81 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
-L { base_size 3 land_position 93 82 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
-L { base_size 3 land_position 93 83 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
-L { base_size 3 land_position 93 83 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
-L { base_size 3 land_position 92 84 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
-L { base_size 3 land_position 92 85 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
-L { base_size 3 land_position 92 85 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
-L { base_size 3 land_position 92 86 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
-L { base_size 3 land_position 91 87 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
-L { base_size 3 land_position 91 87 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
-L { base_size 3 land_position 91 88 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
-L { base_size 3 land_position 90 88 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
-L { base_size 3 land_position 90 89 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
-L { base_size 3 land_position 89 89 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
-L { base_size 3 land_position 89 90 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
-L { base_size 3 land_position 88 90 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
-L { base_size 3 land_position 88 91 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
-L { base_size 3 land_position 87 91 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
-L { base_size 3 land_position 87 91 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
-L { base_size 3 land_position 86 92 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
-L { base_size 3 land_position 85 92 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
-L { base_size 3 land_position 85 92 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
-L { base_size 3 land_position 84 92 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
-L { base_size 3 land_position 83 93 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
-L { base_size 3 land_position 83 93 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
-L { base_size 3 land_position 82 93 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
-L { base_size 3 land_position 81 93 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
-L { base_size 3 land_position 81 93 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
-L { base_size 3 land_position 80 93 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
-L { base_size 3 land_position 79 93 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
-L { base_size 3 land_position 79 93 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
-L { base_size 3 land_position 78 93 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
-L { base_size 3 land_position 77 93 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
-L { base_size 3 land_position 77 93 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
-L { base_size 3 land_position 76 92 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
-L { base_size 3 land_position 75 92 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
-L { base_size 3 land_position 75 92 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
-L { base_size 3 land_position 74 92 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
-L { base_size 3 land_position 74 91 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
-L { base_size 3 land_position 73 91 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
-L { base_size 4 land_position 72 91 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
-L { base_size 4 land_position 72 90 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
-L { base_size 4 land_position 71 90 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
-L { base_size 4 land_position 71 89 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
-L { base_size 4 land_position 70 89 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
-L { base_size 4 land_position 70 88 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
-L { base_size 4 land_position 69 88 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
-L { base_size 4 land_position 69 87 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
-L { base_size 4 land_position 69 87 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
-L { base_size 4 land_position 68 86 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
-L { base_size 4 land_position 68 85 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
-L { base_size 4 land_position 68 85 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
-L { base_size 4 land_position 68 84 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
-L { base_size 4 land_position 67 83 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
-L { base_size 4 land_position 67 83 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
-L { base_size 4 land_position 67 82 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
-L { base_size 4 land_position 67 81 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
-L { base_size 3 land_position 67 81 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
-L { base_size 3 land_position 67 80 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
-L { base_size 3 land_position 67 79 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
-L { base_size 3 land_position 67 79 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
-L { base_size 3 land_position 67 78 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
-L { base_size 3 land_position 67 77 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
-L { base_size 3 land_position 67 77 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
-L { base_size 3 land_position 68 76 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
-L { base_size 3 land_position 68 75 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
-L { base_size 3 land_position 68 75 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
-L { base_size 3 land_position 68 74 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
-L { base_size 3 land_position 69 74 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
-L { base_size 3 land_position 69 73 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
-L { base_size 3 land_position 69 72 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
-L { base_size 3 land_position 70 72 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
-L { base_size 3 land_position 70 71 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
-L { base_size 3 land_position 71 71 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
-L { base_size 3 land_position 71 70 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
-L { base_size 3 land_position 72 70 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
-L { base_size 3 land_position 72 69 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
-L { base_size 3 land_position 73 69 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
-L { base_size 3 land_position 74 69 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
-L { base_size 3 land_position 74 68 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
-L { base_size 3 land_position 75 68 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
-L { base_size 3 land_position 75 68 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
-L { base_size 3 land_position 76 68 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
-L { base_size 3 land_position 77 67 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
-L { base_size 3 land_position 77 67 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
-L { base_size 3 land_position 78 67 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
-L { base_size 3 land_position 79 67 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
-L { base_size 3 land_position 79 67 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
-L { base_size 3 land_position 80 67 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
-L { base_size 3 land_position 81 67 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
-L { base_size 4 land_position 81 67 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
-L { base_size 4 land_position 82 67 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
-L { base_size 4 land_position 83 67 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
-L { base_size 4 land_position 83 67 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
-L { base_size 4 land_position 84 68 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
-L { base_size 4 land_position 85 68 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
-L { base_size 4 land_position 85 68 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
-L { base_size 4 land_position 86 68 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
-L { base_size 4 land_position 87 69 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
-L { base_size 4 land_position 87 69 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
-L { base_size 4 land_position 88 69 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
-L { base_size 4 land_position 88 70 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
-L { base_size 4 land_position 89 70 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
-L { base_size 4 land_position 89 71 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
-L { base_size 4 land_position 90 71 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
-L { base_size 4 land_position 90 72 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
-L { base_size 4 land_position 91 72 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
-L { base_size 3 land_position 91 73 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
-L { base_size 3 land_position 91 74 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
-L { base_size 3 land_position 92 74 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
-L { base_size 3 land_position 92 75 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
-L { base_size 3 land_position 92 75 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
-L { base_size 3 land_position 92 76 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
-L { base_size 3 land_position 93 77 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
-L { base_size 3 land_position 93 77 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
-L { base_size 3 land_position 93 78 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
-L { base_size 3 land_position 93 79 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
-L { base_size 3 land_position 93 79 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
-
-L { land_position 80 80 land_percent 100 base_elevation 2 terrain_type PN1 land_id 1 }
-
-
-/* Generated with MadLands v5.9.xlsm: I: 3 R: 20 XO: 17 YO: 17 OA: 0 XS: 1 YS: 1 A: 0 F: 0 SF: 0 */
-
-/*
-L { base_size 4 land_position 87 68 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
-L { base_size 4 land_position 87 69 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
-L { base_size 4 land_position 87 70 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
-L { base_size 3 land_position 87 71 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
-L { base_size 3 land_position 86 72 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
-L { base_size 3 land_position 86 73 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
-L { base_size 3 land_position 86 74 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
-L { base_size 3 land_position 85 75 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
-L { base_size 3 land_position 85 76 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
-L { base_size 3 land_position 84 77 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
-L { base_size 3 land_position 84 78 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
-L { base_size 3 land_position 83 79 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
-L { base_size 3 land_position 83 80 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
-L { base_size 3 land_position 82 80 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
-L { base_size 3 land_position 81 81 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
-L { base_size 3 land_position 80 82 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
-L { base_size 3 land_position 80 83 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
-L { base_size 3 land_position 79 83 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
-L { base_size 3 land_position 78 84 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
-L { base_size 3 land_position 77 84 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
-L { base_size 3 land_position 76 85 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
-L { base_size 3 land_position 75 85 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
-L { base_size 3 land_position 74 86 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
-L { base_size 3 land_position 73 86 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
-L { base_size 3 land_position 72 86 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
-L { base_size 3 land_position 71 87 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
-L { base_size 4 land_position 70 87 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
-L { base_size 4 land_position 69 87 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
-L { base_size 4 land_position 68 87 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
-*/
-if LUDIKRIS_MAP
-L { base_size 4 land_position 67 87 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
-L { base_size 4 land_position 66 87 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
-endif
-if AT_LEAST_GIGANTIC
-endif
-if AT_LEAST_HUGE
-L { base_size 4 land_position 65 87 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
-endif
-if AT_LEAST_LARGE
-L { base_size 4 land_position 64 87 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
-L { base_size 4 land_position 63 87 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
-endif
-if AT_LEAST_MEDIUM
-L { base_size 4 land_position 62 86 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
-endif
-if AT_LEAST_SMALL
-L { base_size 4 land_position 61 86 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
-endif
-L { base_size 4 land_position 60 86 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
-L { base_size 4 land_position 59 85 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
-L { base_size 4 land_position 58 85 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
-L { base_size 4 land_position 57 84 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
-L { base_size 4 land_position 56 84 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
-L { base_size 4 land_position 55 83 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
-L { base_size 4 land_position 54 83 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
-L { base_size 4 land_position 54 82 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
-L { base_size 4 land_position 53 81 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
-L { base_size 4 land_position 52 80 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
-L { base_size 4 land_position 51 80 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
-L { base_size 4 land_position 51 79 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
-L { base_size 4 land_position 50 78 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
-L { base_size 4 land_position 50 77 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
-L { base_size 4 land_position 49 76 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
-L { base_size 4 land_position 49 75 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
-L { base_size 4 land_position 48 74 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
-L { base_size 4 land_position 48 73 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
-L { base_size 4 land_position 48 72 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
-L { base_size 4 land_position 47 71 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
-L { base_size 4 land_position 47 70 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
-L { base_size 4 land_position 47 69 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
-L { base_size 4 land_position 47 68 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
-L { base_size 4 land_position 47 67 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
-L { base_size 4 land_position 47 66 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
-L { base_size 4 land_position 47 65 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
-L { base_size 4 land_position 47 64 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
-L { base_size 4 land_position 47 63 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
-L { base_size 4 land_position 48 62 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
-L { base_size 4 land_position 48 61 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
-L { base_size 4 land_position 48 60 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
-L { base_size 4 land_position 49 59 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
-L { base_size 4 land_position 49 58 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
-L { base_size 4 land_position 50 57 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
-L { base_size 4 land_position 50 56 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
-L { base_size 4 land_position 51 55 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
-L { base_size 4 land_position 51 54 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
-L { base_size 3 land_position 52 54 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
-L { base_size 3 land_position 53 53 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
-L { base_size 3 land_position 54 52 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
-L { base_size 4 land_position 54 51 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
-L { base_size 4 land_position 55 51 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
-L { base_size 4 land_position 56 50 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
-L { base_size 4 land_position 57 50 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
-L { base_size 4 land_position 58 49 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
-L { base_size 4 land_position 59 49 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
-L { base_size 4 land_position 60 48 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
-L { base_size 4 land_position 61 48 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
-L { base_size 4 land_position 62 48 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
-L { base_size 4 land_position 63 47 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
-L { base_size 4 land_position 64 47 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
-L { base_size 4 land_position 65 47 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
-L { base_size 4 land_position 66 47 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
-L { base_size 4 land_position 67 47 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
-L { base_size 4 land_position 68 47 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
-L { base_size 4 land_position 69 47 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
-L { base_size 4 land_position 70 47 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
-L { base_size 4 land_position 71 47 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
-L { base_size 4 land_position 72 48 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
-L { base_size 4 land_position 73 48 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
-L { base_size 4 land_position 74 48 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
-L { base_size 4 land_position 75 49 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
-L { base_size 4 land_position 76 49 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
-L { base_size 4 land_position 77 50 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
-L { base_size 4 land_position 78 50 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
-L { base_size 4 land_position 79 51 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
-L { base_size 4 land_position 80 51 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
-L { base_size 4 land_position 80 52 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
-L { base_size 4 land_position 81 53 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
-L { base_size 4 land_position 82 54 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
-L { base_size 4 land_position 83 54 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
-L { base_size 4 land_position 83 55 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
-L { base_size 4 land_position 84 56 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
-L { base_size 4 land_position 84 57 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
-L { base_size 4 land_position 85 58 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
-L { base_size 4 land_position 85 59 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
-L { base_size 4 land_position 86 60 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
-if AT_LEAST_SMALL
-L { base_size 4 land_position 86 61 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
-endif
-if AT_LEAST_MEDIUM
-L { base_size 4 land_position 86 62 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
-endif
-if AT_LEAST_LARGE
-L { base_size 4 land_position 87 63 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
-L { base_size 4 land_position 87 64 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
-endif
-if AT_LEAST_HUGE
-L { base_size 4 land_position 87 65 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
-endif
-if AT_LEAST_GIGANTIC
-endif
-if LUDIKRIS_MAP
-L { base_size 4 land_position 87 66 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
-L { base_size 4 land_position 87 67 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
-endif
-
-L { land_position 61 61 land_percent 100 base_elevation 2 terrain_type PN2 }
-
-
-
-
-/* Generated with MadLands v5.9.xlsm: I: 3 R: 24 XO: 1 YO: 1 OA: 0 XS: 1 YS: 1 A: 0 F: 0 SF: 0 */
-/*
-L { base_size 4 land_position 75 51 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
-L { base_size 4 land_position 75 52 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
-L { base_size 4 land_position 75 54 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
-L { base_size 4 land_position 75 55 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
-L { base_size 4 land_position 74 56 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
-L { base_size 4 land_position 74 57 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
-L { base_size 4 land_position 74 58 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
-L { base_size 4 land_position 73 60 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
-L { base_size 4 land_position 73 61 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
-L { base_size 4 land_position 72 62 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
-L { base_size 3 land_position 72 63 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
-L { base_size 3 land_position 71 64 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
-L { base_size 3 land_position 70 65 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
-L { base_size 3 land_position 70 66 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
-L { base_size 3 land_position 69 67 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
-L { base_size 3 land_position 68 68 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
-L { base_size 3 land_position 67 69 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
-L { base_size 3 land_position 66 70 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
-L { base_size 3 land_position 65 70 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
-L { base_size 3 land_position 64 71 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
-L { base_size 3 land_position 63 72 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
-L { base_size 4 land_position 62 72 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
-L { base_size 4 land_position 61 73 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
-L { base_size 4 land_position 60 73 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
-L { base_size 4 land_position 58 74 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
-L { base_size 4 land_position 57 74 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
-L { base_size 4 land_position 56 74 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
-L { base_size 4 land_position 55 75 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
-L { base_size 4 land_position 54 75 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
-L { base_size 4 land_position 52 75 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
-L { base_size 4 land_position 51 75 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
-L { base_size 4 land_position 50 75 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
-L { base_size 4 land_position 48 75 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
-L { base_size 4 land_position 47 75 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
-*/
-if LUDIKRIS_MAP
-L { base_size 4 land_position 46 74 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
-L { base_size 4 land_position 45 74 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
-endif
-if AT_LEAST_GIGANTIC
-endif
-if AT_LEAST_HUGE
-endif
-if AT_LEAST_LARGE
-L { base_size 4 land_position 44 74 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
-endif
-if AT_LEAST_MEDIUM
-L { base_size 4 land_position 42 73 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
-endif
-if AT_LEAST_SMALL
-L { base_size 4 land_position 41 73 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
-endif
-L { base_size 4 land_position 40 72 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
-L { base_size 4 land_position 39 72 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
-L { base_size 3 land_position 38 71 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
-L { base_size 3 land_position 37 70 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
-L { base_size 3 land_position 36 70 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
-L { base_size 3 land_position 35 69 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
-L { base_size 3 land_position 34 68 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
-L { base_size 3 land_position 33 67 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
-L { base_size 3 land_position 32 66 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
-L { base_size 3 land_position 32 65 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
-L { base_size 3 land_position 31 64 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
-L { base_size 3 land_position 30 63 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
-L { base_size 3 land_position 30 62 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
-L { base_size 4 land_position 29 61 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
-L { base_size 4 land_position 29 60 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
-L { base_size 4 land_position 28 58 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
-L { base_size 4 land_position 28 57 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
-L { base_size 4 land_position 28 56 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
-L { base_size 4 land_position 27 55 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
-L { base_size 4 land_position 27 54 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
-L { base_size 4 land_position 27 52 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
-L { base_size 4 land_position 27 51 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
-L { base_size 4 land_position 27 50 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
-L { base_size 4 land_position 27 48 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
-L { base_size 4 land_position 27 47 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
-L { base_size 4 land_position 28 46 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
-L { base_size 4 land_position 28 45 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
-L { base_size 4 land_position 28 44 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
-L { base_size 4 land_position 29 42 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
-L { base_size 4 land_position 29 41 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
-L { base_size 4 land_position 30 40 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
-L { base_size 3 land_position 30 39 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
-L { base_size 3 land_position 31 38 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
-L { base_size 3 land_position 32 37 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
-L { base_size 3 land_position 32 36 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
-L { base_size 3 land_position 33 35 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
-L { base_size 3 land_position 34 34 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
-L { base_size 3 land_position 35 33 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
-L { base_size 3 land_position 36 32 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
-L { base_size 3 land_position 37 32 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
-L { base_size 3 land_position 38 31 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
-L { base_size 3 land_position 39 30 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
-L { base_size 4 land_position 40 30 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
-L { base_size 4 land_position 41 29 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
-L { base_size 4 land_position 42 29 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
-L { base_size 4 land_position 44 28 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
-L { base_size 4 land_position 45 28 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
-L { base_size 4 land_position 46 28 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
-L { base_size 4 land_position 47 27 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
-L { base_size 4 land_position 48 27 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
-L { base_size 4 land_position 50 27 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
-L { base_size 4 land_position 51 27 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
-L { base_size 4 land_position 52 27 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
-L { base_size 4 land_position 54 27 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
-L { base_size 4 land_position 55 27 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
-L { base_size 4 land_position 56 28 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
-L { base_size 4 land_position 57 28 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
-L { base_size 4 land_position 58 28 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
-L { base_size 4 land_position 60 29 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
-L { base_size 4 land_position 61 29 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
-L { base_size 3 land_position 62 30 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
-L { base_size 3 land_position 63 30 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
-L { base_size 3 land_position 64 31 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
-L { base_size 3 land_position 65 32 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
-L { base_size 3 land_position 66 32 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
-L { base_size 3 land_position 67 33 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
-L { base_size 3 land_position 68 34 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
-L { base_size 3 land_position 69 35 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
-L { base_size 3 land_position 70 36 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
-L { base_size 3 land_position 70 37 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
-L { base_size 3 land_position 71 38 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
-L { base_size 4 land_position 72 39 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
-L { base_size 4 land_position 72 40 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
-if AT_LEAST_SMALL
-L { base_size 4 land_position 73 41 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
-endif
-if AT_LEAST_MEDIUM
-L { base_size 4 land_position 73 42 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
-endif
-if AT_LEAST_LARGE
-L { base_size 4 land_position 74 44 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
-endif
-if AT_LEAST_HUGE
-endif
-if AT_LEAST_GIGANTIC
-endif
-if LUDIKRIS_MAP
-L { base_size 4 land_position 74 45 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
-L { base_size 4 land_position 74 46 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
-endif
-/*
-L { base_size 4 land_position 75 47 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
-L { base_size 4 land_position 75 48 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
-L { base_size 4 land_position 75 50 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
-*/
-
-L { land_position 41 41 land_percent 15 base_elevation 2 terrain_type PN3 }
-/* TODO breaks free on ludikris map size */
-
-
-
-
-/* Generated with MadLands v5.9.xlsm: I: 3 R: 28 XO: -15 YO: -15 OA: 0 XS: 1 YS: 1 A: 0 F: 0 SF: 0 */
+/* 
+Generated with MadLands v5.9.xlsm: I 2, R 23, XO/YO:13, OA:0, XS/YS:1, A/F/SF:0, CT: disabled
+note: some duplicate land statments may have been deleted.
+ */
 
 /*
-L { base_size 3 land_position 64 36 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
-L { base_size 3 land_position 64 37 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
-L { base_size 3 land_position 64 39 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
-L { base_size 3 land_position 64 40 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
-L { base_size 3 land_position 63 42 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
-L { base_size 4 land_position 63 43 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
-L { base_size 4 land_position 63 45 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
-L { base_size 4 land_position 62 46 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
-L { base_size 4 land_position 62 47 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
-L { base_size 4 land_position 61 49 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
-L { base_size 4 land_position 60 50 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
-L { base_size 4 land_position 59 51 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
-L { base_size 4 land_position 59 52 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
-L { base_size 4 land_position 58 54 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
-L { base_size 3 land_position 57 55 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
-L { base_size 3 land_position 56 56 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
-L { base_size 3 land_position 55 57 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
-L { base_size 4 land_position 54 58 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
-L { base_size 4 land_position 52 59 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
-L { base_size 4 land_position 51 59 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
-L { base_size 4 land_position 50 60 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
-L { base_size 4 land_position 49 61 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
-L { base_size 4 land_position 47 62 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
-L { base_size 4 land_position 46 62 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
-L { base_size 4 land_position 45 63 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
-L { base_size 4 land_position 43 63 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
-L { base_size 3 land_position 42 63 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
-L { base_size 3 land_position 40 64 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
-L { base_size 3 land_position 39 64 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
-L { base_size 3 land_position 37 64 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
-L { base_size 3 land_position 36 64 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
-L { base_size 3 land_position 35 64 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
-L { base_size 3 land_position 33 64 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
-L { base_size 3 land_position 32 64 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
-L { base_size 3 land_position 30 63 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 86 63 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 86 64 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 86 65 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 86 66 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 86 67 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 85 68 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 85 69 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 85 70 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 85 71 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 84 72 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 84 73 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 83 74 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 83 75 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 82 76 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 82 77 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 81 77 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 81 78 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 80 78 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 80 79 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 79 80 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 78 80 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 78 81 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 77 81 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 77 82 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 76 82 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 75 83 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 74 83 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 73 84 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 72 84 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 71 85 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 70 85 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 69 85 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 68 85 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 67 86 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 66 86 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 65 86 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 64 86 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 63 86 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 62 86 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 61 86 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
 */
-if LUDIKRIS_MAP
-L { base_size 3 land_position 29 63 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
-L { base_size 3 land_position 28 63 number_of_tiles 0 base_elevation 2 terrain_type PN4 } /* added manually */
+if AT_LEAST_ENORMOUS
+create_land { base_size 2 land_position 60 86 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 59 86 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
 endif
-if AT_LEAST_GIGANTIC
-L { base_size 3 land_position 27 63 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
-endif
-if AT_LEAST_HUGE
-endif
-if AT_LEAST_LARGE
-L { base_size 4 land_position 26 62 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
-L { base_size 4 land_position 25 62 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+if AT_LEAST_NORMAL
+create_land { base_size 2 land_position 58 85 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 57 85 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
 endif
 if AT_LEAST_MEDIUM
-L { base_size 4 land_position 23 61 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 56 85 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
 endif
-if AT_LEAST_SMALL
-L { base_size 4 land_position 22 60 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
-L { base_size 4 land_position 21 59 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
-endif
-L { base_size 4 land_position 20 59 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
-L { base_size 4 land_position 18 58 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
-L { base_size 4 land_position 17 57 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
-L { base_size 4 land_position 16 56 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
-L { base_size 4 land_position 15 55 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
-L { base_size 4 land_position 14 54 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
-L { base_size 4 land_position 13 52 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
-L { base_size 4 land_position 13 51 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
-L { base_size 4 land_position 12 50 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
-L { base_size 4 land_position 11 49 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
-L { base_size 4 land_position 10 47 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
-L { base_size 4 land_position 10 46 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
-L { base_size 4 land_position 9 45 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
-L { base_size 4 land_position 9 43 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
-L { base_size 4 land_position 9 42 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
-L { base_size 4 land_position 8 40 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
-L { base_size 4 land_position 8 39 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
-L { base_size 4 land_position 8 37 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
-L { base_size 4 land_position 8 36 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
-L { base_size 4 land_position 8 35 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
-L { base_size 4 land_position 8 33 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
-L { base_size 4 land_position 8 32 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
-L { base_size 4 land_position 9 30 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
-L { base_size 4 land_position 9 29 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
-L { base_size 3 land_position 9 27 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
-L { base_size 3 land_position 10 26 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
-L { base_size 3 land_position 10 25 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
-L { base_size 3 land_position 11 23 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
-L { base_size 3 land_position 12 22 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
-L { base_size 3 land_position 13 21 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
-L { base_size 3 land_position 13 20 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
-L { base_size 3 land_position 14 18 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
-L { base_size 3 land_position 15 17 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
-L { base_size 3 land_position 16 16 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
-L { base_size 3 land_position 17 15 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
-L { base_size 3 land_position 18 14 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
-L { base_size 3 land_position 20 13 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
-L { base_size 3 land_position 21 13 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
-L { base_size 3 land_position 22 12 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
-L { base_size 3 land_position 23 11 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
-L { base_size 3 land_position 25 10 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
-L { base_size 3 land_position 26 10 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
-L { base_size 3 land_position 27 9 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
-L { base_size 4 land_position 29 9 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
-L { base_size 4 land_position 30 9 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
-L { base_size 4 land_position 32 8 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
-L { base_size 4 land_position 33 8 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
-L { base_size 4 land_position 35 8 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
-L { base_size 4 land_position 36 8 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
-L { base_size 4 land_position 37 8 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
-L { base_size 4 land_position 39 8 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
-L { base_size 4 land_position 40 8 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
-L { base_size 4 land_position 42 9 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
-L { base_size 4 land_position 43 9 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
-L { base_size 4 land_position 45 9 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
-L { base_size 4 land_position 46 10 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
-L { base_size 4 land_position 47 10 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
-L { base_size 4 land_position 49 11 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
-L { base_size 4 land_position 50 12 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
-L { base_size 4 land_position 51 13 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
-L { base_size 4 land_position 52 13 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
-L { base_size 4 land_position 54 14 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
-L { base_size 4 land_position 55 15 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
-L { base_size 4 land_position 56 16 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
-L { base_size 4 land_position 57 17 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
-L { base_size 4 land_position 58 18 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
-L { base_size 4 land_position 59 20 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
-if AT_LEAST_SMALL
-L { base_size 4 land_position 59 21 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
-L { base_size 4 land_position 60 22 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
-endif
+create_land { base_size 2 land_position 55 85 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 54 84 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 53 84 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 52 83 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 51 83 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 50 82 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 49 82 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 49 81 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 48 81 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 48 80 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 47 80 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 46 79 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 46 78 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 45 78 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 45 77 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 44 77 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 44 76 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 43 75 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 43 74 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 42 73 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 42 72 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 41 71 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 41 70 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 41 69 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 41 68 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 40 67 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 40 66 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 40 65 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 40 64 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 40 63 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 40 62 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 40 61 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 40 60 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 40 59 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 41 58 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 41 57 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 41 56 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 41 55 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 42 54 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 42 53 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 43 52 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 43 51 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 44 50 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 44 49 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 45 49 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 45 48 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 46 48 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 46 47 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 47 46 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 48 46 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 48 45 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 49 45 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 49 44 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 50 44 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 51 43 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 52 43 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 53 42 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 54 42 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 55 41 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 56 41 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 57 41 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 58 41 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 59 40 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 60 40 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 61 40 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 62 40 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 63 40 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 64 40 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 65 40 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 66 40 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 67 40 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 68 41 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 69 41 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 70 41 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 71 41 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 72 42 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 73 42 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 74 43 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 75 43 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 76 44 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 77 44 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 77 45 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 78 45 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 78 46 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 79 46 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 80 47 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 80 48 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 81 48 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 81 49 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 82 49 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 82 50 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 83 51 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 83 52 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 84 53 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 84 54 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 85 55 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
 if AT_LEAST_MEDIUM
-L { base_size 4 land_position 61 23 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 85 56 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
 endif
-if AT_LEAST_LARGE
-L { base_size 4 land_position 62 25 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
-L { base_size 4 land_position 62 26 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+if AT_LEAST_NORMAL
+create_land { base_size 2 land_position 85 57 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 85 58 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
 endif
-if AT_LEAST_HUGE
-endif
-if AT_LEAST_GIGANTIC
-L { base_size 3 land_position 63 27 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
-endif
-if LUDIKRIS_MAP
-L { base_size 3 land_position 63 28 number_of_tiles 0 base_elevation 2 terrain_type PN4 } /* added manually */
-L { base_size 3 land_position 63 29 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+if AT_LEAST_ENORMOUS
+create_land { base_size 2 land_position 86 59 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 86 60 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
 endif
 /*
-L { base_size 3 land_position 63 30 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
-L { base_size 3 land_position 64 32 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
-L { base_size 3 land_position 64 33 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
-L { base_size 3 land_position 64 35 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 86 61 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 86 62 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
 */
+L { land_position 61 61 land_percent 15 base_elevation 2 terrain_type PN2 }
+
+/* 
+Generated with MadLands v5.9.xlsm: I 2, R 24, XO/YO:-3, OA:0, XS/YS:1, A/F/SF:0, CT: disabled
+note: some duplicate land statments may have been deleted.
+ */
+/*
+create_land { base_size 2 land_position 71 47 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 71 48 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 71 49 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 71 50 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 71 51 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 70 52 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 70 53 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 70 54 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 70 55 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 69 56 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 69 57 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 69 58 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 68 58 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 68 59 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 67 60 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 66 61 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 66 62 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 65 62 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 65 63 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 64 64 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 63 65 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 62 65 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 62 66 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 61 66 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 60 67 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 59 68 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 58 68 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 58 69 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 57 69 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 56 69 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 55 70 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 54 70 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 53 70 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 52 70 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 51 71 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 50 71 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 49 71 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 48 71 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 47 71 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 46 71 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 45 71 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 44 71 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 43 71 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 42 70 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 41 70 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+*/
+if AT_LEAST_MASSIVE
+create_land { base_size 2 land_position 40 70 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 39 70 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+endif
+if AT_LEAST_NORMAL
+create_land { base_size 2 land_position 38 69 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+endif
+if AT_LEAST_SMALL
+create_land { base_size 2 land_position 37 69 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 36 69 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+endif
+create_land { base_size 2 land_position 36 68 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 35 68 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 34 67 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 33 66 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 32 66 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 32 65 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 31 65 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 30 64 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 29 63 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 29 62 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 28 62 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 28 61 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 27 60 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 26 59 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 26 58 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 25 58 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 25 57 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 25 56 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 24 55 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 24 54 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 24 53 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 24 52 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 23 51 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 23 50 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 23 49 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 23 48 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 23 47 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 23 46 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 23 45 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 23 44 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 23 43 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 24 42 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 24 41 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 24 40 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 24 39 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 25 38 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 25 37 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 25 36 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 26 36 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 26 35 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 27 34 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 28 33 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 28 32 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 29 32 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 29 31 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 30 30 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 31 29 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 32 29 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 32 28 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 33 28 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 34 27 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 35 26 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 36 26 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 36 25 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 37 25 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 38 25 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 39 24 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 40 24 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 41 24 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 42 24 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 43 23 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 44 23 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 45 23 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 46 23 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 47 23 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 48 23 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 49 23 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 50 23 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 51 23 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 52 24 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 53 24 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 54 24 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 55 24 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 56 25 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 57 25 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 58 25 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 58 26 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 59 26 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 60 27 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 61 28 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 62 28 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 62 29 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 63 29 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 64 30 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 65 31 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 65 32 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 66 32 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 66 33 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 67 34 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 68 35 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 68 36 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+if AT_LEAST_SMALL
+create_land { base_size 2 land_position 69 36 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 69 37 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+endif
+if AT_LEAST_NORMAL
+create_land { base_size 2 land_position 69 38 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+endif
+if AT_LEAST_MASSIVE
+create_land { base_size 2 land_position 70 39 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 70 40 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+endif
+/*
+create_land { base_size 2 land_position 70 41 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 70 42 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 71 43 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 71 44 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 71 45 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 71 46 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+*/
+
+L { land_position 41 41 land_percent 20 base_elevation 2 terrain_type PN3 }
+
+/* 
+Generated with MadLands v5.9.xlsm: I 2, R 26, XO/YO:-16, OA:0, XS/YS:1, A/F/SF:0, CT: disabled
+note: some duplicate land statments may have been deleted.
+ */
+/*
+create_land { base_size 2 land_position 60 34 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 60 35 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 60 36 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 60 37 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 60 38 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 60 39 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 59 39 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 59 40 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 59 41 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 59 42 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 58 43 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 58 44 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 58 45 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 57 45 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 57 46 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 57 47 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 56 48 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 56 49 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 55 49 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 54 50 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 54 51 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 53 51 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 53 52 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 52 53 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 51 53 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 51 54 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 50 54 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 49 55 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 49 56 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 48 56 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 47 57 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 46 57 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 45 57 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 45 58 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 44 58 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 43 58 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 42 59 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 41 59 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 40 59 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 39 59 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 39 60 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 38 60 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 37 60 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 36 60 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 35 60 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 34 60 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 33 60 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 32 60 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 31 60 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 30 60 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 29 60 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 29 59 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 28 59 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 27 59 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 26 59 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 25 58 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+*/
+if AT_LEAST_MASSIVE
+create_land { base_size 2 land_position 24 58 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 23 58 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 23 57 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+endif
+if AT_LEAST_NORMAL
+create_land { base_size 2 land_position 22 57 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+endif
+if AT_LEAST_SMALL
+create_land { base_size 2 land_position 21 57 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 20 56 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 19 56 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+endif
+create_land { base_size 2 land_position 19 55 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 18 54 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 17 54 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 17 53 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 16 53 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 15 52 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 15 51 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 14 51 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 14 50 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 13 49 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 12 49 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 12 48 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 11 47 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 11 46 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 11 45 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 10 45 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 10 44 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 10 43 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 9 42 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 9 41 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 9 40 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 9 39 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 8 39 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 8 38 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 8 37 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 8 36 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 8 35 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 8 34 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 8 33 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 8 32 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 8 31 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 8 30 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 8 29 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 9 29 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 9 28 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 9 27 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 9 26 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 10 25 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 10 24 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 10 23 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 11 23 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 11 22 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 11 21 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 12 20 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 12 19 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 13 19 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 14 18 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 14 17 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 15 17 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 15 16 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 16 15 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 17 15 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 17 14 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 18 14 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 19 13 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 19 12 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 20 12 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 21 11 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 22 11 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 23 11 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 23 10 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 24 10 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 25 10 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 26 9 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 27 9 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 28 9 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 29 9 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 29 8 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 30 8 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 31 8 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 32 8 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 33 8 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 34 8 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 35 8 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 36 8 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 37 8 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 38 8 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 39 8 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 39 9 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 40 9 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 41 9 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 42 9 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 43 10 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 44 10 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 45 10 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 45 11 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 46 11 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 47 11 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 48 12 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 49 12 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 49 13 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 50 14 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 51 14 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 51 15 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 52 15 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 53 16 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 53 17 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 54 17 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 54 18 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 55 19 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+if AT_LEAST_SMALL
+create_land { base_size 2 land_position 56 19 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 56 20 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 57 21 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+endif
+if AT_LEAST_NORMAL
+create_land { base_size 2 land_position 57 22 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+endif
+if AT_LEAST_MASSIVE
+create_land { base_size 2 land_position 57 23 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 58 23 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 58 24 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+endif
+/*
+create_land { base_size 2 land_position 58 25 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 59 26 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 59 27 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 59 28 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 59 29 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 60 29 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 60 30 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 60 31 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 60 32 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 60 33 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+*/
+
 
 L { land_position 25 25 land_percent 20 base_elevation 2 terrain_type PN4 land_id 4 }
-/* TODO breaks free on ludikris map size */
 
 

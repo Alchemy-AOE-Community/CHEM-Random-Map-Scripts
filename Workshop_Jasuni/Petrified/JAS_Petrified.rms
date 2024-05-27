@@ -1,0 +1,650 @@
+/* 
+
+Title: Petrified
+Author: Jasuni
+Version: 1.0
+Published 18 Apr 2022
+
+map info: This land was cursed. The ground turned into rock, and trees died as their roots became trapped in the soil. 
+(trees died as their roots were trapped)
+(life continues to struggle)
+("The land is just now starting to return to what it once was before it was petrified")
+description incomplete
+
+special effects: buildings (especially farms) take longer to build. 
+
+wonder race test showed that a 26-minute imp is possible as Incas. I suspect that more optimized play (and perhaps a different civ) would make that number even lower. I do not know what a good wonder race time is for a regular map.
+
+feedback from Zetnus:
+TODO can mix in brown trees (with brown leaves) with the rest of the dead trees
+*/
+
+
+<PLAYER_SETUP>
+random_placement
+behavior_version 2
+ai_info_map_type CUSTOM 0 0 0 
+
+effect_amount SET_ATTRIBUTE ROCK ATTR_TERRAIN_ID 7
+effect_amount SET_ATTRIBUTE ROCK_B ATTR_TERRAIN_ID 7
+effect_amount SET_ATTRIBUTE DLC_DEADTREE ATTR_TERRAIN_ID 7
+
+/* build speed rms effects
+rice farm - 1187
+farm  50
+builders: 118, 212
+also 1640,1641, 1643, 1645
+serjeants: 1658-1661
+
+ */
+#const RICE_FARM 1187
+#const SERJEANT 1658
+#const E_SERJEANT 1659
+#const D_SERJEANT 1660
+#const DE_SERJEANT 1661
+/* not certain what these next ones are used for, but changing work rate just in case - experiments on building houses shows no effect, and treadmill crane doesn't affect them either */
+#const BUILDER_M 1640
+#const BUILDER_F 1641
+#const BUILDER_M2 1643
+#const BUILDER_F2 1645
+
+if DISABLE_SPECIAL_EFFECTS
+else 
+    /* not entirely certain what these are, but modified work rate just in case */
+    effect_percent MUL_ATTRIBUTE BUILDER_F ATTR_WORK_RATE 80
+    effect_percent MUL_ATTRIBUTE BUILDER_F2 ATTR_WORK_RATE 80
+    effect_percent MUL_ATTRIBUTE BUILDER_M ATTR_WORK_RATE 80
+    effect_percent MUL_ATTRIBUTE BUILDER_M2 ATTR_WORK_RATE 80
+
+    /* decrease work rates for all builders */
+    effect_percent MUL_ATTRIBUTE VILLAGER_BUILDER_F ATTR_WORK_RATE 80
+    effect_percent MUL_ATTRIBUTE VILLAGER_BUILDER_M ATTR_WORK_RATE 80
+    effect_percent MUL_ATTRIBUTE SERJEANT ATTR_WORK_RATE 80
+    effect_percent MUL_ATTRIBUTE E_SERJEANT ATTR_WORK_RATE 80
+    effect_percent MUL_ATTRIBUTE D_SERJEANT ATTR_WORK_RATE 80
+    effect_percent MUL_ATTRIBUTE DE_SERJEANT ATTR_WORK_RATE 80
+
+    /* make farms take longer to build */
+    effect_percent MUL_ATTRIBUTE FARM ATTR_CREATION_TIME 140
+    effect_percent MUL_ATTRIBUTE RICE_FARM ATTR_CREATION_TIME 140
+endif
+
+<LAND_GENERATION>
+base_terrain DLC_DESERTGRAVEL
+create_player_lands {
+    terrain_type WATER /* mix with DIRT2, which has some greenery. */
+    circle_radius 35 5
+    if 3_PLAYER_GAME
+        land_percent 15
+    elseif 4_PLAYER_GAME
+        land_percent 20
+    elseif 5_PLAYER_GAME
+        land_percent 25
+    elseif 6_PLAYER_GAME
+        land_percent 30
+    elseif 7_PLAYER_GAME
+        land_percent 35
+    elseif 8_PLAYER_GAME
+        land_percent 40
+    else /* 2 or 1-player */
+        land_percent 10
+    endif
+    clumping_factor 32
+}
+
+
+<ELEVATION_GENERATION>
+create_elevation 1 {  
+    base_terrain DLC_DESERTGRAVEL   
+    if TINY_MAP
+        number_of_tiles 1200
+    elseif SMALL_MAP
+        number_of_tiles 1440
+    elseif MEDIUM_MAP
+        number_of_tiles 1680
+    elseif LARGE_MAP
+        number_of_tiles 2000
+    elseif HUGE_MAP
+        number_of_tiles 2200
+    elseif GIGANTIC_MAP
+        number_of_tiles 2400
+    else /* LUDIKRIS_MAP */
+        number_of_tiles 4800
+    endif
+    number_of_clumps 36
+    set_scale_by_groups
+    enable_balanced_elevation
+}
+create_elevation 2 {
+    base_terrain DLC_DESERTGRAVEL   
+    if TINY_MAP
+        number_of_tiles 900
+    elseif SMALL_MAP
+        number_of_tiles 1080
+    elseif MEDIUM_MAP
+        number_of_tiles 1260
+    elseif LARGE_MAP
+        number_of_tiles 1500
+    elseif HUGE_MAP
+        number_of_tiles 1650
+    elseif GIGANTIC_MAP
+        number_of_tiles 1800
+    else /* LUDIKRIS_MAP */
+        number_of_tiles 3600
+    endif
+    number_of_clumps 16
+    set_scale_by_groups
+    enable_balanced_elevation
+}
+create_elevation 3 {
+    base_terrain DLC_DESERTGRAVEL   
+    if TINY_MAP
+        number_of_tiles 600
+    elseif SMALL_MAP
+        number_of_tiles 720
+    elseif MEDIUM_MAP
+        number_of_tiles 840
+    elseif LARGE_MAP
+        number_of_tiles 1000
+    elseif HUGE_MAP
+        number_of_tiles 1100
+    elseif GIGANTIC_MAP
+        number_of_tiles 1200
+    else /* LUDIKRIS_MAP */
+        number_of_tiles 2400
+    endif
+    number_of_clumps 8
+    set_scale_by_groups
+    enable_balanced_elevation
+}
+<CLIFF_GENERATION>
+min_number_of_cliffs 10
+max_number_of_cliffs 1000
+min_distance_cliffs 4
+min_terrain_distance 1
+
+<TERRAIN_GENERATION>
+
+create_terrain DLC_ROCK {
+    base_terrain DLC_DESERTGRAVEL
+    land_percent 15
+    number_of_clumps 20
+    set_avoid_player_start_areas
+} /* this turns into wood spawns - it can be unbalanced, with more or closer forests for one player */
+/* DLC_DESERTGRAVEL
+
+ */
+#const GRAVEL 70
+#const GRAVEL_ROAD 78
+/* create DIRT3 masked desert near each player */
+create_terrain DIRT { 
+    base_terrain WATER
+    land_percent 100
+    number_of_clumps 99
+}
+create_terrain GRAVEL {
+    base_terrain DIRT
+    land_percent 100
+    number_of_clumps 99
+    set_avoid_player_start_areas 15  /*  outside range for berry bushes */
+} /* continue later */
+
+create_terrain DLC_DESERTGRAVEL {
+    base_terrain BEACH
+    land_percent 100
+    number_of_clumps 99
+}
+create_terrain DIRT {
+    base_terrain BEACH
+    land_percent 100
+    number_of_clumps 99
+} /* mask desert underneath to change minimap color */
+
+create_terrain GRAVEL {
+    base_terrain DLC_DESERTGRAVEL
+    land_percent 100
+    number_of_clumps 999
+}
+create_terrain DIRT2 { 
+    base_terrain DIRT
+    land_percent 100
+    number_of_clumps 999 /* saw a map gen where 99 was insufficient - resulted in a player losing berries */
+}
+/* aesthetic changes */
+create_terrain DESERT {
+    base_terrain GRAVEL
+    land_percent 4
+    number_of_clumps 48
+    terrain_mask 2
+    spacing_to_other_terrain_types 2
+}
+create_terrain DLC_CRACKED {
+    base_terrain GRAVEL
+    land_percent 2
+    number_of_clumps 99
+    terrain_mask 2
+    spacing_to_other_terrain_types 2
+}
+create_terrain DLC_CRACKED {
+    base_terrain GRAVEL
+    land_percent 1
+    spacing_to_other_terrain_types 1
+    number_of_clumps 96
+    terrain_mask 2
+    height_limits 1 3
+}
+create_terrain DIRT { /* creates a stronger orange patch in the gravel than desert */
+    land_percent 1
+    base_terrain GRAVEL
+    number_of_clumps 36
+    terrain_mask 1
+}
+create_terrain DLC_ROCK { /* might be a bit confusing for players, so may remove */
+    land_percent 1
+    base_terrain GRAVEL
+    number_of_clumps 36
+    terrain_mask 1
+}
+create_terrain DLC_DESERTGRAVEL { /* might be a bit confusing for players, so may remove */
+    land_percent 6
+    base_terrain GRAVEL
+    number_of_clumps 36
+    terrain_mask 1
+}
+create_terrain DLC_DESERTGRAVEL { /* might be a bit confusing for players, so may remove */
+    land_percent 6
+    base_terrain GRAVEL
+    number_of_clumps 36
+    terrain_mask 2
+}
+create_terrain DIRT2 {
+    land_percent 2
+    base_terrain GRAVEL
+    number_of_clumps 36
+    terrain_mask 1
+}
+
+/* mask underneath all of the dirt2 - results in a gravel/dirt/grass mixture that looks like desert on the minimap. This applies to player bases, and is needed for the forage bushes */
+create_terrain GRAVEL {
+    base_terrain DIRT2
+    land_percent 100
+    number_of_clumps 99
+    terrain_mask 2
+}
+<OBJECTS_GENERATION>
+/* 
+
+include wolves (hungry wolves), and 1 set of 3/4 deer and 1 boar for each player (could probably random between 3 and 4 - should be consistent between players)
+extra stone, good/normal amount of gold, relics
+
+make sure minimap shows different terrain for the petrified forests (i.e. desert vs rock - as dirt shows same color as rock on the minimap)
+
+TODO remove objects for death match: berries, goats, wolves, boar, deer, straggler trees
+TODO adapt for infinite resources and Empire Wars
+might be able to do more to improve aesthetics, but I think it's in a reasonably good spot right now.
+*/
+create_object DLC_DEADTREE {
+    number_of_objects 9320
+    set_scaling_to_map_size
+    number_of_groups 320
+    terrain_to_place_on DLC_ROCK
+    temp_min_distance_group_placement 1
+}
+create_object TOWN_CENTER {
+    set_place_for_every_player
+    find_closest
+}
+create_object VILLAGER {
+    set_place_for_every_player
+    min_distance_to_players 6
+    max_distance_to_players 6
+    temp_min_distance_group_placement 3
+}
+create_object FORAGE {
+    number_of_objects rnd(3,5)
+    set_place_for_every_player
+    set_gaia_object_only
+    min_distance_to_players 8 
+    max_distance_to_players 11
+    avoid_forest_zone
+    avoid_cliff_zone
+    set_tight_grouping
+    terrain_to_place_on GRAVEL
+    layer_to_place_on DIRT2 /* requires berries to be close to TC to ensure, hence low min distance earlier */
+    min_distance_group_placement 2
+}
+if REGICIDE 
+    create_object KING {
+        set_place_for_every_player
+        min_distance_to_players 7
+        find_closest
+        avoid_cliff_zone 2
+    }
+else 
+    create_object SCOUT {
+        set_place_for_every_player
+        min_distance_to_players 6
+        max_distance_to_players 6
+    }
+endif
+create_object DEER {
+    number_of_objects rnd(3,4)
+    set_place_for_every_player
+    set_gaia_object_only
+    min_distance_to_players 17
+    max_distance_to_players 21
+    avoid_forest_zone
+    avoid_cliff_zone
+    set_loose_grouping
+    min_distance_group_placement 2
+}
+create_object BOAR { /* just one */
+    set_place_for_every_player
+    set_gaia_object_only
+    min_distance_to_players 17
+    max_distance_to_players 21
+    avoid_forest_zone
+    avoid_cliff_zone
+    min_distance_group_placement 2
+}
+create_object GOLD {
+    number_of_objects 7
+    set_tight_grouping
+    set_place_for_every_player
+    set_gaia_object_only
+    min_distance_to_players 10
+    max_distance_to_players 16
+    avoid_forest_zone
+    avoid_cliff_zone
+    min_distance_group_placement 2
+    actor_area 1
+    actor_area_radius 7
+}
+create_object GOLD {
+    number_of_objects 4
+    set_tight_grouping
+    set_place_for_every_player
+    set_gaia_object_only
+    min_distance_to_players 18
+    max_distance_to_players 26
+    avoid_forest_zone
+    avoid_cliff_zone
+    min_distance_group_placement 2
+    avoid_actor_area 1
+    actor_area 3
+    actor_area_radius 6
+}
+create_object STONE {
+    number_of_objects 6
+    set_tight_grouping
+    set_place_for_every_player
+    set_gaia_object_only
+    min_distance_to_players 12
+    max_distance_to_players 17
+    avoid_forest_zone
+    avoid_cliff_zone
+    min_distance_group_placement 2
+    group_placement_radius 2
+    avoid_actor_area 2
+    avoid_actor_area 1 /* this stone mine will avoid being too close to gold mines as well */
+    avoid_actor_area 3 
+    actor_area 2
+    actor_area_radius 7
+}
+create_object STONE {
+    number_of_objects 5
+    set_tight_grouping
+    set_place_for_every_player
+    set_gaia_object_only
+    min_distance_to_players 17
+    max_distance_to_players 25
+    avoid_forest_zone
+    avoid_cliff_zone
+    min_distance_group_placement 2
+    group_placement_radius 2
+    avoid_actor_area 2
+    avoid_actor_area 1 /* this stone mine will avoid being too close to gold mines as well */
+    avoid_actor_area 3 
+    actor_area 4
+    actor_area_radius 6
+}
+create_object GOLD {
+    number_of_objects 4
+    set_tight_grouping
+    set_place_for_every_player
+    set_gaia_object_only
+    min_distance_to_players 23
+    max_distance_to_players 32
+    avoid_forest_zone
+    avoid_cliff_zone
+    min_distance_group_placement 2
+    avoid_actor_area 1
+    avoid_actor_area 2
+    avoid_actor_area 3
+    avoid_actor_area 4
+    avoid_actor_area 5
+    actor_area 5
+    actor_area_radius 5
+}
+create_object RELIC {
+    if TINY_MAP
+        number_of_objects 5
+        temp_min_distance_group_placement 36
+        min_distance_to_players 27
+    elseif SMALL_MAP
+        number_of_objects 5
+        temp_min_distance_group_placement 40
+        min_distance_to_players 27
+    elseif MEDIUM_MAP
+        number_of_objects 5
+        temp_min_distance_group_placement 45
+        min_distance_to_players 27
+    elseif LARGE_MAP
+        number_of_objects 7
+        temp_min_distance_group_placement 48
+        min_distance_to_players 30
+    elseif HUGE_MAP
+        number_of_objects 8
+        temp_min_distance_group_placement 50
+        min_distance_to_players 35
+    else /* giant or ludikrus */
+        number_of_objects 16
+        set_scaling_to_map_size
+        if GIGANTIC_MAP
+            temp_min_distance_group_placement 60
+        else
+            temp_min_distance_group_placement 99
+        endif
+        min_distance_to_players 45
+
+    endif
+    min_distance_to_players 27
+    avoid_forest_zone
+    avoid_cliff_zone
+}
+create_object DLC_GOAT {
+    number_of_objects 2
+    set_place_for_every_player
+    set_gaia_object_only
+    min_distance_to_players 6
+    max_distance_to_players 9
+    avoid_forest_zone
+    avoid_cliff_zone
+    set_loose_grouping
+    min_distance_group_placement 1
+    temp_min_distance_group_placement 10
+
+}
+create_object DLC_GOAT {
+    number_of_objects 2
+    number_of_groups 2
+    set_place_for_every_player
+    set_gaia_object_only
+    min_distance_to_players 13
+    max_distance_to_players 21
+    avoid_forest_zone
+    avoid_cliff_zone
+    set_loose_grouping
+    min_distance_group_placement 2
+    temp_min_distance_group_placement 10
+
+}
+create_object DLC_GOAT {
+    number_of_objects 2
+    group_variance 1
+    number_of_groups rnd(1,2)
+    set_scaling_to_map_size
+    set_gaia_object_only
+    min_distance_to_players 29
+    avoid_forest_zone
+    avoid_cliff_zone
+    set_loose_grouping
+    min_distance_group_placement 2
+    temp_min_distance_group_placement 80
+}
+
+create_object GOLD {
+    if TINY_MAP
+        number_of_groups 2
+        number_of_objects 3
+        temp_min_distance_group_placement 30
+    elseif SMALL_MAP
+        number_of_groups 2
+        number_of_objects 3
+        temp_min_distance_group_placement 50
+    elseif MEDIUM_MAP
+        number_of_groups 3
+        number_of_objects 3
+        temp_min_distance_group_placement 50
+    elseif LARGE_MAP
+        number_of_groups 3
+        number_of_objects 3
+        temp_min_distance_group_placement 50
+    elseif HUGE_MAP
+        number_of_groups 4
+        number_of_objects 4
+        temp_min_distance_group_placement 50
+    elseif GIGANTIC_MAP
+        number_of_groups 5
+        number_of_objects 4
+        temp_min_distance_group_placement 50
+    else /* giant or ludikrus */
+        number_of_groups 26
+        number_of_objects 4
+        temp_min_distance_group_placement 50
+    endif
+    min_distance_to_players 40
+    avoid_forest_zone
+    avoid_cliff_zone
+    group_variance 1
+    set_tight_grouping
+    avoid_actor_area 1
+    avoid_actor_area 2
+    avoid_actor_area 3
+    avoid_actor_area 4
+    avoid_actor_area 5
+}
+create_object STONE {
+    if TINY_MAP
+        number_of_groups 3
+        number_of_objects 3
+        temp_min_distance_group_placement 30
+    elseif SMALL_MAP
+        number_of_groups 3
+        number_of_objects 3
+        temp_min_distance_group_placement 50
+    elseif MEDIUM_MAP
+        number_of_groups 4
+        number_of_objects 4
+        temp_min_distance_group_placement 50
+    elseif LARGE_MAP
+        number_of_groups 5
+        number_of_objects 5
+        temp_min_distance_group_placement 50
+    elseif HUGE_MAP
+        number_of_groups 6
+        number_of_objects 5
+        temp_min_distance_group_placement 60
+    elseif GIGANTIC_MAP
+        number_of_groups 50
+        number_of_objects 5
+        temp_min_distance_group_placement 60
+    else /* giant or ludikrus */
+        number_of_groups 260
+        number_of_objects 5
+        temp_min_distance_group_placement 90
+    endif
+    min_distance_to_players 40
+    avoid_forest_zone
+    avoid_cliff_zone
+    group_variance 1
+    set_tight_grouping
+    avoid_actor_area 1
+    avoid_actor_area 2
+    avoid_actor_area 3
+    avoid_actor_area 4 /* note that tertiary resources might not stay away from each other */
+    avoid_actor_area 5
+}
+/* 
+scattered resources (see standard res)
+may move to later TODO may want to reduce number of goats */
+
+create_object DLC_DEADTREE {
+    set_place_for_every_player
+    set_gaia_object_only
+    number_of_objects 2
+    min_distance_group_placement 2
+    min_distance_to_players 4
+    max_distance_to_players 5
+}
+create_object DLC_DEADTREE {
+    set_place_for_every_player
+    set_gaia_object_only
+    number_of_objects 3
+    min_distance_group_placement 2
+    min_distance_to_players 6
+    max_distance_to_players 8
+}
+create_object DLC_DEADTREE {
+    set_gaia_object_only
+    number_of_groups 30
+    set_scaling_to_map_size
+}
+create_object WOLF {
+    set_gaia_object_only
+    set_place_for_every_player
+    min_distance_to_players 34
+    avoid_forest_zone
+    min_distance_group_placement 6
+    /* noone will complain if a wolf is trapped by a cliff */
+}
+create_object DLC_GOAT {
+    number_of_objects 2
+    group_variance 1
+    number_of_groups 24
+    set_scaling_to_map_size
+    set_gaia_object_only
+    min_distance_to_players 29
+    avoid_forest_zone
+    avoid_cliff_zone
+    set_loose_grouping
+    terrain_to_place_on GRAVEL
+    layer_to_place_on DIRT2
+    min_distance_group_placement 4
+    temp_min_distance_group_placement 16
+}
+create_object DLC_VULTURE {
+    number_of_objects 4
+    set_scaling_to_map_size
+}
+create_object WOLF {
+    number_of_groups 2
+    set_scaling_to_map_size
+    min_distance_to_players 40
+    avoid_forest_zone
+    min_distance_group_placement 16
+}
+
+
+
+

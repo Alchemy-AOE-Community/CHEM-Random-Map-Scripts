@@ -1,0 +1,100 @@
+/* map is just X monks (2 on mini/tiny maps, more on larger sizes) and a missionary per player in a constrained area. With monk conversion enabled, of course. May the RNG be on your side. */
+<PLAYER_SETUP>
+random_placement
+behavior_version 2
+
+#const ATONEMENT 27
+/*
+#const HP_REGEN 109
+effect_amount MOD_RESOURCE ATONEMENT ATTR_SET 1
+effect_amount SET_ATTRIBUTE KING ATTR_SET HP_REGEN 10
+effect_amount SET_ATTRIBUTE MONK ATTR_SET HP_REGEN 10
+effect_amount ADD_ATTRIBUTE KING ATTR_SET ATTR_REGENERATION_RATE -10
+effect_amount ADD_ATTRIBUTE KING ATTR_SET ATTR_HITPOINTS 100 */
+
+
+if MAPSIZE_MINI
+    override_map_size 10 /* should alter to 36, since that is as small as it can go */
+elseif MAPSIZE_TINY
+    override_map_size 60
+elseif MAPSIZE_SMALL
+    override_map_size 66
+elseif MAPSIZE_MEDIUM
+    override_map_size 72
+elseif MAPSIZE_NORMAL
+    override_map_size 80
+elseif MAPSIZE_LARGE
+    override_map_size 85
+elseif MAPSIZE_HUGE
+    override_map_size 90
+else
+    override_map_size 150
+endif
+
+<LAND_GENERATION>
+base_terrain WATER
+create_player_lands {
+    terrain_type GRASS2
+    left_border 20
+    right_border 20
+    top_border 20
+    bottom_border 20
+    border_fuzziness 100
+}
+<OBJECTS_GENERATION>
+if REGICIDE
+    create_object KING {
+        set_place_for_every_player
+    }
+    create_object SCOUT {
+        set_place_for_every_player
+    }
+endif
+create_object MISSIONARY {
+    set_place_for_every_player
+    if MAPSIZE_MINI
+        min_distance_group_placement 2
+    else
+        min_distance_group_placement 4
+    endif
+}
+create_object MONK {
+    set_place_for_every_player
+    if MAPSIZE_MINI
+        number_of_objects 2
+        temp_min_distance_group_placement 5
+        min_distance_group_placement 2
+    else
+        temp_min_distance_group_placement 12
+        min_distance_group_placement 4
+    endif
+    if MAPSIZE_TINY
+        number_of_objects 2
+    elseif MAPSIZE_SMALL
+        number_of_objects 3
+    elseif MAPSIZE_MEDIUM
+        number_of_objects 4
+    elseif MAPSIZE_NORMAL
+        number_of_objects 5
+    elseif MAPSIZE_LARGE
+        number_of_objects 6
+    elseif MAPSIZE_HUGE
+        number_of_objects 7
+    elseif MAPSIZE_GIANT
+        number_of_objects 8
+    elseif MAPSIZE_MASSIVE
+        number_of_objects 10
+    elseif MAPSIZE_ENORMOUS
+        number_of_objects 12
+    elseif MAPSIZE_COLOSSAL
+        number_of_objects 14
+    elseif MAPSIZE_INCREDIBLE
+        number_of_objects 16
+    elseif MAPSIZE_MONSTROUS
+        number_of_objects 20
+    elseif MAPSIZE_LUDICROUS
+        number_of_objects 30
+        min_distance_group_placement 2
+        temp_min_distance_group_placement 8
+    endif
+}

@@ -1,4 +1,11 @@
 /* Compatibility: Definitive Edition */
+
+/*
+Map name: Olympus
+Author: QFilip
+Notice of consent: As an author I agree to use this map in any AoE2 competition.
+*/
+
 <PLAYER_SETUP>
 grouped_by_team
 #const PLACEHOLDER 278
@@ -7,13 +14,25 @@ grouped_by_team
 #const LOOT 472
 #const BONFIRE 304
 #const WELL 1567
+/* Heavy Swordsman Configuration */
 #const HEAVY_SWORDSMAN 76
+effect_amount SET_ATTRIBUTE HEAVY_SWORDSMAN ATTR_TRAITS 16
+effect_amount SET_ATTRIBUTE HEAVY_SWORDSMAN ATTR_LINE_OF_SIGHT 8
+effect_amount SET_ATTRIBUTE HEAVY_SWORDSMAN ATTR_SEARCH_RADIUS 6
+effect_amount SET_ATTRIBUTE HEAVY_SWORDSMAN ATTR_HITPOINTS 15
+effect_amount GAIA_SET_ATTRIBUTE HEAVY_SWORDSMAN ATTR_HITPOINTS 75
+effect_percent SET_ATTRIBUTE HEAVY_SWORDSMAN ATTR_MOVE_SPEED 90
+effect_amount SET_ATTRIBUTE HEAVY_SWORDSMAN ATTR_HERO_STATUS 66
+effect_amount SET_ATTRIBUTE HEAVY_SWORDSMAN ATTR_RELOAD_TIME 4
+
+effect_amount GAIA_UPGRADE_UNIT WOLF HEAVY_SWORDSMAN 0 
+
 <LAND_GENERATION>
 base_terrain GRASS
 
 create_player_lands {
     terrain_type GRASS
-    circle_radius 45
+    circle_radius 47
     other_zone_avoidance_distance  20
     base_size 12
     zone 2
@@ -38,7 +57,7 @@ create_land {
     base_size 0
     base_elevation 5
     zone 1
-    other_zone_avoidance_distance  20
+    other_zone_avoidance_distance  19
 }
 
 create_land {
@@ -48,7 +67,7 @@ create_land {
     base_size 0
     base_elevation 5
     zone 1
-    other_zone_avoidance_distance  20
+    other_zone_avoidance_distance  19
 }
 
 
@@ -97,7 +116,7 @@ create_object VILLAGER {
     actor_area_to_place_in 16
     avoid_actor_area 15
 }
-create_object SCOUT { 
+create_object HEAVY_SWORDSMAN { 
     set_place_for_every_player
     max_distance_to_players 6
     actor_area_to_place_in 16
@@ -190,7 +209,7 @@ create_object GOLD {
     terrain_to_place_on DLC_DRYGRASS
 }
 
-create_object HEAVY_SWORDSMAN {
+create_object WOLF {
     number_of_objects 4
     set_gaia_object_only
     set_gaia_unconvertible
@@ -405,10 +424,10 @@ create_terrain PINE_FOREST {
     base_terrain DIRT3
     number_of_clumps 10
     number_of_tiles 250
-    set_avoid_player_start_areas 20
+    set_avoid_player_start_areas 19
     if MAPSIZE_TINY
     else
-        set_scale_by_size
+        set_scale_by_groups
     endif
 }
 
@@ -416,10 +435,10 @@ create_terrain PINE_FOREST {
     base_terrain DLC_DIRT4
     number_of_clumps 10
     number_of_tiles 250
-    set_avoid_player_start_areas 20
+    set_avoid_player_start_areas 19
     if MAPSIZE_TINY
     else
-        set_scale_by_size
+        set_scale_by_groups
     endif
 }
 
@@ -427,7 +446,7 @@ create_terrain DESERT {
     base_terrain GRASS
     number_of_clumps 9999
     number_of_tiles 99999
-    set_avoid_player_start_areas 20
+    set_avoid_player_start_areas 19
     
 }
 
@@ -435,7 +454,7 @@ create_terrain DESERT {
     base_terrain GRASS
     number_of_clumps 9999
     number_of_tiles 99999
-    set_avoid_player_start_areas 20
+    set_avoid_player_start_areas 19
     
 }
 
@@ -443,7 +462,7 @@ create_terrain DESERT {
     base_terrain GRASS
     number_of_clumps 9999
     number_of_tiles 99999
-    set_avoid_player_start_areas 20
+    set_avoid_player_start_areas 19
     
 }
 

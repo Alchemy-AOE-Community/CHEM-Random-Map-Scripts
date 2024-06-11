@@ -378,6 +378,20 @@ create_object WELL {
     temp_min_distance_group_placement 3
     terrain_to_place_on DLC_ROCK
 }
+create_object ROMAN_RUINS {
+    number_of_groups 10
+    set_gaia_object_only
+    temp_min_distance_group_placement 2
+    terrain_to_place_on DLC_DRYGRASS
+    actor_area 777
+    actor_area_radius 1
+}
+
+create_object DLC_VASES {
+    number_of_objects 14
+    set_gaia_object_only
+    actor_area_to_place_in 777
+}
 
 if REGICIDE
     create_object KING { set_place_for_every_player find_closest }
@@ -560,7 +574,7 @@ create_terrain DLC_CRACKED {
     base_terrain DIRT
     number_of_clumps 9999
     number_of_tiles 9999
-    height_limits 2 3
+    height_limits 1 3
     if MAPSIZE_TINY
     else
         set_scale_by_size
@@ -571,7 +585,7 @@ create_terrain DLC_CRACKED {
     base_terrain GRASS
     number_of_clumps 9999
     number_of_tiles 9999
-    height_limits 2 3
+    height_limits 1 3
     if MAPSIZE_TINY
     else
         set_scale_by_size
@@ -613,7 +627,40 @@ create_terrain DLC_FORESTAUTUMN {
 create_terrain DIRT2 {
     base_terrain GRASS
     number_of_clumps 30
-    number_of_tiles 400
+    number_of_tiles 500
+    terrain_mask 1
+    if MAPSIZE_TINY
+    else
+        set_scale_by_size
+    endif
+}
+
+create_terrain DLC_DRYGRASS {
+    base_terrain GRASS
+    number_of_clumps 30
+    number_of_tiles 500
+    terrain_mask 1
+    if MAPSIZE_TINY
+    else
+        set_scale_by_size
+    endif
+}
+
+create_terrain DIRT2 {
+    base_terrain DLC_DRYGRASS
+    number_of_clumps 50
+    number_of_tiles 1000
+    terrain_mask 1
+    if MAPSIZE_TINY
+    else
+        set_scale_by_size
+    endif
+}
+
+create_terrain DIRT {
+    base_terrain DLC_MOORLAND
+    number_of_clumps 30
+    number_of_tiles 1000
     terrain_mask 1
     if MAPSIZE_TINY
     else

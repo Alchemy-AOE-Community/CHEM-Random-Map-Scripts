@@ -409,6 +409,32 @@ create_object DLC_VASES {
     actor_area_to_place_in 777
 }
 
+#const TEMPLE_RUIN 1566
+create_object TEMPLE_RUIN {
+    number_of_groups 2
+    set_gaia_object_only
+    temp_min_distance_group_placement 30
+    set_avoid_player_start_areas
+    terrain_to_place_on DLC_DRYGRASS
+    set_flat_terrain_only
+    actor_area 776
+    actor_area_radius 2
+}
+
+create_object COLUMN_A {
+    set_facet 5
+    number_of_objects 2
+    set_gaia_object_only
+    actor_area_to_place_in 776
+}
+
+create_object COLUMN_A {
+    set_facet 4
+    number_of_objects 3
+    set_gaia_object_only
+    actor_area_to_place_in 776
+}
+
 if REGICIDE
     create_object KING { set_place_for_every_player find_closest }
 endif
@@ -503,7 +529,7 @@ create_terrain DIRT {
     set_avoid_player_start_areas 30
 }
 
-create_terrain DLC_ACACIAFOREST {
+create_terrain MEDITERRANEAN_FOREST {
     base_terrain DESERT
     number_of_clumps 20
     number_of_tiles 200
@@ -630,10 +656,10 @@ create_terrain DIRT {
     endif
 }
 
-create_terrain DLC_FORESTAUTUMN {
+create_terrain MEDITERRANEAN_FOREST {
     base_terrain PINE_FOREST
     number_of_clumps 30
-    number_of_tiles 50
+    number_of_tiles 200
     if MAPSIZE_TINY
     else
         set_scale_by_size

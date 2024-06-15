@@ -21,58 +21,6 @@ ai_info_map_type ISLANDS 0 0 0
 #const ON_GRID 278
 effect_amount GAIA_SET_ATTRIBUTE ON_GRID ATTR_STORAGE_VALUE 0
 
-/* Removing Centurion's Ability to Attack Deer */
-#const CENTURION 275
-effect_amount SET_ATTRIBUTE CENTURION ATTR_TRAITS 16
-/* Centurion Bonus Damage vs Generic Infantry to Zero */
-effect_amount SET_ATTRIBUTE CENTURION ATTR_ATTACK 65536
-/* Centurion Bonus Damage vs Condotierri to Zero */
-effect_amount SET_ATTRIBUTE CENTURION ATTR_ATTACK 2097152
-/* Centurion Base Melee Armor of Zero */
-effect_amount SET_ATTRIBUTE CENTURION ATTR_ARMOR 262144
-/* Centurion Base Pierce Armor of Two  */
-effect_amount SET_ATTRIBUTE CENTURION ATTR_ARMOR 196610
-/* Centurion Anti-Cavalry Bonus Damage to Zero */
-effect_amount SET_ATTRIBUTE CENTURION ATTR_ARMOR 524288
-/* Centurion Population Space */
-effect_amount SET_ATTRIBUTE CENTURION ATTR_POPULATION 0
-#const TREE_REED 1350
-#const ROCK2 1323
-if DEATH_MATCH
-/* Centurion HP */
-effect_amount SET_ATTRIBUTE CENTURION ATTR_HITPOINTS 60
-/* Centurion Vision */
-effect_amount SET_ATTRIBUTE CENTURION ATTR_LINE_OF_SIGHT 10
-/* Centurion Base Attack Set to Seven */
-effect_amount SET_ATTRIBUTE CENTURION ATTR_ATTACK 262151
-/* Removing Straggler Trees */
-effect_amount GAIA_SET_ATTRIBUTE TREE_REED ATTR_STORAGE_VALUE 0
-effect_amount GAIA_SET_ATTRIBUTE TREE_REED ATTR_HITPOINTS 0
-/* Removing Sheep */
-effect_amount GAIA_SET_ATTRIBUTE SHEEP ATTR_STORAGE_VALUE 0
-effect_amount GAIA_SET_ATTRIBUTE SHEEP ATTR_HITPOINTS 0
-effect_amount SET_ATTRIBUTE SHEEP ATTR_STORAGE_VALUE 0
-effect_amount SET_ATTRIBUTE SHEEP ATTR_HITPOINTS 0
-/* Removing Deer */
-effect_amount GAIA_SET_ATTRIBUTE DEER ATTR_STORAGE_VALUE 0
-effect_amount GAIA_SET_ATTRIBUTE DEER ATTR_HITPOINTS 0
-/* Removing Berries */
-effect_amount GAIA_SET_ATTRIBUTE DLC_ORANGEBUSH ATTR_STORAGE_VALUE 0
-effect_amount GAIA_SET_ATTRIBUTE FORAGE ATTR_STORAGE_VALUE 0
-/* Removing Rocks */
-effect_amount GAIA_SET_ATTRIBUTE ROCK ATTR_HITPOINTS 0
-effect_amount GAIA_SET_ATTRIBUTE ROCK2 ATTR_HITPOINTS 0
-/* Reducing Amount of Stone */
-effect_amount GAIA_SET_ATTRIBUTE STONE ATTR_STORAGE_VALUE 150
-else
-/* Centurion HP */
-effect_amount SET_ATTRIBUTE CENTURION ATTR_HITPOINTS 45
-/* Centurion Vision */
-effect_amount SET_ATTRIBUTE CENTURION ATTR_LINE_OF_SIGHT 5
-/* Centurion Base Attack Set to Three */
-effect_amount SET_ATTRIBUTE CENTURION ATTR_ATTACK 262147
-endif
-
 /* Make Some Non Herd Groups Act Like Herds */
 effect_amount GAIA_UPGRADE_UNIT DLC_ZEBRA DLC_GOOSE 0
 effect_amount GAIA_SET_ATTRIBUTE DLC_ZEBRA ATTR_TERRAIN_ID 0
@@ -86,9 +34,8 @@ effect_amount SET_ATTRIBUTE DOCK_F ATTR_GARRISON_TYPE 64 /* Change Garrison Type
 effect_amount SET_ATTRIBUTE DOCK_C ATTR_GARRISON_TYPE 64 /* Change Garrison Type for Dock */
 effect_amount SET_ATTRIBUTE DOCK_I ATTR_GARRISON_TYPE 64 /* Change Garrison Type for Dock */
 
-/* Disabling Trade Carts and Cogs for Multi-team Games */
-if 2_TEAM_GAME
-else
+/* Toggle Trade From Lobby */
+if LOW_RESOURCES
   #const TRADE_CART_ENABLER 161
   #const TRADE_COG_ENABLER 180
   #const TRADE_CARAVAN_ENABLER 48
@@ -101,6 +48,7 @@ else
   effect_amount DISABLE_TECH HINDU_CARAVANSERAI_ENABLER ATTR_DISABLE 518
   effect_amount DISABLE_TECH PERSIAN_CARAVANSERAI_ENABLER ATTR_DISABLE 552
   effect_amount DISABLE_TECH SILK_ROAD ATTR_DISABLE 499    
+else
 endif
 
 <ELEVATION_GENERATION>

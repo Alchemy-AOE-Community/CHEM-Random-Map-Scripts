@@ -1,4 +1,4 @@
-/* RREC_Arabia */
+/* GRK_01_Arabia */
 /* A Random Map Script by TechChariot */
 /* 3.4.23 */
 <PLAYER_SETUP>
@@ -30,15 +30,11 @@ behavior_version 2
 /* Remove Visual Effect of Dead Fish Trap */
 #const ON_GRID 278
 effect_amount GAIA_SET_ATTRIBUTE ON_GRID ATTR_STORAGE_VALUE 0
-if LOW_RESOURCES
-nomad_resources
-ai_info_map_type 141 1 0 0
-else
+
 ai_info_map_type ARABIA 0 0 0
-endif
-/* Disabling Trade Carts and Cogs for Multi-team Games */
-if 2_TEAM_GAME
-else
+
+/* Enabling lobby host to toggle trade */
+if LOW_RESOURCES
   #const TRADE_CART_ENABLER 161
   #const TRADE_COG_ENABLER 180
   #const TRADE_CARAVAN_ENABLER 48
@@ -50,7 +46,8 @@ else
   effect_amount DISABLE_TECH TRADE_CARAVAN_ENABLER ATTR_DISABLE 48
   effect_amount DISABLE_TECH HINDU_CARAVANSERAI_ENABLER ATTR_DISABLE 518
   effect_amount DISABLE_TECH PERSIAN_CARAVANSERAI_ENABLER ATTR_DISABLE 552
-  effect_amount DISABLE_TECH SILK_ROAD ATTR_DISABLE 499    
+  effect_amount DISABLE_TECH SILK_ROAD ATTR_DISABLE 499
+else    
 endif
 <ELEVATION_GENERATION>
 create_elevation 1 { base_terrain GRASS number_of_tiles 1000000 number_of_clumps 9320 set_scale_by_groups enable_balanced_elevation }
@@ -74,6 +71,17 @@ create_elevation 1 { base_terrain DLC_BLACK number_of_tiles 1657 number_of_clump
 create_elevation 2 { base_terrain GRASS number_of_tiles 1657 number_of_clumps 83 enable_balanced_elevation }
 else
 endif
+
+/* Heavy Swordsman Configuration */
+#const HEAVY_SWORDSMAN 76
+effect_amount SET_ATTRIBUTE HEAVY_SWORDSMAN ATTR_TRAITS 16
+effect_amount SET_ATTRIBUTE HEAVY_SWORDSMAN ATTR_LINE_OF_SIGHT 8
+effect_amount SET_ATTRIBUTE HEAVY_SWORDSMAN ATTR_SEARCH_RADIUS 6
+effect_amount SET_ATTRIBUTE HEAVY_SWORDSMAN ATTR_HITPOINTS 15
+effect_percent SET_ATTRIBUTE HEAVY_SWORDSMAN ATTR_MOVE_SPEED 90
+effect_amount SET_ATTRIBUTE HEAVY_SWORDSMAN ATTR_HERO_STATUS 66
+effect_amount SET_ATTRIBUTE HEAVY_SWORDSMAN ATTR_RELOAD_TIME 4
+
 <TERRAIN_GENERATION>
 #define EAGLE_FORMAT_COLLAPSE
 if EAGLE_FORMAT_COLLAPSE
@@ -111,11 +119,7 @@ endif
 #define CLASSIC_FOREST_CREATION
 if CLASSIC_FOREST_CREATION
 	/* Forest Creation */
-	if LOW_RESOURCES
-	create_terrain MF { base_terrain GRASS3 land_percent 12 number_of_clumps 32 clumping_factor 30 set_scale_by_groups }
-	else
 	create_terrain MF { base_terrain GRASS3 land_percent 12 number_of_clumps 32 clumping_factor 30 set_scale_by_groups set_avoid_player_start_areas 17 }
-	endif
 	/* Forest Mixing */
 	create_terrain FOREST { base_terrain MF land_percent 100 number_of_clumps 9320 set_scale_by_groups spacing_to_other_terrain_types 1 }
 	create_terrain BF { base_terrain MF land_percent 2 number_of_clumps 9320 set_scale_by_groups }
@@ -135,315 +139,6 @@ endif
 <OBJECTS_GENERATION>
 #const OFF_GRID 647
 /* BEGIN_OBJECTS_AUTOSCRIBE */
-if LOW_RESOURCES
-#const BUSH_GREEN 1360
-#const GRASS_PATCH 301
-#const PLANT 818
-#const SHRUB_GREEN 1362
-#const STATUE_COLUMN 1322
-#const TEMPLE_RUIN 1566
-#const WEEDS 1364
-if TINY_MAP
-elseif SMALL_MAP
-elseif MEDIUM_MAP
-elseif LARGE_MAP
-elseif HUGE_MAP
-elseif GIGANTIC_MAP
-endif
-create_object RELIC
-{
-set_gaia_object_only
-number_of_groups 1
-set_scaling_to_map_size
-avoid_forest_zone 1
-temp_min_distance_group_placement 32
-actor_area 1
-actor_area_radius 32
-}
-create_object RELIC
-{
-set_gaia_object_only
-number_of_groups 1
-avoid_forest_zone 1
-temp_min_distance_group_placement 32
-actor_area 2
-actor_area_radius 32
-avoid_actor_area 1
-find_closest
-}
-create_object RELIC
-{
-set_gaia_object_only
-number_of_groups 1
-avoid_forest_zone 1
-temp_min_distance_group_placement 32
-actor_area 3
-actor_area_radius 32
-avoid_actor_area 1
-avoid_actor_area 2
-find_closest
-}
-create_object RELIC
-{
-set_gaia_object_only
-number_of_groups 1
-avoid_forest_zone 1
-temp_min_distance_group_placement 32
-actor_area 4
-actor_area_radius 32
-avoid_actor_area 1
-avoid_actor_area 2
-avoid_actor_area 3
-find_closest
-}
-create_object RELIC
-{
-set_gaia_object_only
-number_of_groups 1
-avoid_forest_zone 1
-temp_min_distance_group_placement 32
-avoid_actor_area 1
-avoid_actor_area 2
-avoid_actor_area 3
-avoid_actor_area 4
-find_closest
-}
-create_object DLC_AFRICANBUSH
-{
-set_gaia_object_only
-number_of_groups 10000
-set_scaling_to_map_size
-avoid_forest_zone 3
-temp_min_distance_group_placement 36
-}
-create_object DLC_AFRICANBUSH
-{
-set_gaia_object_only
-number_of_groups 10000
-set_scaling_to_map_size
-avoid_forest_zone 3
-temp_min_distance_group_placement 36
-}
-create_object BOAR
-{
-set_gaia_object_only
-number_of_groups 10000
-set_scaling_to_map_size
-avoid_forest_zone 3
-temp_min_distance_group_placement 36
-actor_area 5
-actor_area_radius 12
-}
-create_object FORAGE
-{
-set_gaia_object_only
-number_of_objects 6
-number_of_groups 10000
-set_tight_grouping
-set_scaling_to_map_size
-avoid_forest_zone 3
-temp_min_distance_group_placement 36
-actor_area 6
-actor_area_radius 12
-avoid_actor_area 5
-find_closest
-}
-create_object GOLD
-{
-set_gaia_object_only
-number_of_objects 6
-number_of_groups 10000
-set_tight_grouping
-set_scaling_to_map_size
-avoid_forest_zone 3
-temp_min_distance_group_placement 36
-actor_area 7
-actor_area_radius 12
-avoid_actor_area 5
-avoid_actor_area 6
-find_closest
-}
-create_object STONE
-{
-set_gaia_object_only
-number_of_objects 4
-number_of_groups 10000
-set_tight_grouping
-set_scaling_to_map_size
-avoid_forest_zone 3
-temp_min_distance_group_placement 36
-actor_area 8
-actor_area_radius 12
-avoid_actor_area 5
-avoid_actor_area 6
-avoid_actor_area 7
-find_closest
-}
-create_object DEER
-{
-set_gaia_object_only
-number_of_objects rnd(3,4)
-number_of_groups 10000
-set_loose_grouping
-set_scaling_to_map_size
-avoid_forest_zone 1
-temp_min_distance_group_placement 36
-avoid_actor_area 5
-avoid_actor_area 6
-avoid_actor_area 7
-avoid_actor_area 8
-find_closest
-}
-create_object HAWK
-{
-set_gaia_object_only
-number_of_groups 4
-set_scaling_to_map_size
-temp_min_distance_group_placement 32
-force_placement
-}
-create_object GRASS_PATCH
-{
-set_gaia_object_only
-number_of_groups 10000
-set_scaling_to_map_size
-temp_min_distance_group_placement 14
-actor_area 9
-actor_area_radius 2
-}
-create_object FLOWER_BED
-{
-set_gaia_object_only
-number_of_groups 10000
-set_scaling_to_map_size
-temp_min_distance_group_placement 14
-actor_area 10
-actor_area_radius 2
-avoid_actor_area 9
-find_closest
-}
-create_object WEEDS
-{
-set_gaia_object_only
-number_of_groups 10000
-set_scaling_to_map_size
-temp_min_distance_group_placement 14
-actor_area 11
-actor_area_radius 2
-avoid_actor_area 9
-avoid_actor_area 10
-find_closest
-}
-create_object DLC_SAVANNAHPATCH
-{
-set_gaia_object_only
-number_of_groups 10000
-set_scaling_to_map_size
-temp_min_distance_group_placement 14
-actor_area 12
-actor_area_radius 2
-avoid_actor_area 9
-avoid_actor_area 10
-avoid_actor_area 11
-find_closest
-}
-create_object BUSH_GREEN
-{
-set_gaia_object_only
-number_of_groups 10000
-set_scaling_to_map_size
-temp_min_distance_group_placement 14
-actor_area 13
-actor_area_radius 2
-avoid_actor_area 9
-avoid_actor_area 10
-avoid_actor_area 11
-avoid_actor_area 12
-find_closest
-}
-create_object SHRUB_GREEN
-{
-set_gaia_object_only
-number_of_groups 10000
-set_scaling_to_map_size
-temp_min_distance_group_placement 14
-actor_area 14
-actor_area_radius 2
-avoid_actor_area 9
-avoid_actor_area 10
-avoid_actor_area 11
-avoid_actor_area 12
-avoid_actor_area 13
-find_closest
-}
-create_object PLANT
-{
-set_gaia_object_only
-number_of_groups 10000
-set_scaling_to_map_size
-temp_min_distance_group_placement 14
-avoid_actor_area 9
-avoid_actor_area 10
-avoid_actor_area 11
-avoid_actor_area 12
-avoid_actor_area 13
-avoid_actor_area 14
-find_closest
-}
-create_object TEMPLE_RUIN
-{
-set_gaia_object_only
-number_of_groups 10000
-set_scaling_to_map_size
-temp_min_distance_group_placement 72
-actor_area 15
-actor_area_radius 24
-}
-create_object ON_GRID
-{
-set_gaia_object_only
-number_of_groups 10000
-set_scaling_to_map_size
-temp_min_distance_group_placement 72
-second_object ROMAN_RUINS
-actor_area 16
-actor_area_radius 24
-avoid_actor_area 15
-find_closest
-}
-create_object STATUE_COLUMN
-{
-set_gaia_object_only
-number_of_objects 3
-number_of_groups 10000
-set_tight_grouping
-set_scaling_to_map_size
-temp_min_distance_group_placement 72
-avoid_actor_area 15
-avoid_actor_area 16
-find_closest
-}
-create_object ROCK
-{
-set_gaia_object_only
-number_of_groups 10000
-set_scaling_to_map_size
-avoid_forest_zone 1
-temp_min_distance_group_placement 16
-actor_area 17
-actor_area_radius 8
-}
-create_object ROCK2
-{
-set_gaia_object_only
-number_of_groups 10000
-set_scaling_to_map_size
-avoid_forest_zone 1
-temp_min_distance_group_placement 16
-avoid_actor_area 17
-find_closest
-}
-else
 #const BUSH_GREEN 1360
 #const GRASS_PATCH 301
 #const OFF_GRID 647
@@ -1418,7 +1113,7 @@ avoid_actor_area 10
 avoid_actor_area 71
 find_closest
 }
-create_object SCOUT
+create_object HEAVY_SWORDSMAN
 {
 set_place_for_every_player
 number_of_groups 1
@@ -1427,11 +1122,8 @@ avoid_actor_area 71
 avoid_actor_area 72
 find_closest
 }
-endif
 /* END_OBJECTS_AUTOSCRIBE */
 if REGICIDE  create_object KING { set_place_for_every_player find_closest } else endif
-if LOW_RESOURCES create_object VILLAGER { set_place_for_every_player avoid_forest_zone 2 temp_min_distance_group_placement 10 }  else endif
-
 
 <LAND_GENERATION>
 base_terrain GRASS

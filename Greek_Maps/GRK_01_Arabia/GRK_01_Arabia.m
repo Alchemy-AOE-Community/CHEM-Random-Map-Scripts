@@ -55,7 +55,7 @@ COMMAND = RMS_Processor_V4(B,LPM_exp);
 
 
 %
-%ObjectAutoscribeV8('RREC_Arabia.ods')
+%ObjectAutoscribeV8('GRK_01_Arabia.ods')
 %CODE = [Preface; Size_List; MLA]; %Adding Preface, Definitions, Random Statement to beginning of CODE
 
 CODE = [Preface; PL; COMMAND; MLA;];

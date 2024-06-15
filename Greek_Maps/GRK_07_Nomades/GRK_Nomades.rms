@@ -1,0 +1,641 @@
+/* Nomad Developed by ES 09/25/00 */
+/* Remastered with Greek Theming and named "Nomades" by BPDrej 9/25/22 */
+	
+<PLAYER_SETUP>
+#const BF 89
+#const GRAVEL 70
+
+random_placement
+nomad_resources
+ai_info_map_type NOMAD 1 0 0
+
+if 1_PLAYER_GAME
+elseif 2_PLAYER_GAME
+elseif 3_PLAYER_GAME
+elseif 4_PLAYER_GAME
+elseif 5_PLAYER_GAME
+elseif 6_PLAYER_GAME
+force_nomad_treaty
+elseif 7_PLAYER_GAME
+force_nomad_treaty
+else
+force_nomad_treaty
+endif
+
+/* Configuring Unit Spawn From Hero Trade Cart */
+#const OX_WAGON 1273
+effect_amount SET_ATTRIBUTE OX_WAGON ATTR_DEAD_ID 1142 /* Setting Dead Object of Ox Wagon to Water Buffalo */
+effect_amount SET_ATTRIBUTE OX_WAGON ATTR_BLOOD_ID 198 /* Setting Blood ID of Ox Wagon to El Cid */
+effect_amount SET_ATTRIBUTE EL_CID ATTR_DEAD_ID 293 /* Setting Dead Object of El Cid to Villager_Base_F */
+effect_amount SET_ATTRIBUTE EL_CID ATTR_BLOOD_ID 838 /* Setting Blood ID of El Cid to King Sancho */
+effect_amount SET_ATTRIBUTE KING_SANCHO ATTR_DEAD_ID 293 /* Setting Dead Object of King Sancho to Villager_Base_F */
+effect_amount SET_ATTRIBUTE KING_SANCHO ATTR_BLOOD_ID 840 /* Setting Blood ID of King Sancho to King Alfonso */
+effect_amount SET_ATTRIBUTE KING_ALFONSO ATTR_DEAD_ID 293 /* Setting Dead Object of King Alfonso to Villager_Base_F */
+effect_amount SET_ATTRIBUTE EL_CID ATTR_HITPOINTS 0 /* Setting Hitpoints of El Cid to Zero */
+effect_amount SET_ATTRIBUTE KING_SANCHO ATTR_HITPOINTS 0 /* Setting Hitpoints of King Sancho to Zero */
+effect_amount SET_ATTRIBUTE KING_ALFONSO ATTR_HITPOINTS 0 /* Setting Hitpoints of King Alfonso to Zero */
+
+effect_amount SET_ATTRIBUTE DLC_WATERBUFFALO ATTR_LINE_OF_SIGHT 0
+effect_amount SET_ATTRIBUTE OX_WAGON ATTR_MOVE_SPEED 1
+effect_amount SET_ATTRIBUTE DLC_WATERBUFFALO ATTR_MOVE_SPEED 1
+if TINY_MAP
+effect_percent MUL_ATTRIBUTE OX_WAGON ATTR_MOVE_SPEED 115
+effect_percent MUL_ATTRIBUTE DLC_WATERBUFFALO ATTR_MOVE_SPEED 115
+elseif SMALL_MAP
+effect_percent MUL_ATTRIBUTE OX_WAGON ATTR_MOVE_SPEED 139
+effect_percent MUL_ATTRIBUTE DLC_WATERBUFFALO ATTR_MOVE_SPEED 139
+elseif MEDIUM_MAP
+effect_percent MUL_ATTRIBUTE OX_WAGON ATTR_MOVE_SPEED 162
+effect_percent MUL_ATTRIBUTE DLC_WATERBUFFALO ATTR_MOVE_SPEED 162
+elseif LARGE_MAP
+effect_percent MUL_ATTRIBUTE OX_WAGON ATTR_MOVE_SPEED 193
+effect_percent MUL_ATTRIBUTE DLC_WATERBUFFALO ATTR_MOVE_SPEED 193
+elseif HUGE_MAP
+effect_percent MUL_ATTRIBUTE OX_WAGON ATTR_MOVE_SPEED 212
+effect_percent MUL_ATTRIBUTE DLC_WATERBUFFALO ATTR_MOVE_SPEED 212
+elseif GIGANTIC_MAP
+effect_percent MUL_ATTRIBUTE OX_WAGON ATTR_MOVE_SPEED 231
+effect_percent MUL_ATTRIBUTE DLC_WATERBUFFALO ATTR_MOVE_SPEED 231
+else
+endif
+
+/* Disabling Trade Carts and Cogs for Multi-team Games */
+if LOW_RESOURCES
+  #const TRADE_CART_ENABLER 161
+  #const TRADE_COG_ENABLER 180
+  #const TRADE_CARAVAN_ENABLER 48
+  #const HINDU_CARAVANSERAI_ENABLER 518
+  #const PERSIAN_CARAVANSERAI_ENABLER 552  
+  #const SILK_ROAD 499
+  effect_amount DISABLE_TECH TRADE_COG_ENABLER ATTR_DISABLE 180
+  effect_amount DISABLE_TECH TRADE_CART_ENABLER ATTR_DISABLE 161
+  effect_amount DISABLE_TECH TRADE_CARAVAN_ENABLER ATTR_DISABLE 48
+  effect_amount DISABLE_TECH HINDU_CARAVANSERAI_ENABLER ATTR_DISABLE 518
+  effect_amount DISABLE_TECH PERSIAN_CARAVANSERAI_ENABLER ATTR_DISABLE 552
+  effect_amount DISABLE_TECH SILK_ROAD ATTR_DISABLE 499    
+  else
+endif
+
+/* Heavy Swordsman Configuration */
+#const HEAVY_SWORDSMAN 704
+effect_amount SET_ATTRIBUTE HEAVY_SWORDSMAN ATTR_TRAITS 16
+effect_amount SET_ATTRIBUTE HEAVY_SWORDSMAN ATTR_LINE_OF_SIGHT 1
+effect_amount SET_ATTRIBUTE HEAVY_SWORDSMAN ATTR_SEARCH_RADIUS 1
+effect_amount SET_ATTRIBUTE HEAVY_SWORDSMAN ATTR_HITPOINTS 130
+effect_percent SET_ATTRIBUTE HEAVY_SWORDSMAN ATTR_MOVE_SPEED 130
+effect_amount SET_ATTRIBUTE HEAVY_SWORDSMAN ATTR_HERO_STATUS 66
+effect_amount SET_ATTRIBUTE HEAVY_SWORDSMAN ATTR_RELOAD_TIME 4
+effect_amount SET_ATTRIBUTE HEAVY_SWORDSMAN ATTR_ATTACK_GRAPHIC 862
+effect_amount SET_ATTRIBUTE HEAVY_SWORDSMAN ATTR_STANDING_GRAPHIC 868
+effect_amount SET_ATTRIBUTE HEAVY_SWORDSMAN ATTR_STANDING2_GRAPHIC 867
+effect_amount SET_ATTRIBUTE HEAVY_SWORDSMAN ATTR_DYING_GRAPHIC 865
+effect_amount SET_ATTRIBUTE HEAVY_SWORDSMAN ATTR_UNDEAD_GRAPHIC 865
+effect_amount SET_ATTRIBUTE HEAVY_SWORDSMAN ATTR_WALKING_GRAPHIC 872
+effect_amount SET_ATTRIBUTE HEAVY_SWORDSMAN ATTR_RUNNING_GRAPHIC 872
+effect_amount SET_ATTRIBUTE HEAVY_SWORDSMAN ATTR_NAME_ID 5077
+effect_amount SET_ATTRIBUTE HEAVY_SWORDSMAN ATTR_ICON_ID 184
+
+
+#const NNB 79
+
+start_random
+percent_chance 20
+#define B1
+percent_chance 20
+#define B2
+percent_chance 20
+#define B3
+percent_chance 20
+#define B4
+percent_chance 20
+#define B5
+end_random
+
+<LAND_GENERATION>
+base_terrain NNB
+
+create_player_lands 
+{ 
+    terrain_type DLC_DIRT4
+	base_size 2
+	base_elevation 1
+
+	if     B1
+		right_border 11 left_border 11 top_border 11 bottom_border 11
+		land_percent rnd(45,55) 
+	elseif B2
+		left_border 11 top_border 11 bottom_border 11
+		land_percent rnd(50,60)
+	elseif B3
+		right_border 11 top_border 11 bottom_border 11
+		land_percent rnd(50,60)
+	elseif B4
+		right_border 11 left_border 11 bottom_border 11 
+		land_percent rnd(50,60)
+	elseif B5
+		right_border 11 left_border 11 top_border 11
+		land_percent rnd(50,60)
+	endif
+
+	border_fuzziness 10
+	clumping_factor 10
+}
+
+<ELEVATION_GENERATION>
+create_elevation rnd(2,4)
+{
+	base_terrain DLC_DIRT4
+if TINY_MAP
+    number_of_clumps 7
+    number_of_tiles 750
+elseif SMALL_MAP
+    number_of_clumps 10
+    number_of_tiles 1080
+elseif MEDIUM_MAP
+    number_of_clumps 15
+    number_of_tiles 1500
+elseif LARGE_MAP
+    number_of_clumps 20
+    number_of_tiles 2088
+elseif HUGE_MAP
+    number_of_clumps 25
+    number_of_tiles 2520
+elseif GIGANTIC_MAP
+    number_of_clumps 30
+    number_of_tiles 3000
+else
+    number_of_clumps 120
+    number_of_tiles 12000
+endif
+    enable_balanced_elevation
+}
+
+<TERRAIN_GENERATION>
+
+#define OCEANIC_BORDER
+if OCEANIC_BORDER
+	/* Non-Navigable Beach Mask */
+	create_terrain DLC_DIRT4 { base_terrain NNB land_percent 100 number_of_clumps 9320 set_scale_by_groups height_limits 1 7 }
+	create_terrain DLC_DIRT4 { base_terrain NNB land_percent 100 number_of_clumps 9320 set_scale_by_groups height_limits 1 7 }
+	create_terrain DLC_DIRT4 { base_terrain NNB land_percent 100 number_of_clumps 9320 set_scale_by_groups height_limits 1 7 }
+	create_terrain DLC_DIRT4 { base_terrain NNB land_percent 100 number_of_clumps 9320 set_scale_by_groups height_limits 1 7 }
+	create_terrain DLC_DIRT4 { base_terrain NNB land_percent 100 number_of_clumps 9320 set_scale_by_groups height_limits 1 7 }
+	create_terrain DLC_DIRT4 { base_terrain NNB land_percent 100 number_of_clumps 9320 set_scale_by_groups height_limits 1 7 }
+	create_terrain DLC_DIRT4 { base_terrain NNB land_percent 100 number_of_clumps 9320 set_scale_by_groups height_limits 1 7 }
+	create_terrain DLC_DIRT4 { base_terrain NNB land_percent 100 number_of_clumps 9320 set_scale_by_groups height_limits 1 7 }
+
+	/* Navigable Beach */
+	create_terrain BEACH { base_terrain NNB land_percent 100 number_of_clumps 9320 set_scale_by_groups height_limits 0 0 spacing_to_other_terrain_types 1 }
+	create_terrain BEACH { base_terrain NNB land_percent 100 number_of_clumps 9320 set_scale_by_groups height_limits 0 0 spacing_to_other_terrain_types 1 }
+	create_terrain BEACH { base_terrain NNB land_percent 100 number_of_clumps 9320 set_scale_by_groups height_limits 0 0 spacing_to_other_terrain_types 1 }
+	create_terrain BEACH { base_terrain NNB land_percent 100 number_of_clumps 9320 set_scale_by_groups height_limits 0 0 spacing_to_other_terrain_types 1 }
+
+	/* Bright Water */
+	create_terrain DLC_WATER5 { base_terrain BEACH land_percent 100 number_of_clumps 9320 set_scale_by_groups spacing_to_other_terrain_types 1 }
+	create_terrain DLC_WATER5 { base_terrain BEACH land_percent 100 number_of_clumps 9320 set_scale_by_groups spacing_to_other_terrain_types 1 }
+	create_terrain DLC_WATER5 { base_terrain BEACH land_percent 100 number_of_clumps 9320 set_scale_by_groups spacing_to_other_terrain_types 1 }
+	create_terrain DLC_WATER5 { base_terrain BEACH land_percent 100 number_of_clumps 9320 set_scale_by_groups spacing_to_other_terrain_types 1 }
+
+	/* Regular Water */
+	create_terrain WATER { base_terrain DLC_WATER5 land_percent 100 number_of_clumps 9320 set_scale_by_groups spacing_to_other_terrain_types 1 }
+endif
+
+create_terrain MEDITERRANEAN_FOREST
+{
+	base_terrain DLC_DIRT4
+	land_percent rnd(8,9)
+	number_of_clumps rnd(10,20)
+	spacing_to_other_terrain_types 5
+	set_avoid_player_start_areas     
+	set_scale_by_groups
+}
+create_terrain BF
+{
+	base_terrain LEAVES
+	land_percent 1
+	number_of_clumps 3
+	spacing_to_other_terrain_types 3
+	set_avoid_player_start_areas     
+	set_scale_by_groups
+}
+create_terrain GRASS3
+{
+    base_terrain DLC_DIRT4
+	land_percent 5
+    number_of_clumps 5
+    spacing_to_other_terrain_types 0
+    set_scale_by_groups
+	terrain_mask 1
+}
+create_terrain DLC_DRYGRASS
+{
+    base_terrain DLC_DIRT4
+	land_percent 5
+    number_of_clumps 14
+    spacing_to_other_terrain_types 0
+    set_scale_by_size
+	terrain_mask 1
+}
+create_terrain GRAVEL
+{
+    base_terrain DLC_DIRT4
+	land_percent 1
+    number_of_clumps 20
+    spacing_to_other_terrain_types 0
+    set_scale_by_groups
+	terrain_mask 1
+}
+/* WATER */
+create_terrain MED_WATER
+{
+	base_terrain WATER
+	land_percent 40
+	number_of_clumps 10
+	spacing_to_other_terrain_types 2
+}
+create_terrain MED_WATER
+{
+	base_terrain WATER
+	land_percent 40
+	number_of_clumps 10
+	spacing_to_other_terrain_types 2
+}
+create_terrain DLC_WATER4
+{
+	base_terrain MED_WATER
+	land_percent 100
+	number_of_clumps 1000
+	spacing_to_other_terrain_types 3
+}
+create_terrain WATER
+{
+	base_terrain MED_WATER
+	land_percent 100
+	number_of_clumps 1000
+	spacing_to_other_terrain_types 0
+	terrain_mask 2
+}
+create_terrain MED_WATER
+{
+	base_terrain DLC_WATER4
+	land_percent 100
+	number_of_clumps 1000
+	spacing_to_other_terrain_types 0
+}
+create_terrain MED_WATER
+{
+	base_terrain DLC_WATER4
+	land_percent 100
+	number_of_clumps 1000
+	spacing_to_other_terrain_types 0
+}
+create_terrain DEEP_WATER
+{
+	base_terrain MED_WATER
+	land_percent 20
+	number_of_clumps 12
+	spacing_to_other_terrain_types 3
+}
+create_terrain DLC_WATER4
+{
+	base_terrain DEEP_WATER
+	land_percent 2
+	number_of_clumps 6
+	spacing_to_other_terrain_types 9
+}
+create_terrain MED_WATER
+{
+	base_terrain DEEP_WATER
+	land_percent 100
+	number_of_clumps 1000
+	spacing_to_other_terrain_types 0
+	terrain_mask 2
+}
+create_terrain MED_WATER
+{
+	base_terrain DLC_WATER4
+	land_percent 100
+	number_of_clumps 1000
+	spacing_to_other_terrain_types 0
+	terrain_mask 2
+}
+
+<OBJECTS_GENERATION>
+#const OG 647
+#const STATUE_COLUMN 1322
+#const TEMPLE_RUIN 1566
+#const ROCK2 1323
+#const ROCK3 389
+#const ROCK4 396
+#const FLARE 112
+
+create_object OG
+{
+	number_of_objects 1
+	number_of_groups 9320
+	set_scaling_to_map_size
+	temp_min_distance_group_placement 2
+	set_gaia_object_only
+	terrain_to_place_on BEACH
+	actor_area 1
+	actor_area_radius 10
+}
+
+
+if REGICIDE
+create_object KING
+{
+	set_place_for_every_player
+	min_distance_to_players 6
+	max_distance_to_players 6
+}
+endif
+create_object OX_WAGON
+{
+	number_of_objects 1
+    set_place_for_every_player
+    avoid_forest_zone 2
+    min_distance_group_placement 2
+	actor_area 99
+	actor_area_radius 16
+	avoid_actor_area 1
+	avoid_actor_area 99
+}
+
+create_object HEAVY_SWORDSMAN
+{
+    set_place_for_every_player
+    avoid_forest_zone 2
+    min_distance_group_placement 6
+    actor_area_to_place_in 99
+	terrain_to_place_on DLC_DIRT4
+}
+
+
+
+create_object RELIC
+{
+	number_of_objects            999
+	min_distance_to_players     25
+	temp_min_distance_group_placement 52
+}
+create_object SHEEP
+{
+	number_of_objects 2
+	number_of_groups 999
+	set_loose_grouping
+	set_gaia_object_only
+	temp_min_distance_group_placement 20
+	actor_area 98
+	actor_area_radius 8
+}
+
+create_object FLARE
+{
+	number_of_objects 12
+    set_place_for_every_player
+    temp_min_distance_group_placement 8
+    avoid_actor_area 98
+	actor_area_to_place_in 99
+	terrain_to_place_on DLC_DIRT4
+}
+
+
+create_object DEER
+{
+	number_of_objects 3
+	number_of_groups 999
+	set_loose_grouping
+	set_gaia_object_only
+	temp_min_distance_group_placement  21
+}
+create_object BOAR
+{
+	number_of_objects 1
+	number_of_groups 999
+	set_loose_grouping
+	set_gaia_object_only
+	temp_min_distance_group_placement  24
+}
+create_object GOLD
+{
+if TINY_MAP
+    number_of_groups 6
+    temp_min_distance_group_placement 18
+elseif SMALL_MAP
+    number_of_groups 10
+    temp_min_distance_group_placement 16
+elseif MEDIUM_MAP
+    number_of_groups 14
+    temp_min_distance_group_placement 16
+elseif LARGE_MAP
+    number_of_groups 21
+    temp_min_distance_group_placement 16
+elseif HUGE_MAP
+    number_of_groups 28
+    temp_min_distance_group_placement 16
+else
+    number_of_groups 999
+    temp_min_distance_group_placement 24
+endif
+    number_of_objects 6
+    group_placement_radius 3
+    set_tight_grouping
+    set_gaia_object_only
+    max_distance_to_other_zones 7
+    actor_area 66
+    actor_area_radius 4
+    avoid_forest_zone 2
+}
+create_object STONE
+{
+if TINY_MAP
+    number_of_groups 6
+    temp_min_distance_group_placement 18
+elseif SMALL_MAP
+    number_of_groups 9
+    temp_min_distance_group_placement 16
+elseif MEDIUM_MAP
+    number_of_groups 12
+    temp_min_distance_group_placement 16
+elseif LARGE_MAP
+  number_of_groups 17
+  temp_min_distance_group_placement 16
+elseif HUGE_MAP
+    number_of_groups 26
+    temp_min_distance_group_placement 16
+else
+    number_of_groups 999
+    temp_min_distance_group_placement 24
+endif
+    number_of_objects 6
+    group_placement_radius 3
+    set_tight_grouping 
+    set_gaia_object_only
+    max_distance_to_other_zones  7
+    actor_area 67
+    actor_area_radius 3
+    avoid_forest_zone 2
+    avoid_actor_area 66
+}
+create_object CYPRESS_TREE
+{
+    number_of_objects 15
+    set_gaia_object_only
+    set_scaling_to_map_size
+    avoid_actor_area 66
+    avoid_actor_area 67
+    avoid_forest_zone 2
+}
+create_object FORAGE
+{
+if TINY_MAP
+    number_of_groups 6
+    temp_min_distance_group_placement 18
+elseif SMALL_MAP
+    number_of_groups 9
+    temp_min_distance_group_placement 16
+elseif MEDIUM_MAP
+    number_of_groups 12
+    temp_min_distance_group_placement 16
+elseif LARGE_MAP
+  number_of_groups 17
+  temp_min_distance_group_placement 16
+elseif HUGE_MAP
+    number_of_groups 26
+    temp_min_distance_group_placement 16
+else
+    number_of_groups 999
+    temp_min_distance_group_placement 24
+endif
+    number_of_objects 6
+	set_tight_grouping
+    set_gaia_object_only
+    set_scaling_to_map_size
+	temp_min_distance_group_placement 25
+    avoid_actor_area 66
+    avoid_actor_area 67
+    avoid_forest_zone 2
+}
+create_object HAWK
+{
+   number_of_objects         4
+   set_scaling_to_map_size
+}
+/* FISHING */
+create_object DORADO
+{
+    number_of_objects 6
+    set_scaling_to_map_size
+    set_gaia_object_only
+    max_distance_to_other_zones 4
+    temp_min_distance_group_placement 8
+    actor_area 2
+    actor_area_radius 4
+}
+create_object SNAPPER
+{
+    number_of_objects 170
+    set_scaling_to_map_size
+    set_gaia_object_only
+    max_distance_to_other_zones 4
+    temp_min_distance_group_placement 8
+    avoid_actor_area 2
+}
+create_object SHORE_FISH
+{
+	number_of_objects 20
+	set_scaling_to_map_size
+	set_gaia_object_only
+	temp_min_distance_group_placement 10
+}
+/* Aesthetic */
+create_object TEMPLE_RUIN
+{
+	set_gaia_object_only
+	set_scaling_to_map_size
+	temp_min_distance_group_placement 72
+	actor_area 27
+	actor_area_radius 24
+	avoid_actor_area 66
+	avoid_actor_area 67
+	avoid_actor_area 28
+	avoid_actor_area 29
+	find_closest
+	terrain_to_place_on DLC_DIRT4
+}
+create_object ON_GRID
+{
+	set_gaia_object_only
+	number_of_groups 9320
+	set_scaling_to_map_size
+	temp_min_distance_group_placement 72
+	second_object ROMAN_RUINS
+	actor_area 28
+	actor_area_radius 24
+	avoid_actor_area 66
+	avoid_actor_area 67
+	avoid_actor_area 27
+	avoid_actor_area 29
+	find_closest
+	terrain_to_place_on DLC_DIRT4
+}
+create_object STATUE_COLUMN
+{
+	set_gaia_object_only
+	number_of_objects 3
+	number_of_groups 9320
+	set_tight_grouping
+	set_scaling_to_map_size
+	temp_min_distance_group_placement 72
+	actor_area 29
+	avoid_actor_area 66
+	avoid_actor_area 67
+	avoid_actor_area 27
+	avoid_actor_area 28
+	find_closest
+	terrain_to_place_on DLC_DIRT4
+}
+create_object ROCK
+{
+	number_of_objects 1
+	number_of_groups 99
+	set_tight_grouping
+	set_scaling_to_map_size
+	min_distance_to_players 20
+	min_distance_group_placement 5
+	temp_min_distance_group_placement 25
+	avoid_forest_zone 2
+	terrain_to_place_on DLC_DIRT4
+}
+create_object ROCK2
+{
+	number_of_objects 1
+	number_of_groups 99
+	set_tight_grouping
+	set_scaling_to_map_size
+	min_distance_group_placement 5
+	temp_min_distance_group_placement 25
+	terrain_to_place_on DLC_DIRT4
+}
+create_object ROCK3
+{
+	number_of_objects 1
+	number_of_groups 9999
+	temp_min_distance_group_placement 16
+	terrain_to_place_on WATER
+}
+create_object ROCK4
+{
+	number_of_objects 1
+	number_of_groups 9999
+	temp_min_distance_group_placement 16
+	terrain_to_place_on DEEP_WATER
+}
+create_object ROCK4
+{
+	number_of_objects 1
+	number_of_groups 9999
+	temp_min_distance_group_placement 16
+	terrain_to_place_on MED_WATER
+}

@@ -51,6 +51,16 @@ if LOW_RESOURCES
 else
 endif
 
+/* Heavy Swordsman Configuration */
+#const HEAVY_SWORDSMAN 76
+effect_amount SET_ATTRIBUTE HEAVY_SWORDSMAN ATTR_TRAITS 16
+effect_amount SET_ATTRIBUTE HEAVY_SWORDSMAN ATTR_LINE_OF_SIGHT 8
+effect_amount SET_ATTRIBUTE HEAVY_SWORDSMAN ATTR_SEARCH_RADIUS 6
+effect_amount SET_ATTRIBUTE HEAVY_SWORDSMAN ATTR_HITPOINTS 15
+effect_percent SET_ATTRIBUTE HEAVY_SWORDSMAN ATTR_MOVE_SPEED 90
+effect_amount SET_ATTRIBUTE HEAVY_SWORDSMAN ATTR_HERO_STATUS 66
+effect_amount SET_ATTRIBUTE HEAVY_SWORDSMAN ATTR_RELOAD_TIME 4
+
 <ELEVATION_GENERATION>
 
 /* Creating Small Rocky Outlying Islands */
@@ -1423,7 +1433,7 @@ actor_area_to_place_in 9
 avoid_actor_area 5
 avoid_actor_area 64
 }
-create_object SCOUT
+create_object HEAVY_SWORDSMAN
 {
 set_place_for_every_player
 avoid_forest_zone 1

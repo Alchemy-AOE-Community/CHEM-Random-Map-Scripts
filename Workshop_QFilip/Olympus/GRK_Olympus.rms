@@ -329,7 +329,8 @@ create_object HAWK {
     temp_min_distance_group_placement 20
 }
 
-create_object DLC_ACACIATREE {
+create_object CYPRESS_TREE {
+    resource_delta 50
     number_of_objects 5
     set_place_for_every_player
     set_gaia_object_only

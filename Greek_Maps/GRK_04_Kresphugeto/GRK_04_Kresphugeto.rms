@@ -1,6 +1,10 @@
 /* Hideout Developed by someone (maybe The_Prophet) some day in 2012 */
 /* Remastered with Greek Theming and Named "Kresphugeto" by TechChariot 09/15/22 */
 
+/* License is granted to use this map in Alchemy League Season 3 */
+/* Component Specification: https://github.com/Alchemy-AOE-Community/CHEM-Published-Specifications/blob/download-to-click-links/SCRIPTING/CHEM-CSRM-GRK-04.pdf */
+
+
 <PLAYER_SETUP>
 random_placement
 behavior_version 1

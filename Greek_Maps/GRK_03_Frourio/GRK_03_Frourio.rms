@@ -1,6 +1,9 @@
 /* Fortress developed by someone some day a very long time ago */
 /* Remastered with Greek Theming and Named "Frourio" by TechChariot 09/20/22 */
 
+/* License is granted to use this map in Alchemy League Season 3 */
+/* Component Specification: https://github.com/Alchemy-AOE-Community/CHEM-Published-Specifications/blob/download-to-click-links/SCRIPTING/CHEM-CSRM-GRK-03.pdf */
+
 <PLAYER_SETUP>
 random_placement
 behavior_version 1

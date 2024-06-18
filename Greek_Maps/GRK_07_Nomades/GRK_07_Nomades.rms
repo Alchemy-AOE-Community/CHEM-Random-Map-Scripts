@@ -1,6 +1,11 @@
 /* Nomad Developed by ES 09/25/00 */
 /* Remastered with Greek Theming and named "Nomades" by BPDrej 9/25/22 */
-	
+/* Reworked by TechChariot June 15th, 2024 */
+
+/* License is granted to use this map in Alchemy League Season 3 */
+/* Component Specification: https://github.com/Alchemy-AOE-Community/CHEM-Published-Specifications/blob/download-to-click-links/SCRIPTING/CHEM-CSRM-GRK-07.pdf */
+
+
 <PLAYER_SETUP>
 #const BF 89
 #const GRAVEL 70

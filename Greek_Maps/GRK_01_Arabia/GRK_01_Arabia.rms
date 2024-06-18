@@ -1,6 +1,10 @@
 /* GRK_01_Arabia */
 /* A Random Map Script by TechChariot */
 /* 3.4.23 */
+
+/* License is granted to use this map in Alchemy League Season 3 */
+/* Component Specification: https://github.com/Alchemy-AOE-Community/CHEM-Published-Specifications/blob/download-to-click-links/SCRIPTING/CHEM-CSRM-GRK-01.pdf */
+
 <PLAYER_SETUP>
 direct_placement
 behavior_version 2

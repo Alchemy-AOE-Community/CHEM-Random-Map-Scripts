@@ -1,6 +1,10 @@
 /* Prairie Developed by JP 09/25/00 */
 /* Remastered with Greek Theming and Named "Libadi" by TechChariot 08/16/00 */
 
+/* License is granted to use this map in Alchemy League Season 3 */
+/* Component Specification: https://github.com/Alchemy-AOE-Community/CHEM-Published-Specifications/blob/download-to-click-links/SCRIPTING/CHEM-CSRM-GRK-05.pdf */
+
+
 <PLAYER_SETUP>
 random_placement
 behavior_version 1

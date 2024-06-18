@@ -1,6 +1,10 @@
 /* Islands is a Map Original to the Game and is not considered Novel */
 /* Remastered with Greek Theming and Named "Nesia" by TechChariot 10/02/22 */
 
+/* License is granted to use this map in Alchemy League Season 3 */
+/* Component Specification: https://github.com/Alchemy-AOE-Community/CHEM-Published-Specifications/blob/download-to-click-links/SCRIPTING/CHEM-CSRM-GRK-06.pdf */
+
+
 <PLAYER_SETUP>
 direct_placement
 behavior_version 1

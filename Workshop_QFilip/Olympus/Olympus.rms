@@ -9,7 +9,7 @@ Notice of consent: As an author I agree to use this map in any AoE2 competition 
 
 <PLAYER_SETUP>
 grouped_by_team
-#const PLACEHOLDER 278
+#const PLACEHOLDER 647
 #const COLUMN_A 1322
 #const STATUEB 1280
 #const LOOT 472
@@ -75,6 +75,7 @@ create_land {
     base_elevation 5
     zone 1
     other_zone_avoidance_distance  19
+    clumping_factor -1
 }
 
 create_land {
@@ -85,6 +86,7 @@ create_land {
     base_elevation 5
     zone 1
     other_zone_avoidance_distance  19
+    clumping_factor -1
 }
 
 
@@ -292,22 +294,28 @@ create_object STONE {
 
 create_object DLC_IBEX {
     number_of_objects 5
-    number_of_groups 2
+    number_of_groups 1
     set_tight_grouping
+    set_place_for_every_player
+    min_distance_to_players 27
     set_gaia_object_only
     min_distance_to_map_edge 2
     temp_min_distance_group_placement 13
     terrain_to_place_on DIRT3
+    avoid_forest_zone 2
 }
 
 create_object DLC_IBEX {
     number_of_objects 5
-    number_of_groups 2
+    number_of_groups 1
     set_tight_grouping
     set_gaia_object_only
+    set_place_for_every_player
+    min_distance_to_players 27
     min_distance_to_map_edge 2
     temp_min_distance_group_placement 13
     terrain_to_place_on DLC_DIRT4
+    avoid_forest_zone 1
 }
 
 
@@ -381,7 +389,7 @@ create_object BONFIRE {
 create_object RELIC {
     number_of_objects 4
     set_gaia_object_only
-    temp_min_distance_group_placement 5
+    temp_min_distance_group_placement 10
     terrain_to_place_on DLC_ROCK
 }
 create_object FORAGE {
@@ -534,7 +542,7 @@ create_terrain DIRT {
 create_terrain MEDITERRANEAN_FOREST {
     base_terrain DESERT
     number_of_clumps 20
-    number_of_tiles 200
+    number_of_tiles 400
     set_avoid_player_start_areas 17
     if MAPSIZE_TINY
     else
@@ -545,7 +553,7 @@ create_terrain MEDITERRANEAN_FOREST {
 create_terrain DLC_ACACIAFOREST {
     base_terrain DIRT
     number_of_clumps 50
-    number_of_tiles 300
+    number_of_tiles 700
     set_avoid_player_start_areas 17
     if MAPSIZE_TINY
     else

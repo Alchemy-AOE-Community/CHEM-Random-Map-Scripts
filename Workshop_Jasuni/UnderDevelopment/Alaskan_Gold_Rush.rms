@@ -10,7 +10,7 @@ Yukon River Hills - river with some curves but not like in the flats, surrounded
 So basic idea is to split the map with a river between players. The river has gold (possibly all the gold, or I may have a small amount of gold on the shore).
 Start players with a mining camp near the river, and gold on the river
 
-TODO: elevate all land to above the river (should help with fortifications guarding against ships)
+TODO: ensure minimum distance between mining camps
 
 */
 
@@ -282,8 +282,9 @@ create_player_lands {
     terrain_type SNOW_LIGHT
     land_percent 100
     set_zone_by_team
-    other_zone_avoidance_distance 7 /* TODO adjust, possibly based on map size? */
+    other_zone_avoidance_distance 9 /* TODO adjust, possibly based on map size? */
     base_size 11
+    base_elevation 1
 }
 <ELEVATION_GENERATION>
 /*
@@ -295,14 +296,14 @@ create_elevation 3 {
     enable_balanced_elevation
 }
 */
-create_elevation 2 {
+create_elevation 3 {
     base_terrain SNOW_LIGHT
     number_of_clumps 16
     number_of_tiles 300
     set_scale_by_size
     enable_balanced_elevation
 }
-create_elevation 1 {
+create_elevation 2 {
     base_terrain SNOW_LIGHT
     number_of_clumps 16
     number_of_tiles 300
@@ -321,11 +322,33 @@ also FOREST_DEAD
 obsolete: GRASS_SNOW, DIRT_SNOW
 
 */
+create_terrain SNOW {
+    base_terrain WATER
+    land_percent 100
+
+}
+create_terrain WATER {
+    base_terrain SNOW
+    land_percent 100
+    height_limits 0 0
+    set_flat_terrain_only
+    spacing_to_other_terrain_types 1
+}
 create_terrain GRASS2 {
     base_terrain SNOW_LIGHT
     land_percent 100
     terrain_mask 1 /* 2 is under, 1 is over */
     number_of_clumps 29
+}
+create_terrain GRASS2 {
+    base_terrain SNOW
+    land_percent 100
+    terrain_mask 1 /* 2 is under, 1 is over */
+    number_of_clumps 999
+    beach_terrain DLC_GRAVELBEACH
+    /* default is ICYSHORE due to snow base terrain
+    beach_terrain ICYSHORE
+    */
 }
 create_terrain DLC_NEWSHALLOW {
     base_terrain WATER
@@ -363,7 +386,6 @@ create_terrain SNOW_FOREST {
     number_of_clumps 64
     set_avoid_player_start_areas
 }
-
 <OBJECTS_GENERATION>
 create_object TOWN_CENTER {
     max_distance_to_players 0

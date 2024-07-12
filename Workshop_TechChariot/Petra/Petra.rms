@@ -284,6 +284,7 @@ endif
 #const MULE_CART 1808
 #const OFF_GRID 647
 #const PLANT_DEAD 1365
+#const ROCK2 1323
 #const ROMAN_RUINS 856
 #const WILD_CAMEL 884
 if TINY_MAP

@@ -1,7 +1,5 @@
-/** Water in thawing version has to be updated, because currently it is undockable. **/
 
-
-/* Utqiagvik by Huehuecoyotl22 
+/* UTQIAVIK by Huehuecoyotl22 
 July 2024
 For Alchemy League S4 */
 
@@ -76,6 +74,7 @@ effect_amount GAIA_SET_ATTRIBUTE DLC_BEAR ATTR_TERRAIN_ID 7
 #const ICY_PASSABLES 26
 #const WATER_BROWN 96
 #const BUSH_FOREST 89
+#const WATER_AZURE 58
 
 start_random
   percent_chance 50
@@ -223,12 +222,43 @@ endif
 <TERRAIN_GENERATION>
 
 if AUTUMNIAN
+
+create_terrain DLC_GRAVELBEACH
+{
+base_terrain ICE
+land_percent                     100
+number_of_clumps                 300
+spacing_to_other_terrain_types   0
+set_flat_terrain_only
+terrain_mask 0
+}
+
+create_terrain WATER_AZURE
+{
+base_terrain DLC_GRAVELBEACH
+land_percent                     100
+number_of_clumps                 300
+spacing_to_other_terrain_types   0
+set_flat_terrain_only
+terrain_mask 2
+}
+
+create_terrain ICE
+{
+base_terrain WATER_AZURE
+land_percent                     100
+number_of_clumps                 300
+spacing_to_other_terrain_types   2
+set_flat_terrain_only
+terrain_mask 0
+}
+
 create_terrain WATER
 {
 base_terrain ICE
 land_percent                     10
 number_of_clumps                 300
-spacing_to_other_terrain_types   1
+spacing_to_other_terrain_types   0
 set_flat_terrain_only
 terrain_mask 2
 }
@@ -238,7 +268,7 @@ base_terrain ICE
 land_percent                    4
 number_of_clumps                 32
 set_avoid_player_start_areas
-spacing_to_other_terrain_types 1
+spacing_to_other_terrain_types 2
 set_flat_terrain_only     
 }
 create_terrain SNOW_FOREST
@@ -438,6 +468,7 @@ base_terrain ICE
 terrain_mask 0
 land_percent 90
 number_of_clumps 200
+spacing_to_other_terrain_types 0
 }
 create_terrain DEEP_WATER
 {
@@ -445,6 +476,7 @@ base_terrain SNOW_STRONG
 terrain_mask 0
 land_percent 90
 number_of_clumps 200
+spacing_to_other_terrain_types 0
 }
 create_terrain WATER
 {
@@ -488,9 +520,20 @@ spacing_to_other_terrain_types 2
 height_limits 0 0
 set_flat_terrain_only
 }
-
-
 endif
+
+create_terrain ICY_PASSABLES
+{
+base_layer DLC_GRAVELBEACH
+land_percent                     4
+number_of_clumps                 30
+spacing_to_other_terrain_types   0
+set_flat_terrain_only
+terrain_mask 0
+}
+
+
+
 /***********************************************************/
 if WINTERIAN
 create_terrain WATER
@@ -941,7 +984,7 @@ create_object SHORE_FISH
   set_gaia_object_only
  temp_min_distance_group_placement  3
 }
-
+/*
 create_object SHORE_FISH
 {
   number_of_objects                   200
@@ -950,6 +993,7 @@ create_object SHORE_FISH
   max_distance_to_other_zones 1
   second_object DLC_BEAR
 }
+*/
 create_object SALMON
 {
   number_of_objects                   200
@@ -1035,6 +1079,25 @@ create_elevation        2
   base_layer			MUD
   number_of_clumps 		16
   number_of_tiles 		1000
+  set_scale_by_groups
+  enable_balanced_elevation
+}
+
+create_elevation        4
+{
+  base_terrain                DLC_ROCK
+  number_of_clumps 		16
+  number_of_tiles 		1000
+  spacing 2
+  set_scale_by_groups
+  enable_balanced_elevation
+}
+
+create_elevation        4
+{
+  base_terrain                DLC_ROCK
+  number_of_clumps 		24
+  number_of_tiles 		200
   set_scale_by_groups
   enable_balanced_elevation
 }

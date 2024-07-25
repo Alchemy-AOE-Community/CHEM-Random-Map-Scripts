@@ -904,7 +904,8 @@ create_object VILLAGER
 	min_distance_to_players 4
 	max_distance_to_players 4
 }
-create_object SHARKATZOR
+#const EAGLE_SCOUT 751
+create_object EAGLE_SCOUT
 {
 	set_place_for_every_player
 	min_distance_to_players 6

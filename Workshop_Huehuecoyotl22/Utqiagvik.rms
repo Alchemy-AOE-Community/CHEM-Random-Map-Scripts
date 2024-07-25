@@ -723,14 +723,16 @@ endif
  }
 
 endif
-
-create_object SHARKATZOR
+/*
+#const EAGLE_SCOUT 751
+create_object EAGLE_SCOUT
 {
   number_of_objects             1
   set_place_for_every_player
   min_distance_to_players       7
   max_distance_to_players       9
  }
+*/
  
  if LUDIKRIS_MAP
 create_object RELIC
@@ -916,6 +918,7 @@ create_object DLC_BEAR
   temp_min_distance_group_placement 16
   min_distance_to_players 30
   terrain_to_place_on SNOW_STRONG
+resource_delta 200
 } 
 create_object DLC_BEAR
 {
@@ -925,6 +928,7 @@ create_object DLC_BEAR
   temp_min_distance_group_placement 16
     min_distance_to_players 30
 	terrain_to_place_on SNOW_STRONG
+resource_delta 200
 
 }
 

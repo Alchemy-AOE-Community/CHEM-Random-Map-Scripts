@@ -6,6 +6,26 @@ Date of origination: 05.07.2024
 Notice of consent: As an author I agree to use this map in any AoE2 competition after 2024-10-26. Prior to this date map can only be used in Alchemy League Season 4
 */
 <PLAYER_SETUP>
+
+/* Alaskan Bears */
+#const ALASKAN_BEAR 810
+#const DEAD_BOAR 356
+effect_amount GAIA_SET_ATTRIBUTE DEAD_BOAR ATTR_STANDING_GRAPHIC 8239
+effect_amount GAIA_SET_ATTRIBUTE ALASKAN_BEAR ATTR_ATTACK_GRAPHIC 8236
+effect_amount GAIA_SET_ATTRIBUTE ALASKAN_BEAR ATTR_STANDING_GRAPHIC 8238
+effect_amount GAIA_SET_ATTRIBUTE ALASKAN_BEAR ATTR_STANDING2_GRAPHIC 8238
+effect_amount GAIA_SET_ATTRIBUTE ALASKAN_BEAR ATTR_DYING_GRAPHIC 8237
+effect_amount GAIA_SET_ATTRIBUTE ALASKAN_BEAR ATTR_UNDEAD_GRAPHIC 8237
+effect_amount GAIA_SET_ATTRIBUTE ALASKAN_BEAR ATTR_WALKING_GRAPHIC 8240
+effect_amount GAIA_SET_ATTRIBUTE ALASKAN_BEAR ATTR_RUNNING_GRAPHIC 8241
+effect_amount GAIA_SET_ATTRIBUTE ALASKAN_BEAR ATTR_NAME_ID 5713
+effect_amount GAIA_SET_ATTRIBUTE ALASKAN_BEAR ATTR_ICON_ID 151
+effect_amount GAIA_SET_ATTRIBUTE ALASKAN_BEAR ATTR_STORAGE_VALUE 510
+effect_amount GAIA_SET_ATTRIBUTE ALASKAN_BEAR ATTR_HERO_STATUS 66
+effect_amount GAIA_SET_ATTRIBUTE ALASKAN_BEAR ATTR_HITPOINTS 24
+effect_amount GAIA_SET_ATTRIBUTE ALASKAN_BEAR ATTR_LINE_OF_SIGHT 5
+effect_amount GAIA_SET_ATTRIBUTE ALASKAN_BEAR ATTR_SEARCH_RADIUS 5
+
 grouped_by_team
 #const PLACEHOLDER 647
 start_random
@@ -119,11 +139,9 @@ create_object VILLAGER {
     actor_area_to_place_in 23
     avoid_actor_area 16
 }
-create_object SCOUT { 
+create_object EAGLE_WARRIOR { 
     set_place_for_every_player
     max_distance_to_players 6
-    actor_area_to_place_in 24
-    avoid_actor_area 23
 }
 
 create_object DLC_AUTUMNTREE {
@@ -155,51 +173,50 @@ create_object FORAGE {
     set_gaia_object_only
     avoid_forest_zone 2
     avoid_actor_area 17
-    avoid_actor_area 18
-    max_distance_to_players 13
-    min_distance_to_players 11
+    max_distance_to_players 12
+    min_distance_to_players 10
     find_closest_to_map_edge
 }
 
-create_object BOAR {
-    number_of_objects 1
+create_object ALASKAN_BEAR {
     set_gaia_object_only
-    min_distance_to_players 20
+    set_gaia_unconvertible
+    number_of_objects 1
     terrain_to_place_on SNOW
     temp_min_distance_group_placement 10
     avoid_actor_area 14
     max_distance_to_other_zones 2
     if MAPSIZE_TINY
-        number_of_groups 3
+        number_of_objects 3
     elseif MAPSIZE_SMALL
-        number_of_groups 3
+        number_of_objects 3
     elseif MAPSIZE_MEDIUM
-        number_of_groups 4
+        number_of_objects 4
     else
-        number_of_groups 6
+        number_of_objects 6
     endif
 }
 
-create_object BOAR {
-    number_of_objects 1
+create_object ALASKAN_BEAR {
     set_gaia_object_only
-    min_distance_to_players 20
+    set_gaia_unconvertible
+    number_of_objects 1
     terrain_to_place_on GRASS2
     temp_min_distance_group_placement 10
     avoid_actor_area 14
     max_distance_to_other_zones 2
     if MAPSIZE_TINY
-        number_of_groups 3
+        number_of_objects 3
     elseif MAPSIZE_SMALL
-        number_of_groups 3
+        number_of_objects 3
     elseif MAPSIZE_MEDIUM
-        number_of_groups 4
+        number_of_objects 4
     else
-        number_of_groups 6
+        number_of_objects 6
     endif
 }
 
-create_object DLC_BEAR {
+create_object WOLF {
     number_of_objects 1
     set_gaia_object_only
     terrain_to_place_on GRASS2
@@ -217,7 +234,7 @@ create_object DLC_BEAR {
     endif
 }
 
-create_object DLC_BEAR {
+create_object WOLF {
     number_of_objects 1
     number_of_groups 6
     set_gaia_object_only

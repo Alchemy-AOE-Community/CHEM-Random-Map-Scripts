@@ -233,6 +233,7 @@ endif
 /* Configuring Eagle Scout */
 #const SHARKATZOR 1222
 #const EXPLOSION 1614
+/*
 effect_amount SET_ATTRIBUTE SHARKATZOR ATTR_TRAITS 16
 effect_amount SET_ATTRIBUTE SHARKATZOR ATTR_ATTACK_GRAPHIC 846
 effect_amount SET_ATTRIBUTE SHARKATZOR ATTR_STANDING_GRAPHIC 846
@@ -262,6 +263,35 @@ effect_amount SET_ATTRIBUTE SHARKATZOR ATTR_TRAIN_BUTTON 4
 effect_amount SET_ATTRIBUTE SHARKATZOR ATTR_TRAIN_TIME 60
 effect_amount SET_ATTRIBUTE SHARKATZOR ATTR_WOOD_COST 75
 effect_amount SET_ATTRIBUTE SHARKATZOR ATTR_GOLD_COST 75
+*/
+
+
+effect_amount SET_ATTRIBUTE HUNTING_WOLF ATTR_SHOWN_ATTACK 4
+effect_amount ADD_ATTRIBUTE HUNTING_WOLF ATTR_ATTACK -1028 /* -(4*256 + 4) : subtracts 4 melee damage from its base of 8 damage. */
+
+/* Alaskan Bears */
+#define SPECIAL_BEAR_DEFINED
+#const ALASKAN_BEAR 810 /* IRON_BOAR */
+#const DEAD_BOAR 356
+effect_amount GAIA_SET_ATTRIBUTE DEAD_BOAR ATTR_STANDING_GRAPHIC 8239
+effect_amount GAIA_SET_ATTRIBUTE ALASKAN_BEAR ATTR_ATTACK_GRAPHIC 8236
+effect_amount GAIA_SET_ATTRIBUTE ALASKAN_BEAR ATTR_STANDING_GRAPHIC 8238
+effect_amount GAIA_SET_ATTRIBUTE ALASKAN_BEAR ATTR_STANDING2_GRAPHIC 8238
+effect_amount GAIA_SET_ATTRIBUTE ALASKAN_BEAR ATTR_DYING_GRAPHIC 8237
+effect_amount GAIA_SET_ATTRIBUTE ALASKAN_BEAR ATTR_UNDEAD_GRAPHIC 8237
+effect_amount GAIA_SET_ATTRIBUTE ALASKAN_BEAR ATTR_WALKING_GRAPHIC 8240
+effect_amount GAIA_SET_ATTRIBUTE ALASKAN_BEAR ATTR_RUNNING_GRAPHIC 8241
+effect_amount GAIA_SET_ATTRIBUTE ALASKAN_BEAR ATTR_NAME_ID 5713
+effect_amount GAIA_SET_ATTRIBUTE ALASKAN_BEAR ATTR_ICON_ID 151
+effect_amount GAIA_SET_ATTRIBUTE ALASKAN_BEAR ATTR_STORAGE_VALUE 510
+effect_amount GAIA_SET_ATTRIBUTE ALASKAN_BEAR ATTR_HERO_STATUS 66
+effect_amount GAIA_SET_ATTRIBUTE ALASKAN_BEAR ATTR_HITPOINTS 24
+effect_amount GAIA_SET_ATTRIBUTE ALASKAN_BEAR ATTR_LINE_OF_SIGHT 5
+effect_amount GAIA_SET_ATTRIBUTE ALASKAN_BEAR ATTR_SEARCH_RADIUS 5
+
+/* TODO check what happens if I change the dead id for the iron boar? bear_dead is 489
+Looks like no bonus damage, so just 12-2 damage against the hunting wolf
+ */
 
 #const ON_GRID 278 /* 278 - dead fish trap; 1291 - Invisible object that keeps player alive */
 
@@ -274,6 +304,13 @@ effect_amount SET_ATTRIBUTE GOLD ATTR_TERRAIN_ID 7
 effect_amount GAIA_SET_ATTRIBUTE GOLD ATTR_STORAGE_VALUE 400 */
 effect_amount GAIA_SET_ATTRIBUTE ON_GRID ATTR_STORAGE_VALUE 0
 
+#const SEA_WALL 788
+
+effect_amount ENABLE_OBJECT SEA_WALL ATTR_ENABLE 0
+effect_amount SET_ATTRIBUTE SEA_WALL ATTR_TRAIN_LOCATION 118 /* builder */
+effect_amount SET_ATTRIBUTE SEA_WALL ATTR_TRAIN_BUTTON 5 
+effect_amount SET_ATTRIBUTE SEA_WALL ATTR_STONE_COST 0 /* remove stone cost - it's pretty flimsy, too much so to justify a stone cost. Normally costs 5 wood/5 stone with a 5 second build time. note: can be used to wall in opponent's docks (which is a potential issue) */
+
 <LAND_GENERATION>
 base_terrain WATER /*
 DLC_NEWSHALLOW  - will want to put a terrain mask on it, but DLC_NEWSHALLOW will allow for wading across the river. MUDDY_SHALLOW might also be an option, but likely won't look right. */
@@ -282,7 +319,23 @@ create_player_lands {
     terrain_type SNOW_LIGHT
     land_percent 100
     set_zone_by_team
-    other_zone_avoidance_distance 9 /* TODO adjust, possibly based on map size? */
+    if AT_MOST_TINY
+        other_zone_avoidance_distance 9 /* TODO confirm these sizes are satisfactory, and adjust resource amounts accordingly; note that any smaller than this causes issues with the way terrain is generated (right now a distance of 8 has a chance of water rather than shallows in the middle of the river though parts of the river) */
+    elseif MAPSIZE_LUDICROUS
+        other_zone_avoidance_distance 16
+    elseif AT_LEAST_MONSTROUS
+        other_zone_avoidance_distance 15
+    elseif AT_LEAST_COLOSSAL
+        other_zone_avoidance_distance 14
+    elseif AT_LEAST_MASSIVE
+        other_zone_avoidance_distance 13
+    elseif AT_LEAST_HUGE
+        other_zone_avoidance_distance 12
+    elseif AT_LEAST_NORMAL
+        other_zone_avoidance_distance 11
+    else
+        other_zone_avoidance_distance 10
+    endif
     base_size 11
     base_elevation 1
 }
@@ -405,20 +458,22 @@ if REGICIDE
         find_closest
     }
 endif
+/*
 create_object SHARKATZOR {
     set_place_for_every_player
     min_distance_to_players 7
     max_distance_to_players 9
     set_circular_placement
 }
-/* TODO test and consider seeing if I can rename it White Fang; Also weaken significantly (should have less attack, but note it does take a lot of bonus damage) 
+*/
+/* TODO consider seeing if I can rename it White Fang
+*/
 create_object HUNTING_WOLF { 
     set_place_for_every_player
     min_distance_to_players 7
     max_distance_to_players 9
     set_circular_placement
 }
-*/
 create_object HOUSE {
     set_place_for_every_player
     min_distance_to_players 10
@@ -481,14 +536,8 @@ create_object GOLD {
     number_of_objects 9320
     /* resource_delta -400 */
 } 
-/* create player resources - include forage bushes, maybe 1 boar, sheep?, cow?, goat, goose?, pig?
-and deer
-
-wild animals: wolf, DLC_BEAR, DLC_SNOWLEOPARD?
-
-players could start with a HUNTING_WOLF
-
-TODO probably will need a starting gold pile, if only for balance reasons (getting kicked off of water would mean getting kicked off of gold access, and would be bad, so need some gold at home to ease comeback potential) */
+/* create player resources - 
+ */
 create_object FORAGE {
     number_of_objects 5
     number_of_groups 2
@@ -550,7 +599,7 @@ create_object STONE {
     avoid_actor_area 100
     avoid_actor_area 102
 }
-create_object GOLD { /* TODO consider adjusting? */
+create_object GOLD { 
     number_of_objects 4
     number_of_groups 3
     temp_min_distance_group_placement 7
@@ -728,19 +777,35 @@ create_object STONE {
         temp_min_distance_group_placement 90
     endif
 }
-create_object DLC_BEAR {
-    number_of_groups 2
-    set_loose_grouping
-    set_place_for_every_player
-    set_gaia_object_only
-    set_circular_placement
-    min_distance_to_players 36
-    temp_min_distance_group_placement 21
-    avoid_forest_zone 1
-    min_distance_group_placement 19 /* should only be wolves after this */
-    avoid_actor_area 100
-    terrain_to_place_on SNOW_LIGHT
-}
+if SPECIAL_BEAR_DEFINED
+    create_object ALASKAN_BEAR { /* TODO improve bear placement */
+        number_of_groups 3
+        set_loose_grouping
+        set_place_for_every_player
+        set_gaia_object_only
+        set_circular_placement
+        min_distance_to_players 36
+        temp_min_distance_group_placement 21
+        avoid_forest_zone 1
+        min_distance_group_placement 19 /* should only be wolves after this */
+        avoid_actor_area 100
+        terrain_to_place_on SNOW_LIGHT
+    }
+else
+    create_object DLC_BEAR {
+        number_of_groups 2
+        set_loose_grouping
+        set_place_for_every_player
+        set_gaia_object_only
+        set_circular_placement
+        min_distance_to_players 36
+        temp_min_distance_group_placement 21
+        avoid_forest_zone 1
+        min_distance_group_placement 19 /* should only be wolves after this */
+        avoid_actor_area 100
+        terrain_to_place_on SNOW_LIGHT
+    }
+endif
 create_object WOLF {
     number_of_groups 4
     set_scaling_to_map_size

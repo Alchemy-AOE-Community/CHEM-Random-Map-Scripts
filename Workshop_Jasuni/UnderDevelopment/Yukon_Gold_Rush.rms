@@ -10,7 +10,10 @@ Yukon River Hills - river with some curves but not like in the flats, surrounded
 So basic idea is to split the map with a river between players. The river has gold (possibly all the gold, or I may have a small amount of gold on the shore).
 Start players with a mining camp near the river, and gold on the river
 
-TODO: ensure minimum distance between mining camps
+TODO: ensure minimum distance between mining camps, ensure that a few sheep start near TC
+
+TODO: things for playtesting: gold balance (and how important the river is), the practicalities of sea walls (probably not very, since its so flimsy - but may be usable for walling in a dock, which would be an issue) - may want to remove.
+Balance of bear placements (not really tested all that much), and thoughts on the hunting wolf scout.
 
 */
 
@@ -568,9 +571,17 @@ create_object DEER {
     avoid_forest_zone 1
 
 }
+create_object DLC_GOAT { /* 2 goats that start under player control, plus 6 that start near TC */
+    number_of_objects 2
+    set_place_for_every_player
+    min_distance_group_placement 2
+    set_loose_grouping
+    max_distance_to_players 5
+    avoid_forest_zone 1
+}
 create_object DLC_GOAT {
     number_of_objects 2
-    number_of_groups 4
+    number_of_groups 3
     temp_min_distance_group_placement 7
     min_distance_group_placement 2
     set_loose_grouping

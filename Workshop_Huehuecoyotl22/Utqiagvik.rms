@@ -47,6 +47,25 @@ effect_amount SET_ATTRIBUTE SHARKATZOR ATTR_TRAIN_TIME 60
 effect_amount SET_ATTRIBUTE SHARKATZOR ATTR_WOOD_COST 75
 effect_amount SET_ATTRIBUTE SHARKATZOR ATTR_GOLD_COST 75
 
+/* Alaskan Bears */
+#const ALASKAN_BEAR 810
+#const DEAD_BOAR 356
+effect_amount GAIA_SET_ATTRIBUTE DEAD_BOAR ATTR_STANDING_GRAPHIC 8239
+effect_amount GAIA_SET_ATTRIBUTE ALASKAN_BEAR ATTR_ATTACK_GRAPHIC 8236
+effect_amount GAIA_SET_ATTRIBUTE ALASKAN_BEAR ATTR_STANDING_GRAPHIC 8238
+effect_amount GAIA_SET_ATTRIBUTE ALASKAN_BEAR ATTR_STANDING2_GRAPHIC 8238
+effect_amount GAIA_SET_ATTRIBUTE ALASKAN_BEAR ATTR_DYING_GRAPHIC 8237
+effect_amount GAIA_SET_ATTRIBUTE ALASKAN_BEAR ATTR_UNDEAD_GRAPHIC 8237
+effect_amount GAIA_SET_ATTRIBUTE ALASKAN_BEAR ATTR_WALKING_GRAPHIC 8240
+effect_amount GAIA_SET_ATTRIBUTE ALASKAN_BEAR ATTR_RUNNING_GRAPHIC 8241
+effect_amount GAIA_SET_ATTRIBUTE ALASKAN_BEAR ATTR_NAME_ID 5713
+effect_amount GAIA_SET_ATTRIBUTE ALASKAN_BEAR ATTR_ICON_ID 151
+effect_amount GAIA_SET_ATTRIBUTE ALASKAN_BEAR ATTR_STORAGE_VALUE 510
+effect_amount GAIA_SET_ATTRIBUTE ALASKAN_BEAR ATTR_HERO_STATUS 66
+effect_amount GAIA_SET_ATTRIBUTE ALASKAN_BEAR ATTR_HITPOINTS 24
+effect_amount GAIA_SET_ATTRIBUTE ALASKAN_BEAR ATTR_LINE_OF_SIGHT 5
+effect_amount GAIA_SET_ATTRIBUTE ALASKAN_BEAR ATTR_SEARCH_RADIUS 5
+
   if 2_PLAYER_GAME
       direct_placement
   else
@@ -62,7 +81,7 @@ effect_amount SET_ATTRIBUTE SHARKATZOR ATTR_GOLD_COST 75
 #const TREE_SNOWY 413
 
 effect_amount GAIA_UPGRADE_UNIT TREE_SNOWY BUSH_SNOWY 0
-effect_amount GAIA_SET_ATTRIBUTE DLC_BEAR ATTR_TERRAIN_ID 7
+effect_amount GAIA_SET_ATTRIBUTE ALASKAN_BEAR ATTR_TERRAIN_ID 7
 
 
 <LAND_GENERATION>
@@ -910,26 +929,25 @@ create_object FORAGE {
 	max_distance_to_other_zones  4
 }
 
-create_object DLC_BEAR
+create_object ALASKAN_BEAR
 {
   number_of_objects 	1
   number_of_groups          10
   set_gaia_object_only
+set_gaia_unconvertible
   temp_min_distance_group_placement 16
   min_distance_to_players 30
   terrain_to_place_on SNOW_STRONG
-resource_delta 200
 } 
-create_object DLC_BEAR
+create_object ALASKAN_BEAR
 {
   number_of_objects 	1
   number_of_groups          10
   set_gaia_object_only
+set_gaia_unconvertible
   temp_min_distance_group_placement 16
     min_distance_to_players 30
 	terrain_to_place_on SNOW_STRONG
-resource_delta 200
-
 }
 
 if BATTLE_ROYALE

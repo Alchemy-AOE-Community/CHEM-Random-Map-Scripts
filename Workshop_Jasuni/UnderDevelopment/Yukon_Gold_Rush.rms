@@ -794,6 +794,7 @@ if SPECIAL_BEAR_DEFINED
         set_loose_grouping
         set_place_for_every_player
         set_gaia_object_only
+        set_gaia_unconvertible /* supposed to make it stay in place more - personally don't care for this behavior. */
         set_circular_placement
         min_distance_to_players 36
         temp_min_distance_group_placement 21

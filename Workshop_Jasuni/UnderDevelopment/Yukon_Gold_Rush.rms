@@ -10,8 +10,6 @@ Yukon River Hills - river with some curves but not like in the flats, surrounded
 So basic idea is to split the map with a river between players. The river has gold (possibly all the gold, or I may have a small amount of gold on the shore).
 Start players with a mining camp near the river, and gold on the river
 
-TODO: ensure minimum distance between mining camps, ensure that a few sheep start near TC
-
 TODO: things for playtesting: gold balance (and how important the river is), the practicalities of sea walls (probably not very, since its so flimsy - but may be usable for walling in a dock, which would be an issue) - may want to remove.
 Balance of bear placements (not really tested all that much), and thoughts on the hunting wolf scout.
 
@@ -485,12 +483,8 @@ create_object HOUSE {
     find_closest
     set_circular_placement
 }
-/* challenge: ensure that the mining camps/villagers can't start close to each other. If I can also get other stuff to stay away from it too, that would be nice as well.
 
-idea: create a placeholder object for each player. Perhaps have a neutral placeholder object that spawns on several locations on the river */
-
-/* TODO finish section in a way that guarantees separate mining camps */
-
+/* want mining camps and villagers to be placed away from opponents. Unfortunately, best way I can figure out to do that doesn't guarantee that they'll be together. */
 create_object MINING_CAMP {
     terrain_to_place_on DLC_NEWSHALLOW
     set_place_for_every_player
@@ -517,7 +511,7 @@ create_object VILLAGER {
     actor_area_radius 12
 }
 
-/* TODO best method I can figure out: does risk the possibility of villagers starting seperate from the mining camp though. */
+/* best method I can figure out: does risk the possibility of villagers starting seperate from the mining camp though. */
 
 create_object GOLD {
     set_gaia_object_only
@@ -555,7 +549,7 @@ create_object GOLD {
     number_of_groups 99
     temp_min_distance_group_placement 3
 }
-/* create player resources - TODO is breaking with 2 player miniature stress test.
+/* create player resources 
  */
 create_object STONE {
     number_of_objects 5
@@ -611,7 +605,7 @@ create_object FORAGE {
     avoid_forest_zone 3
     actor_area 102
     actor_area_radius 3
-    /* avoid_actor_area 101  stone mines TODO check that this doesn't cause issues */
+    /* avoid_actor_area 101  - causes issues */
     avoid_actor_area 103 /* gold mines */
 }
 create_object DEER {

@@ -1,0 +1,1354 @@
+
+/* Chandalar Lake */
+
+/* 
+by Zetnus
+zetnus@outlook.com
+Zetnus#6414 on Discord
+
+21-07-2024
+
+Notice of consent to use the random map script in the Alchemy
+AOE Competition to which it is submitted, also meaning that participants can make
+money streaming their point-of-view playing on the custom map.
+
+Link to any applicable component specification, giving high-level overview of map
+features.
+https://github.com/Alchemy-AOE-Community/CHEM-Published-Specifications/blob/download-to-click-links/SCRIPTING/ALASKA/CHEM-CSRM-AK-07.pdf
+
+
+*/
+
+
+/* constants */
+#const STARTING_SCOUT_RESOURCE 263
+#const ONGRID_PLACEHOLDER 278
+#const DEAD_BOAR 356
+#const ALASKAN_BEAR 810
+
+
+
+start_random
+	percent_chance 50	#define WINTER_VERSION
+end_random
+
+if WINTER_VERSION
+	#const MAP_BASE_TERRAIN 74	/* snow strong */
+	#const CENTER_HILL_TERRAIN 73	/* snow weak */
+	#const LAKE_TERRAIN 35	/* ice */
+	#const PLAYER_LAND_TERRAIN 32	/* snow */
+	#const FOREST_TERRAIN 21	/* snow pine */
+	#const SHRUB_TERRAIN 106	/* dead forest */
+	#const COAST_TERRAIN 70	/* dry gravel */
+	#const MOUNTAIN_TERRAIN 40	/* rock */
+	
+	#const COAST_LAYER 74	/* snow */
+	#const FOREST_LAYER 74	/* snow strong */
+	#const MOUNTAIN_LAYER 32	/* snow */
+	#const PLAYER_LAYER_A 37	/* icy shore */
+	#const PLAYER_LAYER_B 72	/* underbrush snow */
+	#const CENTER_LAYER 72	/* underbrush snow */
+	#const MAP_BASE_LAYER 72	/* underbrush snow */
+
+	#const STRAGGLER_TREE_A 1054	/* bush snow */
+	#const STRAGGLER_TREE_B 1054	/* bush snow */
+	#const MOUNTAIN_A 1045
+	#const MOUNTAIN_B 1046
+	#const MOUNTAIN_C 1047
+	
+else
+	#const MAP_BASE_TERRAIN 100	/* dry grass */
+	#const CENTER_HILL_TERRAIN 9	/* grass 3 */
+	#const LAKE_TERRAIN 58	/* water azure */
+	#const PLAYER_LAND_TERRAIN 0	/* grass */
+	#const FOREST_TERRAIN 19	/* pine */
+	#const SHRUB_TERRAIN 89	/* bushes */
+	#const COAST_TERRAIN 81	/* wet gravel */
+	#const MOUNTAIN_TERRAIN 8	/* farm dead */
+	
+	#const COAST_LAYER 11	/* dirt 2 */
+	#const FOREST_LAYER 76	/* mud */
+	#const MOUNTAIN_LAYER 40	/* rock */
+	#const PLAYER_LAYER_A 100	/* dry grass */
+	#const PLAYER_LAYER_B 9	/* grass 3 */
+	#const CENTER_LAYER 76	/* mud */
+	#const MAP_BASE_LAYER 11	/* dirt 2 */
+
+	#const STRAGGLER_TREE_A 302	/* bush a */
+	#const STRAGGLER_TREE_B 1053	/* bush b */
+	#const MOUNTAIN_A 310
+	#const MOUNTAIN_B 311
+	#const MOUNTAIN_C 1041
+	
+endif
+
+/* =================================================================================================== */
+<PLAYER_SETUP>
+
+behavior_version 2
+
+effect_amount MOD_RESOURCE STARTING_SCOUT_RESOURCE ATTR_SET 751	/* eagle */
+
+effect_amount GAIA_UPGRADE_UNIT DLC_DEADTREE DLC_AFRICANBUSH_2 0	/* snowy bushes */
+
+/* Alaskan Bears */
+effect_amount GAIA_SET_ATTRIBUTE DEAD_BOAR ATTR_STANDING_GRAPHIC 8239
+effect_amount GAIA_SET_ATTRIBUTE ALASKAN_BEAR ATTR_ATTACK_GRAPHIC 8236
+effect_amount GAIA_SET_ATTRIBUTE ALASKAN_BEAR ATTR_STANDING_GRAPHIC 8238
+effect_amount GAIA_SET_ATTRIBUTE ALASKAN_BEAR ATTR_STANDING2_GRAPHIC 8238
+effect_amount GAIA_SET_ATTRIBUTE ALASKAN_BEAR ATTR_DYING_GRAPHIC 8237
+effect_amount GAIA_SET_ATTRIBUTE ALASKAN_BEAR ATTR_UNDEAD_GRAPHIC 8237
+effect_amount GAIA_SET_ATTRIBUTE ALASKAN_BEAR ATTR_WALKING_GRAPHIC 8240
+effect_amount GAIA_SET_ATTRIBUTE ALASKAN_BEAR ATTR_RUNNING_GRAPHIC 8241
+effect_amount GAIA_SET_ATTRIBUTE ALASKAN_BEAR ATTR_NAME_ID 5713
+effect_amount GAIA_SET_ATTRIBUTE ALASKAN_BEAR ATTR_ICON_ID 151
+effect_amount GAIA_SET_ATTRIBUTE ALASKAN_BEAR ATTR_STORAGE_VALUE 510
+effect_amount GAIA_SET_ATTRIBUTE ALASKAN_BEAR ATTR_HERO_STATUS 66
+effect_amount GAIA_SET_ATTRIBUTE ALASKAN_BEAR ATTR_HITPOINTS 24
+effect_amount GAIA_SET_ATTRIBUTE ALASKAN_BEAR ATTR_LINE_OF_SIGHT 5
+effect_amount GAIA_SET_ATTRIBUTE ALASKAN_BEAR ATTR_SEARCH_RADIUS 5
+
+if LOW_RESOURCES
+effect_amount ENABLE_OBJECT TRADE_CART ATTR_ENABLE 0
+effect_amount ENABLE_OBJECT TRADE_COG ATTR_ENABLE 0
+#define TRADE_CARAVAN 48
+effect_amount DISABLE_TECH TRADE_CARAVAN ATTR_DISABLE 48
+endif
+
+
+if 2_TEAM_GAME 
+	if FIXED_POSITIONS
+		if 4_PLAYER_GAME
+			if TEAM1_SIZE2
+				#define BALANCED_TEAMS
+			endif
+		elseif 6_PLAYER_GAME
+			if TEAM1_SIZE3
+				if TEAM2_SIZE3
+					#define BALANCED_TEAMS
+				endif
+			endif
+		elseif 8_PLAYER_GAME
+			if TEAM1_SIZE4
+				if TEAM2_SIZE4
+					#define BALANCED_TEAMS
+				endif
+			endif
+		endif
+	endif
+endif
+
+if BALANCED_TEAMS direct_placement	#define DIRECT_PLACEMENT
+else random_placement	#define RANDOM_PLACEMENT
+endif
+
+if 1_PLAYER_GAME	#define LAKE1
+elseif 2_PLAYER_GAME	#define LAKE1
+elseif 3_PLAYER_GAME
+	start_random
+		percent_chance 33	#define LAKE1
+		percent_chance 33	#define LAKE2
+		percent_chance 100	#define LAKE3
+	end_random
+elseif 4_PLAYER_GAME
+	start_random
+		percent_chance 24	#define LAKE1
+		percent_chance 25	#define LAKE2
+		percent_chance 25	#define LAKE3
+		percent_chance 100	#define LAKE4
+	end_random
+elseif 5_PLAYER_GAME
+	start_random
+		percent_chance 19	#define LAKE1
+		percent_chance 29	#define LAKE2
+		percent_chance 20	#define LAKE3
+		percent_chance 20	#define LAKE4
+		percent_chance 100	#define LAKE5
+	end_random
+elseif 6_PLAYER_GAME
+	start_random
+		percent_chance 16	#define LAKE1
+		percent_chance 17	#define LAKE2
+		percent_chance 17	#define LAKE3
+		percent_chance 16	#define LAKE4
+		percent_chance 16	#define LAKE5
+		percent_chance 100	#define LAKE6
+	end_random
+elseif 7_PLAYER_GAME
+	start_random
+		percent_chance 13	#define LAKE1
+		percent_chance 14	#define LAKE2
+		percent_chance 15	#define LAKE3
+		percent_chance 14	#define LAKE4
+		percent_chance 14	#define LAKE5
+		percent_chance 15	#define LAKE6
+		percent_chance 100	#define LAKE7
+	end_random
+elseif 8_PLAYER_GAME
+	start_random
+		percent_chance 12	#define LAKE1
+		percent_chance 12	#define LAKE2
+		percent_chance 13	#define LAKE3
+		percent_chance 12	#define LAKE4
+		percent_chance 13	#define LAKE5
+		percent_chance 12	#define LAKE6
+		percent_chance 13	#define LAKE7
+		percent_chance 100	#define LAKE8
+	end_random
+endif
+
+start_random
+	percent_chance 49	#define TEAM1_FIRST
+	percent_chance 100	#define TEAM2_FIRST
+end_random
+
+/* =================================================================================================== */
+<LAND_GENERATION>
+
+base_terrain MAP_BASE_TERRAIN
+
+create_land { terrain_type MAP_BASE_TERRAIN base_size 1 land_percent 100 base_elevation 5 land_position 1 1 right_border 95 bottom_border 95 }
+create_land { terrain_type MAP_BASE_TERRAIN base_size 1 land_percent 100 base_elevation 5 land_position 1 99 right_border 95 top_border 95 }
+create_land { terrain_type MAP_BASE_TERRAIN base_size 1 land_percent 100 base_elevation 5 land_position 99 1 left_border 95 bottom_border 95 }
+create_land { terrain_type MAP_BASE_TERRAIN base_size 1 land_percent 100 base_elevation 5 land_position 99 99 left_border 95 top_border 95 }
+
+/*
+if TINY_MAP
+create_land { terrain_type MAP_BASE_TERRAIN base_size 1 land_percent 0 base_elevation 5 land_position 1 1 }
+create_land { terrain_type MAP_BASE_TERRAIN base_size 1 land_percent 0 base_elevation 5 land_position 1 99 }
+create_land { terrain_type MAP_BASE_TERRAIN base_size 1 land_percent 0 base_elevation 5 land_position 99 1 }
+create_land { terrain_type MAP_BASE_TERRAIN base_size 1 land_percent 0 base_elevation 5 land_position 99 99 }
+else
+create_land { terrain_type MAP_BASE_TERRAIN base_size 3 land_percent 0 base_elevation 5 land_position 1 1 }
+create_land { terrain_type MAP_BASE_TERRAIN base_size 3 land_percent 0 base_elevation 5 land_position 1 99 }
+create_land { terrain_type MAP_BASE_TERRAIN base_size 3 land_percent 0 base_elevation 5 land_position 99 1 }
+create_land { terrain_type MAP_BASE_TERRAIN base_size 3 land_percent 0 base_elevation 5 land_position 99 99 }
+endif
+*/
+
+create_land {
+	terrain_type CENTER_HILL_TERRAIN
+	if TINY_MAP base_size 12
+	elseif SMALL_MAP base_size 16
+	else base_size 30
+	endif
+	land_percent 100	base_elevation 1
+	left_border 30
+	right_border 30
+	top_border 30
+	bottom_border 30
+	land_position 50 50
+	land_id 3
+	zone 1
+
+	circle_radius 30 5
+}
+
+if RANDOM_PLACEMENT
+create_land {
+	terrain_type LAKE_TERRAIN
+	base_size 10
+	land_percent 6
+	left_border 6	right_border 6	top_border 6	bottom_border 6	border_fuzziness 100
+	if LAKE1 assign_to_player 1 elseif LAKE2 assign_to_player 2 elseif LAKE3 assign_to_player 3 elseif LAKE4 assign_to_player 4 elseif LAKE5 assign_to_player 5 elseif LAKE6 assign_to_player 6 elseif LAKE7 assign_to_player 7 elseif LAKE8 assign_to_player 8 endif
+	land_id 2
+	zone 2
+}
+create_land {
+	terrain_type LAKE_TERRAIN
+	base_size 10
+	land_percent 6
+	left_border 6	right_border 6	top_border 6	bottom_border 6	border_fuzziness 100
+	if LAKE1 assign_to_player 1 elseif LAKE2 assign_to_player 2 elseif LAKE3 assign_to_player 3 elseif LAKE4 assign_to_player 4 elseif LAKE5 assign_to_player 5 elseif LAKE6 assign_to_player 6 elseif LAKE7 assign_to_player 7 elseif LAKE8 assign_to_player 8 endif
+	land_id 2
+	zone 2
+}
+create_land {
+	terrain_type LAKE_TERRAIN
+	base_size 10
+	land_percent 6
+	left_border 6	right_border 6	top_border 6	bottom_border 6	border_fuzziness 100
+	if LAKE1 assign_to_player 1 elseif LAKE2 assign_to_player 2 elseif LAKE3 assign_to_player 3 elseif LAKE4 assign_to_player 4 elseif LAKE5 assign_to_player 5 elseif LAKE6 assign_to_player 6 elseif LAKE7 assign_to_player 7 elseif LAKE8 assign_to_player 8 endif
+	land_id 2
+	zone 2
+}
+create_land {
+	terrain_type LAKE_TERRAIN
+	base_size 10
+	land_percent 6
+	left_border 6	right_border 6	top_border 6	bottom_border 6	border_fuzziness 100
+	if LAKE1 assign_to_player 1 elseif LAKE2 assign_to_player 2 elseif LAKE3 assign_to_player 3 elseif LAKE4 assign_to_player 4 elseif LAKE5 assign_to_player 5 elseif LAKE6 assign_to_player 6 elseif LAKE7 assign_to_player 7 elseif LAKE8 assign_to_player 8 endif
+	land_id 2
+	zone 2
+}
+create_land {
+	terrain_type LAKE_TERRAIN
+	base_size 10
+	land_percent 6
+	left_border 6	right_border 6	top_border 6	bottom_border 6	border_fuzziness 100
+	if LAKE1 assign_to_player 1 elseif LAKE2 assign_to_player 2 elseif LAKE3 assign_to_player 3 elseif LAKE4 assign_to_player 4 elseif LAKE5 assign_to_player 5 elseif LAKE6 assign_to_player 6 elseif LAKE7 assign_to_player 7 elseif LAKE8 assign_to_player 8 endif
+	land_id 2
+	zone 2
+}
+
+
+
+create_land {
+	terrain_type PLAYER_LAND_TERRAIN
+	base_size 10
+	land_percent 5	base_elevation 1
+	left_border 6	right_border 6	top_border 6	bottom_border 6	border_fuzziness 100
+	assign_to_player 1
+	zone 1
+}
+
+if 2_PLAYER_GAME
+create_land {
+	terrain_type CENTER_HILL_TERRAIN	base_elevation 2
+	base_size 10
+	land_percent 5
+	left_border 6	right_border 6	top_border 6	bottom_border 6	border_fuzziness 100
+	assign_to_player 2
+	zone 1
+	land_id 1
+}
+endif
+
+
+create_land {
+	terrain_type PLAYER_LAND_TERRAIN
+	base_size 10
+	land_percent 5	base_elevation 1
+	left_border 6	right_border 6	top_border 6	bottom_border 6	border_fuzziness 100
+	assign_to_player 2
+	zone 1
+}
+
+create_land {
+	terrain_type PLAYER_LAND_TERRAIN
+	base_size 10
+	land_percent 5	base_elevation 1
+	left_border 6	right_border 6	top_border 6	bottom_border 6	border_fuzziness 100
+	assign_to_player 3
+	zone 1
+}
+
+create_land {
+	terrain_type PLAYER_LAND_TERRAIN
+	base_size 10
+	land_percent 5	base_elevation 1
+	left_border 6	right_border 6	top_border 6	bottom_border 6	border_fuzziness 100
+	assign_to_player 4
+	zone 1
+}
+
+
+create_land {
+	terrain_type PLAYER_LAND_TERRAIN
+	base_size 10
+	land_percent 5	base_elevation 1
+	left_border 6	right_border 6	top_border 6	bottom_border 6	border_fuzziness 100
+	assign_to_player 5
+	zone 1
+}
+
+create_land {
+	terrain_type PLAYER_LAND_TERRAIN
+	base_size 10
+	land_percent 5	base_elevation 1
+	left_border 6	right_border 6	top_border 6	bottom_border 6	border_fuzziness 100
+	assign_to_player 6
+	zone 1
+}
+
+create_land {
+	terrain_type PLAYER_LAND_TERRAIN
+	base_size 10
+	land_percent 5	base_elevation 1
+	left_border 6	right_border 6	top_border 6	bottom_border 6	border_fuzziness 100
+	assign_to_player 7
+	zone 1
+}
+
+create_land {
+	terrain_type PLAYER_LAND_TERRAIN
+	base_size 10
+	land_percent 5	base_elevation 1
+	left_border 6	right_border 6	top_border 6	bottom_border 6	border_fuzziness 100
+	assign_to_player 8
+	zone 1
+}
+
+endif
+
+
+
+if DIRECT_PLACEMENT
+
+create_land {
+	terrain_type LAKE_TERRAIN
+	base_size 10
+	land_percent 4
+	left_border 6	right_border 6	top_border 6	bottom_border 6	border_fuzziness 100
+	land_id 2
+	zone 2
+	land_position rnd(52,56) rnd(78,82)
+} 
+create_land {
+	terrain_type LAKE_TERRAIN
+	base_size 10
+	land_percent 4
+	left_border 6	right_border 6	top_border 6	bottom_border 6	border_fuzziness 100
+	land_id 2
+	zone 2
+	land_position rnd(38,42) rnd(76,80)
+} 
+create_land {
+	terrain_type LAKE_TERRAIN
+	base_size 10
+	land_percent 4
+	left_border 6	right_border 6	top_border 6	bottom_border 6	border_fuzziness 100
+	land_id 2
+	zone 2
+	land_position rnd(27,31) rnd(69,73)
+}
+create_land {
+	terrain_type LAKE_TERRAIN
+	base_size 10
+	land_percent 4
+	left_border 6	right_border 6	top_border 6	bottom_border 6	border_fuzziness 100
+	land_id 2
+	zone 2
+	land_position rnd(21,25) rnd(58,62)
+}
+create_land {
+	terrain_type LAKE_TERRAIN
+	base_size 10
+	land_percent 4
+	left_border 6	right_border 6	top_border 6	bottom_border 6	border_fuzziness 100
+	land_id 2
+	zone 2
+	land_position rnd(19,23) rnd(45,49)
+}
+
+
+
+create_land {
+	terrain_type PLAYER_LAND_TERRAIN
+	base_size 10
+	land_percent 4	base_elevation 1
+	left_border 6	right_border 6	top_border 6	bottom_border 6	border_fuzziness 100
+	zone 1
+	land_position rnd(23,27) rnd(33,37)
+	if TEAM1_FIRST
+		if TEAM_POSITIONS	assign_to AT_COLOR 1 0 0
+		else	assign_to AT_TEAM 1 0 0
+		endif
+	else
+		if TEAM_POSITIONS	assign_to AT_COLOR 2 0 0
+		else	assign_to AT_TEAM 2 0 0
+		endif
+	endif	
+}
+create_land {
+	terrain_type PLAYER_LAND_TERRAIN
+	base_size 10
+	land_percent 4	base_elevation 1
+	left_border 6	right_border 6	top_border 6	bottom_border 6	border_fuzziness 100
+	zone 1
+	land_position rnd(32,36) rnd(23,27)
+	if 8_PLAYER_GAME
+		if TEAM1_FIRST
+			if TEAM_POSITIONS	assign_to AT_COLOR 3 0 0
+			else	assign_to AT_TEAM 1 0 0
+			endif
+		else
+			if TEAM_POSITIONS	assign_to AT_COLOR 4 0 0
+			else	assign_to AT_TEAM 2 0 0
+			endif
+		endif
+	elseif 6_PLAYER_GAME
+		if TEAM1_FIRST
+			if TEAM_POSITIONS	assign_to AT_COLOR 3 0 0
+			else	assign_to AT_TEAM 1 0 0
+			endif
+		else
+			if TEAM_POSITIONS	assign_to AT_COLOR 4 0 0
+			else	assign_to AT_TEAM 2 0 0
+			endif
+		endif
+	elseif 4_PLAYER_GAME
+	endif	
+}
+create_land {
+	terrain_type PLAYER_LAND_TERRAIN
+	base_size 10
+	land_percent 4	base_elevation 1
+	left_border 6	right_border 6	top_border 6	bottom_border 6	border_fuzziness 100
+	zone 1
+	land_position rnd(44,48) rnd(18,22)
+	if 8_PLAYER_GAME
+		if TEAM1_FIRST
+			if TEAM_POSITIONS	assign_to AT_COLOR 5 0 0
+			else	assign_to AT_TEAM 1 0 0
+			endif
+		else
+			if TEAM_POSITIONS	assign_to AT_COLOR 6 0 0
+			else	assign_to AT_TEAM 2 0 0
+			endif
+		endif
+	elseif 6_PLAYER_GAME
+		if TEAM1_FIRST
+			if TEAM_POSITIONS	assign_to AT_COLOR 5 0 0
+			else	assign_to AT_TEAM 1 0 0
+			endif
+		else
+			if TEAM_POSITIONS	assign_to AT_COLOR 6 0 0
+			else	assign_to AT_TEAM 2 0 0
+			endif
+		endif
+	elseif 4_PLAYER_GAME
+		if TEAM1_FIRST
+			if TEAM_POSITIONS	assign_to AT_COLOR 3 0 0
+			else	assign_to AT_TEAM 1 0 0
+			endif
+		else
+			if TEAM_POSITIONS	assign_to AT_COLOR 4 0 0
+			else	assign_to AT_TEAM 2 0 0
+			endif
+		endif			
+	endif	
+}
+create_land {
+	terrain_type PLAYER_LAND_TERRAIN
+	base_size 10
+	land_percent 4	base_elevation 1
+	left_border 6	right_border 6	top_border 6	bottom_border 6	border_fuzziness 100
+	zone 1
+	land_position rnd(52,62) rnd(19,23)
+	if 8_PLAYER_GAME
+		if TEAM1_FIRST
+			if TEAM_POSITIONS	assign_to AT_COLOR 7 0 0
+			else	assign_to AT_TEAM 1 0 0
+			endif
+		else
+			if TEAM_POSITIONS	assign_to AT_COLOR 8 0 0
+			else	assign_to AT_TEAM 2 0 0
+			endif
+		endif
+	elseif 6_PLAYER_GAME
+	elseif 4_PLAYER_GAME			
+	endif	
+}
+create_land {
+	terrain_type CENTER_HILL_TERRAIN	base_elevation 2
+	base_size 10
+	land_percent 4
+	left_border 6	right_border 6	top_border 6	bottom_border 6	border_fuzziness 100
+	zone 1
+	land_id 1
+	land_position rnd(70,74) rnd(26,30)
+}
+create_land {
+	terrain_type PLAYER_LAND_TERRAIN
+	base_size 10
+	land_percent 4	base_elevation 1
+	left_border 6	right_border 6	top_border 6	bottom_border 6	border_fuzziness 100
+	zone 1
+	land_position 79 40
+	if 8_PLAYER_GAME
+		if TEAM2_FIRST
+			if TEAM_POSITIONS	assign_to AT_COLOR 7 0 0
+			else	assign_to AT_TEAM 1 0 0
+			endif
+		else
+			if TEAM_POSITIONS	assign_to AT_COLOR 8 0 0
+			else	assign_to AT_TEAM 2 0 0
+			endif
+		endif
+	elseif 6_PLAYER_GAME
+	elseif 4_PLAYER_GAME			
+	endif	
+}
+
+create_land {
+	terrain_type PLAYER_LAND_TERRAIN
+	base_size 10
+	land_percent 4	base_elevation 1
+	left_border 6	right_border 6	top_border 6	bottom_border 6	border_fuzziness 100
+	zone 1
+	land_position rnd(79,83) rnd(51,55)
+	if 8_PLAYER_GAME
+		if TEAM2_FIRST
+			if TEAM_POSITIONS	assign_to AT_COLOR 5 0 0
+			else	assign_to AT_TEAM 1 0 0
+			endif
+		else
+			if TEAM_POSITIONS	assign_to AT_COLOR 6 0 0
+			else	assign_to AT_TEAM 2 0 0
+			endif
+		endif
+	elseif 6_PLAYER_GAME
+		if TEAM2_FIRST
+			if TEAM_POSITIONS	assign_to AT_COLOR 5 0 0
+			else	assign_to AT_TEAM 1 0 0
+			endif
+		else
+			if TEAM_POSITIONS	assign_to AT_COLOR 6 0 0
+			else	assign_to AT_TEAM 2 0 0
+			endif
+		endif
+	elseif 4_PLAYER_GAME
+		if TEAM2_FIRST
+			if TEAM_POSITIONS	assign_to AT_COLOR 3 0 0
+			else	assign_to AT_TEAM 1 0 0
+			endif
+		else
+			if TEAM_POSITIONS	assign_to AT_COLOR 4 0 0
+			else	assign_to AT_TEAM 2 0 0
+			endif
+		endif			
+	endif	
+}
+create_land {
+	terrain_type PLAYER_LAND_TERRAIN
+	base_size 10
+	land_percent 4	base_elevation 1
+	left_border 6	right_border 6	top_border 6	bottom_border 6	border_fuzziness 100
+	zone 1
+	land_position rnd(74,78) rnd(64,68)
+	if 8_PLAYER_GAME
+		if TEAM2_FIRST
+			if TEAM_POSITIONS	assign_to AT_COLOR 3 0 0
+			else	assign_to AT_TEAM 1 0 0
+			endif
+		else
+			if TEAM_POSITIONS	assign_to AT_COLOR 4 0 0
+			else	assign_to AT_TEAM 2 0 0
+			endif
+		endif
+	elseif 6_PLAYER_GAME
+		if TEAM2_FIRST
+			if TEAM_POSITIONS	assign_to AT_COLOR 3 0 0
+			else	assign_to AT_TEAM 1 0 0
+			endif
+		else
+			if TEAM_POSITIONS	assign_to AT_COLOR 4 0 0
+			else	assign_to AT_TEAM 2 0 0
+			endif
+		endif
+	elseif 4_PLAYER_GAME
+	endif	
+}
+create_land {
+	terrain_type PLAYER_LAND_TERRAIN
+	base_size 10
+	land_percent 4	base_elevation 1
+	left_border 6	right_border 6	top_border 6	bottom_border 6	border_fuzziness 100
+	zone 1
+	land_position rnd(64,68) rnd(74,78)
+	if TEAM2_FIRST
+		if TEAM_POSITIONS	assign_to AT_COLOR 1 0 0
+		else	assign_to AT_TEAM 1 0 0
+		endif
+	else
+		if TEAM_POSITIONS	assign_to AT_COLOR 2 0 0
+		else	assign_to AT_TEAM 2 0 0
+		endif
+	endif	
+}
+
+endif
+
+
+/* =================================================================================================== */
+<ELEVATION_GENERATION> 
+
+create_elevation 7 { base_terrain MAP_BASE_TERRAIN number_of_tiles 999999 number_of_clumps 99999 enable_balanced_elevation spacing 5 }
+
+
+
+/* =================================================================================================== */
+<TERRAIN_GENERATION>
+
+
+create_terrain COAST_TERRAIN { base_terrain LAKE_TERRAIN land_percent 100 number_of_clumps 9320 }
+create_terrain COAST_TERRAIN { base_terrain LAKE_TERRAIN land_percent 100 number_of_clumps 9320 }
+create_terrain COAST_TERRAIN { base_terrain LAKE_TERRAIN land_percent 100 number_of_clumps 9320 }
+create_terrain COAST_TERRAIN { base_terrain LAKE_TERRAIN land_percent 100 number_of_clumps 9320 }
+create_terrain COAST_TERRAIN { base_terrain LAKE_TERRAIN land_percent 100 number_of_clumps 9320 }
+create_terrain COAST_TERRAIN { base_terrain LAKE_TERRAIN land_percent 100 number_of_clumps 9320 }
+create_terrain COAST_TERRAIN { base_terrain MAP_BASE_TERRAIN land_percent 100 number_of_clumps 9320 set_flat_terrain_only height_limits 0 0 }
+create_terrain COAST_TERRAIN { base_terrain MAP_BASE_TERRAIN land_percent 100 number_of_clumps 9320 set_flat_terrain_only height_limits 0 0 }
+create_terrain COAST_TERRAIN { base_terrain MAP_BASE_TERRAIN land_percent 100 number_of_clumps 9320 set_flat_terrain_only height_limits 0 0 }
+create_terrain COAST_TERRAIN { base_terrain MAP_BASE_TERRAIN land_percent 100 number_of_clumps 9320 set_flat_terrain_only height_limits 0 0 }
+create_terrain COAST_TERRAIN { base_terrain MAP_BASE_TERRAIN land_percent 100 number_of_clumps 9320 set_flat_terrain_only height_limits 0 0 }
+create_terrain COAST_TERRAIN { base_terrain MAP_BASE_TERRAIN land_percent 100 number_of_clumps 9320 set_flat_terrain_only height_limits 0 0 }
+create_terrain LAKE_TERRAIN { base_terrain COAST_TERRAIN land_percent 100 number_of_clumps 9320 set_flat_terrain_only height_limits 0 0 spacing_to_other_terrain_types 1 }
+create_terrain LAKE_TERRAIN { base_terrain COAST_TERRAIN land_percent 100 number_of_clumps 9320 set_flat_terrain_only height_limits 0 0 spacing_to_other_terrain_types 1 }
+create_terrain LAKE_TERRAIN { base_terrain COAST_TERRAIN land_percent 100 number_of_clumps 9320 set_flat_terrain_only height_limits 0 0 spacing_to_other_terrain_types 1 }
+create_terrain LAKE_TERRAIN { base_terrain COAST_TERRAIN land_percent 100 number_of_clumps 9320 set_flat_terrain_only height_limits 0 0 spacing_to_other_terrain_types 1 }
+create_terrain LAKE_TERRAIN { base_terrain COAST_TERRAIN land_percent 100 number_of_clumps 9320 set_flat_terrain_only height_limits 0 0 spacing_to_other_terrain_types 1 }
+create_terrain LAKE_TERRAIN { base_terrain COAST_TERRAIN land_percent 100 number_of_clumps 9320 set_flat_terrain_only height_limits 0 0 spacing_to_other_terrain_types 1 }
+
+create_terrain COAST_LAYER { base_terrain COAST_TERRAIN land_percent 100 number_of_clumps 9320 terrain_mask 1 }
+create_terrain COAST_LAYER { base_terrain COAST_TERRAIN land_percent 100 number_of_clumps 9320 terrain_mask 1 }
+create_terrain COAST_LAYER { base_terrain COAST_TERRAIN land_percent 100 number_of_clumps 9320 terrain_mask 1 }
+create_terrain COAST_LAYER { base_terrain COAST_TERRAIN land_percent 100 number_of_clumps 9320 terrain_mask 1 }
+create_terrain COAST_LAYER { base_terrain COAST_TERRAIN land_percent 100 number_of_clumps 9320 terrain_mask 1 }
+create_terrain COAST_LAYER { base_terrain COAST_TERRAIN land_percent 100 number_of_clumps 9320 terrain_mask 1 }
+
+
+if TINY_MAP
+else
+create_terrain SHRUB_TERRAIN {
+	base_terrain PLAYER_LAND_TERRAIN
+	number_of_clumps 8
+	land_percent 2
+	set_scale_by_groups
+	set_avoid_player_start_areas 16
+}
+endif
+
+
+/* center wood */
+create_terrain FOREST_TERRAIN {
+	base_terrain CENTER_HILL_TERRAIN
+	number_of_clumps 9
+	land_percent 3
+	set_scale_by_groups
+	spacing_to_other_terrain_types 3
+}
+
+
+/* other wood */
+create_terrain FOREST_TERRAIN {
+	base_terrain MAP_BASE_TERRAIN
+	number_of_clumps 999
+	land_percent 10
+	set_scale_by_groups
+	spacing_to_other_terrain_types 1
+	height_limits 3 3
+}
+
+create_terrain FOREST_TERRAIN {
+	base_terrain MAP_BASE_TERRAIN
+	number_of_clumps 55
+	land_percent 3
+	set_scale_by_groups
+	spacing_to_other_terrain_types 1
+	height_limits 2 2
+}
+
+create_terrain FOREST_LAYER {
+	base_terrain FOREST_TERRAIN
+	land_percent 100
+	number_of_clumps 9320
+	terrain_mask 1
+}
+create_terrain FOREST_LAYER {
+	base_terrain SHRUB_TERRAIN
+	land_percent 100
+	number_of_clumps 9320
+	terrain_mask 1
+}
+
+/* mountains */
+create_terrain MOUNTAIN_TERRAIN {
+	base_terrain MAP_BASE_TERRAIN
+	number_of_clumps 999
+	land_percent 100
+	set_scale_by_groups
+	height_limits 4 7
+}
+
+create_terrain MOUNTAIN_LAYER {
+	base_terrain MOUNTAIN_TERRAIN
+	number_of_clumps 999
+	land_percent 100
+	set_scale_by_groups
+	terrain_mask 1
+}
+
+
+/* other layering */
+create_terrain PLAYER_LAYER_A {
+	base_terrain PLAYER_LAND_TERRAIN
+	number_of_clumps 9
+	land_percent 3
+	set_scale_by_groups
+	terrain_mask 1
+}
+create_terrain PLAYER_LAYER_B {
+	base_terrain PLAYER_LAND_TERRAIN
+	number_of_clumps 9
+	land_percent 3
+	set_scale_by_groups
+	terrain_mask 1
+}
+
+create_terrain CENTER_LAYER {
+	base_terrain CENTER_HILL_TERRAIN
+	number_of_clumps 9
+	land_percent 3
+	set_scale_by_groups
+	terrain_mask 1
+}
+
+create_terrain MAP_BASE_LAYER {
+	base_terrain MAP_BASE_TERRAIN
+	number_of_clumps 9
+	land_percent 3
+	set_scale_by_groups
+	terrain_mask 1
+}
+
+
+
+
+/* water */
+if WINTER_VERSION
+
+create_terrain DLC_WATER4 {
+	base_terrain LAKE_TERRAIN
+	land_percent 1
+	number_of_clumps 25
+	set_scale_by_groups
+	spacing_to_other_terrain_types 8
+}
+create_terrain ICE { base_terrain DLC_WATER4 land_percent 100 number_of_clumps 9320 terrain_mask 1 }
+create_terrain ICE { base_terrain DLC_WATER4 land_percent 100 number_of_clumps 9320 terrain_mask 1 }
+create_terrain ICE { base_terrain DLC_WATER4 land_percent 100 number_of_clumps 9320 terrain_mask 1 }
+create_terrain ICE { base_terrain DLC_WATER4 land_percent 100 number_of_clumps 9320 terrain_mask 1 }
+create_terrain ICE { base_terrain DLC_WATER4 land_percent 100 number_of_clumps 9320 terrain_mask 1 }
+create_terrain ICE { base_terrain DLC_WATER4 land_percent 100 number_of_clumps 9320 terrain_mask 1 }
+
+create_terrain MED_WATER {
+	base_terrain LAKE_TERRAIN
+	land_percent 1
+	number_of_clumps 25
+	set_scale_by_groups
+	spacing_to_other_terrain_types 4
+}
+create_terrain ICE { base_terrain MED_WATER land_percent 100 number_of_clumps 9320 terrain_mask 1 }
+create_terrain ICE { base_terrain MED_WATER land_percent 100 number_of_clumps 9320 terrain_mask 1 }
+create_terrain ICE { base_terrain MED_WATER land_percent 100 number_of_clumps 9320 terrain_mask 1 }
+create_terrain ICE { base_terrain MED_WATER land_percent 100 number_of_clumps 9320 terrain_mask 1 }
+create_terrain ICE { base_terrain MED_WATER land_percent 100 number_of_clumps 9320 terrain_mask 1 }
+create_terrain ICE { base_terrain MED_WATER land_percent 100 number_of_clumps 9320 terrain_mask 1 }
+
+create_terrain ICYSHORE { base_terrain ICE land_percent 100 number_of_clumps 9320 terrain_mask 1 }
+
+else
+create_terrain WATER {
+	base_terrain LAKE_TERRAIN
+	land_percent 100
+	number_of_clumps 9320
+	terrain_mask 1
+	spacing_to_other_terrain_types 1
+}
+create_terrain WATER {
+	base_terrain LAKE_TERRAIN
+	land_percent 100
+	number_of_clumps 9320
+	spacing_to_other_terrain_types 2
+}
+create_terrain MED_WATER {
+	base_terrain WATER
+	land_percent 100
+	number_of_clumps 9320
+	terrain_mask 1
+	spacing_to_other_terrain_types 1
+}
+create_terrain MED_WATER {
+	base_terrain WATER
+	land_percent 100
+	number_of_clumps 9320
+	spacing_to_other_terrain_types 2
+}
+create_terrain DEEP_WATER {
+	base_terrain MED_WATER
+	land_percent 100
+	number_of_clumps 9320
+	spacing_to_other_terrain_types 1
+	terrain_mask 1
+}
+create_terrain DEEP_WATER {
+	base_terrain MED_WATER
+	land_percent 100
+	number_of_clumps 9320
+	spacing_to_other_terrain_types 2
+}
+create_terrain DLC_WATER4 {
+	base_terrain DEEP_WATER
+	land_percent 100
+	number_of_clumps 9320
+	spacing_to_other_terrain_types 1
+	terrain_mask 1
+}
+create_terrain DLC_WATER4 {
+	base_terrain DEEP_WATER
+	land_percent 100
+	number_of_clumps 9320
+	spacing_to_other_terrain_types 2
+}	
+endif
+
+
+/* =================================================================================================== */
+<CONNECTION_GENERATION>
+
+accumulate_connections  
+
+create_connect_all_players_land {
+replace_terrain BEACH DLC_GRAVELBEACH
+terrain_size CENTER_HILL_TERRAIN 960 0
+}
+
+
+/* =================================================================================================== */
+<OBJECTS_GENERATION>
+
+
+create_object ROCK {
+	second_object MOUNTAIN_A
+	terrain_to_place_on MOUNTAIN_TERRAIN
+	number_of_objects 10
+	set_scaling_to_map_size
+	set_gaia_object_only
+}
+create_object ROCK {
+	second_object MOUNTAIN_B
+	terrain_to_place_on MOUNTAIN_TERRAIN
+	number_of_objects 10
+	set_scaling_to_map_size
+	set_gaia_object_only
+}
+create_object ROCK {
+	second_object MOUNTAIN_C
+	terrain_to_place_on MOUNTAIN_TERRAIN
+	number_of_objects 100
+	set_scaling_to_map_size
+	set_gaia_object_only
+}
+
+
+/* player objects */
+
+create_object TOWN_CENTER {
+	set_place_for_every_player
+	max_distance_to_players 0
+	actor_area 40
+	actor_area_radius 40
+}
+
+create_object VILLAGER {
+	set_place_for_every_player
+	min_distance_to_players 5
+	max_distance_to_players 7
+	set_circular_placement
+	min_distance_group_placement 1
+}
+
+create_object SCOUT {
+	set_place_for_every_player
+	min_distance_to_players 6
+	max_distance_to_players 8
+	set_circular_placement
+	min_distance_group_placement 1
+}
+
+if REGICIDE
+	create_object KING {
+		set_place_for_every_player
+		min_distance_to_players 6
+		set_circular_placement
+		find_closest
+		min_distance_group_placement 1
+	}
+	create_object VILLAGER {
+		number_of_objects 7
+		set_place_for_every_player
+		min_distance_to_players 6
+		max_distance_to_players 8
+		set_circular_placement
+	}
+	create_object CASTLE {
+		set_place_for_every_player
+		min_distance_to_players 9
+		max_distance_to_players 11
+		set_circular_placement
+		min_distance_group_placement 2
+		find_closest_to_map_center
+	}
+endif
+
+
+
+create_object ONGRID_PLACEHOLDER {
+	second_object RELIC
+	max_distance_to_other_zones 2
+	avoid_forest_zone 2
+	min_distance_group_placement 1
+	number_of_objects 1
+	set_gaia_object_only
+	if WINTER_VERSION	terrain_to_place_on ICYSHORE
+	else terrain_to_place_on DLC_GRAVELBEACH
+	endif
+	max_distance_to_players 30
+	set_circular_placement 
+	place_on_specific_land_id 2
+	find_closest_to_map_edge
+	actor_area 1
+	actor_area_radius 20
+	avoid_actor_area 1
+}
+
+
+/* forage */
+if WINTER_VERSION
+else
+create_object FORAGE {
+	number_of_objects 6
+	group_placement_radius 3
+	set_tight_grouping
+	set_gaia_object_only
+	set_place_for_every_player
+	min_distance_to_players 9
+	max_distance_to_players 13
+	set_circular_placement
+	min_distance_group_placement 4
+	avoid_forest_zone 3
+	max_distance_to_other_zones 7
+	actor_area 12
+	actor_area_radius 12
+}
+endif
+
+/* straggler trees */
+create_object STRAGGLER_TREE_A {
+	number_of_objects 2
+	set_gaia_object_only
+	set_place_for_every_player
+	min_distance_to_players 4
+	max_distance_to_players 5
+	set_circular_placement
+	min_distance_group_placement 1
+}
+create_object STRAGGLER_TREE_B {
+	number_of_objects 3
+	set_gaia_object_only
+	set_place_for_every_player
+	min_distance_to_players 6
+	max_distance_to_players 8
+	set_circular_placement
+	min_distance_group_placement 1
+}
+
+/* near gold */
+create_object GOLD {
+	number_of_objects 7
+	group_placement_radius 3
+	set_tight_grouping
+	set_gaia_object_only
+	set_place_for_every_player
+	min_distance_to_players 12
+	max_distance_to_players 16
+	set_circular_placement
+	min_distance_group_placement 4
+	max_distance_to_other_zones 4
+	avoid_forest_zone 3
+}
+
+/* medium gold */
+create_object GOLD {
+	number_of_objects 4
+	group_placement_radius 3
+	number_of_groups 2
+	temp_min_distance_group_placement 20
+	set_tight_grouping
+	set_gaia_object_only
+	set_place_for_every_player
+		min_distance_to_players 17
+		max_distance_to_players 28
+	set_circular_placement
+	min_distance_group_placement 4
+	max_distance_to_other_zones 4
+	avoid_forest_zone 2
+}
+
+
+/* near stone */
+create_object STONE {
+	number_of_objects 5
+	group_placement_radius 2  
+	set_tight_grouping 
+	set_gaia_object_only
+	set_place_for_every_player
+	min_distance_to_players 13
+	max_distance_to_players 18
+	set_circular_placement
+	min_distance_group_placement 4
+	max_distance_to_other_zones 4
+	avoid_forest_zone 3
+}
+
+/* far stone */
+create_object STONE {
+	number_of_objects 4
+	group_placement_radius 2  
+	set_tight_grouping 
+	set_gaia_object_only
+	set_place_for_every_player
+			min_distance_to_players 20
+			max_distance_to_players 24
+	set_circular_placement
+	min_distance_group_placement 4
+	max_distance_to_other_zones 4
+	avoid_forest_zone 2
+}
+
+
+create_object SHEEP {
+	number_of_objects 4
+	number_of_groups 1
+	set_place_for_every_player
+	min_distance_to_players 7
+	max_distance_to_players 8
+	set_circular_placement
+	avoid_forest_zone 2
+}
+
+create_object DLC_GOOSE {
+	number_of_objects 2
+	number_of_groups 2
+	set_gaia_object_only
+	set_place_for_every_player
+			min_distance_to_players 19
+			max_distance_to_players 23
+	set_circular_placement
+	avoid_forest_zone 2
+}
+
+create_object DEER {
+	number_of_objects 4
+	set_scaling_to_player_number 
+	set_gaia_object_only
+	place_on_specific_land_id 3
+	min_distance_to_players 0
+	max_distance_to_players	24
+	temp_min_distance_group_placement 9
+	set_circular_placement
+	terrain_to_place_on CENTER_HILL_TERRAIN
+	actor_area 12
+	actor_area_radius 12
+}
+
+if WINTER_VERSION
+start_random
+	percent_chance 60
+		create_object ALASKAN_BEAR {
+			number_of_groups 2
+			temp_min_distance_group_placement 25
+			set_gaia_object_only
+			set_gaia_unconvertible
+			set_place_for_every_player
+			avoid_forest_zone 2
+			min_distance_group_placement 1
+			set_circular_placement
+			find_closest
+			ignore_terrain_restrictions
+			terrain_to_place_on ICYSHORE
+			avoid_actor_area 12
+		}
+	percent_chance 40
+		create_object ALASKAN_BEAR {
+			number_of_groups 2
+			temp_min_distance_group_placement 25
+			set_gaia_object_only
+			set_gaia_unconvertible
+			set_place_for_every_player
+			avoid_forest_zone 2
+			min_distance_group_placement 1
+			min_distance_to_players 20
+			set_circular_placement
+			find_closest
+			ignore_terrain_restrictions
+			terrain_to_place_on MAP_BASE_TERRAIN
+			avoid_actor_area 12
+			
+		}
+end_random
+	
+else
+create_object ALASKAN_BEAR {
+	number_of_groups 2
+	temp_min_distance_group_placement 25
+	set_gaia_object_only
+	set_gaia_unconvertible
+	set_place_for_every_player
+	avoid_forest_zone 2
+	min_distance_group_placement 1
+	min_distance_to_players 20
+	set_circular_placement
+	find_closest
+	ignore_terrain_restrictions
+	terrain_to_place_on MAP_BASE_TERRAIN
+	avoid_actor_area 12
+	
+}
+endif
+
+/* neutral gold */
+create_object ONGRID_PLACEHOLDER {
+	second_object GOLD
+	avoid_forest_zone 2
+	min_distance_group_placement 1
+	number_of_objects 3
+	set_tight_grouping
+	number_of_groups 1
+	set_gaia_object_only
+	terrain_to_place_on MAP_BASE_TERRAIN
+	max_distance_to_players 30
+	set_circular_placement 
+	place_on_specific_land_id 2
+	actor_area 2
+	actor_area_radius 20
+	avoid_actor_area 2
+	avoid_actor_area 40
+}
+
+create_object ONGRID_PLACEHOLDER {
+	second_object STONE
+	avoid_forest_zone 2
+	min_distance_group_placement 1
+	number_of_objects 2
+	set_tight_grouping
+	number_of_groups 1
+	set_gaia_object_only
+	terrain_to_place_on MAP_BASE_TERRAIN
+	max_distance_to_players 30
+	set_circular_placement 
+	place_on_specific_land_id 2
+	actor_area 3
+	actor_area_radius 20
+	avoid_actor_area 3
+	avoid_actor_area 40
+}
+
+if 2_PLAYER_GAME
+else
+create_object GOLD {
+	avoid_forest_zone 2
+	min_distance_group_placement 1
+	number_of_objects 4
+	set_tight_grouping
+	number_of_groups 4
+	temp_min_distance_group_placement 25
+	set_scaling_to_map_size
+	set_gaia_object_only
+	terrain_to_place_on MAP_BASE_TERRAIN
+	min_distance_to_players 25
+	set_circular_placement 
+	actor_area 2
+	actor_area_radius 20
+	avoid_actor_area 2
+	avoid_actor_area 40
+}
+
+create_object STONE {
+	avoid_forest_zone 2
+	min_distance_group_placement 1
+	number_of_objects 3
+	set_tight_grouping
+	number_of_groups 3
+	temp_min_distance_group_placement 25
+	set_scaling_to_map_size
+	set_gaia_object_only
+	terrain_to_place_on MAP_BASE_TERRAIN
+	min_distance_to_players 25
+	set_circular_placement 
+	actor_area 3
+	actor_area_radius 20
+	avoid_actor_area 3
+	avoid_actor_area 40
+}
+
+endif
+
+
+/* scattered wolves */
+create_object WOLF {
+	number_of_groups 9999
+	set_loose_grouping
+	start_random
+		percent_chance 75	number_of_objects 1
+		percent_chance 25	number_of_objects 2
+	end_random
+	set_gaia_object_only
+	min_distance_group_placement 1
+	temp_min_distance_group_placement 30
+	avoid_forest_zone 2
+	min_distance_to_players 20
+	set_circular_placement
+	avoid_actor_area 40
+} 
+
+/* scattered stragglers */
+create_object STRAGGLER_TREE_A {
+	terrain_to_place_on MAP_BASE_TERRAIN
+	number_of_objects 10
+	set_gaia_object_only
+	set_scaling_to_map_size
+	min_distance_to_players 8
+	set_circular_placement
+	min_distance_group_placement 1
+	temp_min_distance_group_placement 12
+	avoid_forest_zone 1
+}
+create_object STRAGGLER_TREE_B {
+	terrain_to_place_on MAP_BASE_TERRAIN
+	number_of_objects 10
+	set_gaia_object_only
+	set_scaling_to_map_size
+	min_distance_to_players 8
+	set_circular_placement
+	min_distance_group_placement 1
+	temp_min_distance_group_placement 12
+	avoid_forest_zone 1
+}
+
+/* birds */
+create_object HAWK {
+	number_of_objects 6
+	set_scaling_to_map_size
+}
+
+
+/*  fish */
+if WINTER_VERSION
+create_object SHORE_FISH {
+	number_of_groups 999
+	temp_min_distance_group_placement 1
+}
+
+else
+create_object SHORE_FISH {
+	number_of_groups 999
+	temp_min_distance_group_placement 8
+	min_distance_group_placement 2
+}
+
+create_object SALMON {
+	number_of_groups 999
+	max_distance_to_other_zones 4
+	temp_min_distance_group_placement 10
+	min_distance_group_placement 6
+}
+create_object FISH {
+	number_of_groups 999
+	max_distance_to_other_zones 4
+	temp_min_distance_group_placement 10
+	min_distance_group_placement 2
+}
+endif

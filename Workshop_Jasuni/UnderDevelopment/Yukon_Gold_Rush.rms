@@ -394,7 +394,7 @@ create_terrain GRASS2 {
     base_terrain SNOW_LIGHT
     land_percent 100
     terrain_mask 1 /* 2 is under, 1 is over */
-    number_of_clumps 29
+    number_of_clumps 229
 }
 create_terrain GRASS2 {
     base_terrain SNOW
@@ -434,13 +434,13 @@ create_terrain DLC_FORESTSNOWAUTUMN {
     base_terrain SNOW_LIGHT
     land_percent 8
     number_of_clumps 64
-    set_avoid_player_start_areas
+    set_avoid_player_start_areas 15
 }
 create_terrain SNOW_FOREST {
     base_terrain SNOW_LIGHT
     land_percent 8
     number_of_clumps 64
-    set_avoid_player_start_areas
+    set_avoid_player_start_areas 15
 }
 <OBJECTS_GENERATION>
 create_object TOWN_CENTER {
@@ -485,39 +485,45 @@ create_object HOUSE {
     find_closest
     set_circular_placement
 }
+/* challenge: ensure that the mining camps/villagers can't start close to each other. If I can also get other stuff to stay away from it too, that would be nice as well.
 
-create_object MINING_CAMP { /* some potential unfairness due to some players starting closer to the river than others */
+idea: create a placeholder object for each player. Perhaps have a neutral placeholder object that spawns on several locations on the river */
+
+/* TODO finish section in a way that guarantees separate mining camps */
+
+create_object MINING_CAMP {
     terrain_to_place_on DLC_NEWSHALLOW
     set_place_for_every_player
     find_closest
     set_circular_placement
     ignore_terrain_restrictions
-    actor_area 100
-    actor_area_radius 3
+    actor_area 10
+    avoid_actor_area 10
+    actor_area_radius 12
     avoid_forest_zone 2
+
+    temp_min_distance_group_placement 20
 }
 create_object VILLAGER {
-    set_place_for_every_player
-    actor_area_to_place_in 100
     terrain_to_place_on DLC_NEWSHALLOW
-    temp_min_distance_group_placement
-}
-create_object GOLD {
     set_place_for_every_player
+    find_closest
+    set_circular_placement
+    ignore_terrain_restrictions
+    actor_area_to_place_in 10
+    number_of_objects 3
+    actor_area 8
+    avoid_actor_area 8
+    actor_area_radius 12
+}
+
+/* TODO best method I can figure out: does risk the possibility of villagers starting seperate from the mining camp though. */
+
+create_object GOLD {
     set_gaia_object_only
-    actor_area_to_place_in 100
     terrain_to_place_on DLC_NEWSHALLOW
     ignore_terrain_restrictions /* optional: use rms effect instead to change terrain id of gold */
-    min_distance_group_placement 1
-    /* resource_delta -400 */
-    number_of_objects 4
-}
-create_object GOLD {
-    set_gaia_object_only
-    avoid_actor_area 100
-    terrain_to_place_on DLC_NEWSHALLOW
-    ignore_terrain_restrictions /* optional: use rms effect instead to change terrain id of gold */
-    temp_min_distance_group_placement 4
+    temp_min_distance_group_placement 3
     min_distance_group_placement 1
     number_of_objects 9320
     /* resource_delta -400 */
@@ -531,16 +537,65 @@ create_object ON_GRID {
 }
 create_object GOLD {
     set_gaia_object_only
-    avoid_actor_area 100
     terrain_to_place_on DLC_NEWSHALLOW
     ignore_terrain_restrictions /* optional: use rms effect instead to change terrain id of gold */
-    temp_min_distance_group_placement 6
+    temp_min_distance_group_placement 5
     min_distance_group_placement 3
     number_of_objects 9320
     /* resource_delta -400 */
 } 
-/* create player resources - 
+create_object GOLD {
+    set_place_for_every_player
+    set_gaia_object_only
+    actor_area_to_place_in 10 /* mining camp */
+    terrain_to_place_on DLC_NEWSHALLOW
+    ignore_terrain_restrictions /* optional: use rms effect instead to change terrain id of gold */
+    min_distance_group_placement 1
+    /* resource_delta -400 */
+    number_of_groups 99
+    temp_min_distance_group_placement 3
+}
+/* create player resources - TODO is breaking with 2 player miniature stress test.
  */
+create_object STONE {
+    number_of_objects 5
+    number_of_groups 2
+    temp_min_distance_group_placement 11
+    min_distance_group_placement 4
+    group_placement_radius 1
+    set_tight_grouping
+    set_place_for_every_player
+    set_gaia_object_only
+    set_circular_placement
+    min_distance_to_players 13
+    max_distance_to_players 27
+    avoid_forest_zone 3
+    actor_area 101
+    actor_area_radius 6
+    avoid_actor_area 8
+    avoid_actor_area 10
+    avoid_actor_area 102
+}
+create_object GOLD { 
+    number_of_objects 4
+    number_of_groups 3
+    temp_min_distance_group_placement 6
+    min_distance_group_placement 2
+    group_placement_radius 1
+    set_tight_grouping
+    set_place_for_every_player
+    set_gaia_object_only
+    set_circular_placement
+    min_distance_to_players 11
+    max_distance_to_players 31
+    avoid_forest_zone 2
+    actor_area 103
+    actor_area_radius 3
+    avoid_actor_area 8
+    avoid_actor_area 10
+    avoid_actor_area 101
+    avoid_actor_area 102
+}
 create_object FORAGE {
     number_of_objects 5
     number_of_groups 2
@@ -551,11 +606,13 @@ create_object FORAGE {
     set_place_for_every_player
     set_gaia_object_only
     set_circular_placement
-    min_distance_to_players 13
+    min_distance_to_players 11
     max_distance_to_players 17
     avoid_forest_zone 3
     actor_area 102
     actor_area_radius 3
+    /* avoid_actor_area 101  stone mines TODO check that this doesn't cause issues */
+    avoid_actor_area 103 /* gold mines */
 }
 create_object DEER {
     number_of_objects 3
@@ -566,10 +623,11 @@ create_object DEER {
     set_place_for_every_player
     set_gaia_object_only
     set_circular_placement
-    min_distance_to_players 13
+    min_distance_to_players 12
     max_distance_to_players 19
     avoid_forest_zone 1
-
+    /* avoid_actor_area 101 */
+    avoid_actor_area 103
 }
 create_object DLC_GOAT { /* 2 goats that start under player control, plus 6 that start near TC */
     number_of_objects 2
@@ -591,41 +649,6 @@ create_object DLC_GOAT {
     min_distance_to_players 7
     max_distance_to_players 16
     avoid_forest_zone 1
-}
-create_object STONE {
-    number_of_objects 5
-    number_of_groups 2
-    temp_min_distance_group_placement 13
-    min_distance_group_placement 2
-    group_placement_radius 1
-    set_tight_grouping
-    set_place_for_every_player
-    set_gaia_object_only
-    set_circular_placement
-    min_distance_to_players 14
-    max_distance_to_players 26
-    avoid_forest_zone 3
-    actor_area 101
-    actor_area_radius 8
-    avoid_actor_area 100
-    avoid_actor_area 102
-}
-create_object GOLD { 
-    number_of_objects 4
-    number_of_groups 3
-    temp_min_distance_group_placement 7
-    min_distance_group_placement 2
-    group_placement_radius 1
-    set_tight_grouping
-    set_place_for_every_player
-    set_gaia_object_only
-    set_circular_placement
-    min_distance_to_players 12
-    max_distance_to_players 30
-    avoid_forest_zone 2
-    avoid_actor_area 100
-    avoid_actor_area 101
-    avoid_actor_area 102
 }
 create_object SNOW_PINE_TREE { /* TODO change */
     number_of_objects 2
@@ -738,9 +761,10 @@ create_object STONE {
     set_tight_grouping
     avoid_forest_zone 1
     avoid_cliff_zone 1
-    actor_area 100
-    actor_area_radius 16
-    avoid_actor_area   100
+    avoid_actor_area   10
+    avoid_actor_area   101
+    avoid_actor_area   102
+    avoid_actor_area   103
     if AT_MOST_SMALL
         number_of_objects 2
     elseif AT_LEAST_NORMAL
@@ -790,17 +814,31 @@ create_object STONE {
 }
 if SPECIAL_BEAR_DEFINED
     create_object ALASKAN_BEAR { /* TODO improve bear placement */
-        number_of_groups 3
+        number_of_groups 99
+        set_scaling_to_map_size
+        set_loose_grouping
+        set_gaia_object_only
+        set_gaia_unconvertible /* supposed to make it stay in place more - personally don't care for this behavior. TODO switch after tourney? */
+        set_circular_placement
+        min_distance_to_players 36
+        temp_min_distance_group_placement 32
+        avoid_forest_zone 1
+        min_distance_group_placement 16 /* should only be wolves after this */
+        avoid_actor_area 8
+        avoid_actor_area 10
+        terrain_to_place_on SNOW_LIGHT
+    }
+    create_object WOLF {
+        number_of_groups 2
         set_loose_grouping
         set_place_for_every_player
         set_gaia_object_only
-        set_gaia_unconvertible /* supposed to make it stay in place more - personally don't care for this behavior. */
         set_circular_placement
-        min_distance_to_players 36
-        temp_min_distance_group_placement 21
+        min_distance_to_players 32
+        temp_min_distance_group_placement 20
         avoid_forest_zone 1
-        min_distance_group_placement 19 /* should only be wolves after this */
-        avoid_actor_area 100
+        avoid_actor_area 8
+        avoid_actor_area 10
         terrain_to_place_on SNOW_LIGHT
     }
 else
@@ -814,19 +852,21 @@ else
         temp_min_distance_group_placement 21
         avoid_forest_zone 1
         min_distance_group_placement 19 /* should only be wolves after this */
-        avoid_actor_area 100
+        avoid_actor_area 8
+        avoid_actor_area 10
+        terrain_to_place_on SNOW_LIGHT
+    }
+    create_object WOLF {
+        number_of_groups 4
+        set_scaling_to_map_size
+        temp_min_distance_group_placement 27
+        min_distance_to_players 35
+        avoid_forest_zone 1
+        avoid_actor_area 8
+        avoid_actor_area 10
         terrain_to_place_on SNOW_LIGHT
     }
 endif
-create_object WOLF {
-    number_of_groups 4
-    set_scaling_to_map_size
-    temp_min_distance_group_placement 27
-    min_distance_to_players 35
-    avoid_forest_zone 1
-    avoid_actor_area 100
-    terrain_to_place_on SNOW_LIGHT
-}
 
 
 

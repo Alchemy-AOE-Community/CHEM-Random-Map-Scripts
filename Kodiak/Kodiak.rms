@@ -1,0 +1,863 @@
+/* Kodiak */
+/* 7/31/2024 */
+/* A Random Map Script by Cookie Pirate */
+/* Version 0.9 */
+/* This map may not be used for any tournaments, showmatches, or other competitions except for Alchemy League Season 4
+without the express permission of the Author of the Map. This requirement will remain in perpetuity or until the Author
+determines otherwise. This map may be downloaded and played for fun but shall remain unmodified without the express
+permission of the Author of the Map. This map may not be uploaded to the AOE2 Mod Center under ANY circumstances. */
+/* Component specification found at: https://github.com/Alchemy-AOE-Community/CHEM-Published-Specifications/blob/download-to-click-links/SCRIPTING/ALASKA/CHEM-CSRM-AK-03.pdf */
+
+<PLAYER_SETUP>
+grouped_by_team
+behavior_version 1
+
+#const NNB 81
+#const NNB2 79
+#const FALCON 1056
+#const SEAGULL 303
+#const PH 647 /* Placeholder */
+#const LSNOW 73 /* Light snow */
+#const HSNOW 74 /* Heavy snow */
+#const SEA_ROCKS_3 1323 /* Rock 2 */
+
+/* Alaskan Bears */
+#const ALASKAN_BEAR 810
+#const DEAD_BOAR 356
+effect_amount GAIA_SET_ATTRIBUTE DEAD_BOAR ATTR_STANDING_GRAPHIC 8239
+effect_amount GAIA_SET_ATTRIBUTE ALASKAN_BEAR ATTR_ATTACK_GRAPHIC 8236
+effect_amount GAIA_SET_ATTRIBUTE ALASKAN_BEAR ATTR_STANDING_GRAPHIC 8238
+effect_amount GAIA_SET_ATTRIBUTE ALASKAN_BEAR ATTR_STANDING2_GRAPHIC 8238
+effect_amount GAIA_SET_ATTRIBUTE ALASKAN_BEAR ATTR_DYING_GRAPHIC 8237
+effect_amount GAIA_SET_ATTRIBUTE ALASKAN_BEAR ATTR_UNDEAD_GRAPHIC 8237
+effect_amount GAIA_SET_ATTRIBUTE ALASKAN_BEAR ATTR_WALKING_GRAPHIC 8240
+effect_amount GAIA_SET_ATTRIBUTE ALASKAN_BEAR ATTR_RUNNING_GRAPHIC 8241
+effect_amount GAIA_SET_ATTRIBUTE ALASKAN_BEAR ATTR_NAME_ID 5713
+effect_amount GAIA_SET_ATTRIBUTE ALASKAN_BEAR ATTR_ICON_ID 151
+effect_amount GAIA_SET_ATTRIBUTE ALASKAN_BEAR ATTR_STORAGE_VALUE 510
+effect_amount GAIA_SET_ATTRIBUTE ALASKAN_BEAR ATTR_HERO_STATUS 66
+effect_amount GAIA_SET_ATTRIBUTE ALASKAN_BEAR ATTR_HITPOINTS 24
+effect_amount GAIA_SET_ATTRIBUTE ALASKAN_BEAR ATTR_LINE_OF_SIGHT 5
+effect_amount GAIA_SET_ATTRIBUTE ALASKAN_BEAR ATTR_SEARCH_RADIUS 5
+
+/* Disable trade for matches set to Low Resources for FFA/3-4 teams */
+if LOW_RESOURCES
+    #const TRADE_CART_ENABLER 161
+    #const TRADE_COG_ENABLER 180
+    #const TRADE_CARAVAN_ENABLER 48
+    #const HINDU_CARAVANSERAI_ENABLER 518
+    #const PERSIAN_CARAVANSERAI_ENABLER 552
+    #const SILK_ROAD 499
+    effect_amount DISABLE_TECH TRADE_COG_ENABLER ATTR_DISABLE 180
+    effect_amount DISABLE_TECH TRADE_CART_ENABLER ATTR_DISABLE 161
+    effect_amount DISABLE_TECH TRADE_CARAVAN_ENABLER ATTR_DISABLE 48
+    effect_amount DISABLE_TECH HINDU_CARAVANSERAI_ENABLER ATTR_DISABLE 518
+    effect_amount DISABLE_TECH PERSIAN_CARAVANSERAI_ENABLER ATTR_DISABLE 552
+    effect_amount DISABLE_TECH SILK_ROAD ATTR_DISABLE 499
+endif
+
+/* NOTE: Tiny (2p), Small (3p), Medium (4p), Normal (6p), Large (8p) Map sizes scripted individually.
+Huge and Ludicrous use the same size as Large. 'More Map Sizes' not supported.
+Refer to the table below for length, area, and resource/unit multiplier.
+Size | X | Area | Length | Number of players
+Tiny: 2.0 20164 142x142 (supported for 2 players)
+Small: 3.0 29584 172x172 (supported for 3 players)
+Medium: 4.0 40000 200x200 (supported for 4 players)
+Normal: 5.0 50176 224x224 (supported for 5-6 players)
+Large+: 6.0 59536 244x244 (supported for 7-8 players) */
+
+if TINY_MAP override_map_size 142
+elseif SMALL_MAP override_map_size 172
+elseif MEDIUM_MAP override_map_size 200
+elseif LARGE_MAP override_map_size 224
+elseif HUGE_MAP override_map_size 244
+elseif GIGANTIC_MAP override_map_size 244
+elseif LUDIKRIS_MAP override_map_size 244
+endif
+
+<LAND_GENERATION>
+
+base_terrain NNB
+    if TINY_MAP
+        create_land { terrain_type DIRT land_position 50 50 left_border 27 right_border 27 top_border 27 bottom_border 27 border_fuzziness 2 base_size 9 land_percent 30 clumping_factor 4 base_elevation 1 zone 1 other_zone_avoidance_distance 6 }
+        create_player_lands { terrain_type GRASS circle_radius 21 4 left_border 27 right_border 27 top_border 27 bottom_border 27 border_fuzziness 2 base_size 8 land_percent 15 clumping_factor 10 base_elevation 1 zone 1 other_zone_avoidance_distance 6 }
+    elseif SMALL_MAP
+        create_land { terrain_type DIRT land_position 50 50 left_border 25 right_border 25 top_border 25 bottom_border 25 border_fuzziness 2 base_size 9 land_percent 30 clumping_factor 4 base_elevation 1 zone 1 other_zone_avoidance_distance 6 }
+        create_player_lands { terrain_type GRASS circle_radius 23 3 left_border 25 right_border 25 top_border 25 bottom_border 25 border_fuzziness 2 base_size 8 land_percent 15 clumping_factor 10 base_elevation 1 zone 1 other_zone_avoidance_distance 6 }
+    elseif MEDIUM_MAP
+        create_land { terrain_type DIRT land_position 50 50 left_border 23 right_border 23 top_border 23 bottom_border 23 border_fuzziness 2 base_size 9 land_percent 30 clumping_factor 4 base_elevation 1 zone 1 other_zone_avoidance_distance 6 }
+        create_player_lands { terrain_type GRASS circle_radius 25 2 left_border 23 right_border 23 top_border 23 bottom_border 23 border_fuzziness 2 base_size 8 land_percent 15 clumping_factor 10 base_elevation 1 zone 1 other_zone_avoidance_distance 6 }
+    elseif LARGE_MAP
+        create_land { terrain_type DIRT land_position 50 50 left_border 22 right_border 22 top_border 22 bottom_border 22 border_fuzziness 2 base_size 9 land_percent 30 clumping_factor 4 base_elevation 1 zone 1 other_zone_avoidance_distance 6 }
+        create_player_lands { terrain_type GRASS circle_radius 26 2 left_border 22 right_border 22 top_border 22 bottom_border 22 border_fuzziness 2 base_size 8 land_percent 15 clumping_factor 10 base_elevation 1 zone 1 other_zone_avoidance_distance 6 }
+    else
+        create_land { terrain_type DIRT land_position 50 50 left_border 23 right_border 23 top_border 23 bottom_border 23 border_fuzziness 2 base_size 9 land_percent 30 clumping_factor 4 base_elevation 1 zone 1 other_zone_avoidance_distance 6 }
+        create_player_lands { terrain_type GRASS circle_radius 27 2 left_border 23 right_border 23 top_border 23 bottom_border 23 border_fuzziness 2 base_size 8 land_percent 15 clumping_factor 10 base_elevation 1 zone 1 other_zone_avoidance_distance 6 }
+    endif
+
+#define CORNER_LAND
+if CORNER_LAND
+    create_land { terrain_type DIRT2 land_position 1 1 base_size 1 land_percent 100 }
+    create_land { terrain_type DLC_BEACH3 land_position 1 99 base_size 1 land_percent 100 }
+    create_land { terrain_type DIRT3 land_position 99 1 base_size 1 land_percent 100 }
+    create_land { terrain_type DLC_BEACH4 land_position 99 99 base_size 1 land_percent 100 }
+endif
+
+#define RING_LAND
+if RING_LAND
+    create_land { base_size 6 land_position 95 50 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 95 51 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 95 52 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 95 52 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 95 53 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 95 54 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 95 55 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 95 55 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 95 56 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 94 57 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 94 58 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 94 59 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 94 59 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 94 60 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 94 61 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 93 62 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 93 62 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 93 63 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 93 64 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 93 65 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 92 65 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 92 66 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 92 67 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 91 68 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 91 68 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 91 69 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 90 70 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 90 70 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 90 71 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 89 72 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 89 73 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 89 73 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 88 74 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 88 75 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 87 75 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 87 76 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 86 76 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 86 77 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 85 78 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 85 78 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 84 79 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 84 80 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 83 80 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 83 81 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 82 81 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 82 82 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 81 82 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 81 83 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 80 83 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 80 84 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 79 84 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 78 85 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 78 85 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 77 86 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 76 86 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 76 87 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 75 87 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 75 88 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 74 88 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 73 89 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 73 89 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 72 89 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 71 90 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 70 90 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 70 90 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 69 91 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 68 91 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 68 91 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 67 92 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 66 92 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 65 92 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 65 93 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 64 93 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 63 93 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 62 93 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 62 93 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 61 94 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 60 94 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 59 94 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 59 94 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 58 94 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 57 94 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 56 95 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 55 95 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 55 95 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 54 95 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 53 95 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 52 95 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 52 95 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 51 95 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 50 95 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 49 95 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 48 95 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 48 95 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 47 95 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 46 95 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 45 95 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 45 95 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 44 95 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 43 94 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 42 94 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 41 94 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 41 94 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 40 94 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 39 94 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 38 93 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 38 93 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 37 93 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 36 93 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 35 93 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 35 92 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 34 92 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 33 92 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 32 91 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 32 91 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 31 91 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 30 90 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 30 90 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 29 90 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 28 89 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 28 89 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 27 89 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 26 88 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 25 88 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 25 87 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 24 87 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 24 86 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 23 86 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 22 85 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 22 85 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 21 84 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 20 84 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 20 83 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 19 83 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 19 82 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 18 82 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 18 81 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 17 81 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 17 80 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 16 80 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 16 79 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 15 78 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 15 78 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 14 77 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 14 76 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 13 76 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 13 75 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 12 75 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 12 74 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 11 73 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 11 73 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 11 72 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 10 71 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 10 70 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 10 70 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 9 69 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 9 68 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 9 68 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 8 67 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 8 66 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 8 65 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 7 65 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 7 64 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 7 63 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 7 62 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 7 62 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 6 61 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 6 60 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 6 59 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 6 59 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 6 58 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 6 57 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 5 56 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 5 55 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 5 55 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 5 54 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 5 53 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 5 52 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 5 52 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 5 51 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 5 50 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 5 49 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 5 48 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 5 48 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 5 47 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 5 46 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 5 45 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 5 45 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 5 44 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 6 43 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 6 42 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 6 41 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 6 41 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 6 40 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 6 39 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 7 38 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 7 38 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 7 37 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 7 36 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 7 35 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 8 35 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 8 34 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 8 33 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 9 32 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 9 32 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 9 31 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 10 30 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 10 30 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 10 29 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 11 28 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 11 27 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 11 27 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 12 26 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 12 25 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 13 25 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 13 24 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 14 24 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 14 23 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 15 22 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 15 22 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 16 21 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 16 20 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 17 20 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 17 19 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 18 19 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 18 18 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 19 18 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 19 17 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 20 17 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 20 16 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 21 16 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 22 15 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 22 15 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 23 14 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 24 14 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 24 13 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 25 13 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 25 12 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 26 12 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 27 11 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 27 11 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 28 11 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 29 10 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 30 10 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 30 10 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 31 9 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 32 9 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 32 9 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 33 8 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 34 8 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 35 8 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 35 7 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 36 7 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 37 7 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 38 7 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 38 7 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 39 6 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 40 6 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 41 6 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 41 6 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 42 6 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 43 6 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 44 5 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 45 5 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 45 5 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 46 5 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 47 5 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 48 5 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 48 5 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 49 5 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 50 5 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 51 5 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 52 5 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 52 5 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 53 5 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 54 5 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 55 5 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 55 5 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 56 5 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 57 6 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 58 6 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 59 6 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 59 6 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 60 6 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 61 6 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 62 7 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 62 7 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 63 7 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 64 7 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 65 7 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 65 8 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 66 8 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 67 8 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 68 9 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 68 9 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 69 9 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 70 10 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 70 10 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 71 10 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 72 11 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 73 11 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 73 11 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 74 12 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 75 12 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 75 13 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 76 13 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 76 14 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 77 14 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 78 15 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 78 15 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 79 16 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 80 16 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 80 17 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 81 17 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 81 18 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 82 18 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 82 19 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 83 19 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 83 20 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 84 20 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 84 21 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 85 22 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 85 22 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 86 23 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 86 24 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 87 24 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 87 25 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 88 25 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 88 26 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 89 27 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 89 27 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 89 28 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 90 29 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 90 30 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 90 30 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 91 31 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 91 32 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 91 32 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 92 33 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 92 34 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 92 35 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 93 35 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 93 36 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 93 37 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 93 38 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 93 38 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 94 39 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 94 40 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 94 41 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 94 41 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 94 42 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 94 43 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 95 44 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 95 45 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 95 45 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 95 46 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 95 47 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 95 48 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 95 48 land_percent 0 terrain_type NNB2 }
+    create_land { base_size 6 land_position 95 49 land_percent 0 terrain_type NNB2 }
+endif
+
+<ELEVATION_GENERATION>
+
+    if TINY_MAP
+        create_elevation 2 { base_terrain GRASS number_of_tiles 80 number_of_clumps 8 set_scale_by_groups enable_balanced_elevation }
+        create_elevation 7 { base_terrain DIRT number_of_tiles 1200 number_of_clumps 300 set_scale_by_groups enable_balanced_elevation }
+        create_elevation 3 { base_terrain DIRT2 number_of_tiles 240 number_of_clumps 4 set_scale_by_groups enable_balanced_elevation }
+        create_elevation 3 { base_terrain DLC_BEACH3 number_of_tiles 240 number_of_clumps 4 set_scale_by_groups enable_balanced_elevation }
+        create_elevation 3 { base_terrain DIRT3 number_of_tiles 240 number_of_clumps 4 set_scale_by_groups enable_balanced_elevation }
+        create_elevation 3 { base_terrain DLC_BEACH4 number_of_tiles 240 number_of_clumps 4 set_scale_by_groups enable_balanced_elevation }
+        create_elevation 3 { base_terrain NNB number_of_tiles 600 number_of_clumps 30 set_scale_by_groups enable_balanced_elevation }
+        /* create_elevation 2 { base_terrain NNB2 number_of_tiles 80 number_of_clumps 8 set_scale_by_groups enable_balanced_elevation } */
+    elseif SMALL_MAP
+        create_elevation 2 { base_terrain GRASS number_of_tiles 130 number_of_clumps 8 set_scale_by_groups enable_balanced_elevation }
+        create_elevation 7 { base_terrain DIRT number_of_tiles 1950 number_of_clumps 300 set_scale_by_groups enable_balanced_elevation }
+        create_elevation 3 { base_terrain DIRT2 number_of_tiles 390 number_of_clumps 4 set_scale_by_groups enable_balanced_elevation }
+        create_elevation 3 { base_terrain DLC_BEACH3 number_of_tiles 390 number_of_clumps 4 set_scale_by_groups enable_balanced_elevation }
+        create_elevation 3 { base_terrain DIRT3 number_of_tiles 390 number_of_clumps 4 set_scale_by_groups enable_balanced_elevation }
+        create_elevation 3 { base_terrain DLC_BEACH4 number_of_tiles 390 number_of_clumps 4 set_scale_by_groups enable_balanced_elevation }
+        create_elevation 3 { base_terrain NNB number_of_tiles 975 number_of_clumps 30 set_scale_by_groups enable_balanced_elevation }
+        /* create_elevation 2 { base_terrain NNB2 number_of_tiles 130 number_of_clumps 8 set_scale_by_groups enable_balanced_elevation } */
+    elseif MEDIUM_MAP
+        create_elevation 2 { base_terrain GRASS number_of_tiles 187 number_of_clumps 8 set_scale_by_groups enable_balanced_elevation }
+        create_elevation 7 { base_terrain DIRT number_of_tiles 2800 number_of_clumps 300 set_scale_by_groups enable_balanced_elevation }
+        create_elevation 3 { base_terrain DIRT2 number_of_tiles 560 number_of_clumps 4 set_scale_by_groups enable_balanced_elevation }
+        create_elevation 3 { base_terrain DLC_BEACH3 number_of_tiles 560 number_of_clumps 4 set_scale_by_groups enable_balanced_elevation }
+        create_elevation 3 { base_terrain DIRT3 number_of_tiles 560 number_of_clumps 4 set_scale_by_groups enable_balanced_elevation }
+        create_elevation 3 { base_terrain DLC_BEACH4 number_of_tiles 560 number_of_clumps 4 set_scale_by_groups enable_balanced_elevation }
+        create_elevation 3 { base_terrain NNB number_of_tiles 1400 number_of_clumps 30 set_scale_by_groups enable_balanced_elevation }
+        /* create_elevation 2 { base_terrain NNB2 number_of_tiles 187 number_of_clumps 8 set_scale_by_groups enable_balanced_elevation } */
+    elseif LARGE_MAP
+        create_elevation 2 { base_terrain GRASS number_of_tiles 250 number_of_clumps 8 set_scale_by_groups enable_balanced_elevation }
+        create_elevation 7 { base_terrain DIRT number_of_tiles 3750 number_of_clumps 300 set_scale_by_groups enable_balanced_elevation }
+        create_elevation 3 { base_terrain DIRT2 number_of_tiles 750 number_of_clumps 4 set_scale_by_groups enable_balanced_elevation }
+        create_elevation 3 { base_terrain DLC_BEACH3 number_of_tiles 750 number_of_clumps 4 set_scale_by_groups enable_balanced_elevation }
+        create_elevation 3 { base_terrain DIRT3 number_of_tiles 750 number_of_clumps 4 set_scale_by_groups enable_balanced_elevation }
+        create_elevation 3 { base_terrain DLC_BEACH4 number_of_tiles 750 number_of_clumps 4 set_scale_by_groups enable_balanced_elevation }
+        create_elevation 3 { base_terrain NNB number_of_tiles 1875 number_of_clumps 30 set_scale_by_groups enable_balanced_elevation }
+        /* create_elevation 2 { base_terrain NNB2 number_of_tiles 250 number_of_clumps 8 set_scale_by_groups enable_balanced_elevation } */
+    else
+        create_elevation 2 { base_terrain GRASS number_of_tiles 360 number_of_clumps 8 set_scale_by_groups enable_balanced_elevation }
+        create_elevation 7 { base_terrain DIRT number_of_tiles 4800 number_of_clumps 300 set_scale_by_groups enable_balanced_elevation }
+        create_elevation 3 { base_terrain DIRT2 number_of_tiles 960 number_of_clumps 4 set_scale_by_groups enable_balanced_elevation }
+        create_elevation 3 { base_terrain DLC_BEACH3 number_of_tiles 960 number_of_clumps 4 set_scale_by_groups enable_balanced_elevation }
+        create_elevation 3 { base_terrain DIRT3 number_of_tiles 960 number_of_clumps 4 set_scale_by_groups enable_balanced_elevation }
+        create_elevation 3 { base_terrain DLC_BEACH4 number_of_tiles 960 number_of_clumps 4 set_scale_by_groups enable_balanced_elevation }
+        create_elevation 3 { base_terrain NNB number_of_tiles 2400 number_of_clumps 30 set_scale_by_groups enable_balanced_elevation }
+        /* create_elevation 2 { base_terrain NNB2 number_of_tiles 360 number_of_clumps 8 set_scale_by_groups enable_balanced_elevation } */
+   endif
+
+<TERRAIN_GENERATION>
+
+start_random
+    percent_chance 25 #define WINTER
+    percent_chance 25 #define AUTUMNCOLD
+    percent_chance 25 #define AUTUMNWARM
+    percent_chance 25 #define SUMMER
+end_random
+
+if WINTER color_correction CC_WINTER
+elseif AUTUMNCOLD color_correction CC_AUTUMN
+elseif AUTUMNWARM color_correction CC_AUTUMN
+elseif SUMMER 
+endif
+
+if WINTER
+    #const LAND_BASE 9 /* Grass 3 */
+    #const LAND_LAYER 74 /* Strong Snow */
+    #const LAND_TOP 32 /* Snow */
+    #const FOREST_A 21 /* Snow pine */
+    #const FOREST_B 106 /* Dormant oak with bushes */
+    #const OBJTREE_A 1250 /* Oak */
+    #const OBJTREE_B 413 /* Snow pine */
+    #const MOUNTAIN_A 1045 /* Snow mountain 1 */
+    #const MOUNTAIN_B 1046 /* Snow mountain 2 */
+    #const MOUNTAIN_C 1047 /* Snow mountain 3 */
+elseif AUTUMNCOLD
+    #const LAND_BASE 9 /* Grass 3 */
+    #const LAND_LAYER 72 /* Snowy leaves */
+    #const LAND_TOP 32 /* Snow */
+    #const FOREST_A 21 /* Snow pine */ 
+    #const FOREST_B 105 /* Snow autumn oak */
+    #const OBJTREE_A 1249 /* Snow autumn oak */
+    #const OBJTREE_B 413 /* Snow pine */
+    #const MOUNTAIN_A 1045 /* Snow mountain 1 */
+    #const MOUNTAIN_B 1046 /* Snow mountain 2 */
+    #const MOUNTAIN_C 1047 /* Snow mountain 3 */
+elseif AUTUMNWARM
+    #const LAND_BASE 9 /* Grass 3 */
+    #const LEAVES 71 /* Autumn leaves */
+    #const LAND_TOP 6 /* Dirt 1 */
+    #const FOREST_A 19 /* Pine */
+    #const FOREST_B 104 /* Autumn oak */
+    #const OBJTREE_A 1248 /* Autumn oak */
+    #const OBJTREE_B 350 /* Pine */
+    #const MOUNTAIN_A 1042 /* Mountain 6 */
+    #const MOUNTAIN_B 1043 /* Mountain 7 */
+    #const MOUNTAIN_C 1044 /* Mountain 8 */
+elseif SUMMER
+    #const LAND_BASE 0 /* Grass 1 */
+    #const LAND_LAYER 0 /* Grass 1 */
+    #const LAND_TOP 6 /* Dirt 1 */
+    #const FOREST_A 19 /* Pine */
+    #const FOREST_B 20 /* Oak with bushes */
+    #const FOREST_C 110 /* Birch */
+    #const OBJTREE_A 349 /* Oak */
+    #const OBJTREE_B 350 /* Pine */
+    #const MOUNTAIN_A 310 /* Mountain 1 */
+    #const MOUNTAIN_B 311 /* Mountain 2 */
+    #const MOUNTAIN_C 1041 /* Mountain 3 */
+endif 
+
+#define RESKIN_OFFSHORE_TERRAIN
+if RESKIN_OFFSHORE_TERRAIN
+    create_terrain NNB2 { base_terrain DIRT2 number_of_clumps 9320 set_scale_by_groups land_percent 100 }
+    create_terrain NNB2 { base_terrain DLC_BEACH3 number_of_clumps 9320 set_scale_by_groups land_percent 100 }
+    create_terrain NNB2 { base_terrain DIRT3 number_of_clumps 9320 set_scale_by_groups land_percent 100 }
+    create_terrain NNB2 { base_terrain DLC_BEACH4 number_of_clumps 9320 set_scale_by_groups land_percent 100 }
+    create_terrain NNB { base_terrain NNB2 number_of_clumps 9320 set_scale_by_groups land_percent 100 }
+endif
+
+#define ISLAND_LAYERING
+if ISLAND_LAYERING
+
+    create_terrain DIRT { base_terrain NNB number_of_clumps 9320 set_scale_by_groups land_percent 100 height_limits 1 7 }
+    create_terrain DIRT { base_terrain NNB number_of_clumps 9320 set_scale_by_groups land_percent 100 height_limits 1 7 }
+    create_terrain DIRT { base_terrain NNB number_of_clumps 9320 set_scale_by_groups land_percent 100 height_limits 1 7 }
+    create_terrain DIRT { base_terrain NNB number_of_clumps 9320 set_scale_by_groups land_percent 100 height_limits 1 7 }
+    create_terrain DIRT { base_terrain NNB number_of_clumps 9320 set_scale_by_groups land_percent 100 height_limits 1 7 }
+    create_terrain DIRT { base_terrain NNB number_of_clumps 9320 set_scale_by_groups land_percent 100 height_limits 1 7 }
+    create_terrain DIRT { base_terrain NNB number_of_clumps 9320 set_scale_by_groups land_percent 100 height_limits 1 7 }
+    create_terrain DIRT { base_terrain NNB number_of_clumps 9320 set_scale_by_groups land_percent 100 height_limits 1 7 }
+
+    create_terrain GRASS { base_terrain DIRT number_of_clumps 9320 set_scale_by_groups land_percent 100 }
+    create_terrain GRASS { base_terrain DIRT number_of_clumps 9320 set_scale_by_groups land_percent 100 }
+    create_terrain GRASS { base_terrain DIRT number_of_clumps 9320 set_scale_by_groups land_percent 100 }
+    create_terrain GRASS { base_terrain DIRT number_of_clumps 9320 set_scale_by_groups land_percent 100 }
+    create_terrain GRASS { base_terrain DIRT number_of_clumps 9320 set_scale_by_groups land_percent 100 }
+    create_terrain GRASS { base_terrain DIRT number_of_clumps 9320 set_scale_by_groups land_percent 100 }
+    create_terrain GRASS { base_terrain DIRT number_of_clumps 9320 set_scale_by_groups land_percent 100 }
+    create_terrain GRASS { base_terrain DIRT number_of_clumps 9320 set_scale_by_groups land_percent 100 }
+    create_terrain GRASS { base_terrain DIRT number_of_clumps 9320 set_scale_by_groups land_percent 100 }
+    create_terrain GRASS { base_terrain DIRT number_of_clumps 9320 set_scale_by_groups land_percent 100 }
+    create_terrain GRASS { base_terrain DIRT number_of_clumps 9320 set_scale_by_groups land_percent 100 }
+    create_terrain GRASS { base_terrain DIRT number_of_clumps 9320 set_scale_by_groups land_percent 100 }
+    create_terrain GRASS { base_terrain DIRT number_of_clumps 9320 set_scale_by_groups land_percent 100 }
+    create_terrain GRASS { base_terrain DIRT number_of_clumps 9320 set_scale_by_groups land_percent 100 }
+    create_terrain GRASS { base_terrain DIRT number_of_clumps 9320 set_scale_by_groups land_percent 100 }
+    create_terrain GRASS { base_terrain DIRT number_of_clumps 9320 set_scale_by_groups land_percent 100 }
+
+    create_terrain NNB { base_terrain GRASS number_of_clumps 9320 set_scale_by_groups land_percent 100 }
+    create_terrain NNB { base_terrain GRASS number_of_clumps 9320 set_scale_by_groups land_percent 100 }
+    create_terrain NNB { base_terrain GRASS number_of_clumps 9320 set_scale_by_groups land_percent 100 }
+    create_terrain NNB { base_terrain GRASS number_of_clumps 9320 set_scale_by_groups land_percent 100 }
+    create_terrain NNB { base_terrain GRASS number_of_clumps 9320 set_scale_by_groups land_percent 100 }
+    create_terrain NNB { base_terrain GRASS number_of_clumps 9320 set_scale_by_groups land_percent 100 }
+    create_terrain NNB { base_terrain GRASS number_of_clumps 9320 set_scale_by_groups land_percent 100 }
+    create_terrain NNB { base_terrain GRASS number_of_clumps 9320 set_scale_by_groups land_percent 100 }
+    create_terrain NNB { base_terrain GRASS number_of_clumps 9320 set_scale_by_groups land_percent 100 }
+    create_terrain NNB { base_terrain GRASS number_of_clumps 9320 set_scale_by_groups land_percent 100 }
+    create_terrain NNB { base_terrain GRASS number_of_clumps 9320 set_scale_by_groups land_percent 100 }
+    create_terrain NNB { base_terrain GRASS number_of_clumps 9320 set_scale_by_groups land_percent 100 }
+    create_terrain NNB { base_terrain GRASS number_of_clumps 9320 set_scale_by_groups land_percent 100 }
+    create_terrain NNB { base_terrain GRASS number_of_clumps 9320 set_scale_by_groups land_percent 100 }
+    create_terrain NNB { base_terrain GRASS number_of_clumps 9320 set_scale_by_groups land_percent 100 }
+    create_terrain NNB { base_terrain GRASS number_of_clumps 9320 set_scale_by_groups land_percent 100 }
+
+    create_terrain DIRT3 { base_terrain NNB number_of_clumps 9320 set_scale_by_groups land_percent 100 height_limits 0 0 spacing_to_other_terrain_types 1 set_flat_terrain_only }
+    create_terrain DIRT3 { base_terrain NNB number_of_clumps 9320 set_scale_by_groups land_percent 100 height_limits 0 0 spacing_to_other_terrain_types 1 set_flat_terrain_only }
+    create_terrain DIRT3 { base_terrain NNB number_of_clumps 9320 set_scale_by_groups land_percent 100 height_limits 0 0 spacing_to_other_terrain_types 1 set_flat_terrain_only }
+    create_terrain DIRT3 { base_terrain NNB number_of_clumps 9320 set_scale_by_groups land_percent 100 height_limits 0 0 spacing_to_other_terrain_types 1 set_flat_terrain_only }
+
+    create_terrain GRASS { base_terrain NNB number_of_clumps 9320 set_scale_by_groups land_percent 100 spacing_to_other_terrain_types 1 terrain_mask 2 }
+    create_terrain GRASS { base_terrain NNB number_of_clumps 9320 set_scale_by_groups land_percent 100 spacing_to_other_terrain_types 1 terrain_mask 2 }
+    create_terrain GRASS { base_terrain NNB number_of_clumps 9320 set_scale_by_groups land_percent 100 spacing_to_other_terrain_types 1 terrain_mask 2 }
+    create_terrain GRASS { base_terrain NNB number_of_clumps 9320 set_scale_by_groups land_percent 100 spacing_to_other_terrain_types 1 terrain_mask 2 }
+    create_terrain GRASS { base_terrain NNB number_of_clumps 9320 set_scale_by_groups land_percent 100 spacing_to_other_terrain_types 1 terrain_mask 2 }
+    create_terrain GRASS { base_terrain NNB number_of_clumps 9320 set_scale_by_groups land_percent 100 spacing_to_other_terrain_types 1 terrain_mask 2 }
+    create_terrain GRASS { base_terrain NNB number_of_clumps 9320 set_scale_by_groups land_percent 100 spacing_to_other_terrain_types 1 terrain_mask 2 }
+    create_terrain GRASS { base_terrain NNB number_of_clumps 9320 set_scale_by_groups land_percent 100 spacing_to_other_terrain_types 1 terrain_mask 2 }
+
+    create_terrain NNB { base_terrain DIRT3 number_of_clumps 9320 set_scale_by_groups land_percent 100 }
+    create_terrain NNB { base_terrain DIRT3 number_of_clumps 9320 set_scale_by_groups land_percent 100 }
+    create_terrain NNB { base_terrain DIRT3 number_of_clumps 9320 set_scale_by_groups land_percent 100 }
+    create_terrain NNB { base_terrain DIRT3 number_of_clumps 9320 set_scale_by_groups land_percent 100 }
+
+    create_terrain GRASS3 { base_terrain GRASS number_of_clumps 9320 set_scale_by_groups land_percent 100 }
+    create_terrain GRASS3 { base_terrain GRASS number_of_clumps 9320 set_scale_by_groups land_percent 100 }
+    create_terrain GRASS3 { base_terrain GRASS number_of_clumps 9320 set_scale_by_groups land_percent 100 }
+    create_terrain GRASS3 { base_terrain GRASS number_of_clumps 9320 set_scale_by_groups land_percent 100 }
+
+    create_terrain GRASS { base_terrain GRASS3 number_of_clumps 9320 set_scale_by_groups land_percent 100 }
+
+    create_terrain LAND_BASE { base_terrain GRASS number_of_clumps 9320 set_scale_by_groups land_percent 100 }
+endif
+
+#define PLAYER_ASSIGNED_FORESTS
+if PLAYER_ASSIGNED_FORESTS
+    /* Layering outer limits, creating circles of terrain around each player land */
+    /* TO DO: Pull forests closer to start but reduce number of trees */
+    create_terrain DIRT { base_terrain LAND_BASE number_of_clumps 9320 land_percent 100 set_scale_by_groups set_avoid_player_start_areas 21 }
+    create_terrain DIRT2 { base_terrain LAND_BASE number_of_clumps 9320 land_percent 100 set_scale_by_groups spacing_to_other_terrain_types 1 }
+    /* Revert terrain back to base */
+    create_terrain DIRT { base_terrain GRASS number_of_clumps 9320 land_percent 100 set_scale_by_groups }
+    create_terrain DIRT { base_terrain GRASS number_of_clumps 9320 land_percent 100 set_scale_by_groups }
+    create_terrain DIRT { base_terrain GRASS number_of_clumps 9320 land_percent 100 set_scale_by_groups }
+    create_terrain DIRT { base_terrain GRASS number_of_clumps 9320 land_percent 100 set_scale_by_groups }
+    create_terrain DIRT { base_terrain GRASS number_of_clumps 9320 land_percent 100 set_scale_by_groups }
+    create_terrain DIRT { base_terrain GRASS number_of_clumps 9320 land_percent 100 set_scale_by_groups }
+    create_terrain DIRT { base_terrain GRASS number_of_clumps 9320 land_percent 100 set_scale_by_groups }
+    create_terrain DIRT { base_terrain GRASS number_of_clumps 9320 land_percent 100 set_scale_by_groups } */
+    /* Creating forests for player 1 */
+    create_terrain DLC_BLACK { base_terrain DIRT2 number_of_clumps 1 land_percent 100 }
+    create_terrain FOREST { base_terrain DLC_BLACK number_of_clumps 1 number_of_tiles 20 clumping_factor 20 set_avoid_player_start_areas 14 }
+    create_terrain PINE_FOREST { base_terrain DLC_BLACK number_of_clumps 1 number_of_tiles 20 clumping_factor 20 set_avoid_player_start_areas 13 spacing_to_other_terrain_types 2 }
+    create_terrain SNOW_FOREST { base_terrain DLC_BLACK number_of_clumps 1 number_of_tiles 20 clumping_factor 20 set_avoid_player_start_areas 12 spacing_to_other_terrain_types 2 }
+    create_terrain DIRT { base_terrain DLC_BLACK number_of_clumps 9320 land_percent 100 set_scale_by_groups }
+    create_terrain DIRT { base_terrain DLC_BLACK number_of_clumps 9320 land_percent 100 set_scale_by_groups }
+    create_terrain DIRT { base_terrain DLC_BLACK number_of_clumps 9320 land_percent 100 set_scale_by_groups }
+    create_terrain DIRT { base_terrain DLC_BLACK number_of_clumps 9320 land_percent 100 set_scale_by_groups }
+    /* Creating forests for player 2 */
+    create_terrain DLC_BLACK { base_terrain DIRT2 number_of_clumps 1 land_percent 100 }
+    create_terrain FOREST { base_terrain DLC_BLACK number_of_clumps 1 number_of_tiles 20 clumping_factor 20 set_avoid_player_start_areas 14 }
+    create_terrain PINE_FOREST { base_terrain DLC_BLACK number_of_clumps 1 number_of_tiles 20 clumping_factor 20 set_avoid_player_start_areas 13 spacing_to_other_terrain_types 2 }
+    create_terrain SNOW_FOREST { base_terrain DLC_BLACK number_of_clumps 1 number_of_tiles 20 clumping_factor 20 set_avoid_player_start_areas 12 spacing_to_other_terrain_types 2 }
+    create_terrain DIRT { base_terrain DLC_BLACK number_of_clumps 9320 land_percent 100 set_scale_by_groups }
+    create_terrain DIRT { base_terrain DLC_BLACK number_of_clumps 9320 land_percent 100 set_scale_by_groups }
+    create_terrain DIRT { base_terrain DLC_BLACK number_of_clumps 9320 land_percent 100 set_scale_by_groups }
+    create_terrain DIRT { base_terrain DLC_BLACK number_of_clumps 9320 land_percent 100 set_scale_by_groups }
+    /* Creating forests for player 3 */
+    create_terrain DLC_BLACK { base_terrain DIRT2 number_of_clumps 1 land_percent 100 }
+    create_terrain FOREST { base_terrain DLC_BLACK number_of_clumps 1 number_of_tiles 20 clumping_factor 20 set_avoid_player_start_areas 14 }
+    create_terrain PINE_FOREST { base_terrain DLC_BLACK number_of_clumps 1 number_of_tiles 20 clumping_factor 20 set_avoid_player_start_areas 13 spacing_to_other_terrain_types 2 }
+    create_terrain SNOW_FOREST { base_terrain DLC_BLACK number_of_clumps 1 number_of_tiles 20 clumping_factor 20 set_avoid_player_start_areas 12 spacing_to_other_terrain_types 2 }
+    create_terrain DIRT { base_terrain DLC_BLACK number_of_clumps 9320 land_percent 100 set_scale_by_groups }
+    create_terrain DIRT { base_terrain DLC_BLACK number_of_clumps 9320 land_percent 100 set_scale_by_groups }
+    create_terrain DIRT { base_terrain DLC_BLACK number_of_clumps 9320 land_percent 100 set_scale_by_groups }
+    create_terrain DIRT { base_terrain DLC_BLACK number_of_clumps 9320 land_percent 100 set_scale_by_groups }
+    /* Creating forests for player 4 */
+    create_terrain DLC_BLACK { base_terrain DIRT2 number_of_clumps 1 land_percent 100 }
+    create_terrain FOREST { base_terrain DLC_BLACK number_of_clumps 1 number_of_tiles 20 clumping_factor 20 set_avoid_player_start_areas 14 }
+    create_terrain PINE_FOREST { base_terrain DLC_BLACK number_of_clumps 1 number_of_tiles 20 clumping_factor 20 set_avoid_player_start_areas 13 spacing_to_other_terrain_types 2 }
+    create_terrain SNOW_FOREST { base_terrain DLC_BLACK number_of_clumps 1 number_of_tiles 20 clumping_factor 20 set_avoid_player_start_areas 12 spacing_to_other_terrain_types 2 }
+    create_terrain DIRT { base_terrain DLC_BLACK number_of_clumps 9320 land_percent 100 set_scale_by_groups }
+    create_terrain DIRT { base_terrain DLC_BLACK number_of_clumps 9320 land_percent 100 set_scale_by_groups }
+    create_terrain DIRT { base_terrain DLC_BLACK number_of_clumps 9320 land_percent 100 set_scale_by_groups }
+    create_terrain DIRT { base_terrain DLC_BLACK number_of_clumps 9320 land_percent 100 set_scale_by_groups }
+    /* Creating forests for player 5 */
+    create_terrain DLC_BLACK { base_terrain DIRT2 number_of_clumps 1 land_percent 100 }
+    create_terrain FOREST { base_terrain DLC_BLACK number_of_clumps 1 number_of_tiles 20 clumping_factor 20 set_avoid_player_start_areas 14 }
+    create_terrain PINE_FOREST { base_terrain DLC_BLACK number_of_clumps 1 number_of_tiles 20 clumping_factor 20 set_avoid_player_start_areas 13 spacing_to_other_terrain_types 2 }
+    create_terrain SNOW_FOREST { base_terrain DLC_BLACK number_of_clumps 1 number_of_tiles 20 clumping_factor 20 set_avoid_player_start_areas 12 spacing_to_other_terrain_types 2 }
+    create_terrain DIRT { base_terrain DLC_BLACK number_of_clumps 9320 land_percent 100 set_scale_by_groups }
+    create_terrain DIRT { base_terrain DLC_BLACK number_of_clumps 9320 land_percent 100 set_scale_by_groups }
+    create_terrain DIRT { base_terrain DLC_BLACK number_of_clumps 9320 land_percent 100 set_scale_by_groups }
+    create_terrain DIRT { base_terrain DLC_BLACK number_of_clumps 9320 land_percent 100 set_scale_by_groups }
+    /* Creating forests for player 6 */
+    create_terrain DLC_BLACK { base_terrain DIRT2 number_of_clumps 1 land_percent 100 }
+    create_terrain FOREST { base_terrain DLC_BLACK number_of_clumps 1 number_of_tiles 20 clumping_factor 20 set_avoid_player_start_areas 14 }
+    create_terrain PINE_FOREST { base_terrain DLC_BLACK number_of_clumps 1 number_of_tiles 20 clumping_factor 20 set_avoid_player_start_areas 13 spacing_to_other_terrain_types 2 }
+    create_terrain SNOW_FOREST { base_terrain DLC_BLACK number_of_clumps 1 number_of_tiles 20 clumping_factor 20 set_avoid_player_start_areas 12 spacing_to_other_terrain_types 2 }
+    create_terrain DIRT { base_terrain DLC_BLACK number_of_clumps 9320 land_percent 100 set_scale_by_groups }
+    create_terrain DIRT { base_terrain DLC_BLACK number_of_clumps 9320 land_percent 100 set_scale_by_groups }
+    create_terrain DIRT { base_terrain DLC_BLACK number_of_clumps 9320 land_percent 100 set_scale_by_groups }
+    create_terrain DIRT { base_terrain DLC_BLACK number_of_clumps 9320 land_percent 100 set_scale_by_groups }
+    /* Creating forests for player 7 */
+    create_terrain DLC_BLACK { base_terrain DIRT2 number_of_clumps 1 land_percent 100 }
+    create_terrain FOREST { base_terrain DLC_BLACK number_of_clumps 1 number_of_tiles 20 clumping_factor 20 set_avoid_player_start_areas 14 }
+    create_terrain PINE_FOREST { base_terrain DLC_BLACK number_of_clumps 1 number_of_tiles 20 clumping_factor 20 set_avoid_player_start_areas 13 spacing_to_other_terrain_types 2 }
+    create_terrain SNOW_FOREST { base_terrain DLC_BLACK number_of_clumps 1 number_of_tiles 20 clumping_factor 20 set_avoid_player_start_areas 12 spacing_to_other_terrain_types 2 }
+    create_terrain DIRT { base_terrain DLC_BLACK number_of_clumps 9320 land_percent 100 set_scale_by_groups }
+    create_terrain DIRT { base_terrain DLC_BLACK number_of_clumps 9320 land_percent 100 set_scale_by_groups }
+    create_terrain DIRT { base_terrain DLC_BLACK number_of_clumps 9320 land_percent 100 set_scale_by_groups }
+    create_terrain DIRT { base_terrain DLC_BLACK number_of_clumps 9320 land_percent 100 set_scale_by_groups }
+    /* Creating forests for player 8 */
+    create_terrain DLC_BLACK { base_terrain DIRT2 number_of_clumps 1 land_percent 100 }
+    create_terrain FOREST { base_terrain DLC_BLACK number_of_clumps 1 number_of_tiles 20 clumping_factor 20 set_avoid_player_start_areas 14 }
+    create_terrain PINE_FOREST { base_terrain DLC_BLACK number_of_clumps 1 number_of_tiles 20 clumping_factor 20 set_avoid_player_start_areas 13 spacing_to_other_terrain_types 2 }
+    create_terrain SNOW_FOREST { base_terrain DLC_BLACK number_of_clumps 1 number_of_tiles 20 clumping_factor 20 set_avoid_player_start_areas 12 spacing_to_other_terrain_types 2 }
+    create_terrain DIRT { base_terrain DLC_BLACK number_of_clumps 9320 land_percent 100 set_scale_by_groups }
+    create_terrain DIRT { base_terrain DLC_BLACK number_of_clumps 9320 land_percent 100 set_scale_by_groups }
+    create_terrain DIRT { base_terrain DLC_BLACK number_of_clumps 9320 land_percent 100 set_scale_by_groups }
+    create_terrain DIRT { base_terrain DLC_BLACK number_of_clumps 9320 land_percent 100 set_scale_by_groups }
+    /* Setting all forests to snow pines */
+    create_terrain SNOW_FOREST { base_terrain FOREST number_of_clumps 9320 land_percent 100 set_scale_by_groups }
+    create_terrain SNOW_FOREST { base_terrain PINE_FOREST number_of_clumps 9320 land_percent 100 set_scale_by_groups }
+    create_terrain FOREST_A { base_terrain SNOW_FOREST number_of_clumps 9320 land_percent 100 set_scale_by_groups }
+    create_terrain FOREST_B { base_terrain FOREST_A number_of_clumps 9320 number_of_tiles 30 spacing_to_other_terrain_types 0 set_scale_by_groups }
+    /* Restore base terrain */
+    create_terrain LAND_BASE { base_terrain DIRT number_of_clumps 9320 land_percent 100 set_scale_by_groups }
+endif
+
+#define OCEAN_LAYERING
+if OCEAN_LAYERING
+    create_terrain DLC_GRAVELBEACH { base_terrain NNB number_of_clumps 9320 set_scale_by_groups land_percent 100 spacing_to_other_terrain_types 0 } 
+    create_terrain WATER { base_terrain DLC_GRAVELBEACH number_of_clumps 9320 set_scale_by_groups land_percent 100 spacing_to_other_terrain_types 0 }
+    create_terrain BEACH { base_terrain WATER number_of_clumps 9320 set_scale_by_groups land_percent 100 spacing_to_other_terrain_types 0 }
+    create_terrain DLC_GRAVELBEACH { base_terrain BEACH number_of_clumps 9320 set_scale_by_groups land_percent 100 spacing_to_other_terrain_types 0 } 
+    create_terrain WATER { base_terrain DLC_GRAVELBEACH number_of_clumps 9320 set_scale_by_groups land_percent 100 spacing_to_other_terrain_types 1 }
+    create_terrain MED_WATER { base_terrain WATER number_of_clumps 9320 set_scale_by_groups land_percent 100 spacing_to_other_terrain_types 1 }
+    create_terrain DEEP_WATER { base_terrain MED_WATER number_of_clumps 9320 set_scale_by_groups land_percent 100 spacing_to_other_terrain_types 8 }
+endif
+
+#define FOREST_LAYERING
+if FOREST_LAYERING
+    create_terrain FOREST_A { base_terrain LAND_BASE number_of_clumps 60 set_scale_by_groups number_of_tiles 1200 clumping_factor 10 set_avoid_player_start_areas 25 spacing_to_other_terrain_types 1 height_limits 1 6 }
+    create_terrain FOREST_B { base_terrain FOREST_A number_of_clumps 450 set_scale_by_groups number_of_tiles 600 clumping_factor 1 set_avoid_player_start_areas 25 spacing_to_other_terrain_types 0 height_limits 1 3 }
+endif
+
+#define HEIGHT_LAYERING
+if HEIGHT_LAYERING
+    if WINTER
+        create_terrain HSNOW { base_terrain LAND_BASE number_of_clumps 9320 set_scale_by_groups land_percent 100 height_limits 0 7 spacing_to_other_terrain_types 0 terrain_mask 1 }
+        create_terrain HSNOW { base_terrain LAND_BASE number_of_clumps 9320 set_scale_by_groups land_percent 100 height_limits 3 7 spacing_to_other_terrain_types 0 }
+        create_terrain LAND_TOP { base_terrain HSNOW number_of_clumps 9320 set_scale_by_groups land_percent 100 height_limits 7 7 spacing_to_other_terrain_types 0 }
+    elseif AUTUMNCOLD
+        create_terrain LSNOW { base_terrain LAND_BASE number_of_clumps 9320 set_scale_by_groups land_percent 100 height_limits 0 2 spacing_to_other_terrain_types 0 terrain_mask 1 }
+        create_terrain SNOW { base_terrain LAND_BASE number_of_clumps 9320 set_scale_by_groups land_percent 100 height_limits 3 4 spacing_to_other_terrain_types 0 terrain_mask 1 }
+        create_terrain HSNOW { base_terrain LAND_BASE number_of_clumps 9320 set_scale_by_groups land_percent 100 height_limits 5 6 spacing_to_other_terrain_types 0 terrain_mask 1 }
+        create_terrain LAND_TOP { base_terrain LAND_BASE number_of_clumps 9320 set_scale_by_groups land_percent 100 height_limits 7 7 spacing_to_other_terrain_types 0 }
+    elseif AUTUMNWARM
+        create_terrain LEAVES { base_terrain LAND_BASE number_of_clumps 9320 set_scale_by_groups land_percent 100 height_limits 0 7 spacing_to_other_terrain_types 0 terrain_mask 1 }
+        create_terrain DIRT3 { base_terrain LAND_BASE number_of_clumps 9320 set_scale_by_groups land_percent 100 height_limits 3 7 spacing_to_other_terrain_types 0 }
+        create_terrain LEAVES { base_terrain DIRT3 number_of_clumps 9320 set_scale_by_groups land_percent 100 height_limits 3 7 spacing_to_other_terrain_types 0 terrain_mask 1 }
+        create_terrain DIRT2 { base_terrain DIRT3 number_of_clumps 9320 set_scale_by_groups land_percent 100 height_limits 5 7 spacing_to_other_terrain_types 0 }
+        create_terrain LEAVES { base_terrain DIRT2 number_of_clumps 9320 set_scale_by_groups land_percent 100 height_limits 5 7 spacing_to_other_terrain_types 0 terrain_mask 1 }
+        create_terrain LAND_TOP { base_terrain DIRT2 number_of_clumps 9320 set_scale_by_groups land_percent 100 height_limits 7 7 spacing_to_other_terrain_types 0 }
+        create_terrain LEAVES { base_terrain LAND_TOP number_of_clumps 9320 set_scale_by_groups land_percent 100 height_limits 7 7 spacing_to_other_terrain_types 0 terrain_mask 1 }
+    elseif SUMMER
+        create_terrain GRASS3 { base_terrain LAND_BASE number_of_clumps 9320 set_scale_by_groups land_percent 100 height_limits 2 7 spacing_to_other_terrain_types 0 }
+        create_terrain DIRT3 { base_terrain GRASS3 number_of_clumps 9320 set_scale_by_groups land_percent 100 height_limits 4 7 spacing_to_other_terrain_types 0 }
+        create_terrain DIRT2 { base_terrain DIRT3 number_of_clumps 9320 set_scale_by_groups land_percent 100 height_limits 6 7 spacing_to_other_terrain_types 0 }
+        create_terrain LAND_TOP { base_terrain DIRT2 number_of_clumps 9320 set_scale_by_groups land_percent 100 height_limits 7 7 spacing_to_other_terrain_types 0 }
+    endif
+endif
+
+<OBJECTS_GENERATION>
+
+/* NATURE objects */
+
+create_object MOUNTAIN_A { set_gaia_object_only number_of_groups 2 set_scaling_to_map_size terrain_to_place_on LAND_TOP temp_min_distance_group_placement 7 actor_area 77 actor_area_radius 7 }
+create_object MOUNTAIN_B { set_gaia_object_only number_of_groups 2 set_scaling_to_map_size terrain_to_place_on LAND_TOP temp_min_distance_group_placement 7 actor_area 78 actor_area_radius 7 avoid_actor_area 77 }
+create_object MOUNTAIN_C { set_gaia_object_only number_of_groups 4 set_scaling_to_map_size terrain_to_place_on LAND_TOP temp_min_distance_group_placement 7 actor_area 79 actor_area_radius 7 avoid_actor_area 77 avoid_actor_area 78 }
+create_object OBJTREE_B { set_gaia_object_only number_of_groups 16 set_scaling_to_map_size terrain_to_place_on LAND_TOP temp_min_distance_group_placement 2 }
+create_object SEA_ROCKS_3 { number_of_groups 9320 set_gaia_object_only terrain_to_place_on BEACH }
+create_object SEA_ROCKS_1 { number_of_objects 10 set_scaling_to_map_size terrain_to_place_on DLC_GRAVELBEACH temp_min_distance_group_placement 1 }
+create_object SEA_ROCKS_1 { number_of_objects 10 set_scaling_to_map_size terrain_to_place_on WATER temp_min_distance_group_placement 1 }
+create_object SEA_ROCKS_2 { number_of_objects 10 set_scaling_to_map_size terrain_to_place_on DLC_GRAVELBEACH temp_min_distance_group_placement 1 }
+create_object SEA_ROCKS_2 { number_of_objects 10 set_scaling_to_map_size terrain_to_place_on WATER temp_min_distance_group_placement 1 }
+
+/* PLAYER assigned objects */
+
+create_object TOWN_CENTER { set_place_for_every_player find_closest }
+create_object VILLAGER { set_place_for_every_player min_distance_to_players 3 max_distance_to_players 6 }
+create_object EAGLE_WARRIOR { set_place_for_every_player min_distance_to_players 7 max_distance_to_players 7 }
+
+if REGICIDE
+    create_object KING { set_place_for_every_player find_closest }
+endif
+
+create_object OBJTREE_A { set_place_for_every_player set_gaia_object_only find_closest number_of_groups 3 min_distance_to_players 4 max_distance_to_players 5 }
+create_object OBJTREE_B { set_place_for_every_player set_gaia_object_only find_closest number_of_groups 3 min_distance_to_players 6 max_distance_to_players 8 }
+
+start_random
+    percent_chance 25 create_object DLC_COW { set_place_for_every_player set_gaia_object_only number_of_objects 1 min_distance_to_players 6 max_distance_to_players 6 }
+    percent_chance 25 create_object DLC_COW_B { set_place_for_every_player set_gaia_object_only number_of_objects 1 min_distance_to_players 6 max_distance_to_players 6 }
+    percent_chance 25 create_object DLC_COW_C { set_place_for_every_player set_gaia_object_only number_of_objects 1 min_distance_to_players 6 max_distance_to_players 6 }
+    percent_chance 25 create_object DLC_COW_D { set_place_for_every_player set_gaia_object_only number_of_objects 1 min_distance_to_players 6 max_distance_to_players 6 }
+end_random
+start_random
+    percent_chance 25 create_object DLC_COW { set_place_for_every_player set_gaia_object_only number_of_objects 1 min_distance_to_players 6 max_distance_to_players 6 }
+    percent_chance 25 create_object DLC_COW_B { set_place_for_every_player set_gaia_object_only number_of_objects 1 min_distance_to_players 6 max_distance_to_players 6 }
+    percent_chance 25 create_object DLC_COW_C { set_place_for_every_player set_gaia_object_only number_of_objects 1 min_distance_to_players 6 max_distance_to_players 6 }
+    percent_chance 25 create_object DLC_COW_D { set_place_for_every_player set_gaia_object_only number_of_objects 1 min_distance_to_players 6 max_distance_to_players 6 }
+end_random
+create_object DLC_GOOSE { set_place_for_every_player set_gaia_object_only number_of_objects 2 number_of_groups 1 set_tight_grouping min_distance_to_players 15 max_distance_to_players 15 set_circular_placement actor_area 41 actor_area_radius 6 avoid_actor_area 40 }
+create_object DLC_GOOSE { set_place_for_every_player set_gaia_object_only number_of_objects 3 number_of_groups 1 set_tight_grouping min_distance_to_players 17 max_distance_to_players 17 set_circular_placement avoid_actor_area 40 avoid_actor_area 41 }
+create_object DEER { set_place_for_every_player set_gaia_object_only number_of_objects 4 min_distance_to_players 12 max_distance_to_players 16 set_circular_placement set_tight_grouping }
+create_object FORAGE { set_place_for_every_player set_gaia_object_only number_of_objects 4 set_tight_grouping number_of_groups 1 avoid_forest_zone 4 min_distance_to_players 10 max_distance_to_players 11 temp_min_distance_group_placement 14 set_circular_placement actor_area 61 actor_area_radius 12 }
+create_object FORAGE { set_place_for_every_player set_gaia_object_only number_of_objects 4 set_tight_grouping number_of_groups 1 avoid_forest_zone 4 min_distance_to_players 10 max_distance_to_players 11 temp_min_distance_group_placement 14 set_circular_placement actor_area 62 actor_area_radius 12 avoid_actor_area 61 }
+create_object GOLD { set_place_for_every_player set_gaia_object_only number_of_objects 7 set_tight_grouping number_of_groups 1 avoid_forest_zone 4 min_distance_to_players 10 max_distance_to_players 11 min_distance_group_placement 6 set_circular_placement }
+create_object GOLD { set_place_for_every_player set_gaia_object_only number_of_objects 4 set_tight_grouping number_of_groups 1 avoid_forest_zone 4 min_distance_to_players 18 max_distance_to_players 19 min_distance_group_placement 6 set_circular_placement }
+create_object STONE { set_place_for_every_player set_gaia_object_only number_of_objects 5 set_tight_grouping number_of_groups 1 avoid_forest_zone 4 min_distance_to_players 12 max_distance_to_players 13 min_distance_group_placement 6 set_circular_placement }
+
+/* Neutral objects defined BASED ON MAP SIZE */
+
+create_object ALASKAN_BEAR { number_of_groups 9320 set_gaia_object_only set_gaia_unconvertible min_distance_to_players 20 temp_min_distance_group_placement 20 avoid_actor_area 61 avoid_actor_area 62 }
+create_object FALCON { number_of_groups 10 set_scaling_to_map_size set_gaia_object_only }
+create_object SHORE_FISH { number_of_groups 9320 temp_min_distance_group_placement 7 terrain_to_place_on WATER }
+create_object SNAPPER { number_of_groups 9320 temp_min_distance_group_placement 4 terrain_to_place_on DEEP_WATER actor_area 51 actor_area_radius 3 }
+create_object SALMON { number_of_groups 9320 temp_min_distance_group_placement 7 terrain_to_place_on MED_WATER avoid_actor_area 51 }
+
+create_object FORAGE { set_gaia_object_only number_of_groups 8 set_scaling_to_map_size set_tight_grouping number_of_objects 4 avoid_forest_zone 1 min_distance_to_players 25 temp_min_distance_group_placement 8 }
+create_object GOLD { set_gaia_object_only set_scaling_to_map_size number_of_groups 9320 number_of_objects 3 set_tight_grouping avoid_forest_zone 2 min_distance_to_players 25 temp_min_distance_group_placement 15 }
+create_object STONE { set_gaia_object_only set_scaling_to_map_size number_of_groups 9320 number_of_objects 2 avoid_forest_zone 2 min_distance_to_players 25 temp_min_distance_group_placement 15 }

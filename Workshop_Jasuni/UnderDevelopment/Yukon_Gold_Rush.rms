@@ -300,8 +300,13 @@ if DISABLE_TRADE
   effect_amount DISABLE_TECH PERSIAN_CARAVANSERAI_ENABLER ATTR_DISABLE 552
   effect_amount DISABLE_TECH SILK_ROAD ATTR_DISABLE 499    
 endif
-effect_amount SET_ATTRIBUTE HUNTING_WOLF ATTR_SHOWN_ATTACK 4
-effect_amount ADD_ATTRIBUTE HUNTING_WOLF ATTR_ATTACK -1028 /* -(4*256 + 4) : subtracts 4 melee damage from its base of 8 damage. */
+if TOURNAMENT_VERSION
+    effect_amount SET_ATTRIBUTE HUNTING_WOLF ATTR_SHOWN_ATTACK 0
+    effect_amount ADD_ATTRIBUTE HUNTING_WOLF ATTR_ATTACK -1032 /* -(4*256 + 8) : subtracts 8 melee damage from its base of 8 damage. */
+else
+    effect_amount SET_ATTRIBUTE HUNTING_WOLF ATTR_SHOWN_ATTACK 4
+    effect_amount ADD_ATTRIBUTE HUNTING_WOLF ATTR_ATTACK -1028 /* -(4*256 + 4) : subtracts 4 melee damage from its base of 8 damage. */
+endif
 
 /* Alaskan Bears */
 #define SPECIAL_BEAR_DEFINED
@@ -929,7 +934,7 @@ elseif SPECIAL_BEAR_DEFINED
         set_scaling_to_map_size
         set_loose_grouping
         set_gaia_object_only
-        set_gaia_unconvertible /* supposed to make it stay in place more - personally don't care for this behavior. TODO switch after tourney? */
+        /* set_gaia_unconvertible supposed to make it stay in place more - personally don't care for this behavior - I'd rather have it be lurable with the hunting wolf. */
         set_circular_placement
         min_distance_to_players 36
         temp_min_distance_group_placement 32

@@ -695,6 +695,72 @@ create_object SNOW_PINE_TREE { /* TODO change */
 /* boar: could include a wild boar, as they can survive in a variety of terrains (including northern frozen terrains) due to adaptability and a willingness to eat pretty much anything, but I don't think they were in Alaska quite then (so not thematically appropriate). */
 
 /* wild neutral animals */
+if TOURNAMENT_VERSION
+
+/* create an actor area that takes up most of the map, but doesn't include the edges. Then bears can avoid it to avoid the middle of the map. actor area should include everwhere between 10% - 90%
+ */
+    if MAPSIZE_MINI 
+        create_actor_area 39 39 0 31
+        create_actor_area 40 40 0 31
+    elseif TINY_MAP
+        create_actor_area 59 59 0 47 /* 59 - 47 == 12 tiles */
+        create_actor_area 60 60 0 47 /* place a second time, otherwise, the actor area is biased by 1 tile - 1 extra tile is available in top/bottom corners, but not enough of an impact to be worth fixing. */
+    elseif SMALL_MAP
+        create_actor_area 71 71 0 57
+        create_actor_area 72 72 0 57
+    elseif MEDIUM_MAP
+        create_actor_area 83 83 0 66
+        create_actor_area 84 84 0 66
+    elseif MAPSIZE_NORMAL
+        create_actor_area 99 99 0 79
+        create_actor_area 100 100 0 79
+    elseif MAPSIZE_LARGE
+        create_actor_area 109 109 0 87
+        create_actor_area 110 110 0 87
+    elseif MAPSIZE_HUGE
+        create_actor_area 119 119 0 95
+        create_actor_area 120 120 0 95
+    elseif MAPSIZE_GIANT
+        create_actor_area 125 125 0 100
+        create_actor_area 126 126 0 100
+    elseif MAPSIZE_MASSIVE
+        create_actor_area 137 137 0 109
+        create_actor_area 138 138 0 109
+    elseif MAPSIZE_ENORMOUS
+        create_actor_area 149 149 0 119
+        create_actor_area 150 150 0 119
+    elseif MAPSIZE_COLOSSAL
+        create_actor_area 159 159 0 127
+        create_actor_area 160 160 0 127
+    elseif MAPSIZE_INCREDIBLE
+        create_actor_area 179 179 0 143
+        create_actor_area 180 180 0 143
+    elseif MAPSIZE_MONSTROUS
+        create_actor_area 199 199 0 159
+        create_actor_area 200 200 0 159
+    else /* MAPSIZE_LUDICROUS */
+        create_actor_area 239 239 0 191
+        create_actor_area 240 240 0 191
+    endif
+    create_object ALASKAN_BEAR {
+        number_of_groups 99
+        set_scaling_to_map_size
+        set_loose_grouping
+        set_gaia_object_only
+        set_gaia_unconvertible /* supposed to make it stay in place more - personally don't care for this behavior. TODO switch after tourney? */
+        set_circular_placement
+        min_distance_to_players 36
+        temp_min_distance_group_placement 32
+        avoid_forest_zone 1
+        min_distance_group_placement 3
+        avoid_actor_area 0
+        avoid_actor_area 8
+        avoid_actor_area 10
+        terrain_to_place_on SNOW_LIGHT
+        actor_area 105
+        actor_area_radius 12 /* as required by specs */
+    }
+endif
 create_object DEER {
     number_of_objects 2
     number_of_groups 20
@@ -705,6 +771,7 @@ create_object DEER {
     min_distance_to_players 25
     avoid_forest_zone 1
     set_scaling_to_map_size
+    avoid_actor_area 105
 }
 create_object FORAGE {
     number_of_objects 3
@@ -718,6 +785,7 @@ create_object FORAGE {
     set_scaling_to_map_size
     number_of_groups 6
     set_tight_grouping
+    avoid_actor_area 105
 }
 
 create_object SNOW_PINE_TREE { /* TODO alter to be determined by theme */
@@ -840,7 +908,22 @@ create_object STONE {
         temp_min_distance_group_placement 90
     endif
 }
-if SPECIAL_BEAR_DEFINED
+if TOURNAMENT_VERSION /* bears made earlier */
+    create_object WOLF {
+        number_of_groups 2
+        set_loose_grouping
+        set_place_for_every_player
+        set_gaia_object_only
+        set_circular_placement
+        min_distance_to_players 32
+        temp_min_distance_group_placement 20
+        avoid_forest_zone 1
+        avoid_actor_area 0
+        avoid_actor_area 8
+        avoid_actor_area 10
+        terrain_to_place_on SNOW_LIGHT
+    }
+elseif SPECIAL_BEAR_DEFINED
     create_object ALASKAN_BEAR { /* TODO improve bear placement */
         number_of_groups 99
         set_scaling_to_map_size

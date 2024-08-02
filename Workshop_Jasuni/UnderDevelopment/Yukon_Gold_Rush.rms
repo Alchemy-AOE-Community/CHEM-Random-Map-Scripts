@@ -1,4 +1,12 @@
 /*
+Name: Yukon Gold Rush
+Author: Jasuni
+Created: July 2024
+
+Map script may be used for Alchemy League.
+
+note to self: do not publish until after competition is over.
+
 Klondike gold rush: extra villagers in the river, near a mining camp (with gold mines)
 
 "So as for gold rushes, Alaska has had a considerable share of them. The Klondike is not in Alaska, but the rush did start there when prospectors would arrive in Skagway (and a town called Dyea which no longer exists) - just up a ways from Juneau. Some years after the Klondike rush, gold was found in Nome and there was a big gold rush there. Fairbanks had a gold rush in the hills northeast of the present-day city as well. Gold has been found in the upper southeast (near Haines, Skagway), along the Yukon River itself in the flat areas and in the hills near the town of Ruby, also around Valdez in the south central part of the state, among others. So you have a ton of options depending on the kind of terrain you want. A gold rush map could be thematically appropriate in several different locations."
@@ -13,6 +21,7 @@ Start players with a mining camp near the river, and gold on the river
 TODO: things for playtesting: gold balance (and how important the river is), the practicalities of sea walls (probably not very, since its so flimsy - but may be usable for walling in a dock, which would be an issue) - may want to remove.
 Balance of bear placements (not really tested all that much), and thoughts on the hunting wolf scout.
 
+TODO: add in tournament version, a restriction for bears to be exclusively near the edges of the map (use actor areas), as well as any other changes needed to make my map compliant
 */
 
 <PLAYER_SETUP>
@@ -267,6 +276,30 @@ effect_amount SET_ATTRIBUTE SHARKATZOR ATTR_GOLD_COST 75
 */
 
 
+#define TOURNAMENT_VERSION
+
+if 2_TEAM_GAME
+elseif 2_PLAYER_GAME
+elseif TOURNAMENT_VERSION
+    if LOW_RESOURCES
+        #define DISABLE_TRADE /* TODO figure out a better solution for FFAs */
+    endif
+endif
+if DISABLE_TRADE
+/* Removing Trade for Multi-team Games, as per Alchemy requirements.  */
+  #const TRADE_CART_ENABLER 161
+  #const TRADE_COG_ENABLER 180
+  #const TRADE_CARAVAN_ENABLER 48
+  #const HINDU_CARAVANSERAI_ENABLER 518
+  #const PERSIAN_CARAVANSERAI_ENABLER 552  
+  #const SILK_ROAD 499
+  effect_amount DISABLE_TECH TRADE_COG_ENABLER ATTR_DISABLE 180
+  effect_amount DISABLE_TECH TRADE_CART_ENABLER ATTR_DISABLE 161
+  effect_amount DISABLE_TECH TRADE_CARAVAN_ENABLER ATTR_DISABLE 48
+  effect_amount DISABLE_TECH HINDU_CARAVANSERAI_ENABLER ATTR_DISABLE 518
+  effect_amount DISABLE_TECH PERSIAN_CARAVANSERAI_ENABLER ATTR_DISABLE 552
+  effect_amount DISABLE_TECH SILK_ROAD ATTR_DISABLE 499    
+endif
 effect_amount SET_ATTRIBUTE HUNTING_WOLF ATTR_SHOWN_ATTACK 4
 effect_amount ADD_ATTRIBUTE HUNTING_WOLF ATTR_ATTACK -1028 /* -(4*256 + 4) : subtracts 4 melee damage from its base of 8 damage. */
 
@@ -310,6 +343,7 @@ effect_amount GAIA_SET_ATTRIBUTE ON_GRID ATTR_STORAGE_VALUE 0
 effect_amount ENABLE_OBJECT SEA_WALL ATTR_ENABLE 0
 effect_amount SET_ATTRIBUTE SEA_WALL ATTR_TRAIN_LOCATION 118 /* builder */
 effect_amount SET_ATTRIBUTE SEA_WALL ATTR_TRAIN_BUTTON 5 
+effect_amount ADD_ATTRIBUTE SEA_WALL ATTR_CREATION_TIME 2 /* changes to 7 seconds, to match the build time of Palisade walls */
 effect_amount SET_ATTRIBUTE SEA_WALL ATTR_STONE_COST 0 /* remove stone cost - it's pretty flimsy, too much so to justify a stone cost. Normally costs 5 wood/5 stone with a 5 second build time. note: can be used to wall in opponent's docks (which is a potential issue) */
 
 <LAND_GENERATION>

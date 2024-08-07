@@ -307,6 +307,7 @@ if TOURNAMENT_VERSION
 else
     effect_amount SET_ATTRIBUTE HUNTING_WOLF ATTR_SHOWN_ATTACK 4
     effect_amount ADD_ATTRIBUTE HUNTING_WOLF ATTR_ATTACK -1028 /* -(4*256 + 4) : subtracts 4 melee damage from its base of 8 damage. */
+    /* #define ALLOW_SEA_WALLS */
 endif
 
 /* Alaskan Bears */
@@ -344,13 +345,14 @@ effect_amount SET_ATTRIBUTE GOLD ATTR_TERRAIN_ID 7
 effect_amount GAIA_SET_ATTRIBUTE GOLD ATTR_STORAGE_VALUE 400 */
 effect_amount GAIA_SET_ATTRIBUTE ON_GRID ATTR_STORAGE_VALUE 0
 
-#const SEA_WALL 788
-
-effect_amount ENABLE_OBJECT SEA_WALL ATTR_ENABLE 0
-effect_amount SET_ATTRIBUTE SEA_WALL ATTR_TRAIN_LOCATION 118 /* builder */
-effect_amount SET_ATTRIBUTE SEA_WALL ATTR_TRAIN_BUTTON 5 
-effect_amount ADD_ATTRIBUTE SEA_WALL ATTR_CREATION_TIME 2 /* changes to 7 seconds, to match the build time of Palisade walls */
-effect_amount SET_ATTRIBUTE SEA_WALL ATTR_STONE_COST 0 /* remove stone cost - it's pretty flimsy, too much so to justify a stone cost. Normally costs 5 wood/5 stone with a 5 second build time. note: can be used to wall in opponent's docks (which is a potential issue) */
+if ALLOW_SEA_WALLS
+    #const SEA_WALL 788
+    effect_amount ENABLE_OBJECT SEA_WALL ATTR_ENABLE 0
+    effect_amount SET_ATTRIBUTE SEA_WALL ATTR_TRAIN_LOCATION 118 /* builder */
+    effect_amount SET_ATTRIBUTE SEA_WALL ATTR_TRAIN_BUTTON 5 
+    effect_amount ADD_ATTRIBUTE SEA_WALL ATTR_CREATION_TIME 2 /* changes to 7 seconds, to match the build time of Palisade walls */
+    effect_amount SET_ATTRIBUTE SEA_WALL ATTR_STONE_COST 0 /* remove stone cost - it's pretty flimsy, too much so to justify a stone cost. Normally costs 5 wood/5 stone with a 5 second build time. note: can be used to wall in opponent's docks (which is a potential issue) */
+endif
 
 <LAND_GENERATION>
 base_terrain WATER /*

@@ -2,6 +2,7 @@
 Name: Yukon Gold Rush
 Author: Jasuni
 Created: July 2024
+Component spec: https://github.com/Alchemy-AOE-Community/CHEM-Published-Specifications/blob/download-to-click-links/SCRIPTING/ALASKA/CHEM-CSRM-AK-06.pdf
 
 Map script may be used for Alchemy League.
 
@@ -21,7 +22,7 @@ Start players with a mining camp near the river, and gold on the river
 TODO: things for playtesting: gold balance (and how important the river is), the practicalities of sea walls (probably not very, since its so flimsy - but may be usable for walling in a dock, which would be an issue) - may want to remove.
 Balance of bear placements (not really tested all that much), and thoughts on the hunting wolf scout.
 
-TODO: add in tournament version, a restriction for bears to be exclusively near the edges of the map (use actor areas), as well as any other changes needed to make my map compliant
+note: has a tournament version, which moves bears/wolves to outside of map and reduces hunting wolf attack from 4 to 0 (base 8)
 */
 
 <PLAYER_SETUP>
@@ -276,13 +277,13 @@ effect_amount SET_ATTRIBUTE SHARKATZOR ATTR_GOLD_COST 75
 */
 
 
-#define TOURNAMENT_VERSION
+#define TOURNAMENT_VERSION /* allows the disabling of trade under certain conditions, reduces the attack of the hunting wolf to 0 (instead of 4), and forces hostile wild animals to the edge of the map */
 
 if 2_TEAM_GAME
 elseif 2_PLAYER_GAME
 elseif TOURNAMENT_VERSION
     if LOW_RESOURCES
-        #define DISABLE_TRADE /* TODO figure out a better solution for FFAs */
+        #define DISABLE_TRADE 
     endif
 endif
 if DISABLE_TRADE

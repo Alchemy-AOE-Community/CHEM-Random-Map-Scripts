@@ -44,11 +44,14 @@ end
 
 MTNR.BE = MTNL.BE;
 
-MTNL.NT = [220 300; 280 300]*0.9;
+MTNL.NT = [220 300; 280 300];
 %MTNL.NT = 0;
 MTNR.NT = MTNL.NT;
 %MTNL.BS = [4 2; 4 2];
-MTNL.BS = [3 2; 3 2];
+%MTNL.BS = [3 2; 3 2];
+%MTNL.BS = [2 1; 2 1];
+MTNL.BS = [1];
+
 MTNR.BS = MTNL.BS;
 
 
@@ -71,9 +74,11 @@ MTNR.CF = MTNL.CF;
 MTNL.TT = {'MUD'};
 MTNR.TT = MTNL.TT;
 
-MTNL.OZA = [22:-1:5]';
+MTNL.OZA = [26:-1:5]';
 MTNR.OZA = MTNL.OZA;
 
+%%MTNL.OZA = [22:-1:5]';
+%%MTNR.OZA = MTNL.OZA;
 
 MTNL.Z = 1;
 MTNR.Z = 3;
@@ -134,35 +139,35 @@ OC.X = [99]; OC.Y = [0];
 OC.Z   = [4];
 OC.OZA = 6;
 
-OC.BS = 3;
-OC.NT = 90;
+OC.BS = 2;
+OC.NT = 60;
 OC.SS = 3;
 OC.CF = 25;
 OC.BE = 8;
 OC.TT = {'SNOW'};
 
-OC.v = 12;
-OC.w = 12;
+OC.v = 8;
+OC.w = 8;
 
 [LM_OC,OC] = LandScribeV6(OC,[1 1]);
 
 % -- Seed Elevation -- %
 
-SE.X = [75:-10:50]; SE.Y = 99 - SE.X;
-
-SE.Z.s1   = [1];
-SE.Z.s2   = [3];
-SE.OZA = 0;
-
-SE.BS = 0;
-SE.NT = 0;
-SE.SS = 0;
-SE.CF = 25;
-SE.BE = 4;
-SE.TT = {'NNGB'};
-
-[LM_SE,SE] = LandScribeV6(SE,[1 1]);
-
+%SE.X = [70:-10:50]; SE.Y = 99 - SE.X;
+%
+%SE.Z.s1   = [1];
+%SE.Z.s2   = [3];
+%SE.OZA = 0;
+%
+%SE.BS = 0;
+%SE.NT = 0;
+%SE.SS = 0;
+%SE.CF = 25;
+%SE.BE = 4;
+%SE.TT = {'NNGB'};
+%
+%[LM_SE,SE] = LandScribeV6(SE,[1 1]);
+LM_SE = [];
 
 %% -- Processor -- %%
 

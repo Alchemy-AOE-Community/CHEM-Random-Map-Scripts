@@ -2,6 +2,7 @@
 /* A Random Map Script by TechChariot */
 /* Created 24-07-26 */
 /* Based on Moraine developed 22-05-31 */
+/* As of August 10th, 2024, This map is licensed for exclusive use in Alchemy League Season 4, and no other competition. */
 
 
 <PLAYER_SETUP>
@@ -109,6 +110,13 @@ effect_amount GAIA_SET_ATTRIBUTE ALASKAN_BEAR ATTR_SEARCH_RADIUS 5
 
 <ELEVATION_GENERATION>
 /* Enabling Glacial Elevation */
+create_elevation 4 { base_terrain NNGB number_of_tiles 10000 number_of_clumps 20 set_scale_by_groups enable_balanced_elevation }
+create_elevation 4 { base_terrain NNGB number_of_tiles 10000 number_of_clumps 20 set_scale_by_groups enable_balanced_elevation }
+create_elevation 4 { base_terrain NNGB number_of_tiles 10000 number_of_clumps 20 set_scale_by_groups enable_balanced_elevation }
+create_elevation 4 { base_terrain NNGB number_of_tiles 10000 number_of_clumps 20 set_scale_by_groups enable_balanced_elevation }
+create_elevation 4 { base_terrain NNGB number_of_tiles 10000 number_of_clumps 20 set_scale_by_groups enable_balanced_elevation }
+create_elevation 4 { base_terrain NNGB number_of_tiles 10000 number_of_clumps 20 set_scale_by_groups enable_balanced_elevation }
+create_elevation 4 { base_terrain NNGB number_of_tiles 10000 number_of_clumps 20 set_scale_by_groups enable_balanced_elevation }
 create_elevation 4 { base_terrain NNGB number_of_tiles 10000 number_of_clumps 20 set_scale_by_groups enable_balanced_elevation }
 
 
@@ -2715,6 +2723,7 @@ find_closest
 }
 /* END_OBJECTS_AUTOSCRIBE */
 
+if REGICIDE create_object KING { set_place_for_every_player find_closest } endif
 
 
 <LAND_GENERATION>

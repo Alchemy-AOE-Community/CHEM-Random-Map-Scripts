@@ -1309,7 +1309,6 @@ endif
 #const PLANT 818
 #const PLANT_DEAD 1365
 #const ROCK2 1323
-#const SEA_ROCKS_1  
 #const SHRUB_GREEN 1362
 #const UNDERBRUSH 1353
 #const WEEDS 1364
@@ -1398,7 +1397,7 @@ create_object PH8_2
 {
 set_place_for_every_player
 actor_area 9
-actor_area_radius 32
+actor_area_radius 36
 actor_area_to_place_in 7
 force_placement
 find_closest
@@ -1418,7 +1417,7 @@ create_object PH10_2
 {
 set_place_for_every_player
 actor_area 11
-actor_area_radius 24
+actor_area_radius 28
 actor_area_to_place_in 7
 force_placement
 find_closest
@@ -1438,7 +1437,7 @@ create_object PH12_2
 {
 set_place_for_every_player
 actor_area 13
-actor_area_radius 28
+actor_area_radius 32
 actor_area_to_place_in 7
 force_placement
 find_closest
@@ -1545,6 +1544,8 @@ number_of_groups 9320
 set_scaling_to_map_size
 terrain_to_place_on NNGB
 temp_min_distance_group_placement 12
+actor_area 23
+actor_area_radius 1
 avoid_actor_area 22
 find_closest
 }
@@ -1556,6 +1557,8 @@ set_scaling_to_map_size
 terrain_to_place_on NNGB
 temp_min_distance_group_placement 12
 set_facet 3
+actor_area 24
+actor_area_radius 1
 avoid_actor_area 22
 find_closest
 }
@@ -1567,6 +1570,8 @@ set_scaling_to_map_size
 terrain_to_place_on NNGB
 temp_min_distance_group_placement 12
 set_facet 4
+actor_area 25
+actor_area_radius 1
 avoid_actor_area 22
 find_closest
 }
@@ -1577,7 +1582,7 @@ number_of_groups 9320
 set_scaling_to_map_size
 terrain_to_place_on NNGB
 temp_min_distance_group_placement 8
-actor_area 23
+actor_area 26
 actor_area_radius 2
 avoid_actor_area 22
 find_closest
@@ -1589,7 +1594,7 @@ number_of_groups 9320
 set_scaling_to_map_size
 terrain_to_place_on NNGB
 temp_min_distance_group_placement 8
-actor_area 24
+actor_area 27
 actor_area_radius 2
 avoid_actor_area 22
 find_closest
@@ -1601,7 +1606,7 @@ number_of_groups 9320
 set_scaling_to_map_size
 terrain_to_place_on DLC_ROCK
 temp_min_distance_group_placement 8
-actor_area 25
+actor_area 28
 actor_area_radius 2
 }
 create_object GRASS_PATCH
@@ -1611,9 +1616,9 @@ number_of_groups 9320
 set_scaling_to_map_size
 terrain_to_place_on DLC_ROCK
 temp_min_distance_group_placement 8
-actor_area 26
+actor_area 29
 actor_area_radius 2
-avoid_actor_area 25
+avoid_actor_area 28
 find_closest
 }
 create_object PLANT_DEAD
@@ -1623,10 +1628,10 @@ number_of_groups 9320
 set_scaling_to_map_size
 terrain_to_place_on DLC_ROCK
 temp_min_distance_group_placement 8
-actor_area 27
+actor_area 30
 actor_area_radius 2
-avoid_actor_area 25
-avoid_actor_area 26
+avoid_actor_area 28
+avoid_actor_area 29
 find_closest
 }
 create_object WEEDS
@@ -1636,80 +1641,14 @@ number_of_groups 9320
 set_scaling_to_map_size
 terrain_to_place_on DLC_ROCK
 temp_min_distance_group_placement 8
-actor_area 28
-actor_area_radius 2
-avoid_actor_area 25
-avoid_actor_area 26
-avoid_actor_area 27
-find_closest
-}
-create_object DLC_SAVANNAHPATCH
-{
-set_gaia_object_only
-number_of_groups 9320
-set_scaling_to_map_size
-terrain_to_place_on NNGB
-temp_min_distance_group_placement 8
-actor_area 29
-actor_area_radius 2
-avoid_actor_area 18
-avoid_actor_area 19
-avoid_actor_area 20
-avoid_actor_area 21
-avoid_actor_area 23
-avoid_actor_area 24
-avoid_actor_area 25
-avoid_actor_area 26
-avoid_actor_area 27
-avoid_actor_area 28
-find_closest
-}
-create_object GRASS_PATCH
-{
-set_gaia_object_only
-number_of_groups 9320
-set_scaling_to_map_size
-terrain_to_place_on NNGB
-temp_min_distance_group_placement 8
-actor_area 30
-actor_area_radius 2
-avoid_actor_area 18
-avoid_actor_area 19
-avoid_actor_area 20
-avoid_actor_area 21
-avoid_actor_area 23
-avoid_actor_area 24
-avoid_actor_area 25
-avoid_actor_area 26
-avoid_actor_area 27
-avoid_actor_area 28
-avoid_actor_area 29
-find_closest
-}
-create_object PLANT_DEAD
-{
-set_gaia_object_only
-number_of_groups 9320
-set_scaling_to_map_size
-terrain_to_place_on NNGB
-temp_min_distance_group_placement 8
 actor_area 31
 actor_area_radius 2
-avoid_actor_area 18
-avoid_actor_area 19
-avoid_actor_area 20
-avoid_actor_area 21
-avoid_actor_area 23
-avoid_actor_area 24
-avoid_actor_area 25
-avoid_actor_area 26
-avoid_actor_area 27
 avoid_actor_area 28
 avoid_actor_area 29
 avoid_actor_area 30
 find_closest
 }
-create_object WEEDS
+create_object DLC_SAVANNAHPATCH
 {
 set_gaia_object_only
 number_of_groups 9320
@@ -1722,9 +1661,6 @@ avoid_actor_area 18
 avoid_actor_area 19
 avoid_actor_area 20
 avoid_actor_area 21
-avoid_actor_area 23
-avoid_actor_area 24
-avoid_actor_area 25
 avoid_actor_area 26
 avoid_actor_area 27
 avoid_actor_area 28
@@ -1738,9 +1674,78 @@ create_object GRASS_PATCH
 set_gaia_object_only
 number_of_groups 9320
 set_scaling_to_map_size
+terrain_to_place_on NNGB
+temp_min_distance_group_placement 8
+actor_area 33
+actor_area_radius 2
+avoid_actor_area 18
+avoid_actor_area 19
+avoid_actor_area 20
+avoid_actor_area 21
+avoid_actor_area 26
+avoid_actor_area 27
+avoid_actor_area 28
+avoid_actor_area 29
+avoid_actor_area 30
+avoid_actor_area 31
+avoid_actor_area 32
+find_closest
+}
+create_object PLANT_DEAD
+{
+set_gaia_object_only
+number_of_groups 9320
+set_scaling_to_map_size
+terrain_to_place_on NNGB
+temp_min_distance_group_placement 8
+actor_area 34
+actor_area_radius 2
+avoid_actor_area 18
+avoid_actor_area 19
+avoid_actor_area 20
+avoid_actor_area 21
+avoid_actor_area 26
+avoid_actor_area 27
+avoid_actor_area 28
+avoid_actor_area 29
+avoid_actor_area 30
+avoid_actor_area 31
+avoid_actor_area 32
+avoid_actor_area 33
+find_closest
+}
+create_object WEEDS
+{
+set_gaia_object_only
+number_of_groups 9320
+set_scaling_to_map_size
+terrain_to_place_on NNGB
+temp_min_distance_group_placement 8
+actor_area 35
+actor_area_radius 2
+avoid_actor_area 18
+avoid_actor_area 19
+avoid_actor_area 20
+avoid_actor_area 21
+avoid_actor_area 26
+avoid_actor_area 27
+avoid_actor_area 28
+avoid_actor_area 29
+avoid_actor_area 30
+avoid_actor_area 31
+avoid_actor_area 32
+avoid_actor_area 33
+avoid_actor_area 34
+find_closest
+}
+create_object GRASS_PATCH
+{
+set_gaia_object_only
+number_of_groups 9320
+set_scaling_to_map_size
 terrain_to_place_on DLC_DRYGRASS
 temp_min_distance_group_placement 16
-actor_area 33
+actor_area 36
 actor_area_radius 2
 avoid_actor_area 8
 find_closest
@@ -1752,10 +1757,10 @@ number_of_groups 9320
 set_scaling_to_map_size
 terrain_to_place_on DLC_DRYGRASS
 temp_min_distance_group_placement 16
-actor_area 34
+actor_area 37
 actor_area_radius 2
 avoid_actor_area 8
-avoid_actor_area 33
+avoid_actor_area 36
 find_closest
 }
 create_object FLOWER_BED
@@ -1765,11 +1770,11 @@ number_of_groups 9320
 set_scaling_to_map_size
 terrain_to_place_on DLC_DRYGRASS
 temp_min_distance_group_placement 16
-actor_area 35
+actor_area 38
 actor_area_radius 2
 avoid_actor_area 8
-avoid_actor_area 33
-avoid_actor_area 34
+avoid_actor_area 36
+avoid_actor_area 37
 find_closest
 }
 create_object UNDERBRUSH
@@ -1779,66 +1784,15 @@ number_of_groups 9320
 set_scaling_to_map_size
 terrain_to_place_on DLC_DRYGRASS
 temp_min_distance_group_placement 16
-actor_area 36
-actor_area_radius 2
-avoid_actor_area 8
-avoid_actor_area 33
-avoid_actor_area 34
-avoid_actor_area 35
-find_closest
-}
-create_object WEEDS
-{
-set_gaia_object_only
-number_of_groups 9320
-set_scaling_to_map_size
-terrain_to_place_on DLC_DRYGRASS
-temp_min_distance_group_placement 16
-actor_area 37
-actor_area_radius 2
-avoid_actor_area 8
-avoid_actor_area 33
-avoid_actor_area 34
-avoid_actor_area 35
-avoid_actor_area 36
-find_closest
-}
-create_object BUSH_GREEN
-{
-set_gaia_object_only
-number_of_groups 9320
-set_scaling_to_map_size
-terrain_to_place_on DLC_DRYGRASS
-temp_min_distance_group_placement 16
-actor_area 38
-actor_area_radius 2
-avoid_actor_area 8
-avoid_actor_area 33
-avoid_actor_area 34
-avoid_actor_area 35
-avoid_actor_area 36
-avoid_actor_area 37
-find_closest
-}
-create_object SHRUB_GREEN
-{
-set_gaia_object_only
-number_of_groups 9320
-set_scaling_to_map_size
-terrain_to_place_on DLC_DRYGRASS
-temp_min_distance_group_placement 16
 actor_area 39
 actor_area_radius 2
 avoid_actor_area 8
-avoid_actor_area 33
-avoid_actor_area 34
-avoid_actor_area 35
 avoid_actor_area 36
 avoid_actor_area 37
 avoid_actor_area 38
 find_closest
 }
-create_object PLANT
+create_object WEEDS
 {
 set_gaia_object_only
 number_of_groups 9320
@@ -1848,37 +1802,22 @@ temp_min_distance_group_placement 16
 actor_area 40
 actor_area_radius 2
 avoid_actor_area 8
-avoid_actor_area 33
-avoid_actor_area 34
-avoid_actor_area 35
 avoid_actor_area 36
 avoid_actor_area 37
 avoid_actor_area 38
 avoid_actor_area 39
 find_closest
 }
-create_object DLC_SAVANNAHPATCH
+create_object BUSH_GREEN
 {
 set_gaia_object_only
 number_of_groups 9320
 set_scaling_to_map_size
-terrain_to_place_on DIRT3
-temp_min_distance_group_placement 8
+terrain_to_place_on DLC_DRYGRASS
+temp_min_distance_group_placement 16
 actor_area 41
 actor_area_radius 2
-avoid_actor_area 23
-avoid_actor_area 24
-avoid_actor_area 25
-avoid_actor_area 26
-avoid_actor_area 27
-avoid_actor_area 28
-avoid_actor_area 29
-avoid_actor_area 30
-avoid_actor_area 31
-avoid_actor_area 32
-avoid_actor_area 33
-avoid_actor_area 34
-avoid_actor_area 35
+avoid_actor_area 8
 avoid_actor_area 36
 avoid_actor_area 37
 avoid_actor_area 38
@@ -1886,28 +1825,16 @@ avoid_actor_area 39
 avoid_actor_area 40
 find_closest
 }
-create_object GRASS_PATCH
+create_object SHRUB_GREEN
 {
 set_gaia_object_only
 number_of_groups 9320
 set_scaling_to_map_size
-terrain_to_place_on DIRT3
-temp_min_distance_group_placement 8
+terrain_to_place_on DLC_DRYGRASS
+temp_min_distance_group_placement 16
 actor_area 42
 actor_area_radius 2
-avoid_actor_area 23
-avoid_actor_area 24
-avoid_actor_area 25
-avoid_actor_area 26
-avoid_actor_area 27
-avoid_actor_area 28
-avoid_actor_area 29
-avoid_actor_area 30
-avoid_actor_area 31
-avoid_actor_area 32
-avoid_actor_area 33
-avoid_actor_area 34
-avoid_actor_area 35
+avoid_actor_area 8
 avoid_actor_area 36
 avoid_actor_area 37
 avoid_actor_area 38
@@ -1916,28 +1843,16 @@ avoid_actor_area 40
 avoid_actor_area 41
 find_closest
 }
-create_object PLANT_DEAD
+create_object PLANT
 {
 set_gaia_object_only
 number_of_groups 9320
 set_scaling_to_map_size
-terrain_to_place_on DIRT3
-temp_min_distance_group_placement 8
+terrain_to_place_on DLC_DRYGRASS
+temp_min_distance_group_placement 16
 actor_area 43
 actor_area_radius 2
-avoid_actor_area 23
-avoid_actor_area 24
-avoid_actor_area 25
-avoid_actor_area 26
-avoid_actor_area 27
-avoid_actor_area 28
-avoid_actor_area 29
-avoid_actor_area 30
-avoid_actor_area 31
-avoid_actor_area 32
-avoid_actor_area 33
-avoid_actor_area 34
-avoid_actor_area 35
+avoid_actor_area 8
 avoid_actor_area 36
 avoid_actor_area 37
 avoid_actor_area 38
@@ -1947,16 +1862,15 @@ avoid_actor_area 41
 avoid_actor_area 42
 find_closest
 }
-create_object WEEDS
+create_object DLC_SAVANNAHPATCH
 {
 set_gaia_object_only
 number_of_groups 9320
 set_scaling_to_map_size
 terrain_to_place_on DIRT3
 temp_min_distance_group_placement 8
-avoid_actor_area 23
-avoid_actor_area 24
-avoid_actor_area 25
+actor_area 44
+actor_area_radius 2
 avoid_actor_area 26
 avoid_actor_area 27
 avoid_actor_area 28
@@ -1977,6 +1891,97 @@ avoid_actor_area 42
 avoid_actor_area 43
 find_closest
 }
+create_object GRASS_PATCH
+{
+set_gaia_object_only
+number_of_groups 9320
+set_scaling_to_map_size
+terrain_to_place_on DIRT3
+temp_min_distance_group_placement 8
+actor_area 45
+actor_area_radius 2
+avoid_actor_area 26
+avoid_actor_area 27
+avoid_actor_area 28
+avoid_actor_area 29
+avoid_actor_area 30
+avoid_actor_area 31
+avoid_actor_area 32
+avoid_actor_area 33
+avoid_actor_area 34
+avoid_actor_area 35
+avoid_actor_area 36
+avoid_actor_area 37
+avoid_actor_area 38
+avoid_actor_area 39
+avoid_actor_area 40
+avoid_actor_area 41
+avoid_actor_area 42
+avoid_actor_area 43
+avoid_actor_area 44
+find_closest
+}
+create_object PLANT_DEAD
+{
+set_gaia_object_only
+number_of_groups 9320
+set_scaling_to_map_size
+terrain_to_place_on DIRT3
+temp_min_distance_group_placement 8
+actor_area 46
+actor_area_radius 2
+avoid_actor_area 26
+avoid_actor_area 27
+avoid_actor_area 28
+avoid_actor_area 29
+avoid_actor_area 30
+avoid_actor_area 31
+avoid_actor_area 32
+avoid_actor_area 33
+avoid_actor_area 34
+avoid_actor_area 35
+avoid_actor_area 36
+avoid_actor_area 37
+avoid_actor_area 38
+avoid_actor_area 39
+avoid_actor_area 40
+avoid_actor_area 41
+avoid_actor_area 42
+avoid_actor_area 43
+avoid_actor_area 44
+avoid_actor_area 45
+find_closest
+}
+create_object WEEDS
+{
+set_gaia_object_only
+number_of_groups 9320
+set_scaling_to_map_size
+terrain_to_place_on DIRT3
+temp_min_distance_group_placement 8
+avoid_actor_area 26
+avoid_actor_area 27
+avoid_actor_area 28
+avoid_actor_area 29
+avoid_actor_area 30
+avoid_actor_area 31
+avoid_actor_area 32
+avoid_actor_area 33
+avoid_actor_area 34
+avoid_actor_area 35
+avoid_actor_area 36
+avoid_actor_area 37
+avoid_actor_area 38
+avoid_actor_area 39
+avoid_actor_area 40
+avoid_actor_area 41
+avoid_actor_area 42
+avoid_actor_area 43
+avoid_actor_area 44
+avoid_actor_area 45
+avoid_actor_area 46
+find_closest
+}
 create_object SEA_ROCKS_1
 {
 set_gaia_object_only
@@ -1984,41 +1989,41 @@ number_of_groups 9320
 set_scaling_to_map_size
 terrain_to_place_on DLC_WATER5
 temp_min_distance_group_placement 8
-actor_area 44
+actor_area 47
 actor_area_radius 0
 avoid_actor_area 4
 find_closest
 }
-#const PH44_3 647
-create_object PH44_3
+#const PH47_3 647
+create_object PH47_3
 {
 number_of_groups 9320
 set_scaling_to_map_size
-actor_area 45
+actor_area 48
 actor_area_radius 4
-actor_area_to_place_in 44
+actor_area_to_place_in 47
 force_placement
 find_closest
 }
-#const PH45_3 647
-create_object PH45_3
+#const PH48_3 647
+create_object PH48_3
 {
 number_of_groups 9320
 set_scaling_to_map_size
-actor_area 46
+actor_area 49
 actor_area_radius 12
-actor_area_to_place_in 44
+actor_area_to_place_in 47
 force_placement
 find_closest
 }
-#const PH46_3 647
-create_object PH46_3
+#const PH49_3 647
+create_object PH49_3
 {
 number_of_groups 9320
 set_scaling_to_map_size
-actor_area 47
+actor_area 50
 actor_area_radius 6
-actor_area_to_place_in 44
+actor_area_to_place_in 47
 force_placement
 find_closest
 }
@@ -2029,31 +2034,31 @@ number_of_groups 9320
 set_scaling_to_map_size
 terrain_to_place_on DLC_WATER5
 temp_min_distance_group_placement 8
-actor_area 48
+actor_area 51
 actor_area_radius 0
 avoid_actor_area 4
-avoid_actor_area 45
+avoid_actor_area 48
 find_closest
 }
-#const PH48_4 647
-create_object PH48_4
+#const PH51_4 647
+create_object PH51_4
 {
 number_of_groups 9320
 set_scaling_to_map_size
-actor_area 49
+actor_area 52
 actor_area_radius 12
-actor_area_to_place_in 48
+actor_area_to_place_in 51
 force_placement
 find_closest
 }
-#const PH49_4 647
-create_object PH49_4
+#const PH52_4 647
+create_object PH52_4
 {
 number_of_groups 9320
 set_scaling_to_map_size
-actor_area 50
+actor_area 53
 actor_area_radius 6
-actor_area_to_place_in 48
+actor_area_to_place_in 51
 force_placement
 find_closest
 }
@@ -2064,7 +2069,7 @@ number_of_groups 9320
 set_scaling_to_map_size
 terrain_to_place_on DLC_CRACKED
 temp_min_distance_group_placement 12
-actor_area 51
+actor_area 54
 actor_area_radius 3
 }
 create_object GRASS_PATCH
@@ -2074,9 +2079,9 @@ number_of_groups 9320
 set_scaling_to_map_size
 terrain_to_place_on DLC_CRACKED
 temp_min_distance_group_placement 12
-actor_area 52
+actor_area 55
 actor_area_radius 3
-avoid_actor_area 51
+avoid_actor_area 54
 find_closest
 }
 create_object PLANT_DEAD
@@ -2086,10 +2091,10 @@ number_of_groups 9320
 set_scaling_to_map_size
 terrain_to_place_on DLC_CRACKED
 temp_min_distance_group_placement 12
-actor_area 53
+actor_area 56
 actor_area_radius 3
-avoid_actor_area 51
-avoid_actor_area 52
+avoid_actor_area 54
+avoid_actor_area 55
 find_closest
 }
 create_object WEEDS
@@ -2099,9 +2104,9 @@ number_of_groups 9320
 set_scaling_to_map_size
 terrain_to_place_on DLC_CRACKED
 temp_min_distance_group_placement 12
-avoid_actor_area 51
-avoid_actor_area 52
-avoid_actor_area 53
+avoid_actor_area 54
+avoid_actor_area 55
+avoid_actor_area 56
 find_closest
 }
 create_object OFF_GRID
@@ -2110,7 +2115,7 @@ set_gaia_object_only
 number_of_groups 9320
 set_scaling_to_map_size
 terrain_to_place_on DLC_NEWSHALLOW
-actor_area 54
+actor_area 57
 actor_area_radius 2
 actor_area_to_place_in 5
 }
@@ -2122,11 +2127,11 @@ set_scaling_to_map_size
 terrain_to_place_on DLC_WATER5
 if TINY_MAP temp_min_distance_group_placement 3 elseif SMALL_MAP temp_min_distance_group_placement 4 elseif MEDIUM_MAP temp_min_distance_group_placement 4 elseif LARGE_MAP temp_min_distance_group_placement 5 elseif HUGE_MAP temp_min_distance_group_placement 5 else temp_min_distance_group_placement 6 endif
 second_object FISH
-actor_area 55
+actor_area 58
 actor_area_radius 16
-avoid_actor_area 46
 avoid_actor_area 49
-avoid_actor_area 54
+avoid_actor_area 52
+avoid_actor_area 57
 find_closest
 }
 create_object SEA_ROCKS_1
@@ -2136,7 +2141,7 @@ number_of_groups 9320
 set_scaling_to_map_size
 terrain_to_place_on DLC_NEWSHALLOW
 temp_min_distance_group_placement 8
-actor_area 56
+actor_area 59
 actor_area_radius 4
 }
 create_object SEA_ROCKS_2
@@ -2146,7 +2151,7 @@ number_of_groups 9320
 set_scaling_to_map_size
 terrain_to_place_on DLC_NEWSHALLOW
 temp_min_distance_group_placement 8
-avoid_actor_area 56
+avoid_actor_area 59
 find_closest
 }
 create_object RELIC
@@ -2156,7 +2161,7 @@ number_of_groups 9320
 set_scaling_to_map_size
 terrain_to_place_on DLC_ROCK
 temp_min_distance_group_placement 2
-actor_area 57
+actor_area 60
 actor_area_radius 1
 actor_area_to_place_in 6
 }
@@ -2168,9 +2173,9 @@ number_of_groups 9320
 set_scaling_to_map_size
 terrain_to_place_on DLC_ROCK
 temp_min_distance_group_placement 2
-actor_area 58
+actor_area 61
 actor_area_radius 16
-actor_area_to_place_in 57
+actor_area_to_place_in 60
 avoid_actor_area 18
 avoid_actor_area 19
 avoid_actor_area 20
@@ -2184,7 +2189,7 @@ set_scaling_to_map_size
 layer_to_place_on SNOW_LIGHT
 terrain_to_place_on ICE
 temp_min_distance_group_placement 2
-actor_area 59
+actor_area 62
 actor_area_radius 4
 }
 create_object OFF_GRID
@@ -2195,86 +2200,40 @@ set_scaling_to_map_size
 layer_to_place_on DLC_NEWSHALLOW
 terrain_to_place_on ICE
 temp_min_distance_group_placement 1
-actor_area 60
-actor_area_radius 0
-actor_area_to_place_in 59
-}
-#const PH60_5 647
-create_object PH60_5
-{
-number_of_groups 9320
-set_scaling_to_map_size
-actor_area 61
-actor_area_radius 1
-actor_area_to_place_in 60
-force_placement
-find_closest
-}
-#const PH61_5 647
-create_object PH61_5
-{
-number_of_groups 9320
-set_scaling_to_map_size
-actor_area 62
-actor_area_radius 3
-actor_area_to_place_in 60
-force_placement
-find_closest
-}
-#const PH62_5 647
-create_object PH62_5
-{
-number_of_groups 9320
-set_scaling_to_map_size
 actor_area 63
-if TINY_MAP actor_area_radius 16 elseif SMALL_MAP actor_area_radius 19 elseif MEDIUM_MAP actor_area_radius 22 elseif LARGE_MAP actor_area_radius 26 elseif HUGE_MAP actor_area_radius 29 else actor_area_radius 32 endif
-actor_area_to_place_in 60
-force_placement
-find_closest
-}
-create_object OFF_GRID
-{
-set_gaia_object_only
-number_of_groups 9320
-set_scaling_to_map_size
-layer_to_place_on DLC_NEWSHALLOW
-terrain_to_place_on ICE
-temp_min_distance_group_placement 1
-actor_area 64
 actor_area_radius 0
 actor_area_to_place_in 62
-avoid_actor_area 61
 }
-#const PH64_6 647
-create_object PH64_6
+#const PH63_5 647
+create_object PH63_5
+{
+number_of_groups 9320
+set_scaling_to_map_size
+actor_area 64
+actor_area_radius 1
+actor_area_to_place_in 63
+force_placement
+find_closest
+}
+#const PH64_5 647
+create_object PH64_5
 {
 number_of_groups 9320
 set_scaling_to_map_size
 actor_area 65
-actor_area_radius 1
-actor_area_to_place_in 64
+actor_area_radius 3
+actor_area_to_place_in 63
 force_placement
 find_closest
 }
-#const PH65_6 647
-create_object PH65_6
+#const PH65_5 647
+create_object PH65_5
 {
 number_of_groups 9320
 set_scaling_to_map_size
 actor_area 66
-actor_area_radius 2
-actor_area_to_place_in 64
-force_placement
-find_closest
-}
-#const PH66_6 647
-create_object PH66_6
-{
-number_of_groups 9320
-set_scaling_to_map_size
-actor_area 67
 if TINY_MAP actor_area_radius 16 elseif SMALL_MAP actor_area_radius 19 elseif MEDIUM_MAP actor_area_radius 22 elseif LARGE_MAP actor_area_radius 26 elseif HUGE_MAP actor_area_radius 29 else actor_area_radius 32 endif
-actor_area_to_place_in 64
+actor_area_to_place_in 63
 force_placement
 find_closest
 }
@@ -2286,42 +2245,41 @@ set_scaling_to_map_size
 layer_to_place_on DLC_NEWSHALLOW
 terrain_to_place_on ICE
 temp_min_distance_group_placement 1
-actor_area 68
+actor_area 67
 actor_area_radius 0
-actor_area_to_place_in 66
-avoid_actor_area 61
-avoid_actor_area 65
+actor_area_to_place_in 65
+avoid_actor_area 64
 }
-#const PH68_7 647
-create_object PH68_7
+#const PH67_6 647
+create_object PH67_6
+{
+number_of_groups 9320
+set_scaling_to_map_size
+actor_area 68
+actor_area_radius 1
+actor_area_to_place_in 67
+force_placement
+find_closest
+}
+#const PH68_6 647
+create_object PH68_6
 {
 number_of_groups 9320
 set_scaling_to_map_size
 actor_area 69
-actor_area_radius 1
-actor_area_to_place_in 68
+actor_area_radius 2
+actor_area_to_place_in 67
 force_placement
 find_closest
 }
-#const PH69_7 647
-create_object PH69_7
+#const PH69_6 647
+create_object PH69_6
 {
 number_of_groups 9320
 set_scaling_to_map_size
 actor_area 70
-actor_area_radius 2
-actor_area_to_place_in 68
-force_placement
-find_closest
-}
-#const PH70_7 647
-create_object PH70_7
-{
-number_of_groups 9320
-set_scaling_to_map_size
-actor_area 71
 if TINY_MAP actor_area_radius 16 elseif SMALL_MAP actor_area_radius 19 elseif MEDIUM_MAP actor_area_radius 22 elseif LARGE_MAP actor_area_radius 26 elseif HUGE_MAP actor_area_radius 29 else actor_area_radius 32 endif
-actor_area_to_place_in 68
+actor_area_to_place_in 67
 force_placement
 find_closest
 }
@@ -2333,12 +2291,59 @@ set_scaling_to_map_size
 layer_to_place_on DLC_NEWSHALLOW
 terrain_to_place_on ICE
 temp_min_distance_group_placement 1
+actor_area 71
+actor_area_radius 0
+actor_area_to_place_in 69
+avoid_actor_area 64
+avoid_actor_area 68
+}
+#const PH71_7 647
+create_object PH71_7
+{
+number_of_groups 9320
+set_scaling_to_map_size
 actor_area 72
+actor_area_radius 1
+actor_area_to_place_in 71
+force_placement
+find_closest
+}
+#const PH72_7 647
+create_object PH72_7
+{
+number_of_groups 9320
+set_scaling_to_map_size
+actor_area 73
+actor_area_radius 2
+actor_area_to_place_in 71
+force_placement
+find_closest
+}
+#const PH73_7 647
+create_object PH73_7
+{
+number_of_groups 9320
+set_scaling_to_map_size
+actor_area 74
 if TINY_MAP actor_area_radius 16 elseif SMALL_MAP actor_area_radius 19 elseif MEDIUM_MAP actor_area_radius 22 elseif LARGE_MAP actor_area_radius 26 elseif HUGE_MAP actor_area_radius 29 else actor_area_radius 32 endif
-actor_area_to_place_in 70
-avoid_actor_area 61
-avoid_actor_area 65
-avoid_actor_area 69
+actor_area_to_place_in 71
+force_placement
+find_closest
+}
+create_object OFF_GRID
+{
+set_gaia_object_only
+number_of_groups 9320
+set_scaling_to_map_size
+layer_to_place_on DLC_NEWSHALLOW
+terrain_to_place_on ICE
+temp_min_distance_group_placement 1
+actor_area 75
+if TINY_MAP actor_area_radius 16 elseif SMALL_MAP actor_area_radius 19 elseif MEDIUM_MAP actor_area_radius 22 elseif LARGE_MAP actor_area_radius 26 elseif HUGE_MAP actor_area_radius 29 else actor_area_radius 32 endif
+actor_area_to_place_in 73
+avoid_actor_area 64
+avoid_actor_area 68
+avoid_actor_area 72
 }
 create_object OFF_GRID
 {
@@ -2347,33 +2352,33 @@ number_of_groups 9320
 set_scaling_to_map_size
 terrain_to_place_on DLC_GRAVELBEACH
 temp_min_distance_group_placement 1
-actor_area 73
+actor_area 76
 actor_area_radius 0
-avoid_actor_area 63
-avoid_actor_area 67
-avoid_actor_area 71
-avoid_actor_area 72
+avoid_actor_area 66
+avoid_actor_area 70
+avoid_actor_area 74
+avoid_actor_area 75
 find_closest
 }
-#const PH73_8 647
-create_object PH73_8
+#const PH76_8 647
+create_object PH76_8
 {
 number_of_groups 9320
 set_scaling_to_map_size
-actor_area 74
+actor_area 77
 actor_area_radius 6
-actor_area_to_place_in 73
+actor_area_to_place_in 76
 force_placement
 find_closest
 }
-#const PH74_8 647
-create_object PH74_8
+#const PH77_8 647
+create_object PH77_8
 {
 number_of_groups 9320
 set_scaling_to_map_size
-actor_area 75
+actor_area 78
 actor_area_radius 4
-actor_area_to_place_in 73
+actor_area_to_place_in 76
 force_placement
 find_closest
 }
@@ -2384,33 +2389,33 @@ number_of_groups 9320
 set_scaling_to_map_size
 terrain_to_place_on DLC_NEWSHALLOW
 temp_min_distance_group_placement 1
-actor_area 76
+actor_area 79
 actor_area_radius 0
-avoid_actor_area 47
 avoid_actor_area 50
-avoid_actor_area 55
-avoid_actor_area 74
+avoid_actor_area 53
+avoid_actor_area 58
+avoid_actor_area 77
 find_closest
 }
-#const PH76_9 647
-create_object PH76_9
+#const PH79_9 647
+create_object PH79_9
 {
 number_of_groups 9320
 set_scaling_to_map_size
-actor_area 77
+actor_area 80
 actor_area_radius 1
-actor_area_to_place_in 76
+actor_area_to_place_in 79
 force_placement
 find_closest
 }
-#const PH77_9 647
-create_object PH77_9
+#const PH80_9 647
+create_object PH80_9
 {
 number_of_groups 9320
 set_scaling_to_map_size
-actor_area 78
+actor_area 81
 actor_area_radius 2
-actor_area_to_place_in 76
+actor_area_to_place_in 79
 force_placement
 find_closest
 }
@@ -2421,30 +2426,30 @@ number_of_groups 9320
 set_scaling_to_map_size
 terrain_to_place_on DLC_NEWSHALLOW
 temp_min_distance_group_placement 2
-actor_area 79
+actor_area 82
 actor_area_radius 0
-actor_area_to_place_in 78
-avoid_actor_area 77
+actor_area_to_place_in 81
+avoid_actor_area 80
 }
-#const PH79_10 647
-create_object PH79_10
+#const PH82_10 647
+create_object PH82_10
 {
 number_of_groups 9320
 set_scaling_to_map_size
-actor_area 80
+actor_area 83
 actor_area_radius 2
-actor_area_to_place_in 79
+actor_area_to_place_in 82
 force_placement
 find_closest
 }
-#const PH80_10 647
-create_object PH80_10
+#const PH83_10 647
+create_object PH83_10
 {
 number_of_groups 9320
 set_scaling_to_map_size
-actor_area 81
+actor_area 84
 actor_area_radius 3
-actor_area_to_place_in 79
+actor_area_to_place_in 82
 force_placement
 find_closest
 }
@@ -2455,9 +2460,9 @@ number_of_groups 9320
 set_scaling_to_map_size
 terrain_to_place_on DLC_NEWSHALLOW
 temp_min_distance_group_placement 3
-actor_area_to_place_in 81
-avoid_actor_area 78
-avoid_actor_area 80
+actor_area_to_place_in 84
+avoid_actor_area 81
+avoid_actor_area 83
 }
 create_object ICE_CHUNK
 {
@@ -2466,9 +2471,9 @@ number_of_groups 9320
 set_scaling_to_map_size
 terrain_to_place_on DLC_WATER5
 temp_min_distance_group_placement 3
-actor_area_to_place_in 81
-avoid_actor_area 78
-avoid_actor_area 80
+actor_area_to_place_in 84
+avoid_actor_area 81
+avoid_actor_area 83
 }
 create_object DEER
 {
@@ -2477,10 +2482,10 @@ number_of_groups 9320
 set_scaling_to_map_size
 terrain_to_place_on GRAVEL
 if TINY_MAP temp_min_distance_group_placement 2 elseif SMALL_MAP temp_min_distance_group_placement 2 elseif MEDIUM_MAP temp_min_distance_group_placement 3 elseif LARGE_MAP temp_min_distance_group_placement 3 elseif HUGE_MAP temp_min_distance_group_placement 4 else temp_min_distance_group_placement 4 endif
-actor_area 82
+actor_area 85
 actor_area_radius 12
-avoid_actor_area 59
-avoid_actor_area 75
+avoid_actor_area 62
+avoid_actor_area 78
 find_closest
 }
 create_object STONE
@@ -2493,9 +2498,9 @@ set_tight_grouping
 set_scaling_to_map_size
 terrain_to_place_on NNGB
 if TINY_MAP temp_min_distance_group_placement 6 elseif SMALL_MAP temp_min_distance_group_placement 7 elseif MEDIUM_MAP temp_min_distance_group_placement 8 elseif LARGE_MAP temp_min_distance_group_placement 10 elseif HUGE_MAP temp_min_distance_group_placement 11 else temp_min_distance_group_placement 12 endif
-actor_area 83
+actor_area 86
 actor_area_radius 6
-actor_area_to_place_in 59
+actor_area_to_place_in 62
 }
 create_object SHEEP
 {
@@ -2505,7 +2510,7 @@ set_scaling_to_map_size
 layer_to_place_on SNOW_LIGHT
 terrain_to_place_on ICE
 if TINY_MAP temp_min_distance_group_placement 8 elseif SMALL_MAP temp_min_distance_group_placement 10 elseif MEDIUM_MAP temp_min_distance_group_placement 11 elseif LARGE_MAP temp_min_distance_group_placement 13 elseif HUGE_MAP temp_min_distance_group_placement 14 else temp_min_distance_group_placement 16 endif
-avoid_actor_area 58
+avoid_actor_area 61
 find_closest
 }
 create_object FORAGE
@@ -2518,7 +2523,7 @@ set_scaling_to_map_size
 terrain_to_place_on DLC_DRYGRASS
 avoid_forest_zone 1
 if TINY_MAP temp_min_distance_group_placement 12 elseif SMALL_MAP temp_min_distance_group_placement 14 elseif MEDIUM_MAP temp_min_distance_group_placement 17 elseif LARGE_MAP temp_min_distance_group_placement 19 elseif HUGE_MAP temp_min_distance_group_placement 22 else temp_min_distance_group_placement 24 endif
-actor_area 84
+actor_area 87
 actor_area_radius 2
 avoid_actor_area 9
 find_closest
@@ -2531,7 +2536,7 @@ number_of_groups 9320
 set_scaling_to_map_size
 avoid_forest_zone 1
 temp_min_distance_group_placement 8
-actor_area_to_place_in 84
+actor_area_to_place_in 87
 }
 create_object WOLF
 {
@@ -2571,12 +2576,15 @@ number_of_groups 2
 set_tight_grouping
 avoid_forest_zone 1
 temp_min_distance_group_placement 16
-actor_area 85
+actor_area 88
 actor_area_radius 8
 actor_area_to_place_in 11
 avoid_actor_area 10
-avoid_actor_area 82
-avoid_actor_area 83
+avoid_actor_area 23
+avoid_actor_area 24
+avoid_actor_area 25
+avoid_actor_area 85
+avoid_actor_area 86
 }
 create_object STONE
 {
@@ -2587,13 +2595,16 @@ number_of_groups 2
 set_tight_grouping
 avoid_forest_zone 1
 temp_min_distance_group_placement 16
-actor_area 86
+actor_area 89
 actor_area_radius 12
 actor_area_to_place_in 11
 avoid_actor_area 10
-avoid_actor_area 82
-avoid_actor_area 83
+avoid_actor_area 23
+avoid_actor_area 24
+avoid_actor_area 25
 avoid_actor_area 85
+avoid_actor_area 86
+avoid_actor_area 88
 }
 create_object GOLD
 {
@@ -2603,14 +2614,17 @@ number_of_objects 2
 set_tight_grouping
 avoid_forest_zone 1
 temp_min_distance_group_placement 24
-actor_area 87
+actor_area 90
 actor_area_radius 12
 actor_area_to_place_in 13
 avoid_actor_area 12
-avoid_actor_area 82
-avoid_actor_area 83
+avoid_actor_area 23
+avoid_actor_area 24
+avoid_actor_area 25
 avoid_actor_area 85
 avoid_actor_area 86
+avoid_actor_area 88
+avoid_actor_area 89
 }
 create_object STONE
 {
@@ -2622,11 +2636,14 @@ avoid_forest_zone 1
 temp_min_distance_group_placement 24
 actor_area_to_place_in 13
 avoid_actor_area 12
-avoid_actor_area 82
-avoid_actor_area 83
+avoid_actor_area 23
+avoid_actor_area 24
+avoid_actor_area 25
 avoid_actor_area 85
 avoid_actor_area 86
-avoid_actor_area 87
+avoid_actor_area 88
+avoid_actor_area 89
+avoid_actor_area 90
 }
 create_object FORAGE
 {
@@ -2672,7 +2689,7 @@ set_place_for_every_player
 number_of_objects 2
 set_tight_grouping
 avoid_forest_zone 3
-actor_area 88
+actor_area 91
 actor_area_radius 6
 avoid_actor_area 17
 find_closest
@@ -2681,10 +2698,10 @@ create_object VILLAGER_BASE_F
 {
 set_place_for_every_player
 avoid_forest_zone 3
-actor_area 89
+actor_area 92
 actor_area_radius 6
 avoid_actor_area 17
-avoid_actor_area 88
+avoid_actor_area 91
 find_closest
 }
 create_object EAGLE_WARRIOR
@@ -2692,8 +2709,8 @@ create_object EAGLE_WARRIOR
 set_place_for_every_player
 avoid_forest_zone 1
 avoid_actor_area 8
-avoid_actor_area 88
-avoid_actor_area 89
+avoid_actor_area 91
+avoid_actor_area 92
 find_closest
 }
 /* END_OBJECTS_AUTOSCRIBE */

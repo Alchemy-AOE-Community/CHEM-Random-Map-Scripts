@@ -511,12 +511,21 @@ create_object SHARKATZOR {
 */
 /* TODO consider seeing if I can rename it White Fang
 */
-create_object HUNTING_WOLF { 
-    set_place_for_every_player
-    min_distance_to_players 7
-    max_distance_to_players 9
-    set_circular_placement
-}
+if TOURNAMENT_VERSION
+    create_object HORSE { 
+        set_place_for_every_player
+        min_distance_to_players 7
+        max_distance_to_players 9
+        set_circular_placement
+    }
+else
+    create_object HUNTING_WOLF { 
+        set_place_for_every_player
+        min_distance_to_players 7
+        max_distance_to_players 9
+        set_circular_placement
+    }
+endif
 create_object HOUSE {
     set_place_for_every_player
     min_distance_to_players 10

@@ -100,6 +100,21 @@ effect_amount SET_ATTRIBUTE FLAG_D ATTR_RADIUS_1 4
 effect_amount SET_ATTRIBUTE FLAG_D ATTR_RADIUS_2 4
 effect_amount SET_ATTRIBUTE DLC_BOULDER_C ATTR_RADIUS_1 4
 effect_amount SET_ATTRIBUTE DLC_BOULDER_C ATTR_RADIUS_2 4
+
+/* Removing Trade Carts and Cogs for Multi-team Games */
+if 2_TEAM_GAME
+else
+#const TRADE_CART_ENABLER 161
+#const TRADE_COG_ENABLER 180
+#const TRADE_CARAVAN_ENABLER 48
+#const HINDU_CARAVANSERAI_ENABLER 518
+#const PERSIAN_CARAVANSERAI_ENABLER 552  
+effect_amount DISABLE_TECH TRADE_COG_ENABLER ATTR_DISABLE 180
+effect_amount DISABLE_TECH TRADE_CART_ENABLER ATTR_DISABLE 161
+effect_amount DISABLE_TECH TRADE_CARAVAN_ENABLER ATTR_DISABLE 48
+effect_amount DISABLE_TECH HINDU_CARAVANSERAI_ENABLER ATTR_DISABLE 518
+effect_amount DISABLE_TECH PERSIAN_CARAVANSERAI_ENABLER ATTR_DISABLE 552
+endif
 	
 <LAND_GENERATION>
 base_terrain DESERT
@@ -546,12 +561,12 @@ create_land
 create_land
 {
 	terrain_type SNOW
-	number_of_tiles 65
-	base_size 7
+	number_of_tiles 24
+	base_size 1
 	land_id 1
 	land_position 50 50
 	zone 1
-	base_elevation 8
+	base_elevation 3
 	other_zone_avoidance_distance 3
 	set_scaling_to_map_size
 }

@@ -14,6 +14,21 @@ end_random
 
 nomad_resources
 
+/* Removing Trade Carts and Cogs for Multi-team Games */
+if 2_TEAM_GAME
+else
+#const TRADE_CART_ENABLER 161
+#const TRADE_COG_ENABLER 180
+#const TRADE_CARAVAN_ENABLER 48
+#const HINDU_CARAVANSERAI_ENABLER 518
+#const PERSIAN_CARAVANSERAI_ENABLER 552  
+effect_amount DISABLE_TECH TRADE_COG_ENABLER ATTR_DISABLE 180
+effect_amount DISABLE_TECH TRADE_CART_ENABLER ATTR_DISABLE 161
+effect_amount DISABLE_TECH TRADE_CARAVAN_ENABLER ATTR_DISABLE 48
+effect_amount DISABLE_TECH HINDU_CARAVANSERAI_ENABLER ATTR_DISABLE 518
+effect_amount DISABLE_TECH PERSIAN_CARAVANSERAI_ENABLER ATTR_DISABLE 552
+endif
+
 /* Configuring Eagle Scout */
 #const SHARKATZOR 1222
 #const EXPLOSION 1614
@@ -895,9 +910,9 @@ create_object BOAR
   set_loose_grouping  
   set_gaia_object_only
   set_place_for_every_player
-  min_distance_to_players    14
-  max_distance_to_players    20
-  set_circular_placement
+  min_distance_to_players    12
+  max_distance_to_players    30
+  find_closest
 }
 
 create_object DLC_GOOSE {

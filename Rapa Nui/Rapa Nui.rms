@@ -1,17 +1,29 @@
-/* Rapa Nui (Easter Island) */
-/* A Random Map Script by CookiePirate -- Created 11.27.2023 */
+/* Rapa Nui (Easter Island) (Isla de Pascua) */
+/* A Random Map Script by CookiePirate -- Created and uploaded 11.27.2023 */
 
 /* Rapa Nui, also known as Easter Island, is a small island in the South Pacific Ocean.
+Known as Isla de Pascua in Spanish, today it is a special territory of Chile.
 Famous for its stone statues known as Moai, Rapa Nui is part of the Polynesian Triangle.
 The setting may look like any lovely tropical island, but don't be deceived! Danger awaits.
 Use your merchant to discover your surroundings and watch out for the Rapa Nui guardians.
 Find the resources you need to build the greatest Empire and be the Ariki (King) of Rapa Nui.
 Ka oho riva-riva! (Good luck!) */
 
+/* This random map script was created for Alchemy League Season 1, January-March 2024.
+It may not be used in any other tournament, showmatch, or other competition without my express permission. */
+
 /* Version 1.01 -- Updated 11.28.23 -- modified neutral gold and starting sheep distance from TC */
 /* Version 1.02 -- Updated 11.28.23 -- added/clarified comments and revision history */
 /* Version 1.03 -- Updated 12.05.23 -- added text description and minor formatting adjustments */
+/* Version 1.1  -- Updated 08.09.24 -- revised file name, updated text description, adjusted trade disabling */
 
+/* To do in future updates:
+--Reduce number of seagulls to lessen impact on PC resources
+--Rework merchant/priest dropping relic due to conflicting relic victory start conditions
+--Rework relic placement so that standard numbers of relics appear on the map and in more balanced positions
+--Possibly make Moai indestructible so that buildings must be built around them (check balance of Moai placement if this is to be attempted)
+--Other ideas to be added later?
+*/
 
 <PLAYER_SETUP>
 grouped_by_team
@@ -49,9 +61,8 @@ effect_amount GAIA_SET_ATTRIBUTE RNA ATTR_LINE_OF_SIGHT 3
 effect_amount GAIA_SET_ATTRIBUTE FALCON ATTR_LINE_OF_SIGHT 0
 effect_amount GAIA_SET_ATTRIBUTE SEAGULL ATTR_LINE_OF_SIGHT 0
 
-/* Disable trade for matches with more than 2 teams or FFA */
-if 2_TEAM_GAME
-else
+/* Disable trade for matches if Low Resources is set in lobby */
+if LOW_RESOURCES
     #const TRADE_CART_ENABLER 161
     #const TRADE_COG_ENABLER 180
     #const TRADE_CARAVAN_ENABLER 48

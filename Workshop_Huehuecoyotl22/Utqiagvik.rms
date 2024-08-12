@@ -904,17 +904,6 @@ create_object STONE
   avoid_forest_zone
 }
 
-create_object BOAR
-{
-  number_of_objects          1
-  set_loose_grouping  
-  set_gaia_object_only
-  set_place_for_every_player
-  min_distance_to_players    12
-  max_distance_to_players    30
-  find_closest
-}
-
 create_object DLC_GOOSE {
 	number_of_groups 9320
 	number_of_objects 2

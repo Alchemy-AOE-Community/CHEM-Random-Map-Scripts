@@ -929,7 +929,7 @@ if BASIN_MORAINE_LAYERING
   create_terrain MUD { base_terrain DLC_CRACKED land_percent 1 number_of_clumps 9320 set_scale_by_groups terrain_mask 1 }
 
   /* Adding Water */
-  create_terrain DLC_WATER5 { base_terrain DLC_NEWSHALLOW land_percent 100 number_of_clumps 9320 set_scale_by_groups if TINY_MAP spacing_to_other_terrain_types 5  elseif SMALL_MAP spacing_to_other_terrain_types 5 elseif MEDIUM_MAP spacing_to_other_terrain_types 5 elseif LARGE_MAP spacing_to_other_terrain_types 6 elseif HUGE_MAP spacing_to_other_terrain_types 6  else spacing_to_other_terrain_types 7 endif }
+  create_terrain DLC_WATER5 { base_terrain DLC_NEWSHALLOW land_percent 100 number_of_clumps 9320 set_scale_by_groups if TINY_MAP spacing_to_other_terrain_types 4  elseif SMALL_MAP spacing_to_other_terrain_types 5 elseif MEDIUM_MAP spacing_to_other_terrain_types 6 elseif LARGE_MAP spacing_to_other_terrain_types 7 elseif HUGE_MAP spacing_to_other_terrain_types 8  else spacing_to_other_terrain_types 8 endif }
 
   create_terrain DLC_WATER5 { base_terrain DLC_NEWSHALLOW land_percent 1 number_of_clumps 20 set_scale_by_groups terrain_mask 1 }
 
@@ -1305,11 +1305,10 @@ endif
 
 
 <OBJECTS_GENERATION>
-#const OFF_GRID 647
-
 /* BEGIN_OBJECTS_AUTOSCRIBE */
 #const BURNED_BUILDING 758
 #const BUSH_GREEN 1360
+#const COW 1596
 #const FALCON 1056
 #const GRASS_PATCH 301
 #const ICE_CHUNK 728
@@ -1317,6 +1316,8 @@ endif
 #const PLANT 818
 #const PLANT_DEAD 1365
 #const ROCK2 1323
+#const SEA_ROCKS_1 389
+#const SEA_ROCKS_2 396
 #const SHRUB_GREEN 1362
 #const UNDERBRUSH 1353
 #const WEEDS 1364
@@ -1405,7 +1406,7 @@ create_object PH8_2
 {
 set_place_for_every_player
 actor_area 9
-actor_area_radius 36
+actor_area_radius 14
 actor_area_to_place_in 7
 force_placement
 find_closest
@@ -1415,7 +1416,7 @@ create_object PH9_2
 {
 set_place_for_every_player
 actor_area 10
-actor_area_radius 16
+actor_area_radius 24
 actor_area_to_place_in 7
 force_placement
 find_closest
@@ -1425,7 +1426,7 @@ create_object PH10_2
 {
 set_place_for_every_player
 actor_area 11
-actor_area_radius 28
+actor_area_radius 18
 actor_area_to_place_in 7
 force_placement
 find_closest
@@ -1435,7 +1436,7 @@ create_object PH11_2
 {
 set_place_for_every_player
 actor_area 12
-actor_area_radius 20
+actor_area_radius 28
 actor_area_to_place_in 7
 force_placement
 find_closest
@@ -1445,7 +1446,7 @@ create_object PH12_2
 {
 set_place_for_every_player
 actor_area 13
-actor_area_radius 32
+actor_area_radius 3
 actor_area_to_place_in 7
 force_placement
 find_closest
@@ -1455,7 +1456,7 @@ create_object PH13_2
 {
 set_place_for_every_player
 actor_area 14
-actor_area_radius 2
+actor_area_radius 4
 actor_area_to_place_in 7
 force_placement
 find_closest
@@ -1465,7 +1466,7 @@ create_object PH14_2
 {
 set_place_for_every_player
 actor_area 15
-actor_area_radius 3
+actor_area_radius 2
 actor_area_to_place_in 7
 force_placement
 find_closest
@@ -1475,16 +1476,6 @@ create_object PH15_2
 {
 set_place_for_every_player
 actor_area 16
-actor_area_radius 4
-actor_area_to_place_in 7
-force_placement
-find_closest
-}
-#const PH16_2 647
-create_object PH16_2
-{
-set_place_for_every_player
-actor_area 17
 actor_area_radius 6
 actor_area_to_place_in 7
 force_placement
@@ -1498,7 +1489,7 @@ set_scaling_to_map_size
 layer_to_place_on NNRB
 terrain_to_place_on ICE
 temp_min_distance_group_placement 2
-actor_area 18
+actor_area 17
 actor_area_radius 2
 }
 create_object SEA_ROCKS_1
@@ -1508,9 +1499,9 @@ number_of_groups 9320
 set_scaling_to_map_size
 terrain_to_place_on NNRB
 temp_min_distance_group_placement 2
-actor_area 19
+actor_area 18
 actor_area_radius 2
-actor_area_to_place_in 18
+actor_area_to_place_in 17
 }
 create_object SEA_ROCKS_2
 {
@@ -1519,9 +1510,9 @@ number_of_groups 9320
 set_scaling_to_map_size
 terrain_to_place_on NNRB
 temp_min_distance_group_placement 2
-actor_area 20
+actor_area 19
 actor_area_radius 2
-actor_area_to_place_in 18
+actor_area_to_place_in 17
 }
 create_object SEA_ROCKS_2
 {
@@ -1531,7 +1522,7 @@ set_scaling_to_map_size
 layer_to_place_on NNRB
 terrain_to_place_on ICE
 temp_min_distance_group_placement 2
-actor_area 21
+actor_area 20
 actor_area_radius 2
 }
 create_object GOLD
@@ -1542,7 +1533,7 @@ number_of_groups 9320
 set_scaling_to_map_size
 terrain_to_place_on DLC_CRACKED
 temp_min_distance_group_placement 1
-actor_area 22
+actor_area 21
 actor_area_radius 4
 }
 create_object ROCK2
@@ -1552,9 +1543,9 @@ number_of_groups 9320
 set_scaling_to_map_size
 terrain_to_place_on NNGB
 temp_min_distance_group_placement 12
-actor_area 23
+actor_area 22
 actor_area_radius 1
-avoid_actor_area 22
+avoid_actor_area 21
 find_closest
 }
 create_object ROCK
@@ -1565,9 +1556,9 @@ set_scaling_to_map_size
 terrain_to_place_on NNGB
 temp_min_distance_group_placement 12
 set_facet 3
-actor_area 24
+actor_area 23
 actor_area_radius 1
-avoid_actor_area 22
+avoid_actor_area 21
 find_closest
 }
 create_object ROCK
@@ -1578,9 +1569,9 @@ set_scaling_to_map_size
 terrain_to_place_on NNGB
 temp_min_distance_group_placement 12
 set_facet 4
-actor_area 25
+actor_area 24
 actor_area_radius 1
-avoid_actor_area 22
+avoid_actor_area 21
 find_closest
 }
 create_object SEA_ROCKS_1
@@ -1590,9 +1581,9 @@ number_of_groups 9320
 set_scaling_to_map_size
 terrain_to_place_on NNGB
 temp_min_distance_group_placement 8
-actor_area 26
+actor_area 25
 actor_area_radius 2
-avoid_actor_area 22
+avoid_actor_area 21
 find_closest
 }
 create_object SEA_ROCKS_2
@@ -1602,12 +1593,22 @@ number_of_groups 9320
 set_scaling_to_map_size
 terrain_to_place_on NNGB
 temp_min_distance_group_placement 8
-actor_area 27
+actor_area 26
 actor_area_radius 2
-avoid_actor_area 22
+avoid_actor_area 21
 find_closest
 }
 create_object DLC_SAVANNAHPATCH
+{
+set_gaia_object_only
+number_of_groups 9320
+set_scaling_to_map_size
+terrain_to_place_on DLC_ROCK
+temp_min_distance_group_placement 8
+actor_area 27
+actor_area_radius 2
+}
+create_object GRASS_PATCH
 {
 set_gaia_object_only
 number_of_groups 9320
@@ -1616,17 +1617,7 @@ terrain_to_place_on DLC_ROCK
 temp_min_distance_group_placement 8
 actor_area 28
 actor_area_radius 2
-}
-create_object GRASS_PATCH
-{
-set_gaia_object_only
-number_of_groups 9320
-set_scaling_to_map_size
-terrain_to_place_on DLC_ROCK
-temp_min_distance_group_placement 8
-actor_area 29
-actor_area_radius 2
-avoid_actor_area 28
+avoid_actor_area 27
 find_closest
 }
 create_object PLANT_DEAD
@@ -1636,10 +1627,10 @@ number_of_groups 9320
 set_scaling_to_map_size
 terrain_to_place_on DLC_ROCK
 temp_min_distance_group_placement 8
-actor_area 30
+actor_area 29
 actor_area_radius 2
+avoid_actor_area 27
 avoid_actor_area 28
-avoid_actor_area 29
 find_closest
 }
 create_object WEEDS
@@ -1649,11 +1640,11 @@ number_of_groups 9320
 set_scaling_to_map_size
 terrain_to_place_on DLC_ROCK
 temp_min_distance_group_placement 8
-actor_area 31
+actor_area 30
 actor_area_radius 2
+avoid_actor_area 27
 avoid_actor_area 28
 avoid_actor_area 29
-avoid_actor_area 30
 find_closest
 }
 create_object DLC_SAVANNAHPATCH
@@ -1663,18 +1654,18 @@ number_of_groups 9320
 set_scaling_to_map_size
 terrain_to_place_on NNGB
 temp_min_distance_group_placement 8
-actor_area 32
+actor_area 31
 actor_area_radius 2
+avoid_actor_area 17
 avoid_actor_area 18
 avoid_actor_area 19
 avoid_actor_area 20
-avoid_actor_area 21
+avoid_actor_area 25
 avoid_actor_area 26
 avoid_actor_area 27
 avoid_actor_area 28
 avoid_actor_area 29
 avoid_actor_area 30
-avoid_actor_area 31
 find_closest
 }
 create_object GRASS_PATCH
@@ -1684,19 +1675,19 @@ number_of_groups 9320
 set_scaling_to_map_size
 terrain_to_place_on NNGB
 temp_min_distance_group_placement 8
-actor_area 33
+actor_area 32
 actor_area_radius 2
+avoid_actor_area 17
 avoid_actor_area 18
 avoid_actor_area 19
 avoid_actor_area 20
-avoid_actor_area 21
+avoid_actor_area 25
 avoid_actor_area 26
 avoid_actor_area 27
 avoid_actor_area 28
 avoid_actor_area 29
 avoid_actor_area 30
 avoid_actor_area 31
-avoid_actor_area 32
 find_closest
 }
 create_object PLANT_DEAD
@@ -1706,12 +1697,13 @@ number_of_groups 9320
 set_scaling_to_map_size
 terrain_to_place_on NNGB
 temp_min_distance_group_placement 8
-actor_area 34
+actor_area 33
 actor_area_radius 2
+avoid_actor_area 17
 avoid_actor_area 18
 avoid_actor_area 19
 avoid_actor_area 20
-avoid_actor_area 21
+avoid_actor_area 25
 avoid_actor_area 26
 avoid_actor_area 27
 avoid_actor_area 28
@@ -1719,7 +1711,6 @@ avoid_actor_area 29
 avoid_actor_area 30
 avoid_actor_area 31
 avoid_actor_area 32
-avoid_actor_area 33
 find_closest
 }
 create_object WEEDS
@@ -1729,12 +1720,13 @@ number_of_groups 9320
 set_scaling_to_map_size
 terrain_to_place_on NNGB
 temp_min_distance_group_placement 8
-actor_area 35
+actor_area 34
 actor_area_radius 2
+avoid_actor_area 17
 avoid_actor_area 18
 avoid_actor_area 19
 avoid_actor_area 20
-avoid_actor_area 21
+avoid_actor_area 25
 avoid_actor_area 26
 avoid_actor_area 27
 avoid_actor_area 28
@@ -1743,7 +1735,6 @@ avoid_actor_area 30
 avoid_actor_area 31
 avoid_actor_area 32
 avoid_actor_area 33
-avoid_actor_area 34
 find_closest
 }
 create_object GRASS_PATCH
@@ -1753,7 +1744,7 @@ number_of_groups 9320
 set_scaling_to_map_size
 terrain_to_place_on DLC_DRYGRASS
 temp_min_distance_group_placement 16
-actor_area 36
+actor_area 35
 actor_area_radius 2
 avoid_actor_area 8
 find_closest
@@ -1765,10 +1756,10 @@ number_of_groups 9320
 set_scaling_to_map_size
 terrain_to_place_on DLC_DRYGRASS
 temp_min_distance_group_placement 16
-actor_area 37
+actor_area 36
 actor_area_radius 2
 avoid_actor_area 8
-avoid_actor_area 36
+avoid_actor_area 35
 find_closest
 }
 create_object FLOWER_BED
@@ -1778,11 +1769,11 @@ number_of_groups 9320
 set_scaling_to_map_size
 terrain_to_place_on DLC_DRYGRASS
 temp_min_distance_group_placement 16
-actor_area 38
+actor_area 37
 actor_area_radius 2
 avoid_actor_area 8
+avoid_actor_area 35
 avoid_actor_area 36
-avoid_actor_area 37
 find_closest
 }
 create_object UNDERBRUSH
@@ -1792,12 +1783,12 @@ number_of_groups 9320
 set_scaling_to_map_size
 terrain_to_place_on DLC_DRYGRASS
 temp_min_distance_group_placement 16
-actor_area 39
+actor_area 38
 actor_area_radius 2
 avoid_actor_area 8
+avoid_actor_area 35
 avoid_actor_area 36
 avoid_actor_area 37
-avoid_actor_area 38
 find_closest
 }
 create_object WEEDS
@@ -1807,13 +1798,13 @@ number_of_groups 9320
 set_scaling_to_map_size
 terrain_to_place_on DLC_DRYGRASS
 temp_min_distance_group_placement 16
-actor_area 40
+actor_area 39
 actor_area_radius 2
 avoid_actor_area 8
+avoid_actor_area 35
 avoid_actor_area 36
 avoid_actor_area 37
 avoid_actor_area 38
-avoid_actor_area 39
 find_closest
 }
 create_object BUSH_GREEN
@@ -1823,14 +1814,14 @@ number_of_groups 9320
 set_scaling_to_map_size
 terrain_to_place_on DLC_DRYGRASS
 temp_min_distance_group_placement 16
-actor_area 41
+actor_area 40
 actor_area_radius 2
 avoid_actor_area 8
+avoid_actor_area 35
 avoid_actor_area 36
 avoid_actor_area 37
 avoid_actor_area 38
 avoid_actor_area 39
-avoid_actor_area 40
 find_closest
 }
 create_object SHRUB_GREEN
@@ -1840,15 +1831,15 @@ number_of_groups 9320
 set_scaling_to_map_size
 terrain_to_place_on DLC_DRYGRASS
 temp_min_distance_group_placement 16
-actor_area 42
+actor_area 41
 actor_area_radius 2
 avoid_actor_area 8
+avoid_actor_area 35
 avoid_actor_area 36
 avoid_actor_area 37
 avoid_actor_area 38
 avoid_actor_area 39
 avoid_actor_area 40
-avoid_actor_area 41
 find_closest
 }
 create_object PLANT
@@ -1858,16 +1849,16 @@ number_of_groups 9320
 set_scaling_to_map_size
 terrain_to_place_on DLC_DRYGRASS
 temp_min_distance_group_placement 16
-actor_area 43
+actor_area 42
 actor_area_radius 2
 avoid_actor_area 8
+avoid_actor_area 35
 avoid_actor_area 36
 avoid_actor_area 37
 avoid_actor_area 38
 avoid_actor_area 39
 avoid_actor_area 40
 avoid_actor_area 41
-avoid_actor_area 42
 find_closest
 }
 create_object DLC_SAVANNAHPATCH
@@ -1877,8 +1868,9 @@ number_of_groups 9320
 set_scaling_to_map_size
 terrain_to_place_on DIRT3
 temp_min_distance_group_placement 8
-actor_area 44
+actor_area 43
 actor_area_radius 2
+avoid_actor_area 25
 avoid_actor_area 26
 avoid_actor_area 27
 avoid_actor_area 28
@@ -1896,7 +1888,6 @@ avoid_actor_area 39
 avoid_actor_area 40
 avoid_actor_area 41
 avoid_actor_area 42
-avoid_actor_area 43
 find_closest
 }
 create_object GRASS_PATCH
@@ -1906,8 +1897,9 @@ number_of_groups 9320
 set_scaling_to_map_size
 terrain_to_place_on DIRT3
 temp_min_distance_group_placement 8
-actor_area 45
+actor_area 44
 actor_area_radius 2
+avoid_actor_area 25
 avoid_actor_area 26
 avoid_actor_area 27
 avoid_actor_area 28
@@ -1926,7 +1918,6 @@ avoid_actor_area 40
 avoid_actor_area 41
 avoid_actor_area 42
 avoid_actor_area 43
-avoid_actor_area 44
 find_closest
 }
 create_object PLANT_DEAD
@@ -1936,8 +1927,9 @@ number_of_groups 9320
 set_scaling_to_map_size
 terrain_to_place_on DIRT3
 temp_min_distance_group_placement 8
-actor_area 46
+actor_area 45
 actor_area_radius 2
+avoid_actor_area 25
 avoid_actor_area 26
 avoid_actor_area 27
 avoid_actor_area 28
@@ -1957,7 +1949,6 @@ avoid_actor_area 41
 avoid_actor_area 42
 avoid_actor_area 43
 avoid_actor_area 44
-avoid_actor_area 45
 find_closest
 }
 create_object WEEDS
@@ -1967,6 +1958,7 @@ number_of_groups 9320
 set_scaling_to_map_size
 terrain_to_place_on DIRT3
 temp_min_distance_group_placement 8
+avoid_actor_area 25
 avoid_actor_area 26
 avoid_actor_area 27
 avoid_actor_area 28
@@ -1987,7 +1979,6 @@ avoid_actor_area 42
 avoid_actor_area 43
 avoid_actor_area 44
 avoid_actor_area 45
-avoid_actor_area 46
 find_closest
 }
 create_object SEA_ROCKS_1
@@ -1997,9 +1988,20 @@ number_of_groups 9320
 set_scaling_to_map_size
 terrain_to_place_on DLC_WATER5
 temp_min_distance_group_placement 8
-actor_area 47
+actor_area 46
 actor_area_radius 0
 avoid_actor_area 4
+find_closest
+}
+#const PH46_3 647
+create_object PH46_3
+{
+number_of_groups 9320
+set_scaling_to_map_size
+actor_area 47
+actor_area_radius 4
+actor_area_to_place_in 46
+force_placement
 find_closest
 }
 #const PH47_3 647
@@ -2008,8 +2010,8 @@ create_object PH47_3
 number_of_groups 9320
 set_scaling_to_map_size
 actor_area 48
-actor_area_radius 4
-actor_area_to_place_in 47
+actor_area_radius 12
+actor_area_to_place_in 46
 force_placement
 find_closest
 }
@@ -2019,19 +2021,8 @@ create_object PH48_3
 number_of_groups 9320
 set_scaling_to_map_size
 actor_area 49
-actor_area_radius 12
-actor_area_to_place_in 47
-force_placement
-find_closest
-}
-#const PH49_3 647
-create_object PH49_3
-{
-number_of_groups 9320
-set_scaling_to_map_size
-actor_area 50
 actor_area_radius 6
-actor_area_to_place_in 47
+actor_area_to_place_in 46
 force_placement
 find_closest
 }
@@ -2042,10 +2033,21 @@ number_of_groups 9320
 set_scaling_to_map_size
 terrain_to_place_on DLC_WATER5
 temp_min_distance_group_placement 8
-actor_area 51
+actor_area 50
 actor_area_radius 0
 avoid_actor_area 4
-avoid_actor_area 48
+avoid_actor_area 47
+find_closest
+}
+#const PH50_4 647
+create_object PH50_4
+{
+number_of_groups 9320
+set_scaling_to_map_size
+actor_area 51
+actor_area_radius 12
+actor_area_to_place_in 50
+force_placement
 find_closest
 }
 #const PH51_4 647
@@ -2054,19 +2056,8 @@ create_object PH51_4
 number_of_groups 9320
 set_scaling_to_map_size
 actor_area 52
-actor_area_radius 12
-actor_area_to_place_in 51
-force_placement
-find_closest
-}
-#const PH52_4 647
-create_object PH52_4
-{
-number_of_groups 9320
-set_scaling_to_map_size
-actor_area 53
 actor_area_radius 6
-actor_area_to_place_in 51
+actor_area_to_place_in 50
 force_placement
 find_closest
 }
@@ -2077,7 +2068,7 @@ number_of_groups 9320
 set_scaling_to_map_size
 terrain_to_place_on DLC_CRACKED
 temp_min_distance_group_placement 12
-actor_area 54
+actor_area 53
 actor_area_radius 3
 }
 create_object GRASS_PATCH
@@ -2087,9 +2078,9 @@ number_of_groups 9320
 set_scaling_to_map_size
 terrain_to_place_on DLC_CRACKED
 temp_min_distance_group_placement 12
-actor_area 55
+actor_area 54
 actor_area_radius 3
-avoid_actor_area 54
+avoid_actor_area 53
 find_closest
 }
 create_object PLANT_DEAD
@@ -2099,10 +2090,10 @@ number_of_groups 9320
 set_scaling_to_map_size
 terrain_to_place_on DLC_CRACKED
 temp_min_distance_group_placement 12
-actor_area 56
+actor_area 55
 actor_area_radius 3
+avoid_actor_area 53
 avoid_actor_area 54
-avoid_actor_area 55
 find_closest
 }
 create_object WEEDS
@@ -2112,9 +2103,9 @@ number_of_groups 9320
 set_scaling_to_map_size
 terrain_to_place_on DLC_CRACKED
 temp_min_distance_group_placement 12
+avoid_actor_area 53
 avoid_actor_area 54
 avoid_actor_area 55
-avoid_actor_area 56
 find_closest
 }
 create_object OFF_GRID
@@ -2123,7 +2114,7 @@ set_gaia_object_only
 number_of_groups 9320
 set_scaling_to_map_size
 terrain_to_place_on DLC_NEWSHALLOW
-actor_area 57
+actor_area 56
 actor_area_radius 2
 actor_area_to_place_in 5
 }
@@ -2133,13 +2124,13 @@ set_gaia_object_only
 number_of_groups 9320
 set_scaling_to_map_size
 terrain_to_place_on DLC_WATER5
-if TINY_MAP temp_min_distance_group_placement 3 elseif SMALL_MAP temp_min_distance_group_placement 4 elseif MEDIUM_MAP temp_min_distance_group_placement 4 elseif LARGE_MAP temp_min_distance_group_placement 5 elseif HUGE_MAP temp_min_distance_group_placement 5 else temp_min_distance_group_placement 6 endif
+if TINY_MAP temp_min_distance_group_placement 6 elseif SMALL_MAP temp_min_distance_group_placement 7 elseif MEDIUM_MAP temp_min_distance_group_placement 8 elseif LARGE_MAP temp_min_distance_group_placement 10 elseif HUGE_MAP temp_min_distance_group_placement 11 else temp_min_distance_group_placement 12 endif
 second_object FISH
-actor_area 58
+actor_area 57
 actor_area_radius 16
-avoid_actor_area 49
-avoid_actor_area 52
-avoid_actor_area 57
+avoid_actor_area 48
+avoid_actor_area 51
+avoid_actor_area 56
 find_closest
 }
 create_object SEA_ROCKS_1
@@ -2149,7 +2140,7 @@ number_of_groups 9320
 set_scaling_to_map_size
 terrain_to_place_on DLC_NEWSHALLOW
 temp_min_distance_group_placement 8
-actor_area 59
+actor_area 58
 actor_area_radius 4
 }
 create_object SEA_ROCKS_2
@@ -2159,7 +2150,7 @@ number_of_groups 9320
 set_scaling_to_map_size
 terrain_to_place_on DLC_NEWSHALLOW
 temp_min_distance_group_placement 8
-avoid_actor_area 59
+avoid_actor_area 58
 find_closest
 }
 create_object RELIC
@@ -2169,7 +2160,7 @@ number_of_groups 9320
 set_scaling_to_map_size
 terrain_to_place_on DLC_ROCK
 temp_min_distance_group_placement 2
-actor_area 60
+actor_area 59
 actor_area_radius 1
 actor_area_to_place_in 6
 }
@@ -2180,14 +2171,14 @@ set_gaia_unconvertible
 number_of_groups 9320
 set_scaling_to_map_size
 terrain_to_place_on DLC_ROCK
-temp_min_distance_group_placement 2
-actor_area 61
+temp_min_distance_group_placement 3
+actor_area 60
 actor_area_radius 16
-actor_area_to_place_in 60
+actor_area_to_place_in 59
+avoid_actor_area 17
 avoid_actor_area 18
 avoid_actor_area 19
 avoid_actor_area 20
-avoid_actor_area 21
 }
 create_object OFF_GRID
 {
@@ -2197,7 +2188,7 @@ set_scaling_to_map_size
 layer_to_place_on SNOW_LIGHT
 terrain_to_place_on ICE
 temp_min_distance_group_placement 2
-actor_area 62
+actor_area 61
 actor_area_radius 4
 }
 create_object OFF_GRID
@@ -2208,9 +2199,20 @@ set_scaling_to_map_size
 layer_to_place_on DLC_NEWSHALLOW
 terrain_to_place_on ICE
 temp_min_distance_group_placement 1
-actor_area 63
+actor_area 62
 actor_area_radius 0
+actor_area_to_place_in 61
+}
+#const PH62_5 647
+create_object PH62_5
+{
+number_of_groups 9320
+set_scaling_to_map_size
+actor_area 63
+actor_area_radius 1
 actor_area_to_place_in 62
+force_placement
+find_closest
 }
 #const PH63_5 647
 create_object PH63_5
@@ -2218,8 +2220,8 @@ create_object PH63_5
 number_of_groups 9320
 set_scaling_to_map_size
 actor_area 64
-actor_area_radius 1
-actor_area_to_place_in 63
+actor_area_radius 3
+actor_area_to_place_in 62
 force_placement
 find_closest
 }
@@ -2229,19 +2231,8 @@ create_object PH64_5
 number_of_groups 9320
 set_scaling_to_map_size
 actor_area 65
-actor_area_radius 3
-actor_area_to_place_in 63
-force_placement
-find_closest
-}
-#const PH65_5 647
-create_object PH65_5
-{
-number_of_groups 9320
-set_scaling_to_map_size
-actor_area 66
 if TINY_MAP actor_area_radius 16 elseif SMALL_MAP actor_area_radius 19 elseif MEDIUM_MAP actor_area_radius 22 elseif LARGE_MAP actor_area_radius 26 elseif HUGE_MAP actor_area_radius 29 else actor_area_radius 32 endif
-actor_area_to_place_in 63
+actor_area_to_place_in 62
 force_placement
 find_closest
 }
@@ -2253,10 +2244,21 @@ set_scaling_to_map_size
 layer_to_place_on DLC_NEWSHALLOW
 terrain_to_place_on ICE
 temp_min_distance_group_placement 1
-actor_area 67
+actor_area 66
 actor_area_radius 0
-actor_area_to_place_in 65
-avoid_actor_area 64
+actor_area_to_place_in 64
+avoid_actor_area 63
+}
+#const PH66_6 647
+create_object PH66_6
+{
+number_of_groups 9320
+set_scaling_to_map_size
+actor_area 67
+actor_area_radius 1
+actor_area_to_place_in 66
+force_placement
+find_closest
 }
 #const PH67_6 647
 create_object PH67_6
@@ -2264,8 +2266,8 @@ create_object PH67_6
 number_of_groups 9320
 set_scaling_to_map_size
 actor_area 68
-actor_area_radius 1
-actor_area_to_place_in 67
+actor_area_radius 2
+actor_area_to_place_in 66
 force_placement
 find_closest
 }
@@ -2275,19 +2277,8 @@ create_object PH68_6
 number_of_groups 9320
 set_scaling_to_map_size
 actor_area 69
-actor_area_radius 2
-actor_area_to_place_in 67
-force_placement
-find_closest
-}
-#const PH69_6 647
-create_object PH69_6
-{
-number_of_groups 9320
-set_scaling_to_map_size
-actor_area 70
 if TINY_MAP actor_area_radius 16 elseif SMALL_MAP actor_area_radius 19 elseif MEDIUM_MAP actor_area_radius 22 elseif LARGE_MAP actor_area_radius 26 elseif HUGE_MAP actor_area_radius 29 else actor_area_radius 32 endif
-actor_area_to_place_in 67
+actor_area_to_place_in 66
 force_placement
 find_closest
 }
@@ -2299,11 +2290,22 @@ set_scaling_to_map_size
 layer_to_place_on DLC_NEWSHALLOW
 terrain_to_place_on ICE
 temp_min_distance_group_placement 1
-actor_area 71
+actor_area 70
 actor_area_radius 0
-actor_area_to_place_in 69
-avoid_actor_area 64
-avoid_actor_area 68
+actor_area_to_place_in 68
+avoid_actor_area 63
+avoid_actor_area 67
+}
+#const PH70_7 647
+create_object PH70_7
+{
+number_of_groups 9320
+set_scaling_to_map_size
+actor_area 71
+actor_area_radius 1
+actor_area_to_place_in 70
+force_placement
+find_closest
 }
 #const PH71_7 647
 create_object PH71_7
@@ -2311,8 +2313,8 @@ create_object PH71_7
 number_of_groups 9320
 set_scaling_to_map_size
 actor_area 72
-actor_area_radius 1
-actor_area_to_place_in 71
+actor_area_radius 2
+actor_area_to_place_in 70
 force_placement
 find_closest
 }
@@ -2322,19 +2324,8 @@ create_object PH72_7
 number_of_groups 9320
 set_scaling_to_map_size
 actor_area 73
-actor_area_radius 2
-actor_area_to_place_in 71
-force_placement
-find_closest
-}
-#const PH73_7 647
-create_object PH73_7
-{
-number_of_groups 9320
-set_scaling_to_map_size
-actor_area 74
 if TINY_MAP actor_area_radius 16 elseif SMALL_MAP actor_area_radius 19 elseif MEDIUM_MAP actor_area_radius 22 elseif LARGE_MAP actor_area_radius 26 elseif HUGE_MAP actor_area_radius 29 else actor_area_radius 32 endif
-actor_area_to_place_in 71
+actor_area_to_place_in 70
 force_placement
 find_closest
 }
@@ -2346,12 +2337,12 @@ set_scaling_to_map_size
 layer_to_place_on DLC_NEWSHALLOW
 terrain_to_place_on ICE
 temp_min_distance_group_placement 1
-actor_area 75
+actor_area 74
 if TINY_MAP actor_area_radius 16 elseif SMALL_MAP actor_area_radius 19 elseif MEDIUM_MAP actor_area_radius 22 elseif LARGE_MAP actor_area_radius 26 elseif HUGE_MAP actor_area_radius 29 else actor_area_radius 32 endif
-actor_area_to_place_in 73
-avoid_actor_area 64
-avoid_actor_area 68
-avoid_actor_area 72
+actor_area_to_place_in 72
+avoid_actor_area 63
+avoid_actor_area 67
+avoid_actor_area 71
 }
 create_object OFF_GRID
 {
@@ -2360,12 +2351,23 @@ number_of_groups 9320
 set_scaling_to_map_size
 terrain_to_place_on DLC_GRAVELBEACH
 temp_min_distance_group_placement 1
-actor_area 76
+actor_area 75
 actor_area_radius 0
-avoid_actor_area 66
-avoid_actor_area 70
+avoid_actor_area 65
+avoid_actor_area 69
+avoid_actor_area 73
 avoid_actor_area 74
-avoid_actor_area 75
+find_closest
+}
+#const PH75_8 647
+create_object PH75_8
+{
+number_of_groups 9320
+set_scaling_to_map_size
+actor_area 76
+actor_area_radius 6
+actor_area_to_place_in 75
+force_placement
 find_closest
 }
 #const PH76_8 647
@@ -2374,19 +2376,8 @@ create_object PH76_8
 number_of_groups 9320
 set_scaling_to_map_size
 actor_area 77
-actor_area_radius 6
-actor_area_to_place_in 76
-force_placement
-find_closest
-}
-#const PH77_8 647
-create_object PH77_8
-{
-number_of_groups 9320
-set_scaling_to_map_size
-actor_area 78
 actor_area_radius 4
-actor_area_to_place_in 76
+actor_area_to_place_in 75
 force_placement
 find_closest
 }
@@ -2397,12 +2388,23 @@ number_of_groups 9320
 set_scaling_to_map_size
 terrain_to_place_on DLC_NEWSHALLOW
 temp_min_distance_group_placement 1
-actor_area 79
+actor_area 78
 actor_area_radius 0
-avoid_actor_area 50
-avoid_actor_area 53
-avoid_actor_area 58
-avoid_actor_area 77
+avoid_actor_area 49
+avoid_actor_area 52
+avoid_actor_area 57
+avoid_actor_area 76
+find_closest
+}
+#const PH78_9 647
+create_object PH78_9
+{
+number_of_groups 9320
+set_scaling_to_map_size
+actor_area 79
+actor_area_radius 1
+actor_area_to_place_in 78
+force_placement
 find_closest
 }
 #const PH79_9 647
@@ -2411,19 +2413,8 @@ create_object PH79_9
 number_of_groups 9320
 set_scaling_to_map_size
 actor_area 80
-actor_area_radius 1
-actor_area_to_place_in 79
-force_placement
-find_closest
-}
-#const PH80_9 647
-create_object PH80_9
-{
-number_of_groups 9320
-set_scaling_to_map_size
-actor_area 81
 actor_area_radius 2
-actor_area_to_place_in 79
+actor_area_to_place_in 78
 force_placement
 find_closest
 }
@@ -2434,10 +2425,21 @@ number_of_groups 9320
 set_scaling_to_map_size
 terrain_to_place_on DLC_NEWSHALLOW
 temp_min_distance_group_placement 2
-actor_area 82
+actor_area 81
 actor_area_radius 0
+actor_area_to_place_in 80
+avoid_actor_area 79
+}
+#const PH81_10 647
+create_object PH81_10
+{
+number_of_groups 9320
+set_scaling_to_map_size
+actor_area 82
+actor_area_radius 2
 actor_area_to_place_in 81
-avoid_actor_area 80
+force_placement
+find_closest
 }
 #const PH82_10 647
 create_object PH82_10
@@ -2445,19 +2447,8 @@ create_object PH82_10
 number_of_groups 9320
 set_scaling_to_map_size
 actor_area 83
-actor_area_radius 2
-actor_area_to_place_in 82
-force_placement
-find_closest
-}
-#const PH83_10 647
-create_object PH83_10
-{
-number_of_groups 9320
-set_scaling_to_map_size
-actor_area 84
 actor_area_radius 3
-actor_area_to_place_in 82
+actor_area_to_place_in 81
 force_placement
 find_closest
 }
@@ -2468,9 +2459,9 @@ number_of_groups 9320
 set_scaling_to_map_size
 terrain_to_place_on DLC_NEWSHALLOW
 temp_min_distance_group_placement 3
-actor_area_to_place_in 84
-avoid_actor_area 81
-avoid_actor_area 83
+actor_area_to_place_in 83
+avoid_actor_area 80
+avoid_actor_area 82
 }
 create_object ICE_CHUNK
 {
@@ -2479,9 +2470,9 @@ number_of_groups 9320
 set_scaling_to_map_size
 terrain_to_place_on DLC_WATER5
 temp_min_distance_group_placement 3
-actor_area_to_place_in 84
-avoid_actor_area 81
-avoid_actor_area 83
+actor_area_to_place_in 83
+avoid_actor_area 80
+avoid_actor_area 82
 }
 create_object DEER
 {
@@ -2490,25 +2481,25 @@ number_of_groups 9320
 set_scaling_to_map_size
 terrain_to_place_on GRAVEL
 if TINY_MAP temp_min_distance_group_placement 2 elseif SMALL_MAP temp_min_distance_group_placement 2 elseif MEDIUM_MAP temp_min_distance_group_placement 3 elseif LARGE_MAP temp_min_distance_group_placement 3 elseif HUGE_MAP temp_min_distance_group_placement 4 else temp_min_distance_group_placement 4 endif
-actor_area 85
+actor_area 84
 actor_area_radius 12
-avoid_actor_area 62
-avoid_actor_area 78
+avoid_actor_area 61
+avoid_actor_area 77
 find_closest
 }
 create_object STONE
 {
 set_gaia_object_only
-number_of_objects 3
+number_of_objects 2
 number_of_groups 9320
 group_placement_radius 1
 set_tight_grouping
 set_scaling_to_map_size
 terrain_to_place_on NNGB
 if TINY_MAP temp_min_distance_group_placement 6 elseif SMALL_MAP temp_min_distance_group_placement 7 elseif MEDIUM_MAP temp_min_distance_group_placement 8 elseif LARGE_MAP temp_min_distance_group_placement 10 elseif HUGE_MAP temp_min_distance_group_placement 11 else temp_min_distance_group_placement 12 endif
-actor_area 86
+actor_area 85
 actor_area_radius 6
-actor_area_to_place_in 62
+actor_area_to_place_in 61
 }
 create_object SHEEP
 {
@@ -2518,45 +2509,7 @@ set_scaling_to_map_size
 layer_to_place_on SNOW_LIGHT
 terrain_to_place_on ICE
 if TINY_MAP temp_min_distance_group_placement 8 elseif SMALL_MAP temp_min_distance_group_placement 10 elseif MEDIUM_MAP temp_min_distance_group_placement 11 elseif LARGE_MAP temp_min_distance_group_placement 13 elseif HUGE_MAP temp_min_distance_group_placement 14 else temp_min_distance_group_placement 16 endif
-avoid_actor_area 61
-find_closest
-}
-create_object FORAGE
-{
-set_gaia_object_only
-number_of_objects 2
-number_of_groups 9320
-set_tight_grouping
-set_scaling_to_map_size
-terrain_to_place_on DLC_DRYGRASS
-avoid_forest_zone 1
-if TINY_MAP temp_min_distance_group_placement 12 elseif SMALL_MAP temp_min_distance_group_placement 14 elseif MEDIUM_MAP temp_min_distance_group_placement 17 elseif LARGE_MAP temp_min_distance_group_placement 19 elseif HUGE_MAP temp_min_distance_group_placement 22 else temp_min_distance_group_placement 24 endif
-actor_area 87
-actor_area_radius 2
-avoid_actor_area 9
-find_closest
-}
-create_object ALASKAN_BEAR
-{
-set_gaia_object_only
-set_gaia_unconvertible
-number_of_groups 9320
-set_scaling_to_map_size
-avoid_forest_zone 1
-temp_min_distance_group_placement 8
-actor_area_to_place_in 87
-}
-create_object WOLF
-{
-set_gaia_object_only
-number_of_objects 2
-number_of_groups 9320
-set_tight_grouping
-set_scaling_to_map_size
-terrain_to_place_on DLC_DRYGRASS
-avoid_forest_zone 1
-if TINY_MAP temp_min_distance_group_placement 12 elseif SMALL_MAP temp_min_distance_group_placement 14 elseif MEDIUM_MAP temp_min_distance_group_placement 17 elseif LARGE_MAP temp_min_distance_group_placement 19 elseif HUGE_MAP temp_min_distance_group_placement 22 else temp_min_distance_group_placement 24 endif
-avoid_actor_area 9
+avoid_actor_area 60
 find_closest
 }
 create_object HAWK
@@ -2579,40 +2532,62 @@ create_object GOLD
 {
 set_place_for_every_player
 set_gaia_object_only
-number_of_objects 2
+number_of_objects 3
 number_of_groups 2
 set_tight_grouping
 avoid_forest_zone 1
-temp_min_distance_group_placement 16
-actor_area 88
+temp_min_distance_group_placement 12
+actor_area 86
 actor_area_radius 8
-actor_area_to_place_in 11
-avoid_actor_area 10
+actor_area_to_place_in 10
+avoid_actor_area 9
+avoid_actor_area 22
 avoid_actor_area 23
 avoid_actor_area 24
-avoid_actor_area 25
+avoid_actor_area 84
 avoid_actor_area 85
-avoid_actor_area 86
 }
 create_object STONE
 {
 set_place_for_every_player
 set_gaia_object_only
-number_of_objects 2
+number_of_objects 3
 number_of_groups 2
 set_tight_grouping
 avoid_forest_zone 1
-temp_min_distance_group_placement 16
-actor_area 89
-actor_area_radius 12
-actor_area_to_place_in 11
-avoid_actor_area 10
+temp_min_distance_group_placement 12
+actor_area 87
+actor_area_radius 1
+actor_area_to_place_in 10
+avoid_actor_area 9
+avoid_actor_area 22
 avoid_actor_area 23
 avoid_actor_area 24
-avoid_actor_area 25
+avoid_actor_area 84
 avoid_actor_area 85
 avoid_actor_area 86
-avoid_actor_area 88
+}
+#const PH87_11 647
+create_object PH87_11
+{
+set_place_for_every_player
+number_of_groups 18
+actor_area 88
+actor_area_radius 12
+actor_area_to_place_in 87
+force_placement
+find_closest
+}
+#const PH88_11 647
+create_object PH88_11
+{
+set_place_for_every_player
+number_of_groups 18
+actor_area 89
+actor_area_radius 8
+actor_area_to_place_in 87
+force_placement
+find_closest
 }
 create_object GOLD
 {
@@ -2621,46 +2596,18 @@ set_gaia_object_only
 number_of_objects 2
 set_tight_grouping
 avoid_forest_zone 1
-temp_min_distance_group_placement 24
+temp_min_distance_group_placement 16
 actor_area 90
-actor_area_radius 12
-actor_area_to_place_in 13
-avoid_actor_area 12
+actor_area_radius 8
+actor_area_to_place_in 12
+avoid_actor_area 11
+avoid_actor_area 22
 avoid_actor_area 23
 avoid_actor_area 24
-avoid_actor_area 25
+avoid_actor_area 84
 avoid_actor_area 85
 avoid_actor_area 86
 avoid_actor_area 88
-avoid_actor_area 89
-}
-create_object STONE
-{
-set_place_for_every_player
-set_gaia_object_only
-number_of_objects 2
-set_tight_grouping
-avoid_forest_zone 1
-temp_min_distance_group_placement 24
-actor_area_to_place_in 13
-avoid_actor_area 12
-avoid_actor_area 23
-avoid_actor_area 24
-avoid_actor_area 25
-avoid_actor_area 85
-avoid_actor_area 86
-avoid_actor_area 88
-avoid_actor_area 89
-avoid_actor_area 90
-}
-create_object FORAGE
-{
-set_place_for_every_player
-set_gaia_object_only
-number_of_groups 2
-temp_min_distance_group_placement 2
-avoid_actor_area 14
-find_closest
 }
 create_object TREE_REED
 {
@@ -2668,28 +2615,29 @@ set_place_for_every_player
 set_gaia_object_only
 number_of_groups rnd(3,4)
 temp_min_distance_group_placement 2
+avoid_actor_area 13
+find_closest
+}
+create_object TREE_REED
+{
+set_place_for_every_player
+set_gaia_object_only
+number_of_groups rnd(3,4)
+layer_to_place_on  
+avoid_forest_zone 1
+temp_min_distance_group_placement 4
+avoid_actor_area 14
+find_closest
+}
+create_object COW
+{
+set_place_for_every_player
+number_of_objects 2
+number_of_groups 2
+set_tight_grouping
+temp_min_distance_group_placement 4
+actor_area_to_place_in 13
 avoid_actor_area 15
-find_closest
-}
-create_object TREE_REED
-{
-set_place_for_every_player
-set_gaia_object_only
-number_of_groups rnd(3,4)
-avoid_forest_zone 1
-temp_min_distance_group_placement 4
-avoid_actor_area 16
-find_closest
-}
-create_object SHEEP
-{
-set_place_for_every_player
-number_of_objects 2
-number_of_groups 2
-set_tight_grouping
-temp_min_distance_group_placement 4
-actor_area_to_place_in 15
-avoid_actor_area 14
 }
 create_object VILLAGER_BASE_F
 {
@@ -2699,7 +2647,7 @@ set_tight_grouping
 avoid_forest_zone 3
 actor_area 91
 actor_area_radius 6
-avoid_actor_area 17
+avoid_actor_area 16
 find_closest
 }
 create_object VILLAGER_BASE_F
@@ -2708,7 +2656,7 @@ set_place_for_every_player
 avoid_forest_zone 3
 actor_area 92
 actor_area_radius 6
-avoid_actor_area 17
+avoid_actor_area 16
 avoid_actor_area 91
 find_closest
 }
@@ -2721,6 +2669,52 @@ avoid_actor_area 91
 avoid_actor_area 92
 find_closest
 }
+create_object FORAGE
+{
+set_place_for_every_player
+set_gaia_object_only
+number_of_groups 10
+min_distance_group_placement 1
+avoid_actor_area 15
+find_closest
+}
+create_object FORAGE
+{
+set_gaia_object_only
+number_of_objects 2
+number_of_groups 9320
+set_tight_grouping
+set_scaling_to_map_size
+terrain_to_place_on DLC_DRYGRASS
+avoid_forest_zone 1
+if TINY_MAP temp_min_distance_group_placement 12 elseif SMALL_MAP temp_min_distance_group_placement 14 elseif MEDIUM_MAP temp_min_distance_group_placement 17 elseif LARGE_MAP temp_min_distance_group_placement 19 elseif HUGE_MAP temp_min_distance_group_placement 22 else temp_min_distance_group_placement 24 endif
+actor_area 93
+actor_area_radius 2
+avoid_actor_area 12
+avoid_actor_area 86
+avoid_actor_area 89
+avoid_actor_area 90
+find_closest
+}
+create_object ALASKAN_BEAR
+{
+set_gaia_object_only
+set_gaia_unconvertible
+number_of_groups 9320
+set_scaling_to_map_size
+avoid_forest_zone 1
+temp_min_distance_group_placement 8
+actor_area_to_place_in 93
+}
+create_object WOLF
+{
+set_gaia_object_only
+number_of_groups 9320
+set_scaling_to_map_size
+avoid_forest_zone 1
+if TINY_MAP temp_min_distance_group_placement 12 elseif SMALL_MAP temp_min_distance_group_placement 14 elseif MEDIUM_MAP temp_min_distance_group_placement 17 elseif LARGE_MAP temp_min_distance_group_placement 19 elseif HUGE_MAP temp_min_distance_group_placement 22 else temp_min_distance_group_placement 24 endif
+actor_area_to_place_in 93
+}
 /* END_OBJECTS_AUTOSCRIBE */
 
 if REGICIDE create_object KING { set_place_for_every_player find_closest } endif
@@ -2730,111 +2724,97 @@ if REGICIDE create_object KING { set_place_for_every_player find_closest } endif
 base_terrain NNGB
 
 /* LAND_AUTOSCRIBE */
-L {  terrain_type  MUD base_elevation 9 zone 3 other_zone_avoidance_distance 23 if TINY_MAP base_size 1  number_of_tiles 254  elseif SMALL_MAP base_size 1  number_of_tiles 366  elseif MEDIUM_MAP base_size 1  number_of_tiles 498  elseif LARGE_MAP base_size 2  number_of_tiles 706  elseif HUGE_MAP base_size 2  number_of_tiles 854  else base_size 2  number_of_tiles 1016  endif land_position 88 51  left_border 75 top_border 38 bottom_border 36 clumping_factor 25 }
-L {  terrain_type  MUD base_elevation 2 zone 1 other_zone_avoidance_distance 14 if TINY_MAP base_size 1  number_of_tiles 255  elseif SMALL_MAP base_size 1  number_of_tiles 367  elseif MEDIUM_MAP base_size 1  number_of_tiles 500  elseif LARGE_MAP base_size 2  number_of_tiles 708  elseif HUGE_MAP base_size 2  number_of_tiles 857  else base_size 2  number_of_tiles 1020  endif land_position 9 52  right_border 79 top_border 40 bottom_border 36 clumping_factor 25 }
-L {  terrain_type  MUD base_elevation 5 zone 1 other_zone_avoidance_distance 23 if TINY_MAP base_size 1  number_of_tiles 231  elseif SMALL_MAP base_size 1  number_of_tiles 333  elseif MEDIUM_MAP base_size 1  number_of_tiles 453  elseif LARGE_MAP base_size 2  number_of_tiles 642  elseif HUGE_MAP base_size 2  number_of_tiles 776  else base_size 2  number_of_tiles 924  endif land_position 58 22  left_border 47 right_border 31 top_border 11 bottom_border 67 clumping_factor 25 }
-L {  terrain_type  DLC_CRACKED zone 2 other_zone_avoidance_distance 4 if TINY_MAP base_size 3  number_of_tiles 40  elseif SMALL_MAP base_size 4  number_of_tiles 58  elseif MEDIUM_MAP base_size 4  number_of_tiles 78  elseif LARGE_MAP base_size 5  number_of_tiles 111  elseif HUGE_MAP base_size 6  number_of_tiles 134  else base_size 6  number_of_tiles 160  endif land_position 32 89  }
-L {  terrain_type  MUD base_elevation 6 zone 3 other_zone_avoidance_distance 17 if TINY_MAP base_size 1  number_of_tiles 265  elseif SMALL_MAP base_size 1  number_of_tiles 382  elseif MEDIUM_MAP base_size 1  number_of_tiles 519  elseif LARGE_MAP base_size 2  number_of_tiles 736  elseif HUGE_MAP base_size 2  number_of_tiles 891  else base_size 2  number_of_tiles 1060  endif land_position 69 76  left_border 56 right_border 18 top_border 63 bottom_border 11 clumping_factor 25 }
-L {  terrain_type  MUD base_elevation 10 zone 1 other_zone_avoidance_distance 25 if TINY_MAP base_size 1  number_of_tiles 250  elseif SMALL_MAP base_size 1  number_of_tiles 360  elseif MEDIUM_MAP base_size 1  number_of_tiles 490  elseif LARGE_MAP base_size 2  number_of_tiles 694  elseif HUGE_MAP base_size 2  number_of_tiles 840  else base_size 2  number_of_tiles 1000  endif land_position 55 4  left_border 42 right_border 32 bottom_border 83 clumping_factor 25 }
-L {  terrain_type  MUD base_elevation 2 zone 3 other_zone_avoidance_distance 13 if TINY_MAP base_size 1  number_of_tiles 258  elseif SMALL_MAP base_size 1  number_of_tiles 372  elseif MEDIUM_MAP base_size 1  number_of_tiles 506  elseif LARGE_MAP base_size 2  number_of_tiles 717  elseif HUGE_MAP base_size 2  number_of_tiles 867  else base_size 2  number_of_tiles 1032  endif land_position 46 100  left_border 34 right_border 42 top_border 88 clumping_factor 25 }
-L {  terrain_type  MUD base_elevation 3 zone 1 other_zone_avoidance_distance 17 if TINY_MAP base_size 1  number_of_tiles 247  elseif SMALL_MAP base_size 1  number_of_tiles 356  elseif MEDIUM_MAP base_size 1  number_of_tiles 484  elseif LARGE_MAP base_size 2  number_of_tiles 686  elseif HUGE_MAP base_size 2  number_of_tiles 830  else base_size 2  number_of_tiles 988  endif land_position 31 43  left_border 19 right_border 57 top_border 31 bottom_border 45 clumping_factor 25 }
-L {  terrain_type  MUD base_elevation 5 zone 1 other_zone_avoidance_distance 24 if TINY_MAP base_size 1  number_of_tiles 228  elseif SMALL_MAP base_size 1  number_of_tiles 328  elseif MEDIUM_MAP base_size 1  number_of_tiles 447  elseif LARGE_MAP base_size 2  number_of_tiles 633  elseif HUGE_MAP base_size 2  number_of_tiles 766  else base_size 2  number_of_tiles 912  endif land_position 61 18  left_border 50 right_border 28 top_border 7 bottom_border 71 clumping_factor 25 }
-L {  terrain_type  MUD base_elevation 3 zone 1 other_zone_avoidance_distance 18 if TINY_MAP base_size 1  number_of_tiles 245  elseif SMALL_MAP base_size 1  number_of_tiles 353  elseif MEDIUM_MAP base_size 1  number_of_tiles 480  elseif LARGE_MAP base_size 2  number_of_tiles 681  elseif HUGE_MAP base_size 2  number_of_tiles 823  else base_size 2  number_of_tiles 980  endif land_position 37 39  left_border 25 right_border 51 top_border 27 bottom_border 49 clumping_factor 25 }
-L {  terrain_type  MUD base_elevation 4 zone 1 other_zone_avoidance_distance 16 if TINY_MAP base_size 1  number_of_tiles 300  elseif SMALL_MAP base_size 1  number_of_tiles 432  elseif MEDIUM_MAP base_size 1  number_of_tiles 588  elseif LARGE_MAP base_size 2  number_of_tiles 833  elseif HUGE_MAP base_size 2  number_of_tiles 1008  else base_size 2  number_of_tiles 1200  endif land_position 5 6  right_border 80 bottom_border 79 clumping_factor 25 }
-L {  terrain_type  DLC_CRACKED zone 2 other_zone_avoidance_distance 4 if TINY_MAP base_size 3  number_of_tiles 40  elseif SMALL_MAP base_size 4  number_of_tiles 58  elseif MEDIUM_MAP base_size 4  number_of_tiles 78  elseif LARGE_MAP base_size 5  number_of_tiles 111  elseif HUGE_MAP base_size 6  number_of_tiles 134  else base_size 6  number_of_tiles 160  endif land_position 18 82  }
-L {  terrain_type  MUD base_elevation 5 zone 3 other_zone_avoidance_distance 18 if TINY_MAP base_size 1  number_of_tiles 300  elseif SMALL_MAP base_size 1  number_of_tiles 432  elseif MEDIUM_MAP base_size 1  number_of_tiles 588  elseif LARGE_MAP base_size 2  number_of_tiles 833  elseif HUGE_MAP base_size 2  number_of_tiles 1008  else base_size 2  number_of_tiles 1200  endif land_position 97 87  left_border 82 top_border 72 clumping_factor 25 }
-L {  terrain_type  MUD base_elevation 5 zone 3 other_zone_avoidance_distance 26 if TINY_MAP base_size 1  number_of_tiles 223  elseif SMALL_MAP base_size 1  number_of_tiles 321  elseif MEDIUM_MAP base_size 1  number_of_tiles 437  elseif LARGE_MAP base_size 2  number_of_tiles 619  elseif HUGE_MAP base_size 2  number_of_tiles 750  else base_size 2  number_of_tiles 892  endif land_position 87 31  left_border 76 right_border 2 top_border 20 bottom_border 58 clumping_factor 25 }
-L {  terrain_type  MUD base_elevation 4 zone 1 other_zone_avoidance_distance 19 if TINY_MAP base_size 1  number_of_tiles 281  elseif SMALL_MAP base_size 1  number_of_tiles 405  elseif MEDIUM_MAP base_size 1  number_of_tiles 551  elseif LARGE_MAP base_size 2  number_of_tiles 781  elseif HUGE_MAP base_size 2  number_of_tiles 944  else base_size 2  number_of_tiles 1124  endif land_position 24 12  left_border 10 right_border 62 bottom_border 74 clumping_factor 25 }
+L {  terrain_type  MUD base_elevation 3 zone 1 other_zone_avoidance_distance 18 if TINY_MAP base_size 1  number_of_tiles 339  elseif SMALL_MAP base_size 1  number_of_tiles 488  elseif MEDIUM_MAP base_size 1  number_of_tiles 664  elseif LARGE_MAP base_size 2  number_of_tiles 942  elseif HUGE_MAP base_size 2  number_of_tiles 1139  else base_size 2  number_of_tiles 1356  endif land_position 40 27  left_border 29 right_border 49 top_border 16 bottom_border 62 clumping_factor 25 }
+L {  terrain_type  MUD base_elevation 8 zone 1 other_zone_avoidance_distance 21 if TINY_MAP base_size 1  number_of_tiles 358  elseif SMALL_MAP base_size 1  number_of_tiles 516  elseif MEDIUM_MAP base_size 1  number_of_tiles 702  elseif LARGE_MAP base_size 2  number_of_tiles 994  elseif HUGE_MAP base_size 2  number_of_tiles 1203  else base_size 2  number_of_tiles 1432  endif land_position 42 6  left_border 29 right_border 45 bottom_border 81 clumping_factor 25 }
+L {  terrain_type  MUD base_elevation 3 zone 1 other_zone_avoidance_distance 18 if TINY_MAP base_size 1  number_of_tiles 393  elseif SMALL_MAP base_size 1  number_of_tiles 566  elseif MEDIUM_MAP base_size 1  number_of_tiles 770  elseif LARGE_MAP base_size 2  number_of_tiles 1092  elseif HUGE_MAP base_size 2  number_of_tiles 1321  else base_size 2  number_of_tiles 1572  endif land_position 22 2  left_border 8 right_border 64 bottom_border 84 clumping_factor 25 }
+L {  terrain_type  DLC_CRACKED zone 2 other_zone_avoidance_distance 4 if TINY_MAP base_size 3  number_of_tiles 40  elseif SMALL_MAP base_size 4  number_of_tiles 58  elseif MEDIUM_MAP base_size 4  number_of_tiles 78  elseif LARGE_MAP base_size 5  number_of_tiles 111  elseif HUGE_MAP base_size 6  number_of_tiles 134  else base_size 6  number_of_tiles 160  endif land_position 28 88  }
+L {  terrain_type  MUD base_elevation 2 zone 3 other_zone_avoidance_distance 14 if TINY_MAP base_size 1  number_of_tiles 354  elseif SMALL_MAP base_size 1  number_of_tiles 510  elseif MEDIUM_MAP base_size 1  number_of_tiles 694  elseif LARGE_MAP base_size 2  number_of_tiles 983  elseif HUGE_MAP base_size 2  number_of_tiles 1190  else base_size 2  number_of_tiles 1416  endif land_position 60 81  left_border 48 right_border 28 top_border 69 bottom_border 7 clumping_factor 25 }
+L {  terrain_type  MUD base_elevation 4 zone 3 other_zone_avoidance_distance 20 if TINY_MAP base_size 1  number_of_tiles 331  elseif SMALL_MAP base_size 1  number_of_tiles 477  elseif MEDIUM_MAP base_size 1  number_of_tiles 649  elseif LARGE_MAP base_size 2  number_of_tiles 919  elseif HUGE_MAP base_size 2  number_of_tiles 1113  else base_size 2  number_of_tiles 1324  endif land_position 79 51  left_border 68 right_border 10 top_border 40 bottom_border 38 clumping_factor 25 }
+L {  terrain_type  MUD base_elevation 7 zone 1 other_zone_avoidance_distance 19 if TINY_MAP base_size 1  number_of_tiles 363  elseif SMALL_MAP base_size 1  number_of_tiles 523  elseif MEDIUM_MAP base_size 1  number_of_tiles 711  elseif LARGE_MAP base_size 2  number_of_tiles 1008  elseif HUGE_MAP base_size 2  number_of_tiles 1220  else base_size 2  number_of_tiles 1452  endif land_position 35 12  left_border 22 right_border 52 bottom_border 75 clumping_factor 25 }
+L {  terrain_type  MUD base_elevation 9 zone 3 other_zone_avoidance_distance 22 if TINY_MAP base_size 1  number_of_tiles 356  elseif SMALL_MAP base_size 1  number_of_tiles 513  elseif MEDIUM_MAP base_size 1  number_of_tiles 698  elseif LARGE_MAP base_size 2  number_of_tiles 989  elseif HUGE_MAP base_size 2  number_of_tiles 1197  else base_size 2  number_of_tiles 1424  endif land_position 96 54  left_border 83 top_border 41 bottom_border 33 clumping_factor 25 }
+L {  terrain_type  MUD base_elevation 4 zone 3 other_zone_avoidance_distance 19 if TINY_MAP base_size 1  number_of_tiles 335  elseif SMALL_MAP base_size 1  number_of_tiles 482  elseif MEDIUM_MAP base_size 1  number_of_tiles 657  elseif LARGE_MAP base_size 2  number_of_tiles 931  elseif HUGE_MAP base_size 2  number_of_tiles 1126  else base_size 2  number_of_tiles 1340  endif land_position 76 55  left_border 65 right_border 13 top_border 44 bottom_border 34 clumping_factor 25 }
+L {  terrain_type  MUD base_elevation 3 zone 1 other_zone_avoidance_distance 15 if TINY_MAP base_size 1  number_of_tiles 397  elseif SMALL_MAP base_size 1  number_of_tiles 572  elseif MEDIUM_MAP base_size 1  number_of_tiles 778  elseif LARGE_MAP base_size 2  number_of_tiles 1103  elseif HUGE_MAP base_size 2  number_of_tiles 1334  else base_size 2  number_of_tiles 1588  endif land_position 12 9  right_border 74 bottom_border 77 clumping_factor 25 }
+L {  terrain_type  DLC_CRACKED zone 2 other_zone_avoidance_distance 4 if TINY_MAP base_size 3  number_of_tiles 40  elseif SMALL_MAP base_size 4  number_of_tiles 58  elseif MEDIUM_MAP base_size 4  number_of_tiles 78  elseif LARGE_MAP base_size 5  number_of_tiles 111  elseif HUGE_MAP base_size 6  number_of_tiles 134  else base_size 6  number_of_tiles 160  endif land_position 11 70  }
+L {  terrain_type  MUD base_elevation 4 zone 1 other_zone_avoidance_distance 13 if TINY_MAP base_size 1  number_of_tiles 378  elseif SMALL_MAP base_size 1  number_of_tiles 544  elseif MEDIUM_MAP base_size 1  number_of_tiles 741  elseif LARGE_MAP base_size 2  number_of_tiles 1050  elseif HUGE_MAP base_size 2  number_of_tiles 1271  else base_size 2  number_of_tiles 1512  endif land_position 7 27  right_border 80 top_border 14 bottom_border 60 clumping_factor 25 }
+L {  terrain_type  MUD base_elevation 2 zone 1 other_zone_avoidance_distance 14 if TINY_MAP base_size 1  number_of_tiles 398  elseif SMALL_MAP base_size 1  number_of_tiles 573  elseif MEDIUM_MAP base_size 1  number_of_tiles 780  elseif LARGE_MAP base_size 2  number_of_tiles 1106  elseif HUGE_MAP base_size 2  number_of_tiles 1338  else base_size 2  number_of_tiles 1592  endif land_position 8 11  right_border 78 bottom_border 75 clumping_factor 25 }
+L {  terrain_type  DLC_DESERTGRAVEL zone 1 other_zone_avoidance_distance 2 if TINY_MAP base_size 4  number_of_tiles 320  elseif SMALL_MAP base_size 5  number_of_tiles 461  elseif MEDIUM_MAP base_size 6  number_of_tiles 627  elseif LARGE_MAP base_size 7  number_of_tiles 889  elseif HUGE_MAP base_size 7  number_of_tiles 1076  else base_size 8  number_of_tiles 1280  endif land_position 34 56  left_border 26 right_border 58 top_border 48 bottom_border 36 clumping_factor 25 }
+L {  terrain_type  MUD base_elevation 5 zone 1 other_zone_avoidance_distance 14 if TINY_MAP base_size 1  number_of_tiles 376  elseif SMALL_MAP base_size 1  number_of_tiles 541  elseif MEDIUM_MAP base_size 1  number_of_tiles 737  elseif LARGE_MAP base_size 2  number_of_tiles 1044  elseif HUGE_MAP base_size 2  number_of_tiles 1264  else base_size 2  number_of_tiles 1504  endif land_position 13 25  right_border 74 top_border 12 bottom_border 62 clumping_factor 25 }
+L {  terrain_type  DLC_CRACKED zone 2 other_zone_avoidance_distance 4 if TINY_MAP base_size 3  number_of_tiles 40  elseif SMALL_MAP base_size 4  number_of_tiles 58  elseif MEDIUM_MAP base_size 4  number_of_tiles 78  elseif LARGE_MAP base_size 5  number_of_tiles 111  elseif HUGE_MAP base_size 6  number_of_tiles 134  else base_size 6  number_of_tiles 160  endif land_position 13 76  }
+L {  terrain_type  MUD base_elevation 3 zone 3 other_zone_avoidance_distance 18 if TINY_MAP base_size 1  number_of_tiles 339  elseif SMALL_MAP base_size 1  number_of_tiles 488  elseif MEDIUM_MAP base_size 1  number_of_tiles 664  elseif LARGE_MAP base_size 2  number_of_tiles 942  elseif HUGE_MAP base_size 2  number_of_tiles 1139  else base_size 2  number_of_tiles 1356  endif land_position 72 59  left_border 61 right_border 17 top_border 48 bottom_border 30 clumping_factor 25 }
+L {  terrain_type  MUD base_elevation 8 zone 3 other_zone_avoidance_distance 21 if TINY_MAP base_size 1  number_of_tiles 358  elseif SMALL_MAP base_size 1  number_of_tiles 516  elseif MEDIUM_MAP base_size 1  number_of_tiles 702  elseif LARGE_MAP base_size 2  number_of_tiles 994  elseif HUGE_MAP base_size 2  number_of_tiles 1203  else base_size 2  number_of_tiles 1432  endif land_position 93 57  left_border 80 top_border 44 bottom_border 30 clumping_factor 25 }
+L {  terrain_type  MUD base_elevation 3 zone 1 other_zone_avoidance_distance 17 if TINY_MAP base_size 1  number_of_tiles 342  elseif SMALL_MAP base_size 1  number_of_tiles 492  elseif MEDIUM_MAP base_size 1  number_of_tiles 670  elseif LARGE_MAP base_size 2  number_of_tiles 950  elseif HUGE_MAP base_size 2  number_of_tiles 1150  else base_size 2  number_of_tiles 1368  endif land_position 36 30  left_border 24 right_border 52 top_border 18 bottom_border 58 clumping_factor 25 }
 L {  terrain_type  SNOW base_elevation 8 zone 4 other_zone_avoidance_distance 6 if TINY_MAP base_size 2  number_of_tiles 60  elseif SMALL_MAP base_size 2  number_of_tiles 86  elseif MEDIUM_MAP base_size 3  number_of_tiles 118  elseif LARGE_MAP base_size 3  number_of_tiles 167  elseif HUGE_MAP base_size 4  number_of_tiles 202  else base_size 4  number_of_tiles 240  endif land_position 99 0  left_border 95 bottom_border 96 clumping_factor 25 }
-L {  terrain_type  MUD base_elevation 9 zone 3 other_zone_avoidance_distance 22 if TINY_MAP base_size 1  number_of_tiles 256  elseif SMALL_MAP base_size 1  number_of_tiles 369  elseif MEDIUM_MAP base_size 1  number_of_tiles 502  elseif LARGE_MAP base_size 2  number_of_tiles 711  elseif HUGE_MAP base_size 2  number_of_tiles 860  else base_size 2  number_of_tiles 1024  endif land_position 85 55  left_border 72 right_border 2 top_border 42 bottom_border 32 clumping_factor 25 }
-L {  terrain_type  MUD base_elevation 10 zone 1 other_zone_avoidance_distance 24 if TINY_MAP base_size 1  number_of_tiles 252  elseif SMALL_MAP base_size 1  number_of_tiles 363  elseif MEDIUM_MAP base_size 1  number_of_tiles 494  elseif LARGE_MAP base_size 2  number_of_tiles 700  elseif HUGE_MAP base_size 2  number_of_tiles 847  else base_size 2  number_of_tiles 1008  endif land_position 51 8  left_border 38 right_border 36 bottom_border 79 clumping_factor 25 }
-L {  terrain_type  MUD base_elevation 5 zone 3 other_zone_avoidance_distance 17 if TINY_MAP base_size 1  number_of_tiles 300  elseif SMALL_MAP base_size 1  number_of_tiles 432  elseif MEDIUM_MAP base_size 1  number_of_tiles 588  elseif LARGE_MAP base_size 2  number_of_tiles 833  elseif HUGE_MAP base_size 2  number_of_tiles 1008  else base_size 2  number_of_tiles 1200  endif land_position 95 91  left_border 80 top_border 76 clumping_factor 25 }
-L {  terrain_type  MUD base_elevation 5 zone 3 other_zone_avoidance_distance 25 if TINY_MAP base_size 1  number_of_tiles 225  elseif SMALL_MAP base_size 1  number_of_tiles 324  elseif MEDIUM_MAP base_size 1  number_of_tiles 441  elseif LARGE_MAP base_size 2  number_of_tiles 625  elseif HUGE_MAP base_size 2  number_of_tiles 756  else base_size 2  number_of_tiles 900  endif land_position 84 34  left_border 73 right_border 5 top_border 23 bottom_border 55 clumping_factor 25 }
-L {  terrain_type  MUD base_elevation 11 zone 3 other_zone_avoidance_distance 26 if TINY_MAP base_size 1  number_of_tiles 248  elseif SMALL_MAP base_size 1  number_of_tiles 357  elseif MEDIUM_MAP base_size 1  number_of_tiles 486  elseif LARGE_MAP base_size 2  number_of_tiles 689  elseif HUGE_MAP base_size 2  number_of_tiles 834  else base_size 2  number_of_tiles 992  endif land_position 98 41  left_border 86 top_border 29 bottom_border 47 clumping_factor 25 }
-L {  terrain_type  DLC_CRACKED zone 2 other_zone_avoidance_distance 4 if TINY_MAP base_size 3  number_of_tiles 40  elseif SMALL_MAP base_size 4  number_of_tiles 58  elseif MEDIUM_MAP base_size 4  number_of_tiles 78  elseif LARGE_MAP base_size 5  number_of_tiles 111  elseif HUGE_MAP base_size 6  number_of_tiles 134  else base_size 6  number_of_tiles 160  endif land_position 12 73  }
-L {  terrain_type  MUD base_elevation 10 zone 3 other_zone_avoidance_distance 25 if TINY_MAP base_size 1  number_of_tiles 250  elseif SMALL_MAP base_size 1  number_of_tiles 360  elseif MEDIUM_MAP base_size 1  number_of_tiles 490  elseif LARGE_MAP base_size 2  number_of_tiles 694  elseif HUGE_MAP base_size 2  number_of_tiles 840  else base_size 2  number_of_tiles 1000  endif land_position 95 44  left_border 82 top_border 31 bottom_border 43 clumping_factor 25 }
-L {  terrain_type  MUD base_elevation 3 zone 1 other_zone_avoidance_distance 18 if TINY_MAP base_size 1  number_of_tiles 282  elseif SMALL_MAP base_size 1  number_of_tiles 406  elseif MEDIUM_MAP base_size 1  number_of_tiles 553  elseif LARGE_MAP base_size 2  number_of_tiles 783  elseif HUGE_MAP base_size 2  number_of_tiles 948  else base_size 2  number_of_tiles 1128  endif land_position 20 14  left_border 6 right_border 66 bottom_border 72 clumping_factor 25 }
-L {  terrain_type  MUD base_elevation 5 zone 3 other_zone_avoidance_distance 19 if TINY_MAP base_size 1  number_of_tiles 300  elseif SMALL_MAP base_size 1  number_of_tiles 432  elseif MEDIUM_MAP base_size 1  number_of_tiles 588  elseif LARGE_MAP base_size 2  number_of_tiles 833  elseif HUGE_MAP base_size 2  number_of_tiles 1008  else base_size 2  number_of_tiles 1200  endif land_position 99 84  left_border 84 top_border 69 bottom_border 1 clumping_factor 25 }
-L {  terrain_type  MUD base_elevation 2 zone 3 other_zone_avoidance_distance 14 if TINY_MAP base_size 1  number_of_tiles 285  elseif SMALL_MAP base_size 1  number_of_tiles 410  elseif MEDIUM_MAP base_size 1  number_of_tiles 559  elseif LARGE_MAP base_size 2  number_of_tiles 792  elseif HUGE_MAP base_size 2  number_of_tiles 958  else base_size 2  number_of_tiles 1140  endif land_position 76 97  left_border 62 right_border 10 top_border 83 clumping_factor 25 }
-L {  terrain_type  MUD base_elevation 4 zone 3 other_zone_avoidance_distance 20 if TINY_MAP base_size 1  number_of_tiles 280  elseif SMALL_MAP base_size 1  number_of_tiles 403  elseif MEDIUM_MAP base_size 1  number_of_tiles 549  elseif LARGE_MAP base_size 2  number_of_tiles 778  elseif HUGE_MAP base_size 2  number_of_tiles 941  else base_size 2  number_of_tiles 1120  endif land_position 90 72  left_border 76 top_border 58 bottom_border 14 clumping_factor 25 }
-L {  terrain_type  MUD base_elevation 8 zone 1 other_zone_avoidance_distance 20 if TINY_MAP base_size 1  number_of_tiles 259  elseif SMALL_MAP base_size 1  number_of_tiles 373  elseif MEDIUM_MAP base_size 1  number_of_tiles 508  elseif LARGE_MAP base_size 2  number_of_tiles 719  elseif HUGE_MAP base_size 2  number_of_tiles 871  else base_size 2  number_of_tiles 1036  endif land_position 37 20  left_border 24 right_border 50 top_border 7 bottom_border 67 clumping_factor 25 }
-L {  terrain_type  MUD base_elevation 3 zone 3 other_zone_avoidance_distance 14 if TINY_MAP base_size 1  number_of_tiles 300  elseif SMALL_MAP base_size 1  number_of_tiles 432  elseif MEDIUM_MAP base_size 1  number_of_tiles 588  elseif LARGE_MAP base_size 2  number_of_tiles 833  elseif HUGE_MAP base_size 2  number_of_tiles 1008  else base_size 2  number_of_tiles 1200  endif land_position 91 100  left_border 76 top_border 85 clumping_factor 25 }
-L {  terrain_type  MUD base_elevation 4 zone 3 other_zone_avoidance_distance 20 if TINY_MAP base_size 1  number_of_tiles 239  elseif SMALL_MAP base_size 1  number_of_tiles 344  elseif MEDIUM_MAP base_size 1  number_of_tiles 468  elseif LARGE_MAP base_size 2  number_of_tiles 664  elseif HUGE_MAP base_size 2  number_of_tiles 803  else base_size 2  number_of_tiles 956  endif land_position 67 53  left_border 56 right_border 22 top_border 42 bottom_border 36 clumping_factor 25 }
-L {  terrain_type  DLC_CRACKED zone 2 other_zone_avoidance_distance 4 if TINY_MAP base_size 3  number_of_tiles 40  elseif SMALL_MAP base_size 4  number_of_tiles 58  elseif MEDIUM_MAP base_size 4  number_of_tiles 78  elseif LARGE_MAP base_size 5  number_of_tiles 111  elseif HUGE_MAP base_size 6  number_of_tiles 134  else base_size 6  number_of_tiles 160  endif land_position 11 71  }
-L {  terrain_type  MUD base_elevation 5 zone 1 other_zone_avoidance_distance 19 if TINY_MAP base_size 1  number_of_tiles 300  elseif SMALL_MAP base_size 1  number_of_tiles 432  elseif MEDIUM_MAP base_size 1  number_of_tiles 588  elseif LARGE_MAP base_size 2  number_of_tiles 833  elseif HUGE_MAP base_size 2  number_of_tiles 1008  else base_size 2  number_of_tiles 1200  endif land_position 15 -0  right_border 70 bottom_border 85 clumping_factor 25 }
-L {  terrain_type  DLC_CRACKED zone 2 other_zone_avoidance_distance 4 if TINY_MAP base_size 3  number_of_tiles 40  elseif SMALL_MAP base_size 4  number_of_tiles 58  elseif MEDIUM_MAP base_size 4  number_of_tiles 78  elseif LARGE_MAP base_size 5  number_of_tiles 111  elseif HUGE_MAP base_size 6  number_of_tiles 134  else base_size 6  number_of_tiles 160  endif land_position 29 89  }
-L {  terrain_type  MUD base_elevation 4 zone 3 other_zone_avoidance_distance 15 if TINY_MAP base_size 1  number_of_tiles 300  elseif SMALL_MAP base_size 1  number_of_tiles 432  elseif MEDIUM_MAP base_size 1  number_of_tiles 588  elseif LARGE_MAP base_size 2  number_of_tiles 833  elseif HUGE_MAP base_size 2  number_of_tiles 1008  else base_size 2  number_of_tiles 1200  endif land_position 92 97  left_border 77 top_border 82 clumping_factor 25 }
-L {  terrain_type  MUD base_elevation 3 zone 3 other_zone_avoidance_distance 16 if TINY_MAP base_size 1  number_of_tiles 283  elseif SMALL_MAP base_size 1  number_of_tiles 408  elseif MEDIUM_MAP base_size 1  number_of_tiles 555  elseif LARGE_MAP base_size 2  number_of_tiles 786  elseif HUGE_MAP base_size 2  number_of_tiles 951  else base_size 2  number_of_tiles 1132  endif land_position 80 87  left_border 66 right_border 6 top_border 73 clumping_factor 25 }
-L {  terrain_type  MUD base_elevation 5 zone 1 other_zone_avoidance_distance 26 if TINY_MAP base_size 1  number_of_tiles 223  elseif SMALL_MAP base_size 1  number_of_tiles 321  elseif MEDIUM_MAP base_size 1  number_of_tiles 437  elseif LARGE_MAP base_size 2  number_of_tiles 619  elseif HUGE_MAP base_size 2  number_of_tiles 750  else base_size 2  number_of_tiles 892  endif land_position 68 12  left_border 57 right_border 21 top_border 1 bottom_border 77 clumping_factor 25 }
-L {  terrain_type  MUD base_elevation 5 zone 1 other_zone_avoidance_distance 18 if TINY_MAP base_size 1  number_of_tiles 300  elseif SMALL_MAP base_size 1  number_of_tiles 432  elseif MEDIUM_MAP base_size 1  number_of_tiles 588  elseif LARGE_MAP base_size 2  number_of_tiles 833  elseif HUGE_MAP base_size 2  number_of_tiles 1008  else base_size 2  number_of_tiles 1200  endif land_position 12 2  right_border 73 bottom_border 83 clumping_factor 25 }
-L {  terrain_type  MUD base_elevation 3 zone 3 other_zone_avoidance_distance 18 if TINY_MAP base_size 1  number_of_tiles 282  elseif SMALL_MAP base_size 1  number_of_tiles 406  elseif MEDIUM_MAP base_size 1  number_of_tiles 553  elseif LARGE_MAP base_size 2  number_of_tiles 783  elseif HUGE_MAP base_size 2  number_of_tiles 948  else base_size 2  number_of_tiles 1128  endif land_position 85 79  left_border 71 right_border 1 top_border 65 bottom_border 7 clumping_factor 25 }
-L {  terrain_type  MUD base_elevation 3 zone 1 other_zone_avoidance_distance 15 if TINY_MAP base_size 1  number_of_tiles 284  elseif SMALL_MAP base_size 1  number_of_tiles 409  elseif MEDIUM_MAP base_size 1  number_of_tiles 557  elseif LARGE_MAP base_size 2  number_of_tiles 789  elseif HUGE_MAP base_size 2  number_of_tiles 955  else base_size 2  number_of_tiles 1136  endif land_position 7 21  right_border 79 top_border 7 bottom_border 65 clumping_factor 25 }
-L {  terrain_type  MUD base_elevation 3 zone 1 other_zone_avoidance_distance 17 if TINY_MAP base_size 1  number_of_tiles 282  elseif SMALL_MAP base_size 1  number_of_tiles 406  elseif MEDIUM_MAP base_size 1  number_of_tiles 553  elseif LARGE_MAP base_size 2  number_of_tiles 783  elseif HUGE_MAP base_size 2  number_of_tiles 948  else base_size 2  number_of_tiles 1128  endif land_position 16 17  left_border 2 right_border 70 top_border 3 bottom_border 69 clumping_factor 25 }
-L {  terrain_type  MUD base_elevation 7 zone 3 other_zone_avoidance_distance 18 if TINY_MAP base_size 1  number_of_tiles 263  elseif SMALL_MAP base_size 1  number_of_tiles 379  elseif MEDIUM_MAP base_size 1  number_of_tiles 515  elseif LARGE_MAP base_size 2  number_of_tiles 731  elseif HUGE_MAP base_size 2  number_of_tiles 884  else base_size 2  number_of_tiles 1052  endif land_position 72 71  left_border 59 right_border 15 top_border 58 bottom_border 16 clumping_factor 25 }
-L {  terrain_type  MUD base_elevation 4 zone 3 other_zone_avoidance_distance 22 if TINY_MAP base_size 1  number_of_tiles 234  elseif SMALL_MAP base_size 1  number_of_tiles 337  elseif MEDIUM_MAP base_size 1  number_of_tiles 459  elseif LARGE_MAP base_size 2  number_of_tiles 650  elseif HUGE_MAP base_size 2  number_of_tiles 787  else base_size 2  number_of_tiles 936  endif land_position 74 45  left_border 63 right_border 15 top_border 34 bottom_border 44 clumping_factor 25 }
-L {  terrain_type  MUD base_elevation 4 zone 1 other_zone_avoidance_distance 21 if TINY_MAP base_size 1  number_of_tiles 279  elseif SMALL_MAP base_size 1  number_of_tiles 402  elseif MEDIUM_MAP base_size 1  number_of_tiles 547  elseif LARGE_MAP base_size 2  number_of_tiles 775  elseif HUGE_MAP base_size 2  number_of_tiles 938  else base_size 2  number_of_tiles 1116  endif land_position 31 6  left_border 17 right_border 55 bottom_border 80 clumping_factor 25 }
-L {  terrain_type  MUD base_elevation 5 zone 1 other_zone_avoidance_distance 15 if TINY_MAP base_size 1  number_of_tiles 268  elseif SMALL_MAP base_size 1  number_of_tiles 386  elseif MEDIUM_MAP base_size 1  number_of_tiles 525  elseif LARGE_MAP base_size 2  number_of_tiles 744  elseif HUGE_MAP base_size 2  number_of_tiles 901  else base_size 2  number_of_tiles 1072  endif land_position 12 35  right_border 75 top_border 22 bottom_border 52 clumping_factor 25 }
-L {  terrain_type  MUD base_elevation 4 zone 3 other_zone_avoidance_distance 21 if TINY_MAP base_size 1  number_of_tiles 279  elseif SMALL_MAP base_size 1  number_of_tiles 402  elseif MEDIUM_MAP base_size 1  number_of_tiles 547  elseif LARGE_MAP base_size 2  number_of_tiles 775  elseif HUGE_MAP base_size 2  number_of_tiles 938  else base_size 2  number_of_tiles 1116  endif land_position 93 68  left_border 79 top_border 54 bottom_border 18 clumping_factor 25 }
-L {  terrain_type  MUD base_elevation 9 zone 1 other_zone_avoidance_distance 22 if TINY_MAP base_size 1  number_of_tiles 256  elseif SMALL_MAP base_size 1  number_of_tiles 369  elseif MEDIUM_MAP base_size 1  number_of_tiles 502  elseif LARGE_MAP base_size 2  number_of_tiles 711  elseif HUGE_MAP base_size 2  number_of_tiles 860  else base_size 2  number_of_tiles 1024  endif land_position 44 14  left_border 31 right_border 43 top_border 1 bottom_border 73 clumping_factor 25 }
-L {  terrain_type  MUD base_elevation 6 zone 1 other_zone_avoidance_distance 27 if TINY_MAP base_size 1  number_of_tiles 220  elseif SMALL_MAP base_size 1  number_of_tiles 317  elseif MEDIUM_MAP base_size 1  number_of_tiles 431  elseif LARGE_MAP base_size 2  number_of_tiles 611  elseif HUGE_MAP base_size 2  number_of_tiles 739  else base_size 2  number_of_tiles 880  endif land_position 72 9  left_border 61 right_border 17 bottom_border 80 clumping_factor 25 }
-L {  terrain_type  DLC_CRACKED zone 2 other_zone_avoidance_distance 4 if TINY_MAP base_size 3  number_of_tiles 40  elseif SMALL_MAP base_size 4  number_of_tiles 58  elseif MEDIUM_MAP base_size 4  number_of_tiles 78  elseif LARGE_MAP base_size 5  number_of_tiles 111  elseif HUGE_MAP base_size 6  number_of_tiles 134  else base_size 6  number_of_tiles 160  endif land_position 21 85  }
-L {  terrain_type  MUD base_elevation 10 zone 3 other_zone_avoidance_distance 24 if TINY_MAP base_size 1  number_of_tiles 252  elseif SMALL_MAP base_size 1  number_of_tiles 363  elseif MEDIUM_MAP base_size 1  number_of_tiles 494  elseif LARGE_MAP base_size 2  number_of_tiles 700  elseif HUGE_MAP base_size 2  number_of_tiles 847  else base_size 2  number_of_tiles 1008  endif land_position 91 48  left_border 78 top_border 35 bottom_border 39 clumping_factor 25 }
-L {  terrain_type  MUD base_elevation 4 zone 3 other_zone_avoidance_distance 19 if TINY_MAP base_size 1  number_of_tiles 281  elseif SMALL_MAP base_size 1  number_of_tiles 405  elseif MEDIUM_MAP base_size 1  number_of_tiles 551  elseif LARGE_MAP base_size 2  number_of_tiles 781  elseif HUGE_MAP base_size 2  number_of_tiles 944  else base_size 2  number_of_tiles 1124  endif land_position 87 75  left_border 73 top_border 61 bottom_border 11 clumping_factor 25 }
-L {  terrain_type  DLC_DESERTGRAVEL zone 3 other_zone_avoidance_distance 2 if TINY_MAP base_size 4  number_of_tiles 280  elseif SMALL_MAP base_size 5  number_of_tiles 403  elseif MEDIUM_MAP base_size 6  number_of_tiles 549  elseif LARGE_MAP base_size 7  number_of_tiles 778  elseif HUGE_MAP base_size 7  number_of_tiles 941  else base_size 8  number_of_tiles 1120  endif land_position 44 66  left_border 36 right_border 48 top_border 58 bottom_border 26 clumping_factor 25 }
-L {  terrain_type  DLC_CRACKED zone 2 other_zone_avoidance_distance 4 if TINY_MAP base_size 3  number_of_tiles 40  elseif SMALL_MAP base_size 4  number_of_tiles 58  elseif MEDIUM_MAP base_size 4  number_of_tiles 78  elseif LARGE_MAP base_size 5  number_of_tiles 111  elseif HUGE_MAP base_size 6  number_of_tiles 134  else base_size 6  number_of_tiles 160  endif land_position 14 77  }
-L {  terrain_type  MUD base_elevation 3 zone 3 other_zone_avoidance_distance 16 if TINY_MAP base_size 1  number_of_tiles 250  elseif SMALL_MAP base_size 1  number_of_tiles 360  elseif MEDIUM_MAP base_size 1  number_of_tiles 490  elseif LARGE_MAP base_size 2  number_of_tiles 694  elseif HUGE_MAP base_size 2  number_of_tiles 840  else base_size 2  number_of_tiles 1000  endif land_position 53 74  left_border 41 right_border 35 top_border 62 bottom_border 14 clumping_factor 25 }
-L {  terrain_type  MUD base_elevation 5 zone 1 other_zone_avoidance_distance 14 if TINY_MAP base_size 1  number_of_tiles 270  elseif SMALL_MAP base_size 1  number_of_tiles 389  elseif MEDIUM_MAP base_size 1  number_of_tiles 529  elseif LARGE_MAP base_size 2  number_of_tiles 750  elseif HUGE_MAP base_size 2  number_of_tiles 908  else base_size 2  number_of_tiles 1080  endif land_position 6 37  right_border 81 top_border 24 bottom_border 50 clumping_factor 25 }
-L {  terrain_type  MUD base_elevation 5 zone 3 other_zone_avoidance_distance 23 if TINY_MAP base_size 1  number_of_tiles 277  elseif SMALL_MAP base_size 1  number_of_tiles 399  elseif MEDIUM_MAP base_size 1  number_of_tiles 543  elseif LARGE_MAP base_size 2  number_of_tiles 769  elseif HUGE_MAP base_size 2  number_of_tiles 931  else base_size 2  number_of_tiles 1108  endif land_position 99 61  left_border 85 top_border 47 bottom_border 25 clumping_factor 25 }
-L {  terrain_type  DLC_CRACKED zone 2 other_zone_avoidance_distance 4 if TINY_MAP base_size 3  number_of_tiles 40  elseif SMALL_MAP base_size 4  number_of_tiles 58  elseif MEDIUM_MAP base_size 4  number_of_tiles 78  elseif LARGE_MAP base_size 5  number_of_tiles 111  elseif HUGE_MAP base_size 6  number_of_tiles 134  else base_size 6  number_of_tiles 160  endif land_position 13 75  }
-L {  terrain_type  MUD base_elevation 5 zone 3 other_zone_avoidance_distance 14 if TINY_MAP base_size 1  number_of_tiles 270  elseif SMALL_MAP base_size 1  number_of_tiles 389  elseif MEDIUM_MAP base_size 1  number_of_tiles 529  elseif LARGE_MAP base_size 2  number_of_tiles 750  elseif HUGE_MAP base_size 2  number_of_tiles 908  else base_size 2  number_of_tiles 1080  endif land_position 62 93  left_border 49 right_border 25 top_border 80 clumping_factor 25 }
-L {  terrain_type  DLC_CRACKED zone 2 other_zone_avoidance_distance 4 if TINY_MAP base_size 3  number_of_tiles 40  elseif SMALL_MAP base_size 4  number_of_tiles 58  elseif MEDIUM_MAP base_size 4  number_of_tiles 78  elseif LARGE_MAP base_size 5  number_of_tiles 111  elseif HUGE_MAP base_size 6  number_of_tiles 134  else base_size 6  number_of_tiles 160  endif land_position 11 68  }
-L {  terrain_type  MUD base_elevation 11 zone 1 other_zone_avoidance_distance 26 if TINY_MAP base_size 1  number_of_tiles 248  elseif SMALL_MAP base_size 1  number_of_tiles 357  elseif MEDIUM_MAP base_size 1  number_of_tiles 486  elseif LARGE_MAP base_size 2  number_of_tiles 689  elseif HUGE_MAP base_size 2  number_of_tiles 834  else base_size 2  number_of_tiles 992  endif land_position 58 1  left_border 46 right_border 30 bottom_border 87 clumping_factor 25 }
-L {  terrain_type  MUD base_elevation 3 zone 3 other_zone_avoidance_distance 15 if TINY_MAP base_size 1  number_of_tiles 284  elseif SMALL_MAP base_size 1  number_of_tiles 409  elseif MEDIUM_MAP base_size 1  number_of_tiles 557  elseif LARGE_MAP base_size 2  number_of_tiles 789  elseif HUGE_MAP base_size 2  number_of_tiles 955  else base_size 2  number_of_tiles 1136  endif land_position 78 92  left_border 64 right_border 8 top_border 78 clumping_factor 25 }
-L {  terrain_type  MUD base_elevation 3 zone 1 other_zone_avoidance_distance 15 if TINY_MAP base_size 1  number_of_tiles 253  elseif SMALL_MAP base_size 1  number_of_tiles 364  elseif MEDIUM_MAP base_size 1  number_of_tiles 496  elseif LARGE_MAP base_size 2  number_of_tiles 703  elseif HUGE_MAP base_size 2  number_of_tiles 850  else base_size 2  number_of_tiles 1012  endif land_position 17 49  left_border 5 right_border 71 top_border 37 bottom_border 39 clumping_factor 25 }
-L {  terrain_type  MUD base_elevation 2 zone 1 other_zone_avoidance_distance 14 if TINY_MAP base_size 1  number_of_tiles 285  elseif SMALL_MAP base_size 1  number_of_tiles 410  elseif MEDIUM_MAP base_size 1  number_of_tiles 559  elseif LARGE_MAP base_size 2  number_of_tiles 792  elseif HUGE_MAP base_size 2  number_of_tiles 958  else base_size 2  number_of_tiles 1140  endif land_position 2 23  right_border 84 top_border 9 bottom_border 63 clumping_factor 25 }
-L {  terrain_type  MUD base_elevation 3 zone 3 other_zone_avoidance_distance 18 if TINY_MAP base_size 1  number_of_tiles 245  elseif SMALL_MAP base_size 1  number_of_tiles 353  elseif MEDIUM_MAP base_size 1  number_of_tiles 480  elseif LARGE_MAP base_size 2  number_of_tiles 681  elseif HUGE_MAP base_size 2  number_of_tiles 823  else base_size 2  number_of_tiles 980  endif land_position 60 62  left_border 48 right_border 28 top_border 50 bottom_border 26 clumping_factor 25 }
-L {  terrain_type  MUD base_elevation 4 zone 3 other_zone_avoidance_distance 19 if TINY_MAP base_size 1  number_of_tiles 242  elseif SMALL_MAP base_size 1  number_of_tiles 348  elseif MEDIUM_MAP base_size 1  number_of_tiles 474  elseif LARGE_MAP base_size 2  number_of_tiles 672  elseif HUGE_MAP base_size 2  number_of_tiles 813  else base_size 2  number_of_tiles 968  endif land_position 63 57  left_border 52 right_border 26 top_border 46 bottom_border 32 clumping_factor 25 }
-L {  terrain_type  MUD base_elevation 5 zone 1 other_zone_avoidance_distance 23 if TINY_MAP base_size 1  number_of_tiles 277  elseif SMALL_MAP base_size 1  number_of_tiles 399  elseif MEDIUM_MAP base_size 1  number_of_tiles 543  elseif LARGE_MAP base_size 2  number_of_tiles 769  elseif HUGE_MAP base_size 2  number_of_tiles 931  else base_size 2  number_of_tiles 1108  endif land_position 38 -0  left_border 24 right_border 48 bottom_border 86 clumping_factor 25 }
-L {  terrain_type  MUD base_elevation 4 zone 1 other_zone_avoidance_distance 20 if TINY_MAP base_size 1  number_of_tiles 280  elseif SMALL_MAP base_size 1  number_of_tiles 403  elseif MEDIUM_MAP base_size 1  number_of_tiles 549  elseif LARGE_MAP base_size 2  number_of_tiles 778  elseif HUGE_MAP base_size 2  number_of_tiles 941  else base_size 2  number_of_tiles 1120  endif land_position 27 9  left_border 13 right_border 59 bottom_border 77 clumping_factor 25 }
-L {  terrain_type  MUD base_elevation 9 zone 1 other_zone_avoidance_distance 23 if TINY_MAP base_size 1  number_of_tiles 254  elseif SMALL_MAP base_size 1  number_of_tiles 366  elseif MEDIUM_MAP base_size 1  number_of_tiles 498  elseif LARGE_MAP base_size 2  number_of_tiles 706  elseif HUGE_MAP base_size 2  number_of_tiles 854  else base_size 2  number_of_tiles 1016  endif land_position 48 11  left_border 35 right_border 39 bottom_border 76 clumping_factor 25 }
-L {  terrain_type  MUD base_elevation 5 zone 3 other_zone_avoidance_distance 24 if TINY_MAP base_size 1  number_of_tiles 228  elseif SMALL_MAP base_size 1  number_of_tiles 328  elseif MEDIUM_MAP base_size 1  number_of_tiles 447  elseif LARGE_MAP base_size 2  number_of_tiles 633  elseif HUGE_MAP base_size 2  number_of_tiles 766  else base_size 2  number_of_tiles 912  endif land_position 81 38  left_border 70 right_border 8 top_border 27 bottom_border 51 clumping_factor 25 }
-L {  terrain_type  MUD base_elevation 4 zone 3 other_zone_avoidance_distance 22 if TINY_MAP base_size 1  number_of_tiles 278  elseif SMALL_MAP base_size 1  number_of_tiles 400  elseif MEDIUM_MAP base_size 1  number_of_tiles 545  elseif LARGE_MAP base_size 2  number_of_tiles 772  elseif HUGE_MAP base_size 2  number_of_tiles 934  else base_size 2  number_of_tiles 1112  endif land_position 96 65  left_border 82 top_border 51 bottom_border 21 clumping_factor 25 }
-L {  terrain_type  MUD base_elevation 8 zone 1 other_zone_avoidance_distance 21 if TINY_MAP base_size 1  number_of_tiles 258  elseif SMALL_MAP base_size 1  number_of_tiles 372  elseif MEDIUM_MAP base_size 1  number_of_tiles 506  elseif LARGE_MAP base_size 2  number_of_tiles 717  elseif HUGE_MAP base_size 2  number_of_tiles 867  else base_size 2  number_of_tiles 1032  endif land_position 40 17  left_border 27 right_border 47 top_border 4 bottom_border 70 clumping_factor 25 }
-L {  terrain_type  DLC_CRACKED zone 2 other_zone_avoidance_distance 4 if TINY_MAP base_size 3  number_of_tiles 40  elseif SMALL_MAP base_size 4  number_of_tiles 58  elseif MEDIUM_MAP base_size 4  number_of_tiles 78  elseif LARGE_MAP base_size 5  number_of_tiles 111  elseif HUGE_MAP base_size 6  number_of_tiles 134  else base_size 6  number_of_tiles 160  endif land_position 17 81  }
-L {  terrain_type  DLC_CRACKED zone 2 other_zone_avoidance_distance 4 if TINY_MAP base_size 3  number_of_tiles 40  elseif SMALL_MAP base_size 4  number_of_tiles 58  elseif MEDIUM_MAP base_size 4  number_of_tiles 78  elseif LARGE_MAP base_size 5  number_of_tiles 111  elseif HUGE_MAP base_size 6  number_of_tiles 134  else base_size 6  number_of_tiles 160  endif land_position 23 86  }
-L {  terrain_type  MUD base_elevation 6 zone 3 other_zone_avoidance_distance 16 if TINY_MAP base_size 1  number_of_tiles 267  elseif SMALL_MAP base_size 1  number_of_tiles 384  elseif MEDIUM_MAP base_size 1  number_of_tiles 523  elseif LARGE_MAP base_size 2  number_of_tiles 742  elseif HUGE_MAP base_size 2  number_of_tiles 897  else base_size 2  number_of_tiles 1068  endif land_position 66 81  left_border 53 right_border 21 top_border 68 bottom_border 6 clumping_factor 25 }
-L {  terrain_type  MUD base_elevation 5 zone 1 other_zone_avoidance_distance 17 if TINY_MAP base_size 1  number_of_tiles 300  elseif SMALL_MAP base_size 1  number_of_tiles 432  elseif MEDIUM_MAP base_size 1  number_of_tiles 588  elseif LARGE_MAP base_size 2  number_of_tiles 833  elseif HUGE_MAP base_size 2  number_of_tiles 1008  else base_size 2  number_of_tiles 1200  endif land_position 8 4  right_border 77 bottom_border 81 clumping_factor 25 }
-L {  terrain_type  MUD base_elevation 3 zone 1 other_zone_avoidance_distance 16 if TINY_MAP base_size 1  number_of_tiles 250  elseif SMALL_MAP base_size 1  number_of_tiles 360  elseif MEDIUM_MAP base_size 1  number_of_tiles 490  elseif LARGE_MAP base_size 2  number_of_tiles 694  elseif HUGE_MAP base_size 2  number_of_tiles 840  else base_size 2  number_of_tiles 1000  endif land_position 25 46  left_border 13 right_border 63 top_border 34 bottom_border 42 clumping_factor 25 }
-L {  terrain_type  DLC_CRACKED zone 2 other_zone_avoidance_distance 4 if TINY_MAP base_size 3  number_of_tiles 40  elseif SMALL_MAP base_size 4  number_of_tiles 58  elseif MEDIUM_MAP base_size 4  number_of_tiles 78  elseif LARGE_MAP base_size 5  number_of_tiles 111  elseif HUGE_MAP base_size 6  number_of_tiles 134  else base_size 6  number_of_tiles 160  endif land_position 27 88  }
-L {  terrain_type  MUD base_elevation 8 zone 3 other_zone_avoidance_distance 20 if TINY_MAP base_size 1  number_of_tiles 259  elseif SMALL_MAP base_size 1  number_of_tiles 373  elseif MEDIUM_MAP base_size 1  number_of_tiles 508  elseif LARGE_MAP base_size 2  number_of_tiles 719  elseif HUGE_MAP base_size 2  number_of_tiles 871  else base_size 2  number_of_tiles 1036  endif land_position 79 62  left_border 66 right_border 8 top_border 49 bottom_border 25 clumping_factor 25 }
-L {  terrain_type  MUD base_elevation 6 zone 1 other_zone_avoidance_distance 17 if TINY_MAP base_size 1  number_of_tiles 265  elseif SMALL_MAP base_size 1  number_of_tiles 382  elseif MEDIUM_MAP base_size 1  number_of_tiles 519  elseif LARGE_MAP base_size 2  number_of_tiles 736  elseif HUGE_MAP base_size 2  number_of_tiles 891  else base_size 2  number_of_tiles 1060  endif land_position 23 30  left_border 10 right_border 64 top_border 17 bottom_border 57 clumping_factor 25 }
-L {  terrain_type  MUD base_elevation 7 zone 3 other_zone_avoidance_distance 19 if TINY_MAP base_size 1  number_of_tiles 261  elseif SMALL_MAP base_size 1  number_of_tiles 376  elseif MEDIUM_MAP base_size 1  number_of_tiles 512  elseif LARGE_MAP base_size 2  number_of_tiles 725  elseif HUGE_MAP base_size 2  number_of_tiles 877  else base_size 2  number_of_tiles 1044  endif land_position 75 66  left_border 62 right_border 12 top_border 53 bottom_border 21 clumping_factor 25 }
-L {  terrain_type  DLC_CRACKED zone 2 other_zone_avoidance_distance 4 if TINY_MAP base_size 3  number_of_tiles 40  elseif SMALL_MAP base_size 4  number_of_tiles 58  elseif MEDIUM_MAP base_size 4  number_of_tiles 78  elseif LARGE_MAP base_size 5  number_of_tiles 111  elseif HUGE_MAP base_size 6  number_of_tiles 134  else base_size 6  number_of_tiles 160  endif land_position 25 87  }
-L {  terrain_type  MUD base_elevation 4 zone 3 other_zone_avoidance_distance 21 if TINY_MAP base_size 1  number_of_tiles 236  elseif SMALL_MAP base_size 1  number_of_tiles 340  elseif MEDIUM_MAP base_size 1  number_of_tiles 463  elseif LARGE_MAP base_size 2  number_of_tiles 656  elseif HUGE_MAP base_size 2  number_of_tiles 793  else base_size 2  number_of_tiles 944  endif land_position 70 49  left_border 59 right_border 19 top_border 38 bottom_border 40 clumping_factor 25 }
-L {  terrain_type  MUD base_elevation 4 zone 1 other_zone_avoidance_distance 20 if TINY_MAP base_size 1  number_of_tiles 239  elseif SMALL_MAP base_size 1  number_of_tiles 344  elseif MEDIUM_MAP base_size 1  number_of_tiles 468  elseif LARGE_MAP base_size 2  number_of_tiles 664  elseif HUGE_MAP base_size 2  number_of_tiles 803  else base_size 2  number_of_tiles 956  endif land_position 46 32  left_border 35 right_border 43 top_border 21 bottom_border 57 clumping_factor 25 }
-L {  terrain_type  MUD base_elevation 3 zone 3 other_zone_avoidance_distance 17 if TINY_MAP base_size 1  number_of_tiles 247  elseif SMALL_MAP base_size 1  number_of_tiles 356  elseif MEDIUM_MAP base_size 1  number_of_tiles 484  elseif LARGE_MAP base_size 2  number_of_tiles 686  elseif HUGE_MAP base_size 2  number_of_tiles 830  else base_size 2  number_of_tiles 988  endif land_position 56 68  left_border 44 right_border 32 top_border 56 bottom_border 20 clumping_factor 25 }
-L {  terrain_type  MUD base_elevation 5 zone 3 other_zone_avoidance_distance 15 if TINY_MAP base_size 1  number_of_tiles 268  elseif SMALL_MAP base_size 1  number_of_tiles 386  elseif MEDIUM_MAP base_size 1  number_of_tiles 525  elseif LARGE_MAP base_size 2  number_of_tiles 744  elseif HUGE_MAP base_size 2  number_of_tiles 901  else base_size 2  number_of_tiles 1072  endif land_position 64 87  left_border 51 right_border 23 top_border 74 clumping_factor 25 }
-L {  terrain_type  MUD base_elevation 3 zone 3 other_zone_avoidance_distance 15 if TINY_MAP base_size 1  number_of_tiles 253  elseif SMALL_MAP base_size 1  number_of_tiles 364  elseif MEDIUM_MAP base_size 1  number_of_tiles 496  elseif LARGE_MAP base_size 2  number_of_tiles 703  elseif HUGE_MAP base_size 2  number_of_tiles 850  else base_size 2  number_of_tiles 1012  endif land_position 50 82  left_border 38 right_border 38 top_border 70 bottom_border 6 clumping_factor 25 }
-L {  terrain_type  MUD base_elevation 4 zone 1 other_zone_avoidance_distance 21 if TINY_MAP base_size 1  number_of_tiles 236  elseif SMALL_MAP base_size 1  number_of_tiles 340  elseif MEDIUM_MAP base_size 1  number_of_tiles 463  elseif LARGE_MAP base_size 2  number_of_tiles 656  elseif HUGE_MAP base_size 2  number_of_tiles 793  else base_size 2  number_of_tiles 944  endif land_position 50 29  left_border 39 right_border 39 top_border 18 bottom_border 60 clumping_factor 25 }
-L {  terrain_type  MUD base_elevation 8 zone 3 other_zone_avoidance_distance 21 if TINY_MAP base_size 1  number_of_tiles 258  elseif SMALL_MAP base_size 1  number_of_tiles 372  elseif MEDIUM_MAP base_size 1  number_of_tiles 506  elseif LARGE_MAP base_size 2  number_of_tiles 717  elseif HUGE_MAP base_size 2  number_of_tiles 867  else base_size 2  number_of_tiles 1032  endif land_position 82 59  left_border 69 right_border 5 top_border 46 bottom_border 28 clumping_factor 25 }
-L {  terrain_type  DLC_CRACKED zone 2 other_zone_avoidance_distance 4 if TINY_MAP base_size 3  number_of_tiles 40  elseif SMALL_MAP base_size 4  number_of_tiles 58  elseif MEDIUM_MAP base_size 4  number_of_tiles 78  elseif LARGE_MAP base_size 5  number_of_tiles 111  elseif HUGE_MAP base_size 6  number_of_tiles 134  else base_size 6  number_of_tiles 160  endif land_position 15 79  }
-L {  terrain_type  MUD base_elevation 4 zone 1 other_zone_avoidance_distance 22 if TINY_MAP base_size 1  number_of_tiles 234  elseif SMALL_MAP base_size 1  number_of_tiles 337  elseif MEDIUM_MAP base_size 1  number_of_tiles 459  elseif LARGE_MAP base_size 2  number_of_tiles 650  elseif HUGE_MAP base_size 2  number_of_tiles 787  else base_size 2  number_of_tiles 936  endif land_position 54 25  left_border 43 right_border 35 top_border 14 bottom_border 64 clumping_factor 25 }
-L {  terrain_type  MUD base_elevation 4 zone 1 other_zone_avoidance_distance 22 if TINY_MAP base_size 1  number_of_tiles 278  elseif SMALL_MAP base_size 1  number_of_tiles 400  elseif MEDIUM_MAP base_size 1  number_of_tiles 545  elseif LARGE_MAP base_size 2  number_of_tiles 772  elseif HUGE_MAP base_size 2  number_of_tiles 934  else base_size 2  number_of_tiles 1112  endif land_position 34 3  left_border 20 right_border 52 bottom_border 83 clumping_factor 25 }
-L {  terrain_type  MUD base_elevation 3 zone 1 other_zone_avoidance_distance 16 if TINY_MAP base_size 1  number_of_tiles 283  elseif SMALL_MAP base_size 1  number_of_tiles 408  elseif MEDIUM_MAP base_size 1  number_of_tiles 555  elseif LARGE_MAP base_size 2  number_of_tiles 786  elseif HUGE_MAP base_size 2  number_of_tiles 951  else base_size 2  number_of_tiles 1132  endif land_position 12 19  right_border 74 top_border 5 bottom_border 67 clumping_factor 25 }
-L {  terrain_type  MUD base_elevation 4 zone 1 other_zone_avoidance_distance 15 if TINY_MAP base_size 1  number_of_tiles 300  elseif SMALL_MAP base_size 1  number_of_tiles 432  elseif MEDIUM_MAP base_size 1  number_of_tiles 588  elseif LARGE_MAP base_size 2  number_of_tiles 833  elseif HUGE_MAP base_size 2  number_of_tiles 1008  else base_size 2  number_of_tiles 1200  endif land_position 2 7  right_border 83 bottom_border 78 clumping_factor 25 }
-L {  terrain_type  MUD base_elevation 5 zone 3 other_zone_avoidance_distance 23 if TINY_MAP base_size 1  number_of_tiles 231  elseif SMALL_MAP base_size 1  number_of_tiles 333  elseif MEDIUM_MAP base_size 1  number_of_tiles 453  elseif LARGE_MAP base_size 2  number_of_tiles 642  elseif HUGE_MAP base_size 2  number_of_tiles 776  else base_size 2  number_of_tiles 924  endif land_position 77 41  left_border 66 right_border 12 top_border 30 bottom_border 48 clumping_factor 25 }
-L {  terrain_type  MUD base_elevation 6 zone 1 other_zone_avoidance_distance 16 if TINY_MAP base_size 1  number_of_tiles 267  elseif SMALL_MAP base_size 1  number_of_tiles 384  elseif MEDIUM_MAP base_size 1  number_of_tiles 523  elseif LARGE_MAP base_size 2  number_of_tiles 742  elseif HUGE_MAP base_size 2  number_of_tiles 897  else base_size 2  number_of_tiles 1068  endif land_position 18 33  left_border 5 right_border 69 top_border 20 bottom_border 54 clumping_factor 25 }
-L {  terrain_type  MUD base_elevation 2 zone 3 other_zone_avoidance_distance 14 if TINY_MAP base_size 1  number_of_tiles 255  elseif SMALL_MAP base_size 1  number_of_tiles 367  elseif MEDIUM_MAP base_size 1  number_of_tiles 500  elseif LARGE_MAP base_size 2  number_of_tiles 708  elseif HUGE_MAP base_size 2  number_of_tiles 857  else base_size 2  number_of_tiles 1020  endif land_position 47 90  left_border 35 right_border 41 top_border 78 clumping_factor 25 }
-L {  terrain_type  DLC_CRACKED zone 2 other_zone_avoidance_distance 4 if TINY_MAP base_size 3  number_of_tiles 40  elseif SMALL_MAP base_size 4  number_of_tiles 58  elseif MEDIUM_MAP base_size 4  number_of_tiles 78  elseif LARGE_MAP base_size 5  number_of_tiles 111  elseif HUGE_MAP base_size 6  number_of_tiles 134  else base_size 6  number_of_tiles 160  endif land_position 19 83  }
-L {  terrain_type  MUD base_elevation 5 zone 1 other_zone_avoidance_distance 25 if TINY_MAP base_size 1  number_of_tiles 225  elseif SMALL_MAP base_size 1  number_of_tiles 324  elseif MEDIUM_MAP base_size 1  number_of_tiles 441  elseif LARGE_MAP base_size 2  number_of_tiles 625  elseif HUGE_MAP base_size 2  number_of_tiles 756  else base_size 2  number_of_tiles 900  endif land_position 65 15  left_border 54 right_border 24 top_border 4 bottom_border 74 clumping_factor 25 }
-L {  terrain_type  MUD base_elevation 3 zone 3 other_zone_avoidance_distance 17 if TINY_MAP base_size 1  number_of_tiles 282  elseif SMALL_MAP base_size 1  number_of_tiles 406  elseif MEDIUM_MAP base_size 1  number_of_tiles 553  elseif LARGE_MAP base_size 2  number_of_tiles 783  elseif HUGE_MAP base_size 2  number_of_tiles 948  else base_size 2  number_of_tiles 1128  endif land_position 82 83  left_border 68 right_border 4 top_border 69 bottom_border 3 clumping_factor 25 }
-L {  terrain_type  MUD base_elevation 7 zone 1 other_zone_avoidance_distance 18 if TINY_MAP base_size 1  number_of_tiles 263  elseif SMALL_MAP base_size 1  number_of_tiles 379  elseif MEDIUM_MAP base_size 1  number_of_tiles 515  elseif LARGE_MAP base_size 2  number_of_tiles 731  elseif HUGE_MAP base_size 2  number_of_tiles 884  else base_size 2  number_of_tiles 1052  endif land_position 28 27  left_border 15 right_border 59 top_border 14 bottom_border 60 clumping_factor 25 }
-L {  terrain_type  MUD base_elevation 4 zone 1 other_zone_avoidance_distance 19 if TINY_MAP base_size 1  number_of_tiles 242  elseif SMALL_MAP base_size 1  number_of_tiles 348  elseif MEDIUM_MAP base_size 1  number_of_tiles 474  elseif LARGE_MAP base_size 2  number_of_tiles 672  elseif HUGE_MAP base_size 2  number_of_tiles 813  else base_size 2  number_of_tiles 968  endif land_position 42 36  left_border 31 right_border 47 top_border 25 bottom_border 53 clumping_factor 25 }
+L {  terrain_type  MUD base_elevation 3 zone 3 other_zone_avoidance_distance 17 if TINY_MAP base_size 1  number_of_tiles 342  elseif SMALL_MAP base_size 1  number_of_tiles 492  elseif MEDIUM_MAP base_size 1  number_of_tiles 670  elseif LARGE_MAP base_size 2  number_of_tiles 950  elseif HUGE_MAP base_size 2  number_of_tiles 1150  else base_size 2  number_of_tiles 1368  endif land_position 69 63  left_border 57 right_border 19 top_border 51 bottom_border 25 clumping_factor 25 }
+L {  terrain_type  MUD base_elevation 3 zone 3 other_zone_avoidance_distance 16 if TINY_MAP base_size 1  number_of_tiles 346  elseif SMALL_MAP base_size 1  number_of_tiles 498  elseif MEDIUM_MAP base_size 1  number_of_tiles 678  elseif LARGE_MAP base_size 2  number_of_tiles 961  elseif HUGE_MAP base_size 2  number_of_tiles 1163  else base_size 2  number_of_tiles 1384  endif land_position 66 69  left_border 54 right_border 22 top_border 57 bottom_border 19 clumping_factor 25 }
+L {  terrain_type  MUD base_elevation 7 zone 1 other_zone_avoidance_distance 18 if TINY_MAP base_size 1  number_of_tiles 366  elseif SMALL_MAP base_size 1  number_of_tiles 527  elseif MEDIUM_MAP base_size 1  number_of_tiles 717  elseif LARGE_MAP base_size 2  number_of_tiles 1017  elseif HUGE_MAP base_size 2  number_of_tiles 1230  else base_size 2  number_of_tiles 1464  endif land_position 31 14  left_border 18 right_border 56 top_border 1 bottom_border 73 clumping_factor 25 }
+L {  terrain_type  DLC_CRACKED zone 2 other_zone_avoidance_distance 4 if TINY_MAP base_size 3  number_of_tiles 40  elseif SMALL_MAP base_size 4  number_of_tiles 58  elseif MEDIUM_MAP base_size 4  number_of_tiles 78  elseif LARGE_MAP base_size 5  number_of_tiles 111  elseif HUGE_MAP base_size 6  number_of_tiles 134  else base_size 6  number_of_tiles 160  endif land_position 13 74  }
+L {  terrain_type  DLC_CRACKED zone 2 other_zone_avoidance_distance 4 if TINY_MAP base_size 3  number_of_tiles 40  elseif SMALL_MAP base_size 4  number_of_tiles 58  elseif MEDIUM_MAP base_size 4  number_of_tiles 78  elseif LARGE_MAP base_size 5  number_of_tiles 111  elseif HUGE_MAP base_size 6  number_of_tiles 134  else base_size 6  number_of_tiles 160  endif land_position 10 65  }
+L {  terrain_type  MUD base_elevation 9 zone 1 other_zone_avoidance_distance 22 if TINY_MAP base_size 1  number_of_tiles 356  elseif SMALL_MAP base_size 1  number_of_tiles 513  elseif MEDIUM_MAP base_size 1  number_of_tiles 698  elseif LARGE_MAP base_size 2  number_of_tiles 989  elseif HUGE_MAP base_size 2  number_of_tiles 1197  else base_size 2  number_of_tiles 1424  endif land_position 45 3  left_border 32 right_border 42 bottom_border 84 clumping_factor 25 }
+L {  terrain_type  MUD base_elevation 3 zone 3 other_zone_avoidance_distance 18 if TINY_MAP base_size 1  number_of_tiles 393  elseif SMALL_MAP base_size 1  number_of_tiles 566  elseif MEDIUM_MAP base_size 1  number_of_tiles 770  elseif LARGE_MAP base_size 2  number_of_tiles 1092  elseif HUGE_MAP base_size 2  number_of_tiles 1321  else base_size 2  number_of_tiles 1572  endif land_position 97 77  left_border 83 top_border 63 bottom_border 9 clumping_factor 25 }
+L {  terrain_type  DLC_CRACKED zone 2 other_zone_avoidance_distance 4 if TINY_MAP base_size 3  number_of_tiles 40  elseif SMALL_MAP base_size 4  number_of_tiles 58  elseif MEDIUM_MAP base_size 4  number_of_tiles 78  elseif LARGE_MAP base_size 5  number_of_tiles 111  elseif HUGE_MAP base_size 6  number_of_tiles 134  else base_size 6  number_of_tiles 160  endif land_position 24 87  }
+L {  terrain_type  MUD base_elevation 3 zone 1 other_zone_avoidance_distance 15 if TINY_MAP base_size 1  number_of_tiles 350  elseif SMALL_MAP base_size 1  number_of_tiles 504  elseif MEDIUM_MAP base_size 1  number_of_tiles 686  elseif LARGE_MAP base_size 2  number_of_tiles 972  elseif HUGE_MAP base_size 2  number_of_tiles 1176  else base_size 2  number_of_tiles 1400  endif land_position 25 36  left_border 13 right_border 63 top_border 24 bottom_border 52 clumping_factor 25 }
+L {  terrain_type  MUD base_elevation 4 zone 1 other_zone_avoidance_distance 19 if TINY_MAP base_size 1  number_of_tiles 392  elseif SMALL_MAP base_size 1  number_of_tiles 564  elseif MEDIUM_MAP base_size 1  number_of_tiles 768  elseif LARGE_MAP base_size 2  number_of_tiles 1089  elseif HUGE_MAP base_size 2  number_of_tiles 1318  else base_size 2  number_of_tiles 1568  endif land_position 26 -0  left_border 12 right_border 60 bottom_border 86 clumping_factor 25 }
+L {  terrain_type  MUD base_elevation 2 zone 1 other_zone_avoidance_distance 12 if TINY_MAP base_size 1  number_of_tiles 361  elseif SMALL_MAP base_size 1  number_of_tiles 520  elseif MEDIUM_MAP base_size 1  number_of_tiles 708  elseif LARGE_MAP base_size 2  number_of_tiles 1003  elseif HUGE_MAP base_size 2  number_of_tiles 1213  else base_size 2  number_of_tiles 1444  endif land_position 1 42  right_border 87 top_border 30 bottom_border 46 clumping_factor 25 }
+L {  terrain_type  DLC_CRACKED zone 2 other_zone_avoidance_distance 4 if TINY_MAP base_size 3  number_of_tiles 40  elseif SMALL_MAP base_size 4  number_of_tiles 58  elseif MEDIUM_MAP base_size 4  number_of_tiles 78  elseif LARGE_MAP base_size 5  number_of_tiles 111  elseif HUGE_MAP base_size 6  number_of_tiles 134  else base_size 6  number_of_tiles 160  endif land_position 21 84  }
+L {  terrain_type  DLC_CRACKED zone 2 other_zone_avoidance_distance 4 if TINY_MAP base_size 3  number_of_tiles 40  elseif SMALL_MAP base_size 4  number_of_tiles 58  elseif MEDIUM_MAP base_size 4  number_of_tiles 78  elseif LARGE_MAP base_size 5  number_of_tiles 111  elseif HUGE_MAP base_size 6  number_of_tiles 134  else base_size 6  number_of_tiles 160  endif land_position 15 78  }
+L {  terrain_type  MUD base_elevation 5 zone 3 other_zone_avoidance_distance 26 if TINY_MAP base_size 1  number_of_tiles 308  elseif SMALL_MAP base_size 1  number_of_tiles 444  elseif MEDIUM_MAP base_size 1  number_of_tiles 604  elseif LARGE_MAP base_size 2  number_of_tiles 856  elseif HUGE_MAP base_size 2  number_of_tiles 1035  else base_size 2  number_of_tiles 1232  endif land_position 97 31  left_border 86 top_border 20 bottom_border 58 clumping_factor 25 }
+L {  terrain_type  MUD base_elevation 5 zone 1 other_zone_avoidance_distance 25 if TINY_MAP base_size 1  number_of_tiles 312  elseif SMALL_MAP base_size 1  number_of_tiles 449  elseif MEDIUM_MAP base_size 1  number_of_tiles 612  elseif LARGE_MAP base_size 2  number_of_tiles 867  elseif HUGE_MAP base_size 2  number_of_tiles 1049  else base_size 2  number_of_tiles 1248  endif land_position 65 5  left_border 54 right_border 24 bottom_border 84 clumping_factor 25 }
+L {  terrain_type  MUD base_elevation 4 zone 1 other_zone_avoidance_distance 12 if TINY_MAP base_size 1  number_of_tiles 381  elseif SMALL_MAP base_size 1  number_of_tiles 549  elseif MEDIUM_MAP base_size 1  number_of_tiles 747  elseif LARGE_MAP base_size 2  number_of_tiles 1058  elseif HUGE_MAP base_size 2  number_of_tiles 1281  else base_size 2  number_of_tiles 1524  endif land_position -0 28  right_border 87 top_border 15 bottom_border 59 clumping_factor 25 }
+L {  terrain_type  MUD base_elevation 3 zone 3 other_zone_avoidance_distance 15 if TINY_MAP base_size 1  number_of_tiles 350  elseif SMALL_MAP base_size 1  number_of_tiles 504  elseif MEDIUM_MAP base_size 1  number_of_tiles 686  elseif LARGE_MAP base_size 2  number_of_tiles 972  elseif HUGE_MAP base_size 2  number_of_tiles 1176  else base_size 2  number_of_tiles 1400  endif land_position 63 74  left_border 51 right_border 25 top_border 62 bottom_border 14 clumping_factor 25 }
+L {  terrain_type  MUD base_elevation 5 zone 1 other_zone_avoidance_distance 15 if TINY_MAP base_size 1  number_of_tiles 373  elseif SMALL_MAP base_size 1  number_of_tiles 537  elseif MEDIUM_MAP base_size 1  number_of_tiles 731  elseif LARGE_MAP base_size 2  number_of_tiles 1036  elseif HUGE_MAP base_size 2  number_of_tiles 1254  else base_size 2  number_of_tiles 1492  endif land_position 18 23  left_border 5 right_border 69 top_border 10 bottom_border 64 clumping_factor 25 }
+L {  terrain_type  MUD base_elevation 2 zone 1 other_zone_avoidance_distance 13 if TINY_MAP base_size 1  number_of_tiles 399  elseif SMALL_MAP base_size 1  number_of_tiles 575  elseif MEDIUM_MAP base_size 1  number_of_tiles 782  elseif LARGE_MAP base_size 2  number_of_tiles 1108  elseif HUGE_MAP base_size 2  number_of_tiles 1341  else base_size 2  number_of_tiles 1596  endif land_position 3 12  right_border 83 bottom_border 74 clumping_factor 25 }
+L {  terrain_type  MUD base_elevation 7 zone 3 other_zone_avoidance_distance 18 if TINY_MAP base_size 1  number_of_tiles 366  elseif SMALL_MAP base_size 1  number_of_tiles 527  elseif MEDIUM_MAP base_size 1  number_of_tiles 717  elseif LARGE_MAP base_size 2  number_of_tiles 1017  elseif HUGE_MAP base_size 2  number_of_tiles 1230  else base_size 2  number_of_tiles 1464  endif land_position 85 68  left_border 72 right_border 2 top_border 55 bottom_border 19 clumping_factor 25 }
+L {  terrain_type  MUD base_elevation 8 zone 3 other_zone_avoidance_distance 20 if TINY_MAP base_size 1  number_of_tiles 361  elseif SMALL_MAP base_size 1  number_of_tiles 520  elseif MEDIUM_MAP base_size 1  number_of_tiles 708  elseif LARGE_MAP base_size 2  number_of_tiles 1003  elseif HUGE_MAP base_size 2  number_of_tiles 1213  else base_size 2  number_of_tiles 1444  endif land_position 90 60  left_border 77 top_border 47 bottom_border 27 clumping_factor 25 }
+L {  terrain_type  MUD base_elevation 6 zone 1 other_zone_avoidance_distance 17 if TINY_MAP base_size 1  number_of_tiles 368  elseif SMALL_MAP base_size 1  number_of_tiles 530  elseif MEDIUM_MAP base_size 1  number_of_tiles 721  elseif LARGE_MAP base_size 2  number_of_tiles 1022  elseif HUGE_MAP base_size 2  number_of_tiles 1237  else base_size 2  number_of_tiles 1472  endif land_position 27 17  left_border 14 right_border 60 top_border 4 bottom_border 70 clumping_factor 25 }
+L {  terrain_type  DLC_CRACKED zone 2 other_zone_avoidance_distance 4 if TINY_MAP base_size 3  number_of_tiles 40  elseif SMALL_MAP base_size 4  number_of_tiles 58  elseif MEDIUM_MAP base_size 4  number_of_tiles 78  elseif LARGE_MAP base_size 5  number_of_tiles 111  elseif HUGE_MAP base_size 6  number_of_tiles 134  else base_size 6  number_of_tiles 160  endif land_position 26 87  }
+L {  terrain_type  MUD base_elevation 2 zone 1 other_zone_avoidance_distance 14 if TINY_MAP base_size 1  number_of_tiles 354  elseif SMALL_MAP base_size 1  number_of_tiles 510  elseif MEDIUM_MAP base_size 1  number_of_tiles 694  elseif LARGE_MAP base_size 2  number_of_tiles 983  elseif HUGE_MAP base_size 2  number_of_tiles 1190  else base_size 2  number_of_tiles 1416  endif land_position 18 39  left_border 6 right_border 70 top_border 27 bottom_border 49 clumping_factor 25 }
+L {  terrain_type  MUD base_elevation 2 zone 3 other_zone_avoidance_distance 12 if TINY_MAP base_size 1  number_of_tiles 361  elseif SMALL_MAP base_size 1  number_of_tiles 520  elseif MEDIUM_MAP base_size 1  number_of_tiles 708  elseif LARGE_MAP base_size 2  number_of_tiles 1003  elseif HUGE_MAP base_size 2  number_of_tiles 1213  else base_size 2  number_of_tiles 1444  endif land_position 57 98  left_border 45 right_border 31 top_border 86 clumping_factor 25 }
+L {  terrain_type  MUD base_elevation 2 zone 3 other_zone_avoidance_distance 13 if TINY_MAP base_size 1  number_of_tiles 358  elseif SMALL_MAP base_size 1  number_of_tiles 516  elseif MEDIUM_MAP base_size 1  number_of_tiles 702  elseif LARGE_MAP base_size 2  number_of_tiles 994  elseif HUGE_MAP base_size 2  number_of_tiles 1203  else base_size 2  number_of_tiles 1432  endif land_position 58 89  left_border 46 right_border 30 top_border 77 clumping_factor 25 }
+L {  terrain_type  MUD base_elevation 5 zone 1 other_zone_avoidance_distance 24 if TINY_MAP base_size 1  number_of_tiles 316  elseif SMALL_MAP base_size 1  number_of_tiles 455  elseif MEDIUM_MAP base_size 1  number_of_tiles 619  elseif LARGE_MAP base_size 2  number_of_tiles 878  elseif HUGE_MAP base_size 2  number_of_tiles 1062  else base_size 2  number_of_tiles 1264  endif land_position 62 8  left_border 51 right_border 27 bottom_border 81 clumping_factor 25 }
+L {  terrain_type  MUD base_elevation 3 zone 1 other_zone_avoidance_distance 17 if TINY_MAP base_size 1  number_of_tiles 394  elseif SMALL_MAP base_size 1  number_of_tiles 567  elseif MEDIUM_MAP base_size 1  number_of_tiles 772  elseif LARGE_MAP base_size 2  number_of_tiles 1094  elseif HUGE_MAP base_size 2  number_of_tiles 1324  else base_size 2  number_of_tiles 1576  endif land_position 19 5  left_border 5 right_border 67 bottom_border 81 clumping_factor 25 }
+L {  terrain_type  MUD base_elevation 5 zone 1 other_zone_avoidance_distance 23 if TINY_MAP base_size 1  number_of_tiles 319  elseif SMALL_MAP base_size 1  number_of_tiles 459  elseif MEDIUM_MAP base_size 1  number_of_tiles 625  elseif LARGE_MAP base_size 2  number_of_tiles 886  elseif HUGE_MAP base_size 2  number_of_tiles 1072  else base_size 2  number_of_tiles 1276  endif land_position 58 11  left_border 47 right_border 31 bottom_border 78 clumping_factor 25 }
+L {  terrain_type  MUD base_elevation 8 zone 1 other_zone_avoidance_distance 20 if TINY_MAP base_size 1  number_of_tiles 361  elseif SMALL_MAP base_size 1  number_of_tiles 520  elseif MEDIUM_MAP base_size 1  number_of_tiles 708  elseif LARGE_MAP base_size 2  number_of_tiles 1003  elseif HUGE_MAP base_size 2  number_of_tiles 1213  else base_size 2  number_of_tiles 1444  endif land_position 39 9  left_border 26 right_border 48 bottom_border 78 clumping_factor 25 }
+L {  terrain_type  MUD base_elevation 4 zone 3 other_zone_avoidance_distance 22 if TINY_MAP base_size 1  number_of_tiles 323  elseif SMALL_MAP base_size 1  number_of_tiles 465  elseif MEDIUM_MAP base_size 1  number_of_tiles 633  elseif LARGE_MAP base_size 2  number_of_tiles 897  elseif HUGE_MAP base_size 2  number_of_tiles 1086  else base_size 2  number_of_tiles 1292  endif land_position 85 44  left_border 74 right_border 4 top_border 33 bottom_border 45 clumping_factor 25 }
+L {  terrain_type  DLC_CRACKED zone 2 other_zone_avoidance_distance 4 if TINY_MAP base_size 3  number_of_tiles 40  elseif SMALL_MAP base_size 4  number_of_tiles 58  elseif MEDIUM_MAP base_size 4  number_of_tiles 78  elseif LARGE_MAP base_size 5  number_of_tiles 111  elseif HUGE_MAP base_size 6  number_of_tiles 134  else base_size 6  number_of_tiles 160  endif land_position 30 89  }
+L {  terrain_type  DLC_CRACKED zone 2 other_zone_avoidance_distance 4 if TINY_MAP base_size 3  number_of_tiles 40  elseif SMALL_MAP base_size 4  number_of_tiles 58  elseif MEDIUM_MAP base_size 4  number_of_tiles 78  elseif LARGE_MAP base_size 5  number_of_tiles 111  elseif HUGE_MAP base_size 6  number_of_tiles 134  else base_size 6  number_of_tiles 160  endif land_position 33 90  }
+L {  terrain_type  MUD base_elevation 2 zone 3 other_zone_avoidance_distance 13 if TINY_MAP base_size 1  number_of_tiles 399  elseif SMALL_MAP base_size 1  number_of_tiles 575  elseif MEDIUM_MAP base_size 1  number_of_tiles 782  elseif LARGE_MAP base_size 2  number_of_tiles 1108  elseif HUGE_MAP base_size 2  number_of_tiles 1341  else base_size 2  number_of_tiles 1596  endif land_position 87 96  left_border 73 top_border 82 clumping_factor 25 }
+L {  terrain_type  DLC_DESERTGRAVEL zone 3 other_zone_avoidance_distance 2 if TINY_MAP base_size 4  number_of_tiles 320  elseif SMALL_MAP base_size 5  number_of_tiles 461  elseif MEDIUM_MAP base_size 6  number_of_tiles 627  elseif LARGE_MAP base_size 7  number_of_tiles 889  elseif HUGE_MAP base_size 7  number_of_tiles 1076  else base_size 8  number_of_tiles 1280  endif land_position 44 66  left_border 36 right_border 48 top_border 58 bottom_border 26 clumping_factor 25 }
+L {  terrain_type  MUD base_elevation 4 zone 3 other_zone_avoidance_distance 19 if TINY_MAP base_size 1  number_of_tiles 392  elseif SMALL_MAP base_size 1  number_of_tiles 564  elseif MEDIUM_MAP base_size 1  number_of_tiles 768  elseif LARGE_MAP base_size 2  number_of_tiles 1089  elseif HUGE_MAP base_size 2  number_of_tiles 1318  else base_size 2  number_of_tiles 1568  endif land_position 99 73  left_border 85 top_border 59 bottom_border 13 clumping_factor 25 }
+L {  terrain_type  MUD base_elevation 3 zone 3 other_zone_avoidance_distance 16 if TINY_MAP base_size 1  number_of_tiles 395  elseif SMALL_MAP base_size 1  number_of_tiles 569  elseif MEDIUM_MAP base_size 1  number_of_tiles 774  elseif LARGE_MAP base_size 2  number_of_tiles 1097  elseif HUGE_MAP base_size 2  number_of_tiles 1328  else base_size 2  number_of_tiles 1580  endif land_position 92 84  left_border 78 top_border 70 bottom_border 2 clumping_factor 25 }
 L {  terrain_type  GRASS zone 4 other_zone_avoidance_distance 1 if TINY_MAP base_size 1  elseif SMALL_MAP base_size 1  elseif MEDIUM_MAP base_size 1  elseif LARGE_MAP base_size 2  elseif HUGE_MAP base_size 2  else base_size 2  endif land_position 0 99  clumping_factor 25 }
-L {  terrain_type  MUD base_elevation 7 zone 1 other_zone_avoidance_distance 19 if TINY_MAP base_size 1  number_of_tiles 261  elseif SMALL_MAP base_size 1  number_of_tiles 376  elseif MEDIUM_MAP base_size 1  number_of_tiles 512  elseif LARGE_MAP base_size 2  number_of_tiles 725  elseif HUGE_MAP base_size 2  number_of_tiles 877  else base_size 2  number_of_tiles 1044  endif land_position 33 24  left_border 20 right_border 54 top_border 11 bottom_border 63 clumping_factor 25 }
-L {  terrain_type  MUD base_elevation 6 zone 3 other_zone_avoidance_distance 27 if TINY_MAP base_size 1  number_of_tiles 220  elseif SMALL_MAP base_size 1  number_of_tiles 317  elseif MEDIUM_MAP base_size 1  number_of_tiles 431  elseif LARGE_MAP base_size 2  number_of_tiles 611  elseif HUGE_MAP base_size 2  number_of_tiles 739  else base_size 2  number_of_tiles 880  endif land_position 90 27  left_border 79 top_border 16 bottom_border 62 clumping_factor 25 }
-L {  terrain_type  DLC_DESERTGRAVEL zone 1 other_zone_avoidance_distance 2 if TINY_MAP base_size 4  number_of_tiles 280  elseif SMALL_MAP base_size 5  number_of_tiles 403  elseif MEDIUM_MAP base_size 6  number_of_tiles 549  elseif LARGE_MAP base_size 7  number_of_tiles 778  elseif HUGE_MAP base_size 7  number_of_tiles 941  else base_size 8  number_of_tiles 1120  endif land_position 34 56  left_border 26 right_border 58 top_border 48 bottom_border 36 clumping_factor 25 }
-L {  terrain_type  MUD base_elevation 4 zone 3 other_zone_avoidance_distance 16 if TINY_MAP base_size 1  number_of_tiles 300  elseif SMALL_MAP base_size 1  number_of_tiles 432  elseif MEDIUM_MAP base_size 1  number_of_tiles 588  elseif LARGE_MAP base_size 2  number_of_tiles 833  elseif HUGE_MAP base_size 2  number_of_tiles 1008  else base_size 2  number_of_tiles 1200  endif land_position 93 94  left_border 78 top_border 79 clumping_factor 25 }
+L {  terrain_type  MUD base_elevation 4 zone 1 other_zone_avoidance_distance 20 if TINY_MAP base_size 1  number_of_tiles 331  elseif SMALL_MAP base_size 1  number_of_tiles 477  elseif MEDIUM_MAP base_size 1  number_of_tiles 649  elseif LARGE_MAP base_size 2  number_of_tiles 919  elseif HUGE_MAP base_size 2  number_of_tiles 1113  else base_size 2  number_of_tiles 1324  endif land_position 48 20  left_border 37 right_border 41 top_border 9 bottom_border 69 clumping_factor 25 }
+L {  terrain_type  DLC_CRACKED zone 2 other_zone_avoidance_distance 4 if TINY_MAP base_size 3  number_of_tiles 40  elseif SMALL_MAP base_size 4  number_of_tiles 58  elseif MEDIUM_MAP base_size 4  number_of_tiles 78  elseif LARGE_MAP base_size 5  number_of_tiles 111  elseif HUGE_MAP base_size 6  number_of_tiles 134  else base_size 6  number_of_tiles 160  endif land_position 35 90  }
+L {  terrain_type  MUD base_elevation 4 zone 1 other_zone_avoidance_distance 22 if TINY_MAP base_size 1  number_of_tiles 323  elseif SMALL_MAP base_size 1  number_of_tiles 465  elseif MEDIUM_MAP base_size 1  number_of_tiles 633  elseif LARGE_MAP base_size 2  number_of_tiles 897  elseif HUGE_MAP base_size 2  number_of_tiles 1086  else base_size 2  number_of_tiles 1292  endif land_position 55 14  left_border 44 right_border 34 top_border 3 bottom_border 75 clumping_factor 25 }
+L {  terrain_type  MUD base_elevation 3 zone 3 other_zone_avoidance_distance 17 if TINY_MAP base_size 1  number_of_tiles 394  elseif SMALL_MAP base_size 1  number_of_tiles 567  elseif MEDIUM_MAP base_size 1  number_of_tiles 772  elseif LARGE_MAP base_size 2  number_of_tiles 1094  elseif HUGE_MAP base_size 2  number_of_tiles 1324  else base_size 2  number_of_tiles 1576  endif land_position 94 80  left_border 80 top_border 66 bottom_border 6 clumping_factor 25 }
+L {  terrain_type  DLC_CRACKED zone 2 other_zone_avoidance_distance 4 if TINY_MAP base_size 3  number_of_tiles 40  elseif SMALL_MAP base_size 4  number_of_tiles 58  elseif MEDIUM_MAP base_size 4  number_of_tiles 78  elseif LARGE_MAP base_size 5  number_of_tiles 111  elseif HUGE_MAP base_size 6  number_of_tiles 134  else base_size 6  number_of_tiles 160  endif land_position 18 82  }
+L {  terrain_type  MUD base_elevation 5 zone 3 other_zone_avoidance_distance 23 if TINY_MAP base_size 1  number_of_tiles 319  elseif SMALL_MAP base_size 1  number_of_tiles 459  elseif MEDIUM_MAP base_size 1  number_of_tiles 625  elseif LARGE_MAP base_size 2  number_of_tiles 886  elseif HUGE_MAP base_size 2  number_of_tiles 1072  else base_size 2  number_of_tiles 1276  endif land_position 88 41  left_border 77 right_border 1 top_border 30 bottom_border 48 clumping_factor 25 }
+L {  terrain_type  MUD base_elevation 6 zone 3 other_zone_avoidance_distance 16 if TINY_MAP base_size 1  number_of_tiles 371  elseif SMALL_MAP base_size 1  number_of_tiles 534  elseif MEDIUM_MAP base_size 1  number_of_tiles 727  elseif LARGE_MAP base_size 2  number_of_tiles 1031  elseif HUGE_MAP base_size 2  number_of_tiles 1247  else base_size 2  number_of_tiles 1484  endif land_position 79 76  left_border 66 right_border 8 top_border 63 bottom_border 11 clumping_factor 25 }
+L {  terrain_type  DLC_CRACKED zone 2 other_zone_avoidance_distance 4 if TINY_MAP base_size 3  number_of_tiles 40  elseif SMALL_MAP base_size 4  number_of_tiles 58  elseif MEDIUM_MAP base_size 4  number_of_tiles 78  elseif LARGE_MAP base_size 5  number_of_tiles 111  elseif HUGE_MAP base_size 6  number_of_tiles 134  else base_size 6  number_of_tiles 160  endif land_position 22 85  }
+L {  terrain_type  MUD base_elevation 5 zone 3 other_zone_avoidance_distance 24 if TINY_MAP base_size 1  number_of_tiles 316  elseif SMALL_MAP base_size 1  number_of_tiles 455  elseif MEDIUM_MAP base_size 1  number_of_tiles 619  elseif LARGE_MAP base_size 2  number_of_tiles 878  elseif HUGE_MAP base_size 2  number_of_tiles 1062  else base_size 2  number_of_tiles 1264  endif land_position 91 37  left_border 80 top_border 26 bottom_border 52 clumping_factor 25 }
+L {  terrain_type  MUD base_elevation 4 zone 1 other_zone_avoidance_distance 19 if TINY_MAP base_size 1  number_of_tiles 335  elseif SMALL_MAP base_size 1  number_of_tiles 482  elseif MEDIUM_MAP base_size 1  number_of_tiles 657  elseif LARGE_MAP base_size 2  number_of_tiles 931  elseif HUGE_MAP base_size 2  number_of_tiles 1126  else base_size 2  number_of_tiles 1340  endif land_position 44 23  left_border 33 right_border 45 top_border 12 bottom_border 66 clumping_factor 25 }
+L {  terrain_type  MUD base_elevation 2 zone 3 other_zone_avoidance_distance 14 if TINY_MAP base_size 1  number_of_tiles 398  elseif SMALL_MAP base_size 1  number_of_tiles 573  elseif MEDIUM_MAP base_size 1  number_of_tiles 780  elseif LARGE_MAP base_size 2  number_of_tiles 1106  elseif HUGE_MAP base_size 2  number_of_tiles 1338  else base_size 2  number_of_tiles 1592  endif land_position 88 91  left_border 74 top_border 77 clumping_factor 25 }
+L {  terrain_type  MUD base_elevation 4 zone 3 other_zone_avoidance_distance 13 if TINY_MAP base_size 1  number_of_tiles 378  elseif SMALL_MAP base_size 1  number_of_tiles 544  elseif MEDIUM_MAP base_size 1  number_of_tiles 741  elseif LARGE_MAP base_size 2  number_of_tiles 1050  elseif HUGE_MAP base_size 2  number_of_tiles 1271  else base_size 2  number_of_tiles 1512  endif land_position 72 92  left_border 59 right_border 15 top_border 79 clumping_factor 25 }
+L {  terrain_type  MUD base_elevation 6 zone 3 other_zone_avoidance_distance 17 if TINY_MAP base_size 1  number_of_tiles 368  elseif SMALL_MAP base_size 1  number_of_tiles 530  elseif MEDIUM_MAP base_size 1  number_of_tiles 721  elseif LARGE_MAP base_size 2  number_of_tiles 1022  elseif HUGE_MAP base_size 2  number_of_tiles 1237  else base_size 2  number_of_tiles 1472  endif land_position 82 72  left_border 69 right_border 5 top_border 59 bottom_border 15 clumping_factor 25 }
+L {  terrain_type  DLC_CRACKED zone 2 other_zone_avoidance_distance 4 if TINY_MAP base_size 3  number_of_tiles 40  elseif SMALL_MAP base_size 4  number_of_tiles 58  elseif MEDIUM_MAP base_size 4  number_of_tiles 78  elseif LARGE_MAP base_size 5  number_of_tiles 111  elseif HUGE_MAP base_size 6  number_of_tiles 134  else base_size 6  number_of_tiles 160  endif land_position 10 67  }
+L {  terrain_type  MUD base_elevation 4 zone 1 other_zone_avoidance_distance 21 if TINY_MAP base_size 1  number_of_tiles 327  elseif SMALL_MAP base_size 1  number_of_tiles 471  elseif MEDIUM_MAP base_size 1  number_of_tiles 641  elseif LARGE_MAP base_size 2  number_of_tiles 908  elseif HUGE_MAP base_size 2  number_of_tiles 1099  else base_size 2  number_of_tiles 1308  endif land_position 52 17  left_border 41 right_border 37 top_border 6 bottom_border 72 clumping_factor 25 }
+L {  terrain_type  MUD base_elevation 7 zone 3 other_zone_avoidance_distance 19 if TINY_MAP base_size 1  number_of_tiles 363  elseif SMALL_MAP base_size 1  number_of_tiles 523  elseif MEDIUM_MAP base_size 1  number_of_tiles 711  elseif LARGE_MAP base_size 2  number_of_tiles 1008  elseif HUGE_MAP base_size 2  number_of_tiles 1220  else base_size 2  number_of_tiles 1452  endif land_position 87 64  left_border 74 top_border 51 bottom_border 23 clumping_factor 25 }
+L {  terrain_type  DLC_CRACKED zone 2 other_zone_avoidance_distance 4 if TINY_MAP base_size 3  number_of_tiles 40  elseif SMALL_MAP base_size 4  number_of_tiles 58  elseif MEDIUM_MAP base_size 4  number_of_tiles 78  elseif LARGE_MAP base_size 5  number_of_tiles 111  elseif HUGE_MAP base_size 6  number_of_tiles 134  else base_size 6  number_of_tiles 160  endif land_position 19 83  }
+L {  terrain_type  MUD base_elevation 3 zone 3 other_zone_avoidance_distance 15 if TINY_MAP base_size 1  number_of_tiles 397  elseif SMALL_MAP base_size 1  number_of_tiles 572  elseif MEDIUM_MAP base_size 1  number_of_tiles 778  elseif LARGE_MAP base_size 2  number_of_tiles 1103  elseif HUGE_MAP base_size 2  number_of_tiles 1334  else base_size 2  number_of_tiles 1588  endif land_position 90 87  left_border 76 top_border 73 clumping_factor 25 }
+L {  terrain_type  MUD base_elevation 5 zone 3 other_zone_avoidance_distance 14 if TINY_MAP base_size 1  number_of_tiles 376  elseif SMALL_MAP base_size 1  number_of_tiles 541  elseif MEDIUM_MAP base_size 1  number_of_tiles 737  elseif LARGE_MAP base_size 2  number_of_tiles 1044  elseif HUGE_MAP base_size 2  number_of_tiles 1264  else base_size 2  number_of_tiles 1504  endif land_position 74 86  left_border 61 right_border 13 top_border 73 bottom_border 1 clumping_factor 25 }
+L {  terrain_type  DLC_CRACKED zone 2 other_zone_avoidance_distance 4 if TINY_MAP base_size 3  number_of_tiles 40  elseif SMALL_MAP base_size 4  number_of_tiles 58  elseif MEDIUM_MAP base_size 4  number_of_tiles 78  elseif LARGE_MAP base_size 5  number_of_tiles 111  elseif HUGE_MAP base_size 6  number_of_tiles 134  else base_size 6  number_of_tiles 160  endif land_position 17 81  }
+L {  terrain_type  MUD base_elevation 5 zone 3 other_zone_avoidance_distance 25 if TINY_MAP base_size 1  number_of_tiles 312  elseif SMALL_MAP base_size 1  number_of_tiles 449  elseif MEDIUM_MAP base_size 1  number_of_tiles 612  elseif LARGE_MAP base_size 2  number_of_tiles 867  elseif HUGE_MAP base_size 2  number_of_tiles 1049  else base_size 2  number_of_tiles 1248  endif land_position 94 34  left_border 83 top_border 23 bottom_border 55 clumping_factor 25 }
+L {  terrain_type  MUD base_elevation 6 zone 1 other_zone_avoidance_distance 16 if TINY_MAP base_size 1  number_of_tiles 371  elseif SMALL_MAP base_size 1  number_of_tiles 534  elseif MEDIUM_MAP base_size 1  number_of_tiles 727  elseif LARGE_MAP base_size 2  number_of_tiles 1031  elseif HUGE_MAP base_size 2  number_of_tiles 1247  else base_size 2  number_of_tiles 1484  endif land_position 23 20  left_border 10 right_border 64 top_border 7 bottom_border 67 clumping_factor 25 }
+L {  terrain_type  MUD base_elevation 3 zone 1 other_zone_avoidance_distance 16 if TINY_MAP base_size 1  number_of_tiles 346  elseif SMALL_MAP base_size 1  number_of_tiles 498  elseif MEDIUM_MAP base_size 1  number_of_tiles 678  elseif LARGE_MAP base_size 2  number_of_tiles 961  elseif HUGE_MAP base_size 2  number_of_tiles 1163  else base_size 2  number_of_tiles 1384  endif land_position 30 33  left_border 18 right_border 58 top_border 21 bottom_border 55 clumping_factor 25 }
+L {  terrain_type  DLC_CRACKED zone 2 other_zone_avoidance_distance 4 if TINY_MAP base_size 3  number_of_tiles 40  elseif SMALL_MAP base_size 4  number_of_tiles 58  elseif MEDIUM_MAP base_size 4  number_of_tiles 78  elseif LARGE_MAP base_size 5  number_of_tiles 111  elseif HUGE_MAP base_size 6  number_of_tiles 134  else base_size 6  number_of_tiles 160  endif land_position 16 79  }
+L {  terrain_type  DLC_CRACKED zone 2 other_zone_avoidance_distance 4 if TINY_MAP base_size 3  number_of_tiles 40  elseif SMALL_MAP base_size 4  number_of_tiles 58  elseif MEDIUM_MAP base_size 4  number_of_tiles 78  elseif LARGE_MAP base_size 5  number_of_tiles 111  elseif HUGE_MAP base_size 6  number_of_tiles 134  else base_size 6  number_of_tiles 160  endif land_position 12 72  }
+L {  terrain_type  MUD base_elevation 4 zone 3 other_zone_avoidance_distance 21 if TINY_MAP base_size 1  number_of_tiles 327  elseif SMALL_MAP base_size 1  number_of_tiles 471  elseif MEDIUM_MAP base_size 1  number_of_tiles 641  elseif LARGE_MAP base_size 2  number_of_tiles 908  elseif HUGE_MAP base_size 2  number_of_tiles 1099  else base_size 2  number_of_tiles 1308  endif land_position 82 47  left_border 71 right_border 7 top_border 36 bottom_border 42 clumping_factor 25 }
+L {  terrain_type  MUD base_elevation 9 zone 1 other_zone_avoidance_distance 23 if TINY_MAP base_size 1  number_of_tiles 353  elseif SMALL_MAP base_size 1  number_of_tiles 508  elseif MEDIUM_MAP base_size 1  number_of_tiles 692  elseif LARGE_MAP base_size 2  number_of_tiles 981  elseif HUGE_MAP base_size 2  number_of_tiles 1186  else base_size 2  number_of_tiles 1412  endif land_position 48 0  left_border 35 right_border 39 bottom_border 87 clumping_factor 25 }
+L {  terrain_type  MUD base_elevation 3 zone 1 other_zone_avoidance_distance 16 if TINY_MAP base_size 1  number_of_tiles 395  elseif SMALL_MAP base_size 1  number_of_tiles 569  elseif MEDIUM_MAP base_size 1  number_of_tiles 774  elseif LARGE_MAP base_size 2  number_of_tiles 1097  elseif HUGE_MAP base_size 2  number_of_tiles 1328  else base_size 2  number_of_tiles 1580  endif land_position 15 7  left_border 1 right_border 71 bottom_border 79 clumping_factor 25 }
+L {  terrain_type  MUD base_elevation 5 zone 3 other_zone_avoidance_distance 15 if TINY_MAP base_size 1  number_of_tiles 373  elseif SMALL_MAP base_size 1  number_of_tiles 537  elseif MEDIUM_MAP base_size 1  number_of_tiles 731  elseif LARGE_MAP base_size 2  number_of_tiles 1036  elseif HUGE_MAP base_size 2  number_of_tiles 1254  else base_size 2  number_of_tiles 1492  endif land_position 76 81  left_border 63 right_border 11 top_border 68 bottom_border 6 clumping_factor 25 }
+L {  terrain_type  MUD base_elevation 9 zone 3 other_zone_avoidance_distance 23 if TINY_MAP base_size 1  number_of_tiles 353  elseif SMALL_MAP base_size 1  number_of_tiles 508  elseif MEDIUM_MAP base_size 1  number_of_tiles 692  elseif LARGE_MAP base_size 2  number_of_tiles 981  elseif HUGE_MAP base_size 2  number_of_tiles 1186  else base_size 2  number_of_tiles 1412  endif land_position 99 51  left_border 86 top_border 38 bottom_border 36 clumping_factor 25 }
+L {  terrain_type  MUD base_elevation 4 zone 3 other_zone_avoidance_distance 12 if TINY_MAP base_size 1  number_of_tiles 381  elseif SMALL_MAP base_size 1  number_of_tiles 549  elseif MEDIUM_MAP base_size 1  number_of_tiles 747  elseif LARGE_MAP base_size 2  number_of_tiles 1058  elseif HUGE_MAP base_size 2  number_of_tiles 1281  else base_size 2  number_of_tiles 1524  endif land_position 71 99  left_border 58 right_border 16 top_border 86 clumping_factor 25 }
+L {  terrain_type  MUD base_elevation 5 zone 1 other_zone_avoidance_distance 26 if TINY_MAP base_size 1  number_of_tiles 308  elseif SMALL_MAP base_size 1  number_of_tiles 444  elseif MEDIUM_MAP base_size 1  number_of_tiles 604  elseif LARGE_MAP base_size 2  number_of_tiles 856  elseif HUGE_MAP base_size 2  number_of_tiles 1035  else base_size 2  number_of_tiles 1232  endif land_position 68 2  left_border 57 right_border 21 bottom_border 87 clumping_factor 25 }
+L {  terrain_type  MUD base_elevation 2 zone 1 other_zone_avoidance_distance 13 if TINY_MAP base_size 1  number_of_tiles 358  elseif SMALL_MAP base_size 1  number_of_tiles 516  elseif MEDIUM_MAP base_size 1  number_of_tiles 702  elseif LARGE_MAP base_size 2  number_of_tiles 994  elseif HUGE_MAP base_size 2  number_of_tiles 1203  else base_size 2  number_of_tiles 1432  endif land_position 10 41  right_border 78 top_border 29 bottom_border 47 clumping_factor 25 }
 if 1_PLAYER_GAME
 #define P2
 elseif 2_PLAYER_GAME

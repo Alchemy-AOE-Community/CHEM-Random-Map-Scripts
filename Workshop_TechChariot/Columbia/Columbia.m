@@ -19,7 +19,9 @@ filename = [mfilename '.rms'];
 f = {'5*exp(x/15)'};
 sx = 8; sy = 15;
 
-[MTNLX,MTNLY] = function_to_points_V3([f; {[02 14]}; {+135}],[-50 50],[-2*sy sy],[sx sx; sy sy]);
+%[MTNLX,MTNLY] = function_to_points_V3([f; {[02 14]}; {+135}],[-50 50],[-2*sy sy],[sx sx; sy sy]);
+%[MTNLX,MTNLY] = function_to_points_V3([f; {[02 14]}; {+135}],[-45 45],[-2*sy sy],[sx sx; sy sy]);
+[MTNLX,MTNLY] = function_to_points_V3([f; {[02 04]}; {+135}],[-45 45],[-2*sy sy],[sx sx; sy sy]);
 MTNL.X = MTNLX; MTNL.Y = MTNLY;
 MTNR.X = 99 - MTNLY; MTNR.Y = 99 - MTNLX;
 [nx,ny] = size(MTNLX);
@@ -44,7 +46,7 @@ end
 
 MTNR.BE = MTNL.BE;
 
-MTNL.NT = [220 300; 280 300];
+MTNL.NT = [220 300; 280 300]*1.4;
 %MTNL.NT = 0;
 MTNR.NT = MTNL.NT;
 %MTNL.BS = [4 2; 4 2];
@@ -74,7 +76,8 @@ MTNR.CF = MTNL.CF;
 MTNL.TT = {'MUD'};
 MTNR.TT = MTNL.TT;
 
-MTNL.OZA = [27:-1:5]';
+MTNL.OZA = [26:-1:4]';
+%MTNL.OZA = [28:-1:5]';
 MTNR.OZA = MTNL.OZA;
 
 %%MTNL.OZA = [22:-1:5]';
@@ -88,7 +91,7 @@ MTNR.Z = 3;
 
 
 % -- Moraine -- %%
-[SMILEX,SMILEY] = function_to_points_V3([{'-0.02*x.^2'}; {[18 82]}; {045}],[-15 15],[0 0],[2 2; 10 10]);
+[SMILEX,SMILEY] = function_to_points_V3([{'-0.02*x.^2'}; {[18 82]}; {045}],[-18 18],[0 0],[2 2; 10 10]);
 SMILE.X = SMILEX; SMILE.Y = SMILEY;
 
 SMILE.Z   = 2;
@@ -110,7 +113,7 @@ BASIN.w = BB;
 BASIN.Z   = [1 3];
 BASIN.OZA = 2;
 
-BASIN.NT = 280;
+BASIN.NT = 320;
 BASIN.BS = 4;
 BASIN.SS = 3;
 BASIN.CF = 25;
@@ -129,6 +132,7 @@ SEA.BS = 1;
 SEA.SS = 3;
 SEA.CF = 25;
 SEA.TT = {'GRASS'};
+%SEA.NT = 0;
 
 [LM_SEA,SEA] = LandScribeV6(SEA,[1 1]);
 

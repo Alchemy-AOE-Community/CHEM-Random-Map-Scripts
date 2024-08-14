@@ -10,11 +10,9 @@ clc
 tic
 disp(["Run Executed " datestr(clock) "..."])
 
-addpath('C:\Program Files (x86)\Steam\steamapps\common\AoE2DE\resources\_common\random-map-scripts\My_Workshop')
-[filename] = Load_Library();
-
-
-
+filestruc = dir; %Extract a structure of the files in this directory
+path = filestruc.folder; path = path(1:89); addpath(genpath(path)) %Adding functions in main folder to the path
+filename = [mfilename '.rms'];
 
 [Preface,LPM_exp,SigComb] = RMS_Manual_Land(filename);
 
@@ -91,6 +89,7 @@ CODE = [Preface; List; MLA]; %Adding Preface, Definitions, Random Statement to b
 
 RMS_ForgeV4(filename,CODE);
 %ObjectAutoscribeV8('Kharga_V5.ods')
+%ObjectAutoscribeV10('Kharga_V7.ods')
 disp(["Run Completed " datestr(clock) "..."])
 toc
 %SigScpt = [{'BT'} {0}];                 %Signature Map Parameters (necessary for positive space signature) [Terrain Type, Base Elevation]

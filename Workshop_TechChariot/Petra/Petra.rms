@@ -673,6 +673,8 @@ set_scaling_to_map_size
 actor_area 33
 actor_area_radius 0
 actor_area_to_place_in 32
+avoid_actor_area 20
+avoid_actor_area 26
 }
 #const PH33_8 647
 create_object PH33_8
@@ -706,6 +708,7 @@ actor_area 36
 actor_area_radius 0
 actor_area_to_place_in 34
 avoid_actor_area 21
+avoid_actor_area 26
 }
 #const PH36_9 647
 create_object PH36_9
@@ -1678,379 +1681,379 @@ endif
 }
 
 /* LAND_AUTOSCRIBE */
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 61 54  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 53 48  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 66 53  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 66 54  clumping_factor 25 }
 L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 60 42  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 59 43  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 62 52  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 61 46  clumping_factor 25 }
-L {  terrain_type  CAN_TER2 zone 2 other_zone_avoidance_distance 2 base_size 1 land_percent 6 land_position 31 32  left_border 12 right_border 50 top_border 12 bottom_border 12 clumping_factor -20 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 61 41  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 62 53  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 61 53  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 64 49  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 56 49  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 2 number_of_tiles 0 land_position 60 51  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 55 54  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 69 51  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 59 41  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 52 45  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 55 49  clumping_factor 25 }
-L {  terrain_type  CAN_TER1 zone 1 if TINY_MAP base_size 3  elseif SMALL_MAP base_size 4  elseif MEDIUM_MAP base_size 4  elseif LARGE_MAP base_size 5  elseif HUGE_MAP base_size 6  else base_size 6  endif number_of_tiles 0 land_position 27 80  }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 60 56  clumping_factor 25 }
-L {  terrain_type  CAN_TER2 zone 2 if TINY_MAP base_size 3  elseif SMALL_MAP base_size 4  elseif MEDIUM_MAP base_size 4  elseif LARGE_MAP base_size 5  elseif HUGE_MAP base_size 6  else base_size 6  endif number_of_tiles 0 land_position 13 46  }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 63 57  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 55 53  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 62 58  clumping_factor 25 }
-L {  terrain_type  CAN_TER1 zone 1 if TINY_MAP base_size 3  elseif SMALL_MAP base_size 4  elseif MEDIUM_MAP base_size 4  elseif LARGE_MAP base_size 5  elseif HUGE_MAP base_size 6  else base_size 6  endif number_of_tiles 0 land_position 31 88  }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 55 42  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 57 55  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 67 53  clumping_factor 25 }
-L {  terrain_type  LWLND_TER if TINY_MAP base_size 5  number_of_tiles 121  elseif SMALL_MAP base_size 6  number_of_tiles 174  elseif MEDIUM_MAP base_size 7  number_of_tiles 237  elseif LARGE_MAP base_size 8  number_of_tiles 336  elseif HUGE_MAP base_size 9  number_of_tiles 407  else base_size 10  number_of_tiles 484  endif land_position 1 50  right_border 93 top_border 45 bottom_border 45 clumping_factor 25 }
-L {  terrain_type  CAN_TER2 zone 2 if TINY_MAP base_size 3  elseif SMALL_MAP base_size 4  elseif MEDIUM_MAP base_size 4  elseif LARGE_MAP base_size 5  elseif HUGE_MAP base_size 6  else base_size 6  endif number_of_tiles 0 land_position 44 44  }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 51 53  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 66 48  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 68 51  clumping_factor 25 }
+L {  terrain_type  CAN_TER1 zone 1 if TINY_MAP base_size 3  elseif SMALL_MAP base_size 4  elseif MEDIUM_MAP base_size 4  elseif LARGE_MAP base_size 5  elseif HUGE_MAP base_size 6  else base_size 6  endif number_of_tiles 0 land_position 49 54  }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 64 45  clumping_factor 25 }
+L {  terrain_type  CAN_TER2 zone 2 if TINY_MAP base_size 3  elseif SMALL_MAP base_size 4  elseif MEDIUM_MAP base_size 4  elseif LARGE_MAP base_size 5  elseif HUGE_MAP base_size 6  else base_size 6  endif number_of_tiles 0 land_position 30 13  }
+L {  terrain_type  CAN_TER1 zone 1 if TINY_MAP base_size 3  elseif SMALL_MAP base_size 4  elseif MEDIUM_MAP base_size 4  elseif LARGE_MAP base_size 5  elseif HUGE_MAP base_size 6  else base_size 6  endif number_of_tiles 0 land_position 15 54  }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 52 49  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 53 46  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 57 42  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 63 51  clumping_factor 25 }
+L {  terrain_type  CAN_TER2 zone 2 if TINY_MAP base_size 3  elseif SMALL_MAP base_size 4  elseif MEDIUM_MAP base_size 4  elseif LARGE_MAP base_size 5  elseif HUGE_MAP base_size 6  else base_size 6  endif number_of_tiles 0 land_position 37 27  }
+L {  terrain_type  OPEN_TER base_size 2 number_of_tiles 0 land_position 61 49  clumping_factor 25 }
+L {  terrain_type  CAN_TER1 zone 1 if TINY_MAP base_size 3  elseif SMALL_MAP base_size 4  elseif MEDIUM_MAP base_size 4  elseif LARGE_MAP base_size 5  elseif HUGE_MAP base_size 6  else base_size 6  endif number_of_tiles 0 land_position 28 84  }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 64 46  clumping_factor 25 }
 L {  terrain_type  CAN_TER2 zone 2 if TINY_MAP base_size 3  elseif SMALL_MAP base_size 4  elseif MEDIUM_MAP base_size 4  elseif LARGE_MAP base_size 5  elseif HUGE_MAP base_size 6  else base_size 6  endif number_of_tiles 0 land_position 26 23  }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 66 45  clumping_factor 25 }
+L {  terrain_type  CAN_TER1 zone 1 other_zone_avoidance_distance 2 base_size 1 land_percent 6 land_position 31 68  left_border 12 right_border 50 top_border 12 bottom_border 12 clumping_factor -20 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 61 43  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 59 58  clumping_factor 25 }
+L {  terrain_type  CAN_TER1 zone 1 if TINY_MAP base_size 3  elseif SMALL_MAP base_size 4  elseif MEDIUM_MAP base_size 4  elseif LARGE_MAP base_size 5  elseif HUGE_MAP base_size 6  else base_size 6  endif number_of_tiles 0 land_position 43 57  }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 58 44  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 66 57  clumping_factor 25 }
+L {  terrain_type  CAN_TER2 zone 2 if TINY_MAP base_size 3  elseif SMALL_MAP base_size 4  elseif MEDIUM_MAP base_size 4  elseif LARGE_MAP base_size 5  elseif HUGE_MAP base_size 6  else base_size 6  endif number_of_tiles 0 land_position 35 20  }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 64 56  clumping_factor 25 }
 L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 56 47  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 57 52  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 67 56  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 55 46  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 56 57  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 63 47  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 55 42  clumping_factor 25 }
+L {  terrain_type  CAN_TER1 zone 1 if TINY_MAP base_size 3  elseif SMALL_MAP base_size 4  elseif MEDIUM_MAP base_size 4  elseif LARGE_MAP base_size 5  elseif HUGE_MAP base_size 6  else base_size 6  endif number_of_tiles 0 land_position 29 86  }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 55 50  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 65 42  clumping_factor 25 }
+L {  terrain_type  CAN_TER1 zone 1 if TINY_MAP base_size 3  elseif SMALL_MAP base_size 4  elseif MEDIUM_MAP base_size 4  elseif LARGE_MAP base_size 5  elseif HUGE_MAP base_size 6  else base_size 6  endif number_of_tiles 0 land_position 30 87  }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 62 58  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 60 47  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 62 59  clumping_factor 25 }
+L {  terrain_type  CAN_TER1 zone 1 if TINY_MAP base_size 3  elseif SMALL_MAP base_size 4  elseif MEDIUM_MAP base_size 4  elseif LARGE_MAP base_size 5  elseif HUGE_MAP base_size 6  else base_size 6  endif number_of_tiles 0 land_position 32 87  }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 56 44  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 59 44  clumping_factor 25 }
+L {  terrain_type  CAN_TER1 zone 1 if TINY_MAP base_size 3  elseif SMALL_MAP base_size 4  elseif MEDIUM_MAP base_size 4  elseif LARGE_MAP base_size 5  elseif HUGE_MAP base_size 6  else base_size 6  endif number_of_tiles 0 land_position 48 54  }
+L {  terrain_type  CAN_TER2 zone 2 if TINY_MAP base_size 3  elseif SMALL_MAP base_size 4  elseif MEDIUM_MAP base_size 4  elseif LARGE_MAP base_size 5  elseif HUGE_MAP base_size 6  else base_size 6  endif number_of_tiles 0 land_position 34 16  }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 53 45  clumping_factor 25 }
+L {  terrain_type  CAN_TER1 zone 1 if TINY_MAP base_size 3  elseif SMALL_MAP base_size 4  elseif MEDIUM_MAP base_size 4  elseif LARGE_MAP base_size 5  elseif HUGE_MAP base_size 6  else base_size 6  endif number_of_tiles 0 land_position 20 59  }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 54 47  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 65 55  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 61 41  clumping_factor 25 }
+L {  terrain_type  LWLND_TER if TINY_MAP base_size 5  number_of_tiles 121  elseif SMALL_MAP base_size 6  number_of_tiles 174  elseif MEDIUM_MAP base_size 7  number_of_tiles 237  elseif LARGE_MAP base_size 8  number_of_tiles 336  elseif HUGE_MAP base_size 9  number_of_tiles 407  else base_size 10  number_of_tiles 484  endif land_position 1 50  right_border 93 top_border 45 bottom_border 45 clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 68 48  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 69 48  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 69 52  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 65 53  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 66 46  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 62 44  clumping_factor 25 }
+L {  terrain_type  CAN_TER2 zone 2 if TINY_MAP base_size 3  elseif SMALL_MAP base_size 4  elseif MEDIUM_MAP base_size 4  elseif LARGE_MAP base_size 5  elseif HUGE_MAP base_size 6  else base_size 6  endif number_of_tiles 0 land_position 50 46  }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 60 43  clumping_factor 25 }
+L {  terrain_type  CAN_TER1 zone 1 if TINY_MAP base_size 3  elseif SMALL_MAP base_size 4  elseif MEDIUM_MAP base_size 4  elseif LARGE_MAP base_size 5  elseif HUGE_MAP base_size 6  else base_size 6  endif number_of_tiles 0 land_position 47 54  }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 67 45  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 54 50  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 63 57  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 64 42  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 64 50  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 55 58  clumping_factor 25 }
+L {  terrain_type  CAN_TER2 zone 2 if TINY_MAP base_size 3  elseif SMALL_MAP base_size 4  elseif MEDIUM_MAP base_size 4  elseif LARGE_MAP base_size 5  elseif HUGE_MAP base_size 6  else base_size 6  endif number_of_tiles 0 land_position 38 30  }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 59 57  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 65 46  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 57 41  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 63 45  clumping_factor 25 }
+L {  terrain_type  CAN_TER2 zone 2 if TINY_MAP base_size 3  elseif SMALL_MAP base_size 4  elseif MEDIUM_MAP base_size 4  elseif LARGE_MAP base_size 5  elseif HUGE_MAP base_size 6  else base_size 6  endif number_of_tiles 0 land_position 49 46  }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 64 57  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 65 54  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 57 49  clumping_factor 25 }
+L {  terrain_type  MDLND_TER base_elevation 4 base_size 1 land_position 80 50  left_border 6 right_border 6 top_border 32 bottom_border 32 clumping_factor 25 }
+L {  terrain_type  CAN_TER2 zone 2 if TINY_MAP base_size 3  elseif SMALL_MAP base_size 4  elseif MEDIUM_MAP base_size 4  elseif LARGE_MAP base_size 5  elseif HUGE_MAP base_size 6  else base_size 6  endif number_of_tiles 0 land_position 27 20  }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 56 53  clumping_factor 25 }
+L {  terrain_type  CAN_TER2 zone 2 if TINY_MAP base_size 3  elseif SMALL_MAP base_size 4  elseif MEDIUM_MAP base_size 4  elseif LARGE_MAP base_size 5  elseif HUGE_MAP base_size 6  else base_size 6  endif number_of_tiles 0 land_position 45 45  }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 67 46  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 63 54  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 63 55  clumping_factor 25 }
+L {  terrain_type  CAN_TER2 zone 2 if TINY_MAP base_size 3  elseif SMALL_MAP base_size 4  elseif MEDIUM_MAP base_size 4  elseif LARGE_MAP base_size 5  elseif HUGE_MAP base_size 6  else base_size 6  endif number_of_tiles 0 land_position 48 46  }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 61 52  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 57 59  clumping_factor 25 }
+L {  terrain_type  CAN_TER1 zone 1 if TINY_MAP base_size 3  elseif SMALL_MAP base_size 4  elseif MEDIUM_MAP base_size 4  elseif LARGE_MAP base_size 5  elseif HUGE_MAP base_size 6  else base_size 6  endif number_of_tiles 0 land_position 42 59  }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 64 47  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 63 58  clumping_factor 25 }
+L {  terrain_type  CAN_TER2 zone 2 if TINY_MAP base_size 3  elseif SMALL_MAP base_size 4  elseif MEDIUM_MAP base_size 4  elseif LARGE_MAP base_size 5  elseif HUGE_MAP base_size 6  else base_size 6  endif number_of_tiles 0 land_position 28 16  }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 57 50  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 66 52  clumping_factor 25 }
+L {  terrain_type  CAN_TER2 zone 2 if TINY_MAP base_size 3  elseif SMALL_MAP base_size 4  elseif MEDIUM_MAP base_size 4  elseif LARGE_MAP base_size 5  elseif HUGE_MAP base_size 6  else base_size 6  endif number_of_tiles 0 land_position 43 43  }
+L {  terrain_type  OPEN_TER base_size 2 number_of_tiles 0 land_position 59 51  clumping_factor 25 }
+L {  terrain_type  CAN_TER2 zone 2 if TINY_MAP base_size 3  elseif SMALL_MAP base_size 4  elseif MEDIUM_MAP base_size 4  elseif LARGE_MAP base_size 5  elseif HUGE_MAP base_size 6  else base_size 6  endif number_of_tiles 0 land_position 17 45  }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 68 52  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 57 45  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 59 55  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 60 48  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 61 53  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 67 47  clumping_factor 25 }
+L {  terrain_type  CAN_TER1 zone 1 if TINY_MAP base_size 3  elseif SMALL_MAP base_size 4  elseif MEDIUM_MAP base_size 4  elseif LARGE_MAP base_size 5  elseif HUGE_MAP base_size 6  else base_size 6  endif number_of_tiles 0 land_position 27 80  }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 65 48  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 66 50  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 64 48  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 54 51  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 52 46  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 68 51  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 58 45  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 51 48  clumping_factor 25 }
+L {  terrain_type  CAN_TER2 zone 2 if TINY_MAP base_size 3  elseif SMALL_MAP base_size 4  elseif MEDIUM_MAP base_size 4  elseif LARGE_MAP base_size 5  elseif HUGE_MAP base_size 6  else base_size 6  endif number_of_tiles 0 land_position 36 23  }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 62 52  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 69 49  clumping_factor 25 }
+L {  terrain_type  CAN_TER1 zone 1 if TINY_MAP base_size 3  elseif SMALL_MAP base_size 4  elseif MEDIUM_MAP base_size 4  elseif LARGE_MAP base_size 5  elseif HUGE_MAP base_size 6  else base_size 6  endif number_of_tiles 0 land_position 39 66  }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 67 54  clumping_factor 25 }
+L {  terrain_type  CAN_TER2 zone 2 if TINY_MAP base_size 3  elseif SMALL_MAP base_size 4  elseif MEDIUM_MAP base_size 4  elseif LARGE_MAP base_size 5  elseif HUGE_MAP base_size 6  else base_size 6  endif number_of_tiles 0 land_position 44 44  }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 58 51  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 67 49  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 62 41  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 67 55  clumping_factor 25 }
+L {  terrain_type  CAN_TER1 zone 1 if TINY_MAP base_size 3  elseif SMALL_MAP base_size 4  elseif MEDIUM_MAP base_size 4  elseif LARGE_MAP base_size 5  elseif HUGE_MAP base_size 6  else base_size 6  endif number_of_tiles 0 land_position 44 56  }
+L {  terrain_type  CAN_TER1 zone 1 if TINY_MAP base_size 3  elseif SMALL_MAP base_size 4  elseif MEDIUM_MAP base_size 4  elseif LARGE_MAP base_size 5  elseif HUGE_MAP base_size 6  else base_size 6  endif number_of_tiles 0 land_position 17 55  }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 63 44  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 63 46  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 52 47  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 64 53  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 62 48  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 66 47  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 66 43  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 54 46  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 60 53  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 51 53  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 63 42  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 55 43  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 59 45  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 65 51  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 60 54  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 60 55  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 67 48  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 63 49  clumping_factor 25 }
 L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 57 43  clumping_factor 25 }
 L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 52 53  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 68 54  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 62 47  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 64 55  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 52 55  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 67 50  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 65 42  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 54 55  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 66 57  clumping_factor 25 }
-L {  terrain_type  CAN_TER1 zone 1 if TINY_MAP base_size 3  elseif SMALL_MAP base_size 4  elseif MEDIUM_MAP base_size 4  elseif LARGE_MAP base_size 5  elseif HUGE_MAP base_size 6  else base_size 6  endif number_of_tiles 0 land_position 50 54  }
-L {  terrain_type  CAN_TER1 zone 1 if TINY_MAP base_size 3  elseif SMALL_MAP base_size 4  elseif MEDIUM_MAP base_size 4  elseif LARGE_MAP base_size 5  elseif HUGE_MAP base_size 6  else base_size 6  endif number_of_tiles 0 land_position 41 61  }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 62 54  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 63 43  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 53 50  clumping_factor 25 }
-L {  terrain_type  CAN_TER1 zone 1 if TINY_MAP base_size 3  elseif SMALL_MAP base_size 4  elseif MEDIUM_MAP base_size 4  elseif LARGE_MAP base_size 5  elseif HUGE_MAP base_size 6  else base_size 6  endif number_of_tiles 0 land_position 24 70  }
-L {  terrain_type  CAN_TER2 zone 2 if TINY_MAP base_size 3  elseif SMALL_MAP base_size 4  elseif MEDIUM_MAP base_size 4  elseif LARGE_MAP base_size 5  elseif HUGE_MAP base_size 6  else base_size 6  endif number_of_tiles 0 land_position 49 46  }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 52 51  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 59 55  clumping_factor 25 }
-L {  terrain_type  CAN_TER1 zone 1 if TINY_MAP base_size 3  elseif SMALL_MAP base_size 4  elseif MEDIUM_MAP base_size 4  elseif LARGE_MAP base_size 5  elseif HUGE_MAP base_size 6  else base_size 6  endif number_of_tiles 0 land_position 33 86  }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 52 50  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 54 52  clumping_factor 25 }
-L {  terrain_type  CAN_TER2 zone 2 if TINY_MAP base_size 3  elseif SMALL_MAP base_size 4  elseif MEDIUM_MAP base_size 4  elseif LARGE_MAP base_size 5  elseif HUGE_MAP base_size 6  else base_size 6  endif number_of_tiles 0 land_position 17 45  }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 54 48  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 59 48  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 67 54  clumping_factor 25 }
-L {  terrain_type  CAN_TER2 zone 2 if TINY_MAP base_size 3  elseif SMALL_MAP base_size 4  elseif MEDIUM_MAP base_size 4  elseif LARGE_MAP base_size 5  elseif HUGE_MAP base_size 6  else base_size 6  endif number_of_tiles 0 land_position 48 46  }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 66 51  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 66 46  clumping_factor 25 }
-L {  terrain_type  CAN_TER2 zone 2 if TINY_MAP base_size 3  elseif SMALL_MAP base_size 4  elseif MEDIUM_MAP base_size 4  elseif LARGE_MAP base_size 5  elseif HUGE_MAP base_size 6  else base_size 6  endif number_of_tiles 0 land_position 28 16  }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 52 47  clumping_factor 25 }
-L {  terrain_type  CAN_TER2 zone 2 if TINY_MAP base_size 3  elseif SMALL_MAP base_size 4  elseif MEDIUM_MAP base_size 4  elseif LARGE_MAP base_size 5  elseif HUGE_MAP base_size 6  else base_size 6  endif number_of_tiles 0 land_position 40 37  }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 62 42  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 63 46  clumping_factor 25 }
-L {  terrain_type  CAN_TER1 zone 1 other_zone_avoidance_distance 2 base_size 1 land_percent 6 land_position 31 68  left_border 12 right_border 50 top_border 12 bottom_border 12 clumping_factor -20 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 55 52  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 67 49  clumping_factor 25 }
-L {  terrain_type  CAN_TER1 zone 1 if TINY_MAP base_size 3  elseif SMALL_MAP base_size 4  elseif MEDIUM_MAP base_size 4  elseif LARGE_MAP base_size 5  elseif HUGE_MAP base_size 6  else base_size 6  endif number_of_tiles 0 land_position 37 73  }
-L {  terrain_type  CAN_TER2 zone 2 if TINY_MAP base_size 3  elseif SMALL_MAP base_size 4  elseif MEDIUM_MAP base_size 4  elseif LARGE_MAP base_size 5  elseif HUGE_MAP base_size 6  else base_size 6  endif number_of_tiles 0 land_position 31 12  }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 63 50  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 2 number_of_tiles 0 land_position 60 49  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 54 54  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 64 46  clumping_factor 25 }
-L {  terrain_type  CAN_TER1 zone 1 if TINY_MAP base_size 3  elseif SMALL_MAP base_size 4  elseif MEDIUM_MAP base_size 4  elseif LARGE_MAP base_size 5  elseif HUGE_MAP base_size 6  else base_size 6  endif number_of_tiles 0 land_position 39 66  }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 56 50  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 53 49  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 61 59  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 60 55  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 59 54  clumping_factor 25 }
-L {  terrain_type  CAN_TER2 zone 2 if TINY_MAP base_size 3  elseif SMALL_MAP base_size 4  elseif MEDIUM_MAP base_size 4  elseif LARGE_MAP base_size 5  elseif HUGE_MAP base_size 6  else base_size 6  endif number_of_tiles 0 land_position 30 13  }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 67 47  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 54 50  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 68 48  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 63 47  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 69 47  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 60 58  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 61 42  clumping_factor 25 }
-L {  terrain_type  CAN_TER2 zone 2 if TINY_MAP base_size 3  elseif SMALL_MAP base_size 4  elseif MEDIUM_MAP base_size 4  elseif LARGE_MAP base_size 5  elseif HUGE_MAP base_size 6  else base_size 6  endif number_of_tiles 0 land_position 18 44  }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 62 46  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 64 54  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 65 51  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 66 43  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 69 50  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 56 44  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 66 49  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 65 58  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 59 42  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 68 53  clumping_factor 25 }
-L {  terrain_type  CAN_TER2 zone 2 if TINY_MAP base_size 3  elseif SMALL_MAP base_size 4  elseif MEDIUM_MAP base_size 4  elseif LARGE_MAP base_size 5  elseif HUGE_MAP base_size 6  else base_size 6  endif number_of_tiles 0 land_position 16 45  }
-L {  terrain_type  CAN_TER2 zone 2 if TINY_MAP base_size 3  elseif SMALL_MAP base_size 4  elseif MEDIUM_MAP base_size 4  elseif LARGE_MAP base_size 5  elseif HUGE_MAP base_size 6  else base_size 6  endif number_of_tiles 0 land_position 27 20  }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 56 45  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 2 number_of_tiles 0 land_position 61 50  clumping_factor 25 }
-L {  terrain_type  MDLND_TER base_elevation 4 base_size 1 land_position 58 25  left_border 6 right_border 6 top_border 7 bottom_border 57 clumping_factor 25 }
-L {  terrain_type  CAN_TER2 zone 2 if TINY_MAP base_size 3  elseif SMALL_MAP base_size 4  elseif MEDIUM_MAP base_size 4  elseif LARGE_MAP base_size 5  elseif HUGE_MAP base_size 6  else base_size 6  endif number_of_tiles 0 land_position 29 14  }
-L {  terrain_type  CAN_TER2 zone 2 if TINY_MAP base_size 3  elseif SMALL_MAP base_size 4  elseif MEDIUM_MAP base_size 4  elseif LARGE_MAP base_size 5  elseif HUGE_MAP base_size 6  else base_size 6  endif number_of_tiles 0 land_position 23 34  }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 61 52  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 2 number_of_tiles 0 land_position 61 51  clumping_factor 25 }
-L {  terrain_type  CAN_TER2 zone 2 if TINY_MAP base_size 3  elseif SMALL_MAP base_size 4  elseif MEDIUM_MAP base_size 4  elseif LARGE_MAP base_size 5  elseif HUGE_MAP base_size 6  else base_size 6  endif number_of_tiles 0 land_position 15 46  }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 52 49  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 58 42  clumping_factor 25 }
-L {  terrain_type  CAN_TER2 zone 2 if TINY_MAP base_size 3  elseif SMALL_MAP base_size 4  elseif MEDIUM_MAP base_size 4  elseif LARGE_MAP base_size 5  elseif HUGE_MAP base_size 6  else base_size 6  endif number_of_tiles 0 land_position 21 39  }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 59 47  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 58 49  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 63 44  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 61 48  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 63 58  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 65 48  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 66 54  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 68 47  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 64 44  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 55 44  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 65 56  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 58 59  clumping_factor 25 }
-L {  terrain_type  CAN_TER1 zone 1 if TINY_MAP base_size 3  elseif SMALL_MAP base_size 4  elseif MEDIUM_MAP base_size 4  elseif LARGE_MAP base_size 5  elseif HUGE_MAP base_size 6  else base_size 6  endif number_of_tiles 0 land_position 36 77  }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 59 45  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 57 44  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 64 42  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 66 53  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 55 56  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 66 44  clumping_factor 25 }
-L {  terrain_type  CAN_TER1 zone 1 if TINY_MAP base_size 3  elseif SMALL_MAP base_size 4  elseif MEDIUM_MAP base_size 4  elseif LARGE_MAP base_size 5  elseif HUGE_MAP base_size 6  else base_size 6  endif number_of_tiles 0 land_position 34 84  }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 52 54  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 60 52  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 52 46  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 65 47  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 58 51  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 68 45  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 2 number_of_tiles 0 land_position 59 49  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 51 52  clumping_factor 25 }
-L {  terrain_type  CAN_TER1 zone 1 if TINY_MAP base_size 3  elseif SMALL_MAP base_size 4  elseif MEDIUM_MAP base_size 4  elseif LARGE_MAP base_size 5  elseif HUGE_MAP base_size 6  else base_size 6  endif number_of_tiles 0 land_position 35 80  }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 58 58  clumping_factor 25 }
-L {  terrain_type  CAN_TER2 zone 2 if TINY_MAP base_size 3  elseif SMALL_MAP base_size 4  elseif MEDIUM_MAP base_size 4  elseif LARGE_MAP base_size 5  elseif HUGE_MAP base_size 6  else base_size 6  endif number_of_tiles 0 land_position 41 39  }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 60 48  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 55 57  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 58 54  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 69 53  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 65 46  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 58 47  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 55 47  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 65 44  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 63 55  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 53 46  clumping_factor 25 }
-L {  terrain_type  CAN_TER2 zone 2 if TINY_MAP base_size 3  elseif SMALL_MAP base_size 4  elseif MEDIUM_MAP base_size 4  elseif LARGE_MAP base_size 5  elseif HUGE_MAP base_size 6  else base_size 6  endif number_of_tiles 0 land_position 43 43  }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 56 48  clumping_factor 25 }
-L {  terrain_type  CAN_TER1 zone 1 if TINY_MAP base_size 3  elseif SMALL_MAP base_size 4  elseif MEDIUM_MAP base_size 4  elseif LARGE_MAP base_size 5  elseif HUGE_MAP base_size 6  else base_size 6  endif number_of_tiles 0 land_position 32 87  }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 55 50  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 65 55  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 58 56  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 57 57  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 56 42  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 56 54  clumping_factor 25 }
-L {  terrain_type  CAN_TER1 zone 1 if TINY_MAP base_size 3  elseif SMALL_MAP base_size 4  elseif MEDIUM_MAP base_size 4  elseif LARGE_MAP base_size 5  elseif HUGE_MAP base_size 6  else base_size 6  endif number_of_tiles 0 land_position 25 73  }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 63 56  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 51 51  clumping_factor 25 }
-L {  terrain_type  CAN_TER2 zone 2 if TINY_MAP base_size 3  elseif SMALL_MAP base_size 4  elseif MEDIUM_MAP base_size 4  elseif LARGE_MAP base_size 5  elseif HUGE_MAP base_size 6  else base_size 6  endif number_of_tiles 0 land_position 42 41  }
-L {  terrain_type  CAN_TER2 zone 2 if TINY_MAP base_size 3  elseif SMALL_MAP base_size 4  elseif MEDIUM_MAP base_size 4  elseif LARGE_MAP base_size 5  elseif HUGE_MAP base_size 6  else base_size 6  endif number_of_tiles 0 land_position 37 27  }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 62 57  clumping_factor 25 }
-L {  terrain_type  CAN_TER1 zone 1 if TINY_MAP base_size 3  elseif SMALL_MAP base_size 4  elseif MEDIUM_MAP base_size 4  elseif LARGE_MAP base_size 5  elseif HUGE_MAP base_size 6  else base_size 6  endif number_of_tiles 0 land_position 28 84  }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 59 57  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 65 49  clumping_factor 25 }
-L {  terrain_type  CAN_TER1 zone 1 if TINY_MAP base_size 3  elseif SMALL_MAP base_size 4  elseif MEDIUM_MAP base_size 4  elseif LARGE_MAP base_size 5  elseif HUGE_MAP base_size 6  else base_size 6  endif number_of_tiles 0 land_position 23 66  }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 64 50  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 60 44  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 64 56  clumping_factor 25 }
-L {  terrain_type  CAN_TER1 zone 1 if TINY_MAP base_size 3  elseif SMALL_MAP base_size 4  elseif MEDIUM_MAP base_size 4  elseif LARGE_MAP base_size 5  elseif HUGE_MAP base_size 6  else base_size 6  endif number_of_tiles 0 land_position 21 61  }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 66 45  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 63 49  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 52 48  clumping_factor 25 }
-L {  terrain_type  CAN_TER2 zone 2 if TINY_MAP base_size 3  elseif SMALL_MAP base_size 4  elseif MEDIUM_MAP base_size 4  elseif LARGE_MAP base_size 5  elseif HUGE_MAP base_size 6  else base_size 6  endif number_of_tiles 0 land_position 45 45  }
-L {  terrain_type  CAN_TER1 zone 1 if TINY_MAP base_size 3  elseif SMALL_MAP base_size 4  elseif MEDIUM_MAP base_size 4  elseif LARGE_MAP base_size 5  elseif HUGE_MAP base_size 6  else base_size 6  endif number_of_tiles 0 land_position 46 55  }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 61 44  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 60 47  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 57 45  clumping_factor 25 }
-L {  terrain_type  CAN_TER2 zone 2 if TINY_MAP base_size 3  elseif SMALL_MAP base_size 4  elseif MEDIUM_MAP base_size 4  elseif LARGE_MAP base_size 5  elseif HUGE_MAP base_size 6  else base_size 6  endif number_of_tiles 0 land_position 32 13  }
-L {  terrain_type  CAN_TER1 zone 1 if TINY_MAP base_size 3  elseif SMALL_MAP base_size 4  elseif MEDIUM_MAP base_size 4  elseif LARGE_MAP base_size 5  elseif HUGE_MAP base_size 6  else base_size 6  endif number_of_tiles 0 land_position 13 54  }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 54 57  clumping_factor 25 }
-L {  terrain_type  CAN_TER1 zone 1 if TINY_MAP base_size 3  elseif SMALL_MAP base_size 4  elseif MEDIUM_MAP base_size 4  elseif LARGE_MAP base_size 5  elseif HUGE_MAP base_size 6  else base_size 6  endif number_of_tiles 0 land_position 18 56  }
-L {  terrain_type  CAN_TER2 zone 2 if TINY_MAP base_size 3  elseif SMALL_MAP base_size 4  elseif MEDIUM_MAP base_size 4  elseif LARGE_MAP base_size 5  elseif HUGE_MAP base_size 6  else base_size 6  endif number_of_tiles 0 land_position 50 46  }
-L {  terrain_type  CAN_TER1 zone 1 if TINY_MAP base_size 3  elseif SMALL_MAP base_size 4  elseif MEDIUM_MAP base_size 4  elseif LARGE_MAP base_size 5  elseif HUGE_MAP base_size 6  else base_size 6  endif number_of_tiles 0 land_position 15 54  }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 64 53  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 62 51  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 68 55  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 54 44  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 56 55  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 58 44  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 54 45  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 60 59  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 54 46  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 58 50  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 68 49  clumping_factor 25 }
-L {  terrain_type  MDLND_TER base_elevation 4 base_size 1 land_position 58 75  left_border 6 right_border 6 top_border 57 bottom_border 7 clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 57 54  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 61 57  clumping_factor 25 }
-L {  terrain_type  MDLND_TER base_elevation 4 base_size 1 land_position 80 50  left_border 6 right_border 6 top_border 32 bottom_border 32 clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 57 47  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 54 53  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 67 56  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 69 49  clumping_factor 25 }
-L {  terrain_type  CAN_TER1 zone 1 if TINY_MAP base_size 3  elseif SMALL_MAP base_size 4  elseif MEDIUM_MAP base_size 4  elseif LARGE_MAP base_size 5  elseif HUGE_MAP base_size 6  else base_size 6  endif number_of_tiles 0 land_position 45 55  }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 53 53  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 55 55  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 58 53  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 62 49  clumping_factor 25 }
-L {  terrain_type  CAN_TER1 zone 1 if TINY_MAP base_size 3  elseif SMALL_MAP base_size 4  elseif MEDIUM_MAP base_size 4  elseif LARGE_MAP base_size 5  elseif HUGE_MAP base_size 6  else base_size 6  endif number_of_tiles 0 land_position 14 54  }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 61 45  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 56 51  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 61 47  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 53 45  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 59 56  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 65 53  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 59 44  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 64 48  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 65 54  clumping_factor 25 }
-L {  terrain_type  CAN_TER2 zone 2 if TINY_MAP base_size 3  elseif SMALL_MAP base_size 4  elseif MEDIUM_MAP base_size 4  elseif LARGE_MAP base_size 5  elseif HUGE_MAP base_size 6  else base_size 6  endif number_of_tiles 0 land_position 47 46  }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 57 41  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 67 51  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 63 52  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 64 43  clumping_factor 25 }
-L {  terrain_type  CAN_TER1 zone 1 if TINY_MAP base_size 3  elseif SMALL_MAP base_size 4  elseif MEDIUM_MAP base_size 4  elseif LARGE_MAP base_size 5  elseif HUGE_MAP base_size 6  else base_size 6  endif number_of_tiles 0 land_position 16 55  }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 60 57  clumping_factor 25 }
-L {  terrain_type  CAN_TER1 zone 1 if TINY_MAP base_size 3  elseif SMALL_MAP base_size 4  elseif MEDIUM_MAP base_size 4  elseif LARGE_MAP base_size 5  elseif HUGE_MAP base_size 6  else base_size 6  endif number_of_tiles 0 land_position 26 77  }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 57 58  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 53 44  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 66 50  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 52 52  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 63 48  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 62 56  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 57 46  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 66 55  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 55 48  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 67 46  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 56 58  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 65 52  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 62 59  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 59 53  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 66 52  clumping_factor 25 }
-L {  terrain_type  CAN_TER1 zone 1 if TINY_MAP base_size 3  elseif SMALL_MAP base_size 4  elseif MEDIUM_MAP base_size 4  elseif LARGE_MAP base_size 5  elseif HUGE_MAP base_size 6  else base_size 6  endif number_of_tiles 0 land_position 40 63  }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 63 45  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 53 56  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 60 41  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 65 45  clumping_factor 25 }
-L {  terrain_type  CAN_TER1 zone 1 if TINY_MAP base_size 3  elseif SMALL_MAP base_size 4  elseif MEDIUM_MAP base_size 4  elseif LARGE_MAP base_size 5  elseif HUGE_MAP base_size 6  else base_size 6  endif number_of_tiles 0 land_position 29 86  }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 66 56  clumping_factor 25 }
-L {  terrain_type  CAN_TER2 zone 2 if TINY_MAP base_size 3  elseif SMALL_MAP base_size 4  elseif MEDIUM_MAP base_size 4  elseif LARGE_MAP base_size 5  elseif HUGE_MAP base_size 6  else base_size 6  endif number_of_tiles 0 land_position 33 14  }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 67 48  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 54 56  clumping_factor 25 }
-L {  terrain_type  CAN_TER2 zone 2 if TINY_MAP base_size 3  elseif SMALL_MAP base_size 4  elseif MEDIUM_MAP base_size 4  elseif LARGE_MAP base_size 5  elseif HUGE_MAP base_size 6  else base_size 6  endif number_of_tiles 0 land_position 25 27  }
-L {  terrain_type  CAN_TER1 zone 1 if TINY_MAP base_size 3  elseif SMALL_MAP base_size 4  elseif MEDIUM_MAP base_size 4  elseif LARGE_MAP base_size 5  elseif HUGE_MAP base_size 6  else base_size 6  endif number_of_tiles 0 land_position 19 57  }
-L {  terrain_type  CAN_TER2 zone 2 if TINY_MAP base_size 3  elseif SMALL_MAP base_size 4  elseif MEDIUM_MAP base_size 4  elseif LARGE_MAP base_size 5  elseif HUGE_MAP base_size 6  else base_size 6  endif number_of_tiles 0 land_position 20 41  }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 63 41  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 2 number_of_tiles 0 land_position 61 49  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 57 51  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 55 46  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 2 number_of_tiles 0 land_position 59 50  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 62 50  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 62 44  clumping_factor 25 }
-L {  terrain_type  CAN_TER2 zone 2 if TINY_MAP base_size 3  elseif SMALL_MAP base_size 4  elseif MEDIUM_MAP base_size 4  elseif LARGE_MAP base_size 5  elseif HUGE_MAP base_size 6  else base_size 6  endif number_of_tiles 0 land_position 22 37  }
-L {  terrain_type  CAN_TER1 zone 1 if TINY_MAP base_size 3  elseif SMALL_MAP base_size 4  elseif MEDIUM_MAP base_size 4  elseif LARGE_MAP base_size 5  elseif HUGE_MAP base_size 6  else base_size 6  endif number_of_tiles 0 land_position 47 54  }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 57 48  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 54 47  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 54 49  clumping_factor 25 }
-L {  terrain_type  CAN_TER1 zone 1 if TINY_MAP base_size 3  elseif SMALL_MAP base_size 4  elseif MEDIUM_MAP base_size 4  elseif LARGE_MAP base_size 5  elseif HUGE_MAP base_size 6  else base_size 6  endif number_of_tiles 0 land_position 49 54  }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 57 50  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 62 43  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 56 52  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 63 59  clumping_factor 25 }
-L {  terrain_type  CAN_TER1 zone 1 if TINY_MAP base_size 3  elseif SMALL_MAP base_size 4  elseif MEDIUM_MAP base_size 4  elseif LARGE_MAP base_size 5  elseif HUGE_MAP base_size 6  else base_size 6  endif number_of_tiles 0 land_position 17 55  }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 56 57  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 68 52  clumping_factor 25 }
-L {  terrain_type  CAN_TER2 zone 2 if TINY_MAP base_size 3  elseif SMALL_MAP base_size 4  elseif MEDIUM_MAP base_size 4  elseif LARGE_MAP base_size 5  elseif HUGE_MAP base_size 6  else base_size 6  endif number_of_tiles 0 land_position 14 46  }
-L {  terrain_type  CAN_TER2 zone 2 if TINY_MAP base_size 3  elseif SMALL_MAP base_size 4  elseif MEDIUM_MAP base_size 4  elseif LARGE_MAP base_size 5  elseif HUGE_MAP base_size 6  else base_size 6  endif number_of_tiles 0 land_position 46 45  }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 64 52  clumping_factor 25 }
-L {  terrain_type  CAN_TER1 zone 1 if TINY_MAP base_size 3  elseif SMALL_MAP base_size 4  elseif MEDIUM_MAP base_size 4  elseif LARGE_MAP base_size 5  elseif HUGE_MAP base_size 6  else base_size 6  endif number_of_tiles 0 land_position 22 63  }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 53 48  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 59 59  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 64 58  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 56 53  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 67 52  clumping_factor 25 }
-L {  terrain_type  CAN_TER1 zone 1 if TINY_MAP base_size 3  elseif SMALL_MAP base_size 4  elseif MEDIUM_MAP base_size 4  elseif LARGE_MAP base_size 5  elseif HUGE_MAP base_size 6  else base_size 6  endif number_of_tiles 0 land_position 30 87  }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 60 53  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 67 55  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 65 57  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 53 54  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 57 52  clumping_factor 25 }
-L {  terrain_type  CAN_TER2 zone 2 if TINY_MAP base_size 3  elseif SMALL_MAP base_size 4  elseif MEDIUM_MAP base_size 4  elseif LARGE_MAP base_size 5  elseif HUGE_MAP base_size 6  else base_size 6  endif number_of_tiles 0 land_position 38 30  }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 57 42  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 65 50  clumping_factor 25 }
-L {  terrain_type  CAN_TER2 zone 2 if TINY_MAP base_size 3  elseif SMALL_MAP base_size 4  elseif MEDIUM_MAP base_size 4  elseif LARGE_MAP base_size 5  elseif HUGE_MAP base_size 6  else base_size 6  endif number_of_tiles 0 land_position 19 43  }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 62 48  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 59 52  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 56 43  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 68 46  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 60 45  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 63 42  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 66 47  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 58 41  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 61 43  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 58 55  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 64 51  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 69 52  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 58 45  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 67 44  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 61 58  clumping_factor 25 }
-L {  terrain_type  CAN_TER1 zone 1 if TINY_MAP base_size 3  elseif SMALL_MAP base_size 4  elseif MEDIUM_MAP base_size 4  elseif LARGE_MAP base_size 5  elseif HUGE_MAP base_size 6  else base_size 6  endif number_of_tiles 0 land_position 42 59  }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 51 47  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 60 46  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 59 46  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 58 43  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 51 50  clumping_factor 25 }
-L {  terrain_type  CAN_TER1 zone 1 if TINY_MAP base_size 3  elseif SMALL_MAP base_size 4  elseif MEDIUM_MAP base_size 4  elseif LARGE_MAP base_size 5  elseif HUGE_MAP base_size 6  else base_size 6  endif number_of_tiles 0 land_position 12 54  }
-L {  terrain_type  OPEN_TER base_size 2 number_of_tiles 0 land_position 59 51  clumping_factor 25 }
-L {  terrain_type  CAN_TER2 zone 2 if TINY_MAP base_size 3  elseif SMALL_MAP base_size 4  elseif MEDIUM_MAP base_size 4  elseif LARGE_MAP base_size 5  elseif HUGE_MAP base_size 6  else base_size 6  endif number_of_tiles 0 land_position 36 23  }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 57 49  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 58 57  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 51 49  clumping_factor 25 }
-L {  terrain_type  CAN_TER2 zone 2 if TINY_MAP base_size 3  elseif SMALL_MAP base_size 4  elseif MEDIUM_MAP base_size 4  elseif LARGE_MAP base_size 5  elseif HUGE_MAP base_size 6  else base_size 6  endif number_of_tiles 0 land_position 12 46  }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 57 59  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 61 54  clumping_factor 25 }
-L {  terrain_type  CAN_TER1 zone 1 if TINY_MAP base_size 3  elseif SMALL_MAP base_size 4  elseif MEDIUM_MAP base_size 4  elseif LARGE_MAP base_size 5  elseif HUGE_MAP base_size 6  else base_size 6  endif number_of_tiles 0 land_position 43 57  }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 55 51  clumping_factor 25 }
-L {  terrain_type  CAN_TER1 zone 1 if TINY_MAP base_size 3  elseif SMALL_MAP base_size 4  elseif MEDIUM_MAP base_size 4  elseif LARGE_MAP base_size 5  elseif HUGE_MAP base_size 6  else base_size 6  endif number_of_tiles 0 land_position 20 59  }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 60 54  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 68 50  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 60 43  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 58 52  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 65 43  clumping_factor 25 }
-L {  terrain_type  CAN_TER1 zone 1 if TINY_MAP base_size 3  elseif SMALL_MAP base_size 4  elseif MEDIUM_MAP base_size 4  elseif LARGE_MAP base_size 5  elseif HUGE_MAP base_size 6  else base_size 6  endif number_of_tiles 0 land_position 44 56  }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 61 55  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 69 48  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 64 57  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 62 55  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 56 56  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 63 51  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 53 52  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 55 58  clumping_factor 25 }
 L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 53 47  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 55 45  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 62 41  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 63 54  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 51 48  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 59 58  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 64 47  clumping_factor 25 }
-L {  terrain_type  CAN_TER1 zone 1 if TINY_MAP base_size 3  elseif SMALL_MAP base_size 4  elseif MEDIUM_MAP base_size 4  elseif LARGE_MAP base_size 5  elseif HUGE_MAP base_size 6  else base_size 6  endif number_of_tiles 0 land_position 48 54  }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 58 46  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 64 45  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 55 43  clumping_factor 25 }
-L {  terrain_type  CAN_TER1 zone 1 if TINY_MAP base_size 3  elseif SMALL_MAP base_size 4  elseif MEDIUM_MAP base_size 4  elseif LARGE_MAP base_size 5  elseif HUGE_MAP base_size 6  else base_size 6  endif number_of_tiles 0 land_position 38 70  }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 63 53  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 53 55  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 67 45  clumping_factor 25 }
-L {  terrain_type  CAN_TER2 zone 2 if TINY_MAP base_size 3  elseif SMALL_MAP base_size 4  elseif MEDIUM_MAP base_size 4  elseif LARGE_MAP base_size 5  elseif HUGE_MAP base_size 6  else base_size 6  endif number_of_tiles 0 land_position 35 20  }
-L {  terrain_type  CAN_TER2 zone 2 if TINY_MAP base_size 3  elseif SMALL_MAP base_size 4  elseif MEDIUM_MAP base_size 4  elseif LARGE_MAP base_size 5  elseif HUGE_MAP base_size 6  else base_size 6  endif number_of_tiles 0 land_position 24 30  }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 54 43  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 58 48  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 54 51  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 53 51  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 54 44  clumping_factor 25 }
+L {  terrain_type  CAN_TER2 zone 2 if TINY_MAP base_size 3  elseif SMALL_MAP base_size 4  elseif MEDIUM_MAP base_size 4  elseif LARGE_MAP base_size 5  elseif HUGE_MAP base_size 6  else base_size 6  endif number_of_tiles 0 land_position 15 46  }
+L {  terrain_type  CAN_TER1 zone 1 if TINY_MAP base_size 3  elseif SMALL_MAP base_size 4  elseif MEDIUM_MAP base_size 4  elseif LARGE_MAP base_size 5  elseif HUGE_MAP base_size 6  else base_size 6  endif number_of_tiles 0 land_position 33 86  }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 65 43  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 59 43  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 58 52  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 53 50  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 66 51  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 63 43  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 64 55  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 60 44  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 62 49  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 59 46  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 56 50  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 67 44  clumping_factor 25 }
 L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 57 53  clumping_factor 25 }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 61 56  clumping_factor 25 }
-L {  terrain_type  CAN_TER2 zone 2 if TINY_MAP base_size 3  elseif SMALL_MAP base_size 4  elseif MEDIUM_MAP base_size 4  elseif LARGE_MAP base_size 5  elseif HUGE_MAP base_size 6  else base_size 6  endif number_of_tiles 0 land_position 34 16  }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 57 56  clumping_factor 25 }
+L {  terrain_type  CAN_TER1 zone 1 if TINY_MAP base_size 3  elseif SMALL_MAP base_size 4  elseif MEDIUM_MAP base_size 4  elseif LARGE_MAP base_size 5  elseif HUGE_MAP base_size 6  else base_size 6  endif number_of_tiles 0 land_position 13 54  }
+L {  terrain_type  CAN_TER1 zone 1 if TINY_MAP base_size 3  elseif SMALL_MAP base_size 4  elseif MEDIUM_MAP base_size 4  elseif LARGE_MAP base_size 5  elseif HUGE_MAP base_size 6  else base_size 6  endif number_of_tiles 0 land_position 16 55  }
 L {  terrain_type  CAN_TER2 zone 2 if TINY_MAP base_size 3  elseif SMALL_MAP base_size 4  elseif MEDIUM_MAP base_size 4  elseif LARGE_MAP base_size 5  elseif HUGE_MAP base_size 6  else base_size 6  endif number_of_tiles 0 land_position 39 34  }
-L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 62 45  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 65 49  clumping_factor 25 }
+L {  terrain_type  CAN_TER1 zone 1 if TINY_MAP base_size 3  elseif SMALL_MAP base_size 4  elseif MEDIUM_MAP base_size 4  elseif LARGE_MAP base_size 5  elseif HUGE_MAP base_size 6  else base_size 6  endif number_of_tiles 0 land_position 24 70  }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 57 54  clumping_factor 25 }
+L {  terrain_type  CAN_TER1 zone 1 if TINY_MAP base_size 3  elseif SMALL_MAP base_size 4  elseif MEDIUM_MAP base_size 4  elseif LARGE_MAP base_size 5  elseif HUGE_MAP base_size 6  else base_size 6  endif number_of_tiles 0 land_position 21 61  }
+L {  terrain_type  CAN_TER2 zone 2 other_zone_avoidance_distance 2 base_size 1 land_percent 6 land_position 31 32  left_border 12 right_border 50 top_border 12 bottom_border 12 clumping_factor -20 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 59 47  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 52 55  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 63 52  clumping_factor 25 }
+L {  terrain_type  CAN_TER2 zone 2 if TINY_MAP base_size 3  elseif SMALL_MAP base_size 4  elseif MEDIUM_MAP base_size 4  elseif LARGE_MAP base_size 5  elseif HUGE_MAP base_size 6  else base_size 6  endif number_of_tiles 0 land_position 42 41  }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 56 42  clumping_factor 25 }
+L {  terrain_type  CAN_TER1 zone 1 if TINY_MAP base_size 3  elseif SMALL_MAP base_size 4  elseif MEDIUM_MAP base_size 4  elseif LARGE_MAP base_size 5  elseif HUGE_MAP base_size 6  else base_size 6  endif number_of_tiles 0 land_position 18 56  }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 67 52  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 54 52  clumping_factor 25 }
+L {  terrain_type  CAN_TER2 zone 2 if TINY_MAP base_size 3  elseif SMALL_MAP base_size 4  elseif MEDIUM_MAP base_size 4  elseif LARGE_MAP base_size 5  elseif HUGE_MAP base_size 6  else base_size 6  endif number_of_tiles 0 land_position 16 45  }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 58 46  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 58 50  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 68 46  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 64 49  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 68 49  clumping_factor 25 }
+L {  terrain_type  CAN_TER2 zone 2 if TINY_MAP base_size 3  elseif SMALL_MAP base_size 4  elseif MEDIUM_MAP base_size 4  elseif LARGE_MAP base_size 5  elseif HUGE_MAP base_size 6  else base_size 6  endif number_of_tiles 0 land_position 12 46  }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 56 52  clumping_factor 25 }
+L {  terrain_type  CAN_TER2 zone 2 if TINY_MAP base_size 3  elseif SMALL_MAP base_size 4  elseif MEDIUM_MAP base_size 4  elseif LARGE_MAP base_size 5  elseif HUGE_MAP base_size 6  else base_size 6  endif number_of_tiles 0 land_position 13 46  }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 54 48  clumping_factor 25 }
+L {  terrain_type  CAN_TER2 zone 2 if TINY_MAP base_size 3  elseif SMALL_MAP base_size 4  elseif MEDIUM_MAP base_size 4  elseif LARGE_MAP base_size 5  elseif HUGE_MAP base_size 6  else base_size 6  endif number_of_tiles 0 land_position 41 39  }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 61 57  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 59 53  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 68 53  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 63 50  clumping_factor 25 }
+L {  terrain_type  CAN_TER2 zone 2 if TINY_MAP base_size 3  elseif SMALL_MAP base_size 4  elseif MEDIUM_MAP base_size 4  elseif LARGE_MAP base_size 5  elseif HUGE_MAP base_size 6  else base_size 6  endif number_of_tiles 0 land_position 40 37  }
 L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 56 46  clumping_factor 25 }
+L {  terrain_type  CAN_TER1 zone 1 if TINY_MAP base_size 3  elseif SMALL_MAP base_size 4  elseif MEDIUM_MAP base_size 4  elseif LARGE_MAP base_size 5  elseif HUGE_MAP base_size 6  else base_size 6  endif number_of_tiles 0 land_position 23 66  }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 61 45  clumping_factor 25 }
+L {  terrain_type  CAN_TER1 zone 1 if TINY_MAP base_size 3  elseif SMALL_MAP base_size 4  elseif MEDIUM_MAP base_size 4  elseif LARGE_MAP base_size 5  elseif HUGE_MAP base_size 6  else base_size 6  endif number_of_tiles 0 land_position 35 80  }
+L {  terrain_type  CAN_TER2 zone 2 if TINY_MAP base_size 3  elseif SMALL_MAP base_size 4  elseif MEDIUM_MAP base_size 4  elseif LARGE_MAP base_size 5  elseif HUGE_MAP base_size 6  else base_size 6  endif number_of_tiles 0 land_position 29 14  }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 53 52  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 58 54  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 62 57  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 69 47  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 59 52  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 57 47  clumping_factor 25 }
+L {  terrain_type  CAN_TER2 zone 2 if TINY_MAP base_size 3  elseif SMALL_MAP base_size 4  elseif MEDIUM_MAP base_size 4  elseif LARGE_MAP base_size 5  elseif HUGE_MAP base_size 6  else base_size 6  endif number_of_tiles 0 land_position 21 39  }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 55 48  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 57 57  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 60 41  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 58 55  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 68 50  clumping_factor 25 }
+L {  terrain_type  CAN_TER1 zone 1 if TINY_MAP base_size 3  elseif SMALL_MAP base_size 4  elseif MEDIUM_MAP base_size 4  elseif LARGE_MAP base_size 5  elseif HUGE_MAP base_size 6  else base_size 6  endif number_of_tiles 0 land_position 26 77  }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 55 53  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 55 45  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 66 55  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 66 56  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 64 51  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 51 51  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 66 49  clumping_factor 25 }
+L {  terrain_type  CAN_TER2 zone 2 if TINY_MAP base_size 3  elseif SMALL_MAP base_size 4  elseif MEDIUM_MAP base_size 4  elseif LARGE_MAP base_size 5  elseif HUGE_MAP base_size 6  else base_size 6  endif number_of_tiles 0 land_position 19 43  }
+L {  terrain_type  CAN_TER1 zone 1 if TINY_MAP base_size 3  elseif SMALL_MAP base_size 4  elseif MEDIUM_MAP base_size 4  elseif LARGE_MAP base_size 5  elseif HUGE_MAP base_size 6  else base_size 6  endif number_of_tiles 0 land_position 34 84  }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 53 54  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 61 59  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 65 47  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 56 49  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 51 50  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 56 45  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 55 54  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 60 45  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 69 51  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 53 51  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 2 number_of_tiles 0 land_position 61 50  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 60 59  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 62 50  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 64 43  clumping_factor 25 }
+L {  terrain_type  CAN_TER1 zone 1 if TINY_MAP base_size 3  elseif SMALL_MAP base_size 4  elseif MEDIUM_MAP base_size 4  elseif LARGE_MAP base_size 5  elseif HUGE_MAP base_size 6  else base_size 6  endif number_of_tiles 0 land_position 36 77  }
+L {  terrain_type  CAN_TER1 zone 1 if TINY_MAP base_size 3  elseif SMALL_MAP base_size 4  elseif MEDIUM_MAP base_size 4  elseif LARGE_MAP base_size 5  elseif HUGE_MAP base_size 6  else base_size 6  endif number_of_tiles 0 land_position 31 88  }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 58 48  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 57 44  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 63 48  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 62 43  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 2 number_of_tiles 0 land_position 60 49  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 52 50  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 58 58  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 61 55  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 54 55  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 57 48  clumping_factor 25 }
+L {  terrain_type  CAN_TER2 zone 2 if TINY_MAP base_size 3  elseif SMALL_MAP base_size 4  elseif MEDIUM_MAP base_size 4  elseif LARGE_MAP base_size 5  elseif HUGE_MAP base_size 6  else base_size 6  endif number_of_tiles 0 land_position 22 37  }
+L {  terrain_type  CAN_TER1 zone 1 if TINY_MAP base_size 3  elseif SMALL_MAP base_size 4  elseif MEDIUM_MAP base_size 4  elseif LARGE_MAP base_size 5  elseif HUGE_MAP base_size 6  else base_size 6  endif number_of_tiles 0 land_position 37 73  }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 63 53  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 65 50  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 65 45  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 59 48  clumping_factor 25 }
+L {  terrain_type  CAN_TER1 zone 1 if TINY_MAP base_size 3  elseif SMALL_MAP base_size 4  elseif MEDIUM_MAP base_size 4  elseif LARGE_MAP base_size 5  elseif HUGE_MAP base_size 6  else base_size 6  endif number_of_tiles 0 land_position 19 57  }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 56 48  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 54 56  clumping_factor 25 }
+L {  terrain_type  CAN_TER2 zone 2 if TINY_MAP base_size 3  elseif SMALL_MAP base_size 4  elseif MEDIUM_MAP base_size 4  elseif LARGE_MAP base_size 5  elseif HUGE_MAP base_size 6  else base_size 6  endif number_of_tiles 0 land_position 20 41  }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 62 47  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 65 58  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 51 49  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 65 56  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 65 44  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 69 50  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 52 52  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 62 56  clumping_factor 25 }
+L {  terrain_type  CAN_TER2 zone 2 if TINY_MAP base_size 3  elseif SMALL_MAP base_size 4  elseif MEDIUM_MAP base_size 4  elseif LARGE_MAP base_size 5  elseif HUGE_MAP base_size 6  else base_size 6  endif number_of_tiles 0 land_position 25 27  }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 68 54  clumping_factor 25 }
+L {  terrain_type  CAN_TER1 zone 1 if TINY_MAP base_size 3  elseif SMALL_MAP base_size 4  elseif MEDIUM_MAP base_size 4  elseif LARGE_MAP base_size 5  elseif HUGE_MAP base_size 6  else base_size 6  endif number_of_tiles 0 land_position 45 55  }
+L {  terrain_type  OPEN_TER base_size 2 number_of_tiles 0 land_position 59 49  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 63 59  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 56 51  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 51 52  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 51 47  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 53 49  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 60 58  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 59 41  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 55 47  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 58 57  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 58 49  clumping_factor 25 }
+L {  terrain_type  CAN_TER2 zone 2 if TINY_MAP base_size 3  elseif SMALL_MAP base_size 4  elseif MEDIUM_MAP base_size 4  elseif LARGE_MAP base_size 5  elseif HUGE_MAP base_size 6  else base_size 6  endif number_of_tiles 0 land_position 18 44  }
+L {  terrain_type  CAN_TER2 zone 2 if TINY_MAP base_size 3  elseif SMALL_MAP base_size 4  elseif MEDIUM_MAP base_size 4  elseif LARGE_MAP base_size 5  elseif HUGE_MAP base_size 6  else base_size 6  endif number_of_tiles 0 land_position 14 46  }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 55 56  clumping_factor 25 }
+L {  terrain_type  CAN_TER1 zone 1 if TINY_MAP base_size 3  elseif SMALL_MAP base_size 4  elseif MEDIUM_MAP base_size 4  elseif LARGE_MAP base_size 5  elseif HUGE_MAP base_size 6  else base_size 6  endif number_of_tiles 0 land_position 22 63  }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 62 55  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 62 53  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 59 59  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 60 56  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 52 54  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 62 45  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 2 number_of_tiles 0 land_position 60 51  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 61 48  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 55 51  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 61 58  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 68 55  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 66 44  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 61 56  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 58 53  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 2 number_of_tiles 0 land_position 61 51  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 65 57  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 66 48  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 59 56  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 64 58  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 61 47  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 54 45  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 54 43  clumping_factor 25 }
+L {  terrain_type  MDLND_TER base_elevation 4 base_size 1 land_position 58 75  left_border 6 right_border 6 top_border 57 bottom_border 7 clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 62 51  clumping_factor 25 }
+L {  terrain_type  CAN_TER2 zone 2 if TINY_MAP base_size 3  elseif SMALL_MAP base_size 4  elseif MEDIUM_MAP base_size 4  elseif LARGE_MAP base_size 5  elseif HUGE_MAP base_size 6  else base_size 6  endif number_of_tiles 0 land_position 33 14  }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 63 56  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 54 53  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 55 49  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 61 42  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 63 41  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 58 47  clumping_factor 25 }
+L {  terrain_type  CAN_TER1 zone 1 if TINY_MAP base_size 3  elseif SMALL_MAP base_size 4  elseif MEDIUM_MAP base_size 4  elseif LARGE_MAP base_size 5  elseif HUGE_MAP base_size 6  else base_size 6  endif number_of_tiles 0 land_position 41 61  }
+L {  terrain_type  OPEN_TER base_size 2 number_of_tiles 0 land_position 59 50  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 56 58  clumping_factor 25 }
+L {  terrain_type  CAN_TER2 zone 2 if TINY_MAP base_size 3  elseif SMALL_MAP base_size 4  elseif MEDIUM_MAP base_size 4  elseif LARGE_MAP base_size 5  elseif HUGE_MAP base_size 6  else base_size 6  endif number_of_tiles 0 land_position 32 13  }
+L {  terrain_type  CAN_TER2 zone 2 if TINY_MAP base_size 3  elseif SMALL_MAP base_size 4  elseif MEDIUM_MAP base_size 4  elseif LARGE_MAP base_size 5  elseif HUGE_MAP base_size 6  else base_size 6  endif number_of_tiles 0 land_position 31 12  }
+L {  terrain_type  CAN_TER1 zone 1 if TINY_MAP base_size 3  elseif SMALL_MAP base_size 4  elseif MEDIUM_MAP base_size 4  elseif LARGE_MAP base_size 5  elseif HUGE_MAP base_size 6  else base_size 6  endif number_of_tiles 0 land_position 25 73  }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 57 51  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 65 52  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 62 46  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 55 44  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 54 54  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 57 58  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 62 42  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 53 53  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 53 56  clumping_factor 25 }
+L {  terrain_type  MDLND_TER base_elevation 4 base_size 1 land_position 58 25  left_border 6 right_border 6 top_border 7 bottom_border 57 clumping_factor 25 }
+L {  terrain_type  CAN_TER2 zone 2 if TINY_MAP base_size 3  elseif SMALL_MAP base_size 4  elseif MEDIUM_MAP base_size 4  elseif LARGE_MAP base_size 5  elseif HUGE_MAP base_size 6  else base_size 6  endif number_of_tiles 0 land_position 47 46  }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 61 44  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 56 56  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 57 55  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 64 52  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 67 51  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 60 57  clumping_factor 25 }
+L {  terrain_type  CAN_TER1 zone 1 if TINY_MAP base_size 3  elseif SMALL_MAP base_size 4  elseif MEDIUM_MAP base_size 4  elseif LARGE_MAP base_size 5  elseif HUGE_MAP base_size 6  else base_size 6  endif number_of_tiles 0 land_position 46 55  }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 59 42  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 58 41  clumping_factor 25 }
+L {  terrain_type  CAN_TER1 zone 1 if TINY_MAP base_size 3  elseif SMALL_MAP base_size 4  elseif MEDIUM_MAP base_size 4  elseif LARGE_MAP base_size 5  elseif HUGE_MAP base_size 6  else base_size 6  endif number_of_tiles 0 land_position 14 54  }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 58 42  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 58 56  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 58 59  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 55 57  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 68 45  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 59 54  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 53 44  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 56 54  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 67 53  clumping_factor 25 }
+L {  terrain_type  CAN_TER1 zone 1 if TINY_MAP base_size 3  elseif SMALL_MAP base_size 4  elseif MEDIUM_MAP base_size 4  elseif LARGE_MAP base_size 5  elseif HUGE_MAP base_size 6  else base_size 6  endif number_of_tiles 0 land_position 38 70  }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 69 53  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 54 57  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 68 47  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 54 49  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 57 46  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 67 50  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 52 48  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 52 51  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 53 55  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 64 54  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 56 43  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 55 55  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 55 52  clumping_factor 25 }
+L {  terrain_type  CAN_TER2 zone 2 if TINY_MAP base_size 3  elseif SMALL_MAP base_size 4  elseif MEDIUM_MAP base_size 4  elseif LARGE_MAP base_size 5  elseif HUGE_MAP base_size 6  else base_size 6  endif number_of_tiles 0 land_position 46 45  }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 57 56  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 52 45  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 60 46  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 62 54  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 60 52  clumping_factor 25 }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 58 43  clumping_factor 25 }
+L {  terrain_type  CAN_TER1 zone 1 if TINY_MAP base_size 3  elseif SMALL_MAP base_size 4  elseif MEDIUM_MAP base_size 4  elseif LARGE_MAP base_size 5  elseif HUGE_MAP base_size 6  else base_size 6  endif number_of_tiles 0 land_position 50 54  }
+L {  terrain_type  CAN_TER1 zone 1 if TINY_MAP base_size 3  elseif SMALL_MAP base_size 4  elseif MEDIUM_MAP base_size 4  elseif LARGE_MAP base_size 5  elseif HUGE_MAP base_size 6  else base_size 6  endif number_of_tiles 0 land_position 12 54  }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 61 46  clumping_factor 25 }
+L {  terrain_type  CAN_TER2 zone 2 if TINY_MAP base_size 3  elseif SMALL_MAP base_size 4  elseif MEDIUM_MAP base_size 4  elseif LARGE_MAP base_size 5  elseif HUGE_MAP base_size 6  else base_size 6  endif number_of_tiles 0 land_position 23 34  }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 56 55  clumping_factor 25 }
+L {  terrain_type  CAN_TER1 zone 1 if TINY_MAP base_size 3  elseif SMALL_MAP base_size 4  elseif MEDIUM_MAP base_size 4  elseif LARGE_MAP base_size 5  elseif HUGE_MAP base_size 6  else base_size 6  endif number_of_tiles 0 land_position 40 63  }
+L {  terrain_type  OPEN_TER base_size 1 number_of_tiles 0 land_position 64 44  clumping_factor 25 }
+L {  terrain_type  CAN_TER2 zone 2 if TINY_MAP base_size 3  elseif SMALL_MAP base_size 4  elseif MEDIUM_MAP base_size 4  elseif LARGE_MAP base_size 5  elseif HUGE_MAP base_size 6  else base_size 6  endif number_of_tiles 0 land_position 24 30  }

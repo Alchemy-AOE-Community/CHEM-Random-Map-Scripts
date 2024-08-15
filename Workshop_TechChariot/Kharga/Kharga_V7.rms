@@ -16,21 +16,12 @@
 direct_placement
 #const L 32  /* Defining Land Creation Command */
 /* Defining Starting Scout */
-if LOW_RESOURCES
-nomad_resources
-  if REGICIDE
-  #const NOMAD_SCOUT        434   /* Nomad Scout is King (434) */
-  else
-  #const NOMAD_SCOUT        1602   /* Nomad Scout is HORSE_C (1602) */
-  effect_amount SET_ATTRIBUTE NOMAD_SCOUT ATTR_TRAITS 16
-  endif
+if REGICIDE
+#const KHARGA_SCOUT        434   /* Kharga Scout is King (434) */
 else
-  if REGICIDE
-  #const KHARGA_SCOUT        434   /* Kharga Scout is King (434) */
-  else
-  #const KHARGA_SCOUT        448   /* Kharga Scout is Scout (448) */
-  endif
+#const KHARGA_SCOUT        448   /* Kharga Scout is Scout (448) */
 endif
+
 
 /* Defining Terrain */
 #const V                  70    /* Defining Gravel */

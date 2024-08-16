@@ -31,7 +31,7 @@ Angle = [{0}; {90}];
 
 %Oasis Basic Parameters
 r  = [{0.3}; {0.4}];     %Aspect Ratio of the Oasis
-
+%ecc = [{0.9075}; {0.8285}];
 
 Oasis_Terrain = [{'B'} {'B'} {'B'} {'B'} {'B'} {'B'} ...
                  {'B'} {'B'} {'B'} {'B'} {'B'} {'B'} ...
@@ -68,7 +68,9 @@ end
 %
 
 RawLand = [R; Mountain];
-[cpl] = RMS_CPL_V6({1},{1},{0},[43 45 47],[175 180 185],Angle{i1},[0],[0.9*max(a)],2*r{i2}*0.70); %creating player lands
+%[cpl] = RMS_CPL_V6({1},{1},{0},[43 45 47],[175 180 185],Angle{i1},[0],[0.9*max(a)],2*r{i2}*0.70); %creating player lands
+[cpl] = RMS_CPL_V10([{r{i2}*max(a)*[1.05 1.10]}; {[43 45 47]}; {[175 180 185]}; {[Angle{i1}]}; {[-0.05 0 0.05]}; {sqrt(1-r{i2}^2)}],[{1}; {4}; {120}]);
+
 
 
 Combined = [SigComb; RawLand];

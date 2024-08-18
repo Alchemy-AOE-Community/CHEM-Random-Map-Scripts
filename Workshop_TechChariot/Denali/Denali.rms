@@ -1818,7 +1818,7 @@ set_place_for_every_player
 number_of_groups 3
 place_on_forest_zone
 temp_min_distance_group_placement 12
-actor_area_to_place_in 19
+actor_area_to_place_in 27
 avoid_actor_area 29
 }
 /* END_OBJECTS_AUTOSCRIBE */

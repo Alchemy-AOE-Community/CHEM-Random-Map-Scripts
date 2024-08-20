@@ -328,7 +328,7 @@ elseif MAPSIZE_LUDICROUS
     #define AT_LEAST_COLOSSAL
     #define AT_LEAST_INCREDIBLE
     #define AT_LEAST_MONSTROUS
-    /* and AT_LEAST_LUDCROUS - can simply use MAP_SIZE_LUDICROUS */
+    /* and AT_LEAST_LUDCROUS - can simply use MAPSIZE_LUDICROUS */
 endif
 
 
@@ -1695,24 +1695,191 @@ create_object STORM_DOG {
     set_scaling_to_map_size
     set_gaia_object_only
 }
-/* add relics TODO make more general, and test somewhat more than I currently have. */
+/* add relics TODO make more general, and test somewhat more than I currently have.
+    create_actor_area x y id radius
+    create_actor_area l/8 l/8 2000 l/8
+    create_actor_area 3l/8 l/8 2000 l/8
+    create_actor_area l/8 l/2 2001 l/8
+    create_actor_area l/8 7l/8 2002 l/8
+    create_actor_area 3l/8 7l/8 2002 l/8
+
+    168 -> 21
+    200 -> 25
+    220 -> 27.5
+    240 -> 30
+    252 -> 31.5
+    276 -> 34.5
+    300 -> 37.5
+    40
+    45
+    50
+    60
+ */
+if MAPSIZE_MINI
+    create_actor_area 10 10 2000 10
+    create_actor_area 30 10 2000 10
+    create_actor_area 15 40 2001 15
+    create_actor_area 10 70 2002 10
+    create_actor_area 30 70 2002 10
+elseif MAPSIZE_TINY
+    create_actor_area 15 15 2000 15
+    create_actor_area 45 15 2000 15
+    create_actor_area 15 60 2001 15
+    create_actor_area 15 105 2002 15
+    create_actor_area 45 105 2002 15
+elseif MAPSIZE_SMALL
+    create_actor_area 18 18 2000 18
+    create_actor_area 54 18 2000 18
+    create_actor_area 18 72 2001 18
+    create_actor_area 18 126 2002 18
+    create_actor_area 54 126 2002 18
+elseif MAPSIZE_MEDIUM
+    create_actor_area 21 21 2000 21
+    create_actor_area 63 21 2000 21
+    create_actor_area 21 84 2001 21
+    create_actor_area 21 147 2002 21
+    create_actor_area 63 147 2002 21
+elseif MAPSIZE_NORMAL
+    create_actor_area 25 25 2000 25
+    create_actor_area 75 25 2000 25
+    create_actor_area 25 100 2001 25
+    create_actor_area 25 175 2002 25
+    create_actor_area 75 175 2002 25
+elseif MAPSIZE_LARGE
+    create_actor_area 28 28 2000 28
+    create_actor_area 83 28 2000 28
+    create_actor_area 28 110 2001 28
+    create_actor_area 28 192 2002 28
+    create_actor_area 83 192 2002 28
+elseif MAPSIZE_HUGE
+    create_actor_area 30 30 2000 30
+    create_actor_area 90 30 2000 30
+    create_actor_area 30 120 2001 30
+    create_actor_area 30 210 2002 30
+    create_actor_area 90 210 2002 30
+elseif MAPSIZE_GIANT
+    create_actor_area 32 32 2000 32
+    create_actor_area 95 32 2000 32
+    create_actor_area 32 126 2001 32
+    create_actor_area 32 220 2002 32
+    create_actor_area 95 220 2002 32
+elseif MAPSIZE_MASSIVE
+    create_actor_area 35 35 2000 35
+    create_actor_area 104 35 2000 35
+    create_actor_area 35 138 2001 35
+    create_actor_area 35 241 2002 35
+    create_actor_area 104 241 2002 35
+elseif MAPSIZE_ENORMOUS
+    create_actor_area 38 38 2000 38
+    create_actor_area 113 38 2000 38
+    create_actor_area 38 150 2001 38
+    create_actor_area 38 262 2002 38
+    create_actor_area 113 262 2002 38
+elseif MAPSIZE_COLOSSAL
+    create_actor_area 40 40 2000 40
+    create_actor_area 120 40 2000 40
+    create_actor_area 40 160 2001 40
+    create_actor_area 40 280 2002 40
+    create_actor_area 120 280 2002 40
+elseif MAPSIZE_INCREDIBLE
+    create_actor_area 45 45 2000 45
+    create_actor_area 135 45 2000 45
+    create_actor_area 45 180 2001 45
+    create_actor_area 45 315 2002 45
+    create_actor_area 135 315 2002 45
+elseif MAPSIZE_MONSTROUS
+    create_actor_area 50 50 2000 50
+    create_actor_area 150 50 2000 50
+    create_actor_area 50 200 2001 50
+    create_actor_area 50 350 2002 50
+    create_actor_area 150 350 2002 50
+else /* MAPSIZE_LUDICROUS */
+    create_actor_area 60 60 2000 60
+    create_actor_area 180 60 2000 60
+    create_actor_area 60 240 2001 60
+    create_actor_area 60 420 2002 60
+    create_actor_area 180 420 2002 60
+endif
+/*
 create_object FLAG_A {
     terrain_to_place_on SNOW_HEAVY
     number_of_objects 9320
+    temp_min_distance_group_placement 1
     if AT_MOST_TINY
-       min_distance_to_players 30
+        min_distance_to_players 35
     elseif AT_LEAST_NORMAL
-       min_distance_to_players 40
+        min_distance_to_players 40
     else
         min_distance_to_players 35
     endif
     set_gaia_object_only
 }
+create_object FLAG_A {
+    number_of_objects 9320
+    actor_area_to_place_in 2000
+    set_gaia_object_only
+}
+create_object FLAG_B {
+    number_of_objects 9320
+    actor_area_to_place_in 2001
+    set_gaia_object_only
+}
+create_object FLAG_C {
+    number_of_objects 9320
+    actor_area_to_place_in 2002
+    set_gaia_object_only
+}
+*/
 create_object RELIC {
     terrain_to_place_on SNOW_HEAVY
-    number_of_objects 5
-    min_distance_to_players 50
-    temp_min_distance_group_placement 50
+    number_of_objects 2
+    actor_area_to_place_in 2000
+    if MAPSIZE_MINI
+        temp_min_distance_group_placement 19
+    elseif MAPSIZE_TINY
+        temp_min_distance_group_placement 29
+    elseif MAPSIZE_SMALL
+        temp_min_distance_group_placement 35
+    elseif MAPSIZE_MEDIUM
+        temp_min_distance_group_placement 41
+    elseif MAPSIZE_NORMAL
+        temp_min_distance_group_placement 49
+    elseif MAPSIZE_LARGE
+        temp_min_distance_group_placement 55
+    else
+        temp_min_distance_group_placement 60
+        number_of_objects 10 /* as many as will place */
+    endif
+}
+create_object RELIC {
+    terrain_to_place_on SNOW_HEAVY
+    actor_area_to_place_in 2001
+    if AT_LEAST_LARGE
+        temp_min_distance_group_placement 60
+        number_of_objects 6
+        set_circular_placement
+    endif
+}
+create_object RELIC {
+    terrain_to_place_on SNOW_HEAVY
+    number_of_objects 2
+    actor_area_to_place_in 2002
+    if MAPSIZE_MINI
+        temp_min_distance_group_placement 19
+    elseif MAPSIZE_TINY
+        temp_min_distance_group_placement 29
+    elseif MAPSIZE_SMALL
+        temp_min_distance_group_placement 35
+    elseif MAPSIZE_MEDIUM
+        temp_min_distance_group_placement 41
+    elseif MAPSIZE_NORMAL
+        temp_min_distance_group_placement 49
+    elseif MAPSIZE_LARGE
+        temp_min_distance_group_placement 55
+    else
+        temp_min_distance_group_placement 60
+        number_of_objects 10 /* as many as will place - no more guarantee of relic balance */
+    endif
 }
 /* 
 Old version

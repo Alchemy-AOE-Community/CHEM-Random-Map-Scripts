@@ -76,6 +76,7 @@ food situation: villagers can only gather from berries. Players do start with 2 
 
 First playtest notes: at 1000 wood per pile, wood ran out way too early (in castle age) - responded by quadrupling wood per pile to 4000. Shipwrecks remain at 1000 wood, and are lamable
 
+TODO adjusy relics - at time of writing, only have configured for 2 semi-general map sizes
 
 */
 <PLAYER_SETUP>
@@ -117,9 +118,219 @@ if NOMAD_START
 else
     direct_placement
 endif
-/* 
-Could consider having nomad_resources and force_nomad_treaty, with players starting near shipwrecks
-*/
+
+if MAPSIZE_MINI
+    /* AT_MOST_MINI can simply use MAPSIZE_MINI */
+    #define AT_MOST_TINY
+    #define AT_MOST_SMALL
+    #define AT_MOST_MEDIUM
+    #define AT_MOST_NORMAL
+    #define AT_MOST_LARGE
+    #define AT_MOST_HUGE
+    #define AT_MOST_GIANT
+    #define AT_MOST_MASSIVE
+    #define AT_MOST_ENORMOUS
+    #define AT_MOST_COLOSSAL
+    #define AT_MOST_INCREDIBLE
+    #define AT_MOST_MONSTROUS
+    /* and AT_MOST_LUDCROUS is always true */
+elseif MAPSIZE_TINY
+    #define AT_LEAST_TINY
+    
+    #define AT_MOST_TINY
+    #define AT_MOST_SMALL
+    #define AT_MOST_MEDIUM
+    #define AT_MOST_NORMAL
+    #define AT_MOST_LARGE
+    #define AT_MOST_HUGE
+    #define AT_MOST_GIANT
+    #define AT_MOST_MASSIVE
+    #define AT_MOST_ENORMOUS
+    #define AT_MOST_COLOSSAL
+    #define AT_MOST_INCREDIBLE
+    #define AT_MOST_MONSTROUS
+elseif MAPSIZE_SMALL
+    #define AT_LEAST_TINY
+    #define AT_LEAST_SMALL
+    
+    #define AT_MOST_SMALL
+    #define AT_MOST_MEDIUM
+    #define AT_MOST_NORMAL
+    #define AT_MOST_LARGE
+    #define AT_MOST_HUGE
+    #define AT_MOST_GIANT
+    #define AT_MOST_MASSIVE
+    #define AT_MOST_ENORMOUS
+    #define AT_MOST_COLOSSAL
+    #define AT_MOST_INCREDIBLE
+    #define AT_MOST_MONSTROUS
+elseif MAPSIZE_MEDIUM
+    #define AT_LEAST_TINY
+    #define AT_LEAST_SMALL
+    #define AT_LEAST_MEDIUM
+    
+    #define AT_MOST_MEDIUM
+    #define AT_MOST_NORMAL
+    #define AT_MOST_LARGE
+    #define AT_MOST_HUGE
+    #define AT_MOST_GIANT
+    #define AT_MOST_MASSIVE
+    #define AT_MOST_ENORMOUS
+    #define AT_MOST_COLOSSAL
+    #define AT_MOST_INCREDIBLE
+    #define AT_MOST_MONSTROUS
+elseif MAPSIZE_NORMAL
+    #define AT_LEAST_TINY
+    #define AT_LEAST_SMALL
+    #define AT_LEAST_MEDIUM
+    #define AT_LEAST_NORMAL
+    
+    #define AT_MOST_NORMAL
+    #define AT_MOST_LARGE
+    #define AT_MOST_HUGE
+    #define AT_MOST_GIANT
+    #define AT_MOST_MASSIVE
+    #define AT_MOST_ENORMOUS
+    #define AT_MOST_COLOSSAL
+    #define AT_MOST_INCREDIBLE
+    #define AT_MOST_MONSTROUS
+elseif MAPSIZE_LARGE
+    #define AT_LEAST_TINY
+    #define AT_LEAST_SMALL
+    #define AT_LEAST_MEDIUM
+    #define AT_LEAST_NORMAL
+    #define AT_LEAST_LARGE
+    
+    #define AT_MOST_LARGE
+    #define AT_MOST_HUGE
+    #define AT_MOST_GIANT
+    #define AT_MOST_MASSIVE
+    #define AT_MOST_ENORMOUS
+    #define AT_MOST_COLOSSAL
+    #define AT_MOST_INCREDIBLE
+    #define AT_MOST_MONSTROUS
+elseif MAPSIZE_HUGE
+    #define AT_LEAST_TINY
+    #define AT_LEAST_SMALL
+    #define AT_LEAST_MEDIUM
+    #define AT_LEAST_NORMAL
+    #define AT_LEAST_LARGE
+    #define AT_LEAST_HUGE
+    
+    #define AT_MOST_HUGE
+    #define AT_MOST_GIANT
+    #define AT_MOST_MASSIVE
+    #define AT_MOST_ENORMOUS
+    #define AT_MOST_COLOSSAL
+    #define AT_MOST_INCREDIBLE
+    #define AT_MOST_MONSTROUS
+elseif MAPSIZE_GIANT
+    #define AT_LEAST_TINY
+    #define AT_LEAST_SMALL
+    #define AT_LEAST_MEDIUM
+    #define AT_LEAST_NORMAL
+    #define AT_LEAST_LARGE
+    #define AT_LEAST_HUGE
+    #define AT_LEAST_GIANT
+    
+    #define AT_MOST_GIANT
+    #define AT_MOST_MASSIVE
+    #define AT_MOST_ENORMOUS
+    #define AT_MOST_COLOSSAL
+    #define AT_MOST_INCREDIBLE
+    #define AT_MOST_MONSTROUS
+elseif MAPSIZE_MASSIVE
+    #define AT_LEAST_TINY
+    #define AT_LEAST_SMALL
+    #define AT_LEAST_MEDIUM
+    #define AT_LEAST_NORMAL
+    #define AT_LEAST_LARGE
+    #define AT_LEAST_HUGE
+    #define AT_LEAST_GIANT
+    #define AT_LEAST_MASSIVE
+    
+    #define AT_MOST_MASSIVE
+    #define AT_MOST_ENORMOUS
+    #define AT_MOST_COLOSSAL
+    #define AT_MOST_INCREDIBLE
+    #define AT_MOST_MONSTROUS
+elseif MAPSIZE_ENORMOUS
+    #define AT_LEAST_TINY
+    #define AT_LEAST_SMALL
+    #define AT_LEAST_MEDIUM
+    #define AT_LEAST_NORMAL
+    #define AT_LEAST_LARGE
+    #define AT_LEAST_HUGE
+    #define AT_LEAST_GIANT
+    #define AT_LEAST_MASSIVE
+    #define AT_LEAST_ENORMOUS
+    
+    #define AT_MOST_ENORMOUS
+    #define AT_MOST_COLOSSAL
+    #define AT_MOST_INCREDIBLE
+    #define AT_MOST_MONSTROUS
+elseif MAPSIZE_COLOSSAL
+    #define AT_LEAST_TINY
+    #define AT_LEAST_SMALL
+    #define AT_LEAST_MEDIUM
+    #define AT_LEAST_NORMAL
+    #define AT_LEAST_LARGE
+    #define AT_LEAST_HUGE
+    #define AT_LEAST_GIANT
+    #define AT_LEAST_MASSIVE
+    #define AT_LEAST_ENORMOUS
+    #define AT_LEAST_COLOSSAL
+    
+    #define AT_MOST_COLOSSAL
+    #define AT_MOST_INCREDIBLE
+    #define AT_MOST_MONSTROUS
+elseif MAPSIZE_INCREDIBLE
+    #define AT_LEAST_TINY
+    #define AT_LEAST_SMALL
+    #define AT_LEAST_MEDIUM
+    #define AT_LEAST_NORMAL
+    #define AT_LEAST_LARGE
+    #define AT_LEAST_HUGE
+    #define AT_LEAST_GIANT
+    #define AT_LEAST_MASSIVE
+    #define AT_LEAST_ENORMOUS
+    #define AT_LEAST_COLOSSAL
+    #define AT_LEAST_INCREDIBLE
+    
+    #define AT_MOST_INCREDIBLE
+    #define AT_MOST_MONSTROUS
+elseif MAPSIZE_MONSTROUS
+    #define AT_LEAST_TINY
+    #define AT_LEAST_SMALL
+    #define AT_LEAST_MEDIUM
+    #define AT_LEAST_NORMAL
+    #define AT_LEAST_LARGE
+    #define AT_LEAST_HUGE
+    #define AT_LEAST_GIANT
+    #define AT_LEAST_MASSIVE
+    #define AT_LEAST_ENORMOUS
+    #define AT_LEAST_COLOSSAL
+    #define AT_LEAST_INCREDIBLE
+    #define AT_LEAST_MONSTROUS
+    
+    #define AT_MOST_MONSTROUS
+elseif MAPSIZE_LUDICROUS
+    /* AT_LEAST_MINI is always true */
+    #define AT_LEAST_TINY
+    #define AT_LEAST_SMALL
+    #define AT_LEAST_MEDIUM
+    #define AT_LEAST_NORMAL
+    #define AT_LEAST_LARGE
+    #define AT_LEAST_HUGE
+    #define AT_LEAST_GIANT
+    #define AT_LEAST_MASSIVE
+    #define AT_LEAST_ENORMOUS
+    #define AT_LEAST_COLOSSAL
+    #define AT_LEAST_INCREDIBLE
+    #define AT_LEAST_MONSTROUS
+    /* and AT_LEAST_LUDCROUS - can simply use MAP_SIZE_LUDICROUS */
+endif
+
 
 #const PILE_STONE 248
 #const PILE_GOLD 252 /* used later */
@@ -956,6 +1167,7 @@ if all else fails, avoid_actor_area works well (as an inverse actor area)
 if NOMAD_START /* TODO take the time to test nomad start - takes a long time, may be worthwhile to figure out a way to reduce. Likely the long time has to do with actor areas, so perhaps scale the number of shipwrecks with map size? */
     
     create_object TREE_REED { /* SHIPWRECK */
+        second_object RELIC
         number_of_objects 50
         temp_min_distance_group_placement 20
         terrain_to_place_on DLC_WETROCKBEACH 
@@ -1010,7 +1222,7 @@ if NOMAD_START /* TODO take the time to test nomad start - takes a long time, ma
         terrain_to_place_on WATER
         number_of_objects 2
     }
-else
+else /* non-nomad start */
     /* create TC and starting resources for snow players */
     create_object TOWN_CENTER {
         second_object CASTLE /* almost certainly a terrible idea */
@@ -1037,8 +1249,7 @@ else
     create_object TREE_J {
         second_object BUILDING
         actor_area_to_place_in 1003
-        number_of_objects 2
-        number_of_groups 10
+        number_of_groups 6
         set_place_for_every_player
         set_gaia_object_only
         set_tight_grouping
@@ -1073,6 +1284,7 @@ else
         terrain_to_place_on SNOW_HEAVY
     } */
     create_object TREE_REED {
+        second_object RELIC
         set_place_for_every_player
         find_closest
         actor_area_to_place_in 1003
@@ -1094,6 +1306,7 @@ else
     }
     create_object TREE_REED {
         terrain_to_place_on DLC_WETROCKBEACH
+        second_object RELIC
         find_closest
         set_circular_placement
         actor_area_to_place_in 1020
@@ -1112,7 +1325,7 @@ else
         min_distance_group_placement 2
         max_distance_to_other_zones 1
     }
-    create_object TREE_J {
+    create_object TREE_J { /* wood piles placed near the shipwrecks */
         second_object BUILDING
         set_place_for_every_player
         number_of_objects 2
@@ -1144,6 +1357,7 @@ else
     create_object SCOUT {
         set_place_for_every_player
         terrain_to_place_on DIRT_MUD
+        actor_area_to_place_in 1020
         min_distance_to_players 7
         max_distance_to_players 9
     }
@@ -1171,15 +1385,16 @@ else
         max_distance_to_other_zones 10
     }
 
-    create_object TREE_J { /* this breaks in stress tests */
+    create_object TREE_J { /* wood piles for mud-based players - this breaks in stress tests */
         second_object BUILDING
         set_place_for_every_player
-        number_of_objects 2
+        number_of_objects 3
         actor_area_to_place_in 1020
-        min_distance_to_players 7
+        min_distance_to_players 6
         max_distance_to_players 14
         set_gaia_object_only
-        min_distance_group_placement 2
+        min_distance_group_placement 1
+        temp_min_distance_group_placement 6
         max_distance_to_other_zones 6
         terrain_to_place_on DIRT_MUD
 
@@ -1479,6 +1694,25 @@ create_object STORM_DOG {
     number_of_objects 1
     set_scaling_to_map_size
     set_gaia_object_only
+}
+/* add relics TODO make more general, and test somewhat more than I currently have. */
+create_object FLAG_A {
+    terrain_to_place_on SNOW_HEAVY
+    number_of_objects 9320
+    if AT_MOST_TINY
+       min_distance_to_players 30
+    elseif AT_LEAST_NORMAL
+       min_distance_to_players 40
+    else
+        min_distance_to_players 35
+    endif
+    set_gaia_object_only
+}
+create_object RELIC {
+    terrain_to_place_on SNOW_HEAVY
+    number_of_objects 5
+    min_distance_to_players 50
+    temp_min_distance_group_placement 50
 }
 /* 
 Old version

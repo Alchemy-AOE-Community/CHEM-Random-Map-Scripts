@@ -341,6 +341,12 @@ I think that the wood pile is also too small, but that may be due to popular mod
 #const STORM_DOG 862 /* the optional bird replacement. */
 #const TREE_REED 1350
 #const BUILDING 1639
+
+ #const BLOOD_SMALL 1611
+ #const BLOOD_LARGE 1612
+
+#const OFF_GRID 647
+#const ON_GRID 278 /* 278 - dead fish trap; 1291 - Invisible object that keeps player alive */
 /* 
 
 Following code is taken from Spiny Forest from alchemy league 
@@ -1162,8 +1168,8 @@ generic objects in generic actor areas: minimize commands between actor area cre
 
 if all else fails, avoid_actor_area works well (as an inverse actor area)
 */
-if NOMAD_START /* TODO take the time to test nomad start - takes a long time, may be worthwhile to figure out a way to reduce. Likely the long time has to do with actor areas, so perhaps scale the number of shipwrecks with map size? */
-    
+if NOMAD_START /* TODO take the time to test nomad start */
+
     create_object TREE_REED { /* SHIPWRECK */
         second_object RELIC
         number_of_objects 50
@@ -1171,49 +1177,61 @@ if NOMAD_START /* TODO take the time to test nomad start - takes a long time, ma
         terrain_to_place_on DLC_WETROCKBEACH 
         set_gaia_object_only
         actor_area 10
-        actor_area_radius 9
+        actor_area_radius 17
+        resource_delta 1000 /* an additional 1000 wood to total 2000 */
     }
-    
+    create_object ON_GRID {
+        number_of_objects 9320
+        set_scaling_to_map_size
+        avoid_actor_area 10
+        actor_area 11
+        actor_area_radius 2
+        temp_min_distance_group_placement 1
+        resource_delta -60
+    }
     create_object VILLAGER {
         set_place_for_every_player
         temp_min_distance_group_placement 10
-        actor_area_to_place_in 10
+        avoid_actor_area 11
         min_distance_group_placement 1
         max_distance_to_other_zones 2
     }
     create_object TREE_J { /* pile of wood */
         second_object BUILDING
-        actor_area_to_place_in 10
-        number_of_objects 2
-        set_place_for_every_player
-        number_of_groups 3
+        avoid_actor_area 11
+        number_of_groups 20
+        set_scaling_to_map_size
+        temp_min_distance_group_placement 8
+        min_distance_group_placement 2
         set_loose_grouping
         set_gaia_object_only
         max_distance_to_other_zones 3
     }
-
-    create_object DLC_ORANGEBUSH { /* goods */
-        actor_area_to_place_in 10
-        number_of_objects 4
-        set_place_for_every_player
-        number_of_groups 3
-        set_loose_grouping
-        set_gaia_object_only
-        resource_delta 375 /* to 500 */
-        max_distance_to_other_zones 3
-    }
-
     create_object ROCK_GOLD {
-        actor_area_to_place_in 10
-        number_of_objects 2
-        set_place_for_every_player
-        number_of_groups 3
+        avoid_actor_area 11
+        number_of_groups 6
+        min_distance_group_placement 2
+        temp_min_distance_group_placement 10
+        avoid_forest_zone 2
+        set_scaling_to_map_size
         set_tight_grouping
         set_gaia_object_only
         /* resource_delta 999 unneeded due to rock gold having 800 gold in it already. */
         max_distance_to_other_zones 3
     } 
-    /* TODO test fishing ships */
+    create_object DLC_ORANGEBUSH { 
+        avoid_actor_area 11
+        number_of_objects 4
+        number_of_groups 30
+        min_distance_group_placement 1
+        temp_min_distance_group_placement 8
+        avoid_forest_zone 2
+        set_scaling_to_map_size
+        set_loose_grouping
+        set_gaia_object_only
+        resource_delta 375 /* to 500 */
+        max_distance_to_other_zones 3
+    }
     create_object FISHING_SHIP {
         set_place_for_every_player
         ignore_terrain_restrictions
@@ -1595,11 +1613,6 @@ Can use find_closest_to_map_center  find_closest_to_map_edge
 force_placement
 
  */
- #const BLOOD_SMALL 1611
- #const BLOOD_LARGE 1612
-
-#const OFF_GRID 647
-#const ON_GRID 278 /* 278 - dead fish trap; 1291 - Invisible object that keeps player alive */
 /*
 create_object OFF_GRID {
     second_object BLOOD_LARGE

@@ -28,11 +28,10 @@ katabatic winds evaporate water/ice/snow (can reach over 200 mph)
 
 I think I may want to craft out a scenario editor map first to get a good idea of what I want it to look like
 
-TODO ensure wood sources aren't deletable (there likely won't be much wood anyways)
-determine a good number of shipwrecks and amount of resources needed for them.
-Make player starts (either Vils starting near shipwrecks, or alternate between valleys/glaciers) - probably have the nomad start for non-standard team formations (like FFAs), alternate between valley/glaciers for 1v1,2v2,3v3,4v4.
+wood sources aren't deletable (there likely won't be much wood anyways) - except shipwrecks, which have a relic placed as a second object (making laming much more difficult)
 
-issue: map is very easily lamed: resource nodes can be destroyed by building on top of them.
+TODO nomad start may need some adjustment
+
 
 Blood Falls is really small - basically a tongue on the snow that moves onto dry ground (a very thin strip - like one or two tiles) that then goes onto the water (perhaps red, icy shallows)
 
@@ -76,7 +75,6 @@ food situation: villagers can only gather from berries. Players do start with 2 
 
 First playtest notes: at 1000 wood per pile, wood ran out way too early (in castle age) - responded by quadrupling wood per pile to 4000. Shipwrecks remain at 1000 wood, and are lamable
 
-TODO adjusy relics - at time of writing, only have configured for 2 semi-general map sizes
 
 */
 <PLAYER_SETUP>
@@ -1690,30 +1688,19 @@ create_object GOLD {
     avoid_actor_area 10
     set_place_for_every_player */
 }
+/* It's a stormy area, with very strong winds. */
 create_object STORM_DOG {
     number_of_objects 1
     set_scaling_to_map_size
     set_gaia_object_only
 }
-/* add relics TODO make more general, and test somewhat more than I currently have.
+/* add relics
     create_actor_area x y id radius
     create_actor_area l/8 l/8 2000 l/8
     create_actor_area 3l/8 l/8 2000 l/8
     create_actor_area l/8 l/2 2001 l/8
     create_actor_area l/8 7l/8 2002 l/8
     create_actor_area 3l/8 7l/8 2002 l/8
-
-    168 -> 21
-    200 -> 25
-    220 -> 27.5
-    240 -> 30
-    252 -> 31.5
-    276 -> 34.5
-    300 -> 37.5
-    40
-    45
-    50
-    60
  */
 if MAPSIZE_MINI
     create_actor_area 10 10 2000 10
@@ -1881,143 +1868,3 @@ create_object RELIC {
         number_of_objects 10 /* as many as will place - no more guarantee of relic balance */
     endif
 }
-/* 
-Old version
-create_object ON_GRID {
-    /* second_object FLAG_C */
-    resource_delta -60
-    find_closest_to_map_edge
-    number_of_objects 10
-    temp_min_distance_group_placement 2
-    terrain_to_place_on ICE
-    place_on_specific_land_id 1
-    actor_area 100
-    actor_area_radius 3
-}
-create_object ON_GRID {
-    /* second_object FLAG_C */
-    resource_delta -60
-    find_closest_to_map_center
-    number_of_objects 10 /* TODO may need different amounts for different map sizes */
-    temp_min_distance_group_placement 2
-    terrain_to_place_on SNOW_HEAVY
-    place_on_specific_land_id 1
-    actor_area 101
-    actor_area_radius 3
-}
-create_object ON_GRID {
-    /* second_object FLAG_A */
-    resource_delta -60
-    place_on_specific_land_id 1
-    find_closest_to_map_center
-    number_of_objects 9320
-    temp_min_distance_group_placement 2
-    actor_area 102
-    if TINY_MAP
-        actor_area_radius 6
-    else
-        actor_area_radius 7
-    endif
-    avoid_actor_area 100
-    avoid_actor_area 101
-    terrain_to_place_on DIRT_MUD
-}
-create_object GOLD {
-    second_object BLOOD_SMALL
-    place_on_specific_land_id 1
-    number_of_objects 32
-    terrain_to_place_on DIRT_MUD
-    avoid_actor_area 102
-    find_closest_to_map_center
-    temp_min_distance_group_placement 1
-    
-    actor_area 103
-    actor_area_radius 3
-
-}
-create_object GOLD {
-    second_object BLOOD_SMALL
-    place_on_specific_land_id 1
-    number_of_objects 32
-    terrain_to_place_on SNOW_HEAVY
-    avoid_actor_area 102
-    actor_area_to_place_in 103
-    find_closest_to_map_center
-    temp_min_distance_group_placement 1
-    
-
-}
-create_object ON_GRID {
-    second_object BLOOD_SMALL
-    /* second_object FLAG_A */
-    resource_delta -60
-    place_on_specific_land_id 1
-    number_of_objects 32
-    terrain_to_place_on ICE
-    avoid_actor_area 102
-    actor_area_to_place_in 103
-    find_closest_to_map_center
-    
-    actor_area 104
-    actor_area_radius 5
-}
-create_object GOLD {
-    second_object BLOOD_SMALL
-    place_on_specific_land_id 1
-    number_of_objects 99
-    terrain_to_place_on ICE
-    avoid_actor_area 102
-    avoid_actor_area 103
-    actor_area_to_place_in 104
-    actor_area 105
-    actor_area_radius 3
-    temp_min_distance_group_placement 1
-}
-create_object GOLD {
-    second_object BLOOD_SMALL
-    place_on_specific_land_id 1
-    number_of_objects 99
-    terrain_to_place_on ICE
-    actor_area_to_place_in 105
-    temp_min_distance_group_placement 1
-}
-create_object OFF_GRID {
-    place_on_specific_land_id 1
-    second_object BLOOD_LARGE
-    number_of_objects 200
-    number_of_groups 99
-    actor_area_to_place_in 100
-    force_placement
-    group_placement_radius 2
-    avoid_actor_area 102
-}
-create_object OFF_GRID {
-    place_on_specific_land_id 1
-    second_object BLOOD_LARGE
-    number_of_objects 200
-    number_of_groups 99
-    actor_area_to_place_in 103
-    force_placement
-    group_placement_radius 2
-    avoid_actor_area 102
-}
-create_object OFF_GRID {
-    place_on_specific_land_id 1
-    second_object BLOOD_LARGE
-    number_of_objects 200
-    number_of_groups 99
-    actor_area_to_place_in 104
-    force_placement
-    group_placement_radius 2
-    avoid_actor_area 102
-}
-create_object OFF_GRID {
-    place_on_specific_land_id 1
-    second_object BLOOD_LARGE
-    number_of_objects 200
-    number_of_groups 99
-    actor_area_to_place_in 105
-    force_placement
-    group_placement_radius 2
-}
-*/

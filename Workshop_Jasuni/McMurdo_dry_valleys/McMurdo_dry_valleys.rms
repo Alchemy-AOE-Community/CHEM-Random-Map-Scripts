@@ -66,11 +66,16 @@ idea: players on the snow start with a different setup than players on the bedro
 Giving the snowbank players a castle (essentially the back player) should give them extra strategic options, since they would have an easier time providing support with their unique unit or getting their UT than other players will. 
 
 TCs have been moved farther from shore (as per feedback), but I may consider undoing the special system I've set up in favor of always using the natural player spot.
-TODO consider moving neutral gold to snow terrain? There may be advantages to having the elevated terrain lack resources (would make good farmland, for example, since little else would want to be there). The iron from blood falls would also be under a glacier, so there is some logical reason for the snow to be on the snow.
+TODO consider moving/adding neutral gold to snow terrain? There may be advantages to having the elevated terrain lack resources (would make good farmland, for example, since little else would want to be there). The iron from blood falls would also be under a glacier, so there is some logical reason for the gold to be on the snow.
 
-known issue: wood piles can be lamed
 
 TODO had a generation where relatively little gold spawned on Bonney lake. It appears that how much gold spawns is somewhat inconsistent, with it sometimes spawning on the whole lake and sometimes missing large portions of it.
+
+food situation: villagers can only gather from berries. Players do start with 2 fishing ships (to help with the start) and +100 wood (to remove need to gather from straggler trees, which players do not have).
+
+
+First playtest notes: at 1000 wood per pile, wood ran out way too early (in castle age) - responded by quadrupling wood per pile to 4000. Shipwrecks remain at 1000 wood, and are lamable
+
 
 */
 <PLAYER_SETUP>
@@ -125,16 +130,15 @@ I think that the wood pile is also too small, but that may be due to popular mod
 #const ROCK_GOLD 841
 #const ROCK_STONE 839
 #const STORM_DOG 862 /* the optional bird replacement. */
+#const TREE_REED 1350
+#const BUILDING 1639
 /* 
 
 Following code is taken from Spiny Forest from alchemy league 
-TODO go through and determine what all of these changes are doing and how they work.
 
 Not certain what these first 3 lines are doing yet. Guess is error, change name of forage bush, error
 */
-effect_amount SET_ATTRIBUTE REED_TREE ATTR_NAME_ID 5323
 effect_amount SET_ATTRIBUTE FORAGE ATTR_NAME_ID 5324
-effect_amount SET_ATTRIBUTE REED_TREE ATTR_DEAD_ID 1350 /* Tree (Reeds) - REED_TREE is undefined, so this line doesn't do anything. */
 
 /* make the penguin mostly harmless */
 effect_amount GAIA_UPGRADE_UNIT SHEEP DLC_PENGUIN 0 /* changed from PENGUIN to DLC_PENGUIN b/c PENGUIN is undefined */
@@ -154,26 +158,37 @@ effect_amount SET_ATTRIBUTE DLC_OSTRICH ATTR_NAME_ID 5734
 effect_amount SET_ATTRIBUTE DLC_OSTRICH ATTR_ICON_ID 157
 /* effect_amount SET_ATTRIBUTE DLC_OSTRICH ATTR_DEAD_GRAPHIC 641 */
 
+/* building object, used to create a forest foundation terrain 
+create_object BUILDING
+{
+  second_object OAKTREE
+} */
+effect_percent SET_ATTRIBUTE BUILDING ATTR_RADIUS_1 50 /* make it a 1x1 object */
+effect_percent SET_ATTRIBUTE BUILDING ATTR_RADIUS_2 50 /* make it a 1x1 object */
+effect_amount SET_ATTRIBUTE BUILDING ATTR_FOUNDATION_TERRAIN 21 /* snow forest */
+
+
 /* wood piles */
 effect_amount GAIA_SET_ATTRIBUTE TREE_J ATTR_STANDING_GRAPHIC 8244
 effect_amount GAIA_SET_ATTRIBUTE TREE_J ATTR_WALKING_GRAPHIC 8244
 effect_amount GAIA_SET_ATTRIBUTE TREE_J ATTR_DYING_GRAPHIC 8244
 effect_amount GAIA_SET_ATTRIBUTE TREE_J ATTR_DEAD_GRAPHIC 8244
-effect_amount GAIA_SET_ATTRIBUTE TREE_J ATTR_STORAGE_VALUE 1000
+effect_amount GAIA_SET_ATTRIBUTE TREE_J ATTR_STORAGE_VALUE 4000
 effect_amount SET_ATTRIBUTE TREE_J ATTR_NAME_ID 5323
 effect_amount SET_ATTRIBUTE TREE_J ATTR_ICON_ID 32
 effect_amount SET_ATTRIBUTE TREE_J ATTR_DEAD_ID -1 /* remove stump */
 effect_amount SET_ATTRIBUTE TREE_J ATTR_HITPOINTS 10 /* remove stump */
 
 /* shipwrecks */
-effect_amount GAIA_SET_ATTRIBUTE TREE_K ATTR_STANDING_GRAPHIC 4354
-effect_amount GAIA_SET_ATTRIBUTE TREE_K ATTR_WALKING_GRAPHIC 4354
-effect_amount GAIA_SET_ATTRIBUTE TREE_K ATTR_DYING_GRAPHIC 4354
-effect_amount GAIA_SET_ATTRIBUTE TREE_K ATTR_STORAGE_VALUE 1000
-effect_amount SET_ATTRIBUTE TREE_K ATTR_NAME_ID 5603 /* "Shipwreck A" 729 - don't know what this changes it to TODO explore possibility of making a modded name for this? */
-effect_amount SET_ATTRIBUTE TREE_K ATTR_TERRAIN_ID 7 /* all - water terrains */
-/* effect_amount GAIA_SET_ATTRIBUTE TREE_K ATTR_DEAD_GRAPHIC 4354 */
-effect_amount SET_ATTRIBUTE TREE_K ATTR_DEAD_ID -1
+effect_amount GAIA_SET_ATTRIBUTE TREE_REED ATTR_STANDING_GRAPHIC 4354
+effect_amount GAIA_SET_ATTRIBUTE TREE_REED ATTR_WALKING_GRAPHIC 4354
+effect_amount GAIA_SET_ATTRIBUTE TREE_REED ATTR_DYING_GRAPHIC 4354
+effect_amount GAIA_SET_ATTRIBUTE TREE_REED ATTR_STORAGE_VALUE 1000
+effect_amount SET_ATTRIBUTE TREE_REED ATTR_NAME_ID 5603 /* "Shipwreck A" 729 - don't know what this changes it to TODO explore possibility of making a modded name for this? */
+effect_amount SET_ATTRIBUTE TREE_REED ATTR_TERRAIN_ID 7 /* all - water terrains */
+/* effect_amount GAIA_SET_ATTRIBUTE TREE_REED ATTR_DEAD_GRAPHIC 4354 */
+effect_amount SET_ATTRIBUTE TREE_REED ATTR_DEAD_ID -1
+effect_amount SET_ATTRIBUTE TREE_REED ATTR_FOUNDATION_TERRAIN 91 /* DLC_REEDSBEACH - does not work  */
 
 effect_amount SET_ATTRIBUTE SHIPWRECK ATTR_HITPOINTS 0
 
@@ -213,6 +228,8 @@ effect_amount SET_ATTRIBUTE MARLIN1 ATTR_ICON_ID 282 */
 effect_amount SET_ATTRIBUTE GOLD ATTR_TERRAIN_ID 0 /* 0 is all, 7 is All - water, foot dust */
 /*
 effect_amount SET_ATTRIBUTE STONE ATTR_TERRAIN_ID 7  0 is all, 7 is All - water, foot dust */
+
+effect_amount MOD_RESOURCE AMOUNT_STARTING_WOOD ATTR_ADD 100
 
 <LAND_GENERATION>
 /* 
@@ -350,9 +367,9 @@ if NOMAD_START
     }
 else
     /* TODO currently spawns first player in the back - should I reverse this? */
-    if 2_PLAYER_GAME /* TODO randomize between snow start and bedrock start */
+    if 2_PLAYER_GAME 
         start_random 
-            percent_chance 50 #define SNOW_START /* TODO create bedrock start */
+            percent_chance 50 #define SNOW_START
         end_random 
         if SNOW_START
             create_land {
@@ -936,9 +953,9 @@ generic objects in generic actor areas: minimize commands between actor area cre
 
 if all else fails, avoid_actor_area works well (as an inverse actor area)
 */
-if NOMAD_START /* TODO take the time to test nomad start */
+if NOMAD_START /* TODO take the time to test nomad start - takes a long time, may be worthwhile to figure out a way to reduce. Likely the long time has to do with actor areas, so perhaps scale the number of shipwrecks with map size? */
     
-    create_object TREE_K { /* SHIPWRECK */
+    create_object TREE_REED { /* SHIPWRECK */
         number_of_objects 50
         temp_min_distance_group_placement 20
         terrain_to_place_on DLC_WETROCKBEACH 
@@ -955,6 +972,7 @@ if NOMAD_START /* TODO take the time to test nomad start */
         max_distance_to_other_zones 2
     }
     create_object TREE_J { /* pile of wood */
+        second_object BUILDING
         actor_area_to_place_in 10
         number_of_objects 2
         set_place_for_every_player
@@ -985,7 +1003,13 @@ if NOMAD_START /* TODO take the time to test nomad start */
         /* resource_delta 999 unneeded due to rock gold having 800 gold in it already. */
         max_distance_to_other_zones 3
     } 
-
+    /* TODO test fishing ships */
+    create_object FISHING_SHIP {
+        set_place_for_every_player
+        ignore_terrain_restrictions
+        terrain_to_place_on WATER
+        number_of_objects 2
+    }
 else
     /* create TC and starting resources for snow players */
     create_object TOWN_CENTER {
@@ -1011,6 +1035,7 @@ else
         set_circular_placement
     }
     create_object TREE_J {
+        second_object BUILDING
         actor_area_to_place_in 1003
         number_of_objects 2
         number_of_groups 10
@@ -1047,7 +1072,7 @@ else
         max_distance_to_other_zones 5
         terrain_to_place_on SNOW_HEAVY
     } */
-    create_object TREE_K {
+    create_object TREE_REED {
         set_place_for_every_player
         find_closest
         actor_area_to_place_in 1003
@@ -1067,7 +1092,7 @@ else
         actor_area 1020
         actor_area_radius 45
     }
-    create_object TREE_K {
+    create_object TREE_REED {
         terrain_to_place_on DLC_WETROCKBEACH
         find_closest
         set_circular_placement
@@ -1088,6 +1113,7 @@ else
         max_distance_to_other_zones 1
     }
     create_object TREE_J {
+        second_object BUILDING
         set_place_for_every_player
         number_of_objects 2
         set_loose_grouping
@@ -1146,6 +1172,7 @@ else
     }
 
     create_object TREE_J { /* this breaks in stress tests */
+        second_object BUILDING
         set_place_for_every_player
         number_of_objects 2
         actor_area_to_place_in 1020
@@ -1165,7 +1192,7 @@ else
         actor_area 1020
         actor_area_radius 45
     }
-    create_object TREE_K {
+    create_object TREE_REED {
         terrain_to_place_on DLC_WETROCKBEACH
         find_closest
         set_circular_placement
@@ -1335,6 +1362,15 @@ else
         terrain_to_place_on SNOW_HEAVY
         avoid_actor_area 13
         actor_area_to_place_in 1003 /* ensures only snow players get this scout */
+    }
+
+    create_object FISHING_SHIP {
+        set_place_for_every_player
+        find_closest
+        set_circular_placement
+        ignore_terrain_restrictions
+        terrain_to_place_on WATER
+        number_of_objects 2
     }
 endif
 

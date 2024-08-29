@@ -1,10 +1,13 @@
 /*
-	CHENA HOT SPRINGS V1 by XingXing
+CHENA HOT SPRINGS V1 by XingXing
     July 2024
 */
+/* Licensed for Exclusive Competitive Use in Alchemy League Season 4 */
+/* Component Specification: https://github.com/Alchemy-AOE-Community/CHEM-Published-Specifications/blob/download-to-click-links/SCRIPTING/ALASKA/CHEM-CSRM-AK-01.pdf */
+
 
 /* Removing Trade Carts and Cogs for Multi-team Games */
-if 2_TEAM_GAME
+if LOW_RESOURCES
 else
 #const TRADE_CART_ENABLER 161
 #const TRADE_COG_ENABLER 180

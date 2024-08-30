@@ -8,7 +8,6 @@ CHENA HOT SPRINGS V1 by XingXing
 
 /* Removing Trade Carts and Cogs for Multi-team Games */
 if LOW_RESOURCES
-else
 #const TRADE_CART_ENABLER 161
 #const TRADE_COG_ENABLER 180
 #const TRADE_CARAVAN_ENABLER 48

@@ -1069,6 +1069,24 @@ if 2_PLAYER_GAME
         number_of_clumps 32
 	}
 endif
+if 3_PLAYER_GAME
+
+    create_elevation 5
+	{
+		enable_balanced_elevation
+		base_terrain PLAYER_LAND_A
+		number_of_tiles 350
+        number_of_clumps 32
+	}
+	
+	    create_elevation 5
+	{
+		enable_balanced_elevation
+		base_terrain PLAYER_LAND_B
+		number_of_tiles 350
+        number_of_clumps 32
+	}
+endif
 if 4_PLAYER_GAME
     create_elevation 6
 	{
@@ -1086,7 +1104,41 @@ if 4_PLAYER_GAME
         number_of_clumps 111
 	}
 	endif
+	if 5_PLAYER_GAME
+    create_elevation 6
+	{
+		enable_balanced_elevation
+		base_terrain PLAYER_LAND_A
+		number_of_tiles 1111
+        number_of_clumps 111
+	}
+	
+	    create_elevation 6
+	{
+		enable_balanced_elevation
+		base_terrain PLAYER_LAND_B
+		number_of_tiles 1111
+        number_of_clumps 111
+	}
+	endif
 if 6_PLAYER_GAME
+    create_elevation 6
+	{
+		enable_balanced_elevation
+		base_terrain PLAYER_LAND_A
+		number_of_tiles 2400
+        number_of_clumps 240
+	}
+	
+	    create_elevation 6
+	{
+		enable_balanced_elevation
+		base_terrain PLAYER_LAND_B
+		number_of_tiles 2400
+        number_of_clumps 240
+	}
+	endif
+	if 7_PLAYER_GAME
     create_elevation 6
 	{
 		enable_balanced_elevation
@@ -3329,6 +3381,7 @@ create_object FORAGE
   avoid_forest_zone 3
   min_distance_to_map_edge 4
   max_distance_to_other_zones 4
+  min_distance_group_placement 3
 }
 
 create_object DEER
@@ -3355,15 +3408,33 @@ create_object GOLD
   group_placement_radius     3
   set_tight_grouping
   set_gaia_object_only
-  temp_min_distance_group_placement  26
+  temp_min_distance_group_placement  24
+  min_distance_to_players 10
   actor_area 7041
   actor_area_radius 8
   terrain_to_place_on SNOW_STRONG
   avoid_forest_zone 3
   min_distance_to_map_edge 4
   max_distance_to_other_zones 4
-  avoid_actor_area 7039
-  avoid_actor_area 7040
+  min_distance_group_placement 3
+}
+
+create_object STONE
+{
+  number_of_objects          4
+  number_of_groups	999
+  group_placement_radius     3
+  set_tight_grouping
+  set_gaia_object_only
+  temp_min_distance_group_placement  24
+  min_distance_to_players 10
+  actor_area 7041
+  actor_area_radius 8
+  terrain_to_place_on SNOW_STRONG
+  avoid_forest_zone 3
+  min_distance_to_map_edge 4
+  max_distance_to_other_zones 4
+  min_distance_group_placement 3
 }
 
 create_object RELIC

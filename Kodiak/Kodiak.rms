@@ -1,7 +1,7 @@
 /* Kodiak */
 /* 7/31/2024 */
 /* A Random Map Script by CookiePirate */
-/* Version 0.9 */
+/* Version 0.91 - 9/2/24 */
 /* This map may not be used for any tournaments, showmatches, or other competitions except for Alchemy League Season 4
 without the express permission of the Author of the Map. This requirement will remain in perpetuity or until the Author
 determines otherwise. This map may be downloaded and played for fun but shall remain unmodified without the express
@@ -806,10 +806,10 @@ endif
 
 /* NATURE objects */
 
-create_object MOUNTAIN_A { set_gaia_object_only number_of_groups 2 set_scaling_to_map_size terrain_to_place_on LAND_TOP temp_min_distance_group_placement 7 actor_area 77 actor_area_radius 7 }
-create_object MOUNTAIN_B { set_gaia_object_only number_of_groups 2 set_scaling_to_map_size terrain_to_place_on LAND_TOP temp_min_distance_group_placement 7 actor_area 78 actor_area_radius 7 avoid_actor_area 77 }
-create_object MOUNTAIN_C { set_gaia_object_only number_of_groups 4 set_scaling_to_map_size terrain_to_place_on LAND_TOP temp_min_distance_group_placement 7 actor_area 79 actor_area_radius 7 avoid_actor_area 77 avoid_actor_area 78 }
-create_object OBJTREE_B { set_gaia_object_only number_of_groups 16 set_scaling_to_map_size terrain_to_place_on LAND_TOP temp_min_distance_group_placement 2 }
+create_object MOUNTAIN_A { set_gaia_object_only number_of_groups 2 set_scaling_to_map_size terrain_to_place_on LAND_TOP temp_min_distance_group_placement 8 actor_area 77 actor_area_radius 8 }
+create_object MOUNTAIN_B { set_gaia_object_only number_of_groups 2 set_scaling_to_map_size terrain_to_place_on LAND_TOP temp_min_distance_group_placement 8 actor_area 78 actor_area_radius 8 avoid_actor_area 77 }
+create_object MOUNTAIN_C { set_gaia_object_only number_of_groups 4 set_scaling_to_map_size terrain_to_place_on LAND_TOP temp_min_distance_group_placement 8 actor_area 79 actor_area_radius 8 avoid_actor_area 77 avoid_actor_area 78 }
+create_object OBJTREE_B { set_gaia_object_only number_of_groups 16 set_scaling_to_map_size terrain_to_place_on LAND_TOP temp_min_distance_group_placement 3 }
 create_object SEA_ROCKS_3 { number_of_groups 9320 set_gaia_object_only terrain_to_place_on BEACH }
 create_object SEA_ROCKS_1 { number_of_objects 10 set_scaling_to_map_size terrain_to_place_on DLC_GRAVELBEACH temp_min_distance_group_placement 1 }
 create_object SEA_ROCKS_1 { number_of_objects 10 set_scaling_to_map_size terrain_to_place_on WATER temp_min_distance_group_placement 1 }
@@ -824,6 +824,18 @@ create_object EAGLE_WARRIOR { set_place_for_every_player min_distance_to_players
 
 if REGICIDE
     create_object KING { set_place_for_every_player find_closest }
+endif
+
+if TINY_MAP 
+    create_object RELIC { number_of_objects 5 temp_min_distance_group_placement 15 min_distance_to_map_edge 25 min_distance_to_players 20 avoid_forest_zone 2 }
+elseif SMALL_MAP 
+    create_object RELIC { number_of_objects 5 temp_min_distance_group_placement 15 min_distance_to_map_edge 25 min_distance_to_players 20 avoid_forest_zone 2 }
+elseif MEDIUM_MAP 
+    create_object RELIC { number_of_objects 5 temp_min_distance_group_placement 15 min_distance_to_map_edge 25 min_distance_to_players 20 avoid_forest_zone 2 }
+elseif LARGE_MAP
+    create_object RELIC { number_of_objects 7 temp_min_distance_group_placement 15 min_distance_to_map_edge 25 min_distance_to_players 20 avoid_forest_zone 2 }
+else 
+    create_object RELIC { number_of_objects 8 temp_min_distance_group_placement 15 min_distance_to_map_edge 25 min_distance_to_players 20 avoid_forest_zone 2 }
 endif
 
 create_object OBJTREE_A { set_place_for_every_player set_gaia_object_only find_closest number_of_groups 3 min_distance_to_players 4 max_distance_to_players 5 }
@@ -844,25 +856,13 @@ end_random
 create_object DLC_GOOSE { set_place_for_every_player set_gaia_object_only number_of_objects 2 number_of_groups 1 set_tight_grouping min_distance_to_players 15 max_distance_to_players 15 set_circular_placement actor_area 41 actor_area_radius 6 avoid_actor_area 40 }
 create_object DLC_GOOSE { set_place_for_every_player set_gaia_object_only number_of_objects 3 number_of_groups 1 set_tight_grouping min_distance_to_players 17 max_distance_to_players 17 set_circular_placement avoid_actor_area 40 avoid_actor_area 41 }
 create_object DEER { set_place_for_every_player set_gaia_object_only number_of_objects 4 min_distance_to_players 12 max_distance_to_players 16 set_circular_placement set_tight_grouping }
-create_object FORAGE { set_place_for_every_player set_gaia_object_only number_of_objects 4 set_tight_grouping number_of_groups 1 avoid_forest_zone 4 min_distance_to_players 10 max_distance_to_players 11 temp_min_distance_group_placement 14 set_circular_placement actor_area 61 actor_area_radius 12 }
-create_object FORAGE { set_place_for_every_player set_gaia_object_only number_of_objects 4 set_tight_grouping number_of_groups 1 avoid_forest_zone 4 min_distance_to_players 10 max_distance_to_players 11 temp_min_distance_group_placement 14 set_circular_placement actor_area 62 actor_area_radius 12 avoid_actor_area 61 }
+create_object FORAGE { set_place_for_every_player set_gaia_object_only number_of_objects 4 set_tight_grouping number_of_groups 1 avoid_forest_zone 4 min_distance_to_players 10 max_distance_to_players 11 min_distance_group_placement 4 temp_min_distance_group_placement 14 set_circular_placement actor_area 61 actor_area_radius 12 }
+create_object FORAGE { set_place_for_every_player set_gaia_object_only number_of_objects 4 set_tight_grouping number_of_groups 1 avoid_forest_zone 4 min_distance_to_players 10 max_distance_to_players 11 min_distance_group_placement 4 temp_min_distance_group_placement 14 set_circular_placement actor_area 62 actor_area_radius 12 avoid_actor_area 61 }
 create_object GOLD { set_place_for_every_player set_gaia_object_only number_of_objects 7 set_tight_grouping number_of_groups 1 avoid_forest_zone 4 min_distance_to_players 10 max_distance_to_players 11 min_distance_group_placement 6 set_circular_placement }
-create_object GOLD { set_place_for_every_player set_gaia_object_only number_of_objects 4 set_tight_grouping number_of_groups 1 avoid_forest_zone 4 min_distance_to_players 18 max_distance_to_players 19 min_distance_group_placement 6 set_circular_placement }
+create_object GOLD { set_place_for_every_player set_gaia_object_only number_of_objects 4 set_tight_grouping number_of_groups 1 avoid_forest_zone 4 min_distance_to_players 15 max_distance_to_players 19 min_distance_group_placement 6 set_circular_placement }
 create_object STONE { set_place_for_every_player set_gaia_object_only number_of_objects 5 set_tight_grouping number_of_groups 1 avoid_forest_zone 4 min_distance_to_players 12 max_distance_to_players 13 min_distance_group_placement 6 set_circular_placement }
 
 /* Neutral objects defined BASED ON MAP SIZE */
-
-if TINY_MAP 
-    create_object RELIC { number_of_objects 5 temp_min_distance_group_placement 15 min_distance_to_map_edge 25 min_distance_to_players 20 avoid_forest_zone 2 }
-elseif SMALL_MAP 
-    create_object RELIC { number_of_objects 5 temp_min_distance_group_placement 15 min_distance_to_map_edge 25 min_distance_to_players 20 avoid_forest_zone 2 }
-elseif MEDIUM_MAP 
-    create_object RELIC { number_of_objects 5 temp_min_distance_group_placement 15 min_distance_to_map_edge 25 min_distance_to_players 20 avoid_forest_zone 2 }
-elseif LARGE_MAP
-    create_object RELIC { number_of_objects 7 temp_min_distance_group_placement 15 min_distance_to_map_edge 25 min_distance_to_players 20 avoid_forest_zone 2 }
-else 
-    create_object RELIC { number_of_objects 8 temp_min_distance_group_placement 15 min_distance_to_map_edge 25 min_distance_to_players 20 avoid_forest_zone 2 }
-endif
 
 create_object ALASKAN_BEAR { number_of_groups 9320 set_gaia_object_only set_gaia_unconvertible min_distance_to_players 20 temp_min_distance_group_placement 20 avoid_actor_area 61 avoid_actor_area 62 }
 create_object FALCON { number_of_groups 10 set_scaling_to_map_size set_gaia_object_only }

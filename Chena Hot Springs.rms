@@ -96,9 +96,7 @@ endif
     /* for 1v1 */
 
         start_random
-            percent_chance 0   #define CFG1
             percent_chance 50   #define CFG2
-            percent_chance 0   #define CFG3
             percent_chance 50   #define CFG4
         end_random 
 

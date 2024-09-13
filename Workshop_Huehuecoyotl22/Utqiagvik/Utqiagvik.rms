@@ -3,6 +3,9 @@
 July 2024
 For Alchemy League S4 */
 
+/* Licensed for Exclusive Competitive Use in Alchemy League Season 4 */
+/* Component Specification: https://github.com/Alchemy-AOE-Community/CHEM-Published-Specifications/blob/download-to-click-links/SCRIPTING/ALASKA/CHEM-CSRM-AK-01.pdf */
+
 start_random
 percent_chance 30
 #define AUTUMNIAN
@@ -14,9 +17,22 @@ end_random
 
 nomad_resources
 
+/* Changing trees to bushes */
+	#const TREE_AUTUMN 1248
+	#const TREE_AUTUMN_SNOW 1249
+	#const TREE_SNOWY 413
+	#const BUSH_A 302
+	#const BUSH_B 1053
+	#const BUSH_SNOW 1054
+	#const GRAVEL 70
+	#const RAVELBEACH_UNSAILABLE 81
+
+	
+effect_amount UPGRADE_UNIT PINETREE DLC_AFRICANBUSH 1
+effect_amount UPGRADE_UNIT SNOWPINETREE BUSH_SNOW 1
+
 /* Removing Trade Carts and Cogs for Multi-team Games */
-if 2_TEAM_GAME
-else
+if LOW_RESOURCES
 #const TRADE_CART_ENABLER 161
 #const TRADE_COG_ENABLER 180
 #const TRADE_CARAVAN_ENABLER 48
@@ -350,7 +366,7 @@ number_of_clumps 1000
 }
 create_terrain DLC_DRYGRASS
 {
-base_terrain LEAVES
+base_terrain RAVELBEACH_UNSAILABLE
 land_percent 100
 number_of_clumps 1000
 height_limits 3 8
@@ -363,6 +379,7 @@ base_terrain SNOW
 land_percent                     5
 number_of_clumps                 4
 set_avoid_player_start_areas 35
+spacing_to_other_terrain_types 1
 set_flat_terrain_only
 set_scale_by_groups
 beach_terrain DLC_BOGLAND
@@ -443,14 +460,14 @@ number_of_clumps 20
 set_scale_by_groups
 terrain_mask 1
 }
-create_terrain LEAVES
+create_terrain RAVELBEACH_UNSAILABLE
 {
 base_terrain MUD
 terrain_mask 1
 land_percent 100
 number_of_clumps 2000
 }
-create_terrain LEAVES
+create_terrain RAVELBEACH_UNSAILABLE
 {
 base_terrain SNOW
 terrain_mask 2
@@ -458,7 +475,7 @@ land_percent 9
 number_of_clumps 20
 set_scale_by_groups
 }
-create_terrain LEAVES
+create_terrain RAVELBEACH_UNSAILABLE
 {
 base_terrain SNOW
 terrain_mask 1
@@ -646,6 +663,7 @@ base_terrain SNOW
 land_percent                     5
 number_of_clumps                 4
 set_avoid_player_start_areas 35
+spacing_to_other_terrain_types 1
 set_flat_terrain_only
 set_scale_by_groups
 }
@@ -676,14 +694,14 @@ number_of_clumps 20
 set_scale_by_groups
 terrain_mask 0
 }
-create_terrain LEAVES
+create_terrain RAVELBEACH_UNSAILABLE
 {
 base_terrain MUD
 terrain_mask 1
 land_percent 100
 number_of_clumps 2000
 }
-create_terrain LEAVES
+create_terrain RAVELBEACH_UNSAILABLE
 {
 base_terrain SNOW
 terrain_mask 2
@@ -729,6 +747,68 @@ terrain_mask 0
 land_percent 100
 number_of_clumps 2888
 }
+start_random
+percent_chance 50
+percent_chance 50
+create_terrain SNOW
+{
+base_terrain MUD
+terrain_mask 0
+land_percent 100
+number_of_clumps 2888
+}
+create_terrain SNOW
+{
+base_terrain DLC_DRYGRASS
+terrain_mask 0
+land_percent 100
+number_of_clumps 2888
+}
+create_terrain SNOW
+{
+base_terrain RAVELBEACH_UNSAILABLE
+terrain_mask 0
+land_percent 100
+number_of_clumps 2888
+}
+create_terrain SNOW
+{
+base_terrain MUD
+terrain_mask 0
+land_percent 100
+number_of_clumps 2888
+}
+create_terrain SNOW
+{
+base_terrain DLC_DRYGRASS
+terrain_mask 0
+land_percent 100
+number_of_clumps 2888
+}
+create_terrain SNOW
+{
+base_terrain RAVELBEACH_UNSAILABLE
+terrain_mask 0
+land_percent 100
+number_of_clumps 2888
+}
+create_terrain SNOW
+{
+base_terrain SNOW
+base_layer DLC_DRYGRASS
+terrain_mask 0
+land_percent 100
+number_of_clumps 2888
+}
+create_terrain ICE
+{
+base_terrain SNOW
+terrain_mask 1
+land_percent 5
+number_of_clumps 27
+}
+end_random
+
 endif
 
 if AUTUMNIAN
@@ -904,14 +984,26 @@ create_object STONE
   avoid_forest_zone
 }
 
+if AUTUMNIAN
 create_object DLC_GOOSE {
 	number_of_groups 9320
 	number_of_objects 2
 	set_gaia_object_only
-	temp_min_distance_group_placement 20
+	temp_min_distance_group_placement 18
 	avoid_forest_zone 2
 	avoid_cliff_zone 2
 }
+endif
+if WINTERIAN
+create_object DLC_GOOSE {
+	number_of_groups 9320
+	number_of_objects 2
+	set_gaia_object_only
+	temp_min_distance_group_placement 24
+	avoid_forest_zone 2
+	avoid_cliff_zone 2
+}
+endif
 
 create_object DEER {
 	number_of_groups 9320
@@ -923,15 +1015,28 @@ create_object DEER {
 	max_distance_to_other_zones  4
 }
 
+if WINTERIAN
 create_object FORAGE {
 	number_of_groups 9320
-	number_of_objects 3
+	number_of_objects 4
 	set_gaia_object_only
-	temp_min_distance_group_placement 20
+	temp_min_distance_group_placement 18
 	avoid_forest_zone 2
 	avoid_cliff_zone 2
 	max_distance_to_other_zones  4
 }
+endif
+if AUTUMNIAN
+create_object FORAGE {
+	number_of_groups 9320
+	number_of_objects 3
+	set_gaia_object_only
+	temp_min_distance_group_placement 26
+	avoid_forest_zone 2
+	avoid_cliff_zone 2
+	max_distance_to_other_zones  4
+}
+endif
 
 create_object ALASKAN_BEAR
 {

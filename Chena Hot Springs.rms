@@ -3333,14 +3333,16 @@ create_object SALMON
   temp_min_distance_group_placement 8
 } 
 
-
+#const BOX_TURTLES 1141
 create_object SHORE_FISH
 {
-  number_of_objects                   65
-  set_scaling_to_map_size
-  min_distance_group_placement         3
-  temp_min_distance_group_placement 6
+  number_of_objects                   1
+  number_of_groups 					3
+  set_place_for_every_player
+  min_distance_group_placement         2
+  temp_min_distance_group_placement 5
   set_gaia_object_only
+  find_closest
 }
 
 create_object TEMP

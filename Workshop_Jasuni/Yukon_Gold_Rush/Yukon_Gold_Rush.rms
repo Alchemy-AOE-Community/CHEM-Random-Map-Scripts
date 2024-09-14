@@ -359,6 +359,26 @@ if ALLOW_SEA_WALLS
     effect_amount SET_ATTRIBUTE SEA_WALL ATTR_STONE_COST 0 /* remove stone cost - it's pretty flimsy, too much so to justify a stone cost. Normally costs 5 wood/5 stone with a 5 second build time. note: can be used to wall in opponent's docks (which is a potential issue) */
 endif
 
+/* guarantee 3 villagers spawn together with a unit chain:
+579 - villager male gold miner
+effect_amount SET_ATTRIBUTE UNUSED_UNIT ATTR_DEAD_ID next
+effect_amount SET_ATTRIBUTE UNUSED_UNIT ATTR_BLOOD_ID 579
+
+*/
+effect_amount SET_ATTRIBUTE DLC_PENGUIN ATTR_DEAD_ID 640
+effect_amount SET_ATTRIBUTE DLC_PENGUIN ATTR_BLOOD_ID 579
+effect_amount SET_ATTRIBUTE DLC_PENGUIN ATTR_HITPOINTS 0
+
+effect_amount SET_ATTRIBUTE LA_HIRE ATTR_DEAD_ID 579
+effect_amount SET_ATTRIBUTE LA_HIRE ATTR_BLOOD_ID 579
+effect_amount SET_ATTRIBUTE LA_HIRE ATTR_HITPOINTS 0
+
+/* 632 - FRANKISH_PALADIN; 1808 is mule cart
+effect_amount SET_ATTRIBUTE FRANKISH_PALADIN ATTR_DEAD_ID 1808 
+effect_amount SET_ATTRIBUTE FRANKISH_PALADIN ATTR_BLOOD_ID 579
+effect_amount SET_ATTRIBUTE FRANKISH_PALADIN ATTR_HITPOINTS 0
+*/
+
 <LAND_GENERATION>
 base_terrain WATER /*
 DLC_NEWSHALLOW  - will want to put a terrain mask on it, but DLC_NEWSHALLOW will allow for wading across the river. MUDDY_SHALLOW might also be an option, but likely won't look right. */
@@ -555,17 +575,17 @@ create_object MINING_CAMP {
 
     temp_min_distance_group_placement 20
 }
-create_object VILLAGER {
+/* spawn penguin, which promptly dies to turn into 3 villagers */
+create_object DLC_PENGUIN { /* note: seed 984964488 tiny map size 4 players - player 1 villagers start away from mining camp. Consider exchanging the mining camp with a mule cart. */
     terrain_to_place_on DLC_NEWSHALLOW
     set_place_for_every_player
     find_closest
     set_circular_placement
     ignore_terrain_restrictions
     actor_area_to_place_in 10
-    number_of_objects 3
     actor_area 8
     avoid_actor_area 8
-    actor_area_radius 10
+    actor_area_radius 11
 }
 
 /* best method I can figure out: does risk the possibility of villagers starting seperate from the mining camp though. */
@@ -701,6 +721,7 @@ create_object FORAGE {
     else
         actor_area_radius 9
     endif
+    avoid_actor_area 8
     avoid_actor_area 10
     /* avoid_actor_area 101  - causes issues */
     avoid_actor_area 103 /* gold mines */
@@ -717,6 +738,7 @@ create_object DEER {
     min_distance_to_players 12
     max_distance_to_players 20
     avoid_forest_zone 1
+    avoid_actor_area 8
     avoid_actor_area 10
     /* avoid_actor_area 101 */
     avoid_actor_area 102
@@ -837,6 +859,7 @@ create_object DEER {
     avoid_forest_zone 1
     terrain_to_place_on SNOW_LIGHT /* without this, deer can spawn on the river, but can't cross to the shore */
     set_scaling_to_map_size
+    avoid_actor_area 8
     avoid_actor_area 10
     avoid_actor_area 105
 }
@@ -852,6 +875,7 @@ create_object FORAGE {
     set_scaling_to_map_size
     number_of_groups 6
     set_tight_grouping
+    avoid_actor_area 8
     avoid_actor_area 10
     avoid_actor_area 105
 }

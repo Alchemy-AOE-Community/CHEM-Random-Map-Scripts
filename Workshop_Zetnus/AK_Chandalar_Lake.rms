@@ -25,7 +25,9 @@ https://github.com/Alchemy-AOE-Community/CHEM-Published-Specifications/blob/down
 #const ONGRID_PLACEHOLDER 278
 #const DEAD_BOAR 356
 #const ALASKAN_BEAR 810
-
+#const FOLWARK 1734
+#const FOLWARK_F 1711
+#const FOLWARK_C 1720
 
 
 start_random
@@ -90,6 +92,17 @@ behavior_version 2
 effect_amount MOD_RESOURCE STARTING_SCOUT_RESOURCE ATTR_SET 751	/* eagle */
 
 effect_amount GAIA_UPGRADE_UNIT DLC_DEADTREE DLC_AFRICANBUSH_2 0	/* snowy bushes */
+
+/* allow mills on ice */
+if WINTER_VERSION
+	effect_amount SET_ATTRIBUTE MILL ATTR_TERRAIN_ID 0
+	effect_amount SET_ATTRIBUTE MILL_F ATTR_TERRAIN_ID 0
+	effect_amount SET_ATTRIBUTE MILL_C ATTR_TERRAIN_ID 0
+	effect_amount SET_ATTRIBUTE MILL_I ATTR_TERRAIN_ID 0
+	effect_amount SET_ATTRIBUTE FOLWARK ATTR_TERRAIN_ID 0
+	effect_amount SET_ATTRIBUTE FOLWARK_F ATTR_TERRAIN_ID 0
+	effect_amount SET_ATTRIBUTE FOLWARK_C ATTR_TERRAIN_ID 0
+endif
 
 /* Alaskan Bears */
 effect_amount GAIA_SET_ATTRIBUTE DEAD_BOAR ATTR_STANDING_GRAPHIC 8239

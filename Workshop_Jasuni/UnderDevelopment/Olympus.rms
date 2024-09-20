@@ -1,0 +1,547 @@
+/* 
+Author: Jasuni
+Initial creation date: 20 Sep 2024
+
+Map requested by Theo through the rms discord. Should have a mountain on one side of the map, water with fish on the other. Mountain should be surrounded by a thin layer of trees (maybe 2-3 deep). Has specifications for resources, including no berries, lots of fish, lots of stone/gold on mountain, 2 boars, 3-4 deer, 4 tiles gold, 3 tiles stone, etc.
+1 relic in certer of map (perhaps use an actor area? Or just use find_closest_to_center)
+
+Starting Resources do seem a bit low to me. (specifically, gold is low)
+
+trees: mediterranean forest, which includes cyprus, olive, and italian pine trees
+straggler trees: olive for players, consider other of the two for secondary, and use third for ones starting farther away?
+TODO: add functionality for additional players
+*/
+
+<PLAYER_SETUP>
+direct_placement
+behavior_version 2
+ai_info_map_type CUSTOM 0 0 0
+
+if MAPSIZE_MINI
+    /* AT_MOST_MINI can simply use MAPSIZE_MINI */
+    #define AT_MOST_TINY
+    #define AT_MOST_SMALL
+    #define AT_MOST_MEDIUM
+    #define AT_MOST_NORMAL
+    #define AT_MOST_LARGE
+    #define AT_MOST_HUGE
+    #define AT_MOST_GIANT
+    #define AT_MOST_MASSIVE
+    #define AT_MOST_ENORMOUS
+    #define AT_MOST_COLOSSAL
+    #define AT_MOST_INCREDIBLE
+    #define AT_MOST_MONSTROUS
+    /* and AT_MOST_LUDCROUS is always true */
+elseif MAPSIZE_TINY
+    #define AT_LEAST_TINY
+    
+    #define AT_MOST_TINY
+    #define AT_MOST_SMALL
+    #define AT_MOST_MEDIUM
+    #define AT_MOST_NORMAL
+    #define AT_MOST_LARGE
+    #define AT_MOST_HUGE
+    #define AT_MOST_GIANT
+    #define AT_MOST_MASSIVE
+    #define AT_MOST_ENORMOUS
+    #define AT_MOST_COLOSSAL
+    #define AT_MOST_INCREDIBLE
+    #define AT_MOST_MONSTROUS
+elseif MAPSIZE_SMALL
+    #define AT_LEAST_TINY
+    #define AT_LEAST_SMALL
+    
+    #define AT_MOST_SMALL
+    #define AT_MOST_MEDIUM
+    #define AT_MOST_NORMAL
+    #define AT_MOST_LARGE
+    #define AT_MOST_HUGE
+    #define AT_MOST_GIANT
+    #define AT_MOST_MASSIVE
+    #define AT_MOST_ENORMOUS
+    #define AT_MOST_COLOSSAL
+    #define AT_MOST_INCREDIBLE
+    #define AT_MOST_MONSTROUS
+elseif MAPSIZE_MEDIUM
+    #define AT_LEAST_TINY
+    #define AT_LEAST_SMALL
+    #define AT_LEAST_MEDIUM
+    
+    #define AT_MOST_MEDIUM
+    #define AT_MOST_NORMAL
+    #define AT_MOST_LARGE
+    #define AT_MOST_HUGE
+    #define AT_MOST_GIANT
+    #define AT_MOST_MASSIVE
+    #define AT_MOST_ENORMOUS
+    #define AT_MOST_COLOSSAL
+    #define AT_MOST_INCREDIBLE
+    #define AT_MOST_MONSTROUS
+elseif MAPSIZE_NORMAL
+    #define AT_LEAST_TINY
+    #define AT_LEAST_SMALL
+    #define AT_LEAST_MEDIUM
+    #define AT_LEAST_NORMAL
+    
+    #define AT_MOST_NORMAL
+    #define AT_MOST_LARGE
+    #define AT_MOST_HUGE
+    #define AT_MOST_GIANT
+    #define AT_MOST_MASSIVE
+    #define AT_MOST_ENORMOUS
+    #define AT_MOST_COLOSSAL
+    #define AT_MOST_INCREDIBLE
+    #define AT_MOST_MONSTROUS
+elseif MAPSIZE_LARGE
+    #define AT_LEAST_TINY
+    #define AT_LEAST_SMALL
+    #define AT_LEAST_MEDIUM
+    #define AT_LEAST_NORMAL
+    #define AT_LEAST_LARGE
+    
+    #define AT_MOST_LARGE
+    #define AT_MOST_HUGE
+    #define AT_MOST_GIANT
+    #define AT_MOST_MASSIVE
+    #define AT_MOST_ENORMOUS
+    #define AT_MOST_COLOSSAL
+    #define AT_MOST_INCREDIBLE
+    #define AT_MOST_MONSTROUS
+elseif MAPSIZE_HUGE
+    #define AT_LEAST_TINY
+    #define AT_LEAST_SMALL
+    #define AT_LEAST_MEDIUM
+    #define AT_LEAST_NORMAL
+    #define AT_LEAST_LARGE
+    #define AT_LEAST_HUGE
+    
+    #define AT_MOST_HUGE
+    #define AT_MOST_GIANT
+    #define AT_MOST_MASSIVE
+    #define AT_MOST_ENORMOUS
+    #define AT_MOST_COLOSSAL
+    #define AT_MOST_INCREDIBLE
+    #define AT_MOST_MONSTROUS
+elseif MAPSIZE_GIANT
+    #define AT_LEAST_TINY
+    #define AT_LEAST_SMALL
+    #define AT_LEAST_MEDIUM
+    #define AT_LEAST_NORMAL
+    #define AT_LEAST_LARGE
+    #define AT_LEAST_HUGE
+    #define AT_LEAST_GIANT
+    
+    #define AT_MOST_GIANT
+    #define AT_MOST_MASSIVE
+    #define AT_MOST_ENORMOUS
+    #define AT_MOST_COLOSSAL
+    #define AT_MOST_INCREDIBLE
+    #define AT_MOST_MONSTROUS
+elseif MAPSIZE_MASSIVE
+    #define AT_LEAST_TINY
+    #define AT_LEAST_SMALL
+    #define AT_LEAST_MEDIUM
+    #define AT_LEAST_NORMAL
+    #define AT_LEAST_LARGE
+    #define AT_LEAST_HUGE
+    #define AT_LEAST_GIANT
+    #define AT_LEAST_MASSIVE
+    
+    #define AT_MOST_MASSIVE
+    #define AT_MOST_ENORMOUS
+    #define AT_MOST_COLOSSAL
+    #define AT_MOST_INCREDIBLE
+    #define AT_MOST_MONSTROUS
+elseif MAPSIZE_ENORMOUS
+    #define AT_LEAST_TINY
+    #define AT_LEAST_SMALL
+    #define AT_LEAST_MEDIUM
+    #define AT_LEAST_NORMAL
+    #define AT_LEAST_LARGE
+    #define AT_LEAST_HUGE
+    #define AT_LEAST_GIANT
+    #define AT_LEAST_MASSIVE
+    #define AT_LEAST_ENORMOUS
+    
+    #define AT_MOST_ENORMOUS
+    #define AT_MOST_COLOSSAL
+    #define AT_MOST_INCREDIBLE
+    #define AT_MOST_MONSTROUS
+elseif MAPSIZE_COLOSSAL
+    #define AT_LEAST_TINY
+    #define AT_LEAST_SMALL
+    #define AT_LEAST_MEDIUM
+    #define AT_LEAST_NORMAL
+    #define AT_LEAST_LARGE
+    #define AT_LEAST_HUGE
+    #define AT_LEAST_GIANT
+    #define AT_LEAST_MASSIVE
+    #define AT_LEAST_ENORMOUS
+    #define AT_LEAST_COLOSSAL
+    
+    #define AT_MOST_COLOSSAL
+    #define AT_MOST_INCREDIBLE
+    #define AT_MOST_MONSTROUS
+elseif MAPSIZE_INCREDIBLE
+    #define AT_LEAST_TINY
+    #define AT_LEAST_SMALL
+    #define AT_LEAST_MEDIUM
+    #define AT_LEAST_NORMAL
+    #define AT_LEAST_LARGE
+    #define AT_LEAST_HUGE
+    #define AT_LEAST_GIANT
+    #define AT_LEAST_MASSIVE
+    #define AT_LEAST_ENORMOUS
+    #define AT_LEAST_COLOSSAL
+    #define AT_LEAST_INCREDIBLE
+    
+    #define AT_MOST_INCREDIBLE
+    #define AT_MOST_MONSTROUS
+elseif MAPSIZE_MONSTROUS
+    #define AT_LEAST_TINY
+    #define AT_LEAST_SMALL
+    #define AT_LEAST_MEDIUM
+    #define AT_LEAST_NORMAL
+    #define AT_LEAST_LARGE
+    #define AT_LEAST_HUGE
+    #define AT_LEAST_GIANT
+    #define AT_LEAST_MASSIVE
+    #define AT_LEAST_ENORMOUS
+    #define AT_LEAST_COLOSSAL
+    #define AT_LEAST_INCREDIBLE
+    #define AT_LEAST_MONSTROUS
+    
+    #define AT_MOST_MONSTROUS
+elseif MAPSIZE_LUDICROUS
+    /* AT_LEAST_MINI is always true */
+    #define AT_LEAST_TINY
+    #define AT_LEAST_SMALL
+    #define AT_LEAST_MEDIUM
+    #define AT_LEAST_NORMAL
+    #define AT_LEAST_LARGE
+    #define AT_LEAST_HUGE
+    #define AT_LEAST_GIANT
+    #define AT_LEAST_MASSIVE
+    #define AT_LEAST_ENORMOUS
+    #define AT_LEAST_COLOSSAL
+    #define AT_LEAST_INCREDIBLE
+    #define AT_LEAST_MONSTROUS
+    /* and AT_LEAST_LUDCROUS - can simply use MAP_SIZE_LUDICROUS */
+endif
+<LAND_GENERATION>
+base_terrain GRASS2
+
+create_land {
+    terrain_type GRASS2 /* TODO determine appropriate terrain type */
+    land_percent 8 /* reduce to decrease chance of it cutting into the mountains */
+    land_position 50 80
+    assign_to_player 1
+    right_border 33
+    zone 1
+    other_zone_avoidance_distance 2
+}
+create_land {
+    terrain_type GRASS2
+    land_percent 8
+    land_position 50 20
+    assign_to_player 2
+    right_border 33
+    zone 1
+    other_zone_avoidance_distance 2
+}
+create_land {
+    terrain_type WATER
+    land_percent 100
+    land_position 80 50
+    left_border 70
+    land_id 2
+}
+create_land {
+    terrain_type MEDITERRANEAN_FOREST 
+    land_percent 30
+    land_position 20 50
+    right_border 70
+    top_border 20
+    bottom_border 20
+    zone 2
+    other_zone_avoidance_distance 2
+    land_id 1
+}
+<ELEVATION_GENERATION>
+create_elevation 13 { /* In practice, I believe it only goes up to 7. */
+    base_terrain MEDITERRANEAN_FOREST
+    set_scale_by_size
+    number_of_tiles 9320
+    if MAPSIZE_MINI 
+        spacing 3
+    elseif AT_LEAST_HUGE
+        spacing 7
+    elseif AT_LEAST_MEDIUM
+        spacing 6
+    else
+        spacing 4
+    endif
+    enable_balanced_elevation
+}
+create_elevation 1 {
+    base_terrain GRASS2
+    number_of_tiles 120
+    /* 4 clumps roughly scaled */
+    if MAPSIZE_MINI
+        number_of_clumps 3
+    elseif MAPSIZE_TINY
+        number_of_clumps 6
+    elseif MAPSIZE_SMALL
+        number_of_clumps 8 
+    elseif MAPSIZE_MEDIUM
+        number_of_clumps 12
+    elseif MAPSIZE_NORMAL
+        number_of_clumps 16
+    elseif MAPSIZE_LARGE
+        number_of_clumps 20
+    elseif MAPSIZE_HUGE
+        number_of_clumps 24
+    elseif MAPSIZE_GIANT
+        number_of_clumps 28
+    elseif MAPSIZE_MASSIVE
+        number_of_clumps 32
+    elseif MAPSIZE_ENORMOUS
+        number_of_clumps 36
+    elseif MAPSIZE_COLOSSAL
+        number_of_clumps 40
+    elseif MAPSIZE_INCREDIBLE
+        number_of_clumps 52
+    elseif MAPSIZE_MONSTROUS
+        number_of_clumps 64
+    else /* ludicrous */
+        number_of_clumps 92
+    endif
+    set_scale_by_size
+    enable_balanced_elevation
+}
+<TERRAIN_GENERATION>
+create_terrain DLC_ROCK {
+    base_terrain MEDITERRANEAN_FOREST
+    spacing_to_other_terrain_types rnd(1,3)
+    land_percent 100
+}
+create_terrain MEDITERRANEAN_FOREST {
+    base_terrain GRASS2
+    spacing_to_other_terrain_types 3
+    land_percent 7
+    number_of_clumps 10
+    set_scale_by_groups
+    set_avoid_player_start_areas 15
+}
+create_terrain GRASS2 {
+    base_terrain DLC_ROCK
+    land_percent 100
+}
+create_terrain DLC_ROCK {
+    base_terrain GRASS2
+    land_percent 100
+    terrain_mask 1
+    height_limits 3 14
+}
+<OBJECTS_GENERATION>
+create_object TOWN_CENTER {
+    set_place_for_every_player
+    find_closest
+}
+create_object VILLAGER {
+    min_distance_to_players 6
+    max_distance_to_players 6
+    set_place_for_every_player
+}
+create_object SCOUT {
+    set_place_for_every_player
+    min_distance_to_players 7
+    max_distance_to_players 9
+    set_circular_placement
+}
+create_object GOLD {
+    set_place_for_every_player
+    set_gaia_object_only
+    number_of_objects 4
+    set_tight_grouping
+    min_distance_to_players 10
+    max_distance_to_players 14
+    min_distance_group_placement 4
+    avoid_forest_zone 2
+    set_circular_placement
+}
+create_object STONE {
+    set_place_for_every_player
+    set_gaia_object_only
+    number_of_objects 3
+    set_tight_grouping
+    min_distance_to_players 12
+    max_distance_to_players 16
+    min_distance_group_placement 4
+    avoid_forest_zone 2
+    set_circular_placement
+}
+create_object BOAR {
+    set_place_for_every_player
+    set_gaia_object_only
+    min_distance_to_players 16
+    max_distance_to_players 24
+    number_of_groups 2
+    min_distance_group_placement 4
+    temp_min_distance_group_placement 10
+    avoid_forest_zone 1
+    set_circular_placement
+}
+create_object DEER {
+    set_place_for_every_player
+    set_gaia_object_only
+    set_loose_grouping
+    number_of_objects rnd(3,4)
+    min_distance_to_players 14
+    max_distance_to_players 20
+    min_distance_group_placement 4
+    avoid_forest_zone 1
+    set_circular_placement
+}
+create_object SHEEP {
+    number_of_groups 4
+    number_of_objects 2
+    set_place_for_every_player
+    set_gaia_object_only
+    set_loose_grouping
+    min_distance_to_players 6
+    max_distance_to_players 14
+    set_circular_placement
+    avoid_forest_zone 2
+    temp_min_distance_group_placement 4
+}
+/* straggler trees
+ */
+create_object OLIVE_TREE {
+    set_place_for_every_player
+    min_distance_to_players 5
+    max_distance_to_players 8
+    set_circular_placement
+    number_of_objects 5
+    set_gaia_object_only
+}
+/*  relic in middle */
+create_object RELIC {
+    find_closest_to_map_center
+    place_on_specific_land_id 1
+    avoid_forest_zone 2
+}
+/* TODO gold/stone on mountain - likely will need adjustment */
+create_object GOLD {
+    layer_to_place_on DLC_ROCK
+    set_tight_grouping
+    avoid_forest_zone 5
+    number_of_objects 4
+    group_variance 1
+    number_of_groups 9320
+    temp_min_distance_group_placement 9
+    min_distance_group_placement 4
+}
+create_object STONE {
+    layer_to_place_on DLC_ROCK
+    set_tight_grouping
+    avoid_forest_zone 6
+    number_of_objects 3
+    group_variance 1
+    number_of_groups 9320
+    temp_min_distance_group_placement 9
+    min_distance_group_placement 4
+}
+create_object ITALIAN_PINETREE {
+    min_distance_to_players 17
+    set_circular_placement
+    number_of_objects 15
+    temp_min_distance_group_placement 9
+    set_scaling_to_map_size
+    set_gaia_object_only
+}
+
+create_object CYPRESS_TREE {
+    set_place_for_every_player
+    min_distance_to_players 17
+    set_circular_placement
+    number_of_objects 15
+    temp_min_distance_group_placement 9
+    set_scaling_to_map_size
+    set_gaia_object_only
+}
+/* actor areas for docks */
+if MAPSIZE_MINI
+    create_actor_area 78 0 2 0
+    create_actor_area 78 78 4 0
+elseif TINY_MAP
+    create_actor_area 118 0 2 0
+    create_actor_area 118 118 4 0
+elseif SMALL_MAP
+    create_actor_area 142 0 2 0
+    create_actor_area 142 142 4 0
+elseif MEDIUM_MAP
+    create_actor_area 166 0 2 0
+    create_actor_area 166 166 4 0
+elseif MAPSIZE_NORMAL
+    create_actor_area 198 0 2 0
+    create_actor_area 198 198 4 0
+elseif MAPSIZE_LARGE
+    create_actor_area 218 0 2 0
+    create_actor_area 218 218 4 0
+elseif MAPSIZE_HUGE
+    create_actor_area 238 0 2 0
+    create_actor_area 238 238 4 0
+elseif MAPSIZE_GIANT
+    create_actor_area 250 0 2 0
+    create_actor_area 250 250 4 0
+elseif MAPSIZE_MASSIVE
+    create_actor_area 274 0 2 0
+    create_actor_area 274 274 4 0
+elseif MAPSIZE_ENORMOUS
+    create_actor_area 298 0 2 0
+    create_actor_area 298 298 4 0
+elseif MAPSIZE_COLOSSAL
+    create_actor_area 318 0 2 0
+    create_actor_area 318 318 4 0
+elseif MAPSIZE_INCREDIBLE
+    create_actor_area 358 0 2 0
+    create_actor_area 358 358 4 0
+elseif MAPSIZE_MONSTROUS
+    create_actor_area 398 0 2 0
+    create_actor_area 398 398 4 0
+else /* ludikrus map */
+    create_actor_area 478 0 2 0
+    create_actor_area 478 478 4 0
+endif
+
+create_object DOCK {
+    actor_area_to_place_in 2
+    set_gaia_object_only
+    set_gaia_unconvertible
+    make_indestructible
+    place_on_specific_land_id 2
+    set_place_for_every_player
+    min_distance_group_placement 3
+    ignore_terrain_restrictions
+}
+create_object DOCK {
+    actor_area_to_place_in 4
+    set_gaia_object_only
+    set_gaia_unconvertible
+    make_indestructible
+    place_on_specific_land_id 2
+    set_place_for_every_player
+    min_distance_group_placement 2
+    ignore_terrain_restrictions
+}
+create_object SHORE_FISH {
+    number_of_objects 9320
+    temp_min_distance_group_placement 6
+    min_distance_group_placement 1
+}
+create_object SALMON {
+    number_of_objects 9320
+    temp_min_distance_group_placement 6
+    max_distance_to_other_zones 3
+}

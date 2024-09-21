@@ -33,7 +33,7 @@ berries/deer close to starting mining camp can be unfair - now guaranteed to sta
 <PLAYER_SETUP>
 random_placement
 behavior_version 2
-
+ai_info_map_type CUSTOM 0 0 0
 
 if MAPSIZE_MINI
     /* AT_MOST_MINI can simply use MAPSIZE_MINI */

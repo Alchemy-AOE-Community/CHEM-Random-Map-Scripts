@@ -1,0 +1,1075 @@
+/*
+Name: Yukon Gold Rush
+Author: Jasuni
+Created: July 2024
+Component spec: https://github.com/Alchemy-AOE-Community/CHEM-Published-Specifications/blob/download-to-click-links/SCRIPTING/ALASKA/CHEM-CSRM-AK-06.pdf
+
+Map script may be used for Alchemy League.
+
+note to self: do not publish until after competition is over.
+
+Klondike gold rush: extra villagers in the river, near a mining camp (with gold mines)
+
+"So as for gold rushes, Alaska has had a considerable share of them. The Klondike is not in Alaska, but the rush did start there when prospectors would arrive in Skagway (and a town called Dyea which no longer exists) - just up a ways from Juneau. Some years after the Klondike rush, gold was found in Nome and there was a big gold rush there. Fairbanks had a gold rush in the hills northeast of the present-day city as well. Gold has been found in the upper southeast (near Haines, Skagway), along the Yukon River itself in the flat areas and in the hills near the town of Ruby, also around Valdez in the south central part of the state, among others. So you have a ton of options depending on the kind of terrain you want. A gold rush map could be thematically appropriate in several different locations."
+
+Yukon River Flats - winding river, flat terrain, heavily forested
+Nome - hills and beach with gold, tundra, Bering Sea coast line
+Yukon River Hills - river with some curves but not like in the flats, surrounded by hills or even small mountains, forested"
+
+So basic idea is to split the map with a river between players. The river has gold (possibly all the gold, or I may have a small amount of gold on the shore).
+Start players with a mining camp near the river, and gold on the river
+
+TODO: things for playtesting: gold balance (and how important the river is), the practicalities of sea walls (probably not very, since its so flimsy - but may be usable for walling in a dock, which would be an issue) - may want to remove.
+Balance of bear placements (not really tested all that much), and thoughts on the hunting wolf scout.
+
+note: has a tournament version, which moves bears/wolves to outside of map and reduces hunting wolf attack from 4 to 0 (base 8)
+
+feedback from shiXo: have since made changes
+gold spawns inconsistent and sometimes unfair (gold for blue far away, green almost in range) - now guarantee one gold pile close to player
+berries/deer close to starting mining camp can be unfair - now guaranteed to start away from mining camp (but can still spawn close to river)
+
+*/
+
+<PLAYER_SETUP>
+random_placement
+behavior_version 2
+
+
+if MAPSIZE_MINI
+    /* AT_MOST_MINI can simply use MAPSIZE_MINI */
+    #define AT_MOST_TINY
+    #define AT_MOST_SMALL
+    #define AT_MOST_MEDIUM
+    #define AT_MOST_NORMAL
+    #define AT_MOST_LARGE
+    #define AT_MOST_HUGE
+    #define AT_MOST_GIANT
+    #define AT_MOST_MASSIVE
+    #define AT_MOST_ENORMOUS
+    #define AT_MOST_COLOSSAL
+    #define AT_MOST_INCREDIBLE
+    #define AT_MOST_MONSTROUS
+    /* and AT_MOST_LUDCROUS is always true */
+elseif MAPSIZE_TINY
+    #define AT_LEAST_TINY
+    
+    #define AT_MOST_TINY
+    #define AT_MOST_SMALL
+    #define AT_MOST_MEDIUM
+    #define AT_MOST_NORMAL
+    #define AT_MOST_LARGE
+    #define AT_MOST_HUGE
+    #define AT_MOST_GIANT
+    #define AT_MOST_MASSIVE
+    #define AT_MOST_ENORMOUS
+    #define AT_MOST_COLOSSAL
+    #define AT_MOST_INCREDIBLE
+    #define AT_MOST_MONSTROUS
+elseif MAPSIZE_SMALL
+    #define AT_LEAST_TINY
+    #define AT_LEAST_SMALL
+    
+    #define AT_MOST_SMALL
+    #define AT_MOST_MEDIUM
+    #define AT_MOST_NORMAL
+    #define AT_MOST_LARGE
+    #define AT_MOST_HUGE
+    #define AT_MOST_GIANT
+    #define AT_MOST_MASSIVE
+    #define AT_MOST_ENORMOUS
+    #define AT_MOST_COLOSSAL
+    #define AT_MOST_INCREDIBLE
+    #define AT_MOST_MONSTROUS
+elseif MAPSIZE_MEDIUM
+    #define AT_LEAST_TINY
+    #define AT_LEAST_SMALL
+    #define AT_LEAST_MEDIUM
+    
+    #define AT_MOST_MEDIUM
+    #define AT_MOST_NORMAL
+    #define AT_MOST_LARGE
+    #define AT_MOST_HUGE
+    #define AT_MOST_GIANT
+    #define AT_MOST_MASSIVE
+    #define AT_MOST_ENORMOUS
+    #define AT_MOST_COLOSSAL
+    #define AT_MOST_INCREDIBLE
+    #define AT_MOST_MONSTROUS
+elseif MAPSIZE_NORMAL
+    #define AT_LEAST_TINY
+    #define AT_LEAST_SMALL
+    #define AT_LEAST_MEDIUM
+    #define AT_LEAST_NORMAL
+    
+    #define AT_MOST_NORMAL
+    #define AT_MOST_LARGE
+    #define AT_MOST_HUGE
+    #define AT_MOST_GIANT
+    #define AT_MOST_MASSIVE
+    #define AT_MOST_ENORMOUS
+    #define AT_MOST_COLOSSAL
+    #define AT_MOST_INCREDIBLE
+    #define AT_MOST_MONSTROUS
+elseif MAPSIZE_LARGE
+    #define AT_LEAST_TINY
+    #define AT_LEAST_SMALL
+    #define AT_LEAST_MEDIUM
+    #define AT_LEAST_NORMAL
+    #define AT_LEAST_LARGE
+    
+    #define AT_MOST_LARGE
+    #define AT_MOST_HUGE
+    #define AT_MOST_GIANT
+    #define AT_MOST_MASSIVE
+    #define AT_MOST_ENORMOUS
+    #define AT_MOST_COLOSSAL
+    #define AT_MOST_INCREDIBLE
+    #define AT_MOST_MONSTROUS
+elseif MAPSIZE_HUGE
+    #define AT_LEAST_TINY
+    #define AT_LEAST_SMALL
+    #define AT_LEAST_MEDIUM
+    #define AT_LEAST_NORMAL
+    #define AT_LEAST_LARGE
+    #define AT_LEAST_HUGE
+    
+    #define AT_MOST_HUGE
+    #define AT_MOST_GIANT
+    #define AT_MOST_MASSIVE
+    #define AT_MOST_ENORMOUS
+    #define AT_MOST_COLOSSAL
+    #define AT_MOST_INCREDIBLE
+    #define AT_MOST_MONSTROUS
+elseif MAPSIZE_GIANT
+    #define AT_LEAST_TINY
+    #define AT_LEAST_SMALL
+    #define AT_LEAST_MEDIUM
+    #define AT_LEAST_NORMAL
+    #define AT_LEAST_LARGE
+    #define AT_LEAST_HUGE
+    #define AT_LEAST_GIANT
+    
+    #define AT_MOST_GIANT
+    #define AT_MOST_MASSIVE
+    #define AT_MOST_ENORMOUS
+    #define AT_MOST_COLOSSAL
+    #define AT_MOST_INCREDIBLE
+    #define AT_MOST_MONSTROUS
+elseif MAPSIZE_MASSIVE
+    #define AT_LEAST_TINY
+    #define AT_LEAST_SMALL
+    #define AT_LEAST_MEDIUM
+    #define AT_LEAST_NORMAL
+    #define AT_LEAST_LARGE
+    #define AT_LEAST_HUGE
+    #define AT_LEAST_GIANT
+    #define AT_LEAST_MASSIVE
+    
+    #define AT_MOST_MASSIVE
+    #define AT_MOST_ENORMOUS
+    #define AT_MOST_COLOSSAL
+    #define AT_MOST_INCREDIBLE
+    #define AT_MOST_MONSTROUS
+elseif MAPSIZE_ENORMOUS
+    #define AT_LEAST_TINY
+    #define AT_LEAST_SMALL
+    #define AT_LEAST_MEDIUM
+    #define AT_LEAST_NORMAL
+    #define AT_LEAST_LARGE
+    #define AT_LEAST_HUGE
+    #define AT_LEAST_GIANT
+    #define AT_LEAST_MASSIVE
+    #define AT_LEAST_ENORMOUS
+    
+    #define AT_MOST_ENORMOUS
+    #define AT_MOST_COLOSSAL
+    #define AT_MOST_INCREDIBLE
+    #define AT_MOST_MONSTROUS
+elseif MAPSIZE_COLOSSAL
+    #define AT_LEAST_TINY
+    #define AT_LEAST_SMALL
+    #define AT_LEAST_MEDIUM
+    #define AT_LEAST_NORMAL
+    #define AT_LEAST_LARGE
+    #define AT_LEAST_HUGE
+    #define AT_LEAST_GIANT
+    #define AT_LEAST_MASSIVE
+    #define AT_LEAST_ENORMOUS
+    #define AT_LEAST_COLOSSAL
+    
+    #define AT_MOST_COLOSSAL
+    #define AT_MOST_INCREDIBLE
+    #define AT_MOST_MONSTROUS
+elseif MAPSIZE_INCREDIBLE
+    #define AT_LEAST_TINY
+    #define AT_LEAST_SMALL
+    #define AT_LEAST_MEDIUM
+    #define AT_LEAST_NORMAL
+    #define AT_LEAST_LARGE
+    #define AT_LEAST_HUGE
+    #define AT_LEAST_GIANT
+    #define AT_LEAST_MASSIVE
+    #define AT_LEAST_ENORMOUS
+    #define AT_LEAST_COLOSSAL
+    #define AT_LEAST_INCREDIBLE
+    
+    #define AT_MOST_INCREDIBLE
+    #define AT_MOST_MONSTROUS
+elseif MAPSIZE_MONSTROUS
+    #define AT_LEAST_TINY
+    #define AT_LEAST_SMALL
+    #define AT_LEAST_MEDIUM
+    #define AT_LEAST_NORMAL
+    #define AT_LEAST_LARGE
+    #define AT_LEAST_HUGE
+    #define AT_LEAST_GIANT
+    #define AT_LEAST_MASSIVE
+    #define AT_LEAST_ENORMOUS
+    #define AT_LEAST_COLOSSAL
+    #define AT_LEAST_INCREDIBLE
+    #define AT_LEAST_MONSTROUS
+    
+    #define AT_MOST_MONSTROUS
+elseif MAPSIZE_LUDICROUS
+    /* AT_LEAST_MINI is always true */
+    #define AT_LEAST_TINY
+    #define AT_LEAST_SMALL
+    #define AT_LEAST_MEDIUM
+    #define AT_LEAST_NORMAL
+    #define AT_LEAST_LARGE
+    #define AT_LEAST_HUGE
+    #define AT_LEAST_GIANT
+    #define AT_LEAST_MASSIVE
+    #define AT_LEAST_ENORMOUS
+    #define AT_LEAST_COLOSSAL
+    #define AT_LEAST_INCREDIBLE
+    #define AT_LEAST_MONSTROUS
+    /* and AT_LEAST_LUDCROUS - can simply use MAP_SIZE_LUDICROUS */
+endif
+/* Configuring Eagle Scout */
+#const SHARKATZOR 1222
+#const EXPLOSION 1614
+/*
+effect_amount SET_ATTRIBUTE SHARKATZOR ATTR_TRAITS 16
+effect_amount SET_ATTRIBUTE SHARKATZOR ATTR_ATTACK_GRAPHIC 846
+effect_amount SET_ATTRIBUTE SHARKATZOR ATTR_STANDING_GRAPHIC 846
+effect_amount SET_ATTRIBUTE SHARKATZOR ATTR_STANDING2_GRAPHIC 846
+effect_amount SET_ATTRIBUTE SHARKATZOR ATTR_DYING_GRAPHIC 3933
+effect_amount SET_ATTRIBUTE SHARKATZOR ATTR_UNDEAD_GRAPHIC 3933
+effect_amount SET_ATTRIBUTE SHARKATZOR ATTR_WALKING_GRAPHIC 846
+effect_amount SET_ATTRIBUTE SHARKATZOR ATTR_RUNNING_GRAPHIC 846
+effect_amount SET_ATTRIBUTE SHARKATZOR ATTR_NAME_ID 5672 
+effect_amount SET_ATTRIBUTE SHARKATZOR ATTR_ICON_ID 283
+effect_amount SET_ATTRIBUTE SHARKATZOR ATTR_HERO_STATUS 66
+effect_amount SET_ATTRIBUTE SHARKATZOR ATTR_MIN_RANGE 1
+effect_amount SET_ATTRIBUTE SHARKATZOR ATTR_MAX_RANGE 0
+effect_amount SET_ATTRIBUTE SHARKATZOR ATTR_SHOWN_ATTACK 0
+effect_amount SET_ATTRIBUTE SHARKATZOR ATTR_LINE_OF_SIGHT 9
+effect_amount SET_ATTRIBUTE SHARKATZOR ATTR_SEARCH_RADIUS 9
+effect_amount SET_ATTRIBUTE EXPLOSION  ATTR_BLAST_LEVEL 1
+effect_amount SET_ATTRIBUTE EXPLOSION  ATTR_BLAST_RADIUS 3
+effect_amount SET_ATTRIBUTE EXPLOSION  ATTR_AREA_DAMAGE -3
+effect_percent SET_ATTRIBUTE SHARKATZOR ATTR_HITPOINTS  100
+effect_percent SET_ATTRIBUTE SHARKATZOR ATTR_MOVE_SPEED 90
+effect_amount SET_ATTRIBUTE SHARKATZOR ATTR_DEAD_ID 1614
+effect_amount SET_ATTRIBUTE SHARKATZOR ATTR_BLOOD_ID 834
+effect_amount ENABLE_OBJECT SHARKATZOR ATTR_ENABLE 0
+effect_amount SET_ATTRIBUTE SHARKATZOR ATTR_TRAIN_LOCATION 82
+effect_amount SET_ATTRIBUTE SHARKATZOR ATTR_TRAIN_BUTTON 4
+effect_amount SET_ATTRIBUTE SHARKATZOR ATTR_TRAIN_TIME 60
+effect_amount SET_ATTRIBUTE SHARKATZOR ATTR_WOOD_COST 75
+effect_amount SET_ATTRIBUTE SHARKATZOR ATTR_GOLD_COST 75
+*/
+
+
+#define TOURNAMENT_VERSION /* allows the disabling of trade under certain conditions, reduces the attack of the hunting wolf to 0 (instead of 4), and forces hostile wild animals to the edge of the map */
+
+if 2_TEAM_GAME
+elseif 2_PLAYER_GAME
+elseif TOURNAMENT_VERSION
+    if LOW_RESOURCES
+        #define DISABLE_TRADE 
+    endif
+endif
+if DISABLE_TRADE
+/* Removing Trade for Multi-team Games, as per Alchemy requirements.  */
+  #const TRADE_CART_ENABLER 161
+  #const TRADE_COG_ENABLER 180
+  #const TRADE_CARAVAN_ENABLER 48
+  #const HINDU_CARAVANSERAI_ENABLER 518
+  #const PERSIAN_CARAVANSERAI_ENABLER 552  
+  #const SILK_ROAD 499
+  effect_amount DISABLE_TECH TRADE_COG_ENABLER ATTR_DISABLE 180
+  effect_amount DISABLE_TECH TRADE_CART_ENABLER ATTR_DISABLE 161
+  effect_amount DISABLE_TECH TRADE_CARAVAN_ENABLER ATTR_DISABLE 48
+  effect_amount DISABLE_TECH HINDU_CARAVANSERAI_ENABLER ATTR_DISABLE 518
+  effect_amount DISABLE_TECH PERSIAN_CARAVANSERAI_ENABLER ATTR_DISABLE 552
+  effect_amount DISABLE_TECH SILK_ROAD ATTR_DISABLE 499    
+endif
+if TOURNAMENT_VERSION
+    effect_amount SET_ATTRIBUTE HUNTING_WOLF ATTR_SHOWN_ATTACK 0
+    effect_amount ADD_ATTRIBUTE HUNTING_WOLF ATTR_ATTACK -1032 /* -(4*256 + 8) : subtracts 8 melee damage from its base of 8 damage. */
+else
+    effect_amount SET_ATTRIBUTE HUNTING_WOLF ATTR_SHOWN_ATTACK 4
+    effect_amount ADD_ATTRIBUTE HUNTING_WOLF ATTR_ATTACK -1028 /* -(4*256 + 4) : subtracts 4 melee damage from its base of 8 damage. */
+    /* #define ALLOW_SEA_WALLS */
+endif
+
+/* Alaskan Bears */
+#define SPECIAL_BEAR_DEFINED
+#const ALASKAN_BEAR 810 /* IRON_BOAR */
+#const DEAD_BOAR 356
+effect_amount GAIA_SET_ATTRIBUTE DEAD_BOAR ATTR_STANDING_GRAPHIC 8239
+effect_amount GAIA_SET_ATTRIBUTE ALASKAN_BEAR ATTR_ATTACK_GRAPHIC 8236
+effect_amount GAIA_SET_ATTRIBUTE ALASKAN_BEAR ATTR_STANDING_GRAPHIC 8238
+effect_amount GAIA_SET_ATTRIBUTE ALASKAN_BEAR ATTR_STANDING2_GRAPHIC 8238
+effect_amount GAIA_SET_ATTRIBUTE ALASKAN_BEAR ATTR_DYING_GRAPHIC 8237
+effect_amount GAIA_SET_ATTRIBUTE ALASKAN_BEAR ATTR_UNDEAD_GRAPHIC 8237
+effect_amount GAIA_SET_ATTRIBUTE ALASKAN_BEAR ATTR_WALKING_GRAPHIC 8240
+effect_amount GAIA_SET_ATTRIBUTE ALASKAN_BEAR ATTR_RUNNING_GRAPHIC 8241
+effect_amount GAIA_SET_ATTRIBUTE ALASKAN_BEAR ATTR_NAME_ID 5713
+effect_amount GAIA_SET_ATTRIBUTE ALASKAN_BEAR ATTR_ICON_ID 151
+effect_amount GAIA_SET_ATTRIBUTE ALASKAN_BEAR ATTR_STORAGE_VALUE 510
+effect_amount GAIA_SET_ATTRIBUTE ALASKAN_BEAR ATTR_HERO_STATUS 66
+effect_amount GAIA_SET_ATTRIBUTE ALASKAN_BEAR ATTR_HITPOINTS 24
+effect_amount GAIA_SET_ATTRIBUTE ALASKAN_BEAR ATTR_LINE_OF_SIGHT 5
+effect_amount GAIA_SET_ATTRIBUTE ALASKAN_BEAR ATTR_SEARCH_RADIUS 5
+
+/* TODO check what happens if I change the dead id for the iron boar? bear_dead is 489
+Looks like no bonus damage, so just 12-2 damage against the hunting wolf
+ */
+
+#const ON_GRID 278 /* 278 - dead fish trap; 1291 - Invisible object that keeps player alive */
+
+#const UNDERBRUSH_SNOW 72
+#const SNOW_LIGHT 73
+#const SNOW_HEAVY 74
+
+effect_amount SET_ATTRIBUTE GOLD ATTR_TERRAIN_ID 7
+/*
+effect_amount GAIA_SET_ATTRIBUTE GOLD ATTR_STORAGE_VALUE 400 */
+effect_amount GAIA_SET_ATTRIBUTE ON_GRID ATTR_STORAGE_VALUE 0
+
+if ALLOW_SEA_WALLS
+    #const SEA_WALL 788
+    effect_amount ENABLE_OBJECT SEA_WALL ATTR_ENABLE 0
+    effect_amount SET_ATTRIBUTE SEA_WALL ATTR_TRAIN_LOCATION 118 /* builder */
+    effect_amount SET_ATTRIBUTE SEA_WALL ATTR_TRAIN_BUTTON 5 
+    effect_amount ADD_ATTRIBUTE SEA_WALL ATTR_CREATION_TIME 2 /* changes to 7 seconds, to match the build time of Palisade walls */
+    effect_amount SET_ATTRIBUTE SEA_WALL ATTR_STONE_COST 0 /* remove stone cost - it's pretty flimsy, too much so to justify a stone cost. Normally costs 5 wood/5 stone with a 5 second build time. note: can be used to wall in opponent's docks (which is a potential issue) */
+endif
+
+/* guarantee 3 villagers spawn together with a unit chain:
+579 - villager male gold miner
+effect_amount SET_ATTRIBUTE UNUSED_UNIT ATTR_DEAD_ID next
+effect_amount SET_ATTRIBUTE UNUSED_UNIT ATTR_BLOOD_ID 579
+
+*/
+effect_amount SET_ATTRIBUTE DLC_PENGUIN ATTR_DEAD_ID 640
+effect_amount SET_ATTRIBUTE DLC_PENGUIN ATTR_BLOOD_ID 579
+effect_amount SET_ATTRIBUTE DLC_PENGUIN ATTR_HITPOINTS 0
+
+effect_amount SET_ATTRIBUTE LA_HIRE ATTR_DEAD_ID 579
+effect_amount SET_ATTRIBUTE LA_HIRE ATTR_BLOOD_ID 579
+effect_amount SET_ATTRIBUTE LA_HIRE ATTR_HITPOINTS 0
+
+/* 632 - FRANKISH_PALADIN; 1808 is mule cart
+effect_amount SET_ATTRIBUTE FRANKISH_PALADIN ATTR_DEAD_ID 1808 
+effect_amount SET_ATTRIBUTE FRANKISH_PALADIN ATTR_BLOOD_ID 579
+effect_amount SET_ATTRIBUTE FRANKISH_PALADIN ATTR_HITPOINTS 0
+*/
+
+<LAND_GENERATION>
+base_terrain WATER /*
+DLC_NEWSHALLOW  - will want to put a terrain mask on it, but DLC_NEWSHALLOW will allow for wading across the river. MUDDY_SHALLOW might also be an option, but likely won't look right. */
+
+create_player_lands {
+    terrain_type SNOW_LIGHT
+    land_percent 100
+    set_zone_by_team
+    if AT_MOST_TINY
+        other_zone_avoidance_distance 9 /* TODO confirm these sizes are satisfactory, and adjust resource amounts accordingly; note that any smaller than this causes issues with the way terrain is generated (right now a distance of 8 has a chance of water rather than shallows in the middle of the river though parts of the river) */
+    elseif MAPSIZE_LUDICROUS
+        other_zone_avoidance_distance 16
+    elseif AT_LEAST_MONSTROUS
+        other_zone_avoidance_distance 15
+    elseif AT_LEAST_COLOSSAL
+        other_zone_avoidance_distance 14
+    elseif AT_LEAST_MASSIVE
+        other_zone_avoidance_distance 13
+    elseif AT_LEAST_HUGE
+        other_zone_avoidance_distance 12
+    elseif AT_LEAST_NORMAL
+        other_zone_avoidance_distance 11
+    else
+        other_zone_avoidance_distance 10
+    endif
+    base_size 11
+    base_elevation 1
+}
+<ELEVATION_GENERATION>
+/*
+create_elevation 3 {
+    base_terrain SNOW_LIGHT
+    number_of_clumps 16
+    number_of_tiles 300
+    set_scale_by_size
+    enable_balanced_elevation
+}
+*/
+create_elevation 3 {
+    base_terrain SNOW_LIGHT
+    number_of_clumps 16
+    number_of_tiles 300
+    set_scale_by_size
+    enable_balanced_elevation
+}
+create_elevation 2 {
+    base_terrain SNOW_LIGHT
+    number_of_clumps 16
+    number_of_tiles 300
+    set_scale_by_size
+    enable_balanced_elevation
+}
+
+<TERRAIN_GENERATION>
+color_correction CC_WINTER
+/*
+terrains to use:
+DLC_FORESTSNOWAUTUMN, SNOW, SNOW_FOREST
+UNDERBRUSH_SNOW, SNOW_LIGHT, SNOW_HEAVY
+also FOREST_DEAD
+
+obsolete: GRASS_SNOW, DIRT_SNOW
+
+*/
+create_terrain SNOW {
+    base_terrain WATER
+    land_percent 100
+
+}
+create_terrain WATER {
+    base_terrain SNOW
+    land_percent 100
+    height_limits 0 0
+    set_flat_terrain_only
+    spacing_to_other_terrain_types 1
+}
+create_terrain GRASS2 {
+    base_terrain SNOW_LIGHT
+    land_percent 100
+    terrain_mask 1 /* 2 is under, 1 is over */
+    number_of_clumps 229
+}
+create_terrain GRASS2 {
+    base_terrain SNOW
+    land_percent 100
+    terrain_mask 1 /* 2 is under, 1 is over */
+    number_of_clumps 999
+    beach_terrain DLC_GRAVELBEACH
+    /* default is ICYSHORE due to snow base terrain
+    beach_terrain ICYSHORE
+    */
+}
+create_terrain DLC_NEWSHALLOW {
+    base_terrain WATER
+    land_percent 30
+    terrain_mask 2
+    number_of_clumps 9
+}
+create_terrain MED_WATER {
+    base_terrain DLC_NEWSHALLOW
+    land_percent 30
+    number_of_clumps 99
+    spacing_to_other_terrain_types 1
+}
+create_terrain DLC_NEWSHALLOW {
+    base_terrain MED_WATER
+    land_percent 30
+    terrain_mask 2
+    number_of_clumps 9
+}
+/*
+create forest terrains
+Yukon River Flats - winding river, flat terrain, heavily forested
+Nome - hills and beach with gold, tundra, Bering Sea coast line
+Yukon River Hills - river with some curves but not like in the flats, surrounded by hills or even small mountains, forested"
+*/
+create_terrain DLC_FORESTSNOWAUTUMN {
+    base_terrain SNOW_LIGHT
+    land_percent 8
+    number_of_clumps 64
+    set_avoid_player_start_areas 15
+}
+create_terrain SNOW_FOREST {
+    base_terrain SNOW_LIGHT
+    land_percent 8
+    number_of_clumps 64
+    set_avoid_player_start_areas 15
+}
+<OBJECTS_GENERATION>
+create_object TOWN_CENTER {
+    max_distance_to_players 0
+    set_place_for_every_player
+}
+create_object VILLAGER {
+    set_place_for_every_player
+    min_distance_to_players 6
+    max_distance_to_players 6
+
+}
+if REGICIDE
+    create_object KING {
+        set_place_for_every_player
+        min_distance_to_players 7
+        set_circular_placement
+        find_closest
+    }
+endif
+/*
+create_object SHARKATZOR {
+    set_place_for_every_player
+    min_distance_to_players 7
+    max_distance_to_players 9
+    set_circular_placement
+}
+*/
+/* TODO consider seeing if I can rename it White Fang
+*/
+if TOURNAMENT_VERSION
+    create_object HORSE { 
+        set_place_for_every_player
+        min_distance_to_players 7
+        max_distance_to_players 9
+        set_circular_placement
+    }
+else
+    create_object HUNTING_WOLF { 
+        set_place_for_every_player
+        min_distance_to_players 7
+        max_distance_to_players 9
+        set_circular_placement
+    }
+endif
+create_object HOUSE {
+    set_place_for_every_player
+    min_distance_to_players 10
+    max_distance_to_players 13
+    avoid_forest_zone 1 /* seems unnecesary. Doesn't matter too much if it's next to forest. */
+    find_closest
+    set_circular_placement
+    min_distance_group_placement 1
+}
+
+/* want mining camps and villagers to be placed away from opponents. Unfortunately, best way I can figure out to do that doesn't guarantee that they'll be together. */
+create_object MINING_CAMP {
+    terrain_to_place_on DLC_NEWSHALLOW
+    set_place_for_every_player
+    find_closest
+    set_circular_placement
+    ignore_terrain_restrictions
+    actor_area 10
+    avoid_actor_area 10
+    actor_area_radius 12
+    avoid_forest_zone 2
+
+    temp_min_distance_group_placement 20
+}
+/* spawn penguin, which promptly dies to turn into 3 villagers */
+create_object DLC_PENGUIN { /* note: seed 984964488 tiny map size 4 players - player 1 villagers start away from mining camp. Consider exchanging the mining camp with a mule cart. */
+    terrain_to_place_on DLC_NEWSHALLOW
+    set_place_for_every_player
+    find_closest
+    set_circular_placement
+    ignore_terrain_restrictions
+    actor_area_to_place_in 10
+    actor_area 8
+    avoid_actor_area 8
+    actor_area_radius 11
+}
+
+/* best method I can figure out: does risk the possibility of villagers starting seperate from the mining camp though. */
+
+create_object GOLD {
+    set_gaia_object_only
+    terrain_to_place_on DLC_NEWSHALLOW
+    ignore_terrain_restrictions /* optional: use rms effect instead to change terrain id of gold - would allow player gold piles to potentially end up across the river, so not the best option. */
+    temp_min_distance_group_placement 3
+    min_distance_group_placement 1
+    number_of_objects 9320
+    /* resource_delta -400 */
+} 
+create_object ON_GRID {
+    second_object SHORE_FISH
+    number_of_objects 9320
+    temp_min_distance_group_placement 4
+    min_distance_group_placement 1
+    terrain_to_place_on DLC_NEWSHALLOW
+}
+create_object GOLD {
+    set_gaia_object_only
+    terrain_to_place_on DLC_NEWSHALLOW
+    ignore_terrain_restrictions 
+    temp_min_distance_group_placement 5
+    min_distance_group_placement 3
+    number_of_objects 9320
+    /* resource_delta -400 */
+} 
+create_object GOLD {
+    set_place_for_every_player
+    set_gaia_object_only
+    actor_area_to_place_in 10 /* mining camp */
+    terrain_to_place_on DLC_NEWSHALLOW
+    ignore_terrain_restrictions 
+    min_distance_group_placement 1
+    /* resource_delta -400 */
+    number_of_groups 99
+    temp_min_distance_group_placement 3
+}
+/* create player resources 
+ */
+create_object GOLD { 
+    number_of_objects 4
+    temp_min_distance_group_placement 6
+    min_distance_group_placement 2
+    group_placement_radius 1
+    set_tight_grouping
+    set_place_for_every_player
+    set_gaia_object_only
+    set_circular_placement
+    min_distance_to_players 11
+    max_distance_to_players 16
+    avoid_forest_zone 2
+    actor_area 103
+    if MAPSIZE_MINI
+        actor_area_radius 3
+    else
+        actor_area_radius 7
+    endif
+    avoid_actor_area 8
+    avoid_actor_area 10
+    avoid_actor_area 101
+    avoid_actor_area 102
+}
+create_object STONE {
+    number_of_objects 5
+    number_of_groups 2
+    temp_min_distance_group_placement 11
+    min_distance_group_placement 4
+    group_placement_radius 1
+    set_tight_grouping
+    set_place_for_every_player
+    set_gaia_object_only
+    set_circular_placement
+    min_distance_to_players 13
+    max_distance_to_players 27
+    avoid_forest_zone 3
+    actor_area 101
+    if MAPSIZE_MINI
+        actor_area_radius 3
+    else
+        actor_area_radius 10
+    endif
+    avoid_actor_area 8
+    avoid_actor_area 10
+    avoid_actor_area 102
+    avoid_actor_area 103 /* gold mines */
+}
+create_object GOLD { 
+    number_of_objects 4
+    number_of_groups 2
+    min_distance_group_placement 2
+    group_placement_radius 1
+    set_tight_grouping
+    set_place_for_every_player
+    set_gaia_object_only
+    set_circular_placement
+    min_distance_to_players 15
+    max_distance_to_players 31
+    actor_area 103
+    if MAPSIZE_MINI
+        actor_area_radius 3
+        avoid_forest_zone 1
+        temp_min_distance_group_placement 5
+    else
+        actor_area_radius 6
+        avoid_forest_zone 2
+        temp_min_distance_group_placement 8
+    endif
+    avoid_actor_area 8
+    avoid_actor_area 10
+    avoid_actor_area 101
+    avoid_actor_area 102
+    avoid_actor_area 103 /* gold mines */
+}
+create_object FORAGE {
+    number_of_objects 5
+    number_of_groups 2
+    temp_min_distance_group_placement 9
+    min_distance_group_placement 2
+    group_placement_radius 1
+    set_tight_grouping
+    set_place_for_every_player
+    set_gaia_object_only
+    set_circular_placement
+    min_distance_to_players 11
+    max_distance_to_players 17
+    avoid_forest_zone 3
+    actor_area 102
+    if MAPSIZE_MINI
+        actor_area_radius 3
+    else
+        actor_area_radius 9
+    endif
+    avoid_actor_area 8
+    avoid_actor_area 10
+    /* avoid_actor_area 101  - causes issues */
+    avoid_actor_area 103 /* gold mines */
+}
+create_object DEER {
+    number_of_objects 3
+    number_of_groups 3
+    temp_min_distance_group_placement 8
+    min_distance_group_placement 2
+    set_loose_grouping
+    set_place_for_every_player
+    set_gaia_object_only
+    set_circular_placement
+    min_distance_to_players 12
+    max_distance_to_players 20
+    avoid_forest_zone 1
+    avoid_actor_area 8
+    avoid_actor_area 10
+    /* avoid_actor_area 101 */
+    avoid_actor_area 102
+    avoid_actor_area 103
+}
+create_object DLC_GOAT { /* 2 goats that start under player control, plus 6 that start near TC */
+    number_of_objects 2
+    set_place_for_every_player
+    min_distance_group_placement 2
+    set_loose_grouping
+    max_distance_to_players 5
+    avoid_forest_zone 1
+}
+create_object DLC_GOAT {
+    number_of_objects 2
+    number_of_groups 3
+    temp_min_distance_group_placement 7
+    min_distance_group_placement 2
+    set_loose_grouping
+    set_place_for_every_player
+    set_gaia_object_only
+    set_circular_placement
+    min_distance_to_players 7
+    max_distance_to_players 16
+    avoid_forest_zone 1
+}
+create_object SNOW_PINE_TREE { /* TODO change */
+    number_of_objects 2
+    min_distance_to_players 4
+    max_distance_to_players 5
+    set_place_for_every_player
+    set_gaia_object_only
+}
+create_object SNOW_PINE_TREE { /* TODO change */
+    number_of_objects 3
+    min_distance_to_players 6
+    max_distance_to_players 8
+    set_place_for_every_player
+    set_gaia_object_only
+}
+/* boar: could include a wild boar, as they can survive in a variety of terrains (including northern frozen terrains) due to adaptability and a willingness to eat pretty much anything, but I don't think they were in Alaska quite then (so not thematically appropriate). */
+
+/* wild neutral animals */
+if TOURNAMENT_VERSION
+
+/* create an actor area that takes up most of the map, but doesn't include the edges. Then bears can avoid it to avoid the middle of the map. actor area should include everwhere between 10% - 90%
+ */
+    if MAPSIZE_MINI 
+        create_actor_area 39 39 0 31
+        create_actor_area 40 40 0 31
+    elseif TINY_MAP
+        create_actor_area 59 59 0 47 /* 59 - 47 == 12 tiles */
+        create_actor_area 60 60 0 47 /* place a second time, otherwise, the actor area is biased by 1 tile - 1 extra tile is available in top/bottom corners, but not enough of an impact to be worth fixing. */
+    elseif SMALL_MAP
+        create_actor_area 71 71 0 57
+        create_actor_area 72 72 0 57
+    elseif MEDIUM_MAP
+        create_actor_area 83 83 0 66
+        create_actor_area 84 84 0 66
+    elseif MAPSIZE_NORMAL
+        create_actor_area 99 99 0 79
+        create_actor_area 100 100 0 79
+    elseif MAPSIZE_LARGE
+        create_actor_area 109 109 0 87
+        create_actor_area 110 110 0 87
+    elseif MAPSIZE_HUGE
+        create_actor_area 119 119 0 95
+        create_actor_area 120 120 0 95
+    elseif MAPSIZE_GIANT
+        create_actor_area 125 125 0 100
+        create_actor_area 126 126 0 100
+    elseif MAPSIZE_MASSIVE
+        create_actor_area 137 137 0 109
+        create_actor_area 138 138 0 109
+    elseif MAPSIZE_ENORMOUS
+        create_actor_area 149 149 0 119
+        create_actor_area 150 150 0 119
+    elseif MAPSIZE_COLOSSAL
+        create_actor_area 159 159 0 127
+        create_actor_area 160 160 0 127
+    elseif MAPSIZE_INCREDIBLE
+        create_actor_area 179 179 0 143
+        create_actor_area 180 180 0 143
+    elseif MAPSIZE_MONSTROUS
+        create_actor_area 199 199 0 159
+        create_actor_area 200 200 0 159
+    else /* MAPSIZE_LUDICROUS */
+        create_actor_area 239 239 0 191
+        create_actor_area 240 240 0 191
+    endif
+    create_object ALASKAN_BEAR {
+        number_of_groups 99
+        set_scaling_to_map_size
+        set_loose_grouping
+        set_gaia_object_only
+        set_gaia_unconvertible /* supposed to make it stay in place more - personally don't care for this behavior. TODO switch after tourney? */
+        set_circular_placement
+        min_distance_to_players 36
+        temp_min_distance_group_placement 32
+        avoid_forest_zone 1
+        min_distance_group_placement 3
+        avoid_actor_area 0
+        avoid_actor_area 8
+        avoid_actor_area 10
+        terrain_to_place_on SNOW_LIGHT
+        actor_area 105
+        actor_area_radius 12 /* as required by specs */
+    }
+endif
+create_object DEER {
+    number_of_objects 2
+    number_of_groups 20
+    temp_min_distance_group_placement 21
+    min_distance_group_placement 2
+    set_loose_grouping
+    set_circular_placement
+    min_distance_to_players 25
+    avoid_forest_zone 1
+    terrain_to_place_on SNOW_LIGHT /* without this, deer can spawn on the river, but can't cross to the shore */
+    set_scaling_to_map_size
+    avoid_actor_area 8
+    avoid_actor_area 10
+    avoid_actor_area 105
+}
+create_object FORAGE {
+    number_of_objects 3
+    group_variance 1
+    set_gaia_object_only
+    temp_min_distance_group_placement 45
+    min_distance_to_players 35
+    set_circular_placement
+    min_distance_group_placement 2
+    avoid_forest_zone 1
+    set_scaling_to_map_size
+    number_of_groups 6
+    set_tight_grouping
+    avoid_actor_area 8
+    avoid_actor_area 10
+    avoid_actor_area 105
+}
+
+create_object SNOW_PINE_TREE { /* TODO alter to be determined by theme */
+    number_of_groups 30
+    set_scaling_to_map_size
+    temp_min_distance_group_placement 13
+}
+create_object RELIC {
+    temp_min_distance_group_placement 40
+    avoid_forest_zone 1
+    avoid_cliff_zone 1
+    set_gaia_object_only
+    min_distance_to_players 30
+    set_circular_placement
+    if MAPSIZE_MINI
+        number_of_objects 4
+        temp_min_distance_group_placement 30 /* these are about as high as I can get while passing the 8 player stress test */
+        min_distance_to_players 20 
+    elseif MAPSIZE_TINY
+        number_of_objects 5
+    elseif MAPSIZE_SMALL
+        number_of_objects 5
+    elseif MAPSIZE_MEDIUM
+        number_of_objects 5
+    elseif MAPSIZE_NORMAL
+        number_of_objects 7
+    elseif MAPSIZE_LARGE
+        number_of_objects 8
+    elseif MAPSIZE_HUGE
+        number_of_objects 20
+        temp_min_distance_group_placement 60
+    elseif MAPSIZE_GIANT
+        number_of_objects 20
+        temp_min_distance_group_placement 64
+    elseif MAPSIZE_MASSIVE
+        number_of_objects 20
+        temp_min_distance_group_placement 65
+    elseif MAPSIZE_ENORMOUS
+        number_of_objects 20
+        temp_min_distance_group_placement 68
+    elseif MAPSIZE_COLOSSAL
+        number_of_objects 20
+        temp_min_distance_group_placement 70
+    elseif MAPSIZE_INCREDIBLE
+        number_of_objects 25
+        temp_min_distance_group_placement 75
+    elseif MAPSIZE_MONSTROUS
+        number_of_objects 25
+        temp_min_distance_group_placement 80
+    elseif MAPSIZE_LUDICROUS
+        number_of_objects 30
+        temp_min_distance_group_placement 90
+    endif
+}
+create_object STONE {
+    temp_min_distance_group_placement 35
+    min_distance_group_placement 3
+    set_circular_placement
+    if MAPSIZE_MINI
+        min_distance_to_players 27
+        temp_min_distance_group_placement 30
+    elseif MAPSIZE_TINY
+        min_distance_to_players 27
+    elseif MAPSIZE_SMALL
+        min_distance_to_players 30
+    else
+        min_distance_to_players   44
+    endif
+    set_tight_grouping
+    avoid_forest_zone 1
+    avoid_cliff_zone 1
+    avoid_actor_area   10
+    avoid_actor_area   101
+    avoid_actor_area   102
+    avoid_actor_area   103
+    if AT_MOST_SMALL
+        number_of_objects 2
+    elseif AT_LEAST_NORMAL
+        number_of_objects 4
+    else
+        number_of_objects 3 /* should be medium map size */
+    endif
+    if MAPSIZE_MINI
+        number_of_groups 2
+        temp_min_distance_group_placement 30
+    elseif MAPSIZE_TINY
+        number_of_groups 2
+        temp_min_distance_group_placement 36
+    elseif MAPSIZE_SMALL
+        number_of_groups 2
+    elseif MAPSIZE_MEDIUM
+        number_of_groups 3
+    elseif MAPSIZE_NORMAL
+        number_of_groups 3
+    elseif MAPSIZE_LARGE
+        number_of_groups 4
+    elseif MAPSIZE_HUGE
+        number_of_groups 6 /* start of infinite stone groups for standard resources */
+        temp_min_distance_group_placement 60
+    elseif MAPSIZE_GIANT
+        number_of_groups 7
+        temp_min_distance_group_placement 64
+    elseif MAPSIZE_MASSIVE
+        number_of_groups 8
+        temp_min_distance_group_placement 65
+    elseif MAPSIZE_ENORMOUS
+        number_of_groups 10
+        temp_min_distance_group_placement 68
+    elseif MAPSIZE_COLOSSAL
+        number_of_groups 12
+        temp_min_distance_group_placement 70
+    elseif MAPSIZE_INCREDIBLE
+        number_of_groups 16
+        temp_min_distance_group_placement 75
+    elseif MAPSIZE_MONSTROUS
+        number_of_groups 20
+        temp_min_distance_group_placement 80
+    elseif MAPSIZE_LUDICROUS
+        number_of_groups 29
+        temp_min_distance_group_placement 90
+    endif
+}
+if TOURNAMENT_VERSION /* bears made earlier */
+    create_object WOLF {
+        number_of_groups 2
+        set_loose_grouping
+        set_place_for_every_player
+        set_gaia_object_only
+        set_circular_placement
+        min_distance_to_players 32
+        temp_min_distance_group_placement 20
+        avoid_forest_zone 1
+        avoid_actor_area 0
+        avoid_actor_area 8
+        avoid_actor_area 10
+        terrain_to_place_on SNOW_LIGHT
+    }
+elseif SPECIAL_BEAR_DEFINED
+    create_object ALASKAN_BEAR { /* TODO improve bear placement */
+        number_of_groups 99
+        set_scaling_to_map_size
+        set_loose_grouping
+        set_gaia_object_only
+        /* set_gaia_unconvertible supposed to make it stay in place more - personally don't care for this behavior - I'd rather have it be lurable with the hunting wolf. */
+        set_circular_placement
+        min_distance_to_players 36
+        temp_min_distance_group_placement 32
+        avoid_forest_zone 1
+        min_distance_group_placement 16 /* should only be wolves after this */
+        avoid_actor_area 8
+        avoid_actor_area 10
+        terrain_to_place_on SNOW_LIGHT
+    }
+    create_object WOLF {
+        number_of_groups 2
+        set_loose_grouping
+        set_place_for_every_player
+        set_gaia_object_only
+        set_circular_placement
+        min_distance_to_players 32
+        temp_min_distance_group_placement 20
+        avoid_forest_zone 1
+        avoid_actor_area 8
+        avoid_actor_area 10
+        terrain_to_place_on SNOW_LIGHT
+    }
+else
+    create_object DLC_BEAR {
+        number_of_groups 2
+        set_loose_grouping
+        set_place_for_every_player
+        set_gaia_object_only
+        set_circular_placement
+        min_distance_to_players 36
+        temp_min_distance_group_placement 21
+        avoid_forest_zone 1
+        min_distance_group_placement 19 /* should only be wolves after this */
+        avoid_actor_area 8
+        avoid_actor_area 10
+        terrain_to_place_on SNOW_LIGHT
+    }
+    create_object WOLF {
+        number_of_groups 4
+        set_scaling_to_map_size
+        temp_min_distance_group_placement 27
+        min_distance_to_players 35
+        avoid_forest_zone 1
+        avoid_actor_area 8
+        avoid_actor_area 10
+        terrain_to_place_on SNOW_LIGHT
+    }
+endif
+
+
+

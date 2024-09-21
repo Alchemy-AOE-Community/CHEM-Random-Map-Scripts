@@ -1,0 +1,1252 @@
+
+/* UTQIAVIK by Huehuecoyotl22 
+July 2024
+For Alchemy League S4 */
+
+/* Licensed for Exclusive Competitive Use in Alchemy League Season 4 */
+/* Component Specification: https://github.com/Alchemy-AOE-Community/CHEM-Published-Specifications/blob/download-to-click-links/SCRIPTING/ALASKA/CHEM-CSRM-AK-01.pdf */
+
+start_random
+percent_chance 30
+#define AUTUMNIAN
+percent_chance 70
+#define WINTERIAN
+end_random
+
+<PLAYER_SETUP>
+
+nomad_resources
+
+/* Changing trees to bushes */
+	#const TREE_AUTUMN 1248
+	#const TREE_AUTUMN_SNOW 1249
+	#const TREE_SNOWY 413
+	#const BUSH_A 302
+	#const BUSH_B 1053
+	#const BUSH_SNOW 1054
+	#const GRAVEL 70
+	#const RAVELBEACH_UNSAILABLE 81
+
+	
+effect_amount UPGRADE_UNIT PINETREE DLC_AFRICANBUSH 1
+effect_amount UPGRADE_UNIT SNOWPINETREE BUSH_SNOW 1
+
+/* Removing Trade Carts and Cogs for Multi-team Games */
+if LOW_RESOURCES
+#const TRADE_CART_ENABLER 161
+#const TRADE_COG_ENABLER 180
+#const TRADE_CARAVAN_ENABLER 48
+#const HINDU_CARAVANSERAI_ENABLER 518
+#const PERSIAN_CARAVANSERAI_ENABLER 552  
+effect_amount DISABLE_TECH TRADE_COG_ENABLER ATTR_DISABLE 180
+effect_amount DISABLE_TECH TRADE_CART_ENABLER ATTR_DISABLE 161
+effect_amount DISABLE_TECH TRADE_CARAVAN_ENABLER ATTR_DISABLE 48
+effect_amount DISABLE_TECH HINDU_CARAVANSERAI_ENABLER ATTR_DISABLE 518
+effect_amount DISABLE_TECH PERSIAN_CARAVANSERAI_ENABLER ATTR_DISABLE 552
+endif
+
+/* Configuring Eagle Scout */
+#const SHARKATZOR 1222
+#const EXPLOSION 1614
+effect_amount SET_ATTRIBUTE SHARKATZOR ATTR_TRAITS 16
+effect_amount SET_ATTRIBUTE SHARKATZOR ATTR_ATTACK_GRAPHIC 846
+effect_amount SET_ATTRIBUTE SHARKATZOR ATTR_STANDING_GRAPHIC 846
+effect_amount SET_ATTRIBUTE SHARKATZOR ATTR_STANDING2_GRAPHIC 846
+effect_amount SET_ATTRIBUTE SHARKATZOR ATTR_DYING_GRAPHIC 3933
+effect_amount SET_ATTRIBUTE SHARKATZOR ATTR_UNDEAD_GRAPHIC 3933
+effect_amount SET_ATTRIBUTE SHARKATZOR ATTR_WALKING_GRAPHIC 846
+effect_amount SET_ATTRIBUTE SHARKATZOR ATTR_RUNNING_GRAPHIC 846
+effect_amount SET_ATTRIBUTE SHARKATZOR ATTR_NAME_ID 5672 
+effect_amount SET_ATTRIBUTE SHARKATZOR ATTR_ICON_ID 283
+effect_amount SET_ATTRIBUTE SHARKATZOR ATTR_HERO_STATUS 66
+effect_amount SET_ATTRIBUTE SHARKATZOR ATTR_MIN_RANGE 1
+effect_amount SET_ATTRIBUTE SHARKATZOR ATTR_MAX_RANGE 0
+effect_amount SET_ATTRIBUTE SHARKATZOR ATTR_SHOWN_ATTACK 0
+effect_amount SET_ATTRIBUTE SHARKATZOR ATTR_LINE_OF_SIGHT 9
+effect_amount SET_ATTRIBUTE SHARKATZOR ATTR_SEARCH_RADIUS 9
+effect_amount SET_ATTRIBUTE EXPLOSION  ATTR_BLAST_LEVEL 1
+effect_amount SET_ATTRIBUTE EXPLOSION  ATTR_BLAST_RADIUS 3
+effect_amount SET_ATTRIBUTE EXPLOSION  ATTR_AREA_DAMAGE -3
+effect_percent SET_ATTRIBUTE SHARKATZOR ATTR_HITPOINTS  100
+effect_percent SET_ATTRIBUTE SHARKATZOR ATTR_MOVE_SPEED 90
+effect_amount SET_ATTRIBUTE SHARKATZOR ATTR_DEAD_ID 1614
+effect_amount SET_ATTRIBUTE SHARKATZOR ATTR_BLOOD_ID 834
+effect_amount ENABLE_OBJECT SHARKATZOR ATTR_ENABLE 0
+effect_amount SET_ATTRIBUTE SHARKATZOR ATTR_TRAIN_LOCATION 82
+effect_amount SET_ATTRIBUTE SHARKATZOR ATTR_TRAIN_BUTTON 4
+effect_amount SET_ATTRIBUTE SHARKATZOR ATTR_TRAIN_TIME 60
+effect_amount SET_ATTRIBUTE SHARKATZOR ATTR_WOOD_COST 75
+effect_amount SET_ATTRIBUTE SHARKATZOR ATTR_GOLD_COST 75
+
+/* Alaskan Bears */
+#const ALASKAN_BEAR 810
+#const DEAD_BOAR 356
+effect_amount GAIA_SET_ATTRIBUTE DEAD_BOAR ATTR_STANDING_GRAPHIC 8239
+effect_amount GAIA_SET_ATTRIBUTE ALASKAN_BEAR ATTR_ATTACK_GRAPHIC 8236
+effect_amount GAIA_SET_ATTRIBUTE ALASKAN_BEAR ATTR_STANDING_GRAPHIC 8238
+effect_amount GAIA_SET_ATTRIBUTE ALASKAN_BEAR ATTR_STANDING2_GRAPHIC 8238
+effect_amount GAIA_SET_ATTRIBUTE ALASKAN_BEAR ATTR_DYING_GRAPHIC 8237
+effect_amount GAIA_SET_ATTRIBUTE ALASKAN_BEAR ATTR_UNDEAD_GRAPHIC 8237
+effect_amount GAIA_SET_ATTRIBUTE ALASKAN_BEAR ATTR_WALKING_GRAPHIC 8240
+effect_amount GAIA_SET_ATTRIBUTE ALASKAN_BEAR ATTR_RUNNING_GRAPHIC 8241
+effect_amount GAIA_SET_ATTRIBUTE ALASKAN_BEAR ATTR_NAME_ID 5713
+effect_amount GAIA_SET_ATTRIBUTE ALASKAN_BEAR ATTR_ICON_ID 151
+effect_amount GAIA_SET_ATTRIBUTE ALASKAN_BEAR ATTR_STORAGE_VALUE 510
+effect_amount GAIA_SET_ATTRIBUTE ALASKAN_BEAR ATTR_HERO_STATUS 66
+effect_amount GAIA_SET_ATTRIBUTE ALASKAN_BEAR ATTR_HITPOINTS 24
+effect_amount GAIA_SET_ATTRIBUTE ALASKAN_BEAR ATTR_LINE_OF_SIGHT 5
+effect_amount GAIA_SET_ATTRIBUTE ALASKAN_BEAR ATTR_SEARCH_RADIUS 5
+
+  if 2_PLAYER_GAME
+      direct_placement
+  else
+      random_placement
+	  grouped_by_team
+  endif
+  
+	ai_info_map_type SCANDANAVIA 0 0 0
+
+#include_drs thebr_setup.inc
+
+#const BUSH_SNOWY 1054
+#const TREE_SNOWY 413
+
+effect_amount GAIA_UPGRADE_UNIT TREE_SNOWY BUSH_SNOWY 0
+effect_amount GAIA_SET_ATTRIBUTE ALASKAN_BEAR ATTR_TERRAIN_ID 7
+
+
+<LAND_GENERATION>
+
+#const SNOW_STRONG 74
+#const SNOW_LIGHT 73
+#const SNOW_LEAVES 72
+#const MUD 76
+#const ICY_PASSABLES 26
+#const WATER_BROWN 96
+#const BUSH_FOREST 89
+#const WATER_AZURE 58
+
+start_random
+  percent_chance 50
+#define ROTATE_LEFT
+  percent_chance 50
+#define ROTATE_RIGHT
+end_random
+
+
+base_terrain SNOW
+base_layer MUD
+
+if 2_PLAYER_GAME
+
+start_random
+  percent_chance 50
+#define BLUE_TOP
+  percent_chance 50
+#define RED_TOP
+end_random
+
+create_land
+{ 
+terrain_type                     DIRT
+land_percent                     10
+base_size                        18
+if ROTATE_RIGHT
+  top_border                     12
+  bottom_border                  12
+else
+  left_border                    12
+  right_border                   12
+endif
+clumping_factor                 25
+if BLUE_TOP
+  if ROTATE_RIGHT
+    start_random
+	  percent_chance 30
+		land_position 81 51
+	  percent_chance 40
+	    land_position 81 50
+	  percent_chance 30
+	    land_position 81 49
+	  end_random
+  else
+      percent_chance 30
+		land_position 49 19
+	  percent_chance 40
+	    land_position 50 19
+	  percent_chance 30
+	    land_position 51 19
+	  end_random
+  endif
+else
+  if ROTATE_RIGHT
+	percent_chance 30
+		land_position 19 51
+	  percent_chance 40
+	    land_position 19 50
+	  percent_chance 30
+	    land_position 19 49
+	  end_random
+  else
+      percent_chance 30
+		land_position 49 81
+	  percent_chance 40
+	    land_position 50 81
+	  percent_chance 30
+	    land_position 51 81
+	  end_random
+  endif
+endif
+assign_to AT_PLAYER 1 0 0
+}
+
+create_land
+{ 
+terrain_type                     GRASS2
+land_percent                     10
+base_size                        18
+if ROTATE_RIGHT
+  top_border                     12
+  bottom_border                  12
+else
+  left_border                    12
+  right_border                   12
+endif
+clumping_factor                 25
+if RED_TOP
+  if ROTATE_RIGHT
+	land_position 81 50
+  else
+      land_position 50 19
+  endif
+else
+  if ROTATE_RIGHT
+	land_position 19 50
+  else
+      land_position 50 81
+  endif
+endif
+assign_to AT_PLAYER 2 0 0
+}
+
+else
+
+create_player_lands 
+{ 
+  terrain_type                     GRASS
+  land_percent                       9 
+  base_size                          18
+  border_fuzziness                   5
+
+if ROTATE_LEFT
+    left_border                     22
+    right_border                    22
+elseif ROTATE_RIGHT
+    top_border                      22
+    bottom_border                   22
+endif
+}
+endif
+if ROTATE_LEFT
+
+create_land
+{ 
+  terrain_type                     ICE
+  land_percent                       100
+  base_size                          4
+  border_fuzziness                   18
+    left_border                     72
+}
+elseif ROTATE_RIGHT
+create_land
+{ 
+  terrain_type                     ICE
+  land_percent                       100
+  base_size                          4
+  border_fuzziness                   18
+    bottom_border			72
+}
+endif
+
+/* ****************************************************** */
+<TERRAIN_GENERATION>
+
+if AUTUMNIAN
+
+create_terrain DLC_GRAVELBEACH
+{
+base_terrain ICE
+land_percent                     100
+number_of_clumps                 300
+spacing_to_other_terrain_types   0
+set_flat_terrain_only
+terrain_mask 0
+}
+
+create_terrain WATER_AZURE
+{
+base_terrain DLC_GRAVELBEACH
+land_percent                     100
+number_of_clumps                 300
+spacing_to_other_terrain_types   0
+set_flat_terrain_only
+terrain_mask 2
+}
+
+create_terrain ICE
+{
+base_terrain WATER_AZURE
+land_percent                     100
+number_of_clumps                 300
+spacing_to_other_terrain_types   2
+set_flat_terrain_only
+terrain_mask 0
+}
+
+create_terrain WATER
+{
+base_terrain ICE
+land_percent                     10
+number_of_clumps                 300
+spacing_to_other_terrain_types   0
+set_flat_terrain_only
+terrain_mask 2
+}
+create_terrain SNOW_STRONG
+{
+base_terrain ICE
+land_percent                    4
+number_of_clumps                 32
+set_avoid_player_start_areas
+spacing_to_other_terrain_types 2
+set_flat_terrain_only     
+}
+create_terrain SNOW_FOREST
+{
+base_terrain DIRT
+number_of_tiles	64
+number_of_clumps	2
+spacing_to_other_terrain_types 3
+set_avoid_player_start_areas
+}
+create_terrain SNOW_FOREST
+{
+base_terrain GRASS2
+number_of_tiles	64
+number_of_clumps	2
+spacing_to_other_terrain_types 3
+set_avoid_player_start_areas
+}
+create_terrain SNOW_FOREST
+{
+base_terrain GRASS
+number_of_tiles	128
+number_of_clumps	4
+spacing_to_other_terrain_types 3
+set_scale_by_groups
+set_avoid_player_start_areas
+}
+create_terrain SNOW
+{
+base_terrain DIRT
+land_percent 100
+number_of_clumps 1000
+}
+create_terrain SNOW
+{
+base_terrain GRASS2
+land_percent 100
+number_of_clumps 1000
+}
+create_terrain SNOW
+{
+base_terrain GRASS
+land_percent 100
+number_of_clumps 1000
+}
+create_terrain DLC_DRYGRASS
+{
+base_terrain RAVELBEACH_UNSAILABLE
+land_percent 100
+number_of_clumps 1000
+height_limits 3 8
+terrain_mask 1
+}
+/* PONDS */
+create_terrain DLC_BOGLAND 
+{
+base_terrain SNOW
+land_percent                     5
+number_of_clumps                 4
+set_avoid_player_start_areas 35
+spacing_to_other_terrain_types 1
+set_flat_terrain_only
+set_scale_by_groups
+beach_terrain DLC_BOGLAND
+}
+create_terrain MUD 
+{
+base_terrain DLC_BOGLAND
+terrain_mask 1
+land_percent                     100
+number_of_clumps                 8000
+beach_terrain DLC_BOGLAND
+}
+create_terrain LEAVES 
+{
+base_terrain DLC_BOGLAND
+terrain_mask 1
+land_percent                     1
+number_of_clumps                 8
+beach_terrain DLC_BOGLAND
+}
+/* PRIMARY FOREST */
+create_terrain SNOW_FOREST
+{
+  base_terrain                   SNOW
+  spacing_to_other_terrain_types 6
+  land_percent                   3
+  number_of_clumps               15
+  set_avoid_player_start_areas   18  
+  set_scale_by_groups
+}
+create_terrain BUSH_FOREST
+{
+  base_terrain                   SNOW
+  spacing_to_other_terrain_types 4
+  land_percent                   2
+  number_of_clumps               10
+  set_avoid_player_start_areas   18  
+  set_scale_by_groups
+}
+create_terrain BUSH_FOREST
+{
+base_terrain SNOW_FOREST
+land_percent 2
+number_of_clumps 100
+}
+create_terrain SNOW
+{
+base_terrain BUSH_FOREST
+land_percent 100
+number_of_clumps 9999
+terrain_mask 1
+}
+create_terrain SNOW
+{
+base_terrain BUSH_FOREST
+land_percent 1
+number_of_clumps 600
+terrain_mask 2
+}
+create_terrain SNOW
+{
+base_terrain BUSH_FOREST
+land_percent 100
+number_of_clumps 9999
+terrain_mask 1
+}
+create_terrain BUSH_FOREST
+{
+base_terrain SNOW_FOREST
+land_percent 1
+number_of_clumps 100
+}
+create_terrain MUD
+{
+base_terrain SNOW
+land_percent 9
+number_of_clumps 20
+set_scale_by_groups
+terrain_mask 1
+}
+create_terrain RAVELBEACH_UNSAILABLE
+{
+base_terrain MUD
+terrain_mask 1
+land_percent 100
+number_of_clumps 2000
+}
+create_terrain RAVELBEACH_UNSAILABLE
+{
+base_terrain SNOW
+terrain_mask 2
+land_percent 9
+number_of_clumps 20
+set_scale_by_groups
+}
+create_terrain RAVELBEACH_UNSAILABLE
+{
+base_terrain SNOW
+terrain_mask 1
+land_percent 9
+number_of_clumps 20
+set_scale_by_groups
+}
+create_terrain DLC_DRYGRASS
+{
+base_terrain SNOW
+terrain_mask 1
+land_percent 10
+number_of_clumps 28
+set_scale_by_size
+}
+create_terrain SNOW
+{
+base_terrain SNOW
+land_percent 9
+number_of_clumps 20
+set_scale_by_groups
+}
+create_terrain GRASS3
+{
+base_terrain SNOW
+terrain_mask 1
+land_percent 9
+number_of_clumps 20
+set_scale_by_groups
+}
+create_terrain SNOW_LEAVES
+{
+base_terrain SNOW_FOREST
+land_percent 2
+number_of_clumps 240
+set_scale_by_groups
+}
+create_terrain DEEP_WATER
+{
+base_terrain ICE
+terrain_mask 0
+land_percent 90
+number_of_clumps 200
+spacing_to_other_terrain_types 0
+}
+create_terrain DEEP_WATER
+{
+base_terrain SNOW_STRONG
+terrain_mask 0
+land_percent 90
+number_of_clumps 200
+spacing_to_other_terrain_types 0
+}
+create_terrain WATER
+{
+base_terrain DEEP_WATER
+terrain_mask 1
+land_percent 33
+number_of_clumps 200
+}
+create_terrain ICY_PASSABLES
+{
+base_terrain DEEP_WATER
+terrain_mask 1
+land_percent 3
+number_of_clumps 20
+}
+create_terrain ICY_PASSABLES
+{
+base_terrain DEEP_WATER
+terrain_mask 1
+land_percent 3
+number_of_clumps 20
+}
+#const WATER_NOBEACH 15
+create_terrain WATER_NOBEACH
+{
+base_terrain DLC_BOGLAND
+terrain_mask 2
+land_percent 1
+number_of_clumps 5
+spacing_to_other_terrain_types 3
+height_limits 0 0
+set_flat_terrain_only
+}
+create_terrain WATER_NOBEACH
+{
+base_terrain DLC_BOGLAND
+terrain_mask 2
+land_percent 1
+number_of_clumps 5
+spacing_to_other_terrain_types 2
+height_limits 0 0
+set_flat_terrain_only
+}
+endif
+
+create_terrain ICY_PASSABLES
+{
+base_layer DLC_GRAVELBEACH
+land_percent                     4
+number_of_clumps                 30
+spacing_to_other_terrain_types   0
+set_flat_terrain_only
+terrain_mask 0
+}
+
+
+
+/***********************************************************/
+if WINTERIAN
+create_terrain WATER
+{
+base_terrain ICE
+land_percent                     10
+number_of_clumps                 300
+spacing_to_other_terrain_types   1
+set_flat_terrain_only
+terrain_mask 2
+}
+create_terrain SNOW_STRONG
+{
+base_terrain ICE
+land_percent                    4
+number_of_clumps                 32
+set_avoid_player_start_areas
+spacing_to_other_terrain_types 1
+set_flat_terrain_only     
+}
+create_terrain SNOW_FOREST
+{
+base_terrain DIRT
+number_of_tiles	64
+number_of_clumps	2
+spacing_to_other_terrain_types 3
+set_avoid_player_start_areas
+}
+create_terrain SNOW_FOREST
+{
+base_terrain GRASS2
+number_of_tiles	64
+number_of_clumps	2
+spacing_to_other_terrain_types 3
+set_avoid_player_start_areas
+}
+create_terrain SNOW_FOREST
+{
+base_terrain GRASS
+number_of_tiles	128
+number_of_clumps	4
+spacing_to_other_terrain_types 3
+set_scale_by_groups
+set_avoid_player_start_areas
+}
+create_terrain SNOW
+{
+base_terrain DIRT
+land_percent 100
+number_of_clumps 1000
+}
+create_terrain SNOW
+{
+base_terrain GRASS2
+land_percent 100
+number_of_clumps 1000
+}
+create_terrain SNOW
+{
+base_terrain GRASS
+land_percent 100
+number_of_clumps 1000
+}
+create_terrain DLC_DRYGRASS
+{
+base_terrain LEAVES
+land_percent 100
+number_of_clumps 1000
+height_limits 3 8
+terrain_mask 1
+}
+/* PONDS */
+create_terrain ICE 
+{
+base_terrain SNOW
+land_percent                     5
+number_of_clumps                 4
+set_avoid_player_start_areas 35
+spacing_to_other_terrain_types 1
+set_flat_terrain_only
+set_scale_by_groups
+}
+/* PRIMARY FOREST */
+create_terrain SNOW_FOREST
+{
+  base_terrain                   SNOW
+  spacing_to_other_terrain_types 6
+  land_percent                   2
+  number_of_clumps               15
+  set_avoid_player_start_areas   18  
+  set_scale_by_groups
+}
+create_terrain SNOW_FOREST
+{
+  base_terrain                   SNOW
+  spacing_to_other_terrain_types 4
+  land_percent                   1
+  number_of_clumps               10
+  set_avoid_player_start_areas   18  
+  set_scale_by_groups
+}
+create_terrain MUD
+{
+base_terrain SNOW
+land_percent 1
+number_of_clumps 20
+set_scale_by_groups
+terrain_mask 0
+}
+create_terrain RAVELBEACH_UNSAILABLE
+{
+base_terrain MUD
+terrain_mask 1
+land_percent 100
+number_of_clumps 2000
+}
+create_terrain RAVELBEACH_UNSAILABLE
+{
+base_terrain SNOW
+terrain_mask 2
+land_percent 9
+number_of_clumps 20
+set_scale_by_groups
+}
+create_terrain ICE
+{
+base_terrain SNOW
+terrain_mask 1
+land_percent 9
+number_of_clumps 4
+set_scale_by_groups
+set_avoid_player_start_areas 35
+}
+create_terrain DLC_DRYGRASS
+{
+base_terrain SNOW
+terrain_mask 1
+land_percent 10
+number_of_clumps 28
+set_scale_by_size
+}
+create_terrain SNOW
+{
+base_terrain SNOW
+land_percent 9
+number_of_clumps 20
+set_scale_by_groups
+}
+create_terrain SNOW_LEAVES
+{
+base_terrain SNOW_FOREST
+land_percent 2
+number_of_clumps 240
+set_scale_by_groups
+}
+create_terrain SNOW
+{
+base_layer MUD
+terrain_mask 0
+land_percent 100
+number_of_clumps 2888
+}
+start_random
+percent_chance 50
+percent_chance 50
+create_terrain SNOW
+{
+base_terrain MUD
+terrain_mask 0
+land_percent 100
+number_of_clumps 2888
+}
+create_terrain SNOW
+{
+base_terrain DLC_DRYGRASS
+terrain_mask 0
+land_percent 100
+number_of_clumps 2888
+}
+create_terrain SNOW
+{
+base_terrain RAVELBEACH_UNSAILABLE
+terrain_mask 0
+land_percent 100
+number_of_clumps 2888
+}
+create_terrain SNOW
+{
+base_terrain MUD
+terrain_mask 0
+land_percent 100
+number_of_clumps 2888
+}
+create_terrain SNOW
+{
+base_terrain DLC_DRYGRASS
+terrain_mask 0
+land_percent 100
+number_of_clumps 2888
+}
+create_terrain SNOW
+{
+base_terrain RAVELBEACH_UNSAILABLE
+terrain_mask 0
+land_percent 100
+number_of_clumps 2888
+}
+create_terrain SNOW
+{
+base_terrain SNOW
+base_layer DLC_DRYGRASS
+terrain_mask 0
+land_percent 100
+number_of_clumps 2888
+}
+create_terrain ICE
+{
+base_terrain SNOW
+terrain_mask 1
+land_percent 5
+number_of_clumps 27
+}
+end_random
+
+endif
+
+if AUTUMNIAN
+color_correction	CC_AUTUMN
+endif
+if WINTERIAN
+color_correction CC_WINTER
+endif
+
+
+<OBJECTS_GENERATION>
+
+#const DEADPLANT 1365
+
+create_object VILLAGER
+{ number_of_objects 6
+  set_place_for_every_player
+if LUDIKRIS_MAP
+  temp_min_distance_group_placement  45
+else
+  temp_min_distance_group_placement  25
+endif
+  avoid_forest_zone 2
+  min_distance_group_placement 2
+  max_distance_to_other_zones 10
+ }
+
+endif
+/*
+#const EAGLE_SCOUT 751
+create_object EAGLE_SCOUT
+{
+  number_of_objects             1
+  set_place_for_every_player
+  min_distance_to_players       7
+  max_distance_to_players       9
+ }
+*/
+ 
+ if LUDIKRIS_MAP
+create_object RELIC
+{
+   number_of_objects            250
+   min_distance_to_players     25
+   temp_min_distance_group_placement 110
+}
+else
+create_object RELIC
+{
+   number_of_objects            5
+   min_distance_to_players     25
+   temp_min_distance_group_placement 20
+}
+endif
+
+if REGICIDE
+create_object VILLAGER
+{
+  number_of_objects             7
+  set_place_for_every_player
+  min_distance_to_players       6
+  max_distance_to_players       6
+}
+
+create_object KING
+{
+  set_place_for_every_player
+  min_distance_to_players       6
+  max_distance_to_players       6
+}
+
+create_object CASTLE
+{
+  set_place_for_every_player
+  min_distance_to_players    10
+  max_distance_to_players    10
+}
+
+endif
+
+/* NEAR FORAGE */
+
+create_object FORAGE
+{
+  number_of_objects          6
+  group_placement_radius     3
+  set_tight_grouping
+  set_gaia_object_only
+  set_place_for_every_player
+  min_distance_to_players    10
+  max_distance_to_players    12
+  min_distance_group_placement  6
+  avoid_forest_zone
+}
+
+/* NEAR GOLD */
+
+create_object GOLD
+{
+  number_of_objects          4
+  group_placement_radius     3
+  set_tight_grouping
+  set_gaia_object_only
+  set_place_for_every_player
+  min_distance_to_players    11
+  max_distance_to_players    14
+  min_distance_group_placement  7
+  max_distance_to_other_zones  7
+  avoid_forest_zone 2
+}
+
+create_object GOLD
+{
+  number_of_objects          4
+  group_placement_radius     3
+  set_tight_grouping
+  set_gaia_object_only
+  set_place_for_every_player
+  min_distance_to_players    12
+  max_distance_to_players    15
+  min_distance_group_placement  7
+  max_distance_to_other_zones  7
+  avoid_forest_zone 2
+}
+
+/* MEDIUM GOLD */
+
+create_object GOLD
+{
+  number_of_objects          4
+  group_placement_radius     3
+  set_tight_grouping
+  set_gaia_object_only
+  set_place_for_every_player
+  min_distance_to_players    16
+  max_distance_to_players    22
+  min_distance_group_placement  7
+  max_distance_to_other_zones  7
+  avoid_forest_zone 2
+  set_circular_placement
+}
+
+/* FAR GOLD */
+
+create_object GOLD
+{
+  number_of_objects          4
+  group_placement_radius     3
+  set_tight_grouping
+  set_gaia_object_only
+  set_place_for_every_player
+  min_distance_to_players    21
+  max_distance_to_players    29
+  min_distance_group_placement  7
+  max_distance_to_other_zones  7
+  set_circular_placement
+  avoid_forest_zone 2
+}
+
+/* NEAR STONE */
+
+create_object STONE
+{
+  number_of_objects          2
+  group_placement_radius     2  
+  set_tight_grouping 
+  set_gaia_object_only
+  set_place_for_every_player
+  min_distance_to_players    14
+  max_distance_to_players    18
+  min_distance_group_placement  7
+  max_distance_to_other_zones  7
+  avoid_forest_zone
+}
+
+if AUTUMNIAN
+create_object DLC_GOOSE {
+	number_of_groups 9320
+	number_of_objects 2
+	set_gaia_object_only
+	temp_min_distance_group_placement 18
+	avoid_forest_zone 2
+	avoid_cliff_zone 2
+}
+endif
+if WINTERIAN
+create_object DLC_GOOSE {
+	number_of_groups 9320
+	number_of_objects 2
+	set_gaia_object_only
+	temp_min_distance_group_placement 24
+	avoid_forest_zone 2
+	avoid_cliff_zone 2
+}
+endif
+
+create_object DEER {
+	number_of_groups 9320
+	number_of_objects 8
+	set_gaia_object_only
+	temp_min_distance_group_placement 20
+	avoid_forest_zone 2
+	avoid_cliff_zone 2
+	max_distance_to_other_zones  4
+}
+
+if WINTERIAN
+create_object FORAGE {
+	number_of_groups 9320
+	number_of_objects 4
+	set_gaia_object_only
+	temp_min_distance_group_placement 18
+	avoid_forest_zone 2
+	avoid_cliff_zone 2
+	max_distance_to_other_zones  4
+}
+endif
+if AUTUMNIAN
+create_object FORAGE {
+	number_of_groups 9320
+	number_of_objects 3
+	set_gaia_object_only
+	temp_min_distance_group_placement 26
+	avoid_forest_zone 2
+	avoid_cliff_zone 2
+	max_distance_to_other_zones  4
+}
+endif
+
+create_object ALASKAN_BEAR
+{
+  number_of_objects 	1
+  number_of_groups          10
+  set_gaia_object_only
+set_gaia_unconvertible
+  temp_min_distance_group_placement 16
+  min_distance_to_players 30
+  terrain_to_place_on SNOW_STRONG
+} 
+create_object ALASKAN_BEAR
+{
+  number_of_objects 	1
+  number_of_groups          10
+  set_gaia_object_only
+set_gaia_unconvertible
+  temp_min_distance_group_placement 16
+    min_distance_to_players 30
+	terrain_to_place_on SNOW_STRONG
+}
+
+if BATTLE_ROYALE
+elseif DEATH_MATCH
+elseif INFINITE_RESOURCES
+elseif EMPIRE_WARS
+else
+endif
+
+if BATTLE_ROYALE
+elseif DEATH_MATCH
+elseif INFINITE_RESOURCES
+else
+
+create_object PINETREE
+{
+  number_of_objects             2
+  set_gaia_object_only
+  set_place_for_every_player
+  min_distance_to_players       4
+  max_distance_to_players       5
+  min_distance_group_placement  2
+}
+create_object SNOWPINETREE
+{
+  number_of_objects             3
+  set_gaia_object_only
+  set_place_for_every_player
+  min_distance_to_players       6
+  max_distance_to_players       8
+  min_distance_group_placement  2
+}
+
+create_object SNOWPINETREE
+{
+  number_of_objects          30
+  set_gaia_object_only
+  set_scaling_to_map_size
+  min_distance_to_players    11
+
+  avoid_forest_zone 2
+
+}
+
+endif
+
+/* CAPTAIN FIN BOSS */
+
+if INFINITE_RESOURCES
+else
+
+create_object SHORE_FISH
+{
+  number_of_objects                   200
+  set_scaling_to_map_size
+  set_gaia_object_only
+ temp_min_distance_group_placement  3
+}
+/*
+create_object SHORE_FISH
+{
+  number_of_objects                   200
+  set_scaling_to_map_size
+  set_gaia_object_only
+  max_distance_to_other_zones 1
+  second_object DLC_BEAR
+}
+*/
+create_object SALMON
+{
+  number_of_objects                   200
+  set_scaling_to_map_size
+  set_gaia_object_only
+ temp_min_distance_group_placement  5
+ max_distance_to_other_zones 5
+}
+
+endif
+
+/* CAPTAIN FIN BOSS END */
+
+create_object STONE
+{
+  number_of_objects          2
+  number_of_groups	10
+  group_placement_radius     3
+  set_tight_grouping
+  set_gaia_object_only
+  min_distance_to_players    35
+  min_distance_group_placement  6
+  temp_min_distance_group_placement 18
+  max_distance_to_other_zones  7
+  set_scaling_to_map_size
+  avoid_forest_zone 1
+}
+
+create_object GOLD
+{
+  number_of_objects          2
+  number_of_groups	10
+  group_placement_radius     3
+  set_tight_grouping
+  set_gaia_object_only
+  min_distance_to_players    35
+  min_distance_group_placement  7
+  temp_min_distance_group_placement 18
+  max_distance_to_other_zones  7
+  set_scaling_to_map_size
+  avoid_forest_zone 1
+}
+
+
+create_object	DLC_AFRICANBUSH_2
+{
+number_of_objects	9999
+set_scaling_to_map_size
+terrain_to_place_on	SNOW
+layer_to_place_on BUSH_FOREST
+ignore_terrain_restrictions
+set_gaia_object_only
+}
+
+create_object DLC_SAVANNAHPATCH
+{
+number_of_objects	100
+temp_min_distance_group_placement	18
+terrain_to_place_on SNOW
+}
+
+create_object DLC_SAVANNAHPATCH
+{
+number_of_objects	18
+temp_min_distance_group_placement	18
+terrain_to_place_on DLC_BOGLAND
+}
+
+create_object DLC_SAVANNAHPATCH
+{
+number_of_objects	24
+temp_min_distance_group_placement	12
+terrain_to_place_on MUD
+}
+
+/* ****************************************************** */
+
+<ELEVATION_GENERATION>
+
+create_elevation        2
+{
+  base_terrain                SNOW
+  base_layer			MUD
+  number_of_clumps 		16
+  number_of_tiles 		1000
+  set_scale_by_groups
+  enable_balanced_elevation
+}
+
+create_elevation        4
+{
+  base_terrain                DLC_ROCK
+  number_of_clumps 		16
+  number_of_tiles 		1000
+  spacing 2
+  set_scale_by_groups
+  enable_balanced_elevation
+}
+
+create_elevation        4
+{
+  base_terrain                DLC_ROCK
+  number_of_clumps 		24
+  number_of_tiles 		200
+  set_scale_by_groups
+  enable_balanced_elevation
+}
+
+
+
+/* ****************************************************** */
+
+<CONNECTION_GENERATION>
+
+create_connect_all_lands
+{
+terrain_size DLC_DRYGRASS 9000 0
+terrain_size GRASS3 9000 0
+terrain_size SNOW 9000 0
+/* replace_terrain BEACH DLC_GRAVELBEACH */
+replace_terrain ICYSHORE ICE
+terrain_cost BEACH 1
+terrain_size BEACH  0
+}
+

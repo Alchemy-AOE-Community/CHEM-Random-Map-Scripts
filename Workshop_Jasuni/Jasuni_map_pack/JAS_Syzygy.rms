@@ -1,0 +1,4964 @@
+/* Syzygy */
+/* A Random Map Script initially started by BPDrej, but mostly finished by Jasuni
+
+Title: Syzygy
+Authors: Jasuni (primary), BPDrej (started script, secondary)
+Date: March 2024
+Notice: Map developed for Alchemy League Season 2 at their request and may be used for it (and any other tournaments that wish to use it may do so, but I request a notification from any doing so).
+Spec: https://github.com/TechnicalChariot/Alchemy-AOE-Published-Specifications/blob/main/CHEM-CSRM-HVN-07.pdf
+
+idea: randomize the terrains for each planet so that players have to scout it out - nomad start, with 1 vil on top planet, 1 vil bottom planet, and 1 vil somewhere else (place via actor area?) Could also have players start with a fishing ship (good for scouting) in a map corner (either top/bottom or left/right: likely left/right)
+Syzygy randomizing: when selecting terrains, do a random chance for first 1, then random chance with one removed (remove last 1, check for duplicate) for second planet; 3rd planet remove last 2, if get duplicate check which planet it was (first removed if first planet, otherwise second); remove 3 for last planet (handle like 3rd planet)
+
+ideas implemented:
+Barren (guarantee gold/stone, gravel terrain with rock and desert gravel terrain mask; no trees, no food, but will have stone (often in abundance) and an randomized amount of gold. Biased towards having a larger amount of stone than of gold.
+Radioactive (evil fog mostly under desert gravel terrain, have fish/wildlife/vils avoid the terrain through use of actor areas - no food/wood, stone randomized with a good chance of no stone, gold guaranteed but widely varies. May be extremely gold-rich, may be gold-poor)
+Desert: has desert palm trees, some thematic hunts (rhinos, ostrichs, elephants), gold and (probably) stone, and a small chance of a dromedary scout
+Farmland: Has berry bushes of both kinds, livestock (1 random type of herdable), mediterranean forest, low/no stone, low/no gold
+
+terrain ideas yet to be added: 
+City (Road terrain, has forests, berry bushes, neutral capturable outposts, neutral trading posts, and ruins of buildings - would include stone piles, possibly in some alternative form. Also may include gold piles - guaranteed extra relics on this terrain)
+Marsh (mangrove forest terrain? mangrove terrain should be separated from outside of the planet, but would have plenty of wood and food/berries/hunt. May have some gold. No stone. Predators fit thematically, but nomad start prohibits that).
+Jungle terrain: (lush jungle forests, plenty of wildlife, maybe a little gold, no stone)
+Grassland/plains: has horses (give players a wild horse that only starts on this terrain as a scout). Has some trees, but not too many. Plenty of hunt.
+
+Mountains/alpine (have mountains take up some space; plenty of stone and gold, trees, goats, etc. - would also have some elevation - use Snow light terrain as base)
+Snowy: (some wildlife to hunt, dead forests, some gold/stone, but not an abundance)
+
+
+TODO consider removing photon scout (perhaps leave in irradiated planet with a chance of it spawning there)
+
+terrains that I could use:
+GRASS, GRASS2, GRASS3, DIRT, DIRT2, DIRT3, DLC_DIRT4, LEAVES, FARM (several, but probably only want 1), DESERT, ROAD (would require change in resource terrain table, pair with ROAD2 which is broken road), SNOW, snow_foundation (4th snow terrain, should looklike snow dirt), DLC_SAVANNAH, DLC_CRACKED, DLC_QUICKSAND (would require change in resource terrain table), DLC_JUNGLEGRASS, Corruption, Gravel, underbrush-leaves, underbrush-snow, (see defined terrains)..., DLC_DRYGRASS, DLC_BOGLAND (require change in resource terrain table), DLC_DESERTGRAVEL
+DLC_ROADGRAVEL
+tricky terrains: DLC_MANGROVESHALLOW, rice farm terrains
+obsolete terrains that don't layer: DIRT_SNOW, GRASS_SNOW, DLC_DRYROAD, DLC_MOORLAND, DLC_JUNGLEROAD, DLC_JUNGLELEAVES
+not really usable as a base terrain: DLC_ROCK, ICE, MUDDY_SHALLOW
+
+forest terrains: JUNGLE, BAMBOO, etc.
+
+terrains made/used: 
+	Farmland
+	Barren (Gravel)
+	Evil Fog
+	Desert
+	Dirt
+	Snow heavy (mountainous biome)
+	Dirt4 (forest biome)
+	Savannah
+	Leaves (forest biome)
+	Snow (forest biome)
+	Bogland (mangrove)
+	Dirt Mud (mangrove and muddy water; forest biome)
+	Road
+
+	GRASS, LEAVES, DIRT,  DESERT, ROAD, farm 0%, SNOW, DLC_SAVANNAH, DLC_DIRT4, Corruption, GRAVEL, SNOW_HEAVY, DIRT_MUD, DLC_BOGLAND,
+	 
+
+	UNDERBRUSH_LEAVES - used as backup terrain, aka jungle biome: not a functional biome at this point, but could be turned into one.
+
+still available:
+	GRASS, GRASS2, GRASS3, DIRT2, DIRT3, DLC_CRACKED, DLC_QUICKSAND, DLC_JUNGLEGRASS, DLC_DRYGRASS, DLC_DESERTGRAVEL, DLC_ROADGRAVEL, and any forest terrains*, ROCK1 (grass placed under cliffs), Grass foundation (put under buildings), ICE?, DLC_ROCK (probably best to avoid, since used to fill gaps between planets), DLC_BLACK? (probably best to avoid for similar reasons), SNOW_LIGHT, moddable lands? (check if used in terrain generaiton), 
+
+	potentially other farmland terrains, and other road terrains (ROAD2, ), and snow_foundation
+	need to check: underbrush-leaves, underbrush-snow, DIRT_SNOW, GRASS_SNOW, DLC_DRYROAD, DLC_MOORLAND, DLC_JUNGLEROAD, DLC_JUNGLELEAVES, underbrush-jungle?, 
+need to add: great plain, cracked, dry mountain, rainforest
+
+Personal playtest notes: Way overdid it on the food resources from the looks of it. I think that I can safely get rid of the dolphins (probably the shore fish as well).
+
+Feedback from Yo Yo Dude: Space seems like an issue (limit hill elevation) - may be an issue in the mid game. If players start closer, then it should be trush wars. Recommends talking to Randy Pan and Alexander.
+	He changed his mind on the elevation, but did mention that there's too much stone/gold on the radioactive/barren planets. Does want me to let him know when I update a new version.
+
+feedback from WarLion: more deep fish needed (not much, but a little would be a good add); likes the varying resource generation, but can result in unbalanced gens (might want to lower the variability and rely less on number of groups and more on temp_min_distance_group_placement - or ask for clarification); majority of vils being right next to each other can cause TCs to be within a few tiles range (so maybe tweak the city to have a few less extra vils)
+
+resulting tweaks: added a little more deep fish (slightly reduced temp_min_distance_group_placement),
+Reduce villagers a little for the city biome, also forced them (and houses) away from the planetary villagers.
+Force villagers to have a little separation from each other? (perhaps an actor area to avoid - will need to stress-test with the smallest map size)
+
+TODO: idea: if add a cracked terrain without wood, then could have a check for if 3 biomes are woodless (cracked, radiated, barren) - if so, then rocky terrain gets some wood piles placed on them
+ */
+ 
+
+
+<PLAYER_SETUP>
+behavior_version 2
+nomad_resources
+force_nomad_treaty
+direct_placement
+
+/*
+#define TOURNAMENT_VERSION
+*/
+if 2_TEAM_GAME
+elseif 2_PLAYER_GAME
+elseif TOURNAMENT_VERSION
+    #define DISABLE_TRADE /* TODO figure out a better solution for FFAs */
+endif
+if DISABLE_TRADE
+/* Removing Trade for Multi-team Games, as per Alchemy requirements.  */
+  #const TRADE_CART_ENABLER 161
+  #const TRADE_COG_ENABLER 180
+  #const TRADE_CARAVAN_ENABLER 48
+  #const HINDU_CARAVANSERAI_ENABLER 518
+  #const PERSIAN_CARAVANSERAI_ENABLER 552  
+  #const SILK_ROAD 499
+  effect_amount DISABLE_TECH TRADE_COG_ENABLER ATTR_DISABLE 180
+  effect_amount DISABLE_TECH TRADE_CART_ENABLER ATTR_DISABLE 161
+  effect_amount DISABLE_TECH TRADE_CARAVAN_ENABLER ATTR_DISABLE 48
+  effect_amount DISABLE_TECH HINDU_CARAVANSERAI_ENABLER ATTR_DISABLE 518
+  effect_amount DISABLE_TECH PERSIAN_CARAVANSERAI_ENABLER ATTR_DISABLE 552
+  effect_amount DISABLE_TECH SILK_ROAD ATTR_DISABLE 499    
+endif
+
+/* wood piles */
+effect_amount GAIA_SET_ATTRIBUTE TREE_J ATTR_STANDING_GRAPHIC 8244
+effect_amount GAIA_SET_ATTRIBUTE TREE_J ATTR_WALKING_GRAPHIC 8244
+effect_amount GAIA_SET_ATTRIBUTE TREE_J ATTR_DYING_GRAPHIC 8244
+effect_amount GAIA_SET_ATTRIBUTE TREE_J ATTR_DEAD_GRAPHIC 8244
+effect_amount GAIA_SET_ATTRIBUTE TREE_J ATTR_STORAGE_VALUE 300
+effect_amount SET_ATTRIBUTE TREE_J ATTR_NAME_ID 5323
+effect_amount SET_ATTRIBUTE TREE_J ATTR_ICON_ID 32
+effect_amount SET_ATTRIBUTE TREE_J ATTR_DEAD_ID -1 /* remove stump */
+effect_amount SET_ATTRIBUTE TREE_J ATTR_HITPOINTS 10 /* remove stump */
+effect_amount SET_ATTRIBUTE TREE_J ATTR_TERRAIN_ID 31 /* all - water, wheel track */
+
+if MAPSIZE_MINI
+    /* AT_MOST_MINI can simply use MAPSIZE_MINI */
+    #define AT_MOST_TINY
+    #define AT_MOST_SMALL
+    #define AT_MOST_MEDIUM
+    #define AT_MOST_NORMAL
+    #define AT_MOST_LARGE
+    #define AT_MOST_HUGE
+    #define AT_MOST_GIANT
+    #define AT_MOST_MASSIVE
+    #define AT_MOST_ENORMOUS
+    #define AT_MOST_COLOSSAL
+    #define AT_MOST_INCREDIBLE
+    #define AT_MOST_MONSTROUS
+    /* and AT_MOST_LUDCROUS is always true */
+elseif MAPSIZE_TINY
+    #define AT_LEAST_TINY
+    
+    #define AT_MOST_TINY
+    #define AT_MOST_SMALL
+    #define AT_MOST_MEDIUM
+    #define AT_MOST_NORMAL
+    #define AT_MOST_LARGE
+    #define AT_MOST_HUGE
+    #define AT_MOST_GIANT
+    #define AT_MOST_MASSIVE
+    #define AT_MOST_ENORMOUS
+    #define AT_MOST_COLOSSAL
+    #define AT_MOST_INCREDIBLE
+    #define AT_MOST_MONSTROUS
+elseif MAPSIZE_SMALL
+    #define AT_LEAST_TINY
+    #define AT_LEAST_SMALL
+    
+    #define AT_MOST_SMALL
+    #define AT_MOST_MEDIUM
+    #define AT_MOST_NORMAL
+    #define AT_MOST_LARGE
+    #define AT_MOST_HUGE
+    #define AT_MOST_GIANT
+    #define AT_MOST_MASSIVE
+    #define AT_MOST_ENORMOUS
+    #define AT_MOST_COLOSSAL
+    #define AT_MOST_INCREDIBLE
+    #define AT_MOST_MONSTROUS
+elseif MAPSIZE_MEDIUM
+    #define AT_LEAST_TINY
+    #define AT_LEAST_SMALL
+    #define AT_LEAST_MEDIUM
+    
+    #define AT_MOST_MEDIUM
+    #define AT_MOST_NORMAL
+    #define AT_MOST_LARGE
+    #define AT_MOST_HUGE
+    #define AT_MOST_GIANT
+    #define AT_MOST_MASSIVE
+    #define AT_MOST_ENORMOUS
+    #define AT_MOST_COLOSSAL
+    #define AT_MOST_INCREDIBLE
+    #define AT_MOST_MONSTROUS
+elseif MAPSIZE_NORMAL
+    #define AT_LEAST_TINY
+    #define AT_LEAST_SMALL
+    #define AT_LEAST_MEDIUM
+    #define AT_LEAST_NORMAL
+    
+    #define AT_MOST_NORMAL
+    #define AT_MOST_LARGE
+    #define AT_MOST_HUGE
+    #define AT_MOST_GIANT
+    #define AT_MOST_MASSIVE
+    #define AT_MOST_ENORMOUS
+    #define AT_MOST_COLOSSAL
+    #define AT_MOST_INCREDIBLE
+    #define AT_MOST_MONSTROUS
+elseif MAPSIZE_LARGE
+    #define AT_LEAST_TINY
+    #define AT_LEAST_SMALL
+    #define AT_LEAST_MEDIUM
+    #define AT_LEAST_NORMAL
+    #define AT_LEAST_LARGE
+    
+    #define AT_MOST_LARGE
+    #define AT_MOST_HUGE
+    #define AT_MOST_GIANT
+    #define AT_MOST_MASSIVE
+    #define AT_MOST_ENORMOUS
+    #define AT_MOST_COLOSSAL
+    #define AT_MOST_INCREDIBLE
+    #define AT_MOST_MONSTROUS
+elseif MAPSIZE_HUGE
+    #define AT_LEAST_TINY
+    #define AT_LEAST_SMALL
+    #define AT_LEAST_MEDIUM
+    #define AT_LEAST_NORMAL
+    #define AT_LEAST_LARGE
+    #define AT_LEAST_HUGE
+    
+    #define AT_MOST_HUGE
+    #define AT_MOST_GIANT
+    #define AT_MOST_MASSIVE
+    #define AT_MOST_ENORMOUS
+    #define AT_MOST_COLOSSAL
+    #define AT_MOST_INCREDIBLE
+    #define AT_MOST_MONSTROUS
+elseif MAPSIZE_GIANT
+    #define AT_LEAST_TINY
+    #define AT_LEAST_SMALL
+    #define AT_LEAST_MEDIUM
+    #define AT_LEAST_NORMAL
+    #define AT_LEAST_LARGE
+    #define AT_LEAST_HUGE
+    #define AT_LEAST_GIANT
+    
+    #define AT_MOST_GIANT
+    #define AT_MOST_MASSIVE
+    #define AT_MOST_ENORMOUS
+    #define AT_MOST_COLOSSAL
+    #define AT_MOST_INCREDIBLE
+    #define AT_MOST_MONSTROUS
+elseif MAPSIZE_MASSIVE
+    #define AT_LEAST_TINY
+    #define AT_LEAST_SMALL
+    #define AT_LEAST_MEDIUM
+    #define AT_LEAST_NORMAL
+    #define AT_LEAST_LARGE
+    #define AT_LEAST_HUGE
+    #define AT_LEAST_GIANT
+    #define AT_LEAST_MASSIVE
+    
+    #define AT_MOST_MASSIVE
+    #define AT_MOST_ENORMOUS
+    #define AT_MOST_COLOSSAL
+    #define AT_MOST_INCREDIBLE
+    #define AT_MOST_MONSTROUS
+elseif MAPSIZE_ENORMOUS
+    #define AT_LEAST_TINY
+    #define AT_LEAST_SMALL
+    #define AT_LEAST_MEDIUM
+    #define AT_LEAST_NORMAL
+    #define AT_LEAST_LARGE
+    #define AT_LEAST_HUGE
+    #define AT_LEAST_GIANT
+    #define AT_LEAST_MASSIVE
+    #define AT_LEAST_ENORMOUS
+    
+    #define AT_MOST_ENORMOUS
+    #define AT_MOST_COLOSSAL
+    #define AT_MOST_INCREDIBLE
+    #define AT_MOST_MONSTROUS
+elseif MAPSIZE_COLOSSAL
+    #define AT_LEAST_TINY
+    #define AT_LEAST_SMALL
+    #define AT_LEAST_MEDIUM
+    #define AT_LEAST_NORMAL
+    #define AT_LEAST_LARGE
+    #define AT_LEAST_HUGE
+    #define AT_LEAST_GIANT
+    #define AT_LEAST_MASSIVE
+    #define AT_LEAST_ENORMOUS
+    #define AT_LEAST_COLOSSAL
+    
+    #define AT_MOST_COLOSSAL
+    #define AT_MOST_INCREDIBLE
+    #define AT_MOST_MONSTROUS
+elseif MAPSIZE_INCREDIBLE
+    #define AT_LEAST_TINY
+    #define AT_LEAST_SMALL
+    #define AT_LEAST_MEDIUM
+    #define AT_LEAST_NORMAL
+    #define AT_LEAST_LARGE
+    #define AT_LEAST_HUGE
+    #define AT_LEAST_GIANT
+    #define AT_LEAST_MASSIVE
+    #define AT_LEAST_ENORMOUS
+    #define AT_LEAST_COLOSSAL
+    #define AT_LEAST_INCREDIBLE
+    
+    #define AT_MOST_INCREDIBLE
+    #define AT_MOST_MONSTROUS
+elseif MAPSIZE_MONSTROUS
+    #define AT_LEAST_TINY
+    #define AT_LEAST_SMALL
+    #define AT_LEAST_MEDIUM
+    #define AT_LEAST_NORMAL
+    #define AT_LEAST_LARGE
+    #define AT_LEAST_HUGE
+    #define AT_LEAST_GIANT
+    #define AT_LEAST_MASSIVE
+    #define AT_LEAST_ENORMOUS
+    #define AT_LEAST_COLOSSAL
+    #define AT_LEAST_INCREDIBLE
+    #define AT_LEAST_MONSTROUS
+    
+    #define AT_MOST_MONSTROUS
+elseif MAPSIZE_LUDICROUS
+    /* AT_LEAST_MINI is always true */
+    #define AT_LEAST_TINY
+    #define AT_LEAST_SMALL
+    #define AT_LEAST_MEDIUM
+    #define AT_LEAST_NORMAL
+    #define AT_LEAST_LARGE
+    #define AT_LEAST_HUGE
+    #define AT_LEAST_GIANT
+    #define AT_LEAST_MASSIVE
+    #define AT_LEAST_ENORMOUS
+    #define AT_LEAST_COLOSSAL
+    #define AT_LEAST_INCREDIBLE
+    #define AT_LEAST_MONSTROUS
+    /* and AT_LEAST_LUDCROUS - can simply use MAP_SIZE_LUDICROUS */
+endif
+/* TODO: adjust the map sizes to use at-least-XXX rather than current values; best to avoid confusion by only using the new map sizes.
+if MAPSIZE_MINI
+elseif MAPSIZE_TINY
+elseif MAPSIZE_SMALL
+elseif MAPSIZE_MEDIUM
+elseif MAPSIZE_NORMAL
+elseif MAPSIZE_LARGE
+elseif MAPSIZE_HUGE
+elseif MAPSIZE_GIANT
+elseif MAPSIZE_MASSIVE
+elseif MAPSIZE_ENORMOUS
+elseif MAPSIZE_COLOSSAL
+elseif MAPSIZE_INCREDIBLE
+elseif MAPSIZE_MONSTROUS
+elseif MAPSIZE_LUDICROUS
+endif */
+
+direct_placement
+#const L 32
+/* Defining Terrains */
+#const ICE_NAVIGABLE 26
+#const FARMLAND1 29 /* 7 is farm, 8 is dead farm, 29-31 are other farm terrains with increase percentages. Rice farm is 63-67 */ 
+#const FARMLAND2 30 /* 7 is farm, 8 is dead farm, 29-31 are other farm terrains with increase percentages. Rice farm is 63-67 */ 
+#const FARMLAND3 31 /* 7 is farm, 8 is dead farm, 29-31 are other farm terrains with increase percentages. Rice farm is 63-67 */ 
+#const FARMLAND_FULL 7
+#const FARMLAND_DEAD 8
+#const FOREST_OAK_BUSH 20
+#const SNOW_FOUNDATION 36
+#const SNOW_ROAD 38
+#const OBSOLETE_ROAD_FUNGUS 39
+#const CORRUPTION 69 
+#const GRAVEL 70 
+#const UNDERBRUSH_LEAVES 71 
+#const UNDERBRUSH_SNOW 72 
+#const SNOW_LIGHT 73
+#const SNOW_HEAVY 74
+#const ROAD_FUNGUS 75
+#const DIRT_MUD 76
+#const UNDERBRUSH_JUNGLE 77
+#const ROAD_GRAVEL 78
+#const GRASS_JUNGLE 83 /* SIMLAR TO DLC_JUNGLEGRASS */
+#const FOREST_BUSH 89
+#const FOREST_REEDS 92
+#const WATER_GREEN 95
+#const WATER_BROWN 96
+
+#const G 0 /* GRASS */
+#const WNI  15 /* Water 2D, shoreless */
+#const URB  40 /* DLC_ROCK */
+#const BNN  79 /* beach (non-navigable) */
+#const NNRB 82 /* beach (non-navigable), wet rock */
+#const GW   95 /* Water, Green */
+#const SOC 111 /* MUDDY_SHALLOW */
+#const WG 81 /* beach (non-navigable), wet gravel */
+#const B3 52 /* DLC_BEACH3 */
+#const WRB 109 /* DLC_WETROCKBEACH */
+
+#const PHOTON_MAN 1292 /* queen 
+The photon man is practically a requirement of the tournament, therefore players will start with a photon scout. The photon scout will prioritize placement on radioactive terrain. If there is no radioactive planet, it will place on the barren planet instead. Finally, if neither planet is available, it will place on the rock terrain between planets. May change after tournament, but that is how it will be for now. */
+effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_TRAITS 16
+effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_ATTACK_GRAPHIC 1908
+effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_STANDING_GRAPHIC 1913
+effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_STANDING2_GRAPHIC 1914
+effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_DYING_GRAPHIC 1911
+effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_UNDEAD_GRAPHIC 1911
+effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_WALKING_GRAPHIC 1918
+effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_RUNNING_GRAPHIC 1918
+effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_NAME_ID 5043
+effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_ICON_ID 300
+effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_LINE_OF_SIGHT 5
+effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_SEARCH_RADIUS 5
+effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_HITPOINTS 45
+effect_percent SET_ATTRIBUTE PHOTON_MAN ATTR_MOVE_SPEED 110
+effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_HERO_STATUS 66
+
+/* TODO A tree option for certain planets: Barren, city
+
+#const RUBBLE_AQUEDUCT 1522
+effect_amount GAIA_SET_ATTRIBUTE TREE_A ATTR_STANDING_GRAPHIC 1704
+effect_amount GAIA_SET_ATTRIBUTE TREE_A ATTR_WALKING_GRAPHIC 1704
+effect_amount GAIA_SET_ATTRIBUTE TREE_A ATTR_DYING_GRAPHIC 7344
+effect_amount GAIA_SET_ATTRIBUTE TREE_A ATTR_DEAD_GRAPHIC 7344
+effect_amount GAIA_SET_ATTRIBUTE TREE_A ATTR_DEAD_ID 1522
+effect_amount GAIA_SET_ATTRIBUTE RUBBLE_AQUEDUCT ATTR_STORAGE_VALUE 99999999
+effect_amount GAIA_SET_ATTRIBUTE TREE_A ATTR_NAME_ID 5393
+effect_amount GAIA_SET_ATTRIBUTE TREE_A ATTR_ICON_ID 856
+*/
+
+
+/* Remove Visual Effect of Gaia's Dead Fish Trap */
+#const DOLPHIN 61
+#const ON_GRID 278 /* dead fish trap */
+effect_amount GAIA_SET_ATTRIBUTE ON_GRID ATTR_STORAGE_VALUE 0
+
+#const AMPHITHEATRE 251
+#const INDIAN_RUINS 1784 /* don't use */
+#const CASTLE_RUINS 1837
+#const CHURCH_RUINS 1838
+#const TEMPLE_RUIN 1566
+
+/* set berry bushes land id to all land - needed for farmland terrain, I think. */
+effect_amount SET_ATTRIBUTE FORAGE ATTR_TERRAIN_ID 4
+effect_amount SET_ATTRIBUTE DLC_ORANGEBUSH ATTR_TERRAIN_ID 4
+effect_amount SET_ATTRIBUTE CASTLE_RUINS ATTR_TERRAIN_ID 4 /* why they can normally be placed on water is a mystery - I guess they may want sunken cities. */
+effect_amount SET_ATTRIBUTE CHURCH_RUINS ATTR_TERRAIN_ID 4 
+effect_amount SET_ATTRIBUTE TEMPLE_RUIN ATTR_TERRAIN_ID 4 
+
+/* Defining Planet Terrains
+#define NONRANDOM_PLANETS
+RADIOACTIVE_PLANET, DESERT_PLANET, DIRT4_PLANET, CITY_PLANET, SNOW_PLANET, LEAVES_PLANET, DIRT_MUD_MANGROVE_MAZE_PLANET, BOGLAND_MANGROVE_PLANET, SAVANNAH_PLANET, DIRT_PLANET, FARMLAND_PLANET, SNOW_HEAVY_PLANET, BARREN_PLANET
+no jungle
+add a const for gold added to one of the planets, and once I've done so, add an if-else at the end that adds gold onto the rocks when no gold has appeared. Stone doesn't need this sort of treatment.
+ */
+#define FULL_RANDOM_BIOMES
+if FULL_RANDOM_BIOMES 
+	if DEBUG_MODE
+		#define BARREN_PLANET_1
+	else
+		start_random
+			percent_chance 8 #define RADIOACTIVE_PLANET_1
+			percent_chance 8 #define DESERT_PLANET_1 
+			percent_chance 8 #define DIRT4_PLANET_1 
+			percent_chance 8 #define CITY_PLANET_1 
+			percent_chance 8 #define SNOW_PLANET_1 
+			percent_chance 8 #define LEAVES_PLANET_1 
+			percent_chance 8 #define DIRT_MUD_MANGROVE_MAZE_PLANET_1 
+			percent_chance 8 #define BOGLAND_MANGROVE_PLANET_1 
+			percent_chance 8 #define SAVANNAH_PLANET_1 
+			percent_chance 7 #define DIRT_PLANET_1 
+			percent_chance 7 #define FARMLAND_PLANET_1
+			percent_chance 7 #define SNOW_HEAVY_PLANET_1 
+			percent_chance 7 #define BARREN_PLANET_1 
+		end_random
+	endif
+	if RADIOACTIVE_PLANET_1
+		#const PN1 69 /* Corruption */
+		#define RADIOACTIVE_PLANET
+		#const PN1B 109 /* DLC_WETROCKBEACH */
+	elseif DESERT_PLANET_1
+		#const PN1 14  /* DESERT */
+		#define DESERT_PLANET
+		#const PN1B 108 /* DLC_GRAVELBEACH */
+	elseif DIRT4_PLANET_1
+		#const PN1 42 /* DLC_BAOBABFOREST is 49, DLC_DIRT4 is 42 */
+		#define DIRT4_PLANET
+		#const PN1B 108 /* DLC_GRAVELBEACH */
+	elseif CITY_PLANET_1
+		#const PN1  24  /* ROAD */
+		#define CITY_PLANET
+		#const PN1B 108 /* DLC_GRAVELBEACH */
+	elseif SNOW_PLANET_1
+		#const PN1 32  /* SNOW - a snow forest planetary biome. */
+		#define SNOW_PLANET
+		#const PN1B 108 /* DLC_GRAVELBEACH */
+	elseif LEAVES_PLANET_1
+		#const PN1 5 /* LEAVES */
+		#define LEAVES_PLANET
+		#const PN1B 108 /* DLC_GRAVELBEACH */
+	elseif DIRT_MUD_MANGROVE_MAZE_PLANET_1
+		#const PN1 76  /* DIRT_MUD is 76 - maybe make this one of the mangrove terrains - mangrove forest terrain */
+		#define DIRT_MUD_MANGROVE_MAZE_PLANET
+		#const PN1B 108 /* DLC_GRAVELBEACH */
+	elseif BOGLAND_MANGROVE_PLANET_1
+		#const PN1 101 /* DLC_BOGLAND - mangrove terrain */
+		#define BOGLAND_MANGROVE_PLANET
+		#const PN1B 108 /* DLC_GRAVELBEACH */
+	elseif SAVANNAH_PLANET_1
+		#const PN1 41  /* DLC_SAVANNAH */
+		#define SAVANNAH_PLANET
+		#const PN1B 108 /* DLC_GRAVELBEACH */
+	elseif DIRT_PLANET_1
+		#const PN1  6 /* DIRT */
+		#define DIRT_PLANET
+		#const PN1B 108 /* DLC_GRAVELBEACH */
+	elseif FARMLAND_PLANET_1
+		#const PN1 29 /* Farmland, 0%, aka FARMLAND1 */
+		#define FARMLAND_PLANET
+		#const PN1B 108 /* DLC_GRAVELBEACH */
+	elseif SNOW_HEAVY_PLANET_1
+		#const PN1  74  /* SNOW_HEAVY  */
+		#define SNOW_HEAVY_PLANET
+		#const PN1B 108 /* DLC_GRAVELBEACH */
+	elseif BARREN_PLANET_1
+		#const PN1  70  /* GRAVEL  */
+		#define BARREN_PLANET
+		#const PN1B 108 /* DLC_GRAVELBEACH */
+	else /* bugged generation - minimize damage by activating an unused terrain */
+		#const PN1 71 /* UNDERBRUSH_JUNGLE is 77, UNDERBRUSH_LEAVES is 71 - 71 was used as a terrain mask */
+		#define JUNGLE_PLANET
+		#const PN1B 108 /* DLC_GRAVELBEACH */
+	endif
+
+	start_random
+		percent_chance 9 #define RADIOACTIVE_PLANET_2
+		percent_chance 9 #define DESERT_PLANET_2 
+		percent_chance 9 #define DIRT4_PLANET_2 
+		percent_chance 9 #define CITY_PLANET_2 
+		percent_chance 8 #define SNOW_PLANET_2 
+		percent_chance 8 #define LEAVES_PLANET_2 
+		percent_chance 8 #define DIRT_MUD_MANGROVE_MAZE_PLANET_2 
+		percent_chance 8 #define BOGLAND_MANGROVE_PLANET_2 
+		percent_chance 8 #define SAVANNAH_PLANET_2 
+		percent_chance 8 #define DIRT_PLANET_2 
+		percent_chance 8 #define FARMLAND_PLANET_2
+		percent_chance 8 #define SNOW_HEAVY_PLANET_2 
+		/* percent_chance 0 #define BARREN_PLANET_2  */
+	end_random
+	if RADIOACTIVE_PLANET_2
+		if RADIOACTIVE_PLANET_1
+			#define BARREN_PLANET_2
+		else
+			#const PN2 69 /* Corruption */
+			#define RADIOACTIVE_PLANET
+			#const PN2B 109 /* DLC_WETROCKBEACH */
+		endif
+	elseif DESERT_PLANET_2
+		if DESERT_PLANET_1
+			#define BARREN_PLANET_2
+		else 
+			#const PN2 14  /* DESERT */
+			#define DESERT_PLANET
+			#const PN2B 108 /* DLC_GRAVELBEACH */
+		endif
+	elseif DIRT4_PLANET_2
+		if DIRT4_PLANET_1
+			#define BARREN_PLANET_2
+		else
+			#const PN2 42 /* DLC_BAOBABFOREST is 49, DLC_DIRT4 is 42 */
+			#define DIRT4_PLANET
+			#const PN2B 108 /* DLC_GRAVELBEACH */
+		endif
+	elseif CITY_PLANET_2
+		if CITY_PLANET_1
+			#define BARREN_PLANET_2
+		else
+			#const PN2  24  /* ROAD */
+			#define CITY_PLANET
+			#const PN2B 108 /* DLC_GRAVELBEACH */
+		endif
+	elseif SNOW_PLANET_2
+		if SNOW_PLANET_1
+			#define BARREN_PLANET_2
+		else
+			#const PN2 32  /* SNOW - a snow forest planetary biome. */
+			#define SNOW_PLANET
+			#const PN2B 108 /* DLC_GRAVELBEACH */
+		endif
+	elseif LEAVES_PLANET_2
+		if LEAVES_PLANET_1
+			#define BARREN_PLANET_2
+		else
+			#const PN2 5 /* LEAVES */
+			#define LEAVES_PLANET
+			#const PN2B 108 /* DLC_GRAVELBEACH */
+		endif
+	elseif DIRT_MUD_MANGROVE_MAZE_PLANET_2
+		if DIRT_MUD_MANGROVE_MAZE_PLANET_1
+			#define BARREN_PLANET_2
+		else
+			#const PN2 76  /* DIRT_MUD is 76 - maybe make this one of the mangrove terrains - mangrove forest terrain */
+			#define DIRT_MUD_MANGROVE_MAZE_PLANET
+			#const PN2B 108 /* DLC_GRAVELBEACH */
+		endif
+	elseif BOGLAND_MANGROVE_PLANET_2
+		if BOGLAND_MANGROVE_PLANET_1
+			#define BARREN_PLANET_2
+		else
+			#const PN2 101 /* DLC_BOGLAND - mangrove terrain */
+			#define BOGLAND_MANGROVE_PLANET
+			#const PN2B 108 /* DLC_GRAVELBEACH */
+		endif
+	elseif SAVANNAH_PLANET_2
+		if SAVANNAH_PLANET_1
+			#define BARREN_PLANET_2
+		else
+			#const PN2 41  /* DLC_SAVANNAH */
+			#define SAVANNAH_PLANET
+			#const PN2B 108 /* DLC_GRAVELBEACH */
+		endif
+	elseif DIRT_PLANET_2
+		if DIRT_PLANET_1
+			#define BARREN_PLANET_2
+		else
+			#const PN2  6 /* DIRT */
+			#define DIRT_PLANET
+			#const PN2B 108 /* DLC_GRAVELBEACH */
+		endif
+	elseif FARMLAND_PLANET_2
+		if FARMLAND_PLANET_1
+			#define BARREN_PLANET_2
+		else
+			#const PN2 29 /* Farmland, 0%, aka FARMLAND1 */
+			#define FARMLAND_PLANET
+			#const PN2B 108 /* DLC_GRAVELBEACH */
+		endif
+	elseif SNOW_HEAVY_PLANET_2
+		if SNOW_HEAVY_PLANET_1
+			#define BARREN_PLANET_2
+		else
+			#const PN2  74  /* SNOW_HEAVY  */
+			#define SNOW_HEAVY_PLANET
+			#const PN2B 108 /* DLC_GRAVELBEACH */
+		endif
+	else /*  BARREN_PLANET_2 - bug in random, didn't select an option */
+		#define BARREN_PLANET_2
+	endif
+	if BARREN_PLANET_2
+		#const PN2  70  /* GRAVEL  */
+		#define BARREN_PLANET
+		#const PN2B 108 /* DLC_GRAVELBEACH */
+	endif
+
+	start_random
+		percent_chance 10 #define RADIOACTIVE_PLANET_3
+		percent_chance 9 #define DESERT_PLANET_3 
+		percent_chance 9 #define DIRT4_PLANET_3 
+		percent_chance 9 #define CITY_PLANET_3 
+		percent_chance 9 #define SNOW_PLANET_3 
+		percent_chance 9 #define LEAVES_PLANET_3 
+		percent_chance 9 #define DIRT_MUD_MANGROVE_MAZE_PLANET_3 
+		percent_chance 9 #define BOGLAND_MANGROVE_PLANET_3 
+		percent_chance 9 #define SAVANNAH_PLANET_3 
+		percent_chance 9 #define DIRT_PLANET_3 
+		percent_chance 9 #define FARMLAND_PLANET_3
+		/* percent_chance 0 #define SNOW_HEAVY_PLANET_3  */
+		/* percent_chance 0 #define BARREN_PLANET_3  */
+	end_random
+	if RADIOACTIVE_PLANET_3
+		if RADIOACTIVE_PLANET_1 /* check 1 first - if both were selected, then it would be planet 1 TODO breaks when both selected */
+			#define SNOW_HEAVY_PLANET_3
+		elseif RADIOACTIVE_PLANET_2
+			#define BARREN_PLANET_3 /* barren needs to represent the previous planet selection */
+		else
+			#const PN3 69 /* Corruption */
+			#define RADIOACTIVE_PLANET
+			#const PN3B 109 /* DLC_WETROCKBEACH */
+		endif
+	elseif DESERT_PLANET_3
+		if DESERT_PLANET_1
+			#define SNOW_HEAVY_PLANET_3
+		elseif DESERT_PLANET_2
+			#define BARREN_PLANET_3
+		else
+			#const PN3 14  /* DESERT */
+			#define DESERT_PLANET
+			#const PN3B 108 /* DLC_GRAVELBEACH */
+		endif
+	elseif DIRT4_PLANET_3
+		if DIRT4_PLANET_1
+			#define SNOW_HEAVY_PLANET_3
+		elseif DIRT4_PLANET_2
+			#define BARREN_PLANET_3
+		else
+			#const PN3 42 /* DLC_BAOBABFOREST is 49, DLC_DIRT4 is 42 */
+			#define DIRT4_PLANET
+			#const PN3B 108 /* DLC_GRAVELBEACH */
+		endif
+	elseif CITY_PLANET_3
+		if CITY_PLANET_1
+			#define SNOW_HEAVY_PLANET_3
+		elseif CITY_PLANET_2
+			#define BARREN_PLANET_3
+		else
+			#const PN3  24  /* ROAD */
+			#define CITY_PLANET
+			#const PN3B 108 /* DLC_GRAVELBEACH */
+		endif
+	elseif SNOW_PLANET_3
+		if SNOW_PLANET_1
+			#define SNOW_HEAVY_PLANET_3
+		elseif SNOW_PLANET_2
+			#define BARREN_PLANET_3
+		else
+			#const PN3 32  /* SNOW - a snow forest planetary biome. */
+			#define SNOW_PLANET
+			#const PN3B 108 /* DLC_GRAVELBEACH */
+		endif
+	elseif LEAVES_PLANET_3
+		if LEAVES_PLANET_1
+			#define SNOW_HEAVY_PLANET_3
+		elseif LEAVES_PLANET_2
+			#define BARREN_PLANET_3
+		else
+			#const PN3 5 /* LEAVES */
+			#define LEAVES_PLANET
+			#const PN3B 108 /* DLC_GRAVELBEACH */
+		endif
+	elseif DIRT_MUD_MANGROVE_MAZE_PLANET_3
+		if DIRT_MUD_MANGROVE_MAZE_PLANET_1
+			#define SNOW_HEAVY_PLANET_3
+		elseif DIRT_MUD_MANGROVE_MAZE_PLANET_2
+			#define BARREN_PLANET_3
+		else
+			#const PN3 76  /* DIRT_MUD is 76 - maybe make this one of the mangrove terrains - mangrove forest terrain */
+			#define DIRT_MUD_MANGROVE_MAZE_PLANET
+			#const PN3B 108 /* DLC_GRAVELBEACH */
+		endif
+	elseif BOGLAND_MANGROVE_PLANET_3
+		if BOGLAND_MANGROVE_PLANET_1
+			#define SNOW_HEAVY_PLANET_3
+		elseif BOGLAND_MANGROVE_PLANET_2
+			#define BARREN_PLANET_3
+		else
+			#const PN3 101 /* DLC_BOGLAND - mangrove terrain */
+			#define BOGLAND_MANGROVE_PLANET
+			#const PN3B 108 /* DLC_GRAVELBEACH */
+		endif
+	elseif SAVANNAH_PLANET_3
+		if SAVANNAH_PLANET_1
+			#define SNOW_HEAVY_PLANET_3
+		elseif SAVANNAH_PLANET_2
+			#define BARREN_PLANET_3
+		else
+			#const PN3 41  /* DLC_SAVANNAH */
+			#define SAVANNAH_PLANET
+			#const PN3B 108 /* DLC_GRAVELBEACH */
+		endif
+	elseif DIRT_PLANET_3
+		if DIRT_PLANET_1
+			#define SNOW_HEAVY_PLANET_3
+		elseif DIRT_PLANET_2
+			#define BARREN_PLANET_3
+		else
+			#const PN3  6 /* DIRT */
+			#define DIRT_PLANET
+			#const PN3B 108 /* DLC_GRAVELBEACH */
+		endif
+	elseif FARMLAND_PLANET_3
+		if FARMLAND_PLANET_1
+			#define SNOW_HEAVY_PLANET_3
+		elseif FARMLAND_PLANET_2
+			#define BARREN_PLANET_3
+		else
+			#const PN3 29 /* Farmland, 0%, aka FARMLAND1 */
+			#define FARMLAND_PLANET
+			#const PN3B 108 /* DLC_GRAVELBEACH */
+		endif
+	else /*  BARREN_PLANET_3 or SNOW_HEAVY_PLANET_3 - bug in random, didn't select an option */
+		#define BARREN_PLANET_3
+	endif
+	if BARREN_PLANET_3 /* previous planet, #2, selected again */
+		if BARREN_PLANET_2 /* Only occurs if P1 == P2, in which case as P3 == P2, P3 == P1. Therefore, in the case, the selection cannot be Snow heavy because snow heavy can't be selected for P3, and by the established equalities, snow heavy isn't P1 or P2 either */
+			#define SNOW_HEAVY_PLANET_3
+		else
+			#const PN3  70  /* GRAVEL  */
+			#define BARREN_PLANET
+			#const PN3B 108 /* DLC_GRAVELBEACH */
+		endif
+	endif
+	if SNOW_HEAVY_PLANET_3 /* 2 planets ago, planet 1, selected again */
+		if SNOW_HEAVY_PLANET_2 /* ex selections: desert P1, heavy snow P2, desert P3 */
+			#define BARREN_PLANET_3 /* need to include remainder here since the barren check has already been passed */
+			#const PN3  70  /* GRAVEL  */
+			#define BARREN_PLANET
+			#const PN3B 108 /* DLC_GRAVELBEACH */
+		else
+			#const PN3  74  /* SNOW_HEAVY  */
+			#define SNOW_HEAVY_PLANET
+			#const PN3B 108 /* DLC_GRAVELBEACH */
+		endif
+	endif
+
+	/* Start choose planet 4 */
+	start_random
+		percent_chance 10 #define RADIOACTIVE_PLANET_4
+		percent_chance 10 #define DESERT_PLANET_4 
+		percent_chance 10 #define DIRT4_PLANET_4 
+		percent_chance 10 #define CITY_PLANET_4 
+		percent_chance 10 #define SNOW_PLANET_4 
+		percent_chance 10 #define LEAVES_PLANET_4 
+		percent_chance 10 #define DIRT_MUD_MANGROVE_MAZE_PLANET_4 
+		percent_chance 10 #define BOGLAND_MANGROVE_PLANET_4 
+		percent_chance 10 #define SAVANNAH_PLANET_4 
+		percent_chance 10 #define DIRT_PLANET_4 
+		/* percent_chance 0 #define FARMLAND_PLANET_4 */
+		/* percent_chance 0 #define SNOW_HEAVY_PLANET_4  */
+		/* percent_chance 0 #define BARREN_PLANET_4  */
+	end_random
+	if RADIOACTIVE_PLANET_4
+		if RADIOACTIVE_PLANET_1 /* check 1 first - if selected previously multiple times, then it would be the earliest selection. */
+			#define FARMLAND_PLANET_4
+		elseif RADIOACTIVE_PLANET_2
+			#define SNOW_HEAVY_PLANET_4
+		elseif RADIOACTIVE_PLANET_3
+			#define BARREN_PLANET_4
+		else
+			#const PN4 69 /* Corruption */
+			#define RADIOACTIVE_PLANET
+			#const PN4B 109 /* DLC_WETROCKBEACH */
+		endif
+	elseif DESERT_PLANET_4
+		if DESERT_PLANET_1
+			#define FARMLAND_PLANET_4
+		elseif DESERT_PLANET_2
+			#define SNOW_HEAVY_PLANET_4
+		elseif DESERT_PLANET_3
+			#define BARREN_PLANET_4
+		else
+			#const PN4 14  /* DESERT */
+			#define DESERT_PLANET
+			#const PN4B 108 /* DLC_GRAVELBEACH */
+		endif
+	elseif DIRT4_PLANET_4
+		if DIRT4_PLANET_1
+			#define FARMLAND_PLANET_4
+		elseif DIRT4_PLANET_2
+			#define SNOW_HEAVY_PLANET_4
+		elseif DIRT4_PLANET_3
+			#define BARREN_PLANET_4
+		else
+			#const PN4 42 /* DLC_BAOBABFOREST is 49, DLC_DIRT4 is 42 */
+			#define DIRT4_PLANET
+			#const PN4B 108 /* DLC_GRAVELBEACH */
+		endif
+	elseif CITY_PLANET_4
+		if CITY_PLANET_1
+			#define FARMLAND_PLANET_4
+		elseif CITY_PLANET_2
+			#define SNOW_HEAVY_PLANET_4
+		elseif CITY_PLANET_3
+			#define BARREN_PLANET_4
+		else
+			#const PN4  24  /* ROAD */
+			#define CITY_PLANET
+			#const PN4B 108 /* DLC_GRAVELBEACH */
+		endif
+	elseif SNOW_PLANET_4
+		if SNOW_PLANET_1
+			#define FARMLAND_PLANET_4
+		elseif SNOW_PLANET_2
+			#define SNOW_HEAVY_PLANET_4
+		elseif SNOW_PLANET_3
+			#define BARREN_PLANET_4
+		else
+			#const PN4 32  /* SNOW - a snow forest planetary biome. */
+			#define SNOW_PLANET
+			#const PN4B 108 /* DLC_GRAVELBEACH */
+		endif
+	elseif LEAVES_PLANET_4
+		if LEAVES_PLANET_1
+			#define FARMLAND_PLANET_4
+		elseif LEAVES_PLANET_2
+			#define SNOW_HEAVY_PLANET_4
+		elseif LEAVES_PLANET_3
+			#define BARREN_PLANET_4
+		else
+			#const PN4 5 /* LEAVES */
+			#define LEAVES_PLANET
+			#const PN4B 108 /* DLC_GRAVELBEACH */
+		endif
+	elseif DIRT_MUD_MANGROVE_MAZE_PLANET_4
+		if DIRT_MUD_MANGROVE_MAZE_PLANET_1
+			#define FARMLAND_PLANET_4
+		elseif DIRT_MUD_MANGROVE_MAZE_PLANET_2
+			#define SNOW_HEAVY_PLANET_4
+		elseif DIRT_MUD_MANGROVE_MAZE_PLANET_3
+			#define BARREN_PLANET_4
+		else
+			#const PN4 76  /* DIRT_MUD is 76 - maybe make this one of the mangrove terrains - mangrove forest terrain */
+			#define DIRT_MUD_MANGROVE_MAZE_PLANET
+			#const PN4B 108 /* DLC_GRAVELBEACH */
+		endif
+	elseif BOGLAND_MANGROVE_PLANET_4
+		if BOGLAND_MANGROVE_PLANET_1
+			#define FARMLAND_PLANET_4
+		elseif BOGLAND_MANGROVE_PLANET_2
+			#define SNOW_HEAVY_PLANET_4
+		elseif BOGLAND_MANGROVE_PLANET_3
+			#define BARREN_PLANET_4
+		else
+			#const PN4 101 /* DLC_BOGLAND - mangrove terrain */
+			#define BOGLAND_MANGROVE_PLANET
+			#const PN4B 108 /* DLC_GRAVELBEACH */
+		endif
+	elseif SAVANNAH_PLANET_4
+		if SAVANNAH_PLANET_1
+			#define FARMLAND_PLANET_4
+		elseif SAVANNAH_PLANET_2
+			#define SNOW_HEAVY_PLANET_4
+		elseif SAVANNAH_PLANET_3
+			#define BARREN_PLANET_4
+		else
+			#const PN4 41  /* DLC_SAVANNAH */
+			#define SAVANNAH_PLANET
+			#const PN4B 108 /* DLC_GRAVELBEACH */
+		endif
+	elseif DIRT_PLANET_4
+		if DIRT_PLANET_1
+			#define FARMLAND_PLANET_4
+		elseif DIRT_PLANET_2
+			#define SNOW_HEAVY_PLANET_4
+		elseif DIRT_PLANET_3
+			#define BARREN_PLANET_4
+		else
+			#const PN4  6 /* DIRT */
+			#define DIRT_PLANET
+			#const PN4B 108 /* DLC_GRAVELBEACH */
+		endif
+	else /*  BARREN_PLANET_4 or SNOW_HEAVY_PLANET_4 or FARMLAND_PLANET_4 - bug in random, didn't select an option */
+		#define BARREN_PLANET_4
+	endif
+
+	/* TODO change to planet 4  TODO seed: -1788767322 on small size - barren planet on both 1 and 4 */
+	if FARMLAND_PLANET_4 /* planet 1 selected again */
+		if FARMLAND_PLANET_1 /* impossible - farmland can't be selected for P4 */
+			#const PN4 71 /* UNDERBRUSH_JUNGLE is 77, UNDERBRUSH_LEAVES is 71 - 71 was used as a terrain mask */
+			#define JUNGLE_PLANET
+			#define JUNGLE_PLANET_4
+			#const PN4B 108 /* DLC_GRAVELBEACH */
+		elseif FARMLAND_PLANET_2
+			#define SNOW_HEAVY_PLANET_4
+		elseif FARMLAND_PLANET_3 /* tad problematic, but shouldn't ever be true here since farmland is not directly selected for planet 4, only chosen if planet 4 selection matches the planet 3 selection (and no others). */
+			#define BARREN_PLANET_4
+		else
+			#const PN4 29 /* Farmland, 0%, aka FARMLAND1 */
+			#define FARMLAND_PLANET
+			#const PN4B 108 /* DLC_GRAVELBEACH */
+		endif
+	endif
+	if SNOW_HEAVY_PLANET_4 /* planet 2 selected again: P4 == P2 */
+		if SNOW_HEAVY_PLANET_1 /* replacement selection is heavy snow, which is same as P1, so now the replacement is replaced by farmland. */
+			#const PN4 29 /* Farmland, 0%, aka FARMLAND1 */
+			#define FARMLAND_PLANET
+			#define FARMLAND_PLANET_4
+			#const PN4B 108 /* DLC_GRAVELBEACH */
+		elseif SNOW_HEAVY_PLANET_3 /* heavy snow on planet 2 should be impossible at this point
+			This would indicate that P1 == P3, and P2 == P4 already established: therefore Barren is open and available */
+			#define BARREN_PLANET_4
+		else
+			#const PN4  74  /* SNOW_HEAVY  */
+			#define SNOW_HEAVY_PLANET
+			#const PN4B 108 /* DLC_GRAVELBEACH */
+		endif
+	endif
+	if BARREN_PLANET_4 /* P4 == P3 - can't be direct farmland selection, and effective new selection is barren */
+		if BARREN_PLANET_1 /* effective new selection equaled barren, so pick farmland; P1 barren, P2 __, P3 == P4
+			farmland cannot be P4 and thus can't be P3, but can be P2
+		 */
+		 	if FARMLAND_PLANET_2 /* P1 barren, P2 farm, P3 == P4 - P3 can't directly select barren and wouldn't be == P3 if it was farm, so select heavy snow */
+				#const PN4  74  /* SNOW_HEAVY  */
+				#define SNOW_HEAVY_PLANET
+				#define SNOW_HEAVY_PLANET_4
+				#const PN4B 108 /* DLC_GRAVELBEACH */
+			else
+				#const PN4 29 /* Farmland, 0%, aka FARMLAND1 */
+				#define FARMLAND_PLANET
+				#define FARMLAND_PLANET_4
+				#const PN4B 108 /* DLC_GRAVELBEACH */
+			endif
+		elseif BARREN_PLANET_2 /* P1 == P2 after P3 == P4,  */
+			if SNOW_HEAVY_PLANET_1 /* heavy, barren, __(ex:des), __(ex:des) */
+				#const PN4 29 /* Farmland, 0%, aka FARMLAND1 */
+				#define FARMLAND_PLANET
+				#define FARMLAND_PLANET_4
+				#const PN4B 108 /* DLC_GRAVELBEACH */
+			/* elseif SNOW_HEAVY_PLANET_2 - redundant */
+			/* elseif SNOW_HEAVY_PLANET_3  XX, Barren, heavy, XX - implies planet XX is heavy snow, which isn't possible. */
+			else /* XX, Barren, YY,YY - XX isn't heavy snow, and Y can't select in iether instance */
+				#const PN4  74  /* SNOW_HEAVY  */
+				#define SNOW_HEAVY_PLANET
+				#define SNOW_HEAVY_PLANET_4
+				#const PN4B 108 /* DLC_GRAVELBEACH */			
+			endif
+		elseif BARREN_PLANET_3 /* P4 == P3 == P2 */
+			if FARMLAND_PLANET_4 /* all equal - TODO should already be handled */
+			else /* P1 is different from P2/P3/P4 - XX, YY, Barren, Snow heavy */
+				/* I suspect it was already handled by this point */
+				#const PN4 71 /* UNDERBRUSH_JUNGLE is 77, UNDERBRUSH_LEAVES is 71 - 71 was used as a terrain mask */
+				#define JUNGLE_PLANET
+				#define JUNGLE_PLANET_4
+				#const PN4B 108 /* DLC_GRAVELBEACH */
+			endif
+		else
+			#const PN4  70  /* GRAVEL  */
+			#define BARREN_PLANET
+			#const PN4B 108 /* DLC_GRAVELBEACH */
+		endif
+	endif
+
+elseif NONRANDOM_PLANETS /* TODO should be able to remove now, but may want for testing purposes. See older versions for other planetary biomes. */
+
+	#const PN1  29 /* Farmland, 0%, aka FARMLAND1 */
+	#define FARMLAND_PLANET
+	#define FARMLAND_PLANET_1
+	#const PN1B 2 /* beach */
+
+	#const PN2  70  /* GRAVEL  */
+	#define BARREN_PLANET
+	#define BARREN_PLANET_2
+	#const PN2B 107 /* DLC_WETBEACH */
+
+	#const PN3  69 /* Corruption */
+	#define RADIOACTIVE_PLANET
+	#define RADIOACTIVE_PLANET_3
+	#const PN3B 108 /* DLC_GRAVELBEACH */
+
+	#const PN4  24  /* ROAD */
+	#define CITY_PLANET
+	#define CITY_PLANET_4
+	#const PN4B 109 /* DLC_WETROCKBEACH */
+
+endif
+
+
+<ELEVATION_GENERATION>
+if SNOW_HEAVY_PLANET
+	create_elevation 5 {
+		base_terrain SNOW_HEAVY
+		number_of_clumps 16
+		number_of_tiles 300
+		set_scale_by_size
+		enable_balanced_elevation
+		spacing 2
+	}
+	create_elevation 4 {
+		base_terrain SNOW_HEAVY
+		number_of_clumps 16
+		number_of_tiles 300
+		set_scale_by_size
+		enable_balanced_elevation
+		spacing 3
+	}
+	create_elevation 3 {
+		base_terrain SNOW_HEAVY
+		number_of_clumps 16
+		number_of_tiles 150
+		set_scale_by_size
+		enable_balanced_elevation
+	}
+endif /* would add cliffs, except wouldn't be able to really control where they go */
+
+if DIRT_PLANET
+	start_random
+		percent_chance 10 create_elevation 3 {
+			base_terrain DIRT
+			number_of_clumps rnd(3,32)
+			number_of_tiles rnd(30,300)
+			set_scale_by_size
+			enable_balanced_elevation
+			spacing 3 
+		}
+		percent_chance 85 #define HIGH_ELEVATION_DIRT
+	end_random
+	if HIGH_ELEVATION_DIRT
+		create_elevation 5 {
+			base_terrain DIRT
+			number_of_clumps 16
+			number_of_tiles 300
+			set_scale_by_size
+			enable_balanced_elevation
+			spacing 2
+		}
+		create_elevation 4 {
+			base_terrain DIRT
+			number_of_clumps 16
+			number_of_tiles 300
+			set_scale_by_size
+			enable_balanced_elevation
+			spacing 3
+		}
+		create_elevation 3 {
+			base_terrain DIRT
+			number_of_clumps 16
+			number_of_tiles 150
+			set_scale_by_size
+			enable_balanced_elevation
+		}
+	endif
+endif
+/* standard elevation - may be a bit much when it does appear. Percent chance will be reduced for the heavily forested biomes. increased for the barren/radioactive biomes
+spacing 3 ensures that it won't spill over onto a mangrove terrain
+if TERRAIN_PLANET
+	start_random
+		percent_chance 25 create_elevation 3 {
+			base_terrain TERRAIN
+			number_of_clumps rnd(3,32)
+			number_of_tiles rnd(30,300)
+			set_scale_by_size
+			enable_balanced_elevation
+			spacing 3 
+		}
+	end_random
+endif
+
+ */
+if LEAVES_PLANET
+	start_random
+		percent_chance 15 create_elevation 3 {
+			base_terrain LEAVES
+			number_of_clumps rnd(3,32)
+			number_of_tiles rnd(30,300)
+			set_scale_by_size
+			enable_balanced_elevation
+			spacing 3 
+		}
+	end_random
+endif
+if SNOW_PLANET
+	start_random
+		percent_chance 15 create_elevation 3 {
+			base_terrain SNOW
+			number_of_clumps rnd(3,32)
+			number_of_tiles rnd(30,300)
+			set_scale_by_size
+			enable_balanced_elevation
+			spacing 3 
+		}
+	end_random
+endif
+if BARREN_PLANET
+	start_random
+		percent_chance 55 create_elevation 3 {
+			base_terrain GRAVEL
+			number_of_clumps rnd(3,32)
+			number_of_tiles rnd(30,300)
+			set_scale_by_size
+			enable_balanced_elevation
+			spacing 3 
+		}
+	end_random
+endif
+if RADIOACTIVE_PLANET /* a bit hard to see, but whatever */
+	start_random
+		percent_chance 55 create_elevation 3 {
+			base_terrain CORRUPTION
+			number_of_clumps rnd(3,32)
+			number_of_tiles rnd(30,300)
+			set_scale_by_size
+			enable_balanced_elevation
+			spacing 3 
+		}
+	end_random
+endif
+if DESERT_PLANET
+	start_random
+		percent_chance 30 create_elevation 3 {
+			base_terrain DESERT
+			number_of_clumps rnd(3,32)
+			number_of_tiles rnd(30,300)
+			set_scale_by_size
+			enable_balanced_elevation
+			spacing 3 
+		}
+	end_random
+endif
+if FARMLAND_PLANET /* Farmland planet is relatively flat */
+	start_random
+		percent_chance 10 create_elevation 3 {
+			base_terrain FARMLAND1
+			number_of_clumps rnd(1,10)
+			number_of_tiles rnd(10,100)
+			set_scale_by_size
+			enable_balanced_elevation
+			spacing 3 
+		}
+	end_random
+endif
+if CITY_PLANET /* city planet is more likely to be flat - cities are sometimes built on hilly terrain, but things may get flattened. Not as flat as farmland terrain though. */
+	start_random
+		percent_chance 10 create_elevation 3 {
+			base_terrain ROAD
+			number_of_clumps rnd(2,12)
+			number_of_tiles rnd(40,200)
+			set_scale_by_size
+			enable_balanced_elevation
+			spacing 3 
+		}
+	end_random
+endif
+
+if SAVANNAH_PLANET
+	start_random
+		percent_chance 30 create_elevation 3 {
+			base_terrain DLC_SAVANNAH
+			number_of_clumps rnd(3,32)
+			number_of_tiles rnd(30,300)
+			set_scale_by_size
+			enable_balanced_elevation
+			spacing 3 
+		}
+	end_random
+endif
+if DIRT4_PLANET
+	start_random
+		percent_chance 10 create_elevation 3 {
+			base_terrain DLC_DIRT4
+			number_of_clumps rnd(2,20)
+			number_of_tiles rnd(20,200)
+			set_scale_by_size
+			enable_balanced_elevation
+			spacing 3 
+		}
+	end_random
+endif
+<TERRAIN_GENERATION>
+/*
+#define BORDER_CLEANUP
+from testing, border cleanup does seem to result in some terrain getting far from its designated planet
+*/
+if BORDER_CLEANUP
+	/* PLANET 1 */
+	create_terrain DLC_BLACK { base_terrain PN1 land_percent 100 number_of_clumps 9320 set_scale_by_size spacing_to_other_terrain_types 3 }
+	create_terrain PN2 { base_terrain PN1 land_percent 100 number_of_clumps 9320 set_scale_by_size spacing_to_other_terrain_types 2 }
+	create_terrain PN2 { base_terrain PN1 land_percent 100 number_of_clumps 9320 set_scale_by_size spacing_to_other_terrain_types 2 }
+	create_terrain PN2 { base_terrain PN1 land_percent 100 number_of_clumps 9320 set_scale_by_size spacing_to_other_terrain_types 2 }
+	create_terrain PN2 { base_terrain PN1 land_percent 100 number_of_clumps 9320 set_scale_by_size spacing_to_other_terrain_types 2 }
+	create_terrain PN2 { base_terrain PN1 land_percent 100 number_of_clumps 9320 set_scale_by_size spacing_to_other_terrain_types 2 }
+	create_terrain PN2 { base_terrain PN1 land_percent 100 number_of_clumps 9320 set_scale_by_size spacing_to_other_terrain_types 2 }
+	create_terrain PN2 { base_terrain PN1 land_percent 100 number_of_clumps 9320 set_scale_by_size spacing_to_other_terrain_types 2 }
+	create_terrain PN2 { base_terrain PN1 land_percent 100 number_of_clumps 9320 set_scale_by_size spacing_to_other_terrain_types 2 }
+	create_terrain PN1 { base_terrain DLC_BLACK land_percent 100 number_of_clumps 9320 set_scale_by_size spacing_to_other_terrain_types 2 }
+
+	/* PLANET 2 */
+	create_terrain DLC_BLACK { base_terrain PN2 land_percent 100 number_of_clumps 9320 set_scale_by_size spacing_to_other_terrain_types 3 }
+	create_terrain PN3 { base_terrain PN2 land_percent 100 number_of_clumps 9320 set_scale_by_size spacing_to_other_terrain_types 2 }
+	create_terrain PN3 { base_terrain PN2 land_percent 100 number_of_clumps 9320 set_scale_by_size spacing_to_other_terrain_types 2 }
+	create_terrain PN3 { base_terrain PN2 land_percent 100 number_of_clumps 9320 set_scale_by_size spacing_to_other_terrain_types 2 }
+	create_terrain PN3 { base_terrain PN2 land_percent 100 number_of_clumps 9320 set_scale_by_size spacing_to_other_terrain_types 2 }
+	create_terrain PN3 { base_terrain PN2 land_percent 100 number_of_clumps 9320 set_scale_by_size spacing_to_other_terrain_types 2 }
+	create_terrain PN3 { base_terrain PN2 land_percent 100 number_of_clumps 9320 set_scale_by_size spacing_to_other_terrain_types 2 }
+	create_terrain PN3 { base_terrain PN2 land_percent 100 number_of_clumps 9320 set_scale_by_size spacing_to_other_terrain_types 2 }
+	create_terrain PN3 { base_terrain PN2 land_percent 100 number_of_clumps 9320 set_scale_by_size spacing_to_other_terrain_types 2 }
+	create_terrain PN2 { base_terrain DLC_BLACK land_percent 100 number_of_clumps 9320 set_scale_by_size spacing_to_other_terrain_types 2 }
+
+	/* PLANET 3 */
+	create_terrain DLC_BLACK { base_terrain PN3 land_percent 100 number_of_clumps 9320 set_scale_by_size spacing_to_other_terrain_types 3 }
+	create_terrain PN4 { base_terrain PN3 land_percent 100 number_of_clumps 9320 set_scale_by_size spacing_to_other_terrain_types 2 }
+	create_terrain PN4 { base_terrain PN3 land_percent 100 number_of_clumps 9320 set_scale_by_size spacing_to_other_terrain_types 2 }
+	create_terrain PN4 { base_terrain PN3 land_percent 100 number_of_clumps 9320 set_scale_by_size spacing_to_other_terrain_types 2 }
+	create_terrain PN4 { base_terrain PN3 land_percent 100 number_of_clumps 9320 set_scale_by_size spacing_to_other_terrain_types 2 }
+	create_terrain PN4 { base_terrain PN3 land_percent 100 number_of_clumps 9320 set_scale_by_size spacing_to_other_terrain_types 2 }
+	create_terrain PN4 { base_terrain PN3 land_percent 100 number_of_clumps 9320 set_scale_by_size spacing_to_other_terrain_types 2 }
+	create_terrain PN4 { base_terrain PN3 land_percent 100 number_of_clumps 9320 set_scale_by_size spacing_to_other_terrain_types 2 }
+	create_terrain PN4 { base_terrain PN3 land_percent 100 number_of_clumps 9320 set_scale_by_size spacing_to_other_terrain_types 2 }
+	create_terrain PN3 { base_terrain DLC_BLACK land_percent 100 number_of_clumps 9320 set_scale_by_size spacing_to_other_terrain_types 2 }
+
+endif
+
+#define OCEAN_APPLICATION
+
+if OCEAN_APPLICATION
+
+	/*	original code provided to me by BP_Drej
+ */
+	create_terrain WATER { base_terrain PN1B land_percent 100 number_of_clumps 9320 height_limits 0 0 }	
+	create_terrain WATER { base_terrain PN2B land_percent 100 number_of_clumps 9320 height_limits 0 0 }	
+	create_terrain WATER { base_terrain PN3B land_percent 100 number_of_clumps 9320 height_limits 0 0 }	
+	create_terrain WATER { base_terrain PN4B land_percent 100 number_of_clumps 9320 height_limits 0 0 }	
+
+endif
+
+#define PLANET_TO_ELEVATION_0
+if PLANET_TO_ELEVATION_0 /* downside: transitions between planets becomes ugly, with holes at the intersections. */
+	#const PLACEHOLDER 84
+	create_terrain PLACEHOLDER {
+		base_terrain PN1
+		land_percent 100
+		number_of_clumps 9320
+		terrain_mask 1
+	}
+	create_terrain DLC_BLACK {
+		base_terrain WATER
+		land_percent 100
+		number_of_clumps 9320
+		spacing_to_other_terrain_types 3
+		terrain_mask 1
+	}
+	create_terrain PN1 {
+		base_terrain WATER
+		land_percent 100
+		number_of_clumps 9320
+		terrain_mask 1
+	}
+	create_terrain PN1 {
+		base_terrain WATER
+		land_percent 100
+		number_of_clumps 9320
+		terrain_mask 1
+	}
+	create_terrain PN1 {
+		base_terrain WATER
+		land_percent 100
+		number_of_clumps 9320
+		terrain_mask 1
+	}
+	create_terrain PN1 {
+		base_terrain WATER
+		base_layer DLC_BLACK
+		land_percent 100
+		number_of_clumps 9320
+	}
+	create_terrain PN1 {
+		base_terrain WATER
+		spacing_to_other_terrain_types 3
+		land_percent 100
+		number_of_clumps 9320
+	}
+	create_terrain WATER {
+		base_terrain PN1
+		spacing_to_other_terrain_types 1
+		set_flat_terrain_only
+		land_percent 100
+		number_of_clumps 9320
+		height_limits 0 0
+	}
+	create_terrain PLACEHOLDER {
+		base_terrain PN1
+		land_percent 100
+		number_of_clumps 9320
+		terrain_mask 1
+		spacing_to_other_terrain_types 1
+	} 
+	create_terrain PLACEHOLDER {
+		base_terrain PN1
+		base_layer PLACEHOLDER
+		land_percent 100
+		number_of_clumps 9320
+	}
+	create_terrain PLACEHOLDER {
+		base_terrain PN1
+		base_layer PLACEHOLDER
+		land_percent 100
+		number_of_clumps 9320
+	} 
+	create_terrain PN1 {
+		base_terrain WATER
+		land_percent 100
+		number_of_clumps 9320
+	} 
+	create_terrain WATER {
+		base_terrain PN1
+		land_percent 100
+		number_of_clumps 9320
+	} 
+	create_terrain PN1 {
+		base_terrain PLACEHOLDER
+		land_percent 100
+		number_of_clumps 9320
+	}
+	create_terrain PN1 {
+		base_terrain PLACEHOLDER
+		land_percent 100
+		number_of_clumps 9320
+	}
+	/*
+	So what I did:
+	terrain mask on the planet
+	black terrain mask on water away from the planet, with spacing to other terrain type 3
+	planet terrain mask on the water (which won't include the black terrain, since masks don't overwrite each other)
+	planet terrain on the water with black terrain mask
+	planet terrain on remaining water, with spacing to other terrain types 3
+	replace the water
+	add placeholder terrain mask to remainder of planet terrain with spacing to other terrain type 1
+	replace planet terrain with placeholder terrain mask with placeholder terrain
+	replace water with planet terrain
+	replace planet terrain with water
+	replace placeholder with planet terrain
+	*/
+	/* start second planet */
+	create_terrain PLACEHOLDER {
+		base_terrain PN2
+		land_percent 100
+		number_of_clumps 9320
+		terrain_mask 1
+	}
+	create_terrain DLC_BLACK {
+		base_terrain WATER
+		land_percent 100
+		number_of_clumps 9320
+		spacing_to_other_terrain_types 3
+		terrain_mask 1
+	}
+	create_terrain PN2 {
+		base_terrain WATER
+		land_percent 100
+		number_of_clumps 9320
+		terrain_mask 1
+	}
+	create_terrain PN2 {
+		base_terrain WATER
+		land_percent 100
+		number_of_clumps 9320
+		terrain_mask 1
+	}
+	create_terrain PN2 {
+		base_terrain WATER
+		land_percent 100
+		number_of_clumps 9320
+		terrain_mask 1
+	}
+	create_terrain PN2 {
+		base_terrain WATER
+		base_layer DLC_BLACK
+		land_percent 100
+		number_of_clumps 9320
+	}
+	create_terrain PN2 {
+		base_terrain WATER
+		spacing_to_other_terrain_types 3
+		land_percent 100
+		number_of_clumps 9320
+	}
+	create_terrain WATER {
+		base_terrain PN2
+		spacing_to_other_terrain_types 1
+		set_flat_terrain_only
+		land_percent 100
+		number_of_clumps 9320
+		height_limits 0 0
+	}
+	create_terrain PLACEHOLDER {
+		base_terrain PN2
+		land_percent 100
+		number_of_clumps 9320
+		terrain_mask 1
+		spacing_to_other_terrain_types 1
+	} 
+	create_terrain PLACEHOLDER {
+		base_terrain PN2
+		base_layer PLACEHOLDER
+		land_percent 100
+		number_of_clumps 9320
+	}
+	create_terrain PLACEHOLDER {
+		base_terrain PN2
+		base_layer PLACEHOLDER
+		land_percent 100
+		number_of_clumps 9320
+	}
+	create_terrain PN2 {
+		base_terrain WATER
+		land_percent 100
+		number_of_clumps 9320
+	} 
+	create_terrain WATER {
+		base_terrain PN2
+		land_percent 100
+		number_of_clumps 9320
+	} 
+	create_terrain WATER {
+		base_terrain PN2
+		land_percent 100
+		number_of_clumps 9320
+	} 
+	create_terrain PN2 {
+		base_terrain PLACEHOLDER
+		land_percent 100
+		number_of_clumps 9320
+	}
+	create_terrain PN2 {
+		base_terrain PLACEHOLDER
+		land_percent 100
+		number_of_clumps 9320
+	}
+	/* start planet 3 */
+	create_terrain PLACEHOLDER {
+		base_terrain PN3
+		land_percent 100
+		number_of_clumps 9320
+		terrain_mask 1
+	}
+	create_terrain DLC_BLACK {
+		base_terrain WATER
+		land_percent 100
+		number_of_clumps 9320
+		spacing_to_other_terrain_types 3
+		terrain_mask 1
+	}
+	create_terrain PN3 {
+		base_terrain WATER
+		land_percent 100
+		number_of_clumps 9320
+		terrain_mask 1
+	}
+	create_terrain PN3 {
+		base_terrain WATER
+		land_percent 100
+		number_of_clumps 9320
+		terrain_mask 1
+	}
+	create_terrain PN3 {
+		base_terrain WATER
+		land_percent 100
+		number_of_clumps 9320
+		terrain_mask 1
+	}
+	create_terrain PN3 {
+		base_terrain WATER
+		base_layer DLC_BLACK
+		land_percent 100
+		number_of_clumps 9320
+	}
+	create_terrain PN3 {
+		base_terrain WATER
+		spacing_to_other_terrain_types 3
+		land_percent 100
+		number_of_clumps 9320
+	}
+	create_terrain WATER {
+		base_terrain PN3
+		spacing_to_other_terrain_types 1
+		set_flat_terrain_only
+		land_percent 100
+		number_of_clumps 9320
+		height_limits 0 0
+	}
+	create_terrain PLACEHOLDER {
+		base_terrain PN3
+		land_percent 100
+		number_of_clumps 9320
+		terrain_mask 1
+		spacing_to_other_terrain_types 1
+	} 
+	create_terrain PLACEHOLDER {
+		base_terrain PN3
+		base_layer PLACEHOLDER
+		land_percent 100
+		number_of_clumps 9320
+	}
+	create_terrain PLACEHOLDER {
+		base_terrain PN3
+		base_layer PLACEHOLDER
+		land_percent 100
+		number_of_clumps 9320
+	}
+	create_terrain PN3 {
+		base_terrain WATER
+		land_percent 100
+		number_of_clumps 9320
+	} 
+	create_terrain WATER {
+		base_terrain PN3
+		land_percent 100
+		number_of_clumps 9320
+	} 
+	create_terrain WATER {
+		base_terrain PN3
+		land_percent 100
+		number_of_clumps 9320
+	} 
+	create_terrain PN3 {
+		base_terrain PLACEHOLDER
+		land_percent 100
+		number_of_clumps 9320
+	}
+	create_terrain PN3 {
+		base_terrain PLACEHOLDER
+		land_percent 100
+		number_of_clumps 9320
+	}
+	/* start planet 4 TODO might be able to alter it to avoid certain issues due to it being last */
+	create_terrain PLACEHOLDER {
+		base_terrain PN4
+		land_percent 100
+		number_of_clumps 9320
+		terrain_mask 1
+	}
+	create_terrain DLC_BLACK {
+		base_terrain WATER
+		land_percent 100
+		number_of_clumps 9320
+		spacing_to_other_terrain_types 3
+		terrain_mask 1
+	}
+	create_terrain PN4 {
+		base_terrain WATER
+		land_percent 100
+		number_of_clumps 9320
+		terrain_mask 1
+	}
+	create_terrain PN4 {
+		base_terrain WATER
+		land_percent 100
+		number_of_clumps 9320
+		terrain_mask 1
+	}
+	create_terrain PN4 {
+		base_terrain WATER
+		land_percent 100
+		number_of_clumps 9320
+		terrain_mask 1
+	}
+	create_terrain PN4 {
+		base_terrain WATER
+		base_layer DLC_BLACK
+		land_percent 100
+		number_of_clumps 9320
+	}
+	create_terrain PN4 {
+		base_terrain WATER
+		spacing_to_other_terrain_types 3
+		land_percent 100
+		number_of_clumps 9320
+	}
+	create_terrain WATER {
+		base_terrain PN4
+		spacing_to_other_terrain_types 1
+		set_flat_terrain_only
+		land_percent 100
+		number_of_clumps 9320
+		height_limits 0 0
+	}
+	/* TODO might not need this line - it's meant to get rid of an outline */
+	create_terrain PLACEHOLDER {
+		base_terrain PN4
+		land_percent 100
+		number_of_clumps 9320
+		terrain_mask 1
+		spacing_to_other_terrain_types 1
+	} 
+	create_terrain PLACEHOLDER {
+		base_terrain PN4
+		base_layer PLACEHOLDER
+		land_percent 100
+		number_of_clumps 9320
+	}
+	create_terrain PLACEHOLDER {
+		base_terrain PN4
+		base_layer PLACEHOLDER
+		land_percent 100
+		number_of_clumps 9320
+	}
+	create_terrain PN4 {
+		base_terrain WATER
+		land_percent 100
+		number_of_clumps 9320
+	} 
+	create_terrain WATER {
+		base_terrain PN4
+		land_percent 100
+		number_of_clumps 9320
+	} 
+	create_terrain WATER {
+		base_terrain PN4
+		land_percent 100
+		number_of_clumps 9320
+	} 
+	create_terrain PN4 {
+		base_terrain PLACEHOLDER
+		land_percent 100
+		number_of_clumps 9320
+	}
+	create_terrain PN4 {
+		base_terrain PLACEHOLDER
+		land_percent 100
+		number_of_clumps 9320
+	}
+
+	/* add terrain for the odd */
+	create_terrain DLC_BLACK {
+		base_terrain WATER
+		land_percent 100
+		number_of_clumps 9320
+		spacing_to_other_terrain_types 1
+		set_flat_terrain_only
+		height_limits 0 0
+	}
+	create_terrain DLC_ROCK { /* basically want some terrain to fill in for the planet intersections. - repeat to ensure water is filled in. */
+		base_terrain WATER
+		land_percent 100
+		number_of_clumps 9320
+	}
+	create_terrain DLC_ROCK { 
+		base_terrain WATER
+		land_percent 100
+		number_of_clumps 9320
+	}
+	create_terrain DLC_ROCK { 
+		base_terrain WATER
+		land_percent 100
+		number_of_clumps 9320
+	}
+	create_terrain WATER {
+		base_terrain DLC_BLACK
+		land_percent 100
+		number_of_clumps 9320
+		terrain_mask 2
+	}
+	create_terrain DLC_BLACK {
+		base_terrain ICYSHORE
+		land_percent 100
+		number_of_clumps 9320
+		terrain_mask 1
+	}
+	/*
+	create_terrain PLACEHOLDER {
+		base_terrain PN1
+		land_percent 100
+		number_of_clumps 9320
+		terrain_mask 1
+		beach_terrain ICYSHORE
+	} */
+endif
+
+/* Begin terrains for individual planets. */
+if SNOW_HEAVY_PLANET
+	create_terrain SNOW { /* for placing mountains */
+		base_terrain SNOW_HEAVY
+		terrain_mask 1
+		number_of_clumps 2
+		height_limits 5 6
+	}
+	start_random
+		percent_chance 50 #define SNOW_HEAVY_USE_ROCK
+	end_random
+	if SNOW_HEAVY_USE_ROCK
+		create_terrain DLC_ROCK { /* rock or gravel */
+			base_terrain SNOW_HEAVY
+			land_percent 5
+			number_of_clumps 932
+			terrain_mask 1
+			spacing_to_other_terrain_types 1
+			height_limits 2 6
+		}
+	else
+		create_terrain GRAVEL { /* rock or gravel */
+			base_terrain SNOW_HEAVY
+			land_percent 5
+			number_of_clumps 932
+			terrain_mask 1
+			spacing_to_other_terrain_types 1
+			height_limits 2 6
+		}
+	endif
+	create_terrain SNOW_FOREST {
+		base_terrain SNOW_HEAVY
+		land_percent rnd(1,5)
+		number_of_clumps rnd(5,60)
+		height_limits 1 3
+		terrain_mask 2
+	} 
+endif
+if BARREN_PLANET
+	create_terrain DLC_ROCK {
+		base_terrain GRAVEL
+		land_percent rnd(2,4) /* TODO do full test for this */
+		number_of_clumps 9320
+		terrain_mask 1
+		spacing_to_other_terrain_types 2 /* reduce spillover effect by forcing placement on a terrain mask as well. */
+	}
+	create_terrain DLC_DESERTGRAVEL {
+		base_terrain GRAVEL
+		land_percent rnd(2,4) /* TODO do full test for this */
+		number_of_clumps 9320
+		terrain_mask 1
+	}
+endif
+if CITY_PLANET
+/*	road terrains: ROAD, ROAD2, road_snow (38), road_fungus (39), DLC_DRYROAD, DLC_JUNGLEROAD (many of the preceeding are obsolete and can't be layered)
+
+	another road_fungus (75), road gravel (78), DLC_ROADGRAVEL (obsolete, cannot have resources on it)
+
+	TODO could alter to have a snowy variation, using DLC_FORESTDEAD (106) or some snowy forest and a snowy road
+	*/
+
+	create_terrain ROAD_FUNGUS { /* perhaps use this for placing resources? they're parks */
+		base_terrain ROAD
+		land_percent rnd(1,5)
+		number_of_clumps rnd(1,3)
+		set_scale_by_groups
+		height_limits 2 3
+		clumping_factor 100 /* want these to be round, so high clumping factor. */
+	}
+	create_terrain MEDITERRANEAN_FOREST {
+		base_terrain ROAD_FUNGUS
+		land_percent 100
+		number_of_clumps 932
+		spacing_to_other_terrain_types 1
+		terrain_mask 2
+	}
+	create_terrain ROAD_GRAVEL { /* looks like a ruined road - not as much in disrepair as without a terrain mask, but maybe generalize this one */
+		base_terrain ROAD
+		land_percent 20
+		number_of_clumps 9320
+		terrain_mask 1
+	}
+endif
+if DESERT_PLANET
+	create_terrain PALM_DESERT {
+		base_terrain DESERT
+		land_percent rnd(1,4)
+		number_of_clumps rnd(6,40)
+		/* 4 is the highest land_percent I'd want, 1 is wood-scarce but acceptable imo, 40 is about as many clumps as I'd want to have max, and 5/6 is as low as I'd want. */
+		spacing_to_other_terrain_types rnd(1,2)
+	}
+	/* optional: add terrain masks for desert terrain */
+endif
+if FARMLAND_PLANET /* May need to check that this biome doesn't have trapped villager spawns - seems like that may be a risk here, as many locations are often very close to trapped. Believe that I've fixed this now, with the berries being forced away from the forest zones. */
+	create_terrain FARMLAND_FULL {
+		base_terrain FARMLAND1
+		land_percent 2
+		number_of_clumps 40
+		terrain_mask 1
+		spacing_to_other_terrain_types 3
+	}
+	create_terrain MEDITERRANEAN_FOREST {
+		base_terrain FARMLAND1
+		land_percent rnd(1,2)
+		number_of_clumps 6
+		terrain_mask 1
+	}
+	create_terrain FARMLAND_FULL {
+		base_terrain FARMLAND1
+		land_percent rnd(2,3)
+		number_of_clumps 40
+		terrain_mask 1
+		spacing_to_other_terrain_types 1
+	}
+	create_terrain FARMLAND3 {
+		base_terrain FARMLAND1
+		land_percent rnd(2,3)
+		number_of_clumps 40
+		terrain_mask 1
+	}
+	create_terrain FARMLAND2 {
+		base_terrain FARMLAND1
+		land_percent rnd(1,2)
+		number_of_clumps 40
+		terrain_mask 1
+	}
+	create_terrain MEDITERRANEAN_FOREST {
+		base_terrain FARMLAND1
+		land_percent rnd(1,2)
+		number_of_clumps 6
+		terrain_mask 1
+	}
+	create_terrain FARMLAND2 {
+		base_terrain FARMLAND1
+		land_percent rnd(1,2)
+		number_of_clumps 40
+		terrain_mask 1
+	} 
+	/* these are the terrains that berries are placed on.
+	create_terrain FARMLAND_FULL {
+		base_terrain FARMLAND1
+		land_percent rnd(1,2)
+		number_of_clumps 40
+		terrain_mask 1
+		spacing_to_other_terrain_types 1
+	}
+	create_terrain FARMLAND3 {
+		base_terrain FARMLAND1
+		land_percent rnd(1,2)
+		number_of_clumps 40
+		terrain_mask 1
+	} */
+	/*
+	create_terrain MEDITERRANEAN_FOREST {
+		base_terrain FARMLAND1
+		land_percent rnd(1,2)
+		number_of_clumps 6
+		terrain_mask 1
+	}
+	create_terrain FARMLAND_FULL {
+		base_terrain FARMLAND1
+		land_percent rnd(2,3)
+		number_of_clumps 40
+		terrain_mask 1
+		spacing_to_other_terrain_types 1
+	}
+	create_terrain FARMLAND3 {
+		base_terrain FARMLAND1
+		land_percent rnd(2,3)
+		number_of_clumps 40
+		terrain_mask 1
+	}
+	create_terrain FARMLAND2 {
+		base_terrain FARMLAND1
+		land_percent rnd(1,2)
+		number_of_clumps 40
+		terrain_mask 1
+	}  */
+	create_terrain MEDITERRANEAN_FOREST {
+		base_terrain FARMLAND1
+		land_percent 100
+		number_of_clumps 932
+		terrain_mask 1
+	} 
+	create_terrain MEDITERRANEAN_FOREST {
+		base_terrain FARMLAND1
+		base_layer MEDITERRANEAN_FOREST
+		land_percent 100
+		number_of_clumps 932
+	}
+endif
+if SAVANNAH_PLANET
+	create_terrain DLC_ACACIAFOREST {
+		base_terrain DLC_SAVANNAH
+		land_percent rnd(1,5)
+		number_of_clumps rnd(4,30)
+		spacing_to_other_terrain_types 1
+	}
+endif
+if BOGLAND_MANGROVE_PLANET
+	create_terrain DLC_MANGROVESHALLOW {
+		base_terrain DLC_BOGLAND
+		land_percent 20
+		number_of_clumps 9320
+		height_limits 2 2
+		terrain_mask 2
+	}
+	create_terrain DLC_MANGROVESHALLOW {
+		base_terrain DLC_BOGLAND
+		land_percent 20
+		number_of_clumps 9320
+		height_limits 2 2
+		terrain_mask 2
+	}
+	create_terrain DLC_MANGROVESHALLOW {
+		base_terrain DLC_BOGLAND
+		land_percent 20
+		number_of_clumps 9320
+		height_limits 2 2
+		terrain_mask 2
+	}
+	create_terrain DLC_BOGLAND {
+		base_terrain DLC_MANGROVESHALLOW
+		land_percent rnd(1,5)
+		number_of_clumps rnd(4,30)
+		height_limits 2 2
+		spacing_to_other_terrain_types 1
+		terrain_mask 2
+	}
+	create_terrain DLC_MANGROVEFOREST {
+		base_terrain DLC_BOGLAND
+		land_percent 20
+		number_of_clumps 9320
+		height_limits 2 2
+		terrain_mask 2
+	}
+	create_terrain DLC_MANGROVEFOREST {
+		base_terrain DLC_BOGLAND
+		land_percent 20
+		number_of_clumps 9320
+		height_limits 2 2
+		terrain_mask 2
+	}
+endif
+if SNOW_PLANET
+
+	start_random
+		percent_chance 30 #const SNOW_TERRAIN_FOREST 21 /* SNOW_FOREST */
+		percent_chance 35 #const SNOW_TERRAIN_FOREST 106  /* DLC_FORESTDEAD */
+		percent_chance 35 #const SNOW_TERRAIN_FOREST 105 /* DLC_FORESTSNOWAUTUMN */
+	end_random
+	/* similar to leaves planet: make a forested maze */
+	create_terrain UNDERBRUSH_SNOW {
+		base_terrain SNOW
+		land_percent rnd(1,3)
+		number_of_clumps rnd(4,20)
+		height_limits 1 3
+		terrain_mask 1
+	}
+	create_terrain SNOW_TERRAIN_FOREST {
+		base_terrain SNOW
+		base_layer UNDERBRUSH_SNOW
+		land_percent 100
+		number_of_clumps 9320
+	}
+	create_terrain SNOW_TERRAIN_FOREST {
+		base_terrain SNOW
+		base_layer UNDERBRUSH_SNOW
+		land_percent 100
+		number_of_clumps 9320
+	}
+	create_terrain UNDERBRUSH_SNOW {
+		base_terrain SNOW
+		land_percent rnd(1,2)
+		number_of_clumps rnd(4,20)
+		spacing_to_other_terrain_types 1
+		terrain_mask 1
+	}
+	create_terrain SNOW_TERRAIN_FOREST {
+		base_terrain SNOW
+		base_layer UNDERBRUSH_SNOW
+		land_percent 100
+		number_of_clumps 9320
+	}
+	create_terrain UNDERBRUSH_SNOW {
+		base_terrain SNOW
+		land_percent rnd(1,2)
+		number_of_clumps rnd(4,20)
+		spacing_to_other_terrain_types rnd(2,3)
+		terrain_mask 1
+	}
+	create_terrain SNOW_TERRAIN_FOREST {
+		base_terrain SNOW
+		base_layer UNDERBRUSH_SNOW
+		land_percent 100
+		number_of_clumps 9320
+	}
+	create_terrain UNDERBRUSH_SNOW {
+		base_terrain SNOW
+		land_percent rnd(1,2)
+		number_of_clumps rnd(4,20)
+		spacing_to_other_terrain_types rnd(4,5)
+		terrain_mask 1
+	}
+	create_terrain SNOW_TERRAIN_FOREST {
+		base_terrain SNOW
+		base_layer UNDERBRUSH_SNOW
+		land_percent 100
+		number_of_clumps 9320
+	}
+	create_terrain UNDERBRUSH_SNOW {
+		base_terrain SNOW
+		land_percent 10
+		number_of_clumps rnd(4,20)
+		spacing_to_other_terrain_types 6
+		terrain_mask 1
+	}
+	create_terrain SNOW_TERRAIN_FOREST {
+		base_terrain SNOW
+		base_layer UNDERBRUSH_SNOW
+		land_percent 100
+		number_of_clumps 9320
+	}
+endif
+if DIRT_MUD_MANGROVE_MAZE_PLANET
+	
+	create_terrain MUDDY_SHALLOW {
+		base_terrain DIRT_MUD
+		land_percent 100
+		number_of_clumps 9320
+		height_limits 2 2
+	} 
+	create_terrain DLC_MANGROVESHALLOW {
+		base_terrain MUDDY_SHALLOW
+		land_percent rnd(1,2)
+		number_of_clumps rnd(4,20)
+		height_limits 2 2
+		terrain_mask 1
+	}
+	create_terrain DLC_MANGROVEFOREST {
+		base_terrain MUDDY_SHALLOW
+		base_layer DLC_MANGROVESHALLOW
+		land_percent 100
+		number_of_clumps 9320
+		height_limits 2 2
+		terrain_mask 2 /* under */
+	}
+	create_terrain DLC_MANGROVEFOREST {
+		base_terrain MUDDY_SHALLOW
+		base_layer DLC_MANGROVESHALLOW
+		land_percent 100
+		number_of_clumps 9320
+		height_limits 2 2
+		terrain_mask 2 /* under */
+	}
+	create_terrain DLC_MANGROVESHALLOW {
+		base_terrain MUDDY_SHALLOW
+		land_percent rnd(1,4)
+		number_of_clumps rnd(4,20)
+		spacing_to_other_terrain_types 1
+		height_limits 2 2
+		terrain_mask 1
+	}
+	create_terrain DLC_MANGROVEFOREST {
+		base_terrain MUDDY_SHALLOW
+		base_layer DLC_MANGROVESHALLOW
+		land_percent 100
+		number_of_clumps 9320
+		height_limits 2 2
+		terrain_mask 2 /* under */
+	}
+	create_terrain DLC_MANGROVESHALLOW {
+		base_terrain MUDDY_SHALLOW
+		land_percent rnd(1,2)
+		number_of_clumps rnd(4,20)
+		spacing_to_other_terrain_types rnd(2,3)
+		height_limits 2 2
+		terrain_mask 1
+	}
+	create_terrain DLC_MANGROVEFOREST {
+		base_terrain MUDDY_SHALLOW
+		base_layer DLC_MANGROVESHALLOW
+		land_percent 100
+		number_of_clumps 9320
+		height_limits 2 2
+		terrain_mask 2 /* under */
+	}
+	create_terrain DLC_MANGROVESHALLOW {
+		base_terrain MUDDY_SHALLOW
+		land_percent rnd(1,2)
+		number_of_clumps rnd(4,20)
+		spacing_to_other_terrain_types rnd(3,5)
+		height_limits 2 2
+		terrain_mask 1
+	} 
+	create_terrain DLC_MANGROVEFOREST {
+		base_terrain MUDDY_SHALLOW
+		base_layer DLC_MANGROVESHALLOW
+		land_percent 100
+		number_of_clumps 9320
+		height_limits 2 2
+		terrain_mask 2 /* under */
+	}
+	create_terrain DLC_MANGROVESHALLOW {
+		base_terrain MUDDY_SHALLOW
+		land_percent 10
+		number_of_clumps rnd(4,20)
+		spacing_to_other_terrain_types rnd(5,6)
+		height_limits 2 2
+		terrain_mask 1
+	}
+	create_terrain DLC_MANGROVEFOREST {
+		base_terrain MUDDY_SHALLOW
+		base_layer DLC_MANGROVESHALLOW
+		land_percent 100
+		number_of_clumps 9320
+		height_limits 2 2
+		terrain_mask 2 /* under */
+	}
+	create_terrain DLC_MANGROVESHALLOW {
+		base_terrain MUDDY_SHALLOW
+		land_percent 100
+		number_of_clumps 9320
+		height_limits 2 2
+		terrain_mask 2 /* under */
+	} 
+	create_terrain DLC_MANGROVESHALLOW {
+		base_terrain MUDDY_SHALLOW
+		land_percent 100
+		number_of_clumps 9320
+		height_limits 2 2
+		terrain_mask 2 /* under */
+	}
+endif
+if JUNGLE_PLANET /* TODO double check that this works as expected when adding elevation to the various terrains */
+	create_terrain JUNGLE {
+		base_terrain UNDERBRUSH_LEAVES
+		land_percent 20
+		number_of_clumps 9320
+		height_limits 2 3
+		spacing_to_other_terrain_types 3
+		/* UNDERBRUSH_JUNGLE */
+	}
+	create_terrain JUNGLE {
+		base_terrain UNDERBRUSH_LEAVES
+		land_percent 20
+		number_of_clumps 9320
+		height_limits 2 3
+		spacing_to_other_terrain_types 1
+		set_flat_terrain_only
+		/* UNDERBRUSH_JUNGLE */
+	}
+	create_terrain UNDERBRUSH_JUNGLE {
+		base_terrain UNDERBRUSH_LEAVES
+		land_percent 20
+		number_of_clumps 932
+		terrain_mask 1
+	}
+	create_terrain UNDERBRUSH_JUNGLE {
+		base_terrain JUNGLE
+		land_percent 20
+		number_of_clumps 932
+		terrain_mask 1
+	}
+	create_terrain UNDERBRUSH_JUNGLE { /* TODO right not is rather inconsistent in results: may have lots of small pockets, may have a few large pockets. Would need to exercise some more manual randomness to ensure object generation, so I'll come back to it later. */ 
+		base_terrain JUNGLE
+		land_percent rnd(1,3)
+		number_of_clumps rnd(5,30)
+		spacing_to_other_terrain_types rnd(1,3)
+		
+	}
+endif
+if LEAVES_PLANET
+	start_random
+		percent_chance 10 #const LEAVES_FOREST_TERRAIN 10 /* FOREST */
+		percent_chance 10 #const LEAVES_FOREST_TERRAIN 17  /* JUNGLE */
+		percent_chance 10 #const LEAVES_FOREST_TERRAIN 18 /* BAMBOO */
+		percent_chance 10 #const LEAVES_FOREST_TERRAIN 19 /* PINE_FOREST */
+		percent_chance 10 #const LEAVES_FOREST_TERRAIN 104 /* DLC_FORESTAUTUMN */
+		percent_chance 10 #const LEAVES_FOREST_TERRAIN 110 /* BIRCH_FOREST */
+		percent_chance 10 #const LEAVES_FOREST_TERRAIN 20 /* FOREST_OAK_BUSH */
+		percent_chance 10 #const LEAVES_FOREST_TERRAIN 89 /* FOREST_BUSH - would be a good one to combine with an increase berry bush chance. */
+		percent_chance 10 #const LEAVES_FOREST_TERRAIN 88 /* MEDITERRANEAN_FOREST */
+		percent_chance 10 #const LEAVES_FOREST_TERRAIN 92 /* FOREST_REEDS - has less wood, so favored as a result of that bias. */
+	end_random
+	create_terrain UNDERBRUSH_LEAVES {
+		base_terrain LEAVES
+		land_percent rnd(1,3)
+		number_of_clumps rnd(4,20)
+		height_limits 1 3
+		terrain_mask 1
+	}
+	create_terrain LEAVES_FOREST_TERRAIN {
+		base_terrain LEAVES
+		base_layer UNDERBRUSH_LEAVES
+		land_percent 100
+		number_of_clumps 9320
+	}
+	create_terrain LEAVES_FOREST_TERRAIN {
+		base_terrain LEAVES
+		base_layer UNDERBRUSH_LEAVES
+		land_percent 100
+		number_of_clumps 9320
+	}
+	create_terrain UNDERBRUSH_LEAVES {
+		base_terrain LEAVES
+		land_percent rnd(1,2)
+		number_of_clumps rnd(4,20)
+		spacing_to_other_terrain_types 1
+		terrain_mask 1
+	}
+	create_terrain LEAVES_FOREST_TERRAIN {
+		base_terrain LEAVES
+		base_layer UNDERBRUSH_LEAVES
+		land_percent 100
+		number_of_clumps 9320
+	}
+	create_terrain UNDERBRUSH_LEAVES {
+		base_terrain LEAVES
+		land_percent rnd(1,2)
+		number_of_clumps rnd(4,20)
+		spacing_to_other_terrain_types rnd(2,3)
+		terrain_mask 1
+	}
+	create_terrain LEAVES_FOREST_TERRAIN {
+		base_terrain LEAVES
+		base_layer UNDERBRUSH_LEAVES
+		land_percent 100
+		number_of_clumps 9320
+	}
+	create_terrain UNDERBRUSH_LEAVES {
+		base_terrain LEAVES
+		land_percent rnd(1,2)
+		number_of_clumps rnd(4,20)
+		spacing_to_other_terrain_types rnd(4,5)
+		terrain_mask 1
+	}
+	create_terrain LEAVES_FOREST_TERRAIN {
+		base_terrain LEAVES
+		base_layer UNDERBRUSH_LEAVES
+		land_percent 100
+		number_of_clumps 9320
+	}
+	create_terrain UNDERBRUSH_LEAVES {
+		base_terrain LEAVES
+		land_percent 10
+		number_of_clumps rnd(4,20)
+		spacing_to_other_terrain_types 6
+		terrain_mask 1
+	}
+	create_terrain LEAVES_FOREST_TERRAIN {
+		base_terrain LEAVES
+		base_layer UNDERBRUSH_LEAVES
+		land_percent 100
+		number_of_clumps 9320
+	}
+endif
+if DIRT_PLANET 
+	create_terrain DLC_DRAGONFOREST { /* note potential issue of villager getting trapped in a forest. */
+		base_terrain DIRT
+		land_percent rnd(1,5)
+		number_of_clumps rnd(4,30)
+		spacing_to_other_terrain_types 1
+		height_limits 0 4
+	}
+	create_terrain DIRT_MUD {
+		base_terrain DIRT
+		height_limits 5 6
+		spacing_to_other_terrain_types 1
+		number_of_tiles 4
+		number_of_clumps 1
+		terrain_mask 1
+	}
+	create_terrain DLC_SAVANNAH {
+		base_terrain DIRT
+		land_percent rnd(1,5)
+		number_of_clumps 60
+		terrain_mask 1
+	}
+	create_terrain DIRT2 {
+		base_terrain DIRT
+		land_percent rnd(1,4)
+		number_of_clumps 60
+		terrain_mask 1
+	}
+	create_terrain DLC_DRYGRASS {
+		base_terrain DIRT
+		land_percent rnd(1,4)
+		number_of_clumps 60
+		terrain_mask 1
+	}
+	create_terrain DLC_SAVANNAH {
+		base_terrain DLC_DRAGONFOREST
+		land_percent 1
+		number_of_clumps 6
+		terrain_mask 1
+	}
+	/*
+	create_terrain DLC_ACACIAFOREST {
+		base_terrain DLC_SAVANNAH
+		land_percent rnd(1,5)
+		number_of_clumps rnd(4,30)
+	} */
+endif
+if DIRT4_PLANET  /* redo this one: note: may want to increase villager avoid_forest_zone to 3, but with caveat that an "extra vil" is placed for the DLC_BAOBABFOREST planet, since those vils wouldn't spawn at all. Alternatively, switch back to dirt4 planet */
+
+	create_terrain DLC_BAOBABFOREST {
+		base_terrain DLC_DIRT4
+		land_percent 5
+		number_of_clumps 30
+		height_limits 1 3  /* this statement can go below height 2, but will not go right to the water's edge */
+	}
+	create_terrain DLC_BAOBABFOREST {
+		base_terrain DLC_DIRT4
+		land_percent 25
+		number_of_clumps 30
+		height_limits 2 3
+	}
+	create_terrain DLC_DIRT4 {
+		base_terrain DLC_BAOBABFOREST
+		number_of_tiles 72
+		set_scale_by_size
+		number_of_clumps rnd(4,8)
+	}
+	/* create clearings - should make it easier to find TC spots, and villagers occasionally start in these clearings */
+endif
+if RADIOACTIVE_PLANET
+	create_terrain DLC_DESERTGRAVEL {
+		base_terrain CORRUPTION
+		land_percent 100 /* TODO consider making a little more scarce */
+		number_of_clumps 9320
+		terrain_mask 1
+		spacing_to_other_terrain_types 1 /* reduce spillover effect by forcing placement on a terrain mask as well. */
+	}
+endif
+/* end terrain generation */
+<OBJECTS_GENERATION>
+/* 
+Rules of object generation for this map (which may need updating):
+	1. All animal life (including villagers, hunt, sheep, fish, etc) should avoid actor area 1
+	2. Nothing should be placed before the corruption terrain ON_GRIDs (which create actor area 1)
+	3. assume that forests may be added to adjacent planets
+	4. Gold mines should create actor area 2 with at least radius 3
+	5. Stone mines should create actor area 3 with at least radius 3
+	6. Gold/stone should avoid actor areas 2 and 3. Actor area 2 is gold mines. 3 is stone mines.
+
+note that there may be a little overflow between planets
+
+standard gold/stone code - for planets that don't have any special reason to carry gold/stone, and for which I'd like a small-medium amount of gold/stone.
+TODO alter these so that gold is less common, but also add gold to rock if each biome rejects gold
+	start_random
+		percent_chance 25 #define NO_TERRAIN_GOLD
+		percent_chance 45 #define NO_TERRAIN_STONE
+	end_random 
+	if NO_TERRAIN_GOLD
+	else
+		create_object GOLD {
+			terrain_to_place_on TERRAIN
+			number_of_objects rnd(2,4)
+			number_of_groups rnd(4,10)
+			group_variance rnd(0,1)
+			temp_min_distance_group_placement rnd(16,40)
+			set_scaling_to_map_size
+			min_distance_group_placement 2
+			max_distance_to_other_zones 1
+			set_gaia_object_only
+			avoid_forest_zone 1
+			set_tight_grouping
+			actor_area 2
+			actor_area_radius 3
+			avoid_actor_area 2
+			avoid_actor_area 3
+		}
+	endif
+	if NO_TERRAIN_STONE
+	else
+		create_object STONE {
+			terrain_to_place_on TERRAIN
+			number_of_objects rnd(2,4)
+			number_of_groups rnd(4,10)
+			group_variance rnd(0,1)
+			temp_min_distance_group_placement rnd(16,40)
+			set_scaling_to_map_size
+			min_distance_group_placement 2
+			max_distance_to_other_zones 1
+			set_gaia_object_only
+			avoid_forest_zone 1
+			set_tight_grouping
+			actor_area 3
+			actor_area_radius 3
+			avoid_actor_area 2
+			avoid_actor_area 3
+		}
+	endif
+	 */
+/* Corruption terrain is placed first, because it is the only terrain that should affect other terrains - two parts, so that kings can generate before the resources. */
+if RADIOACTIVE_PLANET
+	create_object ON_GRID {
+		terrain_to_place_on CORRUPTION
+		temp_min_distance_group_placement 1
+		number_of_objects 9320
+		actor_area 1
+		actor_area_radius 7
+	}
+endif
+if REGICIDE
+	create_object KING {
+		avoid_actor_area 1
+		set_place_for_every_player
+		terrain_to_place_on DLC_ROCK
+		min_distance_group_placement 1
+		max_distance_to_other_zones 1
+	}
+endif
+if RADIOACTIVE_PLANET
+	/* maybe add a small chance of there being no resources on the radioactive planet? Feedback: reduce gold/stone (more space). */
+	#define GOLD_PLACED
+	create_object GOLD {
+		terrain_to_place_on CORRUPTION
+		layer_to_place_on DLC_DESERTGRAVEL
+		/* at 4 and 6, extremely gold rich; at 10 and 2, rather gold-poor; result is a wide amount of variation in how much gold there can be. */
+		temp_min_distance_group_placement rnd(4,10)
+		number_of_objects rnd(2,6)
+		group_variance 1
+		set_tight_grouping
+		set_gaia_object_only
+		number_of_groups 9320
+		avoid_forest_zone 3
+		avoid_cliff_zone 3
+		group_placement_radius rnd(1,2)
+		set_circular_placement
+		max_distance_to_other_zones 2
+		actor_area 2
+		actor_area_radius 3
+	}
+	start_random
+		percent_chance 50 create_object STONE {
+			terrain_to_place_on CORRUPTION
+			layer_to_place_on DLC_DESERTGRAVEL
+			temp_min_distance_group_placement 10
+			number_of_objects rnd(0,3)
+			set_tight_grouping
+			set_gaia_object_only
+			number_of_groups 9320
+			avoid_forest_zone 3
+			avoid_cliff_zone 3
+			max_distance_to_other_zones 2
+			avoid_actor_area 2
+			actor_area 3
+			actor_area_radius 3
+		}
+	end_random 
+	start_random
+		percent_chance 80 create_object PHOTON_MAN { /* Photon man has the gear to survive/explore radioactive environments. */
+			set_place_for_every_player
+			terrain_to_place_on CORRUPTION
+			layer_to_place_on DLC_DESERTGRAVEL
+			min_distance_group_placement 2
+		}
+	end_random
+endif
+create_object SHORE_FISH {
+	number_of_objects 9320
+	temp_min_distance_group_placement rnd(8,10)
+	avoid_actor_area 1
+}
+create_object DOLPHIN {
+	number_of_objects 9320
+	temp_min_distance_group_placement rnd(9,16)
+	avoid_actor_area 1
+	max_distance_to_other_zones 5
+	terrain_to_place_on WATER
+}
+/* I think I overdid it on the food, so I can get rid of these. - make much more scarce - so like 10 tiles - and maybe keep the dolphins removed. ARgument for it is that farming space is a little scarce, though I can certainly justify increasing the group distance placement.
+create_object DOLPHIN {
+	number_of_objects 9320
+	temp_min_distance_group_placement 8   8-20: 8 is a bit too many iwth the tendency for other food sources, I think. 20 is likely to favor luck in dock placements
+	avoid_actor_area 1
+	max_distance_to_other_zones 5
+	terrain_to_place_on WATER
+} */
+/* create villagers for each player, 1 on each planet, avoiding radioactive planet aura.
+Considered adding this, but found that a heavily forest planet can force the villagers to not spawn in stress tests (as can radioactive terrain) - so I'm scrapping it for now.
+	actor_area 10
+	avoid_actor_area 10
+	if AT_LEAST_MEDIUM
+		actor_area_radius 4
+	else
+		actor_area_radius 1 or 3
+	endif
+ */
+create_object VILLAGER {
+	if DEBUG_MODE
+		second_object FLAG_A
+	endif
+	number_of_objects 1
+	number_of_groups 1
+	set_place_for_every_player
+	avoid_actor_area 1
+	terrain_to_place_on PN1
+	temp_min_distance_group_placement 300 /* for some reason, refused to spawn just 1 villager. */
+	min_distance_group_placement 1
+	if DIRT4_PLANET_1
+		avoid_forest_zone 1
+	else
+		avoid_forest_zone 2
+	endif
+	avoid_cliff_zone 2
+	actor_area 10
+	actor_area_radius 5
+}
+create_object VILLAGER {
+	number_of_objects 1
+	number_of_groups 1
+	set_place_for_every_player 
+	avoid_actor_area 1
+	terrain_to_place_on PN2
+	temp_min_distance_group_placement 300
+	min_distance_group_placement 1
+	if DIRT4_PLANET_2
+		avoid_forest_zone 1
+	else
+		avoid_forest_zone 2
+	endif
+	avoid_cliff_zone 2
+	actor_area 10
+	actor_area_radius 5
+}
+create_object VILLAGER {
+	number_of_objects 1
+	number_of_groups 1
+	set_place_for_every_player 
+	avoid_actor_area 1
+	terrain_to_place_on PN3
+	temp_min_distance_group_placement 300
+	min_distance_group_placement 1
+	if DIRT4_PLANET_3
+		avoid_forest_zone 1
+	else
+		avoid_forest_zone 2
+	endif
+	avoid_cliff_zone 2
+	actor_area 10
+	actor_area_radius 5
+}
+create_object VILLAGER {
+	number_of_objects 1
+	number_of_groups 1
+	set_place_for_every_player 
+	avoid_actor_area 1
+	terrain_to_place_on PN4
+	temp_min_distance_group_placement 300 
+	min_distance_group_placement 1
+	if DIRT4_PLANET_4
+		avoid_forest_zone 1
+	else
+		avoid_forest_zone 2
+	endif
+	avoid_cliff_zone 2
+	actor_area 10
+	actor_area_radius 5
+}
+/* for checking villager placements on a specific terrain - if it ever does happen, it will surely be farmland terrain
+create_object FLAG_A {
+	number_of_objects 9320
+	avoid_actor_area 1
+	terrain_to_place_on FARMLAND1
+	temp_min_distance_group_placement 1
+	avoid_forest_zone 2
+	avoid_cliff_zone 2
+}
+
+
+ */
+if DESERT_PLANET
+	#define GOLD_PLACED
+	create_object GOLD {
+		avoid_actor_area 2
+		avoid_actor_area 3
+		number_of_objects rnd(2,5)
+		set_tight_grouping
+		number_of_groups rnd(6,12)
+		set_scaling_to_map_size
+		temp_min_distance_group_placement rnd(15,45)
+		min_distance_group_placement 2
+		terrain_to_place_on DESERT
+		avoid_forest_zone 1
+		avoid_cliff_zone 1
+		actor_area 2
+		actor_area_radius 3
+	}
+	start_random
+		percent_chance 60 create_object STONE {
+			avoid_actor_area 2
+			avoid_actor_area 3
+			number_of_objects rnd(2,3)
+			set_tight_grouping
+			number_of_groups rnd(2,6)
+			set_scaling_to_map_size
+			temp_min_distance_group_placement rnd(25,45)
+			min_distance_group_placement 2
+			terrain_to_place_on DESERT
+			avoid_forest_zone 1
+			avoid_cliff_zone 1
+			actor_area 3
+			actor_area_radius 3
+		}
+	end_random
+
+	start_random
+		percent_chance 30 #define NO_DESERT_ELEPHANT
+		percent_chance 30 #define NO_DESERT_RHINO
+		percent_chance 20 #define NO_DESERT_OSTRICH
+	end_random /* 20% chance of all 3 */
+
+	if NO_DESERT_ELEPHANT
+	else
+		create_object DLC_ELEPHANT { 
+			avoid_actor_area 1
+			number_of_objects 10
+			set_scaling_to_map_size
+			temp_min_distance_group_placement rnd(15,40)
+			min_distance_group_placement 2
+			terrain_to_place_on DESERT
+			avoid_forest_zone 1
+			avoid_cliff_zone 1
+			actor_area 4
+			actor_area_radius 4
+		}
+	endif
+	if NO_DESERT_RHINO
+	else
+		create_object DLC_RHINO { /* or rhino rnd(15,40) */
+			avoid_actor_area 1
+			avoid_actor_area 4
+			number_of_objects 10
+			set_scaling_to_map_size
+			temp_min_distance_group_placement rnd(15,40)
+			min_distance_group_placement 2
+			terrain_to_place_on DESERT
+			avoid_forest_zone 1
+			avoid_cliff_zone 1
+			actor_area 4
+			actor_area_radius 4
+		}
+	endif
+	if NO_DESERT_OSTRICH
+	else
+		create_object DLC_OSTRICH {
+			avoid_actor_area 1
+			avoid_actor_area 4
+			number_of_objects rnd(2,4)
+			set_scaling_to_map_size
+			number_of_groups 10
+			temp_min_distance_group_placement rnd(15,40)
+			min_distance_group_placement 2
+			terrain_to_place_on DESERT
+			avoid_forest_zone 1
+			avoid_cliff_zone 1
+			actor_area 4
+			actor_area_radius 4
+		}
+	endif
+	start_random
+	percent_chance 80 create_object DLC_DROMEDARY {
+			avoid_actor_area 1
+			set_place_for_every_player
+			terrain_to_place_on DESERT
+			avoid_forest_zone 1
+			avoid_cliff_zone 1
+		} 
+	end_random
+	/* eye-candy */
+	create_object DLC_WILD_CAMEL {
+		avoid_actor_area 1
+		avoid_actor_area 4
+		number_of_objects 2
+		number_of_groups 2
+		set_scaling_to_map_size
+		temp_min_distance_group_placement 45
+		terrain_to_place_on DESERT
+	}
+endif
+if DIRT4_PLANET
+	/* animals: zebra, ostrich, rhinos, lions, elephants,  */
+	start_random
+		percent_chance 40 #const DIRT4_LURABLE 1139 /* DLC_RHINO */
+		percent_chance 40 #const DIRT4_LURABLE 1301 /* DLC_ELEPHANT */
+		percent_chance 20 #define NO_DIRT4_LURABLE
+	end_random
+	if NO_DIRT4_LURABLE
+	else
+		create_object DIRT4_LURABLE {
+			avoid_actor_area 1
+			number_of_groups rnd(3,8)
+			temp_min_distance_group_placement rnd(14,35)
+			set_scaling_to_map_size
+			min_distance_group_placement 2
+			terrain_to_place_on DLC_BAOBABFOREST
+			set_gaia_object_only
+			actor_area 4
+			actor_area_radius 4
+			avoid_actor_area 4
+		}
+	endif
+	/* Giraffes would be perfect, but aren't an option. */
+	start_random
+		percent_chance 20 #const DIRT4_HUNTABLE 1019 /* DLC_ZEBRA */
+		percent_chance 60 #const DIRT4_HUNTABLE 1026 /* DLC_OSTRICH */
+		percent_chance 20 #define NO_DIRT4_HUNTABLE /* create_object bugs if the object is undefined. */
+	end_random
+	if NO_DIRT4_HUNTABLE
+	else
+		create_object DIRT4_HUNTABLE {
+			avoid_actor_area 1
+			number_of_objects rnd(2,5)
+			number_of_groups rnd(2,8)
+			group_variance rnd(0,1)
+			temp_min_distance_group_placement rnd(8,30)
+			set_scaling_to_map_size
+			min_distance_group_placement 2
+			terrain_to_place_on DLC_BAOBABFOREST
+			set_gaia_object_only
+			set_loose_grouping
+			actor_area 4
+			actor_area_radius 4
+			avoid_actor_area 4
+		}
+	endif
+	/* low gold and stone 	*/
+	start_random
+		percent_chance 35 #define NO_DIRT4_GOLD
+		percent_chance 55 #define NO_DIRT4_STONE
+	end_random 
+	if NO_DIRT4_GOLD
+	else
+		#define GOLD_PLACED
+		create_object GOLD {
+			terrain_to_place_on DLC_BAOBABFOREST
+			number_of_objects rnd(1,4)
+			number_of_groups rnd(4,10)
+			group_variance rnd(0,1)
+			temp_min_distance_group_placement rnd(16,40)
+			set_scaling_to_map_size
+			min_distance_group_placement 2
+			set_gaia_object_only
+			set_tight_grouping
+			place_on_forest_zone
+			actor_area 2
+			actor_area_radius 3
+			avoid_actor_area 2
+			avoid_actor_area 3
+		}
+	endif
+	if NO_DIRT4_STONE
+	else
+		create_object STONE {
+			terrain_to_place_on DLC_BAOBABFOREST
+			number_of_objects rnd(1,3)
+			number_of_groups rnd(4,10)
+			group_variance rnd(0,1)
+			temp_min_distance_group_placement rnd(25,45)
+			set_scaling_to_map_size
+			min_distance_group_placement 2
+			set_gaia_object_only
+			set_tight_grouping
+			place_on_forest_zone
+			actor_area 3
+			actor_area_radius 3
+			avoid_actor_area 2
+			avoid_actor_area 3
+		} 
+	endif
+endif
+
+if SNOW_PLANET /* similar to leaves planet */
+
+	create_object FORAGE { /* same as on leaves terrain - considered having a randomizer for if there are berries, but decided against it. TODO could make more likely when the trees are a dead forest (since those have bushes in them) */
+		number_of_objects rnd(2,5)
+		number_of_groups rnd(4,20)
+		temp_min_distance_group_placement rnd(14,35)
+		set_scaling_to_map_size
+		min_distance_group_placement 2
+		group_variance rnd(0,1)
+		set_tight_grouping
+		max_distance_to_other_zones 2
+		terrain_to_place_on SNOW
+		avoid_forest_zone 1 /* discourages the berries from blocking forest paths - can still do so, but much less likely. Unfortunately means berries will also be more likely to block TC spots. */
+	} 
+	/* Less emphasis on the wildlife than in regular forest, and more gold/stone (at least more stone) 
+	
+	herdables: goats, geese, 
+	huntables: deer, ibex
+	lurable: can have boars (apparently they're pretty good at adapting to cold climates), but make a sizable chance of them not appearing
+
+	*/
+	
+	start_random 
+		percent_chance 1 #const SNOW_HERDABLE 305 /* DLC_LLAMA */
+		percent_chance 4 #const SNOW_HERDABLE 1245 /* DLC_PIG */
+		percent_chance 40 #const SNOW_HERDABLE 1060 /* DLC_GOAT */
+		percent_chance 20 #const SNOW_HERDABLE 1243 /* DLC_GOOSE */
+		percent_chance 35 #define NO_SNOW_HERDABLE
+	end_random
+	if NO_SNOW_HERDABLE
+	else
+		create_object SNOW_HERDABLE {
+			avoid_actor_area 1
+			terrain_to_place_on SNOW
+			number_of_objects rnd(2,4)
+			number_of_groups rnd(4,20)
+			temp_min_distance_group_placement rnd(17,36)
+			set_scaling_to_map_size
+			min_distance_group_placement 1
+			group_variance rnd(0,1)
+			set_loose_grouping
+			/* no avoid forest zone here */
+			max_distance_to_other_zones 1
+		}
+	endif
+	start_random 
+		percent_chance 35 #const SNOW_PLANET_HUNTABLE 65 /* DEER */
+		percent_chance 65 #const SNOW_PLANET_HUNTABLE 1239 /* DLC_IBEX */
+	end_random
+	create_object SNOW_PLANET_HUNTABLE {
+		avoid_actor_area 1
+		terrain_to_place_on SNOW
+		number_of_objects rnd(2,5)
+		number_of_groups rnd(4,20)
+		temp_min_distance_group_placement rnd(17,36)
+		set_scaling_to_map_size
+		min_distance_group_placement 2
+		group_variance rnd(0,2)
+		set_loose_grouping
+		set_gaia_object_only
+		/* avoid_forest_zone 1 */
+		avoid_cliff_zone 1
+		max_distance_to_other_zones 1
+		avoid_actor_area 4
+		actor_area 4
+		actor_area_radius 4
+	} 
+	
+	start_random
+		percent_chance 85 #define NO_SNOW_LURABLE
+	end_random
+	if NO_SNOW_LURABLE
+	else
+		create_object BOAR {
+			avoid_actor_area 1
+			number_of_groups rnd(3,8)
+			temp_min_distance_group_placement rnd(17,36)
+			set_scaling_to_map_size
+			min_distance_group_placement 2
+			terrain_to_place_on SNOW
+			/* avoid_forest_zone 1 */
+			set_gaia_object_only
+			actor_area 4
+			actor_area_radius 4
+			avoid_actor_area 4
+		}
+	endif
+	/* slightly better than standard gold/stone */
+	start_random
+		percent_chance 15 #define NO_SNOW_GOLD
+		percent_chance 35 #define NO_SNOW_STONE
+	end_random 
+	if NO_SNOW_GOLD
+	else
+		#define GOLD_PLACED
+		create_object GOLD {
+			terrain_to_place_on SNOW
+			number_of_objects rnd(2,4)
+			number_of_groups rnd(4,10)
+			group_variance rnd(0,1)
+			temp_min_distance_group_placement rnd(15,38)
+			set_scaling_to_map_size
+			min_distance_group_placement 2
+			max_distance_to_other_zones 1
+			set_gaia_object_only
+			avoid_forest_zone 1
+			set_tight_grouping
+			actor_area 2
+			actor_area_radius 3
+			avoid_actor_area 2
+			avoid_actor_area 3
+		}
+	endif
+	if NO_SNOW_STONE
+	else
+		create_object STONE {
+			terrain_to_place_on SNOW
+			number_of_objects rnd(2,4)
+			number_of_groups rnd(4,10)
+			group_variance rnd(0,1)
+			temp_min_distance_group_placement rnd(15,38)
+			set_scaling_to_map_size
+			min_distance_group_placement 2
+			max_distance_to_other_zones 1
+			set_gaia_object_only
+			avoid_forest_zone 1
+			set_tight_grouping
+			actor_area 3
+			actor_area_radius 3
+			avoid_actor_area 2
+			avoid_actor_area 3
+		}
+	endif
+endif
+if JUNGLE_PLANET /* not finished - do not include. */
+	/* UNDERBRUSH_JUNGLE on inside  UNDERBRUSH_LEAVES on outside
+	TODO finish this biome later - is only biome that can have predators, due to the enclosed nature of the UNDERBRUSH_JUNGLE
+	Should have lots of forage (inside and outside perhaps? - will need to avoid the water terrain a little to ensure a walking path for villagers), plenty of hunt buried in the forest, gold/stone buried in the forest, and possibly some predators buried in the forest also. Should be food rich, and could make generally resource rich.
+	 */
+endif
+if LEAVES_PLANET
+	start_random
+		percent_chance 50 #const LEAVES_BERRY 59 /* FORAGE */
+		percent_chance 50 #const LEAVES_BERRY 1059 /* orange bush */
+		percent_chance 0 #define NO_LEAVES_BERRY /* only reason I have this is because the berries may block potential TC spots or wall vils in */
+	end_random
+	if NO_LEAVES_BERRY
+	else
+		create_object LEAVES_BERRY {
+			number_of_objects rnd(2,5)
+			number_of_groups rnd(4,20)
+			temp_min_distance_group_placement rnd(14,35)
+			set_scaling_to_map_size
+			min_distance_group_placement 2
+			group_variance rnd(0,1)
+			set_tight_grouping
+			max_distance_to_other_zones 2
+			terrain_to_place_on LEAVES
+			avoid_forest_zone 1 /* discourages the berries from blocking forest paths - can still do so, but much less likely. Unfortunately means berries will also be more likely to block TC spots. */
+		} 
+	endif
+	start_random /* TODO could improve realism by tieing the specific animal to the type of tree somewhat. */
+		percent_chance 10 #const LEAVES_HERDABLE 305 /* DLC_LLAMA */
+		percent_chance 10 #const LEAVES_HERDABLE 1060 /* DLC_GOAT */
+		percent_chance 10 #const LEAVES_HERDABLE 1142 /* DLC_WATERBUFFALO */
+		percent_chance 10 #const LEAVES_HERDABLE 1243 /* DLC_GOOSE */
+		percent_chance 40 #const LEAVES_HERDABLE 1245 /* DLC_PIG */
+		percent_chance 20 #const LEAVES_HERDABLE 833 /* TURKEY */
+	end_random
+	create_object LEAVES_HERDABLE {
+		avoid_actor_area 1
+		terrain_to_place_on LEAVES
+		number_of_objects rnd(1,5)
+		number_of_groups rnd(4,20)
+		temp_min_distance_group_placement rnd(14,35)
+		set_scaling_to_map_size
+		min_distance_group_placement 1
+		group_variance rnd(0,2)
+		set_loose_grouping
+		/* no avoid forest zone here */
+		max_distance_to_other_zones 1
+	}
+	create_object DEER {
+		avoid_actor_area 1
+		terrain_to_place_on LEAVES
+		number_of_objects rnd(2,6)
+		number_of_groups rnd(4,20)
+		temp_min_distance_group_placement rnd(14,35)
+		set_scaling_to_map_size
+		min_distance_group_placement 2
+		group_variance rnd(0,2)
+		set_loose_grouping
+		set_gaia_object_only
+		/* avoid_forest_zone 1 */
+		avoid_cliff_zone 1
+		max_distance_to_other_zones 1
+		avoid_actor_area 4
+		actor_area 4
+		actor_area_radius 4
+	} 
+	
+	start_random
+		percent_chance 50 #const LEAVES_LURABLE 48 /* BOAR */
+		percent_chance 50 #const LEAVES_LURABLE 822 /* JAVELINA */
+	end_random
+	create_object LEAVES_LURABLE {
+		avoid_actor_area 1
+		number_of_groups rnd(3,8)
+		temp_min_distance_group_placement rnd(14,35)
+		set_scaling_to_map_size
+		min_distance_group_placement 2
+		terrain_to_place_on LEAVES
+		/* avoid_forest_zone 1 */
+		set_gaia_object_only
+		actor_area 4
+		actor_area_radius 4
+		avoid_actor_area 4
+	}
+	start_random /* a little worse than standard */
+		percent_chance 30 #define NO_LEAVES_GOLD
+		percent_chance 50 #define NO_LEAVES_STONE
+	end_random 
+	if NO_LEAVES_GOLD
+	else
+		#define GOLD_PLACED
+		create_object GOLD {
+			terrain_to_place_on LEAVES
+			number_of_objects rnd(2,4)
+			number_of_groups rnd(4,10)
+			group_variance rnd(0,1)
+			temp_min_distance_group_placement rnd(16,40)
+			set_scaling_to_map_size
+			min_distance_group_placement 2
+			max_distance_to_other_zones 1
+			set_gaia_object_only
+			avoid_forest_zone 1
+			set_tight_grouping
+			actor_area 2
+			actor_area_radius 3
+			avoid_actor_area 2
+			avoid_actor_area 3
+		}
+	endif
+	if NO_LEAVES_STONE
+	else
+		create_object STONE { /* below standard stone */
+			terrain_to_place_on LEAVES
+			number_of_objects rnd(1,4)
+			number_of_groups rnd(4,10)
+			group_variance rnd(0,1)
+			temp_min_distance_group_placement rnd(20,40)
+			set_scaling_to_map_size
+			min_distance_group_placement 2
+			max_distance_to_other_zones 1
+			set_gaia_object_only
+			avoid_forest_zone 1
+			set_tight_grouping
+			actor_area 3
+			actor_area_radius 3
+			avoid_actor_area 2
+			avoid_actor_area 3
+		}
+	endif
+endif
+/* similar to leaves planet - is a forest maze. However, vils will always start on planet's edge */
+if DIRT_MUD_MANGROVE_MAZE_PLANET
+	create_object FORAGE {
+		number_of_objects rnd(2,7)
+		number_of_groups rnd(6,20)
+		temp_min_distance_group_placement rnd(13,30)
+		set_scaling_to_map_size
+		min_distance_group_placement 3
+		group_variance rnd(0,1)
+		set_tight_grouping
+		max_distance_to_other_zones 2
+		terrain_to_place_on DLC_MANGROVESHALLOW
+		layer_to_place_on MUDDY_SHALLOW
+		avoid_forest_zone 1 /* discourages the berries from blocking forest paths - can still do so, but much less likely. Unfortunately means berries will also be more likely to block TC spots. */
+		actor_area 6
+		actor_area_radius 5
+		avoid_actor_area 6
+	} 
+	create_object DLC_ORANGEBUSH {
+		number_of_objects rnd(2,7)
+		number_of_groups rnd(6,20)
+		temp_min_distance_group_placement rnd(13,30)
+		set_scaling_to_map_size
+		min_distance_group_placement 3
+		group_variance rnd(0,1)
+		set_tight_grouping
+		max_distance_to_other_zones 2
+		terrain_to_place_on DLC_MANGROVESHALLOW
+		layer_to_place_on MUDDY_SHALLOW
+		avoid_forest_zone 1 /* discourages the berries from blocking forest paths - can still do so, but much less likely. Unfortunately means berries will also be more likely to block TC spots. */
+		actor_area 6
+		actor_area_radius 5
+		avoid_actor_area 6
+	} 
+	/* place animals
+	herdables: water buffalo, geese
+	
+	hunts: ostrich
+	lurable: probably could do any of them, though favor javelina?
+	place gold mines in the forest terrain? and maybe stone mines (on the small 5% chance that they appear?)
+	 */
+	start_random
+		percent_chance 40 #const DIRT_MUD_HERDABLE 1142 /* DLC_WATERBUFFALO */
+		percent_chance 40 #const DIRT_MUD_HERDABLE 1243 /* DLC_GOOSE */
+		percent_chance 20 #define NO_DIRT_MUD_HERDABLE
+	end_random
+	if NO_DIRT_MUD_HERDABLE
+	else
+		create_object DIRT_MUD_HERDABLE {
+			avoid_actor_area 1
+			terrain_to_place_on DLC_MANGROVESHALLOW
+			layer_to_place_on MUDDY_SHALLOW
+			number_of_objects rnd(2,5)
+			number_of_groups rnd(4,20)
+			temp_min_distance_group_placement rnd(12,30)
+			set_scaling_to_map_size
+			min_distance_group_placement 1
+			group_variance rnd(0,1)
+			set_loose_grouping
+			/* no avoid forest zone here */
+			max_distance_to_other_zones 1
+		}
+	endif
+	start_random
+		percent_chance 30 #const DIRT_MUD_HUNTABLE 1019 /* DLC_ZEBRA */
+		percent_chance 25 #const DIRT_MUD_HUNTABLE 1026 /* DLC_OSTRICH - ostrich prefer arid areas apparently, though other types of birds would fit. */
+		percent_chance 25 #const DIRT_MUD_HUNTABLE 65 /* DEER */
+		percent_chance 20 #define NO_DIRT_MUD_HUNTABLE
+	end_random
+	if NO_DIRT_MUD_HUNTABLE
+	else
+		create_object DIRT_MUD_HUNTABLE {
+			avoid_actor_area 1
+			terrain_to_place_on DLC_MANGROVESHALLOW
+			layer_to_place_on MUDDY_SHALLOW
+			number_of_objects rnd(2,6)
+			number_of_groups rnd(4,20)
+			temp_min_distance_group_placement rnd(14,30)
+			set_scaling_to_map_size
+			min_distance_group_placement 2
+			group_variance rnd(0,1)
+			set_loose_grouping
+			set_gaia_object_only
+			/* avoid_forest_zone 1 */
+			avoid_cliff_zone 1
+			max_distance_to_other_zones 1
+			avoid_actor_area 4
+			actor_area 4
+			actor_area_radius 4
+		} 
+	endif
+	start_random
+		percent_chance 20 #const DIRT_MUD_LURABLE 1139 /* DLC_RHINO */
+		percent_chance 20 #const DIRT_MUD_LURABLE 1301 /* DLC_ELEPHANT */
+		percent_chance 20 #const DIRT_MUD_LURABLE 48 /* BOAR */
+		percent_chance 20 #const DIRT_MUD_LURABLE 822 /* JAVELINA */
+		percent_chance 20 #define NO_DIRT_MUD_LURABLE
+	end_random
+	if NO_DIRT_MUD_LURABLE
+	else
+		create_object DIRT_MUD_LURABLE {
+			avoid_actor_area 1
+			number_of_groups rnd(3,8)
+			temp_min_distance_group_placement rnd(14,30)
+			set_scaling_to_map_size
+			min_distance_group_placement 2
+			terrain_to_place_on DLC_MANGROVESHALLOW
+			layer_to_place_on MUDDY_SHALLOW
+			/* avoid_forest_zone 1 */
+			set_gaia_object_only
+			actor_area 4
+			actor_area_radius 4
+			avoid_actor_area 4
+		}
+	endif
+	start_random
+		percent_chance 25 #define NO_DIRT_MUD_GOLD
+	end_random 
+	start_random
+		percent_chance 95 #define NO_DIRT_MUD_STONE
+	end_random 
+	if NO_DIRT_MUD_GOLD
+	else
+		#define GOLD_PLACED
+		create_object GOLD {
+			terrain_to_place_on DLC_MANGROVEFOREST
+			layer_to_place_on MUDDY_SHALLOW
+			number_of_objects rnd(2,4)
+			number_of_groups rnd(4,10)
+			group_variance rnd(0,1)
+			temp_min_distance_group_placement rnd(16,40)
+			set_scaling_to_map_size
+			min_distance_group_placement 1
+			max_distance_to_other_zones 1
+			set_gaia_object_only
+			set_tight_grouping
+			actor_area 2
+			actor_area_radius 3
+			avoid_actor_area 2
+			avoid_actor_area 3
+		}
+	endif
+	if NO_DIRT_MUD_STONE
+	else
+		create_object STONE { /* well below standard stone */
+			terrain_to_place_on DLC_MANGROVEFOREST
+			layer_to_place_on MUDDY_SHALLOW
+			number_of_objects rnd(1,2)
+			number_of_groups rnd(4,10)
+			temp_min_distance_group_placement rnd(20,40)
+			set_scaling_to_map_size
+			min_distance_group_placement 1
+			max_distance_to_other_zones 1
+			set_gaia_object_only
+			set_tight_grouping
+			actor_area 3
+			actor_area_radius 3
+			avoid_actor_area 2
+			avoid_actor_area 3
+		}
+	endif
+
+	start_random
+		percent_chance 50 #const MANGROVE_MAZE_FISH 69 /* shore fish */
+		percent_chance 50 #const MANGROVE_MAZE_FISH 1141 /* box turtles */
+	end_random
+
+	/* place after stone/gold */
+	create_object ON_GRID {
+		second_object MANGROVE_MAZE_FISH
+		avoid_actor_area 1
+		number_of_groups 50
+		temp_min_distance_group_placement rnd(4,20)
+		set_scaling_to_map_size
+		min_distance_group_placement 2
+		terrain_to_place_on DLC_MANGROVEFOREST
+		layer_to_place_on MUDDY_SHALLOW
+		ignore_terrain_restrictions
+		set_gaia_object_only
+		place_on_specific_land_id 4
+	}
+endif
+if BOGLAND_MANGROVE_PLANET
+	create_object FORAGE {
+		number_of_objects rnd(2,7)
+		number_of_groups rnd(6,20)
+		temp_min_distance_group_placement rnd(13,30)
+		set_scaling_to_map_size
+		min_distance_group_placement 3
+		group_variance rnd(0,1)
+		set_tight_grouping
+		max_distance_to_other_zones 2
+		terrain_to_place_on DLC_MANGROVESHALLOW
+		layer_to_place_on DLC_BOGLAND
+		avoid_forest_zone 2 
+		actor_area 6
+		actor_area_radius 5
+		avoid_actor_area 6
+	} 
+	create_object DLC_ORANGEBUSH {
+		number_of_objects rnd(2,7)
+		number_of_groups rnd(6,20)
+		temp_min_distance_group_placement rnd(13,30)
+		set_scaling_to_map_size
+		min_distance_group_placement 3
+		group_variance rnd(0,1)
+		set_tight_grouping
+		max_distance_to_other_zones 2
+		terrain_to_place_on DLC_MANGROVESHALLOW
+		layer_to_place_on DLC_BOGLAND
+		avoid_forest_zone 2
+		actor_area 6
+		actor_area_radius 5
+		avoid_actor_area 6
+	} 
+
+	start_random
+		percent_chance 60 #const SWAMP_HERDABLE 1142 /* DLC_WATERBUFFALO */
+		percent_chance 40 #const SWAMP_HERDABLE 1243 /* DLC_GOOSE */
+		percent_chance 0 #define NO_SWAMP_HERDABLE
+	end_random
+	if NO_SWAMP_HERDABLE
+	else
+		create_object SWAMP_HERDABLE {
+			avoid_actor_area 1
+			terrain_to_place_on DLC_MANGROVESHALLOW
+			layer_to_place_on DLC_BOGLAND
+			number_of_objects rnd(2,5)
+			number_of_groups rnd(4,20)
+			temp_min_distance_group_placement rnd(12,30)
+			set_scaling_to_map_size
+			min_distance_group_placement 1
+			group_variance rnd(0,1)
+			set_loose_grouping
+			avoid_forest_zone 1
+			max_distance_to_other_zones 1
+		}
+	endif
+	start_random
+		percent_chance 40 #const SWAMP_HUNTABLE 1019 /* DLC_ZEBRA */
+		percent_chance 30 #const SWAMP_HUNTABLE 1026 /* DLC_OSTRICH - ostrich prefer arid areas apparently, though other types of birds would fit. */
+		percent_chance 30 #const SWAMP_HUNTABLE 65 /* DEER */
+		percent_chance 0 #define NO_SWAMP_HUNTABLE
+	end_random
+	if NO_SWAMP_HUNTABLE
+	else
+		create_object SWAMP_HUNTABLE {
+			avoid_actor_area 1
+			terrain_to_place_on DLC_MANGROVESHALLOW
+			layer_to_place_on DLC_BOGLAND
+			number_of_objects rnd(2,6)
+			number_of_groups rnd(4,20)
+			temp_min_distance_group_placement rnd(14,30)
+			set_scaling_to_map_size
+			min_distance_group_placement 2
+			group_variance rnd(0,1)
+			set_loose_grouping
+			set_gaia_object_only
+			avoid_forest_zone 1
+			avoid_cliff_zone 1
+			max_distance_to_other_zones 1
+			avoid_actor_area 4
+			actor_area 4
+			actor_area_radius 4
+		} 
+	endif
+	start_random
+		percent_chance 20 #const SWAMP_LURABLE 1139 /* DLC_RHINO */
+		percent_chance 20 #const SWAMP_LURABLE 1301 /* DLC_ELEPHANT */
+		percent_chance 20 #const SWAMP_LURABLE 48 /* BOAR */
+		percent_chance 20 #const SWAMP_LURABLE 822 /* JAVELINA */
+		percent_chance 20 #define NO_SWAMP_LURABLE
+	end_random
+	if NO_SWAMP_LURABLE
+	else
+		create_object SWAMP_LURABLE {
+			avoid_actor_area 1
+			number_of_groups rnd(3,8)
+			temp_min_distance_group_placement rnd(14,30)
+			set_scaling_to_map_size
+			min_distance_group_placement 2
+			terrain_to_place_on DLC_MANGROVESHALLOW
+			layer_to_place_on DLC_BOGLAND
+			avoid_forest_zone 1
+			set_gaia_object_only
+			actor_area 4
+			actor_area_radius 4
+			avoid_actor_area 4
+		}
+	endif
+	start_random
+		percent_chance 1 #define NO_SWAMP_GOLD
+		percent_chance 95 #define NO_SWAMP_STONE
+	end_random 
+	if NO_SWAMP_GOLD
+	else
+		#define GOLD_PLACED
+		create_object GOLD { /* raised gold amounts */
+			terrain_to_place_on DLC_MANGROVESHALLOW
+			layer_to_place_on DLC_BOGLAND
+			number_of_objects rnd(2,6)
+			number_of_groups rnd(5,10)
+			group_variance rnd(0,1)
+			temp_min_distance_group_placement rnd(12,30)
+			set_scaling_to_map_size
+			min_distance_group_placement 2
+			max_distance_to_other_zones 1
+			avoid_forest_zone 1
+			set_gaia_object_only
+			set_tight_grouping
+			actor_area 2
+			actor_area_radius 3
+			avoid_actor_area 2
+			avoid_actor_area 3
+		}
+	endif
+	if NO_SWAMP_STONE
+	else
+		create_object STONE { /* well below standard stone */
+			terrain_to_place_on DLC_MANGROVESHALLOW
+			layer_to_place_on DLC_BOGLAND
+			number_of_objects rnd(1,2)
+			number_of_groups rnd(4,10)
+			temp_min_distance_group_placement rnd(20,40)
+			set_scaling_to_map_size
+			min_distance_group_placement 2
+			max_distance_to_other_zones 1
+			avoid_forest_zone 1
+			set_gaia_object_only
+			set_tight_grouping
+			actor_area 3
+			actor_area_radius 3
+			avoid_actor_area 2
+			avoid_actor_area 3
+		}
+	endif
+
+	start_random
+		percent_chance 50 #const SWAMP_FISH 69 /* shore fish */
+		percent_chance 50 #const SWAMP_FISH 1141 /* box turtles */
+	end_random
+
+	/* place after stone/gold */
+	create_object ON_GRID {
+		second_object SWAMP_FISH
+		avoid_actor_area 1
+		number_of_groups 50
+		temp_min_distance_group_placement rnd(10,34)
+		set_scaling_to_map_size
+		min_distance_group_placement 3
+		terrain_to_place_on DLC_MANGROVESHALLOW
+		layer_to_place_on DLC_BOGLAND
+		ignore_terrain_restrictions
+		set_gaia_object_only
+		place_on_specific_land_id 4
+	}
+	create_object ON_GRID {
+		second_object SWAMP_FISH
+		avoid_actor_area 1
+		number_of_groups 50
+		temp_min_distance_group_placement rnd(4,20)
+		set_scaling_to_map_size
+		min_distance_group_placement 2
+		terrain_to_place_on DLC_MANGROVEFOREST
+		layer_to_place_on DLC_BOGLAND
+		ignore_terrain_restrictions
+		set_gaia_object_only
+		place_on_specific_land_id 4
+	}
+endif
+
+if SAVANNAH_PLANET
+	start_random
+		percent_chance 40 #const SAVANNAH_LURABLE 1139 /* DLC_RHINO */
+		percent_chance 40 #const SAVANNAH_LURABLE 1301 /* DLC_ELEPHANT */
+		percent_chance 20 #define NO_SAVANNAH_LURABLE
+	end_random
+	if NO_SAVANNAH_LURABLE
+	else
+		create_object SAVANNAH_LURABLE {
+			avoid_actor_area 1
+			number_of_groups rnd(3,8)
+			temp_min_distance_group_placement rnd(14,35)
+			set_scaling_to_map_size
+			min_distance_group_placement 2
+			terrain_to_place_on DLC_SAVANNAH
+			avoid_forest_zone 1
+			set_gaia_object_only
+			actor_area 4
+			actor_area_radius 4
+			avoid_actor_area 4
+		}
+	endif
+	/* Giraffes would be an excelent addition here, but aren't an option. TODO decide on new huntables here. ostricth, zebra, gazelle  */
+	start_random
+		percent_chance 33 #const SAVANNAH_HUNTABLE 1019 /* DLC_ZEBRA */
+		percent_chance 33 #const SAVANNAH_HUNTABLE 1026 /* DLC_OSTRICH */
+		percent_chance 33 #const SAVANNAH_HUNTABLE 1796 /* GAZELLE */
+		percent_chance 1 #define NO_SAVANNAH_HUNTABLE /* create_object bugs if the object is undefined. */
+	end_random
+	if NO_SAVANNAH_HUNTABLE
+	else
+		create_object SAVANNAH_HUNTABLE {
+			avoid_actor_area 1
+			number_of_objects rnd(2,5)
+			number_of_groups rnd(2,8)
+			group_variance rnd(0,1)
+			temp_min_distance_group_placement rnd(8,30)
+			set_scaling_to_map_size
+			min_distance_group_placement 2
+			terrain_to_place_on DLC_SAVANNAH
+			avoid_forest_zone 1
+			set_gaia_object_only
+			set_loose_grouping
+			actor_area 4
+			actor_area_radius 4
+			avoid_actor_area 4
+		}
+	endif
+	/* standard gold and stone */
+	
+	start_random
+		percent_chance 25 #define NO_SAVANNAH_GOLD
+		percent_chance 45 #define NO_SAVANNAH_STONE
+	end_random 
+	if NO_SAVANNAH_GOLD
+	else
+		#define GOLD_PLACED
+		create_object GOLD { 
+			terrain_to_place_on DLC_SAVANNAH
+			number_of_objects rnd(2,4)
+			number_of_groups rnd(4,10)
+			group_variance rnd(0,1)
+			temp_min_distance_group_placement rnd(16,40)
+			set_scaling_to_map_size
+			min_distance_group_placement 2
+			max_distance_to_other_zones 1
+			set_gaia_object_only
+			avoid_forest_zone 1
+			set_tight_grouping
+			actor_area 2
+			actor_area_radius 3
+			avoid_actor_area 2
+			avoid_actor_area 3
+		}
+	endif
+	if NO_SAVANNAH_STONE
+	else
+		create_object STONE {
+			terrain_to_place_on DLC_SAVANNAH
+			number_of_objects rnd(2,4)
+			number_of_groups rnd(4,10)
+			group_variance rnd(0,1)
+			temp_min_distance_group_placement rnd(16,40)
+			set_scaling_to_map_size
+			min_distance_group_placement 2
+			max_distance_to_other_zones 1
+			set_gaia_object_only
+			avoid_forest_zone 1
+			set_tight_grouping
+			actor_area 3
+			actor_area_radius 3
+			avoid_actor_area 2
+			avoid_actor_area 3
+		}
+	endif
+endif
+
+
+if DIRT_PLANET	
+	start_random
+		percent_chance 50 create_object MOUNTAIN_3 {
+			terrain_to_place_on DIRT
+			layer_to_place_on DIRT_MUD
+			actor_area 5
+			actor_area_radius 8
+			avoid_actor_area 5
+		}
+		percent_chance 50 create_object MOUNTAIN_4 {
+			terrain_to_place_on DIRT
+			layer_to_place_on DIRT_MUD
+			actor_area 5
+			actor_area_radius 8
+			avoid_actor_area 5
+		}
+	end_random
+	create_object FORAGE {
+		number_of_objects rnd(2,6)
+		number_of_groups rnd(2,6)
+		group_variance rnd(0,1)
+		set_tight_grouping
+		set_scaling_to_map_size
+		temp_min_distance_group_placement rnd(9,30)
+		min_distance_group_placement 2
+		terrain_to_place_on DIRT
+		set_gaia_object_only
+		max_distance_to_other_zones 2
+		avoid_forest_zone 1
+	}
+	/* Add hunts */
+	start_random
+		percent_chance 33 #const DIRT_HUNTABLE 1019 /* DLC_ZEBRA */
+		percent_chance 30 #const DIRT_HUNTABLE 65 /* DEER */
+		percent_chance 33 #const DIRT_HUNTABLE 1796 /* GAZELLE */
+		percent_chance 4 #define NO_DIRT_HUNTABLE /* create_object bugs if the object is undefined. */
+	end_random
+	if NO_DIRT_HUNTABLE
+	else
+		create_object DIRT_HUNTABLE {
+			avoid_actor_area 1
+			number_of_objects rnd(3,6)
+			number_of_groups rnd(3,10)
+			group_variance rnd(0,1)
+			temp_min_distance_group_placement rnd(8,30)
+			set_scaling_to_map_size
+			min_distance_group_placement 2
+			terrain_to_place_on DIRT
+			set_gaia_object_only
+			max_distance_to_other_zones 1
+			avoid_forest_zone 1
+			set_loose_grouping
+			actor_area 4
+			actor_area_radius 4
+			avoid_actor_area 4
+		}
+	endif
+	start_random
+		percent_chance 30 #const DIRT_LURABLE 1139 /* DLC_RHINO */
+		percent_chance 30 #const DIRT_LURABLE 1301 /* DLC_ELEPHANT */
+		percent_chance 40 #define NO_DIRT_LURABLE /* create_object bugs if the object is undefined. */
+	end_random 
+	if NO_DIRT_LURABLE
+	else
+		create_object DIRT_LURABLE {
+			avoid_actor_area 1
+			number_of_groups rnd(3,10)
+			temp_min_distance_group_placement rnd(12,35)
+			set_scaling_to_map_size
+			min_distance_group_placement 2
+			terrain_to_place_on DIRT
+			set_gaia_object_only
+			max_distance_to_other_zones 1
+			avoid_forest_zone 1
+			actor_area 4
+			actor_area_radius 4
+			avoid_actor_area 4
+		}
+	endif
+	/* add standard stone/gold */
+	start_random
+		percent_chance 25 #define NO_DIRT_GOLD
+		percent_chance 45 #define NO_DIRT_STONE
+	end_random 
+	if NO_DIRT_GOLD
+	else
+		#define GOLD_PLACED
+		create_object GOLD {
+			terrain_to_place_on DIRT
+			number_of_objects rnd(2,4)
+			number_of_groups rnd(4,10)
+			group_variance rnd(0,1)
+			temp_min_distance_group_placement rnd(16,40)
+			set_scaling_to_map_size
+			min_distance_group_placement 2
+			max_distance_to_other_zones 1
+			set_gaia_object_only
+			avoid_forest_zone 1
+			set_tight_grouping
+			actor_area 2
+			actor_area_radius 3
+			avoid_actor_area 2
+			avoid_actor_area 3
+		}
+	endif
+	if NO_DIRT_STONE
+	else
+		create_object STONE {
+			terrain_to_place_on DIRT
+			number_of_objects rnd(2,4)
+			number_of_groups rnd(4,10)
+			group_variance rnd(0,1)
+			temp_min_distance_group_placement rnd(16,40)
+			set_scaling_to_map_size
+			min_distance_group_placement 2
+			max_distance_to_other_zones 1
+			set_gaia_object_only
+			avoid_forest_zone 1
+			set_tight_grouping
+			actor_area 3
+			actor_area_radius 3
+			avoid_actor_area 2
+			avoid_actor_area 3
+		}
+	endif
+endif
+if FARMLAND_PLANET
+	
+	create_object FORAGE {
+		number_of_objects rnd(3,6)
+		number_of_groups rnd(3,12)
+		group_variance rnd(1,2)
+		set_tight_grouping
+		set_scaling_to_map_size
+		temp_min_distance_group_placement 5
+		min_distance_group_placement 2
+		terrain_to_place_on FARMLAND1
+		layer_to_place_on FARMLAND_FULL
+		set_gaia_object_only
+		place_on_specific_land_id 4
+		max_distance_to_other_zones 3
+		avoid_forest_zone 1 /* to ensure that vils can escape */
+	}
+	create_object DLC_ORANGEBUSH { /* change to terrain table 4? land (from 8, land-farm) */
+		number_of_objects rnd(3,6)
+		number_of_groups rnd(3,12)
+		group_variance rnd(1,2)
+		set_tight_grouping
+		set_scaling_to_map_size
+		temp_min_distance_group_placement 5
+		min_distance_group_placement 2
+		terrain_to_place_on FARMLAND1
+		layer_to_place_on FARMLAND3
+		set_gaia_object_only
+		place_on_specific_land_id 1
+		max_distance_to_other_zones 3
+		avoid_forest_zone 1 /* to ensure that vils can escape */
+
+	}
+	/* 
+	also add farm animals
+	*/
+	start_random
+		percent_chance 20 #define FARMLAND_GOLD
+		percent_chance 20 #define FARMLAND_STONE
+		percent_chance 20 #define FARMLAND_GOLD_AND_STONE
+	end_random
+	if FARMLAND_GOLD_AND_STONE
+		#define FARMLAND_GOLD
+		#define FARMLAND_STONE
+	endif
+	if FARMLAND_STONE 
+		create_object ON_GRID {
+			second_object STONE
+			number_of_groups 4
+			set_scaling_to_map_size
+			number_of_objects (1,2)
+			terrain_to_place_on FARMLAND1
+			layer_to_place_on FARMLAND2
+			max_distance_to_other_zones 3
+			actor_area 3
+			actor_area_radius 3
+			avoid_actor_area 2
+			avoid_actor_area 3
+			avoid_cliff_zone 1
+			avoid_forest_zone 1
+			temp_min_distance_group_placement 5
+			min_distance_group_placement 1
+		}
+	endif
+	if FARMLAND_GOLD
+		create_object ON_GRID {
+			second_object GOLD
+			number_of_groups 4
+			set_scaling_to_map_size
+			number_of_objects (1,2)
+			terrain_to_place_on FARMLAND1
+			layer_to_place_on FARMLAND2
+			max_distance_to_other_zones 3
+			actor_area 2
+			actor_area_radius 3
+			avoid_actor_area 2
+			avoid_actor_area 3
+			avoid_cliff_zone 1
+			avoid_forest_zone 1
+			temp_min_distance_group_placement 5
+			min_distance_group_placement 1
+		}
+	endif
+	start_random
+		percent_chance 10 #const FARMLAND_HERDABLE 305 /* llama */
+		percent_chance 12 #const FARMLAND_HERDABLE 594 /* sheep */
+		percent_chance 6 #const FARMLAND_HERDABLE 705 /* cow */
+		percent_chance 10 #const FARMLAND_HERDABLE 833 /* turkey */
+		percent_chance 12 #const FARMLAND_HERDABLE 1060 /* goat */
+		percent_chance 10 #const FARMLAND_HERDABLE 1142 /* water buffalo */
+		percent_chance 10 #const FARMLAND_HERDABLE 1243 /* goose */
+		percent_chance 12 #const FARMLAND_HERDABLE 1245 /* pig */
+		percent_chance 6 #const FARMLAND_HERDABLE 1596 /* cow */
+		percent_chance 6 #const FARMLAND_HERDABLE 1598 /* cow */
+		percent_chance 6 #const FARMLAND_HERDABLE 1600 /* cow */
+	end_random
+	create_object FARMLAND_HERDABLE {
+		avoid_actor_area 1
+		number_of_groups rnd(3,16)
+		number_of_objects rnd(1,4)
+		temp_min_distance_group_placement rnd(8,25)
+		set_scaling_to_map_size
+		min_distance_group_placement 2
+		avoid_forest_zone 1
+		avoid_cliff_zone 1
+		set_gaia_object_only
+		set_loose_grouping
+		terrain_to_place_on FARMLAND1
+	}
+endif
+if SNOW_HEAVY_PLANET
+	/*  add wildlife, goats? DLC_GOAT, DLC_IBEX, DEER
+	DLC_SNOWLEOPARD - can't due to nomad start (would be so unfair to lose a vil like that)
+	 */ 
+	start_random
+		percent_chance 40 #define SNOW_HEAVY_M11
+		percent_chance 40 #define SNOW_HEAVY_M10
+	end_random
+	if SNOW_HEAVY_M11
+		create_object DLC_MOUNTAIN_11 {
+			terrain_to_place_on SNOW_HEAVY
+			layer_to_place_on SNOW
+			actor_area 5
+			actor_area_radius 8
+			avoid_actor_area 5
+		}
+	endif
+	if SNOW_HEAVY_M10
+		create_object DLC_MOUNTAIN_10 {
+			terrain_to_place_on SNOW_HEAVY
+			layer_to_place_on SNOW
+			actor_area 5
+			actor_area_radius 8
+			avoid_actor_area 5
+		}
+	endif
+	create_object DLC_MOUNTAIN_9 {
+		terrain_to_place_on SNOW_HEAVY
+		layer_to_place_on SNOW
+		actor_area 5
+		actor_area_radius 8
+		avoid_actor_area 5
+	}
+	create_object DLC_GOAT { /* TODO add chance of it being a llama */
+		avoid_actor_area 1
+		number_of_objects rnd(1,4)
+		number_of_groups rnd(2,6)
+		temp_min_distance_group_placement rnd(14,40)
+		min_distance_group_placement 2
+		set_scaling_to_map_size
+		terrain_to_place_on SNOW_HEAVY
+		avoid_forest_zone 1
+		avoid_cliff_zone 1
+		max_distance_to_other_zones 1
+	}
+	start_random
+		percent_chance 60 #define SNOW_HEAVY_IBEX
+		percent_chance 20 #define SNOW_HEAVY_DEER
+	end_random
+	if SNOW_HEAVY_DEER 
+		create_object DEER {
+			avoid_actor_area 1
+			terrain_to_place_on SNOW_HEAVY
+			number_of_objects rnd(2,6)
+			number_of_groups rnd(4,20)
+			temp_min_distance_group_placement rnd(14,35)
+			set_scaling_to_map_size
+			min_distance_group_placement 2
+			group_variance rnd(0,2)
+			set_loose_grouping
+			set_gaia_object_only
+			avoid_forest_zone 1
+			avoid_cliff_zone 1
+			max_distance_to_other_zones 1
+			avoid_actor_area 4
+			actor_area 4
+			actor_area_radius 4
+		} 
+	elseif SNOW_HEAVY_IBEX
+		create_object DLC_IBEX {
+			avoid_actor_area 1
+			terrain_to_place_on SNOW_HEAVY
+			number_of_objects rnd(2,6)
+			number_of_groups rnd(4,20)
+			temp_min_distance_group_placement rnd(14,35)
+			set_scaling_to_map_size
+			min_distance_group_placement 2
+			group_variance rnd(0,2)
+			set_loose_grouping
+			set_gaia_object_only
+			avoid_forest_zone 1
+			avoid_cliff_zone 1
+			max_distance_to_other_zones 1
+			avoid_actor_area 4
+			actor_area 4
+			actor_area_radius 4
+		}
+	endif
+	/* somewhat standard stone/gold low to moderate - stone a little more likely to appear, gold  a little less likely
+	 */
+	start_random
+		percent_chance 30 #define NO_HEAVY_SNOW_GOLD
+		percent_chance 40 #define NO_HEAVY_SNOW_STONE
+	end_random 
+	if NO_HEAVY_SNOW_GOLD
+	else
+		#define GOLD_PLACED
+		create_object GOLD {
+			terrain_to_place_on SNOW_HEAVY
+			number_of_objects rnd(2,4)
+			number_of_groups rnd(4,10)
+			group_variance rnd(0,1)
+			temp_min_distance_group_placement rnd(20,40)
+			set_scaling_to_map_size
+			min_distance_group_placement 2
+			max_distance_to_other_zones 1
+			set_gaia_object_only
+			avoid_forest_zone 1
+			set_tight_grouping
+			actor_area 3
+			actor_area_radius 3
+			avoid_actor_area 2
+			avoid_actor_area 3
+		}
+	endif
+	if NO_HEAVY_SNOW_STONE
+	else
+		create_object STONE {
+			terrain_to_place_on SNOW_HEAVY
+			number_of_objects rnd(2,4)
+			number_of_groups rnd(4,10)
+			group_variance rnd(0,1)
+			temp_min_distance_group_placement rnd(16,40)
+			set_scaling_to_map_size
+			min_distance_group_placement 2
+			max_distance_to_other_zones 1
+			set_gaia_object_only
+			avoid_forest_zone 1
+			set_tight_grouping
+			actor_area 3
+			actor_area_radius 3
+			avoid_actor_area 2
+			avoid_actor_area 3
+		}
+	endif
+endif
+if BARREN_PLANET /* feedback: reduce gold/stone */
+	create_object STONE { 
+		terrain_to_place_on GRAVEL
+		layer_to_place_on DLC_ROCK
+		/* at 4 and 7, extremely stone rich; at 10 and 2, rather stone-poor; result is a wide amount of variation in how much stone there can be. Code was basically copied from the radioactive gold, and then altered to match the barren planet. Note that the terrain mask for the barren planet is a bit more restrictive. */
+		temp_min_distance_group_placement rnd(4,10) /* the difference between 3 and 4 is significant */
+		number_of_objects rnd(2,7)
+		group_variance 1
+		set_tight_grouping
+		set_gaia_object_only
+		number_of_groups 9320
+		avoid_forest_zone 3
+		avoid_cliff_zone 3
+		group_placement_radius rnd(1,2)
+		set_circular_placement
+		max_distance_to_other_zones 2
+		actor_area 3
+		actor_area_radius 3
+	}
+	#define GOLD_PLACED
+	create_object GOLD { 
+		terrain_to_place_on GRAVEL
+		layer_to_place_on DLC_DESERTGRAVEL
+		/* at 10 and 1, not much in the way of gold; at 5 and 4 there's a good amount of gold. 0 ends up acting as 1 */
+		temp_min_distance_group_placement rnd(6,10)
+		number_of_objects rnd(0,4)
+		group_variance 1
+		set_tight_grouping
+		set_gaia_object_only
+		number_of_groups 9320
+		avoid_forest_zone 3
+		avoid_cliff_zone 3
+		group_placement_radius 1
+		set_circular_placement
+		max_distance_to_other_zones 2
+		avoid_actor_area 2
+		avoid_actor_area 3
+		actor_area 2
+		actor_area_radius 3
+	}
+	start_random
+		percent_chance 75 create_object PHOTON_MAN {
+			set_place_for_every_player
+			terrain_to_place_on GRAVEL
+			min_distance_group_placement 2
+		} 
+	end_random
+endif
+
+if CITY_PLANET /* moved to end, so that its ruins won't block more important objects */
+	/* create parks */
+	create_object FORAGE {
+		number_of_objects 9320
+		temp_min_distance_group_placement rnd(2,3) /* used to be 1, but then I determined I overdid it on the food, and 2 will make wood easier to access. */
+		terrain_to_place_on ROAD_FUNGUS
+		actor_area 7
+		actor_area_radius 5
+	}
+	create_object DLC_ORANGEBUSH {
+		number_of_objects 9320
+		temp_min_distance_group_placement rnd(2,3)
+		terrain_to_place_on ROAD_FUNGUS
+		actor_area 7
+		actor_area_radius 5
+	}
+	/*
+	animals: boar
+	deer (I've seen them at two college campuses)
+
+	herdables: most any fit
+	*/
+	start_random
+		percent_chance 10 #const CITY_HERDABLE 594 /* sheep */
+		percent_chance 10 #const CITY_HERDABLE 833 /* turkey */
+		percent_chance 10 #const CITY_HERDABLE 1060 /* goat */
+		percent_chance 10 #const CITY_HERDABLE 1245 /* pig */
+		percent_chance 5 #const CITY_HERDABLE 705 /* cow */
+		percent_chance 5 #const CITY_HERDABLE 1596 /* cow */
+		percent_chance 5 #const CITY_HERDABLE 1598 /* cow */
+		percent_chance 5 #const CITY_HERDABLE 1600 /* cow */
+		percent_chance 1 #const CITY_HERDABLE 305 /* llama */
+		percent_chance 1 #const CITY_HERDABLE 1142 /* water buffalo */
+		percent_chance 10 #const CITY_HERDABLE 1243 /* goose */
+		percent_chance 28 #define NO_CITY_HERDABLE
+	end_random
+	if NO_CITY_HERDABLE
+	else
+		create_object CITY_HERDABLE {
+			avoid_actor_area 1
+			number_of_groups rnd(3,16)
+			number_of_objects rnd(1,4)
+			temp_min_distance_group_placement rnd(8,25)
+			set_scaling_to_map_size
+			min_distance_group_placement 2
+			avoid_forest_zone 1
+			avoid_cliff_zone 1
+			set_gaia_object_only
+			set_loose_grouping
+			terrain_to_place_on ROAD
+			actor_area_to_place_in 7
+		}
+	endif
+	start_random
+		percent_chance 25 create_object BOAR {
+			avoid_actor_area 1
+			number_of_groups rnd(3,16) /* TODO change amounts */
+			temp_min_distance_group_placement rnd(8,25)
+			set_scaling_to_map_size
+			min_distance_group_placement 2
+			avoid_forest_zone 1
+			avoid_cliff_zone 1
+			set_gaia_object_only
+			terrain_to_place_on ROAD
+			actor_area_to_place_in 7
+		}
+		percent_chance 70 create_object DEER {
+			avoid_actor_area 1
+			number_of_groups rnd(3,16) /* TODO change amounts */
+			number_of_objects rnd(1,4)
+			temp_min_distance_group_placement rnd(8,25)
+			set_scaling_to_map_size
+			min_distance_group_placement 2
+			avoid_forest_zone 1
+			avoid_cliff_zone 1
+			set_gaia_object_only
+			set_loose_grouping
+			terrain_to_place_on ROAD
+			actor_area_to_place_in 7
+		}
+	end_random
+	create_object OUTPOST {
+		number_of_objects 9320
+		temp_min_distance_group_placement rnd(10,30)
+		set_scaling_to_map_size
+		min_distance_group_placement 1
+		set_gaia_object_only
+		set_building_capturable
+		terrain_to_place_on ROAD
+		avoid_forest_zone 2 
+		actor_area 8
+		actor_area_radius 2
+	}
+	start_random
+		percent_chance 20 #define CITY_MANY_VILS
+		percent_chance 30 #define NO_CITY_EXTRA_VILS
+	end_random
+	if NO_CITY_EXTRA_VILS
+	else
+		create_object ON_GRID {
+			second_object VILLAGER
+			avoid_actor_area 1 
+			resource_delta -60 
+			set_place_for_every_player
+			group_placement_radius 3
+			min_distance_group_placement 1
+			actor_area_to_place_in 8
+			override_actor_radius_if_required
+			terrain_to_place_on ROAD
+			avoid_actor_area 10
+			/*
+			actor_area 10
+			actor_area_radius 1 breaks on tiny sized map stress test. */
+		}
+	endif
+	create_object HOUSE { /* broke on miniature map size stress test, passed tiny though. */
+		set_place_for_every_player
+		terrain_to_place_on ROAD
+		ignore_terrain_restrictions
+		avoid_actor_area 8
+		avoid_forest_zone 3
+		if CITY_MANY_VILS
+			min_distance_group_placement 1
+		else
+			min_distance_group_placement 2
+		endif
+		max_distance_to_other_zones 4
+		actor_area 9
+		actor_area_radius 3
+		avoid_actor_area 9
+		avoid_actor_area 10
+	}
+	if CITY_MANY_VILS 
+		create_object ON_GRID { /* use ON_GRID because I somehow was getting 3 instead */
+			second_object VILLAGER
+			avoid_actor_area 1
+			actor_area_to_place_in 9
+			number_of_objects rnd(0,2) /* 2 + 1 per planet + 1 from on-grid second object results in a max of 7 vils - limited to 2 due to feedback - more vils is likely to make the TCs start close to each other. which isn't neccesarily ideal. */
+			set_place_for_every_player
+			min_distance_group_placement 1
+			terrain_to_place_on ROAD
+			avoid_actor_area 10
+		}
+	endif
+	/* extra stone, standard gold, but guaranteed to appear. */
+	#define GOLD_PLACED
+	create_object GOLD {
+		terrain_to_place_on ROAD
+		ignore_terrain_restrictions
+		place_on_specific_land_id 1
+		number_of_objects rnd(2,4)
+		number_of_groups rnd(4,10)
+		group_variance rnd(0,1)
+		temp_min_distance_group_placement rnd(16,40)
+		set_scaling_to_map_size
+		min_distance_group_placement 2
+		max_distance_to_other_zones 1
+		set_gaia_object_only
+		avoid_forest_zone 3
+		set_tight_grouping
+		actor_area 2
+		actor_area_radius 3
+		avoid_actor_area 2
+		avoid_actor_area 3
+	}
+	create_object STONE { /* extra stone */
+		terrain_to_place_on ROAD
+		ignore_terrain_restrictions
+		place_on_specific_land_id 1
+		number_of_objects rnd(2,4)
+		number_of_groups rnd(4,30)
+		group_variance rnd(0,1)
+		temp_min_distance_group_placement rnd(12,30)
+		set_scaling_to_map_size
+		min_distance_group_placement 2
+		max_distance_to_other_zones 1
+		set_gaia_object_only
+		avoid_forest_zone 3
+		set_tight_grouping
+		actor_area 3
+		actor_area_radius 3
+		avoid_actor_area 2
+		avoid_actor_area 3
+	}	
+	create_object AMPHITHEATRE {
+		set_gaia_object_only
+		set_gaia_unconvertible
+		terrain_to_place_on ROAD
+		avoid_actor_area 8
+		avoid_forest_zone 6
+		min_distance_group_placement 2
+		max_distance_to_other_zones 6
+		actor_area 10
+		actor_area_radius 12
+	}
+	create_object CASTLE_RUINS {
+		set_gaia_object_only
+		set_gaia_unconvertible
+		terrain_to_place_on ROAD
+		avoid_actor_area 8
+		avoid_actor_area 10
+		avoid_forest_zone 6
+		min_distance_group_placement 2
+		temp_min_distance_group_placement 45
+		number_of_objects rnd(1,2)
+		set_scaling_to_map_size
+		max_distance_to_other_zones 6
+		actor_area 10
+		actor_area_radius 12
+	}
+	create_object CHURCH_RUINS {
+		set_gaia_object_only
+		terrain_to_place_on ROAD
+		avoid_actor_area 8
+		avoid_forest_zone 5
+		min_distance_group_placement 3
+		temp_min_distance_group_placement 30
+		number_of_objects rnd(1,4)
+		set_scaling_to_map_size
+		max_distance_to_other_zones 5
+	}
+	create_object TEMPLE_RUIN {
+		set_gaia_object_only
+		terrain_to_place_on ROAD
+		avoid_actor_area 8
+		avoid_forest_zone 4
+		min_distance_group_placement 2
+		temp_min_distance_group_placement rnd(10,20)
+		number_of_objects 9320
+		max_distance_to_other_zones 4
+	}
+endif
+/* removed: if readded, include a check for if irradiated/barren planet is present, and guarantee placement on those planets (with irradiated getting priority)
+if PHOTON_SCOUT_PLACED 
+else
+	#define PHOTON_SCOUT_PLACED
+	create_object PHOTON_MAN {
+		set_place_for_every_player
+		terrain_to_place_on DLC_ROCK
+		min_distance_group_placement 1
+	} 
+endif
+*/
+if GOLD_PLACED
+else
+	create_object GOLD { /* TODO scale amount of gold per pile for different map sizes */
+		number_of_objects 9320
+		temp_min_distance_group_placement 1
+		terrain_to_place_on DLC_ROCK
+		ignore_terrain_restrictions
+		place_on_specific_land_id 1
+	}
+endif
+
+if LOW_WOOD
+	create_object TREE_J { /* TODO check to see if there's a forest zone (and disable in that case), or increase if I ever make 4 different woodless biomes */
+		number_of_objects 9320
+		temp_min_distance_group_placement 1
+		terrain_to_place_on DLC_ROCK
+		place_on_specific_land_id 1
+	}
+else
+endif
+/* add relics, 1 per planet, or just place 2-5 relics - I'll go 2-5 relics TODO scale for different map sizes? */
+create_object RELIC {
+	number_of_objects rnd(2,6)
+	temp_min_distance_group_placement rnd(30,50)  /*  scale for different map sizes */
+	max_distance_to_other_zones 3
+	avoid_cliff_zone 1
+	avoid_forest_zone 1
+}
+<LAND_GENERATION>
+
+L {
+	terrain_type WATER
+	land_percent 0
+	land_position 0 0
+	assign_to_player 1
+}
+L {
+	terrain_type WATER
+	land_percent 0
+	land_position 0 0
+	assign_to_player 2
+}
+L {
+	terrain_type WATER
+	land_percent 0
+	land_position 0 0
+	assign_to_player 3
+}
+L {
+	terrain_type WATER
+	land_percent 0
+	land_position 0 0
+	assign_to_player 4
+}
+L {
+	terrain_type WATER
+	land_percent 0
+	land_position 0 0
+	assign_to_player 5
+}
+L {
+	terrain_type WATER
+	land_percent 0
+	land_position 0 0
+	assign_to_player 6
+}
+L {
+	terrain_type WATER
+	land_percent 0
+	land_position 0 0
+	assign_to_player 7
+}
+L {
+	terrain_type WATER
+	land_percent 0
+	land_position 0 0
+	assign_to_player 8
+}
+
+base_terrain WATER
+/* 
+Generated with MadLands v5.9.xlsm: I 2, R 17, XO/YO:25, OA:0, XS/YS:1, A/F/SF:0, CT: disabled
+note: did delete some duplicate create_land statements in this and other planet generations
+ */
+create_land { base_size 2 land_position 92 75 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 92 76 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 92 77 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 92 78 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 92 79 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 91 79 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 91 80 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 91 81 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 91 82 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 90 82 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 90 83 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 90 84 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 89 84 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 89 85 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 88 85 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 88 86 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 87 87 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 86 88 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 85 88 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 85 89 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 84 89 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 84 90 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 83 90 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 82 90 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 82 91 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 81 91 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 80 91 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 79 91 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 79 92 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 78 92 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 77 92 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 76 92 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 75 92 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 74 92 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 73 92 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 72 92 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 71 92 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 71 91 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 70 91 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 69 91 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 68 91 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 68 90 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 67 90 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 66 89 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 65 89 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 65 88 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 64 88 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 63 87 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 62 86 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 62 85 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 61 85 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 61 84 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 60 84 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 60 83 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 60 82 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 59 82 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 59 81 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 59 80 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 59 79 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 58 79 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 58 78 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 58 77 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 58 76 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 58 75 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 58 74 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 58 73 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 58 72 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 58 71 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 59 71 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 59 70 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 59 69 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 59 68 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 60 68 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 60 67 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 61 66 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 61 65 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 62 65 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 62 64 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 63 63 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 64 62 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 65 62 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 65 61 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 66 61 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 67 60 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 67 60 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 68 60 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 68 59 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 69 59 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 70 59 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 71 59 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 71 58 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 72 58 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 73 58 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 74 58 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 75 58 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 76 58 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 77 58 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 78 58 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 79 58 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 79 59 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 80 59 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 81 59 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 82 59 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 82 60 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 83 60 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 84 60 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 84 61 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 85 61 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 85 62 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 86 62 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 87 63 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 88 64 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 88 65 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 89 65 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 89 66 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 90 67 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 90 68 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 91 68 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 91 69 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 91 70 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 91 71 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 92 71 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 92 72 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 92 73 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+create_land { base_size 2 land_position 92 74 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
+
+L { land_position 80 80 land_percent 10 base_elevation 2 terrain_type PN1 land_id 1 }
+
+/* 
+Generated with MadLands v5.9.xlsm: I 2, R 23, XO/YO:13, OA:0, XS/YS:1, A/F/SF:0, CT: disabled
+note: some duplicate land statments may have been deleted.
+ */
+
+/*
+create_land { base_size 2 land_position 86 63 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 86 64 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 86 65 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 86 66 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 86 67 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 85 68 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 85 69 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 85 70 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 85 71 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 84 72 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 84 73 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 83 74 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 83 75 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 82 76 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 82 77 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 81 77 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 81 78 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 80 78 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 80 79 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 79 80 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 78 80 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 78 81 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 77 81 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 77 82 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 76 82 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 75 83 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 74 83 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 73 84 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 72 84 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 71 85 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 70 85 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 69 85 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 68 85 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 67 86 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 66 86 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 65 86 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 64 86 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 63 86 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 62 86 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 61 86 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+*/
+if AT_LEAST_ENORMOUS
+create_land { base_size 2 land_position 60 86 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 59 86 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+endif
+if AT_LEAST_NORMAL
+create_land { base_size 2 land_position 58 85 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 57 85 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+endif
+if AT_LEAST_MEDIUM
+create_land { base_size 2 land_position 56 85 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+endif
+create_land { base_size 2 land_position 55 85 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 54 84 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 53 84 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 52 83 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 51 83 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 50 82 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 49 82 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 49 81 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 48 81 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 48 80 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 47 80 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 46 79 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 46 78 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 45 78 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 45 77 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 44 77 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 44 76 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 43 75 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 43 74 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 42 73 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 42 72 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 41 71 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 41 70 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 41 69 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 41 68 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 40 67 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 40 66 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 40 65 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 40 64 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 40 63 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 40 62 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 40 61 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 40 60 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 40 59 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 41 58 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 41 57 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 41 56 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 41 55 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 42 54 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 42 53 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 43 52 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 43 51 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 44 50 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 44 49 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 45 49 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 45 48 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 46 48 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 46 47 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 47 46 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 48 46 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 48 45 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 49 45 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 49 44 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 50 44 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 51 43 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 52 43 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 53 42 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 54 42 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 55 41 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 56 41 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 57 41 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 58 41 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 59 40 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 60 40 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 61 40 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 62 40 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 63 40 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 64 40 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 65 40 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 66 40 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 67 40 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 68 41 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 69 41 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 70 41 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 71 41 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 72 42 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 73 42 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 74 43 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 75 43 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 76 44 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 77 44 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 77 45 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 78 45 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 78 46 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 79 46 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 80 47 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 80 48 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 81 48 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 81 49 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 82 49 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 82 50 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 83 51 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 83 52 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 84 53 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 84 54 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 85 55 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+if AT_LEAST_MEDIUM
+create_land { base_size 2 land_position 85 56 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+endif
+if AT_LEAST_NORMAL
+create_land { base_size 2 land_position 85 57 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 85 58 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+endif
+if AT_LEAST_ENORMOUS
+create_land { base_size 2 land_position 86 59 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 86 60 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+endif
+/*
+create_land { base_size 2 land_position 86 61 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+create_land { base_size 2 land_position 86 62 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+*/
+L { land_position 55 55 land_percent 15 base_elevation 2 terrain_type PN2 }
+
+/* 
+Generated with MadLands v5.9.xlsm: I 2, R 24, XO/YO:-3, OA:0, XS/YS:1, A/F/SF:0, CT: disabled
+note: some duplicate land statments may have been deleted.
+ */
+/*
+create_land { base_size 2 land_position 71 47 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 71 48 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 71 49 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 71 50 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 71 51 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 70 52 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 70 53 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 70 54 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 70 55 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 69 56 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 69 57 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 69 58 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 68 58 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 68 59 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 67 60 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 66 61 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 66 62 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 65 62 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 65 63 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 64 64 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 63 65 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 62 65 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 62 66 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 61 66 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 60 67 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 59 68 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 58 68 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 58 69 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 57 69 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 56 69 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 55 70 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 54 70 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 53 70 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 52 70 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 51 71 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 50 71 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 49 71 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 48 71 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 47 71 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 46 71 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 45 71 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 44 71 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 43 71 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 42 70 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 41 70 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+*/
+if AT_LEAST_MASSIVE
+create_land { base_size 2 land_position 40 70 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 39 70 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+endif
+if AT_LEAST_NORMAL
+create_land { base_size 2 land_position 38 69 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+endif
+if AT_LEAST_SMALL
+create_land { base_size 2 land_position 37 69 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 36 69 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+endif
+create_land { base_size 2 land_position 36 68 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 35 68 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 34 67 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 33 66 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 32 66 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 32 65 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 31 65 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 30 64 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 29 63 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 29 62 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 28 62 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 28 61 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 27 60 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 26 59 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 26 58 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 25 58 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 25 57 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 25 56 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 24 55 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 24 54 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 24 53 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 24 52 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 23 51 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 23 50 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 23 49 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 23 48 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 23 47 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 23 46 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 23 45 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 23 44 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 23 43 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 24 42 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 24 41 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 24 40 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 24 39 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 25 38 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 25 37 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 25 36 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 26 36 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 26 35 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 27 34 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 28 33 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 28 32 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 29 32 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 29 31 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 30 30 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 31 29 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 32 29 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 32 28 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 33 28 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 34 27 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 35 26 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 36 26 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 36 25 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 37 25 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 38 25 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 39 24 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 40 24 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 41 24 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 42 24 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 43 23 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 44 23 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 45 23 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 46 23 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 47 23 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 48 23 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 49 23 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 50 23 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 51 23 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 52 24 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 53 24 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 54 24 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 55 24 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 56 25 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 57 25 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 58 25 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 58 26 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 59 26 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 60 27 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 61 28 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 62 28 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 62 29 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 63 29 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 64 30 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 65 31 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 65 32 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 66 32 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 66 33 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 67 34 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 68 35 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 68 36 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+if AT_LEAST_SMALL
+create_land { base_size 2 land_position 69 36 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 69 37 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+endif
+if AT_LEAST_NORMAL
+create_land { base_size 2 land_position 69 38 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+endif
+if AT_LEAST_MASSIVE
+create_land { base_size 2 land_position 70 39 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 70 40 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+endif
+/*
+create_land { base_size 2 land_position 70 41 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 70 42 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 71 43 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 71 44 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 71 45 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+create_land { base_size 2 land_position 71 46 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+*/
+
+L { land_position 41 41 land_percent 20 base_elevation 2 terrain_type PN3 }
+
+/* 
+Generated with MadLands v5.9.xlsm: I 2, R 26, XO/YO:-16, OA:0, XS/YS:1, A/F/SF:0, CT: disabled
+note: some duplicate land statments may have been deleted.
+ */
+/*
+create_land { base_size 2 land_position 60 34 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 60 35 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 60 36 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 60 37 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 60 38 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 60 39 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 59 39 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 59 40 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 59 41 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 59 42 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 58 43 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 58 44 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 58 45 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 57 45 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 57 46 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 57 47 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 56 48 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 56 49 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 55 49 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 54 50 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 54 51 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 53 51 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 53 52 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 52 53 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 51 53 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 51 54 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 50 54 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 49 55 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 49 56 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 48 56 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 47 57 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 46 57 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 45 57 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 45 58 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 44 58 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 43 58 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 42 59 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 41 59 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 40 59 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 39 59 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 39 60 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 38 60 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 37 60 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 36 60 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 35 60 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 34 60 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 33 60 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 32 60 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 31 60 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 30 60 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 29 60 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 29 59 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 28 59 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 27 59 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 26 59 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 25 58 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+*/
+if AT_LEAST_MASSIVE
+create_land { base_size 2 land_position 24 58 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 23 58 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 23 57 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+endif
+if AT_LEAST_NORMAL
+create_land { base_size 2 land_position 22 57 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+endif
+if AT_LEAST_SMALL
+create_land { base_size 2 land_position 21 57 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 20 56 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 19 56 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+endif
+create_land { base_size 2 land_position 19 55 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 18 54 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 17 54 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 17 53 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 16 53 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 15 52 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 15 51 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 14 51 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 14 50 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 13 49 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 12 49 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 12 48 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 11 47 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 11 46 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 11 45 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 10 45 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 10 44 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 10 43 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 9 42 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 9 41 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 9 40 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 9 39 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 8 39 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 8 38 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 8 37 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 8 36 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 8 35 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 8 34 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 8 33 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 8 32 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 8 31 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 8 30 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 8 29 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 9 29 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 9 28 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 9 27 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 9 26 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 10 25 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 10 24 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 10 23 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 11 23 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 11 22 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 11 21 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 12 20 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 12 19 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 13 19 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 14 18 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 14 17 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 15 17 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 15 16 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 16 15 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 17 15 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 17 14 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 18 14 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 19 13 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 19 12 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 20 12 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 21 11 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 22 11 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 23 11 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 23 10 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 24 10 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 25 10 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 26 9 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 27 9 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 28 9 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 29 9 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 29 8 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 30 8 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 31 8 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 32 8 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 33 8 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 34 8 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 35 8 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 36 8 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 37 8 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 38 8 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 39 8 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 39 9 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 40 9 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 41 9 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 42 9 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 43 10 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 44 10 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 45 10 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 45 11 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 46 11 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 47 11 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 48 12 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 49 12 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 49 13 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 50 14 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 51 14 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 51 15 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 52 15 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 53 16 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 53 17 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 54 17 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 54 18 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 55 19 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+if AT_LEAST_SMALL
+create_land { base_size 2 land_position 56 19 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 56 20 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 57 21 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+endif
+if AT_LEAST_NORMAL
+create_land { base_size 2 land_position 57 22 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+endif
+if AT_LEAST_MASSIVE
+create_land { base_size 2 land_position 57 23 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 58 23 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 58 24 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+endif
+/*
+create_land { base_size 2 land_position 58 25 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 59 26 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 59 27 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 59 28 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 59 29 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 60 29 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 60 30 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 60 31 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 60 32 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+create_land { base_size 2 land_position 60 33 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+*/
+
+
+L { land_position 25 25 land_percent 20 base_elevation 2 terrain_type PN4 land_id 4 }
+
+

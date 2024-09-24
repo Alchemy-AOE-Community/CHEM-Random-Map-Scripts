@@ -2201,15 +2201,16 @@ if JUNGLE_PLANET /* TODO double check that this works as expected when adding el
 endif
 if LEAVES_PLANET
 	start_random
-		percent_chance 11 #const LEAVES_FOREST_TERRAIN 10 /* FOREST */
-		percent_chance 11 #const LEAVES_FOREST_TERRAIN 17  /* JUNGLE */
-		percent_chance 11 #const LEAVES_FOREST_TERRAIN 18 /* BAMBOO */
-		percent_chance 11 #const LEAVES_FOREST_TERRAIN 19 /* PINE_FOREST */
-		percent_chance 11 #const LEAVES_FOREST_TERRAIN 104 /* DLC_FORESTAUTUMN */
-		percent_chance 11 #const LEAVES_FOREST_TERRAIN 110 /* BIRCH_FOREST */
-		percent_chance 11 #const LEAVES_FOREST_TERRAIN 20 /* FOREST_OAK_BUSH */
-		percent_chance 11 #const LEAVES_FOREST_TERRAIN 89 /* FOREST_BUSH - would be a good one to combine with an increase berry bush chance. */
-		percent_chance 12 #const LEAVES_FOREST_TERRAIN 92 /* FOREST_REEDS - has less wood, so favored as a result of that bias. */
+		percent_chance 10 #const LEAVES_FOREST_TERRAIN 10 /* FOREST */
+		percent_chance 10 #const LEAVES_FOREST_TERRAIN 17  /* JUNGLE */
+		percent_chance 10 #const LEAVES_FOREST_TERRAIN 18 /* BAMBOO */
+		percent_chance 10 #const LEAVES_FOREST_TERRAIN 19 /* PINE_FOREST */
+		percent_chance 10 #const LEAVES_FOREST_TERRAIN 104 /* DLC_FORESTAUTUMN */
+		percent_chance 10 #const LEAVES_FOREST_TERRAIN 110 /* BIRCH_FOREST */
+		percent_chance 10 #const LEAVES_FOREST_TERRAIN 20 /* FOREST_OAK_BUSH */
+		percent_chance 10 #const LEAVES_FOREST_TERRAIN 89 /* FOREST_BUSH - would be a good one to combine with an increase berry bush chance. */
+		percent_chance 10 #const LEAVES_FOREST_TERRAIN 88 /* MEDITERRANEAN_FOREST */
+		percent_chance 10 #const LEAVES_FOREST_TERRAIN 92 /* FOREST_REEDS - has less wood, so favored as a result of that bias. */
 	end_random
 	create_terrain UNDERBRUSH_LEAVES {
 		base_terrain LEAVES
@@ -2964,12 +2965,11 @@ if LEAVES_PLANET
 	endif
 	start_random /* TODO could improve realism by tieing the specific animal to the type of tree somewhat. */
 		percent_chance 10 #const LEAVES_HERDABLE 305 /* DLC_LLAMA */
-		percent_chance 10 #const LEAVES_HERDABLE 833 /* TURKEY */
 		percent_chance 10 #const LEAVES_HERDABLE 1060 /* DLC_GOAT */
 		percent_chance 10 #const LEAVES_HERDABLE 1142 /* DLC_WATERBUFFALO */
 		percent_chance 10 #const LEAVES_HERDABLE 1243 /* DLC_GOOSE */
 		percent_chance 40 #const LEAVES_HERDABLE 1245 /* DLC_PIG */
-		percent_chance 10 #const LEAVES_HERDABLE 833 /* TURKEY */
+		percent_chance 20 #const LEAVES_HERDABLE 833 /* TURKEY */
 	end_random
 	create_object LEAVES_HERDABLE {
 		avoid_actor_area 1

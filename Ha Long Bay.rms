@@ -1,0 +1,50 @@
+<PLAYER_SETUP>
+grouped_by_team
+behavior_version 1
+
+#const RFGRASS 83
+#const GREENWATER 95
+#const PAGODA_A 1201
+#const PAGODA_B 1202
+#const PAGODA_C 1203
+#const PAIFANG_GATE 1562
+
+if 2_TEAM_GAME
+else
+    #const TRADE_CART_ENABLER 161
+    #const TRADE_COG_ENABLER 180
+    #const TRADE_CARAVAN_ENABLER 48
+    #const HINDU_CARAVANSERAI_ENABLER 518
+    #const PERSIAN_CARAVANSERAI_ENABLER 552  
+    effect_amount DISABLE_TECH TRADE_COG_ENABLER ATTR_DISABLE 180
+    effect_amount DISABLE_TECH TRADE_CART_ENABLER ATTR_DISABLE 161
+    effect_amount DISABLE_TECH TRADE_CARAVAN_ENABLER ATTR_DISABLE 48
+    effect_amount DISABLE_TECH HINDU_CARAVANSERAI_ENABLER ATTR_DISABLE 518
+    effect_amount DISABLE_TECH PERSIAN_CARAVANSERAI_ENABLER ATTR_DISABLE 552
+endif
+
+<LAND_GENERATION>
+base_terrain GREENWATER
+create_player_lands { terrain_type GRASS circle_radius 40 0 land_percent 25 base_size 10 base_elevation 1 }
+
+<ELEVATION_GENERATION>
+
+
+<TERRAIN_GENERATION>
+create_terrain DLC_JUNGLEGRASS { base_terrain GRASS beach_terrain DLC_BEACH4 number_of_clumps 9320 land_percent 100 }
+create_terrain DLC_WATER5 { base_terrain GREENWATER number_of_clumps 9320 land_percent 100 terrain_mask 1 }
+
+<CONNECTION_GENERATION>
+
+<OBJECTS_GENERATION>
+create_object TOWN_CENTER { set_place_for_every_player find_closest }
+create_object VILLAGER { set_place_for_every_player max_distance_to_players 6 }
+create_object DLC_ROCKBEACH { set_gaia_object_only number_of_groups 9320 temp_min_distance_group_placement 8 terrain_to_place_on GREENWATER }
+
+create_object PAGODA_A { set_gaia_object_only number_of_groups 4 temp_min_distance_group_placement 8 terrain_to_place_on DLC_JUNGLEGRASS }
+create_object PAGODA_B { set_gaia_object_only number_of_groups 4 temp_min_distance_group_placement 8 terrain_to_place_on DLC_JUNGLEGRASS }
+create_object PAGODA_C { set_gaia_object_only number_of_groups 4 temp_min_distance_group_placement 8 terrain_to_place_on DLC_JUNGLEGRASS }
+create_object PAIFANG_GATE { set_gaia_object_only number_of_groups 4 temp_min_distance_group_placement 8 terrain_to_place_on DLC_JUNGLEGRASS }
+
+
+/* END OF SCRIPT */

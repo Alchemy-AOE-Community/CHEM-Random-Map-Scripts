@@ -1,0 +1,183 @@
+<PLAYER_SETUP>
+random_placement
+behavior_version 1
+
+if TINY_MAP override_map_size 121
+elseif SMALL_MAP override_map_size 145
+elseif MEDIUM_MAP override_map_size 169
+elseif LARGE_MAP override_map_size 201
+elseif HUGE_MAP override_map_size 221
+
+
+#const RFGRASS 83
+#const GREENWATER 95
+#const PAGODA_A 1201
+#const PAGODA_B 1202
+#const PAGODA_C 1203
+#const PAIFANG_GATE 1562
+#const WBAT 1309
+#const WBAM 1310
+#const WBAB 1311
+#const WBBT 1312
+#const WBBM 1313
+#const WBBB 1314
+#const BATTLE_WORKSHOP 1647
+#const FPW 525
+#const QUEEN 923
+#const PGUP 63
+#const PGDN 67
+
+/* Modify HP of palisade walls to match stone walls */
+/* Possibly add a technology that allows Fortified Palisade walls to be researched */
+
+effect_amount ENABLE_TECH FPW 525
+effect_amount MODIFY_TECH FPW ATTR_SET_TIME 20
+effect_amount MODIFY_TECH FPW ATTR_SET_WOOD_COST 500
+effect_amount MODIFY_TECH FPW ATTR_SET_GOLD_COST 100
+effect_amount MODIFY_TECH FPW ATTR_SET_LOCATION 209
+effect_amount MODIFY_TECH FPW ATTR_SET_NAME 5205
+effect_amount MODIFY_TECH FPW ATTR_SET_DESCRIPTION 209
+effect_amount MODIFY_TECH FPW ATTR_SET_HOTKEY 16142
+effect_amount SET_ATTRIBUTE DLC_IMPERIALSKIRMISHER ATTR_TRAITS 16
+
+
+effect_amount GAIA_SET_ATTRIBUTE MONUMENT ATTR_STANDING_GRAPHIC 10282 /* Makes monument Vietnamese without Set Gaia Civ */
+
+/* Upgrade Pagodas to be player-controlled and converted */
+
+effect_amount SET_ATTRIBUTE SPECIAL_BUILDING ATTR_TERRAIN_ID 0
+effect_amount GAIA_UPGRADE_UNIT SPECIAL_BUILDING BATTLE_WORKSHOP 0
+effect_amount SET_ATTRIBUTE BATTLE_WORKSHOP ATTR_STANDING_GRAPHIC 10301
+/* effect_amount GAIA_UPGRADE_UNIT PAGODA_A MONUMENT 0  */
+
+<LAND_GENERATION>
+base_terrain JUNGLE
+
+create_land { terrain_type DLC_JUNGLEGRASS left_border 12 right_border 12 top_border 12 bottom_border 12 land_percent 60 base_size 12 zone 1 }
+
+create_player_lands { terrain_type DIRT3 circle_radius 40 1 land_percent 20 base_size 16 left_border 4 right_border 4 top_border 4 bottom_border 4 other_zone_avoidance_distance 30 base_elevation 0 }
+create_land { terrain_type MED_WATER land_percent 1 base_size 15 land_position 50 50 land_id 70 }
+
+<ELEVATION_GENERATION>
+
+create_elevation 2 { base_terrain DLC_JUNGLEGRASS number_of_tiles 1000 number_of_clumps 50 set_scale_by_groups enable_balanced_elevation }
+
+<TERRAIN_GENERATION>
+create_terrain DLC_JUNGLEGRASS { base_terrain GRASS beach_terrain DLC_BEACH4 number_of_clumps 9320 land_percent 100 }
+
+create_terrain DLC_JUNGLEROAD { base_terrain MED_WATER number_of_clumps 9320 land_percent 100 spacing_to_other_terrain_types 2 }
+create_terrain ROAD { base_terrain DLC_JUNGLEROAD number_of_clumps 9320 land_percent 100 spacing_to_other_terrain_types 2 }
+
+create_terrain JUNGLE { base_terrain DLC_JUNGLEGRASS number_of_clumps 50 land_percent 5 set_avoid_player_start_areas 25 spacing_to_other_terrain_types 2 }
+
+
+<CONNECTION_GENERATION>
+
+<OBJECTS_GENERATION>
+
+/* Objects per player */
+
+create_object TOWN_CENTER { set_place_for_every_player find_closest }
+create_object DLC_FORTIFIED_PALISADE_WALL { set_place_for_every_player min_distance_to_players 20 max_distance_to_players 20 }
+create_object VILLAGER { set_place_for_every_player min_distance_to_players 6 max_distance_to_players 6 }
+create_object DLC_IMPERIALSKIRMISHER { set_place_for_every_player max_distance_to_players 7 }
+create_object KING { set_place_for_every_player find_closest }
+create_object QUEEN { set_place_for_every_player find_closest }
+
+create_object FORAGE { set_place_for_every_player set_gaia_object_only set_tight_grouping number_of_objects 6 min_distance_to_players 10 max_distance_to_players 12 }
+
+create_object GOLD { set_place_for_every_player set_gaia_object_only set_tight_grouping number_of_objects 7 min_distance_to_players 10 max_distance_to_players 12 }
+create_object GOLD { set_place_for_every_player set_gaia_object_only set_tight_grouping number_of_objects 5 min_distance_to_players 17 max_distance_to_players 19 }
+create_object GOLD { set_place_for_every_player set_gaia_object_only set_tight_grouping number_of_objects 3 min_distance_to_players 22 max_distance_to_players 23 }
+
+create_object STONE { set_place_for_every_player set_gaia_object_only set_tight_grouping number_of_objects 5 min_distance_to_players 12 max_distance_to_players 14 }
+create_object STONE { set_place_for_every_player set_gaia_object_only set_tight_grouping number_of_objects 4 min_distance_to_players 21 max_distance_to_players 23 }
+
+create_object DLC_COW { set_place_for_every_player set_gaia_object_only number_of_objects 3 min_distance_to_players 4 max_distance_to_players 7 }
+create_object DLC_PIG { set_place_for_every_player set_gaia_object_only number_of_objects 4 min_distance_to_players 7 max_distance_to_players 10 }
+create_object BOAR { set_place_for_every_player set_gaia_object_only number_of_objects 2 min_distance_to_players 12 max_distance_to_players 14 }
+create_object DEER { set_place_for_every_player set_gaia_object_only number_of_objects 4 min_distance_to_players 12 max_distance_to_players 14 }
+create_object DLC_KOMODO { set_place_for_every_player set_gaia_object_only number_of_objects 1 min_distance_to_players 34 max_distance_to_players 34 }
+
+create_object DLC_RAINTREE { set_place_for_every_player set_gaia_object_only number_of_objects 2 min_distance_to_players 4 max_distance_to_players 5 }
+create_object JUNGLETREE { set_place_for_every_player set_gaia_object_only number_of_objects 3 min_distance_to_players 6 max_distance_to_players 8 }
+
+create_object BATTLE_WORKSHOP { set_place_for_every_player set_gaia_object_only set_building_capturable number_of_groups 1 min_distance_to_players 25 max_distance_to_players 25 find_closest_to_map_center } /* 6 roof */
+/* create_object PAGODA_B { set_gaia_object_only number_of_groups 9320 temp_min_distance_group_placement 38 terrain_to_place_on DLC_JUNGLEGRASS } 3 roof */
+/* create_object PAGODA_C { set_gaia_object_only number_of_groups 9320 temp_min_distance_group_placement 38 terrain_to_place_on DLC_JUNGLEGRASS } 1 roof */
+/* create_object PAIFANG_GATE { set_gaia_object_only number_of_groups 9320 temp_min_distance_group_placement 38 terrain_to_place_on DLC_JUNGLEGRASS } */
+
+
+
+
+
+
+
+/* Center objects */
+create_object MONUMENT { set_gaia_object_only number_of_groups 1 find_closest_to_map_center ignore_terrain_restrictions place_on_specific_land_id 70 }
+/* create_object DLC_FORTIFIED_PALISADE_WALL { set_gaia_object_only number_of_objects 9320 terrain_to_place_on DLC_JUNGLEROAD } */
+/* Creating bridges */
+#define CITYBRIDGES
+if CITYBRIDGES
+    create_actor_area 110 94 230 0
+    create_actor_area 111 94 230 0
+    create_object WBBT { set_gaia_object_only make_indestructible number_of_groups 6 actor_area_to_place_in 230 }
+    create_actor_area 110 96 231 0
+    create_actor_area 110 95 231 0
+    create_actor_area 111 96 231 0
+    create_actor_area 111 95 231 0
+    create_object WBBM { set_gaia_object_only make_indestructible number_of_groups 12 actor_area_to_place_in 231 }
+    create_actor_area 110 97 232 0
+    create_actor_area 111 97 232 0
+    create_object WBBB { set_gaia_object_only make_indestructible number_of_groups 6 actor_area_to_place_in 232 }
+    create_actor_area 110 126 232 0
+    create_actor_area 111 126 232 0
+    /* create_object WBBB { set_gaia_object_only make_indestructible number_of_groups 4 actor_area_to_place_in 230 } */
+    create_actor_area 110 124 231 0
+    create_actor_area 110 125 231 0
+    create_actor_area 111 124 231 0
+    create_actor_area 111 125 231 0
+    /* create_object WBBM { set_gaia_object_only make_indestructible number_of_groups 4 actor_area_to_place_in 231 } */
+    create_actor_area 110 123 230 0
+    create_actor_area 111 123 230 0
+    /* create_object WBBT { set_gaia_object_only make_indestructible number_of_groups 4 actor_area_to_place_in 232 } */
+    create_actor_area 94 110 233 0
+    create_actor_area 94 111 233 0
+    create_object WBAB { set_gaia_object_only make_indestructible number_of_groups 6 actor_area_to_place_in 233 }
+    create_actor_area 96 110 234 0
+    create_actor_area 95 110 234 0
+    create_actor_area 96 111 234 0
+    create_actor_area 95 111 234 0
+    create_object WBAM { set_gaia_object_only make_indestructible number_of_groups 12 actor_area_to_place_in 234 }
+    create_actor_area 97 110 235 0
+    create_actor_area 97 111 235 0
+    create_object WBAT { set_gaia_object_only make_indestructible number_of_groups 6 actor_area_to_place_in 235 }
+    create_actor_area 126 110 235 0
+    create_actor_area 126 111 235 0
+    /* create_object WBAB { set_gaia_object_only make_indestructible number_of_groups 4 actor_area_to_place_in 233 } */
+    create_actor_area 124 110 234 0
+    create_actor_area 125 110 234 0
+    create_actor_area 124 111 234 0
+    create_actor_area 125 111 234 0
+    /* create_object WBAM { set_gaia_object_only make_indestructible number_of_groups 4 actor_area_to_place_in 234 } */
+    create_actor_area 123 110 233 0
+    create_actor_area 123 111 233 0
+    /* create_object WBAT { set_gaia_object_only make_indestructible number_of_groups 4 actor_area_to_place_in 235 } */
+    create_actor_area 98 111 236 0
+    create_actor_area 121 109 236 0
+    create_object PGUP {set_gaia_object_only make_indestructible number_of_groups 1 actor_area_to_place_in 236 }
+    create_actor_area 109 98 236 0
+    create_actor_area 109 122 236 0
+    create_object PGDN {set_gaia_object_only make_indestructible number_of_groups 4 actor_area_to_place_in 236 }
+endif
+
+/* Neutral objects */
+
+create_object FORAGE { set_gaia_object_only set_tight_grouping number_of_objects 4 min_distance_to_players 40 temp_min_distance_group_placement 12 }
+create_object GOLD { set_gaia_object_only set_tight_grouping number_of_groups 4 number_of_objects 4 min_distance_to_players 40 temp_min_distance_group_placement 20 }
+create_object STONE { set_gaia_object_only set_tight_grouping number_of_groups 4 number_of_objects 4 min_distance_to_players 40 temp_min_distance_group_placement 20 }
+
+create_object JUNGLETREE { set_gaia_object_only set_scaling_to_map_size number_of_objects 30 min_distance_to_players 25 }
+create_object HAWK { set_gaia_object_only set_scaling_to_map_size number_of_objects 4 }
+
+/* END OF SCRIPT */

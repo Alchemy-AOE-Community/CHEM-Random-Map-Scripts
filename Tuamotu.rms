@@ -1,0 +1,265 @@
+<PLAYER_SETUP>
+random_placement
+behavior_version 1
+
+#const NNB 79 /* Defining non-navigable beach */
+#const PALM 112 /* Palm forest grass */
+#const FALCON 1056
+#const SEAGULL 303
+
+#const ST1343 1343 /* Defining Moai statues */
+#const ST1345 1345
+
+<LAND_GENERATION>
+
+base_terrain WATER
+
+	
+create_land
+{
+	terrain_type DLC_NEWSHALLOW
+	land_percent 100
+	top_border 15
+	bottom_border 15
+	right_border 15
+	left_border 15
+	land_position 50 50
+}
+	
+create_player_lands
+{
+	terrain_type NNB
+	land_percent 1
+	base_size 5
+	circle_radius 35 0
+    top_border 7
+    bottom_border 7
+    left_border 7
+    right_border 7
+    other_zone_avoidance_distance 3
+}  
+
+create_land { base_size 4 land_position 85 50 land_percent 1 terrain_type NNB }
+create_land { base_size 4 land_position 84 59 land_percent 1 terrain_type NNB }
+create_land { base_size 4 land_position 80 68 land_percent 1 terrain_type NNB }
+create_land { base_size 4 land_position 75 75 land_percent 1 terrain_type NNB }
+create_land { base_size 4 land_position 68 80 land_percent 1 terrain_type NNB }
+create_land { base_size 4 land_position 59 84 land_percent 1 terrain_type NNB }
+create_land { base_size 4 land_position 50 85 land_percent 1 terrain_type NNB }
+create_land { base_size 4 land_position 41 84 land_percent 1 terrain_type NNB }
+create_land { base_size 4 land_position 33 80 land_percent 1 terrain_type NNB }
+create_land { base_size 4 land_position 25 75 land_percent 1 terrain_type NNB }
+create_land { base_size 4 land_position 20 68 land_percent 1 terrain_type NNB }
+create_land { base_size 4 land_position 16 59 land_percent 1 terrain_type NNB }
+create_land { base_size 4 land_position 15 50 land_percent 1 terrain_type NNB }
+create_land { base_size 4 land_position 16 41 land_percent 1 terrain_type NNB }
+create_land { base_size 4 land_position 20 33 land_percent 1 terrain_type NNB }
+create_land { base_size 4 land_position 25 25 land_percent 1 terrain_type NNB }
+create_land { base_size 4 land_position 33 20 land_percent 1 terrain_type NNB }
+create_land { base_size 4 land_position 41 16 land_percent 1 terrain_type NNB }
+create_land { base_size 4 land_position 50 15 land_percent 1 terrain_type NNB }
+create_land { base_size 4 land_position 59 16 land_percent 1 terrain_type NNB }
+create_land { base_size 4 land_position 68 20 land_percent 1 terrain_type NNB }
+create_land { base_size 4 land_position 75 25 land_percent 1 terrain_type NNB }
+create_land { base_size 4 land_position 80 33 land_percent 1 terrain_type NNB }
+create_land { base_size 4 land_position 84 41 land_percent 1 terrain_type NNB }
+
+
+
+
+
+<ELEVATION_GENERATION>
+
+/* create_elevation 1 { base_terrain GRASS2 number_of_tiles 700 number_of_clumps 8 set_scale_by_groups enable_balanced_elevation } */
+
+
+<TERRAIN_GENERATION>
+
+/* create_terrain DLC_WATER5 { base_terrain DLC_BEACH2 number_of_clumps 9320 set_scale_by_groups land_percent 100 spacing_to_other_terrain_types 1 } */
+/* create_terrain PALM_DESERT { base_terrain NNB number_of_clumps 9320 set_scale_by_groups land_percent 13 set_avoid_player_start_areas 10 spacing_to_other_terrain_types 1 } */
+
+/* create_terrain DLC_BEACH4 { base_terrain GRASS number_of_clumps 9320 set_scale_by_groups land_percent 100 } */
+/* create_terrain DLC_WATER5 { base_terrain DLC_BEACH4 number_of_clumps 9320 set_scale_by_groups land_percent 100 spacing_to_other_terrain_types 1 } */
+
+#define OCEAN_LAYERING
+if OCEAN_LAYERING
+    /* create_terrain WATER { base_terrain DLC_BEACH4 number_of_clumps 9320 set_scale_by_groups land_percent 100 height_limits 0 0 spacing_to_other_terrain_types 2 } */
+    create_terrain MED_WATER { base_terrain WATER number_of_clumps 9320 set_scale_by_groups land_percent 100 height_limits 0 0 spacing_to_other_terrain_types 2 }
+    create_terrain DEEP_WATER { base_terrain MED_WATER number_of_clumps 9320 set_scale_by_groups land_percent 100 height_limits 0 0 spacing_to_other_terrain_types 1 }
+    create_terrain DLC_WATER4 { base_terrain DEEP_WATER number_of_clumps 9320 set_scale_by_groups land_percent 100 height_limits 0 0 spacing_to_other_terrain_types 3 }
+endif
+
+#define LAGOON_LAYERING
+if LAGOON_LAYERING
+    create_terrain DLC_NEWSHALLOW { base_terrain DLC_BEACH4 number_of_clumps 9320 set_scale_by_groups land_percent 100 height_limits 0 0 spacing_to_other_terrain_types 1 }
+    create_terrain DLC_WATER5 { base_terrain DLC_NEWSHALLOW number_of_clumps 9320 set_scale_by_groups land_percent 100 height_limits 0 0 spacing_to_other_terrain_types 4 }
+endif
+
+/* #define ISLAND_LOWLANDS */
+if ISLAND_LOWLANDS
+    create_terrain NNB { base_terrain GRASS2 number_of_clumps 9320 set_scale_by_groups land_percent 100 }
+    create_terrain NNB { base_terrain GRASS2 number_of_clumps 9320 set_scale_by_groups land_percent 100 }
+    create_terrain NNB { base_terrain GRASS2 number_of_clumps 9320 set_scale_by_groups land_percent 100 }
+    create_terrain NNB { base_terrain GRASS2 number_of_clumps 9320 set_scale_by_groups land_percent 100 }
+    create_terrain NNB { base_terrain GRASS2 number_of_clumps 9320 set_scale_by_groups land_percent 100 }
+    create_terrain NNB { base_terrain GRASS2 number_of_clumps 9320 set_scale_by_groups land_percent 100 }
+    create_terrain NNB { base_terrain GRASS2 number_of_clumps 9320 set_scale_by_groups land_percent 100 }
+    create_terrain NNB { base_terrain GRASS2 number_of_clumps 9320 set_scale_by_groups land_percent 100 }
+    create_terrain GRASS2 { base_terrain NNB number_of_clumps 9320 set_scale_by_groups land_percent 100 spacing_to_other_terrain_types 0 terrain_mask 1 }
+    create_terrain GRASS2 { base_terrain NNB number_of_clumps 9320 set_scale_by_groups land_percent 100 spacing_to_other_terrain_types 2 }
+endif
+
+/* #define PLAYER_ASSIGNED_FORESTS */
+if PLAYER_ASSIGNED_FORESTS
+    /* Layering outer limits, creating circles of terrain around each player land */
+    create_terrain DIRT { base_terrain GRASS2 number_of_clumps 9320 land_percent 100 set_scale_by_groups set_avoid_player_start_areas 24 }
+    create_terrain DIRT2 { base_terrain GRASS2 number_of_clumps 9320 land_percent 100 set_scale_by_groups spacing_to_other_terrain_types 1 }
+    /* Revert terrain back to base */
+    create_terrain DIRT { base_terrain GRASS2 number_of_clumps 9320 land_percent 100 set_scale_by_groups }
+    create_terrain DIRT { base_terrain GRASS2 number_of_clumps 9320 land_percent 100 set_scale_by_groups }
+    create_terrain DIRT { base_terrain GRASS2 number_of_clumps 9320 land_percent 100 set_scale_by_groups }
+    create_terrain DIRT { base_terrain GRASS2 number_of_clumps 9320 land_percent 100 set_scale_by_groups }
+    create_terrain DIRT { base_terrain GRASS2 number_of_clumps 9320 land_percent 100 set_scale_by_groups }
+    create_terrain DIRT { base_terrain GRASS2 number_of_clumps 9320 land_percent 100 set_scale_by_groups }
+    create_terrain DIRT { base_terrain GRASS2 number_of_clumps 9320 land_percent 100 set_scale_by_groups }
+    create_terrain DIRT { base_terrain GRASS2 number_of_clumps 9320 land_percent 100 set_scale_by_groups }
+    /* Creating forests for player 1 */
+    create_terrain DIRT3 { base_terrain DIRT2 number_of_clumps 1 land_percent 100 }
+    create_terrain FOREST { base_terrain DIRT3 number_of_clumps 1 number_of_tiles 33 clumping_factor 30 set_avoid_player_start_areas 16 }
+    create_terrain PINE_FOREST { base_terrain DIRT3 number_of_clumps 1 number_of_tiles 33 clumping_factor 30 set_avoid_player_start_areas 16 spacing_to_other_terrain_types 2 }
+    create_terrain PALM { base_terrain DIRT3 number_of_clumps 1 number_of_tiles 33 clumping_factor 30 set_avoid_player_start_areas 16 spacing_to_other_terrain_types 2 }
+    create_terrain DIRT { base_terrain DIRT3 number_of_clumps 9320 land_percent 100 set_scale_by_groups }
+    /* Creating forests for player 2 */
+    create_terrain DIRT3 { base_terrain DIRT2 number_of_clumps 1 land_percent 100 }
+    create_terrain FOREST { base_terrain DIRT3 number_of_clumps 1 number_of_tiles 33 clumping_factor 30 set_avoid_player_start_areas 16 }
+    create_terrain PINE_FOREST { base_terrain DIRT3 number_of_clumps 1 number_of_tiles 33 clumping_factor 30 set_avoid_player_start_areas 16 spacing_to_other_terrain_types 2 }
+    create_terrain PALM { base_terrain DIRT3 number_of_clumps 1 number_of_tiles 33 clumping_factor 30 set_avoid_player_start_areas 16 spacing_to_other_terrain_types 2 }
+    create_terrain DIRT { base_terrain DIRT3 number_of_clumps 9320 land_percent 100 set_scale_by_groups }
+    /* Creating forests for player 3 */
+    create_terrain DIRT3 { base_terrain DIRT2 number_of_clumps 1 land_percent 100 }
+    create_terrain FOREST { base_terrain DIRT3 number_of_clumps 1 number_of_tiles 33 clumping_factor 30 set_avoid_player_start_areas 16 }
+    create_terrain PINE_FOREST { base_terrain DIRT3 number_of_clumps 1 number_of_tiles 33 clumping_factor 30 set_avoid_player_start_areas 16 spacing_to_other_terrain_types 2 }
+    create_terrain PALM { base_terrain DIRT3 number_of_clumps 1 number_of_tiles 33 clumping_factor 30 set_avoid_player_start_areas 16 spacing_to_other_terrain_types 2 }
+    create_terrain DIRT { base_terrain DIRT3 number_of_clumps 9320 land_percent 100 set_scale_by_groups }
+    /* Creating forests for player 4 */
+    create_terrain DIRT3 { base_terrain DIRT2 number_of_clumps 1 land_percent 100 }
+    create_terrain FOREST { base_terrain DIRT3 number_of_clumps 1 number_of_tiles 33 clumping_factor 30 set_avoid_player_start_areas 16 }
+    create_terrain PINE_FOREST { base_terrain DIRT3 number_of_clumps 1 number_of_tiles 33 clumping_factor 30 set_avoid_player_start_areas 16 spacing_to_other_terrain_types 2 }
+    create_terrain PALM { base_terrain DIRT3 number_of_clumps 1 number_of_tiles 33 clumping_factor 30 set_avoid_player_start_areas 16 spacing_to_other_terrain_types 2 }
+    create_terrain DIRT { base_terrain DIRT3 number_of_clumps 9320 land_percent 100 set_scale_by_groups }
+    /* Creating forests for player 5 */
+    create_terrain DIRT3 { base_terrain DIRT2 number_of_clumps 1 land_percent 100 }
+    create_terrain FOREST { base_terrain DIRT3 number_of_clumps 1 number_of_tiles 33 clumping_factor 30 set_avoid_player_start_areas 16 }
+    create_terrain PINE_FOREST { base_terrain DIRT3 number_of_clumps 1 number_of_tiles 33 clumping_factor 30 set_avoid_player_start_areas 16 spacing_to_other_terrain_types 2 }
+    create_terrain PALM { base_terrain DIRT3 number_of_clumps 1 number_of_tiles 33 clumping_factor 30 set_avoid_player_start_areas 16 spacing_to_other_terrain_types 2 }
+    create_terrain DIRT { base_terrain DIRT3 number_of_clumps 9320 land_percent 100 set_scale_by_groups }
+    /* Creating forests for player 6 */
+    create_terrain DIRT3 { base_terrain DIRT2 number_of_clumps 1 land_percent 100 }
+    create_terrain FOREST { base_terrain DIRT3 number_of_clumps 1 number_of_tiles 33 clumping_factor 30 set_avoid_player_start_areas 16 }
+    create_terrain PINE_FOREST { base_terrain DIRT3 number_of_clumps 1 number_of_tiles 33 clumping_factor 30 set_avoid_player_start_areas 16 spacing_to_other_terrain_types 2 }
+    create_terrain PALM { base_terrain DIRT3 number_of_clumps 1 number_of_tiles 33 clumping_factor 30 set_avoid_player_start_areas 16 spacing_to_other_terrain_types 2 }
+    create_terrain DIRT { base_terrain DIRT3 number_of_clumps 9320 land_percent 100 set_scale_by_groups }
+    /* Creating forests for player 7 */
+    create_terrain DIRT3 { base_terrain DIRT2 number_of_clumps 1 land_percent 100 }
+    create_terrain FOREST { base_terrain DIRT3 number_of_clumps 1 number_of_tiles 33 clumping_factor 30 set_avoid_player_start_areas 16 }
+    create_terrain PINE_FOREST { base_terrain DIRT3 number_of_clumps 1 number_of_tiles 33 clumping_factor 30 set_avoid_player_start_areas 16 spacing_to_other_terrain_types 2 }
+    create_terrain PALM { base_terrain DIRT3 number_of_clumps 1 number_of_tiles 33 clumping_factor 30 set_avoid_player_start_areas 16 spacing_to_other_terrain_types 2 }
+    create_terrain DIRT { base_terrain DIRT3 number_of_clumps 9320 land_percent 100 set_scale_by_groups }
+    /* Creating forests for player 8 */
+    create_terrain DIRT3 { base_terrain DIRT2 number_of_clumps 1 land_percent 100 }
+    create_terrain FOREST { base_terrain DIRT3 number_of_clumps 1 number_of_tiles 33 clumping_factor 30 set_avoid_player_start_areas 16 }
+    create_terrain PINE_FOREST { base_terrain DIRT3 number_of_clumps 1 number_of_tiles 33 clumping_factor 30 set_avoid_player_start_areas 16 spacing_to_other_terrain_types 2 }
+    create_terrain PALM { base_terrain DIRT3 number_of_clumps 1 number_of_tiles 33 clumping_factor 30 set_avoid_player_start_areas 16 spacing_to_other_terrain_types 2 }
+    create_terrain DIRT { base_terrain DIRT3 number_of_clumps 9320 land_percent 100 set_scale_by_groups }
+    /* Setting all forests to palms */
+    create_terrain PALM { base_terrain FOREST number_of_clumps 9320 land_percent 100 set_scale_by_groups }
+    create_terrain PALM { base_terrain PINE_FOREST number_of_clumps 9320 land_percent 100 set_scale_by_groups }
+    /* Restore base terrain */
+    create_terrain GRASS2 { base_terrain DIRT number_of_clumps 9320 land_percent 100 set_scale_by_groups }
+endif
+
+/* #define NEUTRAL_LOW_FORESTS */
+if NEUTRAL_LOW_FORESTS   
+    create_terrain PALM { base_terrain GRASS2 number_of_clumps 5 set_scale_by_groups number_of_tiles 1150 clumping_factor 10 set_avoid_player_start_areas 24 spacing_to_other_terrain_types 1 }
+    create_terrain PALM { base_terrain GRASS number_of_clumps 5 set_scale_by_groups number_of_tiles 1150 clumping_factor 10 set_avoid_player_start_areas 24 spacing_to_other_terrain_types 1 }
+endif
+
+<CONNECTION_GENERATION>
+
+
+
+<OBJECTS_GENERATION>
+
+/* Objects defined PER PLAYER */
+
+create_object TOWN_CENTER { set_place_for_every_player find_closest }
+create_object VILLAGER { set_place_for_every_player min_distance_to_players 3 max_distance_to_players 6 }
+/* create_object HORSE_C { set_place_for_every_player min_distance_to_players 7 max_distance_to_players 12 } */
+
+/* create_object PALMTREE { set_place_for_every_player set_gaia_object_only find_closest number_of_groups 2 min_distance_to_players 4 max_distance_to_players 5 } */
+/* create_object PALMTREE { set_place_for_every_player set_gaia_object_only find_closest number_of_groups 3 min_distance_to_players 6 max_distance_to_players 8 } */
+
+/* create_object SHEEP { set_place_for_every_player set_gaia_object_only number_of_objects 4 number_of_groups 1 set_tight_grouping min_distance_to_players 9 max_distance_to_players 9 set_circular_placement } */
+/* create_object SHEEP { set_place_for_every_player set_gaia_object_only number_of_objects 2 number_of_groups 1 set_tight_grouping min_distance_to_players 15 max_distance_to_players 15 set_circular_placement } */
+/* create_object SHEEP { set_place_for_every_player set_gaia_object_only number_of_objects 2 number_of_groups 1 set_tight_grouping min_distance_to_players 17 max_distance_to_players 17 set_circular_placement } */
+/* create_object BOAR { set_place_for_every_player set_gaia_object_only number_of_objects 2 min_distance_to_players 16 max_distance_to_players 18 set_circular_placement } */
+/* create_object DEER { set_place_for_every_player set_gaia_object_only number_of_objects 4 min_distance_to_players 14 max_distance_to_players 18 set_circular_placement } */
+
+/* create_object RELIC { set_place_for_every_player set_gaia_object_only min_distance_to_players 20 max_distance_to_players 25 set_circular_placement } */
+
+/* create_object DLC_ORANGEBUSH { set_place_for_every_player set_gaia_object_only number_of_objects 6 set_tight_grouping number_of_groups 1 avoid_forest_zone 4 min_distance_to_players 10 max_distance_to_players 11 min_distance_group_placement 6 set_circular_placement } */
+/* create_object GOLD { set_place_for_every_player set_gaia_object_only number_of_objects 7 set_tight_grouping number_of_groups 1 avoid_forest_zone 4 min_distance_to_players 10 max_distance_to_players 11 min_distance_group_placement 6 set_circular_placement } */
+/* create_object GOLD { set_place_for_every_player set_gaia_object_only number_of_objects 4 set_tight_grouping number_of_groups 1 avoid_forest_zone 4 min_distance_to_players 18 max_distance_to_players 19 min_distance_group_placement 6 set_circular_placement } */
+/* create_object GOLD { set_place_for_every_player set_gaia_object_only number_of_objects 4 set_tight_grouping number_of_groups 1 avoid_forest_zone 4 min_distance_to_players 21 max_distance_to_players 22 min_distance_group_placement 6 set_circular_placement } */
+
+/* create_object STONE { set_place_for_every_player set_gaia_object_only number_of_objects 5 set_tight_grouping number_of_groups 1 avoid_forest_zone 4 min_distance_to_players 12 max_distance_to_players 13 min_distance_group_placement 6 set_circular_placement } */
+/* create_object STONE { set_place_for_every_player set_gaia_object_only number_of_objects 4 set_tight_grouping number_of_groups 1 avoid_forest_zone 4 min_distance_to_players 16 max_distance_to_players 17 min_distance_group_placement 6 set_circular_placement } */
+
+
+
+
+/* Objects defined BASED ON MAP SIZE */
+
+/* create_object RELIC { set_gaia_object_only set_scaling_to_map_size  } */
+
+/* add amazon warriors/archers to act as wolves or predators in place of predatory animals on the island */
+/* possible merchant per player as a scout */
+
+/* create_object DLC_ORANGEBUSH { set_gaia_object_only number_of_objects 4 set_tight_grouping number_of_groups 1 avoid_forest_zone 4 min_distance_to_players 20 temp_min_distance_group_placement 20 } */
+/* create_object GOLD { set_gaia_object_only number_of_objects 4 set_tight_grouping number_of_groups 1 avoid_forest_zone 4 min_distance_to_players 20 min_distance_group_placement 4 } */
+
+/* create_object STONE { set_gaia_object_only number_of_objects 5 set_tight_grouping number_of_groups 1 avoid_forest_zone 4 min_distance_to_players 20 min_distance_group_placement 4 } */
+
+
+/* create_object SHORE_FISH { number_of_groups 9320 temp_min_distance_group_placement 4 } */
+/* create_object GREAT_FISH_MARLIN { number_of_groups 9320 min_distance_group_placement 8 terrain_to_place_on DLC_WATER4 } */
+/* create_object FISH { number_of_groups 9320 set_scaling_to_map_size min_distance_group_placement 6 terrain_to_place_on DEEP_WATER } */
+/* create_object FISH { number_of_groups 9320 set_scaling_to_map_size temp_min_distance_group_placement 4 terrain_to_place_on MED_WATER } */
+
+/* create_object PALMTREE { number_of_groups 30 set_gaia_object_only set_scaling_to_map_size min_distance_to_players 12 } */
+/* create_object FALCON { number_of_groups 250 set_gaia_object_only } */
+/* create_object SEAGULL { number_of_groups 100 set_gaia_object_only terrain_to_place_on DLC_GRAVELBEACH } */
+/* create_object WILD_HORSE { number_of_groups 50 set_gaia_object_only } */
+
+
+/* SETTING UP ROCKS */
+/* create_object SEA_ROCKS_1 { number_of_objects 100 set_scaling_to_map_size terrain_to_place_on DLC_GRAVELBEACH temp_min_distance_group_placement 1 } */
+/* create_object SEA_ROCKS_2 { number_of_objects 100 set_scaling_to_map_size terrain_to_place_on DLC_GRAVELBEACH temp_min_distance_group_placement 1 } */
+
+
+
+/* NOTE FOR FUTURE REFERENCE: facet 22 24 25 26 for tikis */
+
+/* add small amount of moai along lowlands in grass areas */
+/* create_object ST1343 { number_of_groups 10 set_scaling_to_map_size set_facet 8 min_distance_to_players 8 terrain_to_place_on GRASS3 temp_min_distance_group_placement 6 spacing_to_other_terrain_types 1 } */
+/* create_object ST1345 { number_of_groups 10 set_scaling_to_map_size set_facet 8 min_distance_to_players 8 terrain_to_place_on GRASS3 temp_min_distance_group_placement 6 spacing_to_other_terrain_types 1 } */
+/* create_object ST1343 { number_of_groups 20 set_scaling_to_map_size set_facet 8 min_distance_to_players 8 terrain_to_place_on DIRT3 temp_min_distance_group_placement 6 spacing_to_other_terrain_types 1 } */
+/* create_object ST1345 { number_of_groups 20 set_scaling_to_map_size set_facet 8 min_distance_to_players 8 terrain_to_place_on DIRT3 temp_min_distance_group_placement 6 spacing_to_other_terrain_types 1 } */
+/* create_object ST1343 { number_of_groups 9320 set_scaling_to_map_size temp_min_distance_group_placement 12 set_facet 8 min_distance_to_players 8 terrain_to_place_on NNB actor_area 1 actor_area_radius 1 } */
+/* create_object ST1343 { number_of_groups 9320 set_scaling_to_map_size temp_min_distance_group_placement 12 set_facet 8 min_distance_to_players 8 terrain_to_place_on NNB actor_area 2 actor_area_radius 1 actor_area_to_place_in 1 } */
+/* create_object ST1343 { number_of_groups 9320 set_scaling_to_map_size temp_min_distance_group_placement 12 set_facet 8 min_distance_to_players 8 terrain_to_place_on NNB actor_area 3 actor_area_radius 1 actor_area_to_place_in 2 avoid_actor_area 1 } */
+/* create_object ST1343 { number_of_groups 9320 set_scaling_to_map_size temp_min_distance_group_placement 12 set_facet 8 min_distance_to_players 8 terrain_to_place_on NNB actor_area 4 actor_area_radius 1 actor_area_to_place_in 3 avoid_actor_area 1 avoid_actor_area 2 } */
+/* create_object ST1345 { number_of_groups 9320 set_scaling_to_map_size temp_min_distance_group_placement 12 set_facet 8 min_distance_to_players 8 terrain_to_place_on NNB actor_area 5 actor_area_radius 1 avoid_actor_area 1 avoid_actor_area 2 avoid_actor_area 3 avoid_actor_area 4 } */
+/* create_object ST1345 { number_of_groups 9320 set_scaling_to_map_size temp_min_distance_group_placement 12 set_facet 8 min_distance_to_players 8 terrain_to_place_on NNB actor_area 6 actor_area_radius 1 actor_area_to_place_in 5 avoid_actor_area 1 avoid_actor_area 2 avoid_actor_area 3 avoid_actor_area 4 } */
+/* create_object ST1345 { number_of_groups 9320 set_scaling_to_map_size temp_min_distance_group_placement 12 set_facet 8 min_distance_to_players 8 terrain_to_place_on NNB actor_area 7 actor_area_radius 1 actor_area_to_place_in 6 avoid_actor_area 1 avoid_actor_area 2 avoid_actor_area 3 avoid_actor_area 4 avoid_actor_area 5 } */
+/* create_object ST1345 { number_of_groups 9320 set_scaling_to_map_size temp_min_distance_group_placement 12 set_facet 8 min_distance_to_players 8 terrain_to_place_on NNB actor_area 8 actor_area_radius 1 actor_area_to_place_in 7 avoid_actor_area 1 avoid_actor_area 2 avoid_actor_area 3 avoid_actor_area 4 avoid_actor_area 5 avoid_actor_area 6 } */

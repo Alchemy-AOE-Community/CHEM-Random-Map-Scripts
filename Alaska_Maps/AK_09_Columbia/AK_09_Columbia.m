@@ -48,17 +48,14 @@ MTNR.BE = MTNL.BE;
 
 %MTNL.NT = [220 300; 280 300]*1.4;
 MTNL.NT = 14400;
-%MTNL.NT = 0;
+##MTNL.NT = 0;
 MTNR.NT = MTNL.NT;
-%MTNL.BS = [4 2; 4 2];
-%MTNL.BS = [3 2; 3 2];
-%MTNL.BS = [2 1; 2 1];
-MTNL.BS = [1];
+
+MTNL.BS = [1 6; 6 1];
 
 MTNR.BS = MTNL.BS;
 
-
-SB = [22 32; 26 30]; %standard borders
+SB = [26 36; 36 26]; %standard borders
 MTNL.v.s1 = SB;
 MTNL.v.s2 = SB;
 MTNL.w.s1 = SB;
@@ -77,7 +74,7 @@ MTNR.CF = MTNL.CF;
 MTNL.TT = {'MUD'};
 MTNR.TT = MTNL.TT;
 
-MTNL.OZA = [26:-1:4]';
+MTNL.OZA = [26:-1:3]';
 %MTNL.OZA = [28:-1:5]';
 MTNR.OZA = MTNL.OZA;
 
@@ -96,7 +93,7 @@ MTNR.Z = 3;
 SMILE.X = SMILEX; SMILE.Y = SMILEY;
 
 SMILE.Z   = 2;
-SMILE.OZA = 4;
+SMILE.OZA = 3;
 
 SMILE.NT = 40;
 SMILE.BS = 3;

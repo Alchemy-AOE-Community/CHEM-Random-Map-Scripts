@@ -1,0 +1,747 @@
+
+/*
+a map for blue carbon cup: idea will be to take great lake and alter it into using mangrove shallows. May make further changes to make the map more unique.
+
+For example, since the tourney is a 2v2, I could have 1 player on each team start on the small island at the end of the lake. The other player starts on resource-scarce cracked terrain outside the lake. The mangrove lake will have plenty of resources, but is obviously vulnerable to naval attacks.
+
+
+Renaming to "Escape" - players start close together in a very small circle of cracked terrain. Outside that circle is mangrove shallows then a ring of mangrove forest. Outside that outer ring of mangrove forest is gold-rich and relatively safe (and elevated) land.
+
+note: will want some forest in the middle: it's a very small starting area
+
+TODO: reduce inner stone to 100 stone per pile
+note: iron boar is very tough, basically requiring TC to kill
+
+TODO: add oysters to various maps under the antiquity mode conditional: Forest Maze (mangrove), Syzygy (replace gold in 1-2 biomes), great lake, Yukon gold rush (I don't think so - panning for gold occurred through manual labor, not fishing ships) - McMurdo dry valleys? And Whirlpool Lake (can replace shore fish in center island) - and could add to 4-quarters map (and the Ultra small version)
+*/
+
+<PLAYER_SETUP>
+grouped_by_team /* From stress test, it appears that this makes allied TCs start a fixed distance apart. Not much difference for 4 players on a 4-player map size, but will be noticeable when map sizes don't match (as in enemy TCs can range each other if map size is too small for the number of players) */
+behavior_version 2
+
+
+/* override_map_size was intended to ensure that outer ring has consistent size, but that doesn't seem to be the case. */
+if MAPSIZE_MINI
+    /* AT_MOST_MINI can simply use MAPSIZE_MINI */
+    #define AT_MOST_TINY
+    #define AT_MOST_SMALL
+    #define AT_MOST_MEDIUM
+    #define AT_MOST_NORMAL
+    #define AT_MOST_LARGE
+    #define AT_MOST_HUGE
+    #define AT_MOST_GIANT
+    #define AT_MOST_MASSIVE
+    #define AT_MOST_ENORMOUS
+    #define AT_MOST_COLOSSAL
+    #define AT_MOST_INCREDIBLE
+    #define AT_MOST_MONSTROUS
+    /* and AT_MOST_LUDCROUS is always true */
+
+    override_map_size 81 
+elseif MAPSIZE_TINY
+    #define AT_LEAST_TINY
+    
+    #define AT_MOST_TINY
+    #define AT_MOST_SMALL
+    #define AT_MOST_MEDIUM
+    #define AT_MOST_NORMAL
+    #define AT_MOST_LARGE
+    #define AT_MOST_HUGE
+    #define AT_MOST_GIANT
+    #define AT_MOST_MASSIVE
+    #define AT_MOST_ENORMOUS
+    #define AT_MOST_COLOSSAL
+    #define AT_MOST_INCREDIBLE
+    #define AT_MOST_MONSTROUS
+
+    override_map_size 121 
+elseif MAPSIZE_SMALL
+    #define AT_LEAST_TINY
+    #define AT_LEAST_SMALL
+    
+    #define AT_MOST_SMALL
+    #define AT_MOST_MEDIUM
+    #define AT_MOST_NORMAL
+    #define AT_MOST_LARGE
+    #define AT_MOST_HUGE
+    #define AT_MOST_GIANT
+    #define AT_MOST_MASSIVE
+    #define AT_MOST_ENORMOUS
+    #define AT_MOST_COLOSSAL
+    #define AT_MOST_INCREDIBLE
+    #define AT_MOST_MONSTROUS
+    override_map_size 145
+elseif MAPSIZE_MEDIUM
+    #define AT_LEAST_TINY
+    #define AT_LEAST_SMALL
+    #define AT_LEAST_MEDIUM
+    
+    #define AT_MOST_MEDIUM
+    #define AT_MOST_NORMAL
+    #define AT_MOST_LARGE
+    #define AT_MOST_HUGE
+    #define AT_MOST_GIANT
+    #define AT_MOST_MASSIVE
+    #define AT_MOST_ENORMOUS
+    #define AT_MOST_COLOSSAL
+    #define AT_MOST_INCREDIBLE
+    #define AT_MOST_MONSTROUS
+    override_map_size 169 
+elseif MAPSIZE_NORMAL
+    #define AT_LEAST_TINY
+    #define AT_LEAST_SMALL
+    #define AT_LEAST_MEDIUM
+    #define AT_LEAST_NORMAL
+    
+    #define AT_MOST_NORMAL
+    #define AT_MOST_LARGE
+    #define AT_MOST_HUGE
+    #define AT_MOST_GIANT
+    #define AT_MOST_MASSIVE
+    #define AT_MOST_ENORMOUS
+    #define AT_MOST_COLOSSAL
+    #define AT_MOST_INCREDIBLE
+    #define AT_MOST_MONSTROUS
+    override_map_size 201 
+elseif MAPSIZE_LARGE
+    #define AT_LEAST_TINY
+    #define AT_LEAST_SMALL
+    #define AT_LEAST_MEDIUM
+    #define AT_LEAST_NORMAL
+    #define AT_LEAST_LARGE
+    
+    #define AT_MOST_LARGE
+    #define AT_MOST_HUGE
+    #define AT_MOST_GIANT
+    #define AT_MOST_MASSIVE
+    #define AT_MOST_ENORMOUS
+    #define AT_MOST_COLOSSAL
+    #define AT_MOST_INCREDIBLE
+    #define AT_MOST_MONSTROUS
+    override_map_size 221 
+elseif MAPSIZE_HUGE
+    #define AT_LEAST_TINY
+    #define AT_LEAST_SMALL
+    #define AT_LEAST_MEDIUM
+    #define AT_LEAST_NORMAL
+    #define AT_LEAST_LARGE
+    #define AT_LEAST_HUGE
+    
+    #define AT_MOST_HUGE
+    #define AT_MOST_GIANT
+    #define AT_MOST_MASSIVE
+    #define AT_MOST_ENORMOUS
+    #define AT_MOST_COLOSSAL
+    #define AT_MOST_INCREDIBLE
+    #define AT_MOST_MONSTROUS
+    override_map_size 241 
+elseif MAPSIZE_GIANT
+    #define AT_LEAST_TINY
+    #define AT_LEAST_SMALL
+    #define AT_LEAST_MEDIUM
+    #define AT_LEAST_NORMAL
+    #define AT_LEAST_LARGE
+    #define AT_LEAST_HUGE
+    #define AT_LEAST_GIANT
+    
+    #define AT_MOST_GIANT
+    #define AT_MOST_MASSIVE
+    #define AT_MOST_ENORMOUS
+    #define AT_MOST_COLOSSAL
+    #define AT_MOST_INCREDIBLE
+    #define AT_MOST_MONSTROUS
+    override_map_size 253 
+elseif MAPSIZE_MASSIVE
+    #define AT_LEAST_TINY
+    #define AT_LEAST_SMALL
+    #define AT_LEAST_MEDIUM
+    #define AT_LEAST_NORMAL
+    #define AT_LEAST_LARGE
+    #define AT_LEAST_HUGE
+    #define AT_LEAST_GIANT
+    #define AT_LEAST_MASSIVE
+    
+    #define AT_MOST_MASSIVE
+    #define AT_MOST_ENORMOUS
+    #define AT_MOST_COLOSSAL
+    #define AT_MOST_INCREDIBLE
+    #define AT_MOST_MONSTROUS
+    override_map_size 277 
+elseif MAPSIZE_ENORMOUS
+    #define AT_LEAST_TINY
+    #define AT_LEAST_SMALL
+    #define AT_LEAST_MEDIUM
+    #define AT_LEAST_NORMAL
+    #define AT_LEAST_LARGE
+    #define AT_LEAST_HUGE
+    #define AT_LEAST_GIANT
+    #define AT_LEAST_MASSIVE
+    #define AT_LEAST_ENORMOUS
+    
+    #define AT_MOST_ENORMOUS
+    #define AT_MOST_COLOSSAL
+    #define AT_MOST_INCREDIBLE
+    #define AT_MOST_MONSTROUS
+    override_map_size 301 
+elseif MAPSIZE_COLOSSAL
+    #define AT_LEAST_TINY
+    #define AT_LEAST_SMALL
+    #define AT_LEAST_MEDIUM
+    #define AT_LEAST_NORMAL
+    #define AT_LEAST_LARGE
+    #define AT_LEAST_HUGE
+    #define AT_LEAST_GIANT
+    #define AT_LEAST_MASSIVE
+    #define AT_LEAST_ENORMOUS
+    #define AT_LEAST_COLOSSAL
+    
+    #define AT_MOST_COLOSSAL
+    #define AT_MOST_INCREDIBLE
+    #define AT_MOST_MONSTROUS
+    override_map_size 321 
+elseif MAPSIZE_INCREDIBLE
+    #define AT_LEAST_TINY
+    #define AT_LEAST_SMALL
+    #define AT_LEAST_MEDIUM
+    #define AT_LEAST_NORMAL
+    #define AT_LEAST_LARGE
+    #define AT_LEAST_HUGE
+    #define AT_LEAST_GIANT
+    #define AT_LEAST_MASSIVE
+    #define AT_LEAST_ENORMOUS
+    #define AT_LEAST_COLOSSAL
+    #define AT_LEAST_INCREDIBLE
+    
+    #define AT_MOST_INCREDIBLE
+    #define AT_MOST_MONSTROUS
+    override_map_size 361 
+elseif MAPSIZE_MONSTROUS
+    #define AT_LEAST_TINY
+    #define AT_LEAST_SMALL
+    #define AT_LEAST_MEDIUM
+    #define AT_LEAST_NORMAL
+    #define AT_LEAST_LARGE
+    #define AT_LEAST_HUGE
+    #define AT_LEAST_GIANT
+    #define AT_LEAST_MASSIVE
+    #define AT_LEAST_ENORMOUS
+    #define AT_LEAST_COLOSSAL
+    #define AT_LEAST_INCREDIBLE
+    #define AT_LEAST_MONSTROUS
+    
+    #define AT_MOST_MONSTROUS
+    override_map_size 401 
+elseif MAPSIZE_LUDICROUS
+    /* AT_LEAST_MINI is always true */
+    #define AT_LEAST_TINY
+    #define AT_LEAST_SMALL
+    #define AT_LEAST_MEDIUM
+    #define AT_LEAST_NORMAL
+    #define AT_LEAST_LARGE
+    #define AT_LEAST_HUGE
+    #define AT_LEAST_GIANT
+    #define AT_LEAST_MASSIVE
+    #define AT_LEAST_ENORMOUS
+    #define AT_LEAST_COLOSSAL
+    #define AT_LEAST_INCREDIBLE
+    #define AT_LEAST_MONSTROUS
+    /* and AT_LEAST_LUDCROUS - can simply use MAP_SIZE_LUDICROUS */
+    override_map_size 481 
+endif
+
+#const ON_GRID 278 /* dead fish trap */
+effect_amount GAIA_SET_ATTRIBUTE ON_GRID ATTR_STORAGE_VALUE 0
+
+#const BUILDING 1639
+effect_percent SET_ATTRIBUTE BUILDING ATTR_RADIUS_1 50 /* make it a 1x1 object */
+effect_percent SET_ATTRIBUTE BUILDING ATTR_RADIUS_2 50 /* make it a 1x1 object */
+effect_amount SET_ATTRIBUTE BUILDING ATTR_FOUNDATION_TERRAIN 10 /* forest */
+
+#const MULE_CART 1808
+<LAND_GENERATION>
+base_terrain DLC_MANGROVESHALLOW
+create_player_lands {
+    terrain_type DLC_CRACKED
+    land_percent 100
+    left_border 40
+    right_border 40
+    top_border 40
+    bottom_border 40
+    if MAPSIZE_MINI
+        circle_radius 10 0
+        left_border 33
+        right_border 33
+        top_border 33
+        bottom_border 33
+    elseif MAPSIZE_TINY
+        circle_radius 7 0
+        left_border 37
+        right_border 37
+        top_border 37
+        bottom_border 37
+    else
+        circle_radius 7 0
+    endif
+    border_fuzziness 100
+    base_size 6 /* basically a minimum distance between players and the stone edge */
+}
+create_land {
+    terrain_type DLC_CRACKED
+    land_position 50 50
+    land_id 1
+    land_percent 0
+}
+/* seeing issues with this: perhaps use the trick of placing forest terrain in objects generation section instead?
+create_land {
+    terrain_type FOREST
+    land_percent 2
+    left_border 48
+    right_border 48
+    top_border 48
+    bottom_border 48
+    base_size 2
+    border_fuzziness 100
+}
+*/
+/* want 16-17 tiles on a tiny map size - that would be x_border 87, but player TCs can potentially push the borders out a bit in a domino effect. */
+create_land {
+    terrain_type DLC_DIRT4
+    if AT_MOST_SMALL
+        top_border 87
+    elseif AT_LEAST_COLOSSAL
+        top_border 84
+    elseif AT_LEAST_LARGE
+        top_border 85
+    else
+        top_border 86
+    endif
+    land_percent 100
+    border_fuzziness 100
+    land_position 50 99
+    land_id 2
+}
+create_land {
+    terrain_type DLC_DIRT4
+    if AT_MOST_SMALL
+        bottom_border 87
+    elseif AT_LEAST_COLOSSAL
+        bottom_border 84
+    elseif AT_LEAST_LARGE
+        bottom_border 85
+    else
+        bottom_border 86
+    endif
+    land_percent 100
+    border_fuzziness 100
+    land_position 50 1
+}
+create_land {
+    terrain_type DLC_DIRT4
+    if AT_MOST_SMALL
+        left_border 87
+    elseif AT_LEAST_COLOSSAL
+        left_border 84
+    elseif AT_LEAST_LARGE
+        left_border 85
+    else
+        left_border 86
+    endif
+    land_percent 100
+    border_fuzziness 100
+    land_position 99 50
+}
+create_land {
+    terrain_type DLC_DIRT4
+    if AT_MOST_SMALL
+        right_border 87
+    elseif AT_LEAST_COLOSSAL
+        right_border 84
+    elseif AT_LEAST_LARGE
+        right_border 85
+    else
+        right_border 86
+    endif
+    land_percent 100
+    border_fuzziness 100
+    land_position 1 50
+}
+<ELEVATION_GENERATION>
+create_elevation 1 { /* should only generate on the outer portion of the map */
+    base_terrain DLC_DIRT4
+    number_of_tiles 1200
+    set_scale_by_size
+    enable_balanced_elevation
+    number_of_clumps 60
+}
+<TERRAIN_GENERATION>
+create_terrain DLC_MANGROVESHALLOW {
+    base_terrain DLC_DIRT4
+    land_percent 100
+    number_of_clumps 9320
+}
+create_terrain DLC_REEDSBEACH {
+    base_terrain DLC_MANGROVESHALLOW
+    land_percent 100
+    if MAPSIZE_MINI /* map width * 0.15  */
+        spacing_to_other_terrain_types 8 /* needed to shrink for reasons */
+    elseif MAPSIZE_TINY
+        spacing_to_other_terrain_types 16 /* also shrank a little due to altered inner circle */
+    elseif MAPSIZE_SMALL
+        spacing_to_other_terrain_types 22
+    elseif MAPSIZE_MEDIUM
+        spacing_to_other_terrain_types 25 /* / 10 * 1.5 */
+    elseif MAPSIZE_NORMAL
+        spacing_to_other_terrain_types 30
+    elseif MAPSIZE_LARGE
+        spacing_to_other_terrain_types 33
+    elseif MAPSIZE_HUGE
+        spacing_to_other_terrain_types 36
+    elseif MAPSIZE_GIANT
+        spacing_to_other_terrain_types 38
+    elseif MAPSIZE_MASSIVE
+        spacing_to_other_terrain_types 41
+    elseif MAPSIZE_ENORMOUS
+        spacing_to_other_terrain_types 45
+    elseif MAPSIZE_COLOSSAL
+        spacing_to_other_terrain_types 48
+    elseif MAPSIZE_INCREDIBLE
+        spacing_to_other_terrain_types 54
+    elseif MAPSIZE_MONSTROUS
+        spacing_to_other_terrain_types 60
+    else /* MAPSIZE_LUDICROUS */
+        spacing_to_other_terrain_types 72 /* It appears that this is a bit slow to generate */
+    endif
+}
+create_terrain DLC_MANGROVEFOREST {
+    base_terrain DLC_REEDSBEACH
+    land_percent 100
+    spacing_to_other_terrain_types 2 /* Would do 1, but that's nearly invisible */
+}
+create_terrain DLC_DIRT4 { /* TODO consider changing this terrain to something else - is a very weird terrain mix though that looks somewhat unique, if not entirely realistic. */
+    base_terrain DLC_MANGROVEFOREST
+    land_percent 100
+    if MAPSIZE_MINI /* map width * 0.15  */
+        spacing_to_other_terrain_types 4 /* needed to shrink for reasons */
+    elseif MAPSIZE_TINY
+        spacing_to_other_terrain_types 8 /* also shrank a little due to altered inner circle */
+    elseif MAPSIZE_SMALL
+        spacing_to_other_terrain_types 11
+    elseif MAPSIZE_MEDIUM
+        spacing_to_other_terrain_types 13 /* / 10 * 1.5 */
+    elseif MAPSIZE_NORMAL
+        spacing_to_other_terrain_types 15
+    elseif MAPSIZE_LARGE
+        spacing_to_other_terrain_types 17
+    elseif MAPSIZE_HUGE
+        spacing_to_other_terrain_types 18
+    elseif MAPSIZE_GIANT
+        spacing_to_other_terrain_types 19
+    elseif MAPSIZE_MASSIVE
+        spacing_to_other_terrain_types 21
+    elseif MAPSIZE_ENORMOUS
+        spacing_to_other_terrain_types 23
+    elseif MAPSIZE_COLOSSAL
+        spacing_to_other_terrain_types 24
+    elseif MAPSIZE_INCREDIBLE
+        spacing_to_other_terrain_types 27
+    elseif MAPSIZE_MONSTROUS
+        spacing_to_other_terrain_types 30
+    else /* MAPSIZE_LUDICROUS */
+        spacing_to_other_terrain_types 36 /* It appears that this is a bit slow to generate */
+    endif
+}
+create_terrain DLC_BOGLAND {
+    base_terrain DLC_DIRT4
+    land_percent 100
+    terrain_mask 1
+}
+create_terrain DLC_BAOBABFOREST {
+    base_terrain DLC_DIRT4
+    land_percent 5
+    number_of_clumps 16
+    spacing_to_other_terrain_types 2
+    height_limits 0 0
+}
+create_terrain DLC_BOGLAND {
+    base_terrain DLC_BAOBABFOREST
+    land_percent 100
+    number_of_clumps 9320
+    terrain_mask 1
+}
+<OBJECTS_GENERATION>
+/* place center forest */
+if MAPSIZE_MINI create_actor_area 40 40 1234 20
+elseif MAPSIZE_TINY    create_actor_area 60 60 1234 30
+elseif MAPSIZE_SMALL create_actor_area 72 72 1234 36
+elseif MAPSIZE_MEDIUM create_actor_area 84 84 1234 42
+elseif MAPSIZE_NORMAL create_actor_area 100 100 1234 50
+elseif MAPSIZE_LARGE create_actor_area 110 110 1234 55
+elseif MAPSIZE_HUGE create_actor_area 120 120 1234 60
+
+elseif MAPSIZE_GIANT create_actor_area 126 126 1234 60
+elseif MAPSIZE_MASSIVE create_actor_area 138 138 1234 60
+elseif MAPSIZE_ENORMOUS create_actor_area 150 150 1234 60
+elseif MAPSIZE_COLOSSAL create_actor_area 160 160 1234 60
+elseif MAPSIZE_INCREDIBLE create_actor_area 180 180 1234 60
+elseif MAPSIZE_MONSTROUS create_actor_area 200 200 1234 60
+
+elseif MAPSIZE_LUDICROUS create_actor_area 240 240 1234 120
+endif
+create_object BUILDING {
+    second_object DLC_DEADTREE
+    number_of_objects 20
+    set_scaling_to_map_size
+    find_closest_to_map_center
+    place_on_specific_land_id 1
+}
+
+create_object TOWN_CENTER {
+    set_place_for_every_player
+    find_closest
+}
+create_object ON_GRID { /* TODO: playtest - consider having the outer barrier be ge gold with a layer of stone afterwards on the dirt4 placed within an actor area of size 1.
+for reference, base stone miner work rate is 21.6 - with 3 villagers gathering from a single time, it takes about 1:40 to gather 100 stone. Takes almost 5.5 minutes to do so with 350 stone. I think I will want to reduce the inner stone piles to 100 stone each. Outer stone piles can remain unchanged.
+Full upgrades is 28.57 stone miner work rate - about 3.5 minutes for one vil to gather 350 stone
+ */
+    second_object STONE
+    number_of_objects 9320
+    set_scaling_to_map_size
+    terrain_to_place_on BEACH
+    avoid_actor_area 1234
+}
+create_object STONE { 
+    place_on_specific_land_id 1
+    ignore_terrain_restrictions
+    set_gaia_object_only
+    resource_delta -250
+    number_of_objects 9320
+    set_scaling_to_map_size
+    terrain_to_place_on BEACH
+}
+if REGICIDE
+    create_object KING {
+        set_place_for_every_player
+        find_closest
+        place_on_forest_zone
+    } 
+/*
+else
+    create_object DLC_DROMEDARY { 
+        set_place_for_every_player
+        find_closest
+        place_on_forest_zone
+    } */
+endif
+create_object VILLAGER {
+    /*
+    min_distance_to_players 4 */
+    find_closest_to_map_edge
+    max_distance_to_players 5
+    set_circular_placement
+    set_place_for_every_player
+    terrain_to_place_on DLC_CRACKED
+    temp_min_distance_group_placement 2
+} 
+create_object DLC_DEADTREE { /* consider making these unlambable with second_object BUILDING? And perhaps make them frequent enough that a TC drop would be difficult at best? */
+    set_place_for_every_player
+    number_of_objects 7
+    set_circular_placement
+    set_gaia_object_only
+    terrain_to_place_on DLC_CRACKED
+    min_distance_to_players 4
+    max_distance_to_players 6
+}
+create_object IRON_BOAR { /* just a random boar placed in the very center of the map, surrounded by trees. */
+    place_on_specific_land_id 1
+    max_distance_to_players 0
+    resource_delta 1300 /* from 700 to 2000 food */
+}
+
+create_object BOAR {
+    set_place_for_every_player
+    find_closest_to_map_center
+    set_circular_placement
+    set_gaia_object_only
+    terrain_to_place_on DLC_CRACKED
+    max_distance_to_players 6
+    number_of_objects 1
+    avoid_forest_zone 1
+
+    min_distance_group_placement 1
+}
+create_object DEER {
+    /*
+    set_gaia_object_only
+    terrain_to_place_on DLC_CRACKED
+    min_distance_to_players 8
+    number_of_objects 4
+    number_of_groups 30
+    temp_min_distance_group_placement 8
+    */
+    set_place_for_every_player
+    set_gaia_object_only
+    terrain_to_place_on DLC_CRACKED
+    max_distance_to_players 9
+    set_circular_placement
+    number_of_objects 4
+    number_of_groups 2
+    temp_min_distance_group_placement 4
+}
+create_object MULE_CART { 
+    set_place_for_every_player
+    find_closest
+    place_on_forest_zone
+    terrain_to_place_on DLC_CRACKED
+}
+create_object DLC_GOAT {
+    set_place_for_every_player
+    find_closest
+    terrain_to_place_on DLC_CRACKED
+    number_of_objects 2
+}
+create_object DLC_WATERBUFFALO {
+    set_place_for_every_player
+    find_closest
+    terrain_to_place_on DLC_MANGROVESHALLOW
+    number_of_objects 2
+}
+
+create_object GOLD {
+    set_gaia_object_only
+    terrain_to_place_on DLC_CRACKED
+    number_of_objects 3
+    set_tight_grouping
+    set_place_for_every_player
+    temp_min_distance_group_placement 3
+    avoid_forest_zone 1 /* could have it instead avoid an actor area created by the stone piles */
+    max_distance_to_other_zones 5 /* keeps it from being next to the stone */
+    max_distance_to_players 6
+    min_distance_to_players 5
+    set_circular_placement
+}
+
+create_object FORAGE {
+    set_gaia_object_only
+    terrain_to_place_on DLC_MANGROVESHALLOW
+    number_of_objects 4
+    number_of_groups 9320
+    set_scaling_to_map_size
+    temp_min_distance_group_placement 12
+    min_distance_group_placement 4
+    set_tight_grouping
+    avoid_forest_zone 1 /* may still end up touching the forest, but this isn't actually important, so merely discouraging is good enough. */
+    max_distance_to_other_zones 4 /* keeps it from inhibiting dock placements */
+}
+create_object ON_GRID {
+    set_gaia_object_only
+    second_object SHORE_FISH
+    number_of_groups 9320
+    set_scaling_to_map_size
+    terrain_to_place_on DLC_MANGROVESHALLOW
+    temp_min_distance_group_placement 8 
+    min_distance_group_placement 4
+    min_distance_to_players 10 /* may inhibit dock placements, but less likely to and in way will be close to a player when doing so. */
+    avoid_forest_zone 1
+
+}
+if ANTIQUITY_MODE
+    create_object OYSTERS {
+        set_gaia_object_only
+        terrain_to_place_on DLC_MANGROVESHALLOW
+        number_of_objects 2
+        number_of_groups 9320
+        set_scaling_to_map_size
+        temp_min_distance_group_placement 16
+        min_distance_group_placement 3
+        set_tight_grouping
+        avoid_forest_zone 2 /* could have it instead avoid an actor area created by the stone piles */
+        max_distance_to_other_zones 5 /* keeps it from inhibiting dock placements */
+
+    }
+else
+    create_object GOLD { /* almost equivalent to Oysters, except cannot be collected by fishing ships */
+        set_gaia_object_only
+        terrain_to_place_on DLC_MANGROVESHALLOW
+        number_of_objects 2
+        number_of_groups 9320
+        set_scaling_to_map_size
+        temp_min_distance_group_placement 16
+        min_distance_group_placement 3
+        set_tight_grouping
+        avoid_forest_zone 2 /* could have it instead avoid an actor area created by the stone piles */
+        max_distance_to_other_zones 5 /* keeps it from inhibiting dock placements */
+        resource_delta -350 /* I think oysters have 450 gold */
+    }
+endif
+create_object GOLD {
+    set_gaia_object_only
+    terrain_to_place_on DLC_DIRT4
+    number_of_objects 4
+    number_of_groups 9320
+    set_scaling_to_map_size
+    temp_min_distance_group_placement 12
+    min_distance_group_placement 3
+    set_tight_grouping
+    avoid_forest_zone 5 /* could have it instead avoid an actor area created by the stone piles */
+}
+/* TODO work more on the outer ring - may want to increase distance between relics, or add more of them. TODO add some food sources for funsies to the outermost ring. */
+create_object BOAR {
+    number_of_groups 9320
+    temp_min_distance_group_placement 23
+    min_distance_group_placement 4
+    terrain_to_place_on DLC_DIRT4
+}
+create_object RELIC {
+    terrain_to_place_on DLC_DIRT4
+    temp_min_distance_group_placement 40
+    avoid_forest_zone 1
+    avoid_cliff_zone 1
+    set_gaia_object_only
+    set_circular_placement
+    if MAPSIZE_MINI
+        number_of_objects 4
+        temp_min_distance_group_placement 30 
+    elseif MAPSIZE_TINY
+        number_of_objects 5
+    elseif MAPSIZE_SMALL
+        number_of_objects 5
+    elseif MAPSIZE_MEDIUM
+        number_of_objects 5
+    elseif MAPSIZE_NORMAL
+        number_of_objects 7
+    elseif MAPSIZE_LARGE
+        number_of_objects 8
+    elseif MAPSIZE_HUGE
+        number_of_objects 20
+        temp_min_distance_group_placement 60
+    elseif MAPSIZE_GIANT
+        number_of_objects 20
+        temp_min_distance_group_placement 64
+    elseif MAPSIZE_MASSIVE
+        number_of_objects 20
+        temp_min_distance_group_placement 65
+    elseif MAPSIZE_ENORMOUS
+        number_of_objects 20
+        temp_min_distance_group_placement 68
+    elseif MAPSIZE_COLOSSAL
+        number_of_objects 20
+        temp_min_distance_group_placement 70
+    elseif MAPSIZE_INCREDIBLE
+        number_of_objects 25
+        temp_min_distance_group_placement 75
+    elseif MAPSIZE_MONSTROUS
+        number_of_objects 25
+        temp_min_distance_group_placement 80
+    elseif MAPSIZE_LUDICROUS
+        number_of_objects 30
+        temp_min_distance_group_placement 90
+    endif
+}
+create_object DEER {
+    number_of_objects 5
+    number_of_groups 9320
+    temp_min_distance_group_placement 16
+    place_on_specific_land_id 2 /* deer get blocked by the beach terrain from spawning in the inner rings. Boars aren't like that. */
+}
+
+

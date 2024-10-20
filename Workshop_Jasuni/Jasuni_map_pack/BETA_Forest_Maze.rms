@@ -1,0 +1,938 @@
+/*  
+Forest maze: Basically, make the Syzygy forest biomes as a full map.
+Give each player a clearing to start in (set_avoid_player_start areas in the terrain generation section)
+Start by making some forest patches.
+Then repeat the following steps:
+1. Make a temporary terrain (mask) with an increasing spacing_to_other terrain type attribute.
+2. Fill the terrain mask with the designated forest terrain
+
+Last iteration should have a large map percentage (sufficient for the entire map), but also a larger spacing attribute.
+
+Neutral resources (including straggler trees) may or may not avoid forest zone. I'll probably want them to avoid player clearings though. They may block some passageways, but that should be fine (so long as they don't block to many)
+
+
+themes: would want a snowy theme and some more leafy themes
+
+TODO perform some more thorough testing, especially where themes are concerned - and maybe rebalance the map some (perhaps less lurable/huntable food in starting areas and more out in the forest)
+TODO finish snowy theme (need to make/confirm choices for predators and the like)
+*/
+<PLAYER_SETUP>
+random_placement /* TODO change to group_by_team? - make certain everything spawns properly - or even have a chance of teammates starting together and a chance of random_placement */
+behavior_version 2
+/*
+leaves theme: all are in
+FOREST is forest, oak
+JUNGLE is forest, jungle
+bamboo
+pine
+forest, oak bush
+MEDITERRANEAN_FOREST: mixture of cypress, olive, and italian pine trees
+forest, bush
+forest, reeds (leaves)
+DLC_FORESTAUTUMN
+BIRCH_FOREST
+
+ potential themes: palm desert theme - mythical, so probably not;
+
+DLC_RAINFOREST: forest, rainforest
+
+DLC_DRAGONFOREST: Forest, Dragon Tree - placed on dirt terrain
+avoid baobab forest (used in different map)
+DLC_ACACIAFOREST: Forest, Acacian, 50% terrain density - placed on DLC_SAVANNAH
+DLC_MANGROVEFOREST: 80% density
+Forest, Reeds (Shallows)
+DLC_FORESTSNOWAUTUMN
+DLC_FORESTDEAD
+Forest, palm grass: placed on GRASS2
+
+SNOW_FOREST: forest, pine snow
+
+
+TODO: consider adding more fish to mangrove theme (remove one of the starting boars perhaps?) in the maze
+lurable to random selection
+TODO further nerf canoe
+
+playtest notes: canoe is very strong (even with 0 range) and may need further nerf, walling is easy but can be a bit tricky (holes are a risk with mangrove forest and the general design of the map).
+Not much reason to move out. Less gold in player bases and more neutral? And perhaps add fish further out (replace berries on larger maps?)
+Farming space is somewhat limited. (Still can do a good amount, but players may need to onager chop to get sufficient building space).
+
+potential maps for next blue carbon cup: this (mangrove forest theme), Syzygy (with mangrove planets guaranteed), Whirlpool lake (would need to playtest for 2v2)
+ */
+
+#const CANOE 778
+effect_amount ADD_ATTRIBUTE CANOE ATTR_TRAITS 16 /* enables auto-scout */
+/* TODO weaken canoes - remove range? */
+if DARK_AGE_START
+    effect_amount SET_ATTRIBUTE CANOE ATTR_MAX_RANGE 0
+    effect_amount SET_ATTRIBUTE CANOE ATTR_SHOWN_RANGE 0
+endif
+/*
+#define MANGROVE_THEME
+
+#define SNOW_THEME
+*/
+if SNOW_THEME /* Could use more work (distinguish itself from the other terrains)
+    snow terrains:
+    SNOW_FOREST 21 
+    DLC_FORESTSNOWAUTUMN 105
+    DLC_FORESTDEAD 106
+
+
+    SNOW 32
+    Underbrush, Snow 72
+    Snow, Light 73
+    Snow, Strong 74
+
+    */
+
+    #const UNFORESTED_TERRAIN 74 /* Snow, Strong */
+    #const FOREST_TEMP 72 /* underbrush, snow */
+    start_random
+        percent_chance 33 #define USE_SNOW_FOREST
+        percent_chance 34 #define USE_AUTUMN_FOREST
+        percent_chance 33 #define USE_FOREST_DEAD
+    end_random
+    if USE_SNOW_FOREST
+        #const FOREST_TERRAIN 21 /* SNOW_FOREST */
+        #const STRAGGLER_TREE 413 /* SNOW_PINE_TREE */
+    elseif USE_AUTUMN_FOREST
+        #const FOREST_TERRAIN 105 /* DLC_FORESTSNOWAUTUMN */
+        #const STRAGGLER_TREE 1249 /* DLC_AUTUMNSNOWTREE */
+    else /* USE_FOREST_DEAD */
+        #const FOREST_TERRAIN 106 /* DLC_FORESTDEAD */
+        #const STRAGGLER_TREE 1250 /* DLC_DEADTREE */
+    endif
+
+    #const LURABLE 48 /* BOAR - TODO tie to biome?  javalina would be better for jungle */
+    #const PREDATOR 126 /* WOLF - TODO include bear, jaguar, lion, tiger, and tie to biome */
+
+    #const HERDABLE 594 /* SHEEP */
+elseif MANGROVE_THEME
+    /* if no dock space, then effectively no change except for forest density - consider a version where there is dock space */
+    #const UNFORESTED_TERRAIN 54 /* DLC_MANGROVESHALLOW */
+    #const FOREST_TEMP 28 /* water 2D, bridge - acts as a land terrain, but looks like water. other option is 15: water 2D shoreless (no beaches, but otherwise a water terrain) */
+
+    #const FOREST_TERRAIN 55 /* DLC_MANGROVEFOREST */
+    #const STRAGGLER_TREE 1144 /* DLC_MANGROVE_TREE */
+
+    start_random
+        percent_chance 50 #const PREDATOR 1031 /* DLC_CROCODILE */
+        percent_chance 50 #const PREDATOR 1135 /* DLC_KOMODO */
+    end_random
+    #const LURABLE 1139 /* DLC_RHINO */
+
+    #define FAT_HERDABLE
+else 
+    /* other theme - may split into multiple themes.
+
+    DLC_RAINFOREST: forest, rainforest - placed on underbrush jungle
+
+        start_random
+            percent_chance 11 #define USE_REGULAR_FOREST
+            percent_chance 11 #define USE_JUNGLE_FOREST
+            percent_chance 11 #define USE_BAMBOO_FOREST
+            percent_chance 11 #define USE_PINE_FOREST
+            percent_chance 11 #define USE_FORESTAUTUMN
+            percent_chance 11 #define USE_BIRCH_FOREST
+            percent_chance 11 #define USE_OAK_BUSH
+            percent_chance 11 #define USE_FOREST_BUSH
+            percent_chance 0 #define USE_MEDITERRANEAN_FOREST
+            percent_chance 12 #define USE_FOREST_REEDS
+        end_random
+    */
+    start_random
+        percent_chance 10 #define USE_REGULAR_FOREST
+        percent_chance 10 #define USE_JUNGLE_FOREST
+        percent_chance 10 #define USE_BAMBOO_FOREST
+        percent_chance 10 #define USE_PINE_FOREST
+        percent_chance 10 #define USE_FORESTAUTUMN
+        percent_chance 10 #define USE_BIRCH_FOREST
+        percent_chance 10 #define USE_OAK_BUSH
+        percent_chance 10 #define USE_FOREST_BUSH
+        percent_chance 10 #define USE_MEDITERRANEAN_FOREST
+        percent_chance 10 #define USE_FOREST_REEDS /* no bias right now, but if there was, I'd put it here due to reeds having less wood */
+    end_random
+    if USE_REGULAR_FOREST 
+        #const FOREST_TERRAIN 10 /* FOREST */
+        #const STRAGGLER_TREE 349 /* oak tree */
+    elseif USE_JUNGLE_FOREST
+        #const FOREST_TERRAIN 17  /* JUNGLE */
+        #const STRAGGLER_TREE 414 /* jungle tree */
+    elseif USE_BAMBOO_FOREST
+        #const FOREST_TERRAIN 18 /* BAMBOO */
+        #const STRAGGLER_TREE 348 /* bamboo tree */
+    elseif USE_PINE_FOREST
+        #const FOREST_TERRAIN 19 /* PINE_FOREST */
+        #const STRAGGLER_TREE 350 /* pine tree */
+    elseif USE_FORESTAUTUMN
+        #const FOREST_TERRAIN 104 /* DLC_FORESTAUTUMN */
+        #const STRAGGLER_TREE 1248 /* autumn tree */
+    elseif USE_BIRCH_FOREST
+        #const FOREST_TERRAIN 110 /* BIRCH_FOREST */
+        #const STRAGGLER_TREE 1717
+    elseif USE_OAK_BUSH
+        #const FOREST_TERRAIN 20 /* FOREST_OAK_BUSH */
+        #const STRAGGLER_TREE 349 /* 302 is bush a, 349 is oak tree, 1053 is bush b */
+    elseif USE_FOREST_BUSH
+        #const FOREST_TERRAIN 89 /* FOREST_BUSH - would be a good one to combine with an increase berry bush chance. */
+        #const STRAGGLER_TREE 1053 /* bush b  */
+    elseif USE_FOREST_REEDS 
+        #const FOREST_TERRAIN 92 /* FOREST_REEDS - has less wood, so favored as a result of that bias. */
+        #const STRAGGLER_TREE 1350
+    elseif USE_MEDITERRANEAN_FOREST
+        #const FOREST_TERRAIN 88
+        #const STRAGGLER_TREE rnd(1347,1349) /* randoms between cypress tree, italian pine tree, and olive tree */
+    else /* default case - uses dead trees and reeds */
+        #const FOREST_TERRAIN 92 /* FOREST_REEDS - has less wood, so favored as a result of that bias. */
+        #const STRAGGLER_TREE 1250
+    endif
+    #const UNFORESTED_TERRAIN 5 /* LEAVES */
+    #const FOREST_TEMP 71 /* underbrush, Leaves */
+    /* 77 is underbrush, jungle */
+    
+    #const LURABLE 48 /* BOAR - TODO tie to biome?  javalina would be better for jungle */
+    #const PREDATOR 126 /* WOLF - TODO include bear, jaguar, lion, tiger, and tie to biome */
+endif
+start_random 
+    percent_chance 5 #const HERDABLE 305 /* DLC_LLAMA */
+    percent_chance 5 #const HERDABLE 594 /* SHEEP */
+    percent_chance 20 #const HERDABLE 833 /* TURKEY */
+    percent_chance 5 #const HERDABLE 1060 /* DLC_GOAT */
+    percent_chance 15 #const HERDABLE 1243 /* DLC_GOOSE */
+    percent_chance 49 #const HERDABLE 1245 /* DLC_PIG */
+    percent_chance 1 #define FAT_HERDABLE
+end_random
+
+#const ON_GRID 278 /* dead fish trap */
+effect_amount GAIA_SET_ATTRIBUTE ON_GRID ATTR_STORAGE_VALUE 0
+
+if MAPSIZE_MINI
+    /* AT_MOST_MINI can simply use MAPSIZE_MINI */
+    #define AT_MOST_TINY
+    #define AT_MOST_SMALL
+    #define AT_MOST_MEDIUM
+    #define AT_MOST_NORMAL
+    #define AT_MOST_LARGE
+    #define AT_MOST_HUGE
+    #define AT_MOST_GIANT
+    #define AT_MOST_MASSIVE
+    #define AT_MOST_ENORMOUS
+    #define AT_MOST_COLOSSAL
+    #define AT_MOST_INCREDIBLE
+    #define AT_MOST_MONSTROUS
+    /* and AT_MOST_LUDCROUS is always true */
+elseif MAPSIZE_TINY
+    #define AT_LEAST_TINY
+    
+    #define AT_MOST_TINY
+    #define AT_MOST_SMALL
+    #define AT_MOST_MEDIUM
+    #define AT_MOST_NORMAL
+    #define AT_MOST_LARGE
+    #define AT_MOST_HUGE
+    #define AT_MOST_GIANT
+    #define AT_MOST_MASSIVE
+    #define AT_MOST_ENORMOUS
+    #define AT_MOST_COLOSSAL
+    #define AT_MOST_INCREDIBLE
+    #define AT_MOST_MONSTROUS
+elseif MAPSIZE_SMALL
+    #define AT_LEAST_TINY
+    #define AT_LEAST_SMALL
+    
+    #define AT_MOST_SMALL
+    #define AT_MOST_MEDIUM
+    #define AT_MOST_NORMAL
+    #define AT_MOST_LARGE
+    #define AT_MOST_HUGE
+    #define AT_MOST_GIANT
+    #define AT_MOST_MASSIVE
+    #define AT_MOST_ENORMOUS
+    #define AT_MOST_COLOSSAL
+    #define AT_MOST_INCREDIBLE
+    #define AT_MOST_MONSTROUS
+elseif MAPSIZE_MEDIUM
+    #define AT_LEAST_TINY
+    #define AT_LEAST_SMALL
+    #define AT_LEAST_MEDIUM
+    
+    #define AT_MOST_MEDIUM
+    #define AT_MOST_NORMAL
+    #define AT_MOST_LARGE
+    #define AT_MOST_HUGE
+    #define AT_MOST_GIANT
+    #define AT_MOST_MASSIVE
+    #define AT_MOST_ENORMOUS
+    #define AT_MOST_COLOSSAL
+    #define AT_MOST_INCREDIBLE
+    #define AT_MOST_MONSTROUS
+elseif MAPSIZE_NORMAL
+    #define AT_LEAST_TINY
+    #define AT_LEAST_SMALL
+    #define AT_LEAST_MEDIUM
+    #define AT_LEAST_NORMAL
+    
+    #define AT_MOST_NORMAL
+    #define AT_MOST_LARGE
+    #define AT_MOST_HUGE
+    #define AT_MOST_GIANT
+    #define AT_MOST_MASSIVE
+    #define AT_MOST_ENORMOUS
+    #define AT_MOST_COLOSSAL
+    #define AT_MOST_INCREDIBLE
+    #define AT_MOST_MONSTROUS
+elseif MAPSIZE_LARGE
+    #define AT_LEAST_TINY
+    #define AT_LEAST_SMALL
+    #define AT_LEAST_MEDIUM
+    #define AT_LEAST_NORMAL
+    #define AT_LEAST_LARGE
+    
+    #define AT_MOST_LARGE
+    #define AT_MOST_HUGE
+    #define AT_MOST_GIANT
+    #define AT_MOST_MASSIVE
+    #define AT_MOST_ENORMOUS
+    #define AT_MOST_COLOSSAL
+    #define AT_MOST_INCREDIBLE
+    #define AT_MOST_MONSTROUS
+elseif MAPSIZE_HUGE
+    #define AT_LEAST_TINY
+    #define AT_LEAST_SMALL
+    #define AT_LEAST_MEDIUM
+    #define AT_LEAST_NORMAL
+    #define AT_LEAST_LARGE
+    #define AT_LEAST_HUGE
+    
+    #define AT_MOST_HUGE
+    #define AT_MOST_GIANT
+    #define AT_MOST_MASSIVE
+    #define AT_MOST_ENORMOUS
+    #define AT_MOST_COLOSSAL
+    #define AT_MOST_INCREDIBLE
+    #define AT_MOST_MONSTROUS
+elseif MAPSIZE_GIANT
+    #define AT_LEAST_TINY
+    #define AT_LEAST_SMALL
+    #define AT_LEAST_MEDIUM
+    #define AT_LEAST_NORMAL
+    #define AT_LEAST_LARGE
+    #define AT_LEAST_HUGE
+    #define AT_LEAST_GIANT
+    
+    #define AT_MOST_GIANT
+    #define AT_MOST_MASSIVE
+    #define AT_MOST_ENORMOUS
+    #define AT_MOST_COLOSSAL
+    #define AT_MOST_INCREDIBLE
+    #define AT_MOST_MONSTROUS
+elseif MAPSIZE_MASSIVE
+    #define AT_LEAST_TINY
+    #define AT_LEAST_SMALL
+    #define AT_LEAST_MEDIUM
+    #define AT_LEAST_NORMAL
+    #define AT_LEAST_LARGE
+    #define AT_LEAST_HUGE
+    #define AT_LEAST_GIANT
+    #define AT_LEAST_MASSIVE
+    
+    #define AT_MOST_MASSIVE
+    #define AT_MOST_ENORMOUS
+    #define AT_MOST_COLOSSAL
+    #define AT_MOST_INCREDIBLE
+    #define AT_MOST_MONSTROUS
+elseif MAPSIZE_ENORMOUS
+    #define AT_LEAST_TINY
+    #define AT_LEAST_SMALL
+    #define AT_LEAST_MEDIUM
+    #define AT_LEAST_NORMAL
+    #define AT_LEAST_LARGE
+    #define AT_LEAST_HUGE
+    #define AT_LEAST_GIANT
+    #define AT_LEAST_MASSIVE
+    #define AT_LEAST_ENORMOUS
+    
+    #define AT_MOST_ENORMOUS
+    #define AT_MOST_COLOSSAL
+    #define AT_MOST_INCREDIBLE
+    #define AT_MOST_MONSTROUS
+elseif MAPSIZE_COLOSSAL
+    #define AT_LEAST_TINY
+    #define AT_LEAST_SMALL
+    #define AT_LEAST_MEDIUM
+    #define AT_LEAST_NORMAL
+    #define AT_LEAST_LARGE
+    #define AT_LEAST_HUGE
+    #define AT_LEAST_GIANT
+    #define AT_LEAST_MASSIVE
+    #define AT_LEAST_ENORMOUS
+    #define AT_LEAST_COLOSSAL
+    
+    #define AT_MOST_COLOSSAL
+    #define AT_MOST_INCREDIBLE
+    #define AT_MOST_MONSTROUS
+elseif MAPSIZE_INCREDIBLE
+    #define AT_LEAST_TINY
+    #define AT_LEAST_SMALL
+    #define AT_LEAST_MEDIUM
+    #define AT_LEAST_NORMAL
+    #define AT_LEAST_LARGE
+    #define AT_LEAST_HUGE
+    #define AT_LEAST_GIANT
+    #define AT_LEAST_MASSIVE
+    #define AT_LEAST_ENORMOUS
+    #define AT_LEAST_COLOSSAL
+    #define AT_LEAST_INCREDIBLE
+    
+    #define AT_MOST_INCREDIBLE
+    #define AT_MOST_MONSTROUS
+elseif MAPSIZE_MONSTROUS
+    #define AT_LEAST_TINY
+    #define AT_LEAST_SMALL
+    #define AT_LEAST_MEDIUM
+    #define AT_LEAST_NORMAL
+    #define AT_LEAST_LARGE
+    #define AT_LEAST_HUGE
+    #define AT_LEAST_GIANT
+    #define AT_LEAST_MASSIVE
+    #define AT_LEAST_ENORMOUS
+    #define AT_LEAST_COLOSSAL
+    #define AT_LEAST_INCREDIBLE
+    #define AT_LEAST_MONSTROUS
+    
+    #define AT_MOST_MONSTROUS
+elseif MAPSIZE_LUDICROUS
+    /* AT_LEAST_MINI is always true */
+    #define AT_LEAST_TINY
+    #define AT_LEAST_SMALL
+    #define AT_LEAST_MEDIUM
+    #define AT_LEAST_NORMAL
+    #define AT_LEAST_LARGE
+    #define AT_LEAST_HUGE
+    #define AT_LEAST_GIANT
+    #define AT_LEAST_MASSIVE
+    #define AT_LEAST_ENORMOUS
+    #define AT_LEAST_COLOSSAL
+    #define AT_LEAST_INCREDIBLE
+    #define AT_LEAST_MONSTROUS
+    /* and AT_LEAST_LUDCROUS - can simply use MAP_SIZE_LUDICROUS */
+endif
+<LAND_GENERATION>
+base_terrain UNFORESTED_TERRAIN
+
+create_player_lands {
+    terrain_type UNFORESTED_TERRAIN
+    circle_radius 38 2
+}
+if MANGROVE_THEME
+    create_land {
+        land_id 1
+        land_position 50 50
+        land_percent 0
+        terrain_type UNFORESTED_TERRAIN
+    }
+endif
+
+<ELEVATION_GENERATION>
+if MANGROVE_THEME
+else
+    create_elevation 1 {
+        base_terrain UNFORESTED_TERRAIN
+        number_of_tiles 120
+        if AT_MOST_MEDIUM
+            number_of_clumps 16 
+        elseif AT_LEAST_HUGE
+            number_of_clumps 64 
+        else
+            number_of_clumps 32 /* TODO test these a fair bit more */
+        endif
+        set_scale_by_size
+        enable_balanced_elevation
+    }
+endif
+<TERRAIN_GENERATION>
+/* TODO add pools if a regular forest theme? */
+create_terrain FOREST_TERRAIN {
+    base_terrain UNFORESTED_TERRAIN
+    land_percent 20
+    number_of_clumps 40
+    set_avoid_player_start_areas 15
+}
+create_terrain FOREST_TEMP {
+    base_terrain UNFORESTED_TERRAIN
+    set_avoid_player_start_areas 21
+    land_percent 10
+    number_of_clumps 50
+    terrain_mask 1
+    spacing_to_other_terrain_types 1
+}
+create_terrain FOREST_TERRAIN {
+    base_terrain UNFORESTED_TERRAIN
+    base_layer FOREST_TEMP
+    land_percent 100
+    number_of_clumps 90
+}
+create_terrain FOREST_TEMP {
+    base_terrain UNFORESTED_TERRAIN
+    set_avoid_player_start_areas 20
+    land_percent 10
+    number_of_clumps 30
+    terrain_mask 1
+    spacing_to_other_terrain_types 2
+}
+create_terrain FOREST_TERRAIN {
+    base_terrain UNFORESTED_TERRAIN
+    base_layer FOREST_TEMP
+    land_percent 100
+    number_of_clumps 91
+}
+create_terrain FOREST_TEMP {
+    base_terrain UNFORESTED_TERRAIN
+    set_avoid_player_start_areas 19
+    land_percent 5
+    number_of_clumps 20
+    terrain_mask 1
+    spacing_to_other_terrain_types 3
+}
+create_terrain FOREST_TERRAIN {
+    base_terrain UNFORESTED_TERRAIN
+    base_layer FOREST_TEMP
+    land_percent 100
+    number_of_clumps 92
+}
+create_terrain FOREST_TEMP {
+    base_terrain UNFORESTED_TERRAIN
+    set_avoid_player_start_areas 17
+    land_percent 5
+    number_of_clumps 10
+    terrain_mask 1
+    spacing_to_other_terrain_types 4
+}
+create_terrain FOREST_TERRAIN {
+    base_terrain UNFORESTED_TERRAIN
+    base_layer FOREST_TEMP
+    land_percent 100
+    number_of_clumps 93
+}
+create_terrain FOREST_TEMP {
+    base_terrain UNFORESTED_TERRAIN
+    set_avoid_player_start_areas 15
+    land_percent 5
+    number_of_clumps 10
+    terrain_mask 1
+    spacing_to_other_terrain_types 5
+}
+create_terrain FOREST_TERRAIN {
+    base_terrain UNFORESTED_TERRAIN
+    base_layer FOREST_TEMP
+    land_percent 100
+    number_of_clumps 94
+}
+create_terrain FOREST_TEMP {
+    base_terrain UNFORESTED_TERRAIN
+    set_avoid_player_start_areas 13
+    land_percent 100
+    number_of_clumps 9320
+    terrain_mask 1
+    spacing_to_other_terrain_types 6
+}
+create_terrain FOREST_TERRAIN {
+    base_terrain UNFORESTED_TERRAIN
+    base_layer FOREST_TEMP
+    land_percent 100
+    number_of_clumps 932
+}
+if SNOW_THEME 
+    create_terrain UNFORESTED_TERRAIN {
+        base_terrain FOREST_TERRAIN
+        land_percent 100
+        number_of_clumps 9320
+        terrain_mask 1
+    }
+    create_terrain UNFORESTED_TERRAIN {
+        base_terrain FOREST_TERRAIN
+        land_percent 100
+        number_of_clumps 9320
+        terrain_mask 1
+    }
+endif
+<OBJECTS_GENERATION>
+
+create_object TOWN_CENTER {
+    set_place_for_every_player
+    max_distance_to_players 0
+}
+create_object VILLAGER {
+    set_place_for_every_player
+    min_distance_to_players 6
+    max_distance_to_players 6
+}
+if REGICIDE 
+    create_object KING {
+        set_place_for_every_player
+        find_closest
+        min_distance_to_players 5
+        set_circular_placement
+    }
+elseif MANGROVE_THEME
+    create_object CANOE {
+        set_place_for_every_player
+        find_closest
+        min_distance_to_players 5
+        set_circular_placement
+    }
+else
+    create_object SCOUT {
+        set_place_for_every_player
+        find_closest
+        min_distance_to_players 5
+        set_circular_placement
+    }
+endif
+create_object GOLD {
+    set_place_for_every_player
+    set_gaia_object_only
+    min_distance_to_players 8
+    max_distance_to_players 12
+    set_circular_placement
+    number_of_objects 4
+    set_tight_grouping
+    min_distance_group_placement 2
+    avoid_forest_zone 2
+    actor_area 100
+    actor_area_radius 6
+}
+create_object GOLD {
+    set_place_for_every_player
+    set_gaia_object_only
+    min_distance_to_players 13
+    max_distance_to_players 20
+    set_circular_placement
+    number_of_objects 3
+    number_of_groups 2
+    set_tight_grouping
+    avoid_forest_zone 2
+    min_distance_group_placement 2
+    temp_min_distance_group_placement 9
+    actor_area 100
+    actor_area_radius 6
+    avoid_actor_area 100
+}
+create_object STONE {
+    set_place_for_every_player
+    set_gaia_object_only
+    min_distance_to_players 10
+    max_distance_to_players 18
+    set_circular_placement
+    number_of_objects rnd(4,5)
+    number_of_groups 2
+    set_tight_grouping
+    avoid_forest_zone 2
+    min_distance_group_placement 2
+    temp_min_distance_group_placement 12
+    avoid_actor_area 100
+}
+create_object FORAGE {
+    set_place_for_every_player
+    set_gaia_object_only
+    min_distance_to_players 7
+    max_distance_to_players 11
+    set_circular_placement
+    number_of_objects 6
+    set_tight_grouping
+    min_distance_group_placement 2
+    avoid_forest_zone 2
+    avoid_actor_area 100
+}
+if FAT_HERDABLE
+    create_object DLC_WATERBUFFALO {
+        set_place_for_every_player
+        set_gaia_object_only
+        min_distance_to_players 7
+        max_distance_to_players 15
+        set_circular_placement
+        number_of_groups 6
+        set_loose_grouping
+        min_distance_group_placement 2
+        temp_min_distance_group_placement 3
+        avoid_forest_zone 1
+
+    }
+else 
+    create_object HERDABLE {
+        set_place_for_every_player
+        set_gaia_object_only
+        min_distance_to_players 7
+        max_distance_to_players 15
+        set_circular_placement
+        number_of_objects 2
+        number_of_groups 4
+        set_loose_grouping
+        min_distance_group_placement 2
+        temp_min_distance_group_placement 6
+        avoid_forest_zone 1
+    }
+endif
+create_object LURABLE {
+    set_place_for_every_player
+    set_gaia_object_only
+    min_distance_to_players 15
+    max_distance_to_players 23
+    set_circular_placement
+    number_of_groups 3
+    min_distance_group_placement 2
+    temp_min_distance_group_placement 11
+    avoid_forest_zone 1
+}
+if MANGROVE_THEME
+    #const FISH_FOOD rnd(455,457) /* DORADO, SALMON, TUNA  */
+    create_object FISH_FOOD { /* water nomad uses Dorado and Tuna */
+        set_place_for_every_player
+        set_gaia_object_only
+        min_distance_to_players 9
+        max_distance_to_players 15
+        set_circular_placement
+        number_of_groups 8
+        min_distance_group_placement 1
+        temp_min_distance_group_placement 4
+        avoid_forest_zone 1
+        ignore_terrain_restrictions
+    }
+else
+    create_object DEER {
+        set_place_for_every_player
+        set_gaia_object_only
+        min_distance_to_players 15
+        max_distance_to_players 23
+        set_circular_placement
+        set_loose_grouping
+        number_of_groups 2
+        number_of_objects 4
+        min_distance_group_placement 2
+        temp_min_distance_group_placement 11
+        avoid_forest_zone 1
+    }
+endif
+create_object STRAGGLER_TREE {
+    set_place_for_every_player
+    set_gaia_object_only
+    min_distance_to_players 5
+    max_distance_to_players 8
+    set_circular_placement
+    number_of_objects 5
+    temp_min_distance_group_placement 1
+}
+create_object PREDATOR {
+    set_place_for_every_player
+    set_gaia_object_only
+    min_distance_to_players 30
+    max_distance_to_players 39
+    set_circular_placement
+    avoid_forest_zone 1
+}
+/* neutral resources: may want to adjust */
+if AT_LEAST_LARGE
+    if MANGROVE_THEME
+        create_object FISH_FOOD {
+            second_object FLAG_A
+            place_on_specific_land_id 1
+            ignore_terrain_restrictions
+            set_gaia_object_only
+            min_distance_to_players   40
+            number_of_objects 3
+            number_of_groups 99
+            temp_min_distance_group_placement 55
+            min_distance_group_placement 1
+            set_loose_grouping
+            avoid_forest_zone 1
+        }
+    else
+        create_object FORAGE {
+            set_gaia_object_only
+            min_distance_to_players   40
+            number_of_objects 5
+            number_of_groups 99
+            temp_min_distance_group_placement 55
+            min_distance_group_placement 2
+            set_tight_grouping
+            avoid_forest_zone 1
+        }
+    endif
+endif
+create_object RELIC {
+    temp_min_distance_group_placement 40
+    avoid_forest_zone 1
+    if MAPSIZE_MINI
+        number_of_objects 4
+        temp_min_distance_group_placement 30
+    elseif MAPSIZE_TINY
+        number_of_objects 5
+        temp_min_distance_group_placement 36
+    elseif MAPSIZE_SMALL
+        number_of_objects 5
+    elseif MAPSIZE_MEDIUM
+        number_of_objects 5
+    elseif MAPSIZE_NORMAL
+        number_of_objects 7
+    elseif MAPSIZE_LARGE
+        number_of_objects 8
+    elseif MAPSIZE_HUGE
+        number_of_objects 20
+        temp_min_distance_group_placement 60
+    elseif MAPSIZE_GIANT
+        number_of_objects 20
+        temp_min_distance_group_placement 64
+    elseif MAPSIZE_MASSIVE
+        number_of_objects 20
+        temp_min_distance_group_placement 65
+    elseif MAPSIZE_ENORMOUS
+        number_of_objects 20
+        temp_min_distance_group_placement 68
+    elseif MAPSIZE_COLOSSAL
+        number_of_objects 20
+        temp_min_distance_group_placement 70
+    elseif MAPSIZE_INCREDIBLE
+        number_of_objects 25
+        temp_min_distance_group_placement 75
+    elseif MAPSIZE_MONSTROUS
+        number_of_objects 25
+        temp_min_distance_group_placement 80
+    elseif MAPSIZE_LUDICROUS
+        number_of_objects 30
+        temp_min_distance_group_placement 90
+    endif
+    set_gaia_object_only
+    min_distance_to_players   30
+}
+/* TODO adjust gold and stone - what I have for standard resources doesn't seem very balanced yet, so maybe make changes to my map boilerplate code?
+ */
+create_object STONE {
+    temp_min_distance_group_placement 40
+    min_distance_group_placement 10
+    avoid_forest_zone 1
+    if AT_MOST_TINY
+        min_distance_to_players   22
+    else
+        min_distance_to_players   44
+    endif
+    set_tight_grouping
+    actor_area 100
+    actor_area_radius 16
+    avoid_actor_area 100
+    if AT_MOST_SMALL
+        number_of_objects 2
+    elseif AT_LEAST_NORMAL
+        number_of_objects 4
+    else
+        number_of_objects 3 /* should be medium map size */
+    endif
+    if MAPSIZE_MINI
+        number_of_groups 2
+        temp_min_distance_group_placement 30
+    elseif MAPSIZE_TINY
+        number_of_groups 2
+        temp_min_distance_group_placement 36
+    elseif MAPSIZE_SMALL
+        number_of_groups 2
+    elseif MAPSIZE_MEDIUM
+        number_of_groups 3
+    elseif MAPSIZE_NORMAL
+        number_of_groups 3
+    elseif MAPSIZE_LARGE
+        number_of_groups 4
+    elseif MAPSIZE_HUGE
+        number_of_groups 6 /* start of infinite stone groups for standard resources */
+        temp_min_distance_group_placement 60
+    elseif MAPSIZE_GIANT
+        number_of_groups 7
+        temp_min_distance_group_placement 64
+    elseif MAPSIZE_MASSIVE
+        number_of_groups 8
+        temp_min_distance_group_placement 65
+    elseif MAPSIZE_ENORMOUS
+        number_of_groups 10
+        temp_min_distance_group_placement 68
+    elseif MAPSIZE_COLOSSAL
+        number_of_groups 12
+        temp_min_distance_group_placement 70
+    elseif MAPSIZE_INCREDIBLE
+        number_of_groups 16
+        temp_min_distance_group_placement 75
+    elseif MAPSIZE_MONSTROUS
+        number_of_groups 20
+        temp_min_distance_group_placement 80
+    elseif MAPSIZE_LUDICROUS
+        number_of_groups 29
+        temp_min_distance_group_placement 90
+    endif
+}
+create_object GOLD {
+    temp_min_distance_group_placement 28
+    min_distance_group_placement 10 
+    avoid_forest_zone 1
+    if AT_MOST_TINY
+        min_distance_to_players   20
+    else
+        min_distance_to_players   30
+    endif
+    set_tight_grouping
+    actor_area 100
+    actor_area_radius 16
+    avoid_actor_area 100
+    if AT_MOST_NORMAL
+        number_of_objects 3
+    else
+        number_of_objects 4
+    endif
+    if MAPSIZE_MINI
+        number_of_groups 6
+        temp_min_distance_group_placement 21
+    elseif MAPSIZE_TINY
+        number_of_groups 6
+        temp_min_distance_group_placement 26
+    elseif MAPSIZE_SMALL
+        number_of_groups 6
+    elseif MAPSIZE_MEDIUM
+        number_of_groups 9
+    elseif MAPSIZE_NORMAL
+        number_of_groups 9
+    elseif MAPSIZE_LARGE
+        number_of_groups 12
+    elseif MAPSIZE_HUGE
+        number_of_groups 15
+        temp_min_distance_group_placement 42
+    elseif MAPSIZE_GIANT
+        number_of_groups 18
+        temp_min_distance_group_placement 45
+    elseif MAPSIZE_MASSIVE
+        number_of_groups 21
+        temp_min_distance_group_placement 46
+    elseif MAPSIZE_ENORMOUS
+        number_of_groups 24
+        temp_min_distance_group_placement 48
+    elseif MAPSIZE_COLOSSAL
+        number_of_groups 33
+        temp_min_distance_group_placement 50
+    elseif MAPSIZE_INCREDIBLE
+        number_of_groups 42
+        temp_min_distance_group_placement 53
+    elseif MAPSIZE_MONSTROUS
+        number_of_groups 54
+        temp_min_distance_group_placement 57
+    elseif MAPSIZE_LUDICROUS
+        number_of_groups 78
+        temp_min_distance_group_placement 64
+    endif
+}
+create_object STRAGGLER_TREE {
+    number_of_objects 30
+    set_scaling_to_map_size
+    temp_min_distance_group_placement 7
+    set_avoid_player_start_areas 11
+}
+create_object PREDATOR {
+    number_of_objects 2
+    set_scaling_to_map_size
+    min_distance_to_players 40
+    set_circular_placement
+}

@@ -8,6 +8,8 @@ map info: This map features a lake that is filled with a whirlpool and plenty of
 
 ai_info_map_type XXX 0 0 0
 
+TODO also do some testing for 2v2 and add scaling for most map sizes (mini: remove middle island, or maybe reduce to just 1 tile)
+
 
 TODOs
  take steps to fill in more sinkholes
@@ -153,7 +155,10 @@ start_random
     percent_chance 20 #define THEME_OPTION_D
     percent_chance 20 #define THEME_OPTION_E
 end_random
+/*
 #define THEME_DESERT
+*/
+#define THEME_BOGLAND
 if THEME_DESERT
     #const ORIG_TERRAIN 6 /* DIRT */
     #const TEMP_TERRAIN_A 14 /* Desert */
@@ -180,6 +185,35 @@ if THEME_DESERT
     #const SHALLOW_MASK 1 /* WATER - unused due to connection */
     #const ROCK_MASK 54
     #const FOREST_MASK 3 /* Dirt 3 */
+elseif THEME_BOGLAND
+     /* 100 DLC_DRYGRASS
+     17 jungle
+     42 dlc dirt4
+     49 DLC_BAOBABFOREST
+     56 DLC_RAINFOREST
+    etc
+    TODO needs further work: terrain is looking decent, but needs new forest, and possibly consider changing the rock terrain in the center of the map
+      */
+
+    #const ORIG_TERRAIN 6 /* DIRT */
+    #const TEMP_TERRAIN_A 100 /* DLC_DRYGRASS */
+    #const WATER_TERRAIN 1 /* Water */
+    #const LAND_TERRAIN_A 11 /* Dirt 2 */
+    #const LAND_TERRAIN_B 3 /* Dirt 3 */
+    #const SHALLOW_TERRAIN 54 /* DLC_MANGROVESHALLOW */
+    #const FOREST_TERRAIN_A 48 /* PALM_DESERT */ /* TODO: add a tree variable, to indicate which type of tree I want to place */
+    #const FOREST_TERRAIN_B 55 /* DLC_MANGROVEFOREST */
+
+    
+    #const CRACKED_INNER_MASK 101 /* DLC_BOGLAND */
+
+    #const LAND_MASK_A 100 /* DLC_DRYGRASS */
+    #const CRACKED_MASK 45 /* DLC_CRACKED */
+    #const WATER_MASK 54 /* DLC_MANGROVESHALLOW */
+    #const SHALLOW_MASK 1 /* WATER - unused due to connection */
+    #const ROCK_MASK 54
+    #const FOREST_MASK 3 /* Dirt 3 */
+    /* note: inner island could use DLC_BOGLAND instead of DLC_ROCK */
 else
     #const ORIG_TERRAIN 0 /* Grass */
     #const TEMP_TERRAIN_A 32 /* Snow */
@@ -204,6 +238,7 @@ effect_amount SET_ATTRIBUTE OAKTREE ATTR_HITPOINTS 0
 effect_amount SET_ATTRIBUTE OAKTREE ATTR_STORAGE_VALUE 0
 effect_amount SET_ATTRIBUTE OAKTREE ATTR_DEAD_ID -1
 
+/* TODO replace, and generally make map function for all map sizes */
 if LARGE_MAP
     #define AT_LEAST_LARGE
 elseif HUGE_MAP
@@ -233,7 +268,12 @@ create_land {
     else /* LUDIKRUS_MAP - not quite 0.5% */
         number_of_tiles 1000 
     endif  */
-    land_percent 100
+    if MAPSIZE_MINI
+        land_percent 0
+        base_size 2
+    else
+        land_percent 100
+    endif
     if AT_LEAST_LARGE /* slightly increases the size of the lake, and provides more space for relics to spawn. */
         top_border 47
         bottom_border 47
@@ -834,7 +874,11 @@ else
 endif
 /* place reeds after wood villagers for empire wars - doesn't matter otherwise. */
 create_object TERRAIN_BLOCKER {
-    second_object REEDS
+    if THEME_BOGLAND
+        second_object DLC_MANGROVE_TREE /* TODO work on a better way of doing this - perhaps change mangrove trees to form on water, but not land? */
+    else
+        second_object REEDS 
+    endif
     number_of_objects 9320
     number_of_clumps 9320
     set_gaia_object_only
@@ -1413,12 +1457,14 @@ create_object DLC_STORK {
     number_of_objects 4
     set_scaling_to_map_size
 }
-create_object DLC_WILD_CAMEL {
-    number_of_objects 2
-    number_of_groups 4
-    avoid_actor_area 5
-    set_scaling_to_map_size
-    min_distance_to_players 40
-}
+if THEME_DESERT
+    create_object DLC_WILD_CAMEL {
+        number_of_objects 2
+        number_of_groups 4
+        avoid_actor_area 5
+        set_scaling_to_map_size
+        min_distance_to_players 40
+    }
+endif
 
 

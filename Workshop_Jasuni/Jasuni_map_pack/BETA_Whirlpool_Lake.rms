@@ -928,6 +928,10 @@ create_object DLC_CROCODILE {
 if DEATH_MATCH
 else
     create_object DLC_BOXTURTLE { /* center of map */
+        if ANTIQUITY_MODE /* replace with oysters TODO test that this works properly. */
+            second_object OYSTERS
+            resource_delta -200 
+        endif
         actor_area_to_place_in 5
         min_distance_group_placement 1
         temp_min_distance_group_placement 3

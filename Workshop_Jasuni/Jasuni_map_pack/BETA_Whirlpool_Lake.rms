@@ -9,6 +9,7 @@ map info: This map features a lake that is filled with a whirlpool and plenty of
 ai_info_map_type XXX 0 0 0
 
 TODO also do some testing for 2v2 and add scaling for most map sizes (mini: remove middle island, or maybe reduce to just 1 tile)
+TODO check that player objects generate properly on mini map size (and maybe adjust sea tower location to be a bit closer)
 
 
 TODOs
@@ -75,21 +76,251 @@ behavior_version 2
 
 /* for testing empire wars 
 #define EMPIRE_WARS  
-TODO redo map sizes
+TODO test new map sizes
+
+ludicrous and mini do not follow the same scaling rules.
+
+
+basically, map size increases by roughly 2/3 of what it would normally increase
+so 120 + 2(x-120)/3 (some map sizes are off by ~1 tile)
  */
 
-if SMALL_MAP
-override_map_size 136
-elseif MEDIUM_MAP
-override_map_size 152
-elseif LARGE_MAP
-override_map_size 172
-elseif HUGE_MAP
-override_map_size 186
-elseif GIGANTIC_MAP
-override_map_size 200
-endif /* else leave unchanged for tiny and ludicrous */
 
+if MAPSIZE_SMALL
+    override_map_size 136
+elseif MAPSIZE_MEDIUM
+    override_map_size 152
+elseif MAPSIZE_NORMAL
+    override_map_size 172
+elseif MAPSIZE_LARGE
+    override_map_size 186
+elseif MAPSIZE_HUGE
+    override_map_size 200
+elseif MAPSIZE_GIANT
+    override_map_size 208
+elseif MAPSIZE_MASSIVE
+    override_map_size 224
+elseif MAPSIZE_ENORMOUS
+    override_map_size 240
+elseif MAPSIZE_COLOSSAL
+    override_map_size 252 /* rounded from 253.333 */
+elseif MAPSIZE_INCREDIBLE
+    override_map_size 280
+elseif MAPSIZE_MONSTROUS
+    override_map_size 306 /* rounded from 306.667 */
+endif /* else leave unchanged for mini, tiny and ludicrous */
+
+if MAPSIZE_MINI
+    /* AT_MOST_MINI can simply use MAPSIZE_MINI */
+    #define AT_MOST_TINY
+    #define AT_MOST_SMALL
+    #define AT_MOST_MEDIUM
+    #define AT_MOST_NORMAL
+    #define AT_MOST_LARGE
+    #define AT_MOST_HUGE
+    #define AT_MOST_GIANT
+    #define AT_MOST_MASSIVE
+    #define AT_MOST_ENORMOUS
+    #define AT_MOST_COLOSSAL
+    #define AT_MOST_INCREDIBLE
+    #define AT_MOST_MONSTROUS
+    /* and AT_MOST_LUDCROUS is always true */
+elseif MAPSIZE_TINY
+    #define AT_LEAST_TINY
+    
+    #define AT_MOST_TINY
+    #define AT_MOST_SMALL
+    #define AT_MOST_MEDIUM
+    #define AT_MOST_NORMAL
+    #define AT_MOST_LARGE
+    #define AT_MOST_HUGE
+    #define AT_MOST_GIANT
+    #define AT_MOST_MASSIVE
+    #define AT_MOST_ENORMOUS
+    #define AT_MOST_COLOSSAL
+    #define AT_MOST_INCREDIBLE
+    #define AT_MOST_MONSTROUS
+elseif MAPSIZE_SMALL
+    #define AT_LEAST_TINY
+    #define AT_LEAST_SMALL
+    
+    #define AT_MOST_SMALL
+    #define AT_MOST_MEDIUM
+    #define AT_MOST_NORMAL
+    #define AT_MOST_LARGE
+    #define AT_MOST_HUGE
+    #define AT_MOST_GIANT
+    #define AT_MOST_MASSIVE
+    #define AT_MOST_ENORMOUS
+    #define AT_MOST_COLOSSAL
+    #define AT_MOST_INCREDIBLE
+    #define AT_MOST_MONSTROUS
+elseif MAPSIZE_MEDIUM
+    #define AT_LEAST_TINY
+    #define AT_LEAST_SMALL
+    #define AT_LEAST_MEDIUM
+    
+    #define AT_MOST_MEDIUM
+    #define AT_MOST_NORMAL
+    #define AT_MOST_LARGE
+    #define AT_MOST_HUGE
+    #define AT_MOST_GIANT
+    #define AT_MOST_MASSIVE
+    #define AT_MOST_ENORMOUS
+    #define AT_MOST_COLOSSAL
+    #define AT_MOST_INCREDIBLE
+    #define AT_MOST_MONSTROUS
+elseif MAPSIZE_NORMAL
+    #define AT_LEAST_TINY
+    #define AT_LEAST_SMALL
+    #define AT_LEAST_MEDIUM
+    #define AT_LEAST_NORMAL
+    
+    #define AT_MOST_NORMAL
+    #define AT_MOST_LARGE
+    #define AT_MOST_HUGE
+    #define AT_MOST_GIANT
+    #define AT_MOST_MASSIVE
+    #define AT_MOST_ENORMOUS
+    #define AT_MOST_COLOSSAL
+    #define AT_MOST_INCREDIBLE
+    #define AT_MOST_MONSTROUS
+elseif MAPSIZE_LARGE
+    #define AT_LEAST_TINY
+    #define AT_LEAST_SMALL
+    #define AT_LEAST_MEDIUM
+    #define AT_LEAST_NORMAL
+    #define AT_LEAST_LARGE
+    
+    #define AT_MOST_LARGE
+    #define AT_MOST_HUGE
+    #define AT_MOST_GIANT
+    #define AT_MOST_MASSIVE
+    #define AT_MOST_ENORMOUS
+    #define AT_MOST_COLOSSAL
+    #define AT_MOST_INCREDIBLE
+    #define AT_MOST_MONSTROUS
+elseif MAPSIZE_HUGE
+    #define AT_LEAST_TINY
+    #define AT_LEAST_SMALL
+    #define AT_LEAST_MEDIUM
+    #define AT_LEAST_NORMAL
+    #define AT_LEAST_LARGE
+    #define AT_LEAST_HUGE
+    
+    #define AT_MOST_HUGE
+    #define AT_MOST_GIANT
+    #define AT_MOST_MASSIVE
+    #define AT_MOST_ENORMOUS
+    #define AT_MOST_COLOSSAL
+    #define AT_MOST_INCREDIBLE
+    #define AT_MOST_MONSTROUS
+elseif MAPSIZE_GIANT
+    #define AT_LEAST_TINY
+    #define AT_LEAST_SMALL
+    #define AT_LEAST_MEDIUM
+    #define AT_LEAST_NORMAL
+    #define AT_LEAST_LARGE
+    #define AT_LEAST_HUGE
+    #define AT_LEAST_GIANT
+    
+    #define AT_MOST_GIANT
+    #define AT_MOST_MASSIVE
+    #define AT_MOST_ENORMOUS
+    #define AT_MOST_COLOSSAL
+    #define AT_MOST_INCREDIBLE
+    #define AT_MOST_MONSTROUS
+elseif MAPSIZE_MASSIVE
+    #define AT_LEAST_TINY
+    #define AT_LEAST_SMALL
+    #define AT_LEAST_MEDIUM
+    #define AT_LEAST_NORMAL
+    #define AT_LEAST_LARGE
+    #define AT_LEAST_HUGE
+    #define AT_LEAST_GIANT
+    #define AT_LEAST_MASSIVE
+    
+    #define AT_MOST_MASSIVE
+    #define AT_MOST_ENORMOUS
+    #define AT_MOST_COLOSSAL
+    #define AT_MOST_INCREDIBLE
+    #define AT_MOST_MONSTROUS
+elseif MAPSIZE_ENORMOUS
+    #define AT_LEAST_TINY
+    #define AT_LEAST_SMALL
+    #define AT_LEAST_MEDIUM
+    #define AT_LEAST_NORMAL
+    #define AT_LEAST_LARGE
+    #define AT_LEAST_HUGE
+    #define AT_LEAST_GIANT
+    #define AT_LEAST_MASSIVE
+    #define AT_LEAST_ENORMOUS
+    
+    #define AT_MOST_ENORMOUS
+    #define AT_MOST_COLOSSAL
+    #define AT_MOST_INCREDIBLE
+    #define AT_MOST_MONSTROUS
+elseif MAPSIZE_COLOSSAL
+    #define AT_LEAST_TINY
+    #define AT_LEAST_SMALL
+    #define AT_LEAST_MEDIUM
+    #define AT_LEAST_NORMAL
+    #define AT_LEAST_LARGE
+    #define AT_LEAST_HUGE
+    #define AT_LEAST_GIANT
+    #define AT_LEAST_MASSIVE
+    #define AT_LEAST_ENORMOUS
+    #define AT_LEAST_COLOSSAL
+    
+    #define AT_MOST_COLOSSAL
+    #define AT_MOST_INCREDIBLE
+    #define AT_MOST_MONSTROUS
+elseif MAPSIZE_INCREDIBLE
+    #define AT_LEAST_TINY
+    #define AT_LEAST_SMALL
+    #define AT_LEAST_MEDIUM
+    #define AT_LEAST_NORMAL
+    #define AT_LEAST_LARGE
+    #define AT_LEAST_HUGE
+    #define AT_LEAST_GIANT
+    #define AT_LEAST_MASSIVE
+    #define AT_LEAST_ENORMOUS
+    #define AT_LEAST_COLOSSAL
+    #define AT_LEAST_INCREDIBLE
+    
+    #define AT_MOST_INCREDIBLE
+    #define AT_MOST_MONSTROUS
+elseif MAPSIZE_MONSTROUS
+    #define AT_LEAST_TINY
+    #define AT_LEAST_SMALL
+    #define AT_LEAST_MEDIUM
+    #define AT_LEAST_NORMAL
+    #define AT_LEAST_LARGE
+    #define AT_LEAST_HUGE
+    #define AT_LEAST_GIANT
+    #define AT_LEAST_MASSIVE
+    #define AT_LEAST_ENORMOUS
+    #define AT_LEAST_COLOSSAL
+    #define AT_LEAST_INCREDIBLE
+    #define AT_LEAST_MONSTROUS
+    
+    #define AT_MOST_MONSTROUS
+elseif MAPSIZE_LUDICROUS
+    /* AT_LEAST_MINI is always true */
+    #define AT_LEAST_TINY
+    #define AT_LEAST_SMALL
+    #define AT_LEAST_MEDIUM
+    #define AT_LEAST_NORMAL
+    #define AT_LEAST_LARGE
+    #define AT_LEAST_HUGE
+    #define AT_LEAST_GIANT
+    #define AT_LEAST_MASSIVE
+    #define AT_LEAST_ENORMOUS
+    #define AT_LEAST_COLOSSAL
+    #define AT_LEAST_INCREDIBLE
+    #define AT_LEAST_MONSTROUS
+    /* and AT_LEAST_LUDCROUS - can simply use MAP_SIZE_LUDICROUS */
+endif
 #const STONE_MINE_CLASS 908
 #const REEDS 1350
 
@@ -238,20 +469,10 @@ effect_amount SET_ATTRIBUTE OAKTREE ATTR_HITPOINTS 0
 effect_amount SET_ATTRIBUTE OAKTREE ATTR_STORAGE_VALUE 0
 effect_amount SET_ATTRIBUTE OAKTREE ATTR_DEAD_ID -1
 
-/* TODO replace, and generally make map function for all map sizes */
-if LARGE_MAP
-    #define AT_LEAST_LARGE
-elseif HUGE_MAP
-    #define AT_LEAST_LARGE
-elseif GIGANTIC_MAP
-    #define AT_LEAST_LARGE
-elseif LUDIKRIS_MAP
-    #define AT_LEAST_LARGE
-endif
 <LAND_GENERATION>
 base_terrain ORIG_TERRAIN
 create_land {
-	terrain_type DLC_ROCK /* may decide to change, but pretty much a terrain without equivalent, like cracked terrain.
+	terrain_type DLC_ROCK /* may decide to change
 	land_percent 1 - replacing with number of tiles for 0.5% 
     if TINY_MAP
         number_of_tiles 72 
@@ -271,15 +492,16 @@ create_land {
     if MAPSIZE_MINI
         land_percent 0
         base_size 2
+        base_elevation 3
     else
         land_percent 100
     endif
-    if AT_LEAST_LARGE /* slightly increases the size of the lake, and provides more space for relics to spawn. */
+    if AT_LEAST_NORMAL /* slightly increases the size of the lake, and provides more space for relics to spawn. */
         top_border 47
         bottom_border 47
         left_border 47
         right_border 47 
-    else
+    else /* TODO consider increasing more for even larger sizes */
         top_border 48
         bottom_border 48
         left_border 48
@@ -295,34 +517,51 @@ create_player_lands {
 	terrain_type TEMP_TERRAIN_A
 	land_percent 100
     if DEBUG_MODE /* useful for checking minimum player distances */
-        if TINY_MAP
+        if MAPSIZE_MINI
+            circle_radius 40 0
+        elseif MAPSIZE_TINY
             circle_radius 36 0
-        elseif SMALL_MAP
+        elseif MAPSIZE_SMALL
             circle_radius 32 0
-        elseif MEDIUM_MAP
+        elseif MAPSIZE_MEDIUM
             circle_radius 30 0
-        elseif LARGE_MAP
+        elseif MAPSIZE_NORMAL
             circle_radius 27 0
-        elseif HUGE_MAP
+        elseif MAPSIZE_LARGE
             circle_radius 25 0
-        elseif GIGANTIC_MAP
+        elseif MAPSIZE_HUGE
             circle_radius 22 0
+            /* TODO determine proper placements for giant-monstrous map sizes */
         else
             circle_radius 13 0
         endif
     else
-        if TINY_MAP
+        if MAPSIZE_MINI /* at 37 - really isn't a lot of room for the player bases, even with the decreased lake size and decreased player land size. */ /* rough rule for min: tower range shouild at closest barely be touching the center lake. Not really doable with mapsize mini. */
+            circle_radius 37 0
+        elseif MAPSIZE_TINY
             circle_radius rnd(36,38) 0
-        elseif SMALL_MAP
+        elseif MAPSIZE_SMALL
             circle_radius rnd(32,36) 0
-        elseif MEDIUM_MAP
+        elseif MAPSIZE_MEDIUM
             circle_radius rnd(30,34) 0
-        elseif LARGE_MAP
+        elseif MAPSIZE_NORMAL
             circle_radius rnd(27,32) 0
-        elseif HUGE_MAP
+        elseif MAPSIZE_LARGE
             circle_radius rnd(25,30) 0
-        elseif GIGANTIC_MAP
-            circle_radius rnd(22,27) 0
+        elseif MAPSIZE_HUGE 
+            circle_radius rnd(23,27) 0
+        elseif MAPSIZE_GIANT 
+            circle_radius rnd(23,27) 0
+        elseif MAPSIZE_MASSIVE /* min:         max:           */
+            circle_radius rnd(21,26) 0
+        elseif MAPSIZE_ENORMOUS
+            circle_radius rnd(20,25) 0 
+        elseif MAPSIZE_COLOSSAL
+            circle_radius rnd(19,24) 0 
+        elseif MAPSIZE_INCREDIBLE
+            circle_radius rnd(18,23) 0 
+        elseif MAPSIZE_MONSTROUS
+            circle_radius rnd(16,22) 0 /* a bit close when it's 16, but 17 is a bit farther away than I'd like the min to be */
         else
             circle_radius rnd(13,18) 0
         endif
@@ -333,7 +572,11 @@ create_player_lands {
         other_zone_avoidance_distance 10
     else
         base_elevation 9 /* 9 is the lowest height at which sinkholes form, and forms the smallest sinkholes. */
-        other_zone_avoidance_distance 9
+        if MAPSIZE_MINI
+            other_zone_avoidance_distance 6
+        else
+            other_zone_avoidance_distance 9
+        endif
     endif
 } 
 <ELEVATION_GENERATION>
@@ -430,7 +673,7 @@ create_terrain DLC_CRACKED { /* hopefully gets all the depressions, but I know i
     number_of_clumps 9320 
     set_scale_by_groups
 }
-if LUDIKRIS_MAP
+if AT_LEAST_LARGE
     create_terrain DLC_CRACKED { 
         base_terrain LAND_TERRAIN_A
         base_layer LAND_TERRAIN_B
@@ -455,12 +698,16 @@ create_terrain LAND_TERRAIN_A {
     base_terrain TEMP_TERRAIN_A /* can miss a small clump, but not too serious if it does. */
     land_percent 100
     number_of_clumps 9320
-	set_avoid_player_start_areas 15
+    if MAPSIZE_MINI
+	    set_avoid_player_start_areas 14
+    else
+	    set_avoid_player_start_areas 15
+    endif
 }
 create_terrain SHALLOW_TERRAIN {
 	base_terrain TEMP_TERRAIN_A
 	land_percent 100
-	number_of_clumps 320
+	number_of_clumps 999 /* increase or repeat whole statement if a player land doesn't spawn properly */
     set_flat_terrain_only
     spacing_to_other_terrain_types 1 
 }
@@ -675,32 +922,62 @@ create_connect_to_nonplayer_land {
 #const TERRAIN_BLOCKER 1613
 #const TRADING_POST 1646 /* gaia neutral market - results in a crash when a player with extended unit stats selects it. */
 effect_amount SET_ATTRIBUTE TRADING_POST ATTR_TERRAIN_ID 10 /* land + beach - needed because of beach surrounding mangrove shallows. */
+/* note: these are based on the adjusted map sizes
+ */
 if CORNER_RELICS
     create_actor_area 1 1 1 0
-    if TINY_MAP
+    if MAPSIZE_MINI
+        create_actor_area 78 1 2 0
+        create_actor_area 1 78 3 0
+        create_actor_area 78 78 4 0
+    elseif MAPSIZE_TINY
         create_actor_area 118 1 2 0
         create_actor_area 1 118 3 0
         create_actor_area 118 118 4 0
-    elseif SMALL_MAP
+    elseif MAPSIZE_SMALL
         create_actor_area 134 1 2 0
         create_actor_area 1 134 3 0
         create_actor_area 134 134 4 0
-    elseif MEDIUM_MAP
+    elseif MAPSIZE_MEDIUM
         create_actor_area 150 1 2 0
         create_actor_area 1 150 3 0
         create_actor_area 150 150 4 0
-    elseif LARGE_MAP
+    elseif MAPSIZE_NORMAL
         create_actor_area 170 1 2 0
         create_actor_area 1 170 3 0
         create_actor_area 170 170 4 0
-    elseif HUGE_MAP
+    elseif MAPSIZE_LARGE
         create_actor_area 184 1 2 0
         create_actor_area 1 184 3 0
         create_actor_area 184 184 4 0
-    elseif GIGANTIC_MAP
+    elseif MAPSIZE_HUGE
         create_actor_area 198 1 2 0
         create_actor_area 1 198 3 0
         create_actor_area 198 198 4 0
+    elseif MAPSIZE_GIANT
+        create_actor_area 206 1 2 0
+        create_actor_area 1 206 3 0
+        create_actor_area 206 206 4 0
+    elseif MAPSIZE_MASSIVE
+        create_actor_area 222 1 2 0
+        create_actor_area 1 222 3 0
+        create_actor_area 222 222 4 0
+    elseif MAPSIZE_ENORMOUS
+        create_actor_area 238 1 2 0
+        create_actor_area 1 238 3 0
+        create_actor_area 238 238 4 0
+    elseif MAPSIZE_COLOSSAL
+        create_actor_area 250 1 2 0
+        create_actor_area 1 250 3 0
+        create_actor_area 250 250 4 0
+    elseif MAPSIZE_INCREDIBLE
+        create_actor_area 278 1 2 0
+        create_actor_area 1 278 3 0
+        create_actor_area 278 278 4 0
+    elseif MAPSIZE_MONSTROUS
+        create_actor_area 304 1 2 0
+        create_actor_area 1 304 3 0
+        create_actor_area 304 304 4 0
     else 
         create_actor_area 478 1 2 0
         create_actor_area 1 478 3 0
@@ -708,30 +985,58 @@ if CORNER_RELICS
     endif
 else
     create_actor_area 0 0 1 0
-    if TINY_MAP
+    if MAPSIZE_MINI
+        create_actor_area 78 0 2 0
+        create_actor_area 0 78 3 0
+        create_actor_area 78 78 4 0
+    elseif MAPSIZE_TINY
         create_actor_area 118 0 2 0
         create_actor_area 0 118 3 0
         create_actor_area 118 118 4 0
-    elseif SMALL_MAP
+    elseif MAPSIZE_SMALL
         create_actor_area 134 0 2 0
         create_actor_area 0 134 3 0
         create_actor_area 134 134 4 0
-    elseif MEDIUM_MAP
+    elseif MAPSIZE_MEDIUM
         create_actor_area 150 0 2 0
         create_actor_area 0 150 3 0
         create_actor_area 150 150 4 0
-    elseif LARGE_MAP
+    elseif MAPSIZE_NORMAL
         create_actor_area 170 0 2 0
         create_actor_area 0 170 3 0
         create_actor_area 170 170 4 0
-    elseif HUGE_MAP
+    elseif MAPSIZE_LARGE
         create_actor_area 184 0 2 0
         create_actor_area 0 184 3 0
         create_actor_area 184 184 4 0
-    elseif GIGANTIC_MAP
+    elseif MAPSIZE_HUGE
         create_actor_area 198 0 2 0
         create_actor_area 0 198 3 0
         create_actor_area 198 198 4 0
+    elseif MAPSIZE_GIANT
+        create_actor_area 206 0 2 0
+        create_actor_area 0 206 3 0
+        create_actor_area 206 206 4 0
+    elseif MAPSIZE_MASSIVE
+        create_actor_area 222 0 2 0
+        create_actor_area 0 222 3 0
+        create_actor_area 222 222 4 0
+    elseif MAPSIZE_ENORMOUS
+        create_actor_area 238 0 2 0
+        create_actor_area 0 238 3 0
+        create_actor_area 238 238 4 0
+    elseif MAPSIZE_COLOSSAL
+        create_actor_area 250 0 2 0
+        create_actor_area 0 250 3 0
+        create_actor_area 250 250 4 0
+    elseif MAPSIZE_INCREDIBLE
+        create_actor_area 278 0 2 0
+        create_actor_area 0 278 3 0
+        create_actor_area 278 278 4 0
+    elseif MAPSIZE_MONSTROUS
+        create_actor_area 304 0 2 0
+        create_actor_area 0 304 3 0
+        create_actor_area 304 304 4 0
     else 
         create_actor_area 478 0 2 0
         create_actor_area 0 478 3 0
@@ -1430,7 +1735,7 @@ create_object TERRAIN_BLOCKER {
     avoid_actor_area 104
     avoid_actor_area 107
 }
-if AT_LEAST_LARGE
+if AT_LEAST_NORMAL
 /* TODO fold into theme. */
     create_object DLC_ELEPHANT {
         number_of_objects 30

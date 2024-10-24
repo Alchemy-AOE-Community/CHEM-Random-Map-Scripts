@@ -15,6 +15,16 @@ themes: would want a snowy theme and some more leafy themes
 
 TODO perform some more thorough testing, especially where themes are concerned - and maybe rebalance the map some (perhaps less lurable/huntable food in starting areas and more out in the forest)
 TODO finish snowy theme (need to make/confirm choices for predators and the like)
+
+TODO consider adding ability to train canoes (or dragon ships) to the TC (perhaps with a cost of 70w and 30s train time)
+
+canoe stats:  cost 60w/20g, train time of 25, train button 0, train location -1
+0 armor in ship, melee, UU, leitis; 6 PA
+attack: 7 against buildings, 9 against ships, 7 pierce, 4 rams/trebs/siege_towers, 9 fishing ship; 100% accurate
+70 hp, 1.5 speed
+
+dragon ship: (appears twice): 150 hp, 1.4 speed; attack is 4 pierce/ship/turtle_ship/buildings/standard_buildings/stone_walls&gate&towers/fishing_ship; armor is 8 ship, 2 melee, 8 pierce, 0 leitis; cost 180w/180g, 50s train time (train button 24)
+
 */
 <PLAYER_SETUP>
 random_placement /* TODO change to group_by_team? - make certain everything spawns properly - or even have a chance of teammates starting together and a chance of random_placement */
@@ -61,16 +71,27 @@ potential maps for next blue carbon cup: this (mangrove forest theme), Syzygy (w
 
 #const CANOE 778
 effect_amount ADD_ATTRIBUTE CANOE ATTR_TRAITS 16 /* enables auto-scout */
-/* TODO weaken canoes - remove range? */
+/* TODO weaken canoes - remove range, weaken attack?
+example weakening for pierce attack: 
+effect_amount ADD_ATTRIBUTE CANOE ATTR_ATTACK -771 would reduce attack by 3
+would also need to adjust the shown attack
+
+canoe stats:  cost 60w/20g, train time of 25, train button 0, train location -1
+0 armor in ship, melee, UU, leitis; 6 PA
+attack: 7 against buildings, 9 against ships, 7 pierce, 4 rams/trebs/siege_towers, 9 fishing ship; 100% accurate
+70 hp, 1.5 speed
+ */
 if DARK_AGE_START
     effect_amount SET_ATTRIBUTE CANOE ATTR_MAX_RANGE 0
     effect_amount SET_ATTRIBUTE CANOE ATTR_SHOWN_RANGE 0
+    effect_amount ADD_ATTRIBUTE CANOE ATTR_ATTACK -771 /* reduce attack by 3 - to 4 damage - just enough for it to lose to a loomed villager. */
+    effect_amount ADD_ATTRIBUTE CANOE ATTR_SHOWN_ATTACK -3 /* reduce attack by 3 */
 endif
 /*
-#define MANGROVE_THEME
 
 #define SNOW_THEME
 */
+#define MANGROVE_THEME
 if SNOW_THEME /* Could use more work (distinguish itself from the other terrains)
     snow terrains:
     SNOW_FOREST 21 
@@ -122,6 +143,9 @@ elseif MANGROVE_THEME
     #const LURABLE 1139 /* DLC_RHINO */
 
     #define FAT_HERDABLE
+    if ANTIQUITY_MODE
+        #define USE_OYSTERS
+    endif
 else 
     /* other theme - may split into multiple themes.
 
@@ -451,7 +475,7 @@ else
     }
 endif
 <TERRAIN_GENERATION>
-/* TODO add pools if a regular forest theme? */
+/* TODO add pools if a regular forest theme? */ 
 create_terrain FOREST_TERRAIN {
     base_terrain UNFORESTED_TERRAIN
     land_percent 20
@@ -589,35 +613,68 @@ else
         set_circular_placement
     }
 endif
-create_object GOLD {
-    set_place_for_every_player
-    set_gaia_object_only
-    min_distance_to_players 8
-    max_distance_to_players 12
-    set_circular_placement
-    number_of_objects 4
-    set_tight_grouping
-    min_distance_group_placement 2
-    avoid_forest_zone 2
-    actor_area 100
-    actor_area_radius 6
-}
-create_object GOLD {
-    set_place_for_every_player
-    set_gaia_object_only
-    min_distance_to_players 13
-    max_distance_to_players 20
-    set_circular_placement
-    number_of_objects 3
-    number_of_groups 2
-    set_tight_grouping
-    avoid_forest_zone 2
-    min_distance_group_placement 2
-    temp_min_distance_group_placement 9
-    actor_area 100
-    actor_area_radius 6
-    avoid_actor_area 100
-}
+if USE_OYSTERS /* TODO switch to use oysters instead of gold piles when I have access to oysters. Will need to switch in multiple locations. */
+    create_object OYSTERS {
+        set_place_for_every_player
+        set_gaia_object_only
+        min_distance_to_players 8
+        max_distance_to_players 12
+        set_circular_placement
+        number_of_objects 5
+        set_tight_grouping
+        min_distance_group_placement 2
+        avoid_forest_zone 2
+        actor_area 100
+        actor_area_radius 6
+    }
+    create_object OYSTERS {
+        set_place_for_every_player
+        set_gaia_object_only
+        min_distance_to_players 13
+        max_distance_to_players 20
+        set_circular_placement
+        number_of_objects 4
+        number_of_groups 2
+        set_tight_grouping
+        avoid_forest_zone 2
+        min_distance_group_placement 2
+        temp_min_distance_group_placement 9
+        actor_area 100
+        actor_area_radius 6
+        avoid_actor_area 100
+    }
+
+else
+    create_object GOLD {
+        set_place_for_every_player
+        set_gaia_object_only
+        min_distance_to_players 8
+        max_distance_to_players 12
+        set_circular_placement
+        number_of_objects 4
+        set_tight_grouping
+        min_distance_group_placement 2
+        avoid_forest_zone 2
+        actor_area 100
+        actor_area_radius 6
+    }
+    create_object GOLD {
+        set_place_for_every_player
+        set_gaia_object_only
+        min_distance_to_players 13
+        max_distance_to_players 20
+        set_circular_placement
+        number_of_objects 3
+        number_of_groups 2
+        set_tight_grouping
+        avoid_forest_zone 2
+        min_distance_group_placement 2
+        temp_min_distance_group_placement 9
+        actor_area 100
+        actor_area_radius 6
+        avoid_actor_area 100
+    }
+endif
 create_object STONE {
     set_place_for_every_player
     set_gaia_object_only
@@ -866,64 +923,157 @@ create_object STONE {
         temp_min_distance_group_placement 90
     endif
 }
-create_object GOLD {
-    temp_min_distance_group_placement 28
-    min_distance_group_placement 10 
-    avoid_forest_zone 1
-    if AT_MOST_TINY
-        min_distance_to_players   20
-    else
-        min_distance_to_players   30
-    endif
-    set_tight_grouping
-    actor_area 100
-    actor_area_radius 16
-    avoid_actor_area 100
-    if AT_MOST_NORMAL
-        number_of_objects 3
-    else
-        number_of_objects 4
-    endif
-    if MAPSIZE_MINI
-        number_of_groups 6
-        temp_min_distance_group_placement 21
-    elseif MAPSIZE_TINY
-        number_of_groups 6
-        temp_min_distance_group_placement 26
-    elseif MAPSIZE_SMALL
-        number_of_groups 6
-    elseif MAPSIZE_MEDIUM
-        number_of_groups 9
-    elseif MAPSIZE_NORMAL
-        number_of_groups 9
-    elseif MAPSIZE_LARGE
-        number_of_groups 12
-    elseif MAPSIZE_HUGE
-        number_of_groups 15
-        temp_min_distance_group_placement 42
-    elseif MAPSIZE_GIANT
-        number_of_groups 18
-        temp_min_distance_group_placement 45
-    elseif MAPSIZE_MASSIVE
-        number_of_groups 21
-        temp_min_distance_group_placement 46
-    elseif MAPSIZE_ENORMOUS
-        number_of_groups 24
-        temp_min_distance_group_placement 48
-    elseif MAPSIZE_COLOSSAL
-        number_of_groups 33
-        temp_min_distance_group_placement 50
-    elseif MAPSIZE_INCREDIBLE
-        number_of_groups 42
-        temp_min_distance_group_placement 53
-    elseif MAPSIZE_MONSTROUS
-        number_of_groups 54
-        temp_min_distance_group_placement 57
-    elseif MAPSIZE_LUDICROUS
-        number_of_groups 78
-        temp_min_distance_group_placement 64
-    endif
-}
+if USE_OYSTERS
+    create_object OYSTERS {
+        temp_min_distance_group_placement 28
+        min_distance_group_placement 10 
+        avoid_forest_zone 1
+        if AT_MOST_TINY
+            min_distance_to_players   20
+        else
+            min_distance_to_players   30
+        endif
+        set_tight_grouping
+        actor_area 100
+        actor_area_radius 16
+        avoid_actor_area 100
+        if AT_MOST_NORMAL
+            number_of_objects 3
+        else
+            number_of_objects 4
+        endif
+        if MAPSIZE_MINI
+            number_of_groups 6
+            temp_min_distance_group_placement 21
+        elseif MAPSIZE_TINY
+            number_of_groups 6
+            temp_min_distance_group_placement 26
+        elseif MAPSIZE_SMALL
+            number_of_groups 6
+        elseif MAPSIZE_MEDIUM
+            number_of_groups 9
+        elseif MAPSIZE_NORMAL
+            number_of_groups 9
+        elseif MAPSIZE_LARGE
+            number_of_groups 12
+        elseif MAPSIZE_HUGE
+            number_of_groups 15
+            temp_min_distance_group_placement 42
+        elseif MAPSIZE_GIANT
+            number_of_groups 18
+            temp_min_distance_group_placement 45
+        elseif MAPSIZE_MASSIVE
+            number_of_groups 21
+            temp_min_distance_group_placement 46
+        elseif MAPSIZE_ENORMOUS
+            number_of_groups 24
+            temp_min_distance_group_placement 48
+        elseif MAPSIZE_COLOSSAL
+            number_of_groups 33
+            temp_min_distance_group_placement 50
+        elseif MAPSIZE_INCREDIBLE
+            number_of_groups 42
+            temp_min_distance_group_placement 53
+        elseif MAPSIZE_MONSTROUS
+            number_of_groups 54
+            temp_min_distance_group_placement 57
+        elseif MAPSIZE_LUDICROUS
+            number_of_groups 78
+            temp_min_distance_group_placement 64
+        endif
+    }
+    create_object OYSTERS { /* may be a bit much, but still should be decent amount */
+        terrain_to_place_on DLC_MANGROVEFOREST
+        if MAPSIZE_MINI
+            temp_min_distance_group_placement 21
+        elseif MAPSIZE_TINY
+            temp_min_distance_group_placement 26
+        elseif MAPSIZE_HUGE
+            temp_min_distance_group_placement 42
+        elseif MAPSIZE_GIANT
+            temp_min_distance_group_placement 45
+        elseif MAPSIZE_MASSIVE
+            temp_min_distance_group_placement 46
+        elseif MAPSIZE_ENORMOUS
+            temp_min_distance_group_placement 48
+        elseif MAPSIZE_COLOSSAL
+            temp_min_distance_group_placement 50
+        elseif MAPSIZE_INCREDIBLE
+            temp_min_distance_group_placement 53
+        elseif MAPSIZE_MONSTROUS
+            temp_min_distance_group_placement 57
+        elseif MAPSIZE_LUDICROUS
+            temp_min_distance_group_placement 64
+        endif
+        temp_min_distance_group_placement 28 /* TODO scale */
+        number_of_groups 9320
+        set_scaling_to_map_size
+        if AT_MOST_TINY
+            min_distance_to_players   20
+        else
+            min_distance_to_players   30
+        endif
+    }
+else
+    create_object GOLD {
+        temp_min_distance_group_placement 28
+        min_distance_group_placement 10 
+        avoid_forest_zone 1
+        if AT_MOST_TINY
+            min_distance_to_players   20
+        else
+            min_distance_to_players   30
+        endif
+        set_tight_grouping
+        actor_area 100
+        actor_area_radius 16
+        avoid_actor_area 100
+        if AT_MOST_NORMAL
+            number_of_objects 3
+        else
+            number_of_objects 4
+        endif
+        if MAPSIZE_MINI
+            number_of_groups 6
+            temp_min_distance_group_placement 21
+        elseif MAPSIZE_TINY
+            number_of_groups 6
+            temp_min_distance_group_placement 26
+        elseif MAPSIZE_SMALL
+            number_of_groups 6
+        elseif MAPSIZE_MEDIUM
+            number_of_groups 9
+        elseif MAPSIZE_NORMAL
+            number_of_groups 9
+        elseif MAPSIZE_LARGE
+            number_of_groups 12
+        elseif MAPSIZE_HUGE
+            number_of_groups 15
+            temp_min_distance_group_placement 42
+        elseif MAPSIZE_GIANT
+            number_of_groups 18
+            temp_min_distance_group_placement 45
+        elseif MAPSIZE_MASSIVE
+            number_of_groups 21
+            temp_min_distance_group_placement 46
+        elseif MAPSIZE_ENORMOUS
+            number_of_groups 24
+            temp_min_distance_group_placement 48
+        elseif MAPSIZE_COLOSSAL
+            number_of_groups 33
+            temp_min_distance_group_placement 50
+        elseif MAPSIZE_INCREDIBLE
+            number_of_groups 42
+            temp_min_distance_group_placement 53
+        elseif MAPSIZE_MONSTROUS
+            number_of_groups 54
+            temp_min_distance_group_placement 57
+        elseif MAPSIZE_LUDICROUS
+            number_of_groups 78
+            temp_min_distance_group_placement 64
+        endif
+    }
+endif
 create_object STRAGGLER_TREE {
     number_of_objects 30
     set_scaling_to_map_size

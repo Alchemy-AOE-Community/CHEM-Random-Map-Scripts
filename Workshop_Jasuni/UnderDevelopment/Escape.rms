@@ -9,10 +9,12 @@ Renaming to "Escape" - players start close together in a very small circle of cr
 
 note: will want some forest in the middle: it's a very small starting area
 
-TODO: reduce inner stone to 100 stone per pile
 note: iron boar is very tough, basically requiring TC to kill
 
 TODO: add oysters to various maps under the antiquity mode conditional: Forest Maze (mangrove), Syzygy (replace gold in 1-2 biomes), great lake, Yukon gold rush (I don't think so - panning for gold occurred through manual labor, not fishing ships) - McMurdo dry valleys? And Whirlpool Lake (can replace shore fish in center island) - and could add to 4-quarters map (and the Ultra small version)
+
+TODO strategies to playtest: Persian douche, (Goth) instant loom into lame, villager fights, drush, Korean tower rush, serjeant rush, etc.
+maybe test walling in opponent on the shallows side.
 */
 
 <PLAYER_SETUP>
@@ -260,7 +262,7 @@ effect_amount SET_ATTRIBUTE BUILDING ATTR_FOUNDATION_TERRAIN 10 /* forest */
 #const MULE_CART 1808
 <LAND_GENERATION>
 base_terrain DLC_MANGROVESHALLOW
-create_player_lands {
+create_player_lands { /* TODO change to some other terrain: have starting TCs on some other terrain, but otherwise the center should be cracked terrain (penalize TC drops by causing them to take extra damage) */
     terrain_type DLC_CRACKED
     land_percent 100
     left_border 40
@@ -417,7 +419,7 @@ create_terrain DLC_MANGROVEFOREST {
     land_percent 100
     spacing_to_other_terrain_types 2 /* Would do 1, but that's nearly invisible */
 }
-create_terrain DLC_DIRT4 { /* TODO consider changing this terrain to something else - is a very weird terrain mix though that looks somewhat unique, if not entirely realistic. */
+create_terrain DLC_DIRT4 {
     base_terrain DLC_MANGROVEFOREST
     land_percent 100
     if MAPSIZE_MINI /* map width * 0.15  */
@@ -468,6 +470,23 @@ create_terrain DLC_BOGLAND {
     number_of_clumps 9320
     terrain_mask 1
 }
+create_terrain WATER {
+    base_terrain DLC_MANGROVESHALLOW
+    land_percent 1
+    number_of_clumps 12
+    spacing_to_other_terrain_types 2
+    terrain_mask 2
+}
+/* TODO add in patches of water terrain into the mangrove area: should make walling trickier against ships, thereby increasing danger level against demos.
+create_terrain DLC_BOGLAND {
+    base_terrain DLC_CRACKED
+    land_percent 100
+    number_of_clumps 9320
+    /*
+    terrain_mask 1 */
+    set_avoid_player_start_areas 7
+}
+*/
 <OBJECTS_GENERATION>
 /* place center forest */
 if MAPSIZE_MINI create_actor_area 40 40 1234 20
@@ -604,6 +623,14 @@ create_object DLC_WATERBUFFALO {
     find_closest
     terrain_to_place_on DLC_MANGROVESHALLOW
     number_of_objects 2
+}
+#const FISH_FOOD rnd(455,457) /* DORADO, SALMON, TUNA  */
+create_object FISH_FOOD { /* water nomad uses Dorado and Tuna */ /* note that they're often able to be collected by villagers, especially on smaller map sizes. */
+    number_of_objects 9320
+    set_scaling_to_map_size
+    min_distance_group_placement 2
+    temp_min_distance_group_placement 3
+    avoid_forest_zone 2
 }
 
 create_object GOLD {

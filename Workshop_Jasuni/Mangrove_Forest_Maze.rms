@@ -1,4 +1,8 @@
-/*  
+/*
+Mangrove Forest Maze
+Submitted to Blue Carbon Cup map contest on 25 Oct 2024  
+Author: Jasuni
+
 Forest maze: Basically, make the Syzygy forest biomes as a full map.
 Give each player a clearing to start in (set_avoid_player_start areas in the terrain generation section)
 Start by making some forest patches.
@@ -8,15 +12,10 @@ Then repeat the following steps:
 
 Last iteration should have a large map percentage (sufficient for the entire map), but also a larger spacing attribute.
 
-Neutral resources (including straggler trees) may or may not avoid forest zone. I'll probably want them to avoid player clearings though. They may block some passageways, but that should be fine (so long as they don't block to many)
+Neutral resources (including straggler trees) may or may not avoid forest zone. I'll probably want them to avoid player clearings though. They may block some passageways, but that should be fine (so long as they don't block too many)
 
 
-themes: would want a snowy theme and some more leafy themes
-
-TODO perform some more thorough testing, especially where themes are concerned - and maybe rebalance the map some (perhaps less lurable/huntable food in starting areas and more out in the forest)
-TODO finish snowy theme (need to make/confirm choices for predators and the like)
-
-TODO consider adding ability to train canoes (or dragon ships) to the TC (perhaps with a cost of 70w and 30s train time)
+TODO consider adding ability to train canoes (or dragon ships) to the TC - can't really test with the new civs yet, which may be problematic as they have extra buttons in the TC, potentially resulting in a location conflict.
 
 canoe stats:  cost 60w/20g, train time of 25, train button 0, train location -1
 0 armor in ship, melee, UU, leitis; 6 PA
@@ -27,51 +26,16 @@ dragon ship: (appears twice): 150 hp, 1.4 speed; attack is 4 pierce/ship/turtle_
 
 */
 <PLAYER_SETUP>
-random_placement /* TODO change to group_by_team? - make certain everything spawns properly - or even have a chance of teammates starting together and a chance of random_placement */
+random_placement
 behavior_version 2
 /*
-leaves theme: all are in
-FOREST is forest, oak
-JUNGLE is forest, jungle
-bamboo
-pine
-forest, oak bush
-MEDITERRANEAN_FOREST: mixture of cypress, olive, and italian pine trees
-forest, bush
-forest, reeds (leaves)
-DLC_FORESTAUTUMN
-BIRCH_FOREST
 
- potential themes: palm desert theme - mythical, so probably not;
-
-DLC_RAINFOREST: forest, rainforest
-
-DLC_DRAGONFOREST: Forest, Dragon Tree - placed on dirt terrain
-avoid baobab forest (used in different map)
-DLC_ACACIAFOREST: Forest, Acacian, 50% terrain density - placed on DLC_SAVANNAH
-DLC_MANGROVEFOREST: 80% density
-Forest, Reeds (Shallows)
-DLC_FORESTSNOWAUTUMN
-DLC_FORESTDEAD
-Forest, palm grass: placed on GRASS2
-
-SNOW_FOREST: forest, pine snow
-
-
-TODO: consider adding more fish to mangrove theme (remove one of the starting boars perhaps?) in the maze
-lurable to random selection
-TODO further nerf canoe
-
-playtest notes: canoe is very strong (even with 0 range) and may need further nerf, walling is easy but can be a bit tricky (holes are a risk with mangrove forest and the general design of the map).
-Not much reason to move out. Less gold in player bases and more neutral? And perhaps add fish further out (replace berries on larger maps?)
-Farming space is somewhat limited. (Still can do a good amount, but players may need to onager chop to get sufficient building space).
-
-potential maps for next blue carbon cup: this (mangrove forest theme), Syzygy (with mangrove planets guaranteed), Whirlpool lake (would need to playtest for 2v2)
+potential maps for blue carbon cup: this (mangrove forest theme), Syzygy (with mangrove planets guaranteed), Whirlpool lake (would need to playtest for 2v2)
  */
 
 #const CANOE 778
 effect_amount ADD_ATTRIBUTE CANOE ATTR_TRAITS 16 /* enables auto-scout */
-/* TODO weaken canoes - remove range, weaken attack?
+/*
 example weakening for pierce attack: 
 effect_amount ADD_ATTRIBUTE CANOE ATTR_ATTACK -771 would reduce attack by 3
 would also need to adjust the shown attack
@@ -105,6 +69,11 @@ if MANGROVE_THEME
         percent_chance 50 #const PREDATOR 1135 /* DLC_KOMODO */
     end_random
     #const LURABLE 1139 /* DLC_RHINO */
+    #define DOCKABLE_PLAYER_STARTS
+    /*
+    start_random
+        percent_chance 50 #define DOCKABLE_PLAYER_STARTS
+    end_random */
 
     #define FAT_HERDABLE
     if ANTIQUITY_MODE
@@ -330,7 +299,13 @@ endif
 base_terrain UNFORESTED_TERRAIN
 
 create_player_lands {
-    terrain_type UNFORESTED_TERRAIN
+    if DOCKABLE_PLAYER_STARTS
+        terrain_type BEACH
+        land_percent 0
+        base_size 1 /* playtest: 1  only allows docking after deleting starting TC (a nice strategic decision) - max 4 spots, 2 allows docking earlier, but can delete TC for more docking spaces (max 6, 3 with TC up). */
+    else
+        terrain_type UNFORESTED_TERRAIN
+    endif
     circle_radius 38 2
 }
 if MANGROVE_THEME
@@ -342,25 +317,15 @@ if MANGROVE_THEME
     }
 endif
 
-<ELEVATION_GENERATION>
-if MANGROVE_THEME
-else
-    create_elevation 1 {
-        base_terrain UNFORESTED_TERRAIN
-        number_of_tiles 120
-        if AT_MOST_MEDIUM
-            number_of_clumps 16 
-        elseif AT_LEAST_HUGE
-            number_of_clumps 64 
-        else
-            number_of_clumps 32 /* TODO test these a fair bit more */
-        endif
-        set_scale_by_size
-        enable_balanced_elevation
+<TERRAIN_GENERATION>
+if DOCKABLE_PLAYER_STARTS
+    create_terrain UNFORESTED_TERRAIN {
+        base_terrain BEACH
+        land_percent 100
+        number_of_clumps 932
+        terrain_mask 2
     }
 endif
-<TERRAIN_GENERATION>
-/* TODO add pools if a regular forest theme? */ 
 create_terrain FOREST_TERRAIN {
     base_terrain UNFORESTED_TERRAIN
     land_percent 20
@@ -451,18 +416,12 @@ create_terrain FOREST_TERRAIN {
     land_percent 100
     number_of_clumps 932
 }
-if SNOW_THEME 
-    create_terrain UNFORESTED_TERRAIN {
-        base_terrain FOREST_TERRAIN
+if DOCKABLE_PLAYER_STARTS 
+    create_terrain BEACH {
+        base_terrain DLC_MANGROVESHALLOW
+        base_layer BEACH
         land_percent 100
-        number_of_clumps 9320
-        terrain_mask 1
-    }
-    create_terrain UNFORESTED_TERRAIN {
-        base_terrain FOREST_TERRAIN
-        land_percent 100
-        number_of_clumps 9320
-        terrain_mask 1
+        number_of_clumps 932
     }
 endif
 <OBJECTS_GENERATION>
@@ -470,6 +429,7 @@ endif
 create_object TOWN_CENTER {
     set_place_for_every_player
     max_distance_to_players 0
+    ignore_terrain_restrictions /* doesn't appear to be needed */
 }
 create_object VILLAGER {
     set_place_for_every_player
@@ -490,17 +450,9 @@ elseif MANGROVE_THEME
         min_distance_to_players 5
         set_circular_placement
     }
-else
-    create_object SCOUT {
-        set_place_for_every_player
-        find_closest
-        min_distance_to_players 5
-        set_circular_placement
-    }
 endif
-if USE_OYSTERS /* TODO switch to use oysters instead of gold piles when I have access to oysters. Will need to switch in multiple locations. */
+if USE_OYSTERS
     create_object OYSTERS { 
-        resource_delta -350
         set_place_for_every_player
         set_gaia_object_only
         min_distance_to_players 8
@@ -514,7 +466,6 @@ if USE_OYSTERS /* TODO switch to use oysters instead of gold piles when I have a
         actor_area_radius 6
     }
     create_object OYSTERS { 
-        resource_delta -350
         set_place_for_every_player
         set_gaia_object_only
         min_distance_to_players 13
@@ -532,26 +483,28 @@ if USE_OYSTERS /* TODO switch to use oysters instead of gold piles when I have a
     }
 
 else
-    create_object GOLD {
+    create_object GOLD { 
+        resource_delta -350
         set_place_for_every_player
         set_gaia_object_only
         min_distance_to_players 8
         max_distance_to_players 12
         set_circular_placement
-        number_of_objects 4
+        number_of_objects 5
         set_tight_grouping
         min_distance_group_placement 2
         avoid_forest_zone 2
         actor_area 100
         actor_area_radius 6
     }
-    create_object GOLD {
+    create_object GOLD { 
+        resource_delta -350
         set_place_for_every_player
         set_gaia_object_only
         min_distance_to_players 13
         max_distance_to_players 20
         set_circular_placement
-        number_of_objects 3
+        number_of_objects 4
         number_of_groups 2
         set_tight_grouping
         avoid_forest_zone 2
@@ -633,28 +586,14 @@ if MANGROVE_THEME
     create_object FISH_FOOD { /* water nomad uses Dorado and Tuna */
         set_place_for_every_player
         set_gaia_object_only
-        min_distance_to_players 9
-        max_distance_to_players 15
+        min_distance_to_players 8
+        max_distance_to_players 16
         set_circular_placement
         number_of_groups 8
         min_distance_group_placement 1
         temp_min_distance_group_placement 4
         avoid_forest_zone 1
         ignore_terrain_restrictions
-    }
-else
-    create_object DEER {
-        set_place_for_every_player
-        set_gaia_object_only
-        min_distance_to_players 15
-        max_distance_to_players 23
-        set_circular_placement
-        set_loose_grouping
-        number_of_groups 2
-        number_of_objects 4
-        min_distance_group_placement 2
-        temp_min_distance_group_placement 11
-        avoid_forest_zone 1
     }
 endif
 create_object STRAGGLER_TREE {
@@ -688,17 +627,6 @@ if AT_LEAST_LARGE
             temp_min_distance_group_placement 55
             min_distance_group_placement 1
             set_loose_grouping
-            avoid_forest_zone 1
-        }
-    else
-        create_object FORAGE {
-            set_gaia_object_only
-            min_distance_to_players   40
-            number_of_objects 5
-            number_of_groups 99
-            temp_min_distance_group_placement 55
-            min_distance_group_placement 2
-            set_tight_grouping
             avoid_forest_zone 1
         }
     endif
@@ -748,8 +676,6 @@ create_object RELIC {
     set_gaia_object_only
     min_distance_to_players   30
 }
-/* TODO adjust gold and stone - what I have for standard resources doesn't seem very balanced yet, so maybe make changes to my map boilerplate code?
- */
 create_object STONE {
     temp_min_distance_group_placement 40
     min_distance_group_placement 10
@@ -812,7 +738,6 @@ create_object STONE {
 }
 if USE_OYSTERS
     create_object OYSTERS { 
-        resource_delta -350
         temp_min_distance_group_placement 28
         min_distance_group_placement 10 
         avoid_forest_zone 1
@@ -871,8 +796,8 @@ if USE_OYSTERS
         endif
     }
     create_object OYSTERS { 
-        resource_delta -350 /* may be a bit much, but still should be decent amount */
         terrain_to_place_on DLC_MANGROVEFOREST
+        temp_min_distance_group_placement 28 
         if MAPSIZE_MINI
             temp_min_distance_group_placement 21
         elseif MAPSIZE_TINY
@@ -894,7 +819,6 @@ if USE_OYSTERS
         elseif MAPSIZE_LUDICROUS
             temp_min_distance_group_placement 64
         endif
-        temp_min_distance_group_placement 28 /* TODO scale */
         number_of_groups 9320
         set_scaling_to_map_size
         if AT_MOST_TINY
@@ -904,7 +828,8 @@ if USE_OYSTERS
         endif
     }
 else
-    create_object GOLD {
+    create_object GOLD { 
+        resource_delta -350
         temp_min_distance_group_placement 28
         min_distance_group_placement 10 
         avoid_forest_zone 1
@@ -960,6 +885,39 @@ else
         elseif MAPSIZE_LUDICROUS
             number_of_groups 78
             temp_min_distance_group_placement 64
+        endif
+    }
+    create_object GOLD { 
+        resource_delta -350
+        terrain_to_place_on DLC_MANGROVEFOREST
+        temp_min_distance_group_placement 28 
+        if MAPSIZE_MINI
+            temp_min_distance_group_placement 21
+        elseif MAPSIZE_TINY
+            temp_min_distance_group_placement 26
+        elseif MAPSIZE_HUGE
+            temp_min_distance_group_placement 42
+        elseif MAPSIZE_GIANT
+            temp_min_distance_group_placement 45
+        elseif MAPSIZE_MASSIVE
+            temp_min_distance_group_placement 46
+        elseif MAPSIZE_ENORMOUS
+            temp_min_distance_group_placement 48
+        elseif MAPSIZE_COLOSSAL
+            temp_min_distance_group_placement 50
+        elseif MAPSIZE_INCREDIBLE
+            temp_min_distance_group_placement 53
+        elseif MAPSIZE_MONSTROUS
+            temp_min_distance_group_placement 57
+        elseif MAPSIZE_LUDICROUS
+            temp_min_distance_group_placement 64
+        endif
+        number_of_groups 9320
+        set_scaling_to_map_size
+        if AT_MOST_TINY
+            min_distance_to_players   20
+        else
+            min_distance_to_players   30
         endif
     }
 endif

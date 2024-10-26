@@ -206,7 +206,8 @@ effect_amount SET_ATTRIBUTE DOCK_C ATTR_TERRAIN_ID 6
 effect_amount SET_ATTRIBUTE DOCK_I ATTR_TERRAIN_ID 6
 effect_amount SET_ATTRIBUTE HARBOR ATTR_TERRAIN_ID 6
 
-
+/* fish traps can only be built on water */
+effect_amount SET_ATTRIBUTE FISH_TRAP ATTR_TERRAIN_ID 6
 
 <LAND_GENERATION>
 

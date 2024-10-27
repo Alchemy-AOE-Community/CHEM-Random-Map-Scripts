@@ -1,0 +1,203 @@
+/* _Example_Script */
+/* A Random Map Script by TechChariot -- 2024-10-27 */
+
+/* This script is provided as a demonstration in how to apply  */
+
+<PLAYER_SETUP>
+direct_placement
+behavior_version 1
+
+
+/* Defining Land Creation Command */
+#const L 32
+
+/* Remove Visual Effect of Dead Fish Trap */
+#const ON_GRID 278
+effect_amount GAIA_SET_ATTRIBUTE ON_GRID ATTR_STORAGE_VALUE 0
+
+/* Configuring Building Blocker */
+#const BLOCKER 1654
+effect_percent GAIA_SET_ATTRIBUTE BLOCKER ATTR_RADIUS_1 50
+effect_percent GAIA_SET_ATTRIBUTE BLOCKER ATTR_RADIUS_2 50
+effect_percent GAIA_MOD_RESOURCE AMOUNT_BUILDING_TRICKLE_WOOD  ATTR_SET 0
+effect_percent GAIA_MOD_RESOURCE AMOUNT_BUILDING_TRICKLE_FOOD  ATTR_SET 0
+effect_percent GAIA_MOD_RESOURCE AMOUNT_BUILDING_TRICKLE_GOLD  ATTR_SET 0
+effect_percent GAIA_MOD_RESOURCE AMOUNT_BUILDING_TRICKLE_STONE ATTR_SET 0
+
+#const BT 0 
+
+/* Disabling Trade Carts and Cogs for Multi-team Games */
+if LOW_RESOURCES
+  #const TRADE_CART_ENABLER 161
+  #const TRADE_COG_ENABLER 180
+  #const TRADE_CARAVAN_ENABLER 48
+  #const HINDU_CARAVANSERAI_ENABLER 518
+  #const PERSIAN_CARAVANSERAI_ENABLER 552  
+  #const SILK_ROAD 499
+  effect_amount DISABLE_TECH TRADE_COG_ENABLER ATTR_DISABLE 180
+  effect_amount DISABLE_TECH TRADE_CART_ENABLER ATTR_DISABLE 161
+  effect_amount DISABLE_TECH TRADE_CARAVAN_ENABLER ATTR_DISABLE 48
+  effect_amount DISABLE_TECH HINDU_CARAVANSERAI_ENABLER ATTR_DISABLE 518
+  effect_amount DISABLE_TECH PERSIAN_CARAVANSERAI_ENABLER ATTR_DISABLE 552
+  effect_amount DISABLE_TECH SILK_ROAD ATTR_DISABLE 499    
+else
+endif
+
+/* Making Solid Eye-Candy Semi-Transparent */
+effect_amount GAIA_SET_ATTRIBUTE RIDGE_SEC1 ATTR_OCCLUSION_MODE 2
+effect_amount GAIA_SET_ATTRIBUTE RIDGE_SEC2 ATTR_OCCLUSION_MODE 2
+effect_amount GAIA_SET_ATTRIBUTE RIDGE_SEC3 ATTR_OCCLUSION_MODE 2
+effect_amount GAIA_SET_ATTRIBUTE RIDGE_TEC1 ATTR_OCCLUSION_MODE 2
+effect_amount GAIA_SET_ATTRIBUTE RIDGE_TEC2 ATTR_OCCLUSION_MODE 2
+
+<ELEVATION_GENERATION>
+
+#define ELEVATION_EFFECTS
+if ELEVATION_EFFECTS
+    /* Elevation of Base Terrain */
+    create_elevation 3 { base_terrain BT if TINY_MAP number_of_tiles 1600 elseif SMALL_MAP number_of_tiles 2400 elseif MEDIUM_MAP number_of_tiles 3200 elseif LARGE_MAP number_of_tiles 4571 elseif HUGE_MAP number_of_tiles 5486 elseif GIGANTIC_MAP number_of_tiles 6629 endif number_of_clumps 100 set_scale_by_groups enable_balanced_elevation } 
+endif
+
+<TERRAIN_GENERATION>
+#define SAMPLE_TERRAINS
+if SAMPLE_TERRAINS
+    /* Increasing Reach of Corner Non-Builable Terrain into Center of Map */
+    create_terrain MTOL { base_terrain BT land_percent 100 number_of_clumps 9320 set_scale_by_groups height_limits 6 8 }
+    /* Introducing Mountain to Base Transition Terrain */
+
+endif
+
+<OBJECTS_GENERATION>
+#const OFF_GRID 647
+/* BEGIN_OBJECTS_AUTOSCRIBE */
+
+/* END_OBJECTS_AUTOSCRIBE */
+
+if REGICIDE create_object KING { set_place_for_every_player find_closest terrain_to_place_on MTSH } endif
+
+<LAND_GENERATION>
+base_terrain BT
+/* base_layer   BL */
+
+/* LAND_AUTOSCRIBE */
+L { terrain_type DIRT base_elevation 0 base_size 1 land_percent 1 other_zone_avoidance_distance 2 land_position 0  0 }																
+L { terrain_type DIRT base_elevation 0 base_size 1 land_percent 1 other_zone_avoidance_distance 2 land_position 10  0 }																
+L { terrain_type DIRT base_elevation 0 base_size 1 land_percent 1 other_zone_avoidance_distance 2 land_position 20  0 }																
+L { terrain_type DIRT base_elevation 0 base_size 1 land_percent 1 other_zone_avoidance_distance 2 land_position 30  0 }																
+L { terrain_type DIRT base_elevation 0 base_size 1 land_percent 1 other_zone_avoidance_distance 2 land_position 40  0 }																
+L { terrain_type DIRT base_elevation 0 base_size 1 land_percent 1 other_zone_avoidance_distance 2 land_position 50  0 }																
+L { terrain_type DIRT base_elevation 0 base_size 1 land_percent 1 other_zone_avoidance_distance 2 land_position 60  0 }																
+L { terrain_type DIRT base_elevation 0 base_size 1 land_percent 1 other_zone_avoidance_distance 2 land_position 70  0 }																
+L { terrain_type DIRT base_elevation 0 base_size 1 land_percent 1 other_zone_avoidance_distance 2 land_position 80  0 }																
+L { terrain_type DIRT base_elevation 0 base_size 1 land_percent 1 other_zone_avoidance_distance 2 land_position 90  0 }																
+L { terrain_type DIRT base_elevation 0 base_size 1 land_percent 1 other_zone_avoidance_distance 2 land_position 100  0 }																
+L { terrain_type DIRT base_elevation 0 base_size 1 land_percent 1 other_zone_avoidance_distance 2 land_position 0  10 }																
+L { terrain_type DIRT base_elevation 0 base_size 1 land_percent 1 other_zone_avoidance_distance 2 land_position 10  10 }																
+L { terrain_type DIRT base_elevation 0 base_size 1 land_percent 1 other_zone_avoidance_distance 2 land_position 20  10 }																
+L { terrain_type DIRT base_elevation 0 base_size 1 land_percent 1 other_zone_avoidance_distance 2 land_position 30  10 }																
+L { terrain_type DIRT base_elevation 0 base_size 1 land_percent 1 other_zone_avoidance_distance 2 land_position 40  10 }																
+L { terrain_type DIRT base_elevation 0 base_size 1 land_percent 1 other_zone_avoidance_distance 2 land_position 50  10 }																
+L { terrain_type DIRT base_elevation 0 base_size 1 land_percent 1 other_zone_avoidance_distance 2 land_position 60  10 }																
+L { terrain_type DIRT base_elevation 0 base_size 1 land_percent 1 other_zone_avoidance_distance 2 land_position 70  10 }																
+L { terrain_type DIRT base_elevation 0 base_size 1 land_percent 1 other_zone_avoidance_distance 2 land_position 80  10 }																
+L { terrain_type DIRT base_elevation 0 base_size 1 land_percent 1 other_zone_avoidance_distance 2 land_position 90  10 }																
+L { terrain_type DIRT base_elevation 0 base_size 1 land_percent 1 other_zone_avoidance_distance 2 land_position 100  10 }																
+L { terrain_type DIRT base_elevation 0 base_size 1 land_percent 1 other_zone_avoidance_distance 2 land_position 0  20 }																
+L { terrain_type DIRT base_elevation 0 base_size 1 land_percent 1 other_zone_avoidance_distance 2 land_position 10  20 }																
+L { terrain_type DIRT base_elevation 0 base_size 1 land_percent 1 other_zone_avoidance_distance 2 land_position 20  20 }																
+L { terrain_type DIRT base_elevation 0 base_size 1 land_percent 1 other_zone_avoidance_distance 2 land_position 30  20 }																
+L { terrain_type DIRT base_elevation 0 base_size 1 land_percent 1 other_zone_avoidance_distance 2 land_position 40  20 }																
+L { terrain_type DIRT base_elevation 0 base_size 1 land_percent 1 other_zone_avoidance_distance 2 land_position 50  20 }																
+L { terrain_type DIRT base_elevation 0 base_size 1 land_percent 1 other_zone_avoidance_distance 2 land_position 60  20 }																
+L { terrain_type DIRT base_elevation 0 base_size 1 land_percent 1 other_zone_avoidance_distance 2 land_position 70  20 }																
+L { terrain_type DIRT base_elevation 0 base_size 1 land_percent 1 other_zone_avoidance_distance 2 land_position 80  20 }																
+L { terrain_type DIRT base_elevation 0 base_size 1 land_percent 1 other_zone_avoidance_distance 2 land_position 90  20 }																
+L { terrain_type DIRT base_elevation 0 base_size 1 land_percent 1 other_zone_avoidance_distance 2 land_position 100  20 }																
+L { terrain_type DIRT base_elevation 0 base_size 1 land_percent 1 other_zone_avoidance_distance 2 land_position 0  30 }																
+L { terrain_type DIRT base_elevation 0 base_size 1 land_percent 1 other_zone_avoidance_distance 2 land_position 10  30 }																
+L { terrain_type DIRT base_elevation 0 base_size 1 land_percent 1 other_zone_avoidance_distance 2 land_position 20  30 }																
+L { terrain_type DIRT base_elevation 0 base_size 1 land_percent 1 other_zone_avoidance_distance 2 land_position 30  30 }																
+L { terrain_type DIRT base_elevation 0 base_size 1 land_percent 1 other_zone_avoidance_distance 2 land_position 40  30 }																
+L { terrain_type DIRT base_elevation 0 base_size 1 land_percent 1 other_zone_avoidance_distance 2 land_position 50  30 }																
+L { terrain_type DIRT base_elevation 0 base_size 1 land_percent 1 other_zone_avoidance_distance 2 land_position 60  30 }																
+L { terrain_type DIRT base_elevation 0 base_size 1 land_percent 1 other_zone_avoidance_distance 2 land_position 70  30 }																
+L { terrain_type DIRT base_elevation 0 base_size 1 land_percent 1 other_zone_avoidance_distance 2 land_position 80  30 }																
+L { terrain_type DIRT base_elevation 0 base_size 1 land_percent 1 other_zone_avoidance_distance 2 land_position 90  30 }																
+L { terrain_type DIRT base_elevation 0 base_size 1 land_percent 1 other_zone_avoidance_distance 2 land_position 100  30 }																
+L { terrain_type DIRT base_elevation 0 base_size 1 land_percent 1 other_zone_avoidance_distance 2 land_position 0  40 }																
+L { terrain_type DIRT base_elevation 0 base_size 1 land_percent 1 other_zone_avoidance_distance 2 land_position 10  40 }																
+L { terrain_type DIRT base_elevation 0 base_size 1 land_percent 1 other_zone_avoidance_distance 2 land_position 20  40 }																
+L { terrain_type DIRT base_elevation 0 base_size 1 land_percent 1 other_zone_avoidance_distance 2 land_position 30  40 }																
+L { terrain_type DIRT base_elevation 0 base_size 1 land_percent 1 other_zone_avoidance_distance 2 land_position 40  40 }																
+L { terrain_type DIRT base_elevation 0 base_size 1 land_percent 1 other_zone_avoidance_distance 2 land_position 50  40 }																
+L { terrain_type DIRT base_elevation 0 base_size 1 land_percent 1 other_zone_avoidance_distance 2 land_position 60  40 }																
+L { terrain_type DIRT base_elevation 0 base_size 1 land_percent 1 other_zone_avoidance_distance 2 land_position 70  40 }																
+L { terrain_type DIRT base_elevation 0 base_size 1 land_percent 1 other_zone_avoidance_distance 2 land_position 80  40 }																
+L { terrain_type DIRT base_elevation 0 base_size 1 land_percent 1 other_zone_avoidance_distance 2 land_position 90  40 }																
+L { terrain_type DIRT base_elevation 0 base_size 1 land_percent 1 other_zone_avoidance_distance 2 land_position 100  40 }																
+L { terrain_type DIRT base_elevation 0 base_size 1 land_percent 1 other_zone_avoidance_distance 2 land_position 0  50 }																
+L { terrain_type DIRT base_elevation 0 base_size 1 land_percent 1 other_zone_avoidance_distance 2 land_position 10  50 }																
+L { terrain_type DIRT base_elevation 0 base_size 1 land_percent 1 other_zone_avoidance_distance 2 land_position 20  50 }																
+L { terrain_type DIRT base_elevation 0 base_size 1 land_percent 1 other_zone_avoidance_distance 2 land_position 30  50 }																
+L { terrain_type DIRT base_elevation 0 base_size 1 land_percent 1 other_zone_avoidance_distance 2 land_position 40  50 }																
+L { terrain_type DIRT base_elevation 0 base_size 1 land_percent 1 other_zone_avoidance_distance 2 land_position 50  50 }																
+L { terrain_type DIRT base_elevation 0 base_size 1 land_percent 1 other_zone_avoidance_distance 2 land_position 60  50 }																
+L { terrain_type DIRT base_elevation 0 base_size 1 land_percent 1 other_zone_avoidance_distance 2 land_position 70  50 }																
+L { terrain_type DIRT base_elevation 0 base_size 1 land_percent 1 other_zone_avoidance_distance 2 land_position 80  50 }																
+L { terrain_type DIRT base_elevation 0 base_size 1 land_percent 1 other_zone_avoidance_distance 2 land_position 90  50 }																
+L { terrain_type DIRT base_elevation 0 base_size 1 land_percent 1 other_zone_avoidance_distance 2 land_position 100  50 }																
+L { terrain_type DIRT base_elevation 0 base_size 1 land_percent 1 other_zone_avoidance_distance 2 land_position 0  60 }																
+L { terrain_type DIRT base_elevation 0 base_size 1 land_percent 1 other_zone_avoidance_distance 2 land_position 10  60 }																
+L { terrain_type DIRT base_elevation 0 base_size 1 land_percent 1 other_zone_avoidance_distance 2 land_position 20  60 }																
+L { terrain_type DIRT base_elevation 0 base_size 1 land_percent 1 other_zone_avoidance_distance 2 land_position 30  60 }																
+L { terrain_type DIRT base_elevation 0 base_size 1 land_percent 1 other_zone_avoidance_distance 2 land_position 40  60 }																
+L { terrain_type DIRT base_elevation 0 base_size 1 land_percent 1 other_zone_avoidance_distance 2 land_position 50  60 }																
+L { terrain_type DIRT base_elevation 0 base_size 1 land_percent 1 other_zone_avoidance_distance 2 land_position 60  60 }																
+L { terrain_type DIRT base_elevation 0 base_size 1 land_percent 1 other_zone_avoidance_distance 2 land_position 70  60 }																
+L { terrain_type DIRT base_elevation 0 base_size 1 land_percent 1 other_zone_avoidance_distance 2 land_position 80  60 }																
+L { terrain_type DIRT base_elevation 0 base_size 1 land_percent 1 other_zone_avoidance_distance 2 land_position 90  60 }																
+L { terrain_type DIRT base_elevation 0 base_size 1 land_percent 1 other_zone_avoidance_distance 2 land_position 100  60 }																
+L { terrain_type DIRT base_elevation 0 base_size 1 land_percent 1 other_zone_avoidance_distance 2 land_position 0  70 }																
+L { terrain_type DIRT base_elevation 0 base_size 1 land_percent 1 other_zone_avoidance_distance 2 land_position 10  70 }																
+L { terrain_type DIRT base_elevation 0 base_size 1 land_percent 1 other_zone_avoidance_distance 2 land_position 20  70 }																
+L { terrain_type DIRT base_elevation 0 base_size 1 land_percent 1 other_zone_avoidance_distance 2 land_position 30  70 }																
+L { terrain_type DIRT base_elevation 0 base_size 1 land_percent 1 other_zone_avoidance_distance 2 land_position 40  70 }																
+L { terrain_type DIRT base_elevation 0 base_size 1 land_percent 1 other_zone_avoidance_distance 2 land_position 50  70 }																
+L { terrain_type DIRT base_elevation 0 base_size 1 land_percent 1 other_zone_avoidance_distance 2 land_position 60  70 }																
+L { terrain_type DIRT base_elevation 0 base_size 1 land_percent 1 other_zone_avoidance_distance 2 land_position 70  70 }																
+L { terrain_type DIRT base_elevation 0 base_size 1 land_percent 1 other_zone_avoidance_distance 2 land_position 80  70 }																
+L { terrain_type DIRT base_elevation 0 base_size 1 land_percent 1 other_zone_avoidance_distance 2 land_position 90  70 }																
+L { terrain_type DIRT base_elevation 0 base_size 1 land_percent 1 other_zone_avoidance_distance 2 land_position 100  70 }																
+L { terrain_type DIRT base_elevation 0 base_size 1 land_percent 1 other_zone_avoidance_distance 2 land_position 0  80 }																
+L { terrain_type DIRT base_elevation 0 base_size 1 land_percent 1 other_zone_avoidance_distance 2 land_position 10  80 }																
+L { terrain_type DIRT base_elevation 0 base_size 1 land_percent 1 other_zone_avoidance_distance 2 land_position 20  80 }																
+L { terrain_type DIRT base_elevation 0 base_size 1 land_percent 1 other_zone_avoidance_distance 2 land_position 30  80 }																
+L { terrain_type DIRT base_elevation 0 base_size 1 land_percent 1 other_zone_avoidance_distance 2 land_position 40  80 }																
+L { terrain_type DIRT base_elevation 0 base_size 1 land_percent 1 other_zone_avoidance_distance 2 land_position 50  80 }																
+L { terrain_type DIRT base_elevation 0 base_size 1 land_percent 1 other_zone_avoidance_distance 2 land_position 60  80 }																
+L { terrain_type DIRT base_elevation 0 base_size 1 land_percent 1 other_zone_avoidance_distance 2 land_position 70  80 }																
+L { terrain_type DIRT base_elevation 0 base_size 1 land_percent 1 other_zone_avoidance_distance 2 land_position 80  80 }																
+L { terrain_type DIRT base_elevation 0 base_size 1 land_percent 1 other_zone_avoidance_distance 2 land_position 90  80 }																
+L { terrain_type DIRT base_elevation 0 base_size 1 land_percent 1 other_zone_avoidance_distance 2 land_position 100  80 }																
+L { terrain_type DIRT base_elevation 0 base_size 1 land_percent 1 other_zone_avoidance_distance 2 land_position 0  90 }																
+L { terrain_type DIRT base_elevation 0 base_size 1 land_percent 1 other_zone_avoidance_distance 2 land_position 10  90 }																
+L { terrain_type DIRT base_elevation 0 base_size 1 land_percent 1 other_zone_avoidance_distance 2 land_position 20  90 }																
+L { terrain_type DIRT base_elevation 0 base_size 1 land_percent 1 other_zone_avoidance_distance 2 land_position 30  90 }																
+L { terrain_type DIRT base_elevation 0 base_size 1 land_percent 1 other_zone_avoidance_distance 2 land_position 40  90 }																
+L { terrain_type DIRT base_elevation 0 base_size 1 land_percent 1 other_zone_avoidance_distance 2 land_position 50  90 }																
+L { terrain_type DIRT base_elevation 0 base_size 1 land_percent 1 other_zone_avoidance_distance 2 land_position 60  90 }																
+L { terrain_type DIRT base_elevation 0 base_size 1 land_percent 1 other_zone_avoidance_distance 2 land_position 70  90 }																
+L { terrain_type DIRT base_elevation 0 base_size 1 land_percent 1 other_zone_avoidance_distance 2 land_position 80  90 }																
+L { terrain_type DIRT base_elevation 0 base_size 1 land_percent 1 other_zone_avoidance_distance 2 land_position 90  90 }																
+L { terrain_type DIRT base_elevation 0 base_size 1 land_percent 1 other_zone_avoidance_distance 2 land_position 100  90 }																
+L { terrain_type DIRT base_elevation 0 base_size 1 land_percent 1 other_zone_avoidance_distance 2 land_position 0  100 }																
+L { terrain_type DIRT base_elevation 0 base_size 1 land_percent 1 other_zone_avoidance_distance 2 land_position 10  100 }																
+L { terrain_type DIRT base_elevation 0 base_size 1 land_percent 1 other_zone_avoidance_distance 2 land_position 20  100 }																
+L { terrain_type DIRT base_elevation 0 base_size 1 land_percent 1 other_zone_avoidance_distance 2 land_position 30  100 }																
+L { terrain_type DIRT base_elevation 0 base_size 1 land_percent 1 other_zone_avoidance_distance 2 land_position 40  100 }																
+L { terrain_type DIRT base_elevation 0 base_size 1 land_percent 1 other_zone_avoidance_distance 2 land_position 50  100 }																
+L { terrain_type DIRT base_elevation 0 base_size 1 land_percent 1 other_zone_avoidance_distance 2 land_position 60  100 }																
+L { terrain_type DIRT base_elevation 0 base_size 1 land_percent 1 other_zone_avoidance_distance 2 land_position 70  100 }																
+L { terrain_type DIRT base_elevation 0 base_size 1 land_percent 1 other_zone_avoidance_distance 2 land_position 80  100 }																
+L { terrain_type DIRT base_elevation 0 base_size 1 land_percent 1 other_zone_avoidance_distance 2 land_position 90  100 }																
+L { terrain_type DIRT base_elevation 0 base_size 1 land_percent 1 other_zone_avoidance_distance 2 land_position 100  100 }																

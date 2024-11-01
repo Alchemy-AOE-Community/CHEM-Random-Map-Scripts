@@ -445,6 +445,8 @@ effect_amount SET_ATTRIBUTE TEMPLE_RUIN ATTR_TERRAIN_ID 4
 RADIOACTIVE_PLANET, DESERT_PLANET, DIRT4_PLANET, CITY_PLANET, SNOW_PLANET, LEAVES_PLANET, DIRT_MUD_MANGROVE_MAZE_PLANET, BOGLAND_MANGROVE_PLANET, SAVANNAH_PLANET, DIRT_PLANET, FARMLAND_PLANET, SNOW_HEAVY_PLANET, BARREN_PLANET
 no jungle
 add a const for gold added to one of the planets, and once I've done so, add an if-else at the end that adds gold onto the rocks when no gold has appeared. Stone doesn't need this sort of treatment.
+
+TODO biomes to add: great plains, lake (would be some type of terrain - likely grass - mixed with small lakes on elevation 2 - lakes would need to avoid other planets by a small amount - 1 tile should suffice), cracked (needs definition)
  */
 #define FULL_RANDOM_BIOMES
 if FULL_RANDOM_BIOMES 
@@ -774,7 +776,9 @@ if FULL_RANDOM_BIOMES
 		#define BARREN_PLANET_3
 	endif
 	if BARREN_PLANET_3 /* previous planet, #2, selected again */
-		if BARREN_PLANET_2 /* Only occurs if P1 == P2, in which case as P3 == P2, P3 == P1. Therefore, in the case, the selection cannot be Snow heavy because snow heavy can't be selected for P3, and by the established equalities, snow heavy isn't P1 or P2 either */
+		if BARREN_PLANET_1
+			#define SNOW_HEAVY_PLANET_3
+		elseif BARREN_PLANET_2 /* Only occurs if P1 == P2, in which case as P3 == P2, P3 == P1. Therefore, in the case, the selection cannot be Snow heavy because snow heavy can't be selected for P3, and by the established equalities, snow heavy isn't P1 or P2 either */
 			#define SNOW_HEAVY_PLANET_3
 		else
 			#const PN3  70  /* GRAVEL  */
@@ -1781,7 +1785,7 @@ if BARREN_PLANET
 	}
 endif
 if CITY_PLANET
-/*	road terrains: ROAD, ROAD2, road_snow (38), road_fungus (39), DLC_DRYROAD, DLC_JUNGLEROAD (many of the preceeding are obsolete and can't be layered)
+	/*	road terrains: ROAD, ROAD2, road_snow (38), road_fungus (39), DLC_DRYROAD, DLC_JUNGLEROAD (many of the preceeding are obsolete and can't be layered)
 
 	another road_fungus (75), road gravel (78), DLC_ROADGRAVEL (obsolete, cannot have resources on it)
 
@@ -2455,7 +2459,6 @@ if RADIOACTIVE_PLANET
 		set_gaia_object_only
 		number_of_groups 9320
 		avoid_forest_zone 3
-		avoid_cliff_zone 3
 		group_placement_radius rnd(1,2)
 		set_circular_placement
 		max_distance_to_other_zones 2
@@ -2472,7 +2475,6 @@ if RADIOACTIVE_PLANET
 			set_gaia_object_only
 			number_of_groups 9320
 			avoid_forest_zone 3
-			avoid_cliff_zone 3
 			max_distance_to_other_zones 2
 			avoid_actor_area 2
 			actor_area 3
@@ -2534,7 +2536,6 @@ create_object VILLAGER {
 	else
 		avoid_forest_zone 2
 	endif
-	avoid_cliff_zone 2
 	actor_area 10
 	actor_area_radius 5
 }
@@ -2551,7 +2552,6 @@ create_object VILLAGER {
 	else
 		avoid_forest_zone 2
 	endif
-	avoid_cliff_zone 2
 	actor_area 10
 	actor_area_radius 5
 }
@@ -2568,7 +2568,6 @@ create_object VILLAGER {
 	else
 		avoid_forest_zone 2
 	endif
-	avoid_cliff_zone 2
 	actor_area 10
 	actor_area_radius 5
 }
@@ -2585,7 +2584,6 @@ create_object VILLAGER {
 	else
 		avoid_forest_zone 2
 	endif
-	avoid_cliff_zone 2
 	actor_area 10
 	actor_area_radius 5
 }
@@ -2596,7 +2594,6 @@ create_object FLAG_A {
 	terrain_to_place_on FARMLAND1
 	temp_min_distance_group_placement 1
 	avoid_forest_zone 2
-	avoid_cliff_zone 2
 }
 
 
@@ -2614,7 +2611,6 @@ if DESERT_PLANET
 		min_distance_group_placement 2
 		terrain_to_place_on DESERT
 		avoid_forest_zone 1
-		avoid_cliff_zone 1
 		actor_area 2
 		actor_area_radius 3
 	}
@@ -2630,7 +2626,6 @@ if DESERT_PLANET
 			min_distance_group_placement 2
 			terrain_to_place_on DESERT
 			avoid_forest_zone 1
-			avoid_cliff_zone 1
 			actor_area 3
 			actor_area_radius 3
 		}
@@ -2652,7 +2647,6 @@ if DESERT_PLANET
 			min_distance_group_placement 2
 			terrain_to_place_on DESERT
 			avoid_forest_zone 1
-			avoid_cliff_zone 1
 			actor_area 4
 			actor_area_radius 4
 		}
@@ -2668,7 +2662,6 @@ if DESERT_PLANET
 			min_distance_group_placement 2
 			terrain_to_place_on DESERT
 			avoid_forest_zone 1
-			avoid_cliff_zone 1
 			actor_area 4
 			actor_area_radius 4
 		}
@@ -2685,7 +2678,6 @@ if DESERT_PLANET
 			min_distance_group_placement 2
 			terrain_to_place_on DESERT
 			avoid_forest_zone 1
-			avoid_cliff_zone 1
 			actor_area 4
 			actor_area_radius 4
 		}
@@ -2696,7 +2688,6 @@ if DESERT_PLANET
 			set_place_for_every_player
 			terrain_to_place_on DESERT
 			avoid_forest_zone 1
-			avoid_cliff_zone 1
 		} 
 	end_random
 	/* eye-candy */
@@ -2863,7 +2854,6 @@ if SNOW_PLANET /* similar to leaves planet */
 		set_loose_grouping
 		set_gaia_object_only
 		/* avoid_forest_zone 1 */
-		avoid_cliff_zone 1
 		max_distance_to_other_zones 1
 		avoid_actor_area 4
 		actor_area 4
@@ -2996,7 +2986,6 @@ if LEAVES_PLANET
 		set_loose_grouping
 		set_gaia_object_only
 		/* avoid_forest_zone 1 */
-		avoid_cliff_zone 1
 		max_distance_to_other_zones 1
 		avoid_actor_area 4
 		actor_area 4
@@ -3150,7 +3139,6 @@ if DIRT_MUD_MANGROVE_MAZE_PLANET
 			set_loose_grouping
 			set_gaia_object_only
 			/* avoid_forest_zone 1 */
-			avoid_cliff_zone 1
 			max_distance_to_other_zones 1
 			avoid_actor_area 4
 			actor_area 4
@@ -3325,7 +3313,6 @@ if BOGLAND_MANGROVE_PLANET
 			set_loose_grouping
 			set_gaia_object_only
 			avoid_forest_zone 1
-			avoid_cliff_zone 1
 			max_distance_to_other_zones 1
 			avoid_actor_area 4
 			actor_area 4
@@ -3719,7 +3706,6 @@ if FARMLAND_PLANET
 			actor_area_radius 3
 			avoid_actor_area 2
 			avoid_actor_area 3
-			avoid_cliff_zone 1
 			avoid_forest_zone 1
 			temp_min_distance_group_placement 5
 			min_distance_group_placement 1
@@ -3738,7 +3724,6 @@ if FARMLAND_PLANET
 			actor_area_radius 3
 			avoid_actor_area 2
 			avoid_actor_area 3
-			avoid_cliff_zone 1
 			avoid_forest_zone 1
 			temp_min_distance_group_placement 5
 			min_distance_group_placement 1
@@ -3765,7 +3750,6 @@ if FARMLAND_PLANET
 		set_scaling_to_map_size
 		min_distance_group_placement 2
 		avoid_forest_zone 1
-		avoid_cliff_zone 1
 		set_gaia_object_only
 		set_loose_grouping
 		terrain_to_place_on FARMLAND1
@@ -3813,7 +3797,6 @@ if SNOW_HEAVY_PLANET
 		set_scaling_to_map_size
 		terrain_to_place_on SNOW_HEAVY
 		avoid_forest_zone 1
-		avoid_cliff_zone 1
 		max_distance_to_other_zones 1
 	}
 	start_random
@@ -3833,7 +3816,6 @@ if SNOW_HEAVY_PLANET
 			set_loose_grouping
 			set_gaia_object_only
 			avoid_forest_zone 1
-			avoid_cliff_zone 1
 			max_distance_to_other_zones 1
 			avoid_actor_area 4
 			actor_area 4
@@ -3852,7 +3834,6 @@ if SNOW_HEAVY_PLANET
 			set_loose_grouping
 			set_gaia_object_only
 			avoid_forest_zone 1
-			avoid_cliff_zone 1
 			max_distance_to_other_zones 1
 			avoid_actor_area 4
 			actor_area 4
@@ -3919,7 +3900,6 @@ if BARREN_PLANET /* feedback: reduce gold/stone */
 		set_gaia_object_only
 		number_of_groups 9320
 		avoid_forest_zone 3
-		avoid_cliff_zone 3
 		group_placement_radius rnd(1,2)
 		set_circular_placement
 		max_distance_to_other_zones 2
@@ -3938,7 +3918,6 @@ if BARREN_PLANET /* feedback: reduce gold/stone */
 		set_gaia_object_only
 		number_of_groups 9320
 		avoid_forest_zone 3
-		avoid_cliff_zone 3
 		group_placement_radius 1
 		set_circular_placement
 		max_distance_to_other_zones 2
@@ -4002,7 +3981,6 @@ if CITY_PLANET /* moved to end, so that its ruins won't block more important obj
 			set_scaling_to_map_size
 			min_distance_group_placement 2
 			avoid_forest_zone 1
-			avoid_cliff_zone 1
 			set_gaia_object_only
 			set_loose_grouping
 			terrain_to_place_on ROAD
@@ -4017,7 +3995,6 @@ if CITY_PLANET /* moved to end, so that its ruins won't block more important obj
 			set_scaling_to_map_size
 			min_distance_group_placement 2
 			avoid_forest_zone 1
-			avoid_cliff_zone 1
 			set_gaia_object_only
 			terrain_to_place_on ROAD
 			actor_area_to_place_in 7
@@ -4030,7 +4007,6 @@ if CITY_PLANET /* moved to end, so that its ruins won't block more important obj
 			set_scaling_to_map_size
 			min_distance_group_placement 2
 			avoid_forest_zone 1
-			avoid_cliff_zone 1
 			set_gaia_object_only
 			set_loose_grouping
 			terrain_to_place_on ROAD
@@ -4211,7 +4187,7 @@ else
 endif
 
 if LOW_WOOD
-	create_object TREE_J { /* TODO check to see if there's a forest zone (and disable in that case), or increase if I ever make 4 different woodless biomes */
+	create_object TREE_J { /* TODO check to see if there's a forest zone (and disable in that case), or increase if I ever make 4 different woodless biomes - also check to ensure this wasn't broken by an update. */
 		number_of_objects 9320
 		temp_min_distance_group_placement 1
 		terrain_to_place_on DLC_ROCK
@@ -4219,12 +4195,21 @@ if LOW_WOOD
 	}
 else
 endif
-/* add relics, 1 per planet, or just place 2-5 relics - I'll go 2-5 relics TODO scale for different map sizes? */
+/* add relics, 1 per planet, or just place 2-5 relics - I'll go 2-5 relics TODO scale for different map sizes?
+4/5/5/5/7/8 / 20+
+ */
 create_object RELIC {
-	number_of_objects rnd(2,6)
-	temp_min_distance_group_placement rnd(30,50)  /*  scale for different map sizes */
+	if AT_MOST_MEDIUM
+		number_of_objects rnd(2,6)
+		temp_min_distance_group_placement rnd(30,50) 
+	elseif AT_LEAST_HUGE /* TODO test the at least huge and else cases */
+		number_of_objects rnd(20,60)
+		temp_min_distance_group_placement rnd(60,200) 
+	else /* normal or large map size */
+		number_of_objects /* 10 */ rnd(3,10)
+		temp_min_distance_group_placement rnd(35,80) 
+	endif
 	max_distance_to_other_zones 3
-	avoid_cliff_zone 1
 	avoid_forest_zone 1
 }
 <LAND_GENERATION>

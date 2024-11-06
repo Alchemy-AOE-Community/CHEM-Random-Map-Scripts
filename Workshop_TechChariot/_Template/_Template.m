@@ -1,6 +1,6 @@
-%Shimmerpool Land Generation
+%Template Land Generation
 %TechChariot
-%11.06.2023
+%2024-11-06
 
 clear all
 close all
@@ -74,4 +74,4 @@ RMS_ForgeV4(filename,CODE);
 disp(["Run Completed " datestr(clock) "..."])
 toc
 
-%ObjectAutoscribeV10('_Example_Script.ods')
+%ObjectAutoscribeV10('_Template.ods')

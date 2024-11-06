@@ -381,9 +381,18 @@ create_terrain DLC_MANGROVESHALLOW {
     land_percent 100
     number_of_clumps 9320
 }
-create_terrain DLC_REEDSBEACH {
+create_terrain DLC_REEDSBEACH { /* TODO change so that there's only 4-5 tiles of mangrove forest, plus 2 of this reeds beach - should take roughly 10 minutes to chop through
+
+wood gathering speeds:
+base: 23.4 w/min
+DBA: 28.08
+BS: 33.696 - 1 vil with the mule cart would take ~3 minutes/tree (so 1.5 mins with 2 and mule cart)
+TMS: 37.0656
+
+ */
     base_terrain DLC_MANGROVESHALLOW
     land_percent 100
+    /*
     if MAPSIZE_MINI /* map width * 0.15  */
         spacing_to_other_terrain_types 8 /* needed to shrink for reasons */
     elseif MAPSIZE_TINY
@@ -413,15 +422,51 @@ create_terrain DLC_REEDSBEACH {
     else /* MAPSIZE_LUDICROUS */
         spacing_to_other_terrain_types 72 /* It appears that this is a bit slow to generate */
     endif
+    */
+    if MAPSIZE_MINI /* map width * 0.15, plus additional...  */
+        spacing_to_other_terrain_types 8 
+    elseif MAPSIZE_TINY
+        spacing_to_other_terrain_types 19 
+    elseif MAPSIZE_SMALL
+        spacing_to_other_terrain_types 28
+    elseif MAPSIZE_MEDIUM
+        spacing_to_other_terrain_types 33
+    elseif MAPSIZE_NORMAL
+        spacing_to_other_terrain_types 40
+    elseif MAPSIZE_LARGE
+        spacing_to_other_terrain_types 45
+    elseif MAPSIZE_HUGE
+        spacing_to_other_terrain_types 49
+    elseif MAPSIZE_GIANT
+        spacing_to_other_terrain_types 52
+    elseif MAPSIZE_MASSIVE
+        spacing_to_other_terrain_types 57
+    elseif MAPSIZE_ENORMOUS
+        spacing_to_other_terrain_types 64
+    elseif MAPSIZE_COLOSSAL
+        spacing_to_other_terrain_types 67
+    elseif MAPSIZE_INCREDIBLE
+        spacing_to_other_terrain_types 76
+    elseif MAPSIZE_MONSTROUS
+        spacing_to_other_terrain_types 85
+    else /* MAPSIZE_LUDICROUS */
+        spacing_to_other_terrain_types 103 /* It appears that this is a bit slow to generate */
+    endif
 }
 create_terrain DLC_MANGROVEFOREST {
     base_terrain DLC_REEDSBEACH
     land_percent 100
     spacing_to_other_terrain_types 2 /* Would do 1, but that's nearly invisible */
 }
-create_terrain DLC_DIRT4 {
+create_terrain DLC_DIRT4 { /* TODO change to spacing to other terrain_types 4 for all map sizes, then add remainder to the reeds beach terrain above */
     base_terrain DLC_MANGROVEFOREST
     land_percent 100
+    if MAPSIZE_MINI
+        spacing_to_other_terrain_types 4 
+    else
+        spacing_to_other_terrain_types 5
+    endif
+    /*
     if MAPSIZE_MINI /* map width * 0.15  */
         spacing_to_other_terrain_types 4 /* needed to shrink for reasons */
     elseif MAPSIZE_TINY
@@ -451,6 +496,7 @@ create_terrain DLC_DIRT4 {
     else /* MAPSIZE_LUDICROUS */
         spacing_to_other_terrain_types 36 /* It appears that this is a bit slow to generate */
     endif
+    */
 }
 create_terrain DLC_BOGLAND {
     base_terrain DLC_DIRT4
@@ -476,6 +522,21 @@ create_terrain WATER {
     number_of_clumps 12
     spacing_to_other_terrain_types 2
     terrain_mask 2
+}
+create_terrain DLC_MANGROVEFOREST {
+    base_terrain DLC_MANGROVESHALLOW
+    if AT_MOST_TINY
+        land_percent 1 /* work on scaling */
+        number_of_clumps 10
+    elseif AT_LEAST_MEDIUM
+        land_percent 3
+        number_of_clumps 24
+        /* TODO more clumps at larger map sizes */
+    else 
+        land_percent 2
+        number_of_clumps 12
+    endif
+    spacing_to_other_terrain_types 2
 }
 /* TODO add in patches of water terrain into the mangrove area: should make walling trickier against ships, thereby increasing danger level against demos.
 create_terrain DLC_BOGLAND {
@@ -506,11 +567,16 @@ elseif MAPSIZE_MONSTROUS create_actor_area 200 200 1234 60
 
 elseif MAPSIZE_LUDICROUS create_actor_area 240 240 1234 120
 endif
-create_object BUILDING {
+create_object IRON_BOAR { /* just a random boar placed in the very center of the map, surrounded by trees. */
+    place_on_specific_land_id 1
+    max_distance_to_players 0
+    resource_delta 1300 /* from 700 to 2000 food */
+}
+create_object BUILDING { 
     second_object DLC_DEADTREE
     number_of_objects 20
     set_scaling_to_map_size
-    find_closest_to_map_center
+    find_closest_to_map_center /* even without the iron boar, this would avoid the exact center square */
     place_on_specific_land_id 1
 }
 
@@ -569,11 +635,6 @@ create_object DLC_DEADTREE { /* consider making these unlambable with second_obj
     terrain_to_place_on DLC_CRACKED
     min_distance_to_players 4
     max_distance_to_players 6
-}
-create_object IRON_BOAR { /* just a random boar placed in the very center of the map, surrounded by trees. */
-    place_on_specific_land_id 1
-    max_distance_to_players 0
-    resource_delta 1300 /* from 700 to 2000 food */
 }
 
 create_object BOAR {

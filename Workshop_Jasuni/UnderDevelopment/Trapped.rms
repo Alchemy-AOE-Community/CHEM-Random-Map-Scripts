@@ -1,0 +1,519 @@
+/*
+basically a possible map intended for "wallhalla" - idea is players start partly in a center area and partly in their own area. Different areas are separated by fortified walls, which are possibly guarded by neutral units. The center area will have some kind of reward for players to fight over (like all the relics and lots of gold, or some such). Stone would be on the outside.
+
+I wonder if it would be possible to do part direct-placement (for center area), part random-placement (for outer ring). I think that maybe the center area could be mangrove shallows, and the walls could be on the beach terrains seperating players. 
+
+Walls on beach terrain, center area is mangrove shallows, areas separating player areas could consist of wall in center, a layer of mangrove shallows, which would then have neutral walls surrounding them (due to beach terrain). Neutral units could then be placed on mangrove shallows, but avoid an actor area in the center.
+
+note: likely will need two different themes: one with mangrove terrain, the other with cracked terrain.
+*/
+<PLAYER_SETUP>
+grouped_by_team
+behavior_version 2
+
+if MAPSIZE_MINI
+    /* AT_MOST_MINI can simply use MAPSIZE_MINI */
+    #define AT_MOST_TINY
+    #define AT_MOST_SMALL
+    #define AT_MOST_MEDIUM
+    #define AT_MOST_NORMAL
+    #define AT_MOST_LARGE
+    #define AT_MOST_HUGE
+    #define AT_MOST_GIANT
+    #define AT_MOST_MASSIVE
+    #define AT_MOST_ENORMOUS
+    #define AT_MOST_COLOSSAL
+    #define AT_MOST_INCREDIBLE
+    #define AT_MOST_MONSTROUS
+    /* and AT_MOST_LUDCROUS is always true */
+elseif MAPSIZE_TINY
+    #define AT_LEAST_TINY
+    
+    #define AT_MOST_TINY
+    #define AT_MOST_SMALL
+    #define AT_MOST_MEDIUM
+    #define AT_MOST_NORMAL
+    #define AT_MOST_LARGE
+    #define AT_MOST_HUGE
+    #define AT_MOST_GIANT
+    #define AT_MOST_MASSIVE
+    #define AT_MOST_ENORMOUS
+    #define AT_MOST_COLOSSAL
+    #define AT_MOST_INCREDIBLE
+    #define AT_MOST_MONSTROUS
+elseif MAPSIZE_SMALL
+    #define AT_LEAST_TINY
+    #define AT_LEAST_SMALL
+    
+    #define AT_MOST_SMALL
+    #define AT_MOST_MEDIUM
+    #define AT_MOST_NORMAL
+    #define AT_MOST_LARGE
+    #define AT_MOST_HUGE
+    #define AT_MOST_GIANT
+    #define AT_MOST_MASSIVE
+    #define AT_MOST_ENORMOUS
+    #define AT_MOST_COLOSSAL
+    #define AT_MOST_INCREDIBLE
+    #define AT_MOST_MONSTROUS
+elseif MAPSIZE_MEDIUM
+    #define AT_LEAST_TINY
+    #define AT_LEAST_SMALL
+    #define AT_LEAST_MEDIUM
+    
+    #define AT_MOST_MEDIUM
+    #define AT_MOST_NORMAL
+    #define AT_MOST_LARGE
+    #define AT_MOST_HUGE
+    #define AT_MOST_GIANT
+    #define AT_MOST_MASSIVE
+    #define AT_MOST_ENORMOUS
+    #define AT_MOST_COLOSSAL
+    #define AT_MOST_INCREDIBLE
+    #define AT_MOST_MONSTROUS
+elseif MAPSIZE_NORMAL
+    #define AT_LEAST_TINY
+    #define AT_LEAST_SMALL
+    #define AT_LEAST_MEDIUM
+    #define AT_LEAST_NORMAL
+    
+    #define AT_MOST_NORMAL
+    #define AT_MOST_LARGE
+    #define AT_MOST_HUGE
+    #define AT_MOST_GIANT
+    #define AT_MOST_MASSIVE
+    #define AT_MOST_ENORMOUS
+    #define AT_MOST_COLOSSAL
+    #define AT_MOST_INCREDIBLE
+    #define AT_MOST_MONSTROUS
+elseif MAPSIZE_LARGE
+    #define AT_LEAST_TINY
+    #define AT_LEAST_SMALL
+    #define AT_LEAST_MEDIUM
+    #define AT_LEAST_NORMAL
+    #define AT_LEAST_LARGE
+    
+    #define AT_MOST_LARGE
+    #define AT_MOST_HUGE
+    #define AT_MOST_GIANT
+    #define AT_MOST_MASSIVE
+    #define AT_MOST_ENORMOUS
+    #define AT_MOST_COLOSSAL
+    #define AT_MOST_INCREDIBLE
+    #define AT_MOST_MONSTROUS
+elseif MAPSIZE_HUGE
+    #define AT_LEAST_TINY
+    #define AT_LEAST_SMALL
+    #define AT_LEAST_MEDIUM
+    #define AT_LEAST_NORMAL
+    #define AT_LEAST_LARGE
+    #define AT_LEAST_HUGE
+    
+    #define AT_MOST_HUGE
+    #define AT_MOST_GIANT
+    #define AT_MOST_MASSIVE
+    #define AT_MOST_ENORMOUS
+    #define AT_MOST_COLOSSAL
+    #define AT_MOST_INCREDIBLE
+    #define AT_MOST_MONSTROUS
+elseif MAPSIZE_GIANT
+    #define AT_LEAST_TINY
+    #define AT_LEAST_SMALL
+    #define AT_LEAST_MEDIUM
+    #define AT_LEAST_NORMAL
+    #define AT_LEAST_LARGE
+    #define AT_LEAST_HUGE
+    #define AT_LEAST_GIANT
+    
+    #define AT_MOST_GIANT
+    #define AT_MOST_MASSIVE
+    #define AT_MOST_ENORMOUS
+    #define AT_MOST_COLOSSAL
+    #define AT_MOST_INCREDIBLE
+    #define AT_MOST_MONSTROUS
+elseif MAPSIZE_MASSIVE
+    #define AT_LEAST_TINY
+    #define AT_LEAST_SMALL
+    #define AT_LEAST_MEDIUM
+    #define AT_LEAST_NORMAL
+    #define AT_LEAST_LARGE
+    #define AT_LEAST_HUGE
+    #define AT_LEAST_GIANT
+    #define AT_LEAST_MASSIVE
+    
+    #define AT_MOST_MASSIVE
+    #define AT_MOST_ENORMOUS
+    #define AT_MOST_COLOSSAL
+    #define AT_MOST_INCREDIBLE
+    #define AT_MOST_MONSTROUS
+elseif MAPSIZE_ENORMOUS
+    #define AT_LEAST_TINY
+    #define AT_LEAST_SMALL
+    #define AT_LEAST_MEDIUM
+    #define AT_LEAST_NORMAL
+    #define AT_LEAST_LARGE
+    #define AT_LEAST_HUGE
+    #define AT_LEAST_GIANT
+    #define AT_LEAST_MASSIVE
+    #define AT_LEAST_ENORMOUS
+    
+    #define AT_MOST_ENORMOUS
+    #define AT_MOST_COLOSSAL
+    #define AT_MOST_INCREDIBLE
+    #define AT_MOST_MONSTROUS
+elseif MAPSIZE_COLOSSAL
+    #define AT_LEAST_TINY
+    #define AT_LEAST_SMALL
+    #define AT_LEAST_MEDIUM
+    #define AT_LEAST_NORMAL
+    #define AT_LEAST_LARGE
+    #define AT_LEAST_HUGE
+    #define AT_LEAST_GIANT
+    #define AT_LEAST_MASSIVE
+    #define AT_LEAST_ENORMOUS
+    #define AT_LEAST_COLOSSAL
+    
+    #define AT_MOST_COLOSSAL
+    #define AT_MOST_INCREDIBLE
+    #define AT_MOST_MONSTROUS
+elseif MAPSIZE_INCREDIBLE
+    #define AT_LEAST_TINY
+    #define AT_LEAST_SMALL
+    #define AT_LEAST_MEDIUM
+    #define AT_LEAST_NORMAL
+    #define AT_LEAST_LARGE
+    #define AT_LEAST_HUGE
+    #define AT_LEAST_GIANT
+    #define AT_LEAST_MASSIVE
+    #define AT_LEAST_ENORMOUS
+    #define AT_LEAST_COLOSSAL
+    #define AT_LEAST_INCREDIBLE
+    
+    #define AT_MOST_INCREDIBLE
+    #define AT_MOST_MONSTROUS
+elseif MAPSIZE_MONSTROUS
+    #define AT_LEAST_TINY
+    #define AT_LEAST_SMALL
+    #define AT_LEAST_MEDIUM
+    #define AT_LEAST_NORMAL
+    #define AT_LEAST_LARGE
+    #define AT_LEAST_HUGE
+    #define AT_LEAST_GIANT
+    #define AT_LEAST_MASSIVE
+    #define AT_LEAST_ENORMOUS
+    #define AT_LEAST_COLOSSAL
+    #define AT_LEAST_INCREDIBLE
+    #define AT_LEAST_MONSTROUS
+    
+    #define AT_MOST_MONSTROUS
+elseif MAPSIZE_LUDICROUS
+    /* AT_LEAST_MINI is always true */
+    #define AT_LEAST_TINY
+    #define AT_LEAST_SMALL
+    #define AT_LEAST_MEDIUM
+    #define AT_LEAST_NORMAL
+    #define AT_LEAST_LARGE
+    #define AT_LEAST_HUGE
+    #define AT_LEAST_GIANT
+    #define AT_LEAST_MASSIVE
+    #define AT_LEAST_ENORMOUS
+    #define AT_LEAST_COLOSSAL
+    #define AT_LEAST_INCREDIBLE
+    #define AT_LEAST_MONSTROUS
+    /* and AT_LEAST_LUDCROUS - can simply use MAP_SIZE_LUDICROUS */
+endif
+
+#const ON_GRID 278 /* dead fish trap */
+effect_amount GAIA_SET_ATTRIBUTE ON_GRID ATTR_STORAGE_VALUE 0
+
+effect_percent MOD_RESOURCE AMOUNT_STARTING_STONE ATTR_ADD 99 /* adds .99 stone: apparently makes it possible for players to build 2 TCs with starting stone even if they tap a gaia wall with a villager. */
+
+<LAND_GENERATION>
+base_terrain DLC_MANGROVESHALLOW
+create_player_lands {
+    terrain_type GRASS2
+    set_zone_by_team
+    if MAPSIZE_MINI 
+        other_zone_avoidance_distance 5
+    elseif MAPSIZE_TINY
+        other_zone_avoidance_distance 7
+    elseif MAPSIZE_SMALL
+        other_zone_avoidance_distance 9
+    elseif MAPSIZE_MEDIUM
+        other_zone_avoidance_distance 11
+    elseif MAPSIZE_NORMAL
+        other_zone_avoidance_distance 13
+    else
+        other_zone_avoidance_distance 15 /* TODO scale based on map size */
+    endif
+    land_percent 100 /* change based on number of players? */
+    circle_radius 45 0
+}
+create_land {
+    terrain_type DLC_MANGROVESHALLOW
+    land_percent 0
+    zone 1
+    land_id 1
+    top_border 25
+    bottom_border 25
+    left_border 25
+    right_border 25
+    land_position 50 50
+}
+/* 
+create_land {
+    terrain_type DLC_MANGROVESHALLOW
+    land_percent 100
+    zone 1
+    land_id 1
+    top_border 25
+    bottom_border 25
+    left_border 25
+    right_border 25
+    other_zone_avoidance_distance 1
+}
+May want to shrink a little
+*/
+/* created using madlands: AI 2, R: 24, Amp/Freq: 0, SF: 0, base size: 1, disable consistent thickness, x/y-offset: 0, offset angle: 0, x/y-stretch: 1 */
+
+create_land { base_size 1 land_position 70 50 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 70 51 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 70 51 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 70 52 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 70 53 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 70 53 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 70 54 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 69 55 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 69 56 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 69 56 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 69 57 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 69 57 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 68 58 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 68 59 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 68 59 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 67 60 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 67 61 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 67 61 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 66 62 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 66 62 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 65 63 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 65 63 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 64 64 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 64 64 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 63 65 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 63 65 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 62 66 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 62 66 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 61 67 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 61 67 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 60 67 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 59 68 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 59 68 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 58 68 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 57 69 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 57 69 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 56 69 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 56 69 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 55 69 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 54 70 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 53 70 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 53 70 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 52 70 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 51 70 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 51 70 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 50 70 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 49 70 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 49 70 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 48 70 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 47 70 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 47 70 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 46 70 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 45 69 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 44 69 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 44 69 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 43 69 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 43 69 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 42 68 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 41 68 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 41 68 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 40 67 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 39 67 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 39 67 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 38 66 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 38 66 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 37 65 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 37 65 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 36 64 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 36 64 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 35 63 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 35 63 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 34 62 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 34 62 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 33 61 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 33 61 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 33 60 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 32 59 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 32 59 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 32 58 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 31 57 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 31 57 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 31 56 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 31 56 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 31 55 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 30 54 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 30 53 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 30 53 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 30 52 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 30 51 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 30 51 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 30 50 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 30 49 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 30 49 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 30 48 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 30 47 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 30 47 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 30 46 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 31 45 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 31 44 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 31 44 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 31 43 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 31 43 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 32 42 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 32 41 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 32 41 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 33 40 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 33 39 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 33 39 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 34 38 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 34 38 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 35 37 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 35 37 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 36 36 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 36 36 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 37 35 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 37 35 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 38 34 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 38 34 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 39 33 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 39 33 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 40 33 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 41 32 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 41 32 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 42 32 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 43 31 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 43 31 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 44 31 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 44 31 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 45 31 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 46 30 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 47 30 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 47 30 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 48 30 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 49 30 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 49 30 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 50 30 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 51 30 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 51 30 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 52 30 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 53 30 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 53 30 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 54 30 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 55 31 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 56 31 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 56 31 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 57 31 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 57 31 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 58 32 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 59 32 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 59 32 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 60 33 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 61 33 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 61 33 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 62 34 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 62 34 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 63 35 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 63 35 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 64 36 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 64 36 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 65 37 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 65 37 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 66 38 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 66 38 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 67 39 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 67 39 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 67 40 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 68 41 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 68 41 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 68 42 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 69 43 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 69 43 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 69 44 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 69 44 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 69 45 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 70 46 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 70 47 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 70 47 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 70 48 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 70 49 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+create_land { base_size 1 land_position 70 49 number_of_tiles 0 terrain_type DLC_MANGROVESHALLOW }
+
+<TERRAIN_GENERATION>
+if CRACKED_THEME
+    create_terrain BEACH {
+        base_terrain DLC_MANGROVESHALLOW
+        land_percent 100
+        number_of_clumps 999 
+        set_flat_terrain_only
+    }
+    create_terrain DLC_CRACKED {
+        base_terrain BEACH
+        land_percent 100
+        number_of_clumps 999 
+        set_flat_terrain_only
+        spacing_to_other_terrain_types 1 
+    }
+endif
+
+<OBJECTS_GENERATION>
+create_object TOWN_CENTER {
+    set_place_for_every_player
+    max_distance_to_players 0
+}
+create_object FORTIFIED_WALL {
+    set_gaia_object_only
+    set_gaia_unconvertible
+    number_of_objects 9320
+    set_scaling_to_map_size
+    terrain_to_place_on BEACH
+}
+/* TODO add second TC in middle of map
+created with aid from madlands
+TODO redo entirely (needs to scale with map size to work properly)
+*/
+#define SM
+if TM create_actor_area 77 60 1000 5 elseif SM create_actor_area 92 72 1000 5 endif
+if TM create_actor_area 76 66 1000 5 elseif SM create_actor_area 91 80 1000 5 endif
+if TM create_actor_area 72 72 1000 5 elseif SM create_actor_area 86 86 1000 5 endif
+if TM create_actor_area 66 76 1000 5 elseif SM create_actor_area 80 91 1000 5 endif
+if TM create_actor_area 60 77 1000 5 elseif SM create_actor_area 72 92 1000 5 endif
+if TM create_actor_area 54 76 1000 5 elseif SM create_actor_area 64 91 1000 5 endif
+if TM create_actor_area 48 72 1000 5 elseif SM create_actor_area 58 86 1000 5 endif
+if TM create_actor_area 44 66 1000 5 elseif SM create_actor_area 53 80 1000 5 endif
+if TM create_actor_area 43 60 1000 5 elseif SM create_actor_area 52 72 1000 5 endif
+if TM create_actor_area 44 54 1000 5 elseif SM create_actor_area 53 64 1000 5 endif
+if TM create_actor_area 48 48 1000 5 elseif SM create_actor_area 58 58 1000 5 endif
+if TM create_actor_area 54 44 1000 5 elseif SM create_actor_area 64 53 1000 5 endif
+if TM create_actor_area 60 43 1000 5 elseif SM create_actor_area 72 52 1000 5 endif
+if TM create_actor_area 66 44 1000 5 elseif SM create_actor_area 80 53 1000 5 endif
+if TM create_actor_area 72 48 1000 5 elseif SM create_actor_area 86 58 1000 5 endif
+if TM create_actor_area 76 54 1000 5 elseif SM create_actor_area 91 64 1000 5 endif
+
+create_object FLAG_A {
+    number_of_objects 9320
+    set_scaling_to_map_size
+    temp_min_distance_group_placement 1
+    actor_area_to_place_in 1000
+    set_gaia_object_only
+    place_on_specific_land_id 1
+}
+

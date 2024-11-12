@@ -26,7 +26,7 @@ dragon ship: (appears twice): 150 hp, 1.4 speed; attack is 4 pierce/ship/turtle_
 
 */
 <PLAYER_SETUP>
-random_placement
+grouped_by_team
 behavior_version 2
 /*
 
@@ -300,13 +300,28 @@ base_terrain UNFORESTED_TERRAIN
 
 create_player_lands {
     if DOCKABLE_PLAYER_STARTS
-        terrain_type BEACH
+        terrain_type FOREST_TEMP
         land_percent 0
-        base_size 1 /* playtest: 1  only allows docking after deleting starting TC (a nice strategic decision) - max 4 spots, 2 allows docking earlier, but can delete TC for more docking spaces (max 6, 3 with TC up). */
+        if MAPSIZE_MINI
+            base_size 7
+        elseif MAPSIZE_TINY
+            base_size 12 
+        elseif MAPSIZE_SMALL
+            base_size 14 
+        elseif MAPSIZE_MEDIUM
+            base_size 18
+        else
+            base_size 20 
+        endif
     else
         terrain_type UNFORESTED_TERRAIN
+        if AT_LEAST_MEDIUM /* not really tested */
+            base_size 20
+        else
+            base_size 13
+        endif
     endif
-    circle_radius 38 2
+    circle_radius 38 1
 }
 if MANGROVE_THEME
     create_land {
@@ -319,6 +334,27 @@ endif
 
 <TERRAIN_GENERATION>
 if DOCKABLE_PLAYER_STARTS
+    create_terrain BEACH {
+        base_terrain FOREST_TEMP
+        land_percent 100
+        number_of_clumps 932
+        if MAPSIZE_MINI
+            spacing_to_other_terrain_types 6
+        elseif MAPSIZE_TINY
+            spacing_to_other_terrain_types 11
+        elseif MAPSIZE_SMALL
+            spacing_to_other_terrain_types 13
+        elseif MAPSIZE_MEDIUM
+            spacing_to_other_terrain_types 17
+        else
+            spacing_to_other_terrain_types 19
+        endif /* want this to be 1 less than base_size in create player lands. 1 less only allows docking after deleting starting TC (a nice strategic decision) - max 4 spots, 2 less allows docking earlier, but can delete TC for more docking spaces (max 6, 3 with TC up)  */
+    }
+    create_terrain UNFORESTED_TERRAIN {
+        base_terrain FOREST_TEMP
+        land_percent 100
+        number_of_clumps 932
+    }
     create_terrain UNFORESTED_TERRAIN {
         base_terrain BEACH
         land_percent 100

@@ -1,19 +1,21 @@
 
 /*
-a map for blue carbon cup: idea will be to take great lake and alter it into using mangrove shallows. May make further changes to make the map more unique.
+Map: Escape
+Created: Nov 2024
+Submitted to blue carbon cup map contest: XX Nov 2024
+Author: Jasuni
+Map description: players start in a very small Cracked-terrain area enclosed by small 100-stone piles. They have no scout, but instead receive a mule cart that they can use to gather from the nearby hunt, mine a way out of the center, gather from the gold piles, or chop the scarce trees in the area. But beware - the iron boar lairs in the forest - fat (with 2000 food) and fierce and deadly to any villagers reckless enough to break open its lair. Once players escape from the center area, they escape to mangrove shallows with new food resources, mangrove forests, and oysters. But the relative safety of the mangroves will not last long, so players will want to escape to the outside by chopping through a wall of trees and then mining through another stone pile. Once they do so, a hilly land with plentiful gold, hunts, and forests will become available to them.
 
-For example, since the tourney is a 2v2, I could have 1 player on each team start on the small island at the end of the lake. The other player starts on resource-scarce cracked terrain outside the lake. The mangrove lake will have plenty of resources, but is obviously vulnerable to naval attacks.
+include description, images (map overview, key aspects) with the map script
 
 
 Renaming to "Escape" - players start close together in a very small circle of cracked terrain. Outside that circle is mangrove shallows then a ring of mangrove forest. Outside that outer ring of mangrove forest is gold-rich and relatively safe (and elevated) land.
-
-note: will want some forest in the middle: it's a very small starting area
 
 note: iron boar is very tough, basically requiring TC to kill
 
 TODO: add oysters to various maps under the antiquity mode conditional: Forest Maze (mangrove), Syzygy (replace gold in 1-2 biomes), great lake, Yukon gold rush (I don't think so - panning for gold occurred through manual labor, not fishing ships) - McMurdo dry valleys? And Whirlpool Lake (can replace shore fish in center island) - and could add to 4-quarters map (and the Ultra small version)
 
-TODO strategies to playtest: Persian douche, (Goth) instant loom into lame, villager fights, drush, Korean tower rush, serjeant rush, etc.
+TODO strategies to playtest: Persian douche, (Goth) instant loom into lame (Lithuanians and Persians probably better for this), villager fights, drush, Korean tower rush, serjeant rush, etc.
 maybe test walling in opponent on the shallows side.
 
 playtest (Goths against Mongols): content with how the inner rings played out. May need to further test what happens if I break out into the outermost ring still.
@@ -594,9 +596,9 @@ create_object BUILDING {
 
 create_object TOWN_CENTER {
     set_place_for_every_player
-    find_closest
+    max_distance_to_players 0
 }
-create_object ON_GRID { /* TODO: playtest - consider having the outer barrier be ge gold with a layer of stone afterwards on the dirt4 placed within an actor area of size 1.
+create_object ON_GRID { /* playtest - consider having the outer barrier be ge gold with a layer of stone afterwards on the dirt4 placed within an actor area of size 1.
 for reference, base stone miner work rate is 21.6 - with 3 villagers gathering from a single time, it takes about 1:40 to gather 100 stone. Takes almost 5.5 minutes to do so with 350 stone. I think I will want to reduce the inner stone piles to 100 stone each. Outer stone piles can remain unchanged.
 Full upgrades is 28.57 stone miner work rate - about 3.5 minutes for one vil to gather 100 stone - ~12.25 minutes to gather 350 stone
  */
@@ -791,50 +793,45 @@ create_object BOAR {
     min_distance_group_placement 4
     terrain_to_place_on DLC_DIRT4
 }
-create_object RELIC {
+create_object RELIC { 
     terrain_to_place_on DLC_DIRT4
-    temp_min_distance_group_placement 40
+    temp_min_distance_group_placement 48
     avoid_forest_zone 1
     avoid_cliff_zone 1
     set_gaia_object_only
     set_circular_placement
     if MAPSIZE_MINI
-        number_of_objects 4
-        temp_min_distance_group_placement 30 
+        number_of_objects 6
+        temp_min_distance_group_placement 36    
     elseif MAPSIZE_TINY
-        number_of_objects 5
-    elseif MAPSIZE_SMALL
-        number_of_objects 5
-    elseif MAPSIZE_MEDIUM
-        number_of_objects 5
-    elseif MAPSIZE_NORMAL
-        number_of_objects 7
-    elseif MAPSIZE_LARGE
         number_of_objects 8
+    elseif MAPSIZE_SMALL
+        number_of_objects 8
+    elseif MAPSIZE_MEDIUM
+        number_of_objects 8 /* this one may actually reach 8, earlier ones tend to get stopped by the temp min distance attribute */
+    elseif MAPSIZE_NORMAL
+        number_of_objects 10
+    elseif MAPSIZE_LARGE
+        number_of_objects 12
     elseif MAPSIZE_HUGE
-        number_of_objects 20
-        temp_min_distance_group_placement 60
+        number_of_objects 14
     elseif MAPSIZE_GIANT
-        number_of_objects 20
-        temp_min_distance_group_placement 64
+        number_of_objects 16 /*  counted it at 14 */
     elseif MAPSIZE_MASSIVE
-        number_of_objects 20
-        temp_min_distance_group_placement 65
+        number_of_objects 16
     elseif MAPSIZE_ENORMOUS
-        number_of_objects 20
-        temp_min_distance_group_placement 68
+        number_of_objects 18
     elseif MAPSIZE_COLOSSAL
         number_of_objects 20
-        temp_min_distance_group_placement 70
     elseif MAPSIZE_INCREDIBLE
         number_of_objects 25
-        temp_min_distance_group_placement 75
+        temp_min_distance_group_placement 54 
     elseif MAPSIZE_MONSTROUS
-        number_of_objects 25
-        temp_min_distance_group_placement 80
+        number_of_objects 30 /*  seems to end up at 25 */
+        temp_min_distance_group_placement 54 
     elseif MAPSIZE_LUDICROUS
-        number_of_objects 30
-        temp_min_distance_group_placement 90
+        number_of_objects 40 /* think it will end up around 35 */
+        temp_min_distance_group_placement 54 
     endif
 }
 create_object DEER {

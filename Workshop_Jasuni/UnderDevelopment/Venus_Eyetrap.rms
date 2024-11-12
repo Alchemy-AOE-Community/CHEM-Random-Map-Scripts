@@ -223,9 +223,45 @@ elseif MAPSIZE_LUDICROUS
     /* and AT_LEAST_LUDCROUS - can simply use MAP_SIZE_LUDICROUS */
 endif
 
+/* Would prefer outlaws over amazon archers, except that outlaws don't seem to work preoperly */
+#const AMAZON_WARRIOR 825
+#const AMAZON_ARCHER 850
+#const FISH_FOOD rnd(455,457) /* DORADO, SALMON, TUNA  */
+#const MULE_CART 1808
+#const BANDIT 299 /* melee unit */
+#const OUTLAW 158 /* outlaw stats: 5 LOS, 4 search radisu, 4 range, 4 pierce, 50% acc, no armor stats: do test in game - perhaps alter to have +1 range, +1 atk, +30 hp - comparable to an archer with fletching, but 15 more hp - also take all bonus damage, so still not a particularly healthy unit: maybe up it to 60 hp, and and an additional +1 range/damage (to 6), and increase LOS/search radius.
+other option would be to use amazon warriors/archers (825/850)
+
+TODO playtest notes: with inner cracked terrain, the player's villagers quickly exhaust food sources (so they end up needing to do something else or be idle) - result is that they end up be used for other things, like long distance tree chopping. Maybe add a mule cart to cracked inner terrain to assist with this?
+  */
+
 #const ON_GRID 278 /* dead fish trap */
 effect_amount GAIA_SET_ATTRIBUTE ON_GRID ATTR_STORAGE_VALUE 0
-effect_amount GAIA_SET_ATTRIBUTE SALMON ATTR_TERRAIN_ID 21 /* shallow water: same as sea walls/towers */
+effect_amount GAIA_SET_ATTRIBUTE FISH_FOOD ATTR_TERRAIN_ID 21 /* shallow water: same as sea walls/towers */
+effect_amount GAIA_ADD_ATTRIBUTE AMAZON_ARCHER ATTR_MAX_RANGE 2
+effect_amount GAIA_ADD_ATTRIBUTE AMAZON_ARCHER ATTR_SHOWN_RANGE 2
+/*
+effect_amount GAIA_ADD_ATTRIBUTE AMAZON_ARCHER ATTR_SEARCH_RADIUS 2 - commented out because the amazon archers were a little too aggresive - hopefully this keeps them dangerous while being a little less prone to attack, but not any easier to deal with. Appears that this line is having little to no effect */
+effect_amount GAIA_ADD_ATTRIBUTE AMAZON_ARCHER ATTR_LINE_OF_SIGHT 2
+effect_amount GAIA_ADD_ATTRIBUTE AMAZON_ARCHER ATTR_SHOWN_ATTACK 2
+effect_amount GAIA_ADD_ATTRIBUTE AMAZON_ARCHER ATTR_ATTACK 770 /* 3 * 256 + 2 : should add 2 pierce attack */
+
+effect_amount GAIA_ADD_ATTRIBUTE OUTLAW ATTR_MAX_RANGE 2
+effect_amount GAIA_ADD_ATTRIBUTE OUTLAW ATTR_SEARCH_RADIUS 2
+effect_amount GAIA_ADD_ATTRIBUTE OUTLAW ATTR_LINE_OF_SIGHT 2
+effect_amount GAIA_ADD_ATTRIBUTE OUTLAW ATTR_SHOWN_RANGE 2
+effect_amount GAIA_ADD_ATTRIBUTE OUTLAW ATTR_HITPOINTS 30
+effect_amount GAIA_ADD_ATTRIBUTE OUTLAW ATTR_SHOWN_ATTACK 2
+effect_amount GAIA_ADD_ATTRIBUTE OUTLAW ATTR_ATTACK 770 /* 3 * 256 + 2 : should add 2 pierce attack */
+/* if ever switch back to outlaw: alter armor classes so that outlaws don't take ridiculous amounts of bonus damage from everything
+classes to reset: 1 (infantry), 2 (turtle ship), 5 (elephant), 6 (cav), 16 (ships), 17 (rams), 19? (UU), 20 (siege), 23 (gunpowder), 25 (monk), 27 (spear), 28 (cav archer), 29 (eagle), 30 (camel), 32 (condo), 34 (fishing ship), 35 (mameluke), 37 (heavy siege), 38 (skirms)
+
+(skip 0: wonders cause unused), 11 (building), 13 (stone structs), 21 (building), 22 (walls), 26 (castle)
+14 (predators), 24 (boars)
+
+and 33 (set to 10,000)
+ */
+
 
 effect_percent MOD_RESOURCE AMOUNT_STARTING_STONE ATTR_ADD 99 /* adds .99 stone: apparently makes it possible for players to build 2 TCs with starting stone even if they tap a gaia wall with a villager. */
 
@@ -476,7 +512,6 @@ create_land { base_size 1 land_position 70 49 number_of_tiles 0 terrain_type TEM
 
 <TERRAIN_GENERATION>
 /* 
-TODO create inner ring and layer of wall between players and inner ring
     if MAPSIZE_MINI 
         other_zone_avoidance_distance 5
     elseif MAPSIZE_TINY
@@ -488,7 +523,7 @@ TODO create inner ring and layer of wall between players and inner ring
     elseif MAPSIZE_NORMAL
         other_zone_avoidance_distance 13
     else
-        other_zone_avoidance_distance 15 /* TODO scale based on map size */
+        other_zone_avoidance_distance 15
     endif
 */
 create_terrain DIRT {
@@ -538,7 +573,7 @@ if INNER_SHALLOWS
         number_of_clumps 9320
         spacing_to_other_terrain_types 1
     }
-    /* TODO add forests */
+    /* add forests */
     create_terrain DLC_MANGROVEFOREST {
         base_terrain DLC_MANGROVESHALLOW
         land_percent 3
@@ -562,38 +597,9 @@ create_terrain FOREST {
 /* current result is messy but functional: sometimes the inner terrain will stretch to the outside of the map, but only if the boundary area between players is straight
  */
 /*
-create_terrain BEACH {
-    base_terrain TEMP_TERRAIN
-    land_percent 100
-    number_of_clumps 999 
-    set_flat_terrain_only
-}
-create_terrain OUTER_TERRAIN {
-    base_terrain BEACH
-    land_percent 100
-    number_of_clumps 999 
-    set_flat_terrain_only
-    spacing_to_other_terrain_types 1
-}
-goal: have an inner circle, have a wall between player "halves" of the outer circle, and a wall on the outside of the circle,
 
-Is there
+goal: have an inner circle, have a wall between player "halves" of the outer circle, and a wall on the outside of the circle. Ideally, every wall would be just 1 tile wide, but this hasn't happened in practice.
 
-if CRACKED_THEME /* TODO may need adjustment */
-    create_terrain BEACH {
-        base_terrain TEMP_TERRAIN
-        land_percent 100
-        number_of_clumps 999 
-        set_flat_terrain_only
-    }
-    create_terrain DLC_CRACKED {
-        base_terrain BEACH
-        land_percent 100
-        number_of_clumps 999 
-        set_flat_terrain_only
-        spacing_to_other_terrain_types 1 
-    }
-endif
 */
 
 <OBJECTS_GENERATION>
@@ -607,6 +613,13 @@ create_object VILLAGER {
     max_distance_to_players 7
     set_circular_placement
     min_distance_group_placement 1
+}
+create_object SCOUT {
+    set_place_for_every_player
+    min_distance_to_players 7
+    max_distance_to_players 9
+    set_circular_placement
+    avoid_forest_zone 2
 }
 /* note: no scout in the outer area - might make it harder to detect breaches in the wall */
 /* allows easy removal for testing/creation purposes 
@@ -629,9 +642,8 @@ create_object FORTIFIED_WALL {
     terrain_to_place_on DIRT
 }
 endif
-/* TODO add second TC in middle of map
-created with aid from madlands
-TODO redo entirely (needs to scale with map size to work properly)
+/* 
+ add second TC in middle of map: create an actor area to avoid the outer terrain ring, then place TCs with find_closest while avoiding each other.
 */
 create_object ON_GRID {
     number_of_objects 9320
@@ -691,13 +703,8 @@ create_object VILLAGER {
     set_circular_placement
     avoid_forest_zone 2
 }
-/* TODO make some hostile "bandits" in the outer ring - something that will shoot at players who are foolish enough to get close
-TODO improve health of the outlaws: make their stats match archers? */
-#const BANDIT 299
-#const OUTLAW 158 /* outlaw stats: 5 LOS, 4 search radisu, 4 range, 4 pierce, 50% acc, no armor stats: do test in game - perhaps alter to have +1 range, +1 atk, +30 hp - comparable to an archer with fletching, but 15 more hp - also take all bonus damage, so still not a particularly healthy unit: maybe up it to 60 hp, and and an additional +1 range/damage (to 6), and increase LOS/search radius.
-other option would be to use amazon warriors/archers (825/850)
-TODO playtest notes: need scout in outer area. WOuld like more food available (though missing sheep did not help)  */
-create_object OUTLAW {
+/* OUTLAW - issue: doesn't seem to attack very much: have to get very close before it attacks. */
+create_object AMAZON_ARCHER {
     set_gaia_object_only
     set_gaia_unconvertible
     number_of_objects 3
@@ -711,7 +718,7 @@ create_object OUTLAW {
     terrain_to_place_on OUTER_TERRAIN
 }
 if INNER_SHALLOWS 
-    create_object SALMON { /* TODO change fish */
+    create_object FISH_FOOD { /* TODO change fish */
         terrain_to_place_on DLC_MANGROVESHALLOW
         actor_area_to_place_in 6
         min_distance_group_placement 3
@@ -761,7 +768,7 @@ if INNER_SHALLOWS
         }
     endif
 elseif OUTER_SHALLOWS
-    create_object SALMON { /* TODO change fish */
+    create_object FISH_FOOD { /* TODO change fish */
         terrain_to_place_on DLC_MANGROVESHALLOW
         temp_min_distance_group_placement 8
         number_of_objects 9320
@@ -780,6 +787,22 @@ if INNER_CRACKED
         min_distance_group_placement 2
         avoid_actor_area 6
     }
+    create_object DLC_GOAT {
+        set_place_for_every_player
+        number_of_objects 2
+        terrain_to_place_on DLC_CRACKED
+        temp_min_distance_group_placement 2
+        actor_area_to_place_in 6
+    }
+    create_object DLC_DEADTREE {
+        set_gaia_object_only
+        set_place_for_every_player
+        ignore_terrain_restrictions
+        number_of_objects 8
+        terrain_to_place_on DLC_CRACKED
+        temp_min_distance_group_placement 2
+        actor_area_to_place_in 6
+    }
     create_object DLC_DEADTREE {
         number_of_groups 9320
         set_loose_grouping
@@ -788,8 +811,16 @@ if INNER_CRACKED
         min_distance_group_placement 2
         avoid_actor_area 6
     }
+    create_object MULE_CART {
+        set_place_for_every_player
+        terrain_to_place_on DLC_CRACKED
+        temp_min_distance_group_placement 2
+        actor_area_to_place_in 6
+    }
+    /* TODO could use more food resources - probably hunt - very inefficient gathering from straggler trees, and goats don't scale too well. A player mule cart I think isn't really needed with the straggler trees added in, but still helpful 
+    consider whether to keep or remove the mule cart from inner cracked terrain generations. */
 endif
-/* TODO make player and neutral resources */
+/*  make player and neutral resources */
     /*
 if INNER_CRACKED 
 */
@@ -830,7 +861,7 @@ In tournament  maps, 1 or all of these often start under control of the player.
 2 individual trees at 4-5 tiles away
 3 individual trees at 6-8 tiles away
 
-
+TODO add player straggler trees to outer base.
 */
 
 create_object FORAGE {

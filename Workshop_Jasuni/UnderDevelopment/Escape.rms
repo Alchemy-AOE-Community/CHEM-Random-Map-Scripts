@@ -15,6 +15,8 @@ TODO: add oysters to various maps under the antiquity mode conditional: Forest M
 
 TODO strategies to playtest: Persian douche, (Goth) instant loom into lame, villager fights, drush, Korean tower rush, serjeant rush, etc.
 maybe test walling in opponent on the shallows side.
+
+playtest (Goths against Mongols): content with how the inner rings played out. May need to further test what happens if I break out into the outermost ring still.
 */
 
 <PLAYER_SETUP>
@@ -262,7 +264,7 @@ effect_amount SET_ATTRIBUTE BUILDING ATTR_FOUNDATION_TERRAIN 10 /* forest */
 #const MULE_CART 1808
 <LAND_GENERATION>
 base_terrain DLC_MANGROVESHALLOW
-create_player_lands { /* TODO change to some other terrain: have starting TCs on some other terrain, but otherwise the center should be cracked terrain (penalize TC drops by causing them to take extra damage) */
+create_player_lands { /* TODO could see about have starting TCs on some other terrain, but otherwise the center should be cracked terrain (penalize TC drops by causing them to take extra damage while the starting TC doesn't.) */
     terrain_type DLC_CRACKED
     land_percent 100
     left_border 40
@@ -381,7 +383,7 @@ create_terrain DLC_MANGROVESHALLOW {
     land_percent 100
     number_of_clumps 9320
 }
-create_terrain DLC_REEDSBEACH { /* TODO change so that there's only 4-5 tiles of mangrove forest, plus 2 of this reeds beach - should take roughly 10 minutes to chop through
+create_terrain DLC_REEDSBEACH { /* With only 4-5 tiles of mangrove forest, plus 2 of this reeds beach - should take roughly 10 minutes to chop through
 
 wood gathering speeds:
 base: 23.4 w/min
@@ -458,7 +460,7 @@ create_terrain DLC_MANGROVEFOREST {
     land_percent 100
     spacing_to_other_terrain_types 2 /* Would do 1, but that's nearly invisible */
 }
-create_terrain DLC_DIRT4 { /* TODO change to spacing to other terrain_types 4 for all map sizes, then add remainder to the reeds beach terrain above */
+create_terrain DLC_DIRT4 {
     base_terrain DLC_MANGROVEFOREST
     land_percent 100
     if MAPSIZE_MINI
@@ -502,10 +504,11 @@ create_terrain DLC_BOGLAND {
     base_terrain DLC_DIRT4
     land_percent 100
     terrain_mask 1
+    beach_terrain DLC_GRAVELBEACH
 }
 create_terrain DLC_BAOBABFOREST {
     base_terrain DLC_DIRT4
-    land_percent 5
+    land_percent 6
     number_of_clumps 16
     spacing_to_other_terrain_types 2
     height_limits 0 0
@@ -538,14 +541,23 @@ create_terrain DLC_MANGROVEFOREST {
     endif
     spacing_to_other_terrain_types 2
 }
-/* TODO add in patches of water terrain into the mangrove area: should make walling trickier against ships, thereby increasing danger level against demos.
 create_terrain DLC_BOGLAND {
     base_terrain DLC_CRACKED
     land_percent 100
     number_of_clumps 9320
+    terrain_mask 1 
+    beach_terrain DLC_GRAVELBEACH
+    /* DLC_GRAVELBEACH DLC_WETROCKBEACH DLC_WETBEACH
+    set_avoid_player_start_areas 7 */
+}
+/*  added in patches of water terrain into the mangrove area: should make walling trickier against ships, thereby increasing danger level against demos.
+create_terrain DLC_BOGLAND {
+    base_terrain DLC_CRACKED
+    land_percent 100
+    number_of_clumps 9320
+    terrain_mask 1 
     /*
-    terrain_mask 1 */
-    set_avoid_player_start_areas 7
+    set_avoid_player_start_areas 7 */
 }
 */
 <OBJECTS_GENERATION>
@@ -586,12 +598,12 @@ create_object TOWN_CENTER {
 }
 create_object ON_GRID { /* TODO: playtest - consider having the outer barrier be ge gold with a layer of stone afterwards on the dirt4 placed within an actor area of size 1.
 for reference, base stone miner work rate is 21.6 - with 3 villagers gathering from a single time, it takes about 1:40 to gather 100 stone. Takes almost 5.5 minutes to do so with 350 stone. I think I will want to reduce the inner stone piles to 100 stone each. Outer stone piles can remain unchanged.
-Full upgrades is 28.57 stone miner work rate - about 3.5 minutes for one vil to gather 350 stone
+Full upgrades is 28.57 stone miner work rate - about 3.5 minutes for one vil to gather 100 stone - ~12.25 minutes to gather 350 stone
  */
     second_object STONE
     number_of_objects 9320
     set_scaling_to_map_size
-    terrain_to_place_on BEACH
+    terrain_to_place_on DLC_GRAVELBEACH
     avoid_actor_area 1234
 }
 create_object STONE { 
@@ -601,7 +613,7 @@ create_object STONE {
     resource_delta -250
     number_of_objects 9320
     set_scaling_to_map_size
-    terrain_to_place_on BEACH
+    terrain_to_place_on DLC_GRAVELBEACH
 }
 if REGICIDE
     create_object KING {
@@ -758,7 +770,7 @@ else
         set_tight_grouping
         avoid_forest_zone 2 /* could have it instead avoid an actor area created by the stone piles */
         max_distance_to_other_zones 5 /* keeps it from inhibiting dock placements */
-        resource_delta -350 /* I think oysters have 450 gold */
+        resource_delta -350 /*  oysters have 450 gold, making this gold pile equivalent */
     }
 endif
 create_object GOLD {

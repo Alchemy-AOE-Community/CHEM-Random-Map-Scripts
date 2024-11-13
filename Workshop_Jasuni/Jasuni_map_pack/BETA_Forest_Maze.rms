@@ -27,7 +27,7 @@ dragon ship: (appears twice): 150 hp, 1.4 speed; attack is 4 pierce/ship/turtle_
 
 */
 <PLAYER_SETUP>
-random_placement /* TODO change to group_by_team? - make certain everything spawns properly - or even have a chance of teammates starting together and a chance of random_placement */
+grouped_by_team /* idea: have a chance of teammates starting together and a chance of random_placement */
 behavior_version 2
 /*
 leaves theme: all are in
@@ -90,8 +90,8 @@ endif
 /*
 
 #define SNOW_THEME
-*/
 #define MANGROVE_THEME
+*/
 if SNOW_THEME /* Could use more work (distinguish itself from the other terrains)
     snow terrains:
     SNOW_FOREST 21 
@@ -447,6 +447,21 @@ base_terrain UNFORESTED_TERRAIN
 create_player_lands {
     terrain_type UNFORESTED_TERRAIN
     circle_radius 38 2
+    if AT_LEAST_LARGE
+        base_size 24 /* TODO need to test all of the base sizes - furthest a player object can ever get from player start is 23 tiles, so this base size should be perfectly fine for all of the larger map sizes. */
+    elseif MAPSIZE_MINI
+        base_size 8 /* TODO need to test all of the base sizes - use 4v4? */
+    elseif MAPSIZE_TINY
+        base_size 13 /* TODO need to test all of the base sizes */
+    elseif MAPSIZE_SMALL
+        base_size 15 /* TODO need to test all of the base sizes */
+    elseif MAPSIZE_MEDIUM
+        base_size 18 /* TODO need to test all of the base sizes */
+    else MAPSIZE_NORMAL
+        base_size 21 /* TODO need to test all of the base sizes */
+    else /* MAPSIZE_LARGE */
+        base_size 23 /* TODO need to test all of the base sizes */
+    endif
 }
 if MANGROVE_THEME
     create_land {
@@ -627,7 +642,7 @@ if USE_OYSTERS /* TODO switch to use oysters instead of gold piles when I have a
         actor_area 100
         actor_area_radius 6
     }
-    create_object OYSTERS {
+    create_object OYSTERS { 
         set_place_for_every_player
         set_gaia_object_only
         min_distance_to_players 13
@@ -701,6 +716,22 @@ create_object FORAGE {
     avoid_forest_zone 2
     avoid_actor_area 100
 }
+if MANGROVE_THEME
+else
+    create_object DEER { /* moved deer to before herdables/lurables due to bugged spawns where it would be blocked in by trees/earlier resources - lesson: things with multiple objects in a group should be placed before single-object groups */
+        set_place_for_every_player
+        set_gaia_object_only
+        min_distance_to_players 15
+        max_distance_to_players 23
+        set_circular_placement
+        set_loose_grouping
+        number_of_groups 2
+        number_of_objects 4
+        min_distance_group_placement 2
+        temp_min_distance_group_placement 11
+        avoid_forest_zone 1
+    }
+endif
 if FAT_HERDABLE
     create_object DLC_WATERBUFFALO {
         set_place_for_every_player
@@ -713,7 +744,6 @@ if FAT_HERDABLE
         min_distance_group_placement 2
         temp_min_distance_group_placement 3
         avoid_forest_zone 1
-
     }
 else 
     create_object HERDABLE {
@@ -733,7 +763,7 @@ endif
 create_object LURABLE {
     set_place_for_every_player
     set_gaia_object_only
-    min_distance_to_players 15
+    min_distance_to_players 14 /* can't increase - doing so risks a boar not spawning. */
     max_distance_to_players 23
     set_circular_placement
     number_of_groups 3
@@ -754,20 +784,6 @@ if MANGROVE_THEME
         temp_min_distance_group_placement 4
         avoid_forest_zone 1
         ignore_terrain_restrictions
-    }
-else
-    create_object DEER {
-        set_place_for_every_player
-        set_gaia_object_only
-        min_distance_to_players 15
-        max_distance_to_players 23
-        set_circular_placement
-        set_loose_grouping
-        number_of_groups 2
-        number_of_objects 4
-        min_distance_group_placement 2
-        temp_min_distance_group_placement 11
-        avoid_forest_zone 1
     }
 endif
 create_object STRAGGLER_TREE {
@@ -924,7 +940,7 @@ create_object STONE {
     endif
 }
 if USE_OYSTERS
-    create_object OYSTERS {
+    create_object OYSTERS { 
         temp_min_distance_group_placement 28
         min_distance_group_placement 10 
         avoid_forest_zone 1
@@ -982,7 +998,8 @@ if USE_OYSTERS
             temp_min_distance_group_placement 64
         endif
     }
-    create_object OYSTERS { /* may be a bit much, but still should be decent amount */
+    create_object OYSTERS { 
+        temp_min_distance_group_placement 28 /* TODO test scaling */
         terrain_to_place_on DLC_MANGROVEFOREST
         if MAPSIZE_MINI
             temp_min_distance_group_placement 21
@@ -1005,7 +1022,6 @@ if USE_OYSTERS
         elseif MAPSIZE_LUDICROUS
             temp_min_distance_group_placement 64
         endif
-        temp_min_distance_group_placement 28 /* TODO scale */
         number_of_groups 9320
         set_scaling_to_map_size
         if AT_MOST_TINY

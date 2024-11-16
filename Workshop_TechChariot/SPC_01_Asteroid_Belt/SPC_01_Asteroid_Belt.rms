@@ -1,8 +1,8 @@
 /* Asteroid Belt */
 /* A Random Map Script by TechChariot */
-/* Released 02/23/2024 */
-/* Consent is given for this map to be used in Alchemy League, Season 2, and Content Creation by Alchemy AOE Community Members */
-/* Component Specification: https://github.com/TechnicalChariot/Alchemy-AOE-Published-Specifications/blob/main/CHEM-CSRM-HVN-09.pdf */
+/* Released 2025-11-16 */
+/* Consent is given for this map to be used in Alchemy League Season 5, and Content Creation by Alchemy AOE Community Members */
+/* Component Specification: https://github.com/Alchemy-AOE-Community/CHEM-Published-Specifications/blob/download-to-click-links/SCRIPTING/SPACE/CHEM-CSRM-SPC-01 */
 
 <PLAYER_SETUP>
 
@@ -41,15 +41,14 @@ effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_WALKING_GRAPHIC 1918
 effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_RUNNING_GRAPHIC 1918
 effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_NAME_ID 5043
 effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_ICON_ID 300
-effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_LINE_OF_SIGHT 5
-effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_SEARCH_RADIUS 5
+
+effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_LINE_OF_SIGHT 6
 effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_HITPOINTS 45
 effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_MOVE_SPEED 1
-effect_percent ADD_ATTRIBUTE PHOTON_MAN ATTR_MOVE_SPEED 10
 
-/* Disable trade for matches with more than 2 teams or FFA */
-if 2_TEAM_GAME
-else
+
+/* Disable trade for Low Resource Configuration */
+if LOW_RESOURCES
     #const TRADE_CART_ENABLER 161
     #const TRADE_COG_ENABLER 180
     #const TRADE_CARAVAN_ENABLER 48
@@ -62,6 +61,7 @@ else
     effect_amount DISABLE_TECH HINDU_CARAVANSERAI_ENABLER ATTR_DISABLE 518
     effect_amount DISABLE_TECH PERSIAN_CARAVANSERAI_ENABLER ATTR_DISABLE 552
     effect_amount DISABLE_TECH SILK_ROAD ATTR_DISABLE 499
+else
 endif
 
 /* Disabling Trees from Asteroid Forest */

@@ -1,8 +1,8 @@
 /* Jupiter */
 /* A Random Map Script by TechChariot */
-/* Released 02/05/2024 */
-/* Consent is given for this map to be used in Alchemy League, Season 2, and Content Creation by Alchemy AOE Community Members */
-/* Component Specification: https://github.com/TechnicalChariot/Alchemy-AOE-Published-Specifications/blob/main/CHEM-CSRM-HVN-05.pdf */
+/* Released 2024-11-16 */
+/* Consent is given for this map to be used in Alchemy League Season 5, and Content Creation by Alchemy AOE Community Members */
+/* Component Specification: https://github.com/Alchemy-AOE-Community/CHEM-Published-Specifications/blob/download-to-click-links/SCRIPTING/SPACE/CHEM-CSRM-SPC-03 */
 
 <PLAYER_SETUP>
 
@@ -55,8 +55,8 @@ effect_amount GAIA_SET_ATTRIBUTE DLC_BOULDER_C ATTR_OCCLUSION_MODE 2
 effect_amount GAIA_SET_ATTRIBUTE ROCK ATTR_OCCLUSION_MODE 2
 effect_amount GAIA_SET_ATTRIBUTE ROCK2 ATTR_OCCLUSION_MODE 2
 
-/* Photon Man Definitions */
-#const PHOTON_MAN 430
+/* Configuration of Photon Man */
+#const PHOTON_MAN 430 /* 1292 if no attack */
 effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_TRAITS 16
 effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_ATTACK_GRAPHIC 1908
 effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_STANDING_GRAPHIC 1913
@@ -65,15 +65,12 @@ effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_DYING_GRAPHIC 1911
 effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_UNDEAD_GRAPHIC 1911
 effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_WALKING_GRAPHIC 1918
 effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_RUNNING_GRAPHIC 1918
-effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_NAME_ID 5043 
+effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_NAME_ID 5043
 effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_ICON_ID 300
-effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_LINE_OF_SIGHT 5
-effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_SEARCH_RADIUS 5
+
+effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_LINE_OF_SIGHT 6
 effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_HITPOINTS 45
 effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_MOVE_SPEED 1
-effect_percent ADD_ATTRIBUTE PHOTON_MAN ATTR_MOVE_SPEED 10
-
-
 
 /* Remove Traditional Trees */
 effect_amount GAIA_SET_ATTRIBUTE PALMTREE ATTR_TERRAIN_ID 19
@@ -91,9 +88,9 @@ effect_amount GAIA_SET_ATTRIBUTE RUBBLE_AQUEDUCT ATTR_STORAGE_VALUE 99999999
 effect_amount GAIA_SET_ATTRIBUTE TREE_A ATTR_NAME_ID 5393
 effect_amount GAIA_SET_ATTRIBUTE TREE_A ATTR_ICON_ID 856
 
-if 2_TEAM_GAME elseif 2_PLAYER_GAME else #define DISABLE_TRADE endif
 
-if DISABLE_TRADE
+
+if LOW_RESOURCES
   #const TRADE_CART_ENABLER 161
   #const TRADE_COG_ENABLER 180
   #const TRADE_CARAVAN_ENABLER 48
@@ -106,6 +103,7 @@ if DISABLE_TRADE
   effect_amount DISABLE_TECH HINDU_CARAVANSERAI_ENABLER ATTR_DISABLE 518
   effect_amount DISABLE_TECH PERSIAN_CARAVANSERAI_ENABLER ATTR_DISABLE 552
   effect_amount DISABLE_TECH SILK_ROAD ATTR_DISABLE 499    
+else
 endif
 
 <ELEVATION_GENERATION>

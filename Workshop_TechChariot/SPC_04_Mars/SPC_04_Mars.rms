@@ -1,8 +1,8 @@
 /* Mars */
 /* A Random Map Script by TechChariot */
-/* Released 02/28/2024 */
-/* Consent is given for this map to be used in Alchemy League, Season 2, and Content Creation by Alchemy AOE Community Members */
-/* Component Specification: https://github.com/TechnicalChariot/Alchemy-AOE-Published-Specifications/blob/main/CHEM-CSRM-HVN-10.pdf */
+/* Released 2024-11-16 */
+/* Consent is given for this map to be used in Alchemy League Season 5, and Content Creation by Alchemy AOE Community Members */
+/* Component Specification: https://github.com/Alchemy-AOE-Community/CHEM-Published-Specifications/blob/download-to-click-links/SCRIPTING/SPACE/CHEM-CSRM-SPC-04 */
 
 <PLAYER_SETUP>
 
@@ -40,6 +40,7 @@ ai_info_map_type CUSTOM 1 0 0
 #const LSNOW 73
 #const HSNOW 74
 
+/* Configuration of Photon Man */
 #const PHOTON_MAN 430 /* 1292 if no attack */
 effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_TRAITS 16
 effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_ATTACK_GRAPHIC 1908
@@ -51,11 +52,11 @@ effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_WALKING_GRAPHIC 1918
 effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_RUNNING_GRAPHIC 1918
 effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_NAME_ID 5043
 effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_ICON_ID 300
-effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_LINE_OF_SIGHT 5
-effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_SEARCH_RADIUS 5
+
+effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_LINE_OF_SIGHT 6
 effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_HITPOINTS 45
-effect_percent SET_ATTRIBUTE PHOTON_MAN ATTR_MOVE_SPEED 110
-effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_HERO_STATUS 66
+effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_MOVE_SPEED 1
+
 
 effect_amount GAIA_SET_ATTRIBUTE RNW ATTR_ATTACK_GRAPHIC 1908
 effect_amount GAIA_SET_ATTRIBUTE RNW ATTR_STANDING_GRAPHIC 1913
@@ -66,10 +67,6 @@ effect_amount GAIA_SET_ATTRIBUTE RNW ATTR_WALKING_GRAPHIC 1918
 effect_amount GAIA_SET_ATTRIBUTE RNW ATTR_RUNNING_GRAPHIC 1918
 effect_amount GAIA_SET_ATTRIBUTE RNW ATTR_NAME_ID 5043
 effect_amount GAIA_SET_ATTRIBUTE RNW ATTR_ICON_ID 300
-effect_amount GAIA_SET_ATTRIBUTE RNW ATTR_LINE_OF_SIGHT 5
-effect_amount GAIA_SET_ATTRIBUTE RNW ATTR_SEARCH_RADIUS 5
-effect_amount GAIA_SET_ATTRIBUTE RNW ATTR_HITPOINTS 45
-effect_percent GAIA_SET_ATTRIBUTE RNW ATTR_MOVE_SPEED 110
 
 effect_amount GAIA_SET_ATTRIBUTE RNA ATTR_ATTACK_GRAPHIC 1908
 effect_amount GAIA_SET_ATTRIBUTE RNA ATTR_STANDING_GRAPHIC 1913
@@ -80,10 +77,6 @@ effect_amount GAIA_SET_ATTRIBUTE RNA ATTR_WALKING_GRAPHIC 1918
 effect_amount GAIA_SET_ATTRIBUTE RNA ATTR_RUNNING_GRAPHIC 1918
 effect_amount GAIA_SET_ATTRIBUTE RNA ATTR_NAME_ID 5043
 effect_amount GAIA_SET_ATTRIBUTE RNA ATTR_ICON_ID 300
-effect_amount GAIA_SET_ATTRIBUTE RNA ATTR_LINE_OF_SIGHT 5
-effect_amount GAIA_SET_ATTRIBUTE RNA ATTR_SEARCH_RADIUS 5
-effect_amount GAIA_SET_ATTRIBUTE RNA ATTR_HITPOINTS 45
-effect_percent GAIA_SET_ATTRIBUTE RNA ATTR_MOVE_SPEED 110
 
 /* Disabling Baobab Spawn on Baobab Forest */
 effect_amount GAIA_SET_ATTRIBUTE DLC_BAOBABTREE ATTR_TERRAIN_ID 13
@@ -100,8 +93,7 @@ effect_amount GAIA_SET_ATTRIBUTE TREE_A ATTR_ICON_ID 856
 effect_amount GAIA_SET_ATTRIBUTE TREE_A ATTR_STORAGE_VALUE 300
 
 /* Disable trade for matches with more than 2 teams or FFA */
-if 2_TEAM_GAME
-else
+if LOW_RESOURCES
     #const TRADE_CART_ENABLER 161
     #const TRADE_COG_ENABLER 180
     #const TRADE_CARAVAN_ENABLER 48
@@ -114,6 +106,7 @@ else
     effect_amount DISABLE_TECH HINDU_CARAVANSERAI_ENABLER ATTR_DISABLE 518
     effect_amount DISABLE_TECH PERSIAN_CARAVANSERAI_ENABLER ATTR_DISABLE 552
     effect_amount DISABLE_TECH SILK_ROAD ATTR_DISABLE 499
+else
 endif
 
 /* Large Rock Object Occlusion */

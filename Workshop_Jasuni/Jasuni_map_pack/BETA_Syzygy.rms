@@ -2883,6 +2883,33 @@ remember to
  */
 if LAKES_PLANET /* resources: forage; sheep, cows, goats, geese*, water buffalo, pigs; deer, zebra, ostrich, gazelle, mouflon; boar, elephant, rhino; SHORE_FISH/DLC_BOXTURTLE, FISH/DORADO/SALMON/TUNA/SNAPPER */
 	start_random
+		percent_chance 76 #const FISH_FOOD rnd(455,458) /* DORADO, SALMON, TUNA, SNAPPER  */
+		percent_chance 19 #const FISH_FOOD 53 /* FISH  */
+		percent_chance 1 #const FISH_FOOD 61 /* dolphin  */
+		percent_chance 4 #const FISH_FOOD rnd(450,451) /* MARLIN1, MARLIN2  */
+	end_random
+	create_object FISH_FOOD {
+		avoid_actor_area 1
+		number_of_objects 9320
+		temp_min_distance_group_placement rnd(1,8)
+		min_distance_group_placement 1
+		terrain_to_place_on DLC_WATER5
+		max_distance_to_other_zones 3
+	}
+	start_random
+		percent_chance 50 #const LAKES_SHORE_FISH 69 /* SHORE_FISH, need the comma */
+		percent_chance 50 #const LAKES_SHORE_FISH 1141 /* DLC_BOXTURTLE */
+	end_random
+	create_object LAKES_SHORE_FISH {
+		avoid_actor_area 1
+		number_of_objects 9320
+		temp_min_distance_group_placement rnd(3,7)
+		min_distance_group_placement 1
+		/* making a minimum of 3, so that placing docks is always possible. TODO consider changing, and possibly after adding a way to "check" if there are lots of small ponds
+		temp_min_distance_group_placement rnd(rnd(1,4),rnd(7,9)) */
+		terrain_to_place_on DLC_WATER5
+	}
+	start_random
 		percent_chance 40 #const LAKES_LURABLE 48
 		percent_chance 10 #const LAKES_LURABLE 1139 /* DLC_RHINO */
 		percent_chance 10 #const LAKES_LURABLE 1301 /* DLC_ELEPHANT */
@@ -2918,6 +2945,20 @@ if LAKES_PLANET /* resources: forage; sheep, cows, goats, geese*, water buffalo,
 	else
 		create_object LAKES_HUNTABLE {
 			avoid_actor_area 1
+			terrain_to_place_on GRASS2
+			number_of_objects rnd(2,5)
+			number_of_groups rnd(2,8)
+			group_variance rnd(0,1)
+			temp_min_distance_group_placement rnd(8,30)
+			set_scaling_to_map_size
+			min_distance_group_placement 2
+			avoid_forest_zone 1
+			set_gaia_object_only
+			set_loose_grouping
+			actor_area 4
+			actor_area_radius 4
+			avoid_actor_area 4
+			max_distance_to_other_zones 1
 		}
 	endif
 	
@@ -2926,13 +2967,34 @@ if LAKES_PLANET /* resources: forage; sheep, cows, goats, geese*, water buffalo,
 	else
 		create_object LAKES_HERDABLE {
 			avoid_actor_area 1
-
+			terrain_to_place_on GRASS2
+			number_of_objects rnd(2,4)
+			number_of_groups rnd(4,20)
+			temp_min_distance_group_placement rnd(17,36)
+			set_scaling_to_map_size
+			min_distance_group_placement 1
+			group_variance rnd(0,1)
+			set_loose_grouping
+			avoid_forest_zone 1
+			max_distance_to_other_zones 1
 		}
+		
 	endif
 	
 	if NO_LAKES_FORAGE
 	else
 		create_object LAKES_FORAGE {
+			terrain_to_place_on GRASS2
+			number_of_objects rnd(2,6)
+			number_of_groups rnd(2,12)
+			group_variance rnd(0,2)
+			temp_min_distance_group_placement rnd(9,35)
+			min_distance_group_placement 2
+			set_tight_grouping
+			set_scaling_to_map_size
+			set_gaia_object_only
+			max_distance_to_other_zones 1
+			avoid_forest_zone 1
 
 		}
 	endif
@@ -2941,60 +3003,19 @@ if LAKES_PLANET /* resources: forage; sheep, cows, goats, geese*, water buffalo,
 	else
 		create_object LAKES_LURABLE {
 			avoid_actor_area 1
-
-		}
-	endif
-	/* TODO and add fish
-
-	start_random
-		percent_chance 40 #const SAVANNAH_LURABLE 1139 /* DLC_RHINO */
-		percent_chance 40 #const SAVANNAH_LURABLE 1301 /* DLC_ELEPHANT */
-		percent_chance 20 #define NO_SAVANNAH_LURABLE
-	end_random
-	if NO_SAVANNAH_LURABLE
-	else
-		create_object SAVANNAH_LURABLE {
-			avoid_actor_area 1
-			number_of_groups rnd(3,8)
-			temp_min_distance_group_placement rnd(14,35)
+			terrain_to_place_on GRASS2
+			number_of_groups rnd(3,10)
+			temp_min_distance_group_placement rnd(12,35)
 			set_scaling_to_map_size
 			min_distance_group_placement 2
-			terrain_to_place_on DLC_SAVANNAH
-			avoid_forest_zone 1
 			set_gaia_object_only
+			max_distance_to_other_zones 1
+			avoid_forest_zone 1
 			actor_area 4
 			actor_area_radius 4
 			avoid_actor_area 4
 		}
 	endif
-	/* Giraffes would be an excelent addition here, but aren't an option. TODO decide on new huntables here. ostricth, zebra, gazelle  */
-	start_random
-		percent_chance 33 #const SAVANNAH_HUNTABLE 1019 /* DLC_ZEBRA */
-		percent_chance 33 #const SAVANNAH_HUNTABLE 1026 /* DLC_OSTRICH */
-		percent_chance 33 #const SAVANNAH_HUNTABLE 1796 /* GAZELLE */
-		percent_chance 1 #define NO_SAVANNAH_HUNTABLE /* create_object bugs if the object is undefined. */
-	end_random
-	if NO_SAVANNAH_HUNTABLE
-	else
-		create_object SAVANNAH_HUNTABLE {
-			avoid_actor_area 1
-			number_of_objects rnd(2,5)
-			number_of_groups rnd(2,8)
-			group_variance rnd(0,1)
-			temp_min_distance_group_placement rnd(8,30)
-			set_scaling_to_map_size
-			min_distance_group_placement 2
-			terrain_to_place_on DLC_SAVANNAH
-			avoid_forest_zone 1
-			set_gaia_object_only
-			set_loose_grouping
-			actor_area 4
-			actor_area_radius 4
-			avoid_actor_area 4
-		}
-	endif
-	also include chance of herdables, forage, and include fish - either sparce or bountiful, randomly determined through tmep distance
-	*/
 
 	start_random
 		percent_chance 25 #define NO_LAKES_GOLD
@@ -3004,7 +3025,7 @@ if LAKES_PLANET /* resources: forage; sheep, cows, goats, geese*, water buffalo,
 	else
 		#define GOLD_PLACED
 		create_object GOLD {
-			terrain_to_place_on TERRAIN
+			terrain_to_place_on GRASS2
 			number_of_objects rnd(2,4)
 			number_of_groups rnd(4,10)
 			group_variance rnd(0,1)
@@ -3024,7 +3045,7 @@ if LAKES_PLANET /* resources: forage; sheep, cows, goats, geese*, water buffalo,
 	if NO_LAKES_STONE
 	else
 		create_object STONE {
-			terrain_to_place_on TERRAIN
+			terrain_to_place_on GRASS2
 			number_of_objects rnd(2,4)
 			number_of_groups rnd(4,10)
 			group_variance rnd(0,1)

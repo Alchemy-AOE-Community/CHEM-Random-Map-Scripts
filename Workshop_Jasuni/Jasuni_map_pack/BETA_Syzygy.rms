@@ -76,6 +76,7 @@ Reduce villagers a little for the city biome, also forced them (and houses) away
 Force villagers to have a little separation from each other? (perhaps an actor area to avoid - will need to stress-test with the smallest map size)
 
 TODO: idea: if add a cracked terrain without wood, then could have a check for if 3 biomes are woodless (cracked, radiated, barren) - if so, then rocky terrain gets some wood piles placed on them
+TODO determine where mouflon would be appropriate to add, and add them.
  */
  
 
@@ -378,6 +379,7 @@ direct_placement
 #const FOREST_REEDS 92
 #const WATER_GREEN 95
 #const WATER_BROWN 96
+#const FOREST_PALM_GRASS 112
 
 #const G 0 /* GRASS */
 #const WNI  15 /* Water 2D, shoreless */
@@ -458,8 +460,8 @@ how to add biomes:
 if FULL_RANDOM_BIOMES 
 	#define DEBUG_MODE
 	if DEBUG_MODE
-		#define GREAT_PLAINS_PLANET_1 /* TODO add properly and fully. */
-		/* #define GREAT_PLAINS_PLANET TODO move */
+		#define LAKES_PLANET_1 /* TODO add properly and fully. */
+		/* TODO test great plains planet in other positions, see that it doesn't have any issues on the larger planets. */
 	else
 		start_random
 			percent_chance 8 #define RADIOACTIVE_PLANET_1
@@ -542,7 +544,7 @@ if FULL_RANDOM_BIOMES
 		#define PLANET_1_WOODLESS
 		#const PN1B 108 /* DLC_GRAVELBEACH */
 	elseif LAKES_PLANET_1
-		#const PN1 12 /* TODO determine which grass to use */ /* GRASS2 - a very green grass GREAT_PLAINS_PLANET, LAKES_PLANET, CRACKED_PLANET */
+		#const PN1 12 /* TODO determine which grass to use */ /* GRASS2 - a very green grass, with a forest terrain placed on it. GREAT_PLAINS_PLANET, LAKES_PLANET, CRACKED_PLANET */
 		#define LAKES_PLANET
 		#const PN1B 108 /* DLC_GRAVELBEACH */
 	elseif CRACKED_PLANET_1
@@ -1204,13 +1206,30 @@ endif
 <ELEVATION_GENERATION>
 if GREAT_PLAINS_PLANET	
 	start_random
-		percent_chance 5 create_elevation 3 { /* actually a little below 5% in practice */
+		percent_chance 2 create_elevation 3 { /* actually a little below 2% in practice */
 			base_terrain GRASS
 			number_of_clumps rnd(0,10) /* can potentially end up looking like a single platue - and doesn't appear to generate when it randoms 0 clumps */
 			number_of_tiles rnd(20,300)
 			set_scale_by_size
 			enable_balanced_elevation
 			spacing 3 
+		}
+		percent_chance 38 create_elevation 3 {  /* should get all of it elevated, like a plateu. */
+			base_terrain GRASS
+			number_of_tiles 9320
+			set_scale_by_size
+			enable_balanced_elevation
+		}
+	end_random
+endif
+if LAKES_PLANET
+	start_random
+		percent_chance 25 create_elevation 3 { /* higher than average chance of elevation, but otherwise a little on the skimpy side */
+			base_terrain GRASS2
+			number_of_tiles rnd(10,180)
+			number_of_clumps rnd(5,45)
+			set_scale_by_size
+			enable_balanced_elevation
 		}
 	end_random
 endif
@@ -1943,6 +1962,50 @@ if GREAT_PLAINS_PLANET
 endif 
 if LAKES_PLANET
 	/* forest terrain is palm trees */
+	create_terrain DLC_WATER5 { /* lighter than water, which is fine - can't/shouldn't use water as that would be the same terrain as outer space */
+		base_terrain GRASS2
+		number_of_clumps rnd(1,25) /* TODO can improve, but works fine. */
+		/* 100 tiles == 1 land_percent with set_scale_by_size */
+		number_of_tiles rnd(10,125) /* 0.1-1.25% */
+		set_scale_by_size
+		/* rnd(1,5) */
+		set_flat_terrain_only
+		spacing_to_other_terrain_types 1
+		height_limits 2 2
+	}
+	start_random
+		percent_chance 100 #const LAKES_MASK 111 
+	end_random
+	create_terrain LAKES_MASK {
+		base_terrain GRASS2
+		number_of_clumps rnd(1,25)
+		number_of_tiles rnd(10,100) /* 0.1-1% */
+		set_scale_by_size
+		set_flat_terrain_only
+		spacing_to_other_terrain_types 2
+		terrain_mask 1
+		height_limits 2 2
+	}
+	create_terrain DLC_WATER5 {
+		base_terrain GRASS2
+		base_layer LAKES_MASK
+		number_of_clumps 999
+		land_percent 15
+		height_limits 2 2
+
+	}
+	/*
+	*/
+	create_terrain FOREST_PALM_GRASS {
+		base_terrain GRASS2
+		number_of_clumps rnd(3,40)
+		/*
+		land_percent rnd(1,2) */
+		
+		number_of_tiles rnd(100,450) /* 1-4.5% */ 
+		set_scale_by_size
+		/* rnd(1,5) */
+	}
 endif
 if CRACKED_PLANET
 	/* may be a woodless biome - could make alien-looking by adding a terrain mask. */
@@ -2711,6 +2774,7 @@ create_object SHORE_FISH {
 	number_of_objects 9320
 	temp_min_distance_group_placement rnd(8,10)
 	avoid_actor_area 1
+	terrain_to_place_on WATER
 }
 create_object DOLPHIN {
 	number_of_objects 9320
@@ -2817,6 +2881,216 @@ TODO add any new biomes here/after this point
 remember to 
 		avoid_actor_area 1
  */
+if LAKES_PLANET /* resources: forage; sheep, cows, goats, geese*, water buffalo, pigs; deer, zebra, ostrich, gazelle, mouflon; boar, elephant, rhino; SHORE_FISH/DLC_BOXTURTLE, FISH/DORADO/SALMON/TUNA/SNAPPER */
+	start_random
+		percent_chance 40 #const LAKES_LURABLE 48
+		percent_chance 10 #const LAKES_LURABLE 1139 /* DLC_RHINO */
+		percent_chance 10 #const LAKES_LURABLE 1301 /* DLC_ELEPHANT */
+		percent_chance 40 #define NO_LAKES_LURABLE
+	end_random
+	start_random
+		percent_chance 10 #const LAKES_HUNTABLE 65 /* deer */
+		percent_chance 10 #const LAKES_HUNTABLE 1019 /* zebra */
+		percent_chance 20 #const LAKES_HUNTABLE 1026 /* ostrich */
+		percent_chance 10 #const LAKES_HUNTABLE 1796 /* gazelle */
+		percent_chance 10 #const LAKES_HUNTABLE 2340 /* mouflon */
+		percent_chance 40 #define NO_LAKES_HUNTABLE
+	end_random
+	start_random
+		percent_chance 4 #const LAKES_HERDABLE 594 /* sheep */
+		percent_chance 1 #const LAKES_HERDABLE 705 /* cows */
+		percent_chance 1 #const LAKES_HERDABLE 1596
+		percent_chance 1 #const LAKES_HERDABLE 1598
+		percent_chance 1 #const LAKES_HERDABLE 1600
+		percent_chance 4 #const LAKES_HERDABLE 833 /* turkey */
+		percent_chance 2 #const LAKES_HERDABLE 1142 /* water buffalo */
+		percent_chance 4 #const LAKES_HERDABLE 1245 /* DLC_PIG */
+		percent_chance 42 #const LAKES_HERDABLE 1243 /* DLC_GOOSE */
+		percent_chance 40 #define NO_LAKES_HERDABLE /*  numbers add to 100 */
+	end_random
+	start_random
+		percent_chance 30 #const LAKES_FORAGE 59
+		percent_chance 30 #const LAKES_FORAGE 1059
+		percent_chance 30 #define NO_LAKES_FORAGE
+	end_random
+
+	if NO_LAKES_HUNTABLE
+	else
+		create_object LAKES_HUNTABLE {
+			avoid_actor_area 1
+		}
+	endif
+	
+	
+	if NO_LAKES_HERDABLE
+	else
+		create_object LAKES_HERDABLE {
+			avoid_actor_area 1
+
+		}
+	endif
+	
+	if NO_LAKES_FORAGE
+	else
+		create_object LAKES_FORAGE {
+
+		}
+	endif
+	
+	if NO_LAKES_LURABLE
+	else
+		create_object LAKES_LURABLE {
+			avoid_actor_area 1
+
+		}
+	endif
+	/* TODO and add fish
+
+	start_random
+		percent_chance 40 #const SAVANNAH_LURABLE 1139 /* DLC_RHINO */
+		percent_chance 40 #const SAVANNAH_LURABLE 1301 /* DLC_ELEPHANT */
+		percent_chance 20 #define NO_SAVANNAH_LURABLE
+	end_random
+	if NO_SAVANNAH_LURABLE
+	else
+		create_object SAVANNAH_LURABLE {
+			avoid_actor_area 1
+			number_of_groups rnd(3,8)
+			temp_min_distance_group_placement rnd(14,35)
+			set_scaling_to_map_size
+			min_distance_group_placement 2
+			terrain_to_place_on DLC_SAVANNAH
+			avoid_forest_zone 1
+			set_gaia_object_only
+			actor_area 4
+			actor_area_radius 4
+			avoid_actor_area 4
+		}
+	endif
+	/* Giraffes would be an excelent addition here, but aren't an option. TODO decide on new huntables here. ostricth, zebra, gazelle  */
+	start_random
+		percent_chance 33 #const SAVANNAH_HUNTABLE 1019 /* DLC_ZEBRA */
+		percent_chance 33 #const SAVANNAH_HUNTABLE 1026 /* DLC_OSTRICH */
+		percent_chance 33 #const SAVANNAH_HUNTABLE 1796 /* GAZELLE */
+		percent_chance 1 #define NO_SAVANNAH_HUNTABLE /* create_object bugs if the object is undefined. */
+	end_random
+	if NO_SAVANNAH_HUNTABLE
+	else
+		create_object SAVANNAH_HUNTABLE {
+			avoid_actor_area 1
+			number_of_objects rnd(2,5)
+			number_of_groups rnd(2,8)
+			group_variance rnd(0,1)
+			temp_min_distance_group_placement rnd(8,30)
+			set_scaling_to_map_size
+			min_distance_group_placement 2
+			terrain_to_place_on DLC_SAVANNAH
+			avoid_forest_zone 1
+			set_gaia_object_only
+			set_loose_grouping
+			actor_area 4
+			actor_area_radius 4
+			avoid_actor_area 4
+		}
+	endif
+	also include chance of herdables, forage, and include fish - either sparce or bountiful, randomly determined through tmep distance
+	*/
+
+	start_random
+		percent_chance 25 #define NO_LAKES_GOLD
+		percent_chance 55 #define NO_LAKES_STONE /* slightly less than normal */
+	end_random 
+	if NO_LAKES_GOLD
+	else
+		#define GOLD_PLACED
+		create_object GOLD {
+			terrain_to_place_on TERRAIN
+			number_of_objects rnd(2,4)
+			number_of_groups rnd(4,10)
+			group_variance rnd(0,1)
+			temp_min_distance_group_placement rnd(16,40)
+			set_scaling_to_map_size
+			min_distance_group_placement 2
+			max_distance_to_other_zones 1
+			set_gaia_object_only
+			avoid_forest_zone 1
+			set_tight_grouping
+			actor_area 2
+			actor_area_radius 3
+			avoid_actor_area 2
+			avoid_actor_area 3
+		}
+	endif
+	if NO_LAKES_STONE
+	else
+		create_object STONE {
+			terrain_to_place_on TERRAIN
+			number_of_objects rnd(2,4)
+			number_of_groups rnd(4,10)
+			group_variance rnd(0,1)
+			temp_min_distance_group_placement rnd(16,40)
+			set_scaling_to_map_size
+			min_distance_group_placement 2
+			max_distance_to_other_zones 1
+			set_gaia_object_only
+			avoid_forest_zone 1
+			set_tight_grouping
+			actor_area 3
+			actor_area_radius 3
+			avoid_actor_area 2
+			avoid_actor_area 3
+		}
+	endif
+endif
+if CRACKED_PLANET /* ideas - have pyramids and a desert terrain mask? with stone piles, and maybe gold around the pyramids. Possibly have a chance of palm trees. Low food, if any */
+	/*
+	start_random
+		percent_chance 25 #define NO_TERRAIN_GOLD
+		percent_chance 45 #define NO_TERRAIN_STONE
+	end_random 
+	if NO_TERRAIN_GOLD
+	else
+		#define GOLD_PLACED
+		create_object GOLD {
+			terrain_to_place_on TERRAIN
+			number_of_objects rnd(2,4)
+			number_of_groups rnd(4,10)
+			group_variance rnd(0,1)
+			temp_min_distance_group_placement rnd(16,40)
+			set_scaling_to_map_size
+			min_distance_group_placement 2
+			max_distance_to_other_zones 1
+			set_gaia_object_only
+			avoid_forest_zone 1
+			set_tight_grouping
+			actor_area 2
+			actor_area_radius 3
+			avoid_actor_area 2
+			avoid_actor_area 3
+		}
+	endif
+	if NO_TERRAIN_STONE
+	else
+		create_object STONE {
+			terrain_to_place_on TERRAIN
+			number_of_objects rnd(2,4)
+			number_of_groups rnd(4,10)
+			group_variance rnd(0,1)
+			temp_min_distance_group_placement rnd(16,40)
+			set_scaling_to_map_size
+			min_distance_group_placement 2
+			max_distance_to_other_zones 1
+			set_gaia_object_only
+			avoid_forest_zone 1
+			set_tight_grouping
+			actor_area 3
+			actor_area_radius 3
+			avoid_actor_area 2
+			avoid_actor_area 3
+		}
+	endif
+	*/
+endif
 if GREAT_PLAINS_PLANET /* TODO finish this up, and finish testing.
 TODO also add wood piles when low wood - this is a woodless biome */
 	start_random
@@ -2895,7 +3169,7 @@ TODO also add wood piles when low wood - this is a woodless biome */
 	end_random
 	/* TODO consider adding a modified hunting wolf when theres a large number of hunt: mainly so that laming is an option against mongols - Britons would be harder to lame (due to buffalo being moveable underneath the TC)
 	TODO may need to rebalance
-	TODO figure out bugs with the buffalo representatives in the following command - sometimes not spawning
+	sometimes lots of buffalo, sometimes not so many.
 	 */
 	create_object BUFFALO {
 		avoid_actor_area 1
@@ -2909,7 +3183,6 @@ TODO also add wood piles when low wood - this is a woodless biome */
 		set_loose_grouping
 		min_distance_group_placement 1
 		max_distance_to_other_zones 1
-		place_on_specific_land_id 4
 	}
 
 /*

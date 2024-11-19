@@ -435,12 +435,15 @@ effect_amount GAIA_SET_ATTRIBUTE ON_GRID ATTR_STORAGE_VALUE 0
 #const CHURCH_RUINS 1838
 #const TEMPLE_RUIN 1566
 
+#const NUBIAN_PYRAMID 1563
+
 /* set berry bushes land id to all land - needed for farmland terrain, I think. */
 effect_amount SET_ATTRIBUTE FORAGE ATTR_TERRAIN_ID 4
 effect_amount SET_ATTRIBUTE DLC_ORANGEBUSH ATTR_TERRAIN_ID 4
 effect_amount SET_ATTRIBUTE CASTLE_RUINS ATTR_TERRAIN_ID 4 /* why they can normally be placed on water is a mystery - I guess they may want sunken cities. */
 effect_amount SET_ATTRIBUTE CHURCH_RUINS ATTR_TERRAIN_ID 4 
 effect_amount SET_ATTRIBUTE TEMPLE_RUIN ATTR_TERRAIN_ID 4 
+effect_amount SET_ATTRIBUTE NUBIAN_PYRAMID ATTR_TERRAIN_ID 4 /* why it can be placed on all terrains instead of land terrains is a mystery, but a fixable one */
 
 /* Defining Planet Terrains
 #define NONRANDOM_PLANETS
@@ -460,7 +463,7 @@ how to add biomes:
 if FULL_RANDOM_BIOMES 
 	#define DEBUG_MODE
 	if DEBUG_MODE
-		#define LAKES_PLANET_1 /* TODO add properly and fully. */
+		#define CRACKED_PLANET_1 /* TODO add properly and fully. */
 		/* TODO test great plains planet in other positions, see that it doesn't have any issues on the larger planets. */
 	else
 		start_random
@@ -1337,6 +1340,18 @@ if SNOW_PLANET
 		}
 	end_random
 endif
+if CRACKED_PLANET
+	start_random
+		percent_chance 50 create_elevation 3 {
+			base_terrain DLC_CRACKED
+			number_of_clumps rnd(3,32)
+			number_of_tiles rnd(30,300)
+			set_scale_by_size
+			enable_balanced_elevation
+			spacing 3 
+		}
+	end_random
+endif
 if BARREN_PLANET
 	start_random
 		percent_chance 55 create_elevation 3 {
@@ -1994,8 +2009,6 @@ if LAKES_PLANET
 		height_limits 2 2
 
 	}
-	/*
-	*/
 	create_terrain FOREST_PALM_GRASS {
 		base_terrain GRASS2
 		number_of_clumps rnd(3,40)
@@ -2006,9 +2019,84 @@ if LAKES_PLANET
 		set_scale_by_size
 		/* rnd(1,5) */
 	}
+	/* TODO add more terrain masking
+	*/
 endif
 if CRACKED_PLANET
 	/* may be a woodless biome - could make alien-looking by adding a terrain mask. */
+	start_random
+		percent_chance 40 #define ALIEN_CRACKED_TERRAIN
+		percent_chance 10 #define SANDY_CRACKED_TERRAIN
+
+	/*
+		percent_chance 5 #const CRACKED_MASK 101 /* DLC_BOGLAND - somewhat alien-looking - could support life */
+		percent_chance 0 #const CRACKED_MASK 100 /* DLC_DRYGRASS - looks like it barely supports life */
+		percent_chance 5 #const CRACKED_MASK 6 /* DIRT - harder to see the cracked terrain base. Would probably be fine in small amounts */
+		percent_chance 5 #const CRACKED_MASK 14 /* DESERT - like desert, harder to see the cracked terrain */
+		percent_chance 10 #const CRACKED_MASK 46 /* DLC_QUICKSAND - liking, but again harder to see the cracked terrain */
+		percent_chance 10 #const CRACKED_MASK 102 /* DLC_DESERTGRAVEL - liking */
+		percent_chance 10 #const CRACKED_MASK 111 /* MUDDY_SHALLOW - might mix well with bogland, but needs to avoid outside terrains (like the "outer space" water) */
+		percent_chance 100 #const CRACKED_MASK 45 /* DLC_CRACKED */
+		*/
+	end_random
+	/* options: bogland with muddy shallow;
+	dirt, desert, quicksand, desert gravel, plain cracked
+	
+	 */
+	if ALIEN_CRACKED_TERRAIN
+		create_terrain MUDDY_SHALLOW {
+			base_terrain DLC_CRACKED
+			land_percent rnd(1,8)
+			number_of_clumps rnd(10,100)
+			terrain_mask 1
+			spacing_to_other_terrain_types 1
+		}
+		create_terrain DLC_BOGLAND {
+			base_terrain DLC_CRACKED
+			land_percent 15
+			number_of_clumps 999
+			terrain_mask 1
+		}
+	elseif SANDY_CRACKED_TERRAIN
+		create_terrain DLC_QUICKSAND {
+			base_terrain DLC_CRACKED
+			land_percent 15
+			number_of_clumps 99
+			terrain_mask 1
+		}
+	else
+		create_terrain DIRT {
+			base_terrain DLC_CRACKED
+			number_of_tiles rnd(0,200)
+			set_scaling_to_map_size
+			number_of_clumps rnd(3,30)
+			terrain_mask 1
+			spacing_to_other_terrain_types 1
+		}
+		create_terrain DESERT {
+			base_terrain DLC_CRACKED
+			number_of_tiles rnd(0,300)
+			set_scaling_to_map_size
+			number_of_clumps rnd(4,30)
+			terrain_mask 1
+			spacing_to_other_terrain_types 1
+		}
+		create_terrain DLC_DESERTGRAVEL {
+			base_terrain DLC_CRACKED
+			number_of_tiles rnd(100,400)
+			set_scaling_to_map_size
+			number_of_clumps rnd(8,50)
+			terrain_mask 1
+			spacing_to_other_terrain_types 5
+		}
+		create_terrain DLC_QUICKSAND {
+			base_terrain DLC_CRACKED
+			number_of_tiles rnd(0,350)
+			set_scaling_to_map_size
+			number_of_clumps rnd(4,35)
+			terrain_mask 1
+		}
+	endif
 endif
 
 if SNOW_HEAVY_PLANET
@@ -2801,6 +2889,92 @@ Considered adding this, but found that a heavily forest planet can force the vil
 		actor_area_radius 1 or 3
 	endif
  */
+
+if CRACKED_PLANET 
+	/* ideas - have pyramids and a desert terrain mask? with stone piles, and maybe gold around the pyramids. Possibly have a chance of palm trees. Low food, if any */
+	/* pyramids: 
+		PYRAMID: 689
+		GREAT_PYRAMID: 696
+		1563: Nubian pyramid
+	*/
+	if ALIEN_CRACKED_TERRAIN
+		create_object NUBIAN_PYRAMID {
+			terrain_to_place_on DLC_CRACKED
+			number_of_objects rnd(1,15)
+			set_scaling_to_map_size
+			temp_min_distance_group_placement rnd(6,30)
+			actor_area 11
+			actor_area_radius 2
+			max_distance_to_other_zones 2 /* could potentially be adjacent to a border, resulting in a corner gold not spawning */
+		}
+	elseif SANDY_CRACKED_TERRAIN
+		/* TODO */
+	else
+		create_object GREAT_PYRAMID {
+			avoid_actor_area 11
+			terrain_to_place_on DLC_CRACKED
+			layer_to_place_on DLC_DESERTGRAVEL
+			actor_area 12
+			actor_area_radius 5
+			min_distance_group_placement 4
+			max_distance_to_other_zones 4 /* TODO test to determine the right number for this, and check pyramid as well */
+		}
+		create_object GOLD { /* a single layer of gold surrounding the pyramid */
+			number_of_objects 9320
+			actor_area_to_place_in 12
+			terrain_to_place_on DLC_CRACKED
+		}
+		create_object FLAG_A { /* TODO for some reason stops working when I switch to ON_GRID */
+			number_of_objects 9320
+			set_gaia_object_only
+			actor_area_to_place_in 12
+			actor_area 13
+			actor_area_radius 5
+			set_scaling_to_map_size
+		}
+		create_object PYRAMID { /* TODO add multiple of these */
+		number_of_objects 9320
+			avoid_actor_area 12
+			avoid_actor_area 13
+			terrain_to_place_on DLC_CRACKED
+			layer_to_place_on DLC_DESERTGRAVEL
+			actor_area 11
+			actor_area_radius 3
+			max_distance_to_other_zones 2 
+		}
+	endif
+	#define GOLD_PLACED
+	create_object GOLD { /* a single layer of gold surrounding the pyramid */
+		number_of_objects 9320
+		actor_area_to_place_in 11
+		terrain_to_place_on DLC_CRACKED
+	}
+	/*
+	start_random
+		percent_chance 45 #define NO_TERRAIN_STONE
+	end_random 
+	if NO_TERRAIN_STONE
+	else
+		create_object STONE {
+			terrain_to_place_on TERRAIN
+			number_of_objects rnd(2,4)
+			number_of_groups rnd(4,10)
+			group_variance rnd(0,1)
+			temp_min_distance_group_placement rnd(16,40)
+			set_scaling_to_map_size
+			min_distance_group_placement 2
+			max_distance_to_other_zones 1
+			set_gaia_object_only
+			avoid_forest_zone 1
+			set_tight_grouping
+			actor_area 3
+			actor_area_radius 3
+			avoid_actor_area 2
+			avoid_actor_area 3
+		}
+	endif
+	*/
+endif
 create_object VILLAGER {
 	if DEBUG_MODE
 		second_object FLAG_A
@@ -3062,55 +3236,6 @@ if LAKES_PLANET /* resources: forage; sheep, cows, goats, geese*, water buffalo,
 			avoid_actor_area 3
 		}
 	endif
-endif
-if CRACKED_PLANET /* ideas - have pyramids and a desert terrain mask? with stone piles, and maybe gold around the pyramids. Possibly have a chance of palm trees. Low food, if any */
-	/*
-	start_random
-		percent_chance 25 #define NO_TERRAIN_GOLD
-		percent_chance 45 #define NO_TERRAIN_STONE
-	end_random 
-	if NO_TERRAIN_GOLD
-	else
-		#define GOLD_PLACED
-		create_object GOLD {
-			terrain_to_place_on TERRAIN
-			number_of_objects rnd(2,4)
-			number_of_groups rnd(4,10)
-			group_variance rnd(0,1)
-			temp_min_distance_group_placement rnd(16,40)
-			set_scaling_to_map_size
-			min_distance_group_placement 2
-			max_distance_to_other_zones 1
-			set_gaia_object_only
-			avoid_forest_zone 1
-			set_tight_grouping
-			actor_area 2
-			actor_area_radius 3
-			avoid_actor_area 2
-			avoid_actor_area 3
-		}
-	endif
-	if NO_TERRAIN_STONE
-	else
-		create_object STONE {
-			terrain_to_place_on TERRAIN
-			number_of_objects rnd(2,4)
-			number_of_groups rnd(4,10)
-			group_variance rnd(0,1)
-			temp_min_distance_group_placement rnd(16,40)
-			set_scaling_to_map_size
-			min_distance_group_placement 2
-			max_distance_to_other_zones 1
-			set_gaia_object_only
-			avoid_forest_zone 1
-			set_tight_grouping
-			actor_area 3
-			actor_area_radius 3
-			avoid_actor_area 2
-			avoid_actor_area 3
-		}
-	endif
-	*/
 endif
 if GREAT_PLAINS_PLANET /* TODO finish this up, and finish testing.
 TODO also add wood piles when low wood - this is a woodless biome */

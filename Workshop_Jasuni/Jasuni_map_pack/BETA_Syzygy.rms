@@ -461,30 +461,31 @@ how to add biomes:
  */
 #define FULL_RANDOM_BIOMES
 if FULL_RANDOM_BIOMES 
-	#define DEBUG_MODE
+	/*
+	#define DEBUG_MODE 
+	*/
 	if DEBUG_MODE
-		#define CRACKED_PLANET_1 /* TODO add properly and fully. */
+		#define CRACKED_PLANET_1 
+		#define ANTIQUITY_MODE
 		/* TODO test great plains planet in other positions, see that it doesn't have any issues on the larger planets. */
 	else
 		start_random
-			percent_chance 8 #define RADIOACTIVE_PLANET_1
-			percent_chance 8 #define DESERT_PLANET_1 
-			percent_chance 8 #define DIRT4_PLANET_1 
-			percent_chance 8 #define CITY_PLANET_1 
-			percent_chance 8 #define SNOW_PLANET_1 
-			percent_chance 8 #define LEAVES_PLANET_1 
-			percent_chance 8 #define DIRT_MUD_MANGROVE_MAZE_PLANET_1 
-			percent_chance 8 #define BOGLAND_MANGROVE_PLANET_1 
-			percent_chance 8 #define SAVANNAH_PLANET_1 
-			percent_chance 7 #define DIRT_PLANET_1 
-			percent_chance 7 #define FARMLAND_PLANET_1
-			percent_chance 7 #define SNOW_HEAVY_PLANET_1 
-			percent_chance 7 #define BARREN_PLANET_1 
-			/*
-			percent_chance 5 #define GREAT_PLAINS_PLANET_1
-			percent_chance 5 #define LAKES_PLANET_1
-			percent_chance 5 #define CRACKED_PLANET_1	
-			*/
+			percent_chance 7 #define RADIOACTIVE_PLANET_1
+			percent_chance 7 #define DESERT_PLANET_1 
+			percent_chance 7 #define DIRT4_PLANET_1 
+			percent_chance 7 #define CITY_PLANET_1 
+			percent_chance 6 #define SNOW_PLANET_1 
+			percent_chance 6 #define LEAVES_PLANET_1 
+			percent_chance 6 #define DIRT_MUD_MANGROVE_MAZE_PLANET_1 
+			percent_chance 6 #define BOGLAND_MANGROVE_PLANET_1 
+			percent_chance 6 #define SAVANNAH_PLANET_1 
+			percent_chance 6 #define DIRT_PLANET_1 
+			percent_chance 6 #define FARMLAND_PLANET_1
+			percent_chance 6 #define SNOW_HEAVY_PLANET_1 
+			percent_chance 6 #define BARREN_PLANET_1 
+			percent_chance 6 #define GREAT_PLAINS_PLANET_1
+			percent_chance 6 #define LAKES_PLANET_1
+			percent_chance 6 #define CRACKED_PLANET_1	
 		end_random
 	endif
 	if RADIOACTIVE_PLANET_1
@@ -566,23 +567,21 @@ if FULL_RANDOM_BIOMES
 	dry grass  */
 
 	start_random
-		percent_chance 9 #define RADIOACTIVE_PLANET_2
-		percent_chance 9 #define DESERT_PLANET_2 
-		percent_chance 9 #define DIRT4_PLANET_2 
-		percent_chance 9 #define CITY_PLANET_2 
-		percent_chance 8 #define SNOW_PLANET_2 
-		percent_chance 8 #define LEAVES_PLANET_2 
-		percent_chance 8 #define DIRT_MUD_MANGROVE_MAZE_PLANET_2 
-		percent_chance 8 #define BOGLAND_MANGROVE_PLANET_2 
-		percent_chance 8 #define SAVANNAH_PLANET_2 
-		percent_chance 8 #define DIRT_PLANET_2 
-		percent_chance 8 #define FARMLAND_PLANET_2
-		percent_chance 8 #define SNOW_HEAVY_PLANET_2 
-			/*
-			percent_chance 5 #define GREAT_PLAINS_PLANET_2
-			percent_chance 5 #define LAKES_PLANET_2
-			percent_chance 5 #define CRACKED_PLANET_2	
-			*/
+		percent_chance 7 #define RADIOACTIVE_PLANET_2
+		percent_chance 7 #define DESERT_PLANET_2 
+		percent_chance 7 #define DIRT4_PLANET_2 
+		percent_chance 7 #define CITY_PLANET_2 
+		percent_chance 7 #define SNOW_PLANET_2 
+		percent_chance 7 #define LEAVES_PLANET_2 
+		percent_chance 7 #define DIRT_MUD_MANGROVE_MAZE_PLANET_2 
+		percent_chance 7 #define BOGLAND_MANGROVE_PLANET_2 
+		percent_chance 7 #define SAVANNAH_PLANET_2 
+		percent_chance 7 #define DIRT_PLANET_2 
+		percent_chance 6 #define FARMLAND_PLANET_2
+		percent_chance 6 #define SNOW_HEAVY_PLANET_2 
+		percent_chance 6 #define GREAT_PLAINS_PLANET_2
+		percent_chance 6 #define LAKES_PLANET_2
+		percent_chance 6 #define CRACKED_PLANET_2	
 		/* percent_chance 0 #define BARREN_PLANET_2  */
 	end_random
 	if RADIOACTIVE_PLANET_2
@@ -721,22 +720,20 @@ if FULL_RANDOM_BIOMES
 	endif
 
 	start_random
-		percent_chance 10 #define RADIOACTIVE_PLANET_3
-		percent_chance 9 #define DESERT_PLANET_3 
-		percent_chance 9 #define DIRT4_PLANET_3 
-		percent_chance 9 #define CITY_PLANET_3 
-		percent_chance 9 #define SNOW_PLANET_3 
-		percent_chance 9 #define LEAVES_PLANET_3 
-		percent_chance 9 #define DIRT_MUD_MANGROVE_MAZE_PLANET_3 
-		percent_chance 9 #define BOGLAND_MANGROVE_PLANET_3 
-		percent_chance 9 #define SAVANNAH_PLANET_3 
-		percent_chance 9 #define DIRT_PLANET_3 
-		percent_chance 9 #define FARMLAND_PLANET_3
-			/*
-			percent_chance 5 #define GREAT_PLAINS_PLANET_3
-			percent_chance 5 #define LAKES_PLANET_3
-			percent_chance 5 #define CRACKED_PLANET_3
-			*/
+		percent_chance 8 #define RADIOACTIVE_PLANET_3
+		percent_chance 8 #define DESERT_PLANET_3 
+		percent_chance 7 #define DIRT4_PLANET_3 
+		percent_chance 7 #define CITY_PLANET_3 
+		percent_chance 7 #define SNOW_PLANET_3 
+		percent_chance 7 #define LEAVES_PLANET_3 
+		percent_chance 7 #define DIRT_MUD_MANGROVE_MAZE_PLANET_3 
+		percent_chance 7 #define BOGLAND_MANGROVE_PLANET_3 
+		percent_chance 7 #define SAVANNAH_PLANET_3 
+		percent_chance 7 #define DIRT_PLANET_3 
+		percent_chance 7 #define FARMLAND_PLANET_3
+		percent_chance 7 #define GREAT_PLAINS_PLANET_3
+		percent_chance 7 #define LAKES_PLANET_3
+		percent_chance 7 #define CRACKED_PLANET_3
 		/* percent_chance 0 #define SNOW_HEAVY_PLANET_3  */
 		/* percent_chance 0 #define BARREN_PLANET_3  */
 	end_random
@@ -917,21 +914,19 @@ if FULL_RANDOM_BIOMES
 
 	/* Start choose planet 4 */
 	start_random
-		percent_chance 10 #define RADIOACTIVE_PLANET_4
-		percent_chance 10 #define DESERT_PLANET_4 
-		percent_chance 10 #define DIRT4_PLANET_4 
-		percent_chance 10 #define CITY_PLANET_4 
-		percent_chance 10 #define SNOW_PLANET_4 
-		percent_chance 10 #define LEAVES_PLANET_4 
-		percent_chance 10 #define DIRT_MUD_MANGROVE_MAZE_PLANET_4 
-		percent_chance 10 #define BOGLAND_MANGROVE_PLANET_4 
-		percent_chance 10 #define SAVANNAH_PLANET_4 
-		percent_chance 10 #define DIRT_PLANET_4 
-			/*
-			percent_chance 5 #define GREAT_PLAINS_PLANET_4
-			percent_chance 5 #define LAKES_PLANET_4
-			percent_chance 5 #define CRACKED_PLANET_4
-			*/
+		percent_chance 8 #define RADIOACTIVE_PLANET_4
+		percent_chance 8 #define DESERT_PLANET_4 
+		percent_chance 8 #define DIRT4_PLANET_4 
+		percent_chance 8 #define CITY_PLANET_4 
+		percent_chance 8 #define SNOW_PLANET_4 
+		percent_chance 8 #define LEAVES_PLANET_4 
+		percent_chance 8 #define DIRT_MUD_MANGROVE_MAZE_PLANET_4 
+		percent_chance 8 #define BOGLAND_MANGROVE_PLANET_4 
+		percent_chance 8 #define SAVANNAH_PLANET_4 
+		percent_chance 7 #define DIRT_PLANET_4 
+		percent_chance 7 #define GREAT_PLAINS_PLANET_4
+		percent_chance 7 #define LAKES_PLANET_4
+		percent_chance 7 #define CRACKED_PLANET_4
 		/* percent_chance 0 #define FARMLAND_PLANET_4 */
 		/* percent_chance 0 #define SNOW_HEAVY_PLANET_4  */
 		/* percent_chance 0 #define BARREN_PLANET_4  */
@@ -2984,25 +2979,41 @@ if CRACKED_PLANET /* "I am Ozymandias, king of kings. Look on my works, ye might
 	if ALIEN_CRACKED_TERRAIN
 		/* TODO decide what other resources I want here - forage on muddy shallows, antiquity mode add oysters on the bogland mask; Perhaps add a guaranteed relic or two. Could also add some baobab straggler trees  */
 		#define NO_CRACKED_STONE
-		create_object FORAGE {
-			number_of_objects rnd(1,6)
-			number_of_groups rnd(10,50)
-			temp_min_distance_group_placement rnd(3,30)
-			set_scaling_to_map_size
-			min_distance_group_placement 1
-			group_variance rnd(0,2)
-			set_tight_grouping
-			max_distance_to_other_zones 2
-			terrain_to_place_on DLC_CRACKED
-			layer_to_place_on MUDDY_SHALLOW
-			avoid_forest_zone 2 
-		}
-		create_object DLC_BAOBABTREE { /* straggler trees: still is treated as a woodless biome, for now at least */
-			number_of_groups 9320
-			set_scaling_to_map_size
-			temp_min_distance_group_placement rnd(5,45)
-		} 
-		if ANTIQUITY_MODE 
+		start_random
+			percent_chance 5 #define NO_ALIEN_CRACKED_FORAGE
+		end_random
+		if NO_ALIEN_CRACKED_FORAGE
+		else
+			create_object FORAGE {
+				number_of_objects rnd(1,6)
+				number_of_groups rnd(10,50)
+				temp_min_distance_group_placement rnd(3,30)
+				set_scaling_to_map_size
+				min_distance_group_placement 1
+				group_variance rnd(0,2)
+				set_tight_grouping
+				max_distance_to_other_zones 2
+				terrain_to_place_on DLC_CRACKED
+				layer_to_place_on MUDDY_SHALLOW
+				avoid_forest_zone 2 
+			}
+		endif
+		start_random
+			percent_chance 50 #define NO_ALIEN_CRACKED_TREES
+		end_random
+		if NO_ALIEN_CRACKED_TREES
+		else
+			create_object DLC_BAOBABTREE { /* straggler trees: still is treated as a woodless biome, for now at least */
+				number_of_groups 9320
+				set_scaling_to_map_size
+				temp_min_distance_group_placement rnd(5,45)
+			} 
+		endif
+		start_random
+			percent_chance 20 #define NO_ALIEN_CRACKED_OYSTERS
+		end_random
+		if NO_ALIEN_CRACKED_OYSTERS
+		elseif ANTIQUITY_MODE 
 			create_object OYSTERS { /* a bit unusual as oysters are intended to be placed on water terrains, but can still be collected by villagers (unless really close to a shoreline, then a fishing ship may be able to get at it) */
 				avoid_actor_area 1 /* represents some kind of alien life here, so does avoid radioactive terrain. */
 				terrain_to_place_on DLC_CRACKED

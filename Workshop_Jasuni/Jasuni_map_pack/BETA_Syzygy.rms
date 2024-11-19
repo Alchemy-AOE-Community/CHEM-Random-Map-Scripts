@@ -553,7 +553,7 @@ if FULL_RANDOM_BIOMES
 	elseif CRACKED_PLANET_1
 		#const PN1 45 /* DLC_CRACKED */
 		#define CRACKED_PLANET
-		/* #define PLANET_1_WOODLESS */
+		#define PLANET_1_WOODLESS
 		#const PN1B 108 /* DLC_GRAVELBEACH */
 	else /* bugged generation - minimize damage by activating an unused terrain */
 		#const PN1 71 /* UNDERBRUSH_JUNGLE is 77, UNDERBRUSH_LEAVES is 71 - 71 was used as a terrain mask */
@@ -706,7 +706,7 @@ if FULL_RANDOM_BIOMES
 			#const PN2 45 /* DLC_CRACKED */
 			#define CRACKED_PLANET
 			#const PN2B 108 /* DLC_GRAVELBEACH */
-			/* #define PLANET_2_WOODLESS */
+			#define PLANET_2_WOODLESS
 		endif
 	else /* bugged generation - minimize damage by activating an unused terrain */
 		#const PN2 71 /* UNDERBRUSH_JUNGLE is 77, UNDERBRUSH_LEAVES is 71 - 71 was used as a terrain mask */
@@ -881,7 +881,7 @@ if FULL_RANDOM_BIOMES
 			#const PN3 45 /* DLC_CRACKED */
 			#define CRACKED_PLANET
 			#const PN3B 108 /* DLC_GRAVELBEACH */
-			/* #define PLANET_3_WOODLESS */
+			#define PLANET_3_WOODLESS 
 		endif
 	else /* bugged generation - minimize damage by activating an unused terrain */
 		#const PN3 71 /* UNDERBRUSH_JUNGLE is 77, UNDERBRUSH_LEAVES is 71 - 71 was used as a terrain mask */
@@ -1093,7 +1093,7 @@ if FULL_RANDOM_BIOMES
 			#const PN4 45 /* DLC_CRACKED */
 			#define CRACKED_PLANET
 			#const PN4B 108 /* DLC_GRAVELBEACH */
-			/* #define PLANET_4_WOODLESS */
+			#define PLANET_4_WOODLESS
 		endif
 	else /* bugged generation - minimize damage by activating an unused terrain */
 		#const PN4 71 /* UNDERBRUSH_JUNGLE is 77, UNDERBRUSH_LEAVES is 71 - 71 was used as a terrain mask */
@@ -2023,7 +2023,7 @@ if LAKES_PLANET
 	*/
 endif
 if CRACKED_PLANET
-	/* may be a woodless biome - could make alien-looking by adding a terrain mask. */
+	/* may be a woodless biome - could make alien-looking by adding a terrain mask. 40, 10 */
 	start_random
 		percent_chance 40 #define ALIEN_CRACKED_TERRAIN
 		percent_chance 10 #define SANDY_CRACKED_TERRAIN
@@ -2065,6 +2065,14 @@ if CRACKED_PLANET
 			terrain_mask 1
 		}
 	else
+		create_terrain DLC_DESERTGRAVEL {
+			base_terrain DLC_CRACKED
+			number_of_tiles rnd(50,300)
+			set_scaling_to_map_size
+			number_of_clumps rnd(8,50)
+			terrain_mask 1
+			spacing_to_other_terrain_types 5
+		}
 		create_terrain DIRT {
 			base_terrain DLC_CRACKED
 			number_of_tiles rnd(0,200)
@@ -2083,9 +2091,9 @@ if CRACKED_PLANET
 		}
 		create_terrain DLC_DESERTGRAVEL {
 			base_terrain DLC_CRACKED
-			number_of_tiles rnd(100,400)
+			number_of_tiles rnd(50,100)
 			set_scaling_to_map_size
-			number_of_clumps rnd(8,50)
+			number_of_clumps rnd(4,15)
 			terrain_mask 1
 			spacing_to_other_terrain_types 5
 		}
@@ -2867,10 +2875,29 @@ create_object SHORE_FISH {
 create_object DOLPHIN {
 	number_of_objects 9320
 	temp_min_distance_group_placement rnd(9,16)
+	min_distance_group_placement rnd(3,7)
 	avoid_actor_area 1
 	max_distance_to_other_zones 5
 	terrain_to_place_on WATER
 }
+/*
+	create_object OYSTERS {
+		number_of_groups 9320
+		number_of_objects 1
+		temp_min_distance_group_placement 20
+		max_distance_to_other_zones 30
+		terrain_to_place_on WATER
+	} */
+if ANTIQUITY_MODE
+	#define GOLD_PLACED
+	create_object OYSTERS { /* note: as represents asteroids here, does not avoid radioactive terrain */
+		number_of_groups 9320
+		number_of_objects rnd(1,3)
+		temp_min_distance_group_placement rnd(8,20)
+		max_distance_to_other_zones rnd(8,30)
+		terrain_to_place_on WATER
+	}
+endif
 /* I think I overdid it on the food, so I can get rid of these. - make much more scarce - so like 10 tiles - and maybe keep the dolphins removed. ARgument for it is that farming space is a little scarce, though I can certainly justify increasing the group distance placement.
 create_object DOLPHIN {
 	number_of_objects 9320
@@ -2890,13 +2917,8 @@ Considered adding this, but found that a heavily forest planet can force the vil
 	endif
  */
 
-if CRACKED_PLANET 
-	/* ideas - have pyramids and a desert terrain mask? with stone piles, and maybe gold around the pyramids. Possibly have a chance of palm trees. Low food, if any */
-	/* pyramids: 
-		PYRAMID: 689
-		GREAT_PYRAMID: 696
-		1563: Nubian pyramid
-	*/
+if CRACKED_PLANET /* "I am Ozymandias, king of kings. Look on my works, ye mighty, and despair" */
+	/* main idea is to have pyramids with gold surrounding them. This planet has variants: sandy variant is just small pyramids with a small chance of stone. Normal variant is large and small pyramids with significant chance of stone. alien variant has forage busshes, baobab stragglers, and oysters (if antiquity mode) in addition to nubian pyramids. */
 	if ALIEN_CRACKED_TERRAIN
 		create_object NUBIAN_PYRAMID {
 			terrain_to_place_on DLC_CRACKED
@@ -2906,11 +2928,23 @@ if CRACKED_PLANET
 			actor_area 11
 			actor_area_radius 2
 			max_distance_to_other_zones 2 /* could potentially be adjacent to a border, resulting in a corner gold not spawning */
-		}
-	elseif SANDY_CRACKED_TERRAIN
-		/* TODO */
+		} 
+	elseif SANDY_CRACKED_TERRAIN /* TODO does risk overflowing into adjacent biomes */
+		create_object PYRAMID { 
+			number_of_objects 920
+			temp_min_distance_group_placement rnd(7,40) /* rnd(6,30)  6 allows them to be "adjacent" - as in gold piles touching - risks trapping villagers though */
+			terrain_to_place_on DLC_CRACKED
+			actor_area 11
+			actor_area_radius 3
+			max_distance_to_other_zones 2 
+		} /* add a small chance of stone - still a fairly desolate landscape */
+		start_random
+			percent_chance 75 #define NO_CRACKED_STONE
+		end_random 
 	else
 		create_object GREAT_PYRAMID {
+			number_of_objects rnd(5,40)
+			temp_min_distance_group_placement rnd(10,60) /* 10 is min distance - allows surrounding gold mines to be touching, but not overlapping */
 			avoid_actor_area 11
 			terrain_to_place_on DLC_CRACKED
 			layer_to_place_on DLC_DESERTGRAVEL
@@ -2923,17 +2957,12 @@ if CRACKED_PLANET
 			number_of_objects 9320
 			actor_area_to_place_in 12
 			terrain_to_place_on DLC_CRACKED
-		}
-		create_object FLAG_A { /* TODO for some reason stops working when I switch to ON_GRID */
-			number_of_objects 9320
-			set_gaia_object_only
-			actor_area_to_place_in 12
 			actor_area 13
-			actor_area_radius 5
-			set_scaling_to_map_size
+			actor_area_radius rnd(3,7) /* 3 is the min needed to ensure that gold rings don't overlap */
 		}
 		create_object PYRAMID { /* TODO add multiple of these */
-		number_of_objects 9320
+			number_of_objects rnd(5,40)
+			temp_min_distance_group_placement rnd(7,30) /* 7 is min distance - allows surrounding gold mines to be touching, but not overlapping  */
 			avoid_actor_area 12
 			avoid_actor_area 13
 			terrain_to_place_on DLC_CRACKED
@@ -2942,6 +2971,9 @@ if CRACKED_PLANET
 			actor_area_radius 3
 			max_distance_to_other_zones 2 
 		}
+		start_random
+			percent_chance 10 #define NO_CRACKED_STONE
+		end_random 
 	endif
 	#define GOLD_PLACED
 	create_object GOLD { /* a single layer of gold surrounding the pyramid */
@@ -2949,23 +2981,63 @@ if CRACKED_PLANET
 		actor_area_to_place_in 11
 		terrain_to_place_on DLC_CRACKED
 	}
-	/*
-	start_random
-		percent_chance 45 #define NO_TERRAIN_STONE
-	end_random 
-	if NO_TERRAIN_STONE
+	if ALIEN_CRACKED_TERRAIN
+		/* TODO decide what other resources I want here - forage on muddy shallows, antiquity mode add oysters on the bogland mask; Perhaps add a guaranteed relic or two. Could also add some baobab straggler trees  */
+		#define NO_CRACKED_STONE
+		create_object FORAGE {
+			number_of_objects rnd(1,6)
+			number_of_groups rnd(10,50)
+			temp_min_distance_group_placement rnd(3,30)
+			set_scaling_to_map_size
+			min_distance_group_placement 1
+			group_variance rnd(0,2)
+			set_tight_grouping
+			max_distance_to_other_zones 2
+			terrain_to_place_on DLC_CRACKED
+			layer_to_place_on MUDDY_SHALLOW
+			avoid_forest_zone 2 
+		}
+		create_object DLC_BAOBABTREE { /* straggler trees: still is treated as a woodless biome, for now at least */
+			number_of_groups 9320
+			set_scaling_to_map_size
+			temp_min_distance_group_placement rnd(5,45)
+		} 
+		if ANTIQUITY_MODE 
+			create_object OYSTERS { /* a bit unusual as oysters are intended to be placed on water terrains, but can still be collected by villagers (unless really close to a shoreline, then a fishing ship may be able to get at it) */
+				avoid_actor_area 1 /* represents some kind of alien life here, so does avoid radioactive terrain. */
+				terrain_to_place_on DLC_CRACKED
+				layer_to_place_on DLC_BOGLAND
+				number_of_objects rnd(1,4)
+				number_of_groups rnd(6,20)
+				group_variance rnd(0,1)
+				temp_min_distance_group_placement rnd(10,40)
+				set_scaling_to_map_size
+				min_distance_group_placement 2
+				max_distance_to_other_zones 1
+				set_gaia_object_only
+				avoid_forest_zone 1
+				set_tight_grouping
+				actor_area 2
+				actor_area_radius 3
+				avoid_actor_area 2
+				avoid_actor_area 3
+				place_on_specific_land_id 1
+				ignore_terrain_restrictions
+			}
+		endif
+	elseif NO_CRACKED_STONE
 	else
 		create_object STONE {
-			terrain_to_place_on TERRAIN
+			terrain_to_place_on DLC_CRACKED
 			number_of_objects rnd(2,4)
 			number_of_groups rnd(4,10)
 			group_variance rnd(0,1)
-			temp_min_distance_group_placement rnd(16,40)
+			temp_min_distance_group_placement rnd(12,45)
 			set_scaling_to_map_size
 			min_distance_group_placement 2
 			max_distance_to_other_zones 1
 			set_gaia_object_only
-			avoid_forest_zone 1
+			avoid_forest_zone 2
 			set_tight_grouping
 			actor_area 3
 			actor_area_radius 3
@@ -2973,7 +3045,6 @@ if CRACKED_PLANET
 			avoid_actor_area 3
 		}
 	endif
-	*/
 endif
 create_object VILLAGER {
 	if DEBUG_MODE
@@ -2983,6 +3054,8 @@ create_object VILLAGER {
 	number_of_groups 1
 	set_place_for_every_player
 	avoid_actor_area 1
+	avoid_actor_area 11
+	avoid_actor_area 12
 	terrain_to_place_on PN1
 	temp_min_distance_group_placement 300 /* for some reason, refused to spawn just 1 villager. */
 	min_distance_group_placement 1
@@ -2999,6 +3072,8 @@ create_object VILLAGER {
 	number_of_groups 1
 	set_place_for_every_player 
 	avoid_actor_area 1
+	avoid_actor_area 11
+	avoid_actor_area 12
 	terrain_to_place_on PN2
 	temp_min_distance_group_placement 300
 	min_distance_group_placement 1
@@ -3015,6 +3090,8 @@ create_object VILLAGER {
 	number_of_groups 1
 	set_place_for_every_player 
 	avoid_actor_area 1
+	avoid_actor_area 11
+	avoid_actor_area 12
 	terrain_to_place_on PN3
 	temp_min_distance_group_placement 300
 	min_distance_group_placement 1
@@ -3031,6 +3108,8 @@ create_object VILLAGER {
 	number_of_groups 1
 	set_place_for_every_player 
 	avoid_actor_area 1
+	avoid_actor_area 11
+	avoid_actor_area 12
 	terrain_to_place_on PN4
 	temp_min_distance_group_placement 300 
 	min_distance_group_placement 1

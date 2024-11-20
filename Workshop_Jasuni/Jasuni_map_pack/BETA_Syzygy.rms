@@ -87,9 +87,9 @@ nomad_resources
 force_nomad_treaty
 direct_placement
 
-/*
-#define TOURNAMENT_VERSION
+/* TODO rename before submitting to alchemy league; also remove tournament_version after alchemy league.
 */
+#define TOURNAMENT_VERSION
 if 2_TEAM_GAME
 elseif 2_PLAYER_GAME
 elseif TOURNAMENT_VERSION
@@ -404,12 +404,18 @@ effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_WALKING_GRAPHIC 1918
 effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_RUNNING_GRAPHIC 1918
 effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_NAME_ID 5043
 effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_ICON_ID 300
-effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_LINE_OF_SIGHT 5
-effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_SEARCH_RADIUS 5
-effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_HITPOINTS 45
-effect_percent SET_ATTRIBUTE PHOTON_MAN ATTR_MOVE_SPEED 110
 effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_HERO_STATUS 66
-
+if TOURNAMENT_VERSION
+	effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_LINE_OF_SIGHT 1
+	effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_SEARCH_RADIUS 1
+	effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_HITPOINTS 130
+	effect_percent SET_ATTRIBUTE PHOTON_MAN ATTR_MOVE_SPEED 130
+else
+	effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_LINE_OF_SIGHT 5
+	effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_SEARCH_RADIUS 5
+	effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_HITPOINTS 45
+	effect_percent SET_ATTRIBUTE PHOTON_MAN ATTR_MOVE_SPEED 110
+endif
 /* TODO A tree option for certain planets: Barren, city
 
 #const RUBBLE_AQUEDUCT 1522
@@ -2852,14 +2858,21 @@ if RADIOACTIVE_PLANET
 			actor_area_radius 3
 		}
 	end_random 
-	start_random
-		percent_chance 80 create_object PHOTON_MAN { /* Photon man has the gear to survive/explore radioactive environments. */
+	if TOURNAMENT_VERSION
+		#define PHOTON_SCOUT_PLACED
+	else
+		start_random
+			percent_chance 80 #define PHOTON_SCOUT_PLACED
+		end_random
+	endif
+	if PHOTON_SCOUT_PLACED
+		create_object PHOTON_MAN { /* Photon man has the gear to survive/explore radioactive environments. */
 			set_place_for_every_player
 			terrain_to_place_on CORRUPTION
 			layer_to_place_on DLC_DESERTGRAVEL
 			min_distance_group_placement 2
 		}
-	end_random
+	endif
 endif
 create_object SHORE_FISH {
 	number_of_objects 9320
@@ -2913,7 +2926,9 @@ Considered adding this, but found that a heavily forest planet can force the vil
  */
 
 if CRACKED_PLANET /* "I am Ozymandias, king of kings. Look on my works, ye mighty, and despair" */
-	/* main idea is to have pyramids with gold surrounding them. This planet has variants: sandy variant is just small pyramids with a small chance of stone. Normal variant is large and small pyramids with significant chance of stone. alien variant has forage busshes, baobab stragglers, and oysters (if antiquity mode) in addition to nubian pyramids. */
+	/* main idea is to have pyramids with gold surrounding them. This planet has variants: sandy variant is just small pyramids with a small chance of stone. Normal variant is large and small pyramids with significant chance of stone. alien variant has forage busshes, baobab stragglers, and oysters (if antiquity mode) in addition to nubian pyramids.
+	TODO consider adding additional relics (to represent the ancient civilization)
+	 */
 	if ALIEN_CRACKED_TERRAIN
 		create_object NUBIAN_PYRAMID {
 			terrain_to_place_on DLC_CRACKED
@@ -2955,7 +2970,7 @@ if CRACKED_PLANET /* "I am Ozymandias, king of kings. Look on my works, ye might
 			actor_area 13
 			actor_area_radius rnd(3,7) /* 3 is the min needed to ensure that gold rings don't overlap */
 		}
-		create_object PYRAMID { /* TODO add multiple of these */
+		create_object PYRAMID {
 			number_of_objects rnd(5,40)
 			temp_min_distance_group_placement rnd(7,30) /* 7 is min distance - allows surrounding gold mines to be touching, but not overlapping  */
 			avoid_actor_area 12
@@ -4773,13 +4788,27 @@ if BARREN_PLANET /* feedback: reduce gold/stone */
 		actor_area 2
 		actor_area_radius 3
 	}
-	start_random
-		percent_chance 75 create_object PHOTON_MAN {
+
+	
+	if TOURNAMENT_VERSION
+		if PHOTON_SCOUT_PLACED /* nothing to do in this case */
+		else
+			#define PHOTON_MAN_BARREN
+		endif
+	else
+		start_random
+			percent_chance 75 #define PHOTON_MAN_BARREN
+		end_random
+	endif
+
+	if PHOTON_MAN_BARREN
+		create_object PHOTON_MAN {
 			set_place_for_every_player
 			terrain_to_place_on GRAVEL
 			min_distance_group_placement 2
 		} 
-	end_random
+		#define PHOTON_SCOUT_PLACED
+	endif
 endif
 
 if CITY_PLANET /* moved to end, so that its ruins won't block more important objects */
@@ -5011,17 +5040,20 @@ if CITY_PLANET /* moved to end, so that its ruins won't block more important obj
 		max_distance_to_other_zones 4
 	}
 endif
-/* removed: if readded, include a check for if irradiated/barren planet is present, and guarantee placement on those planets (with irradiated getting priority)
-if PHOTON_SCOUT_PLACED 
-else
-	#define PHOTON_SCOUT_PLACED
-	create_object PHOTON_MAN {
-		set_place_for_every_player
-		terrain_to_place_on DLC_ROCK
-		min_distance_group_placement 1
-	} 
-endif
-*/
+
+/* basically for alchemy league
+if TOURNAMENT_VERSION 
+	if PHOTON_SCOUT_PLACED 
+	else
+		#define PHOTON_SCOUT_PLACED
+		create_object PHOTON_MAN {
+			set_place_for_every_player
+			terrain_to_place_on DLC_ROCK
+			min_distance_group_placement 1
+		} 
+	endif
+endif */
+
 if GOLD_PLACED
 else
 	create_object GOLD { /* TODO scale amount of gold per pile for different map sizes */

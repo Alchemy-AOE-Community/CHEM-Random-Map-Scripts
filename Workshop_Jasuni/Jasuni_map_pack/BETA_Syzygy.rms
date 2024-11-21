@@ -471,7 +471,7 @@ if FULL_RANDOM_BIOMES
 	#define DEBUG_MODE 
 	*/
 	if DEBUG_MODE
-		#define CRACKED_PLANET_1 
+		#define DIRT_MUD_MANGROVE_MAZE_PLANET_1 
 		#define ANTIQUITY_MODE
 		/* TODO test great plains planet in other positions, see that it doesn't have any issues on the larger planets. */
 	else
@@ -4038,6 +4038,26 @@ if DIRT_MUD_MANGROVE_MAZE_PLANET
 		percent_chance 95 #define NO_DIRT_MUD_STONE
 	end_random 
 	if NO_DIRT_MUD_GOLD
+	elseif ANTIQUITY_MODE
+		#define GOLD_PLACED
+		create_object OYSTERS {
+			resource_delta 350 /* TODO remove the resource_delta after rebalancing. */
+			terrain_to_place_on DLC_MANGROVEFOREST
+			layer_to_place_on MUDDY_SHALLOW
+			number_of_objects rnd(2,4)
+			number_of_groups rnd(4,10)
+			group_variance rnd(0,1)
+			temp_min_distance_group_placement rnd(12,30) /* small reductions here  */
+			set_scaling_to_map_size
+			min_distance_group_placement 1
+			set_gaia_object_only
+			set_tight_grouping
+			actor_area 2
+			actor_area_radius 3
+			avoid_actor_area 2
+			avoid_actor_area 3
+		}
+
 	else
 		#define GOLD_PLACED
 		create_object GOLD {
@@ -4133,9 +4153,9 @@ if BOGLAND_MANGROVE_PLANET
 	} 
 
 	start_random
-		percent_chance 60 #const SWAMP_HERDABLE 1142 /* DLC_WATERBUFFALO */
-		percent_chance 40 #const SWAMP_HERDABLE 1243 /* DLC_GOOSE */
-		percent_chance 0 #define NO_SWAMP_HERDABLE
+		percent_chance 58 #const SWAMP_HERDABLE 1142 /* DLC_WATERBUFFALO */
+		percent_chance 38 #const SWAMP_HERDABLE 1243 /* DLC_GOOSE */
+		percent_chance 4 #define NO_SWAMP_HERDABLE
 	end_random
 	if NO_SWAMP_HERDABLE
 	else
@@ -4155,10 +4175,10 @@ if BOGLAND_MANGROVE_PLANET
 		}
 	endif
 	start_random
-		percent_chance 40 #const SWAMP_HUNTABLE 1019 /* DLC_ZEBRA */
-		percent_chance 30 #const SWAMP_HUNTABLE 1026 /* DLC_OSTRICH - ostrich prefer arid areas apparently, though other types of birds would fit. */
-		percent_chance 30 #const SWAMP_HUNTABLE 65 /* DEER */
-		percent_chance 0 #define NO_SWAMP_HUNTABLE
+		percent_chance 39 #const SWAMP_HUNTABLE 1019 /* DLC_ZEBRA */
+		percent_chance 29 #const SWAMP_HUNTABLE 1026 /* DLC_OSTRICH - ostrich prefer arid areas apparently, though other types of birds would fit. */
+		percent_chance 29 #const SWAMP_HUNTABLE 65 /* DEER */
+		percent_chance 3 #define NO_SWAMP_HUNTABLE
 	end_random
 	if NO_SWAMP_HUNTABLE
 	else
@@ -4212,24 +4232,46 @@ if BOGLAND_MANGROVE_PLANET
 	if NO_SWAMP_GOLD
 	else
 		#define GOLD_PLACED
-		create_object GOLD { /* raised gold amounts */
-			terrain_to_place_on DLC_MANGROVESHALLOW
-			layer_to_place_on DLC_BOGLAND
-			number_of_objects rnd(2,6)
-			number_of_groups rnd(5,10)
-			group_variance rnd(0,1)
-			temp_min_distance_group_placement rnd(12,30)
-			set_scaling_to_map_size
-			min_distance_group_placement 2
-			max_distance_to_other_zones 1
-			avoid_forest_zone 1
-			set_gaia_object_only
-			set_tight_grouping
-			actor_area 2
-			actor_area_radius 3
-			avoid_actor_area 2
-			avoid_actor_area 3
-		}
+		if ANTIQUITY_MODE
+			create_object OYSTERS { /* raised gold amounts */
+				resource_delta 350 /* TODO raised it to match gold, but might not want it to be this way. Just simpler since I don't have to re-balance test it again. */
+				terrain_to_place_on DLC_MANGROVESHALLOW
+				layer_to_place_on DLC_BOGLAND
+				number_of_objects rnd(2,6)
+				number_of_groups rnd(5,10)
+				group_variance rnd(0,1)
+				temp_min_distance_group_placement rnd(12,30)
+				set_scaling_to_map_size
+				min_distance_group_placement 1
+				max_distance_to_other_zones 1
+				avoid_forest_zone 1
+				set_gaia_object_only
+				set_tight_grouping
+				actor_area 2
+				actor_area_radius 3
+				avoid_actor_area 2
+				avoid_actor_area 3
+			}
+		else
+			create_object GOLD { /* raised gold amounts */
+				terrain_to_place_on DLC_MANGROVESHALLOW
+				layer_to_place_on DLC_BOGLAND
+				number_of_objects rnd(2,6)
+				number_of_groups rnd(5,10)
+				group_variance rnd(0,1)
+				temp_min_distance_group_placement rnd(12,30)
+				set_scaling_to_map_size
+				min_distance_group_placement 2
+				max_distance_to_other_zones 1
+				avoid_forest_zone 1
+				set_gaia_object_only
+				set_tight_grouping
+				actor_area 2
+				actor_area_radius 3
+				avoid_actor_area 2
+				avoid_actor_area 3
+			}
+		endif
 	endif
 	if NO_SWAMP_STONE
 	else

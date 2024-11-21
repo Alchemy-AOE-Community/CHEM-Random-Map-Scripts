@@ -116,7 +116,6 @@ effect_amount GAIA_SET_ATTRIBUTE TREE_J ATTR_STANDING_GRAPHIC 8244
 effect_amount GAIA_SET_ATTRIBUTE TREE_J ATTR_WALKING_GRAPHIC 8244
 effect_amount GAIA_SET_ATTRIBUTE TREE_J ATTR_DYING_GRAPHIC 8244
 effect_amount GAIA_SET_ATTRIBUTE TREE_J ATTR_DEAD_GRAPHIC 8244
-effect_amount GAIA_SET_ATTRIBUTE TREE_J ATTR_STORAGE_VALUE 300
 effect_amount SET_ATTRIBUTE TREE_J ATTR_NAME_ID 5323
 effect_amount SET_ATTRIBUTE TREE_J ATTR_ICON_ID 32
 effect_amount SET_ATTRIBUTE TREE_J ATTR_DEAD_ID -1 /* remove stump */
@@ -1182,28 +1181,29 @@ if FULL_RANDOM_BIOMES
 
 elseif NONRANDOM_PLANETS /* TODO should be able to remove now, but may want for testing purposes. See older versions for other planetary biomes. */
 
-	#const PN1  29 /* Farmland, 0%, aka FARMLAND1 */
-	#define FARMLAND_PLANET
-	#define FARMLAND_PLANET_1
-	#const PN1B 2 /* beach */
+	#const PN1 45 /* DLC_CRACKED */
+	#define CRACKED_PLANET
+	#define CRACKED_PLANET_1
+	#define PLANET_1_WOODLESS
+	#const PN1B 108 /* DLC_GRAVELBEACH */
 
 	#const PN2  70  /* GRAVEL  */
 	#define BARREN_PLANET
 	#define BARREN_PLANET_2
-			#define PLANET_2_WOODLESS
-	#const PN2B 107 /* DLC_WETBEACH */
+	#define PLANET_2_WOODLESS
+	#const PN2B 108 /* DLC_GRAVELBEACH */
 
 	#const PN3  69 /* Corruption */
 	#define RADIOACTIVE_PLANET
 	#define RADIOACTIVE_PLANET_3
-			#define PLANET_3_WOODLESS
-	#const PN3B 108 /* DLC_GRAVELBEACH */
+	#define PLANET_3_WOODLESS
+	#const PN3B 109 /* DLC_GRAVELBEACH */
 
-	#const PN4  24  /* ROAD */
-	#define CITY_PLANET
-	#define CITY_PLANET_4
-	#const PN4B 109 /* DLC_WETROCKBEACH */
-
+	#const PN4 0 /* GRASS */
+	#define GREAT_PLAINS_PLANET
+	#define GREAT_PLAINS_PLANET_4
+	#define PLANET_4_WOODLESS
+	#const PN4B 108 /* DLC_GRAVELBEACH */
 endif
 
 
@@ -5106,13 +5106,39 @@ else
 		place_on_specific_land_id 1
 	}
 endif
-/* TODO add logic to check if 3 or 4 planets are woodless. */
-if LOW_WOOD
+/* TODO thoroughly test, appears to be working */
+if PLANET_1_WOODLESS
+	if PLANET_2_WOODLESS
+		if PLANET_3_WOODLESS
+			#define LOW_WOOD
+			if PLANET_4_WOODLESS
+				#define NO_WOOD
+			endif
+		elseif PLANET_4_WOODLESS
+			#define LOW_WOOD
+		endif
+	elseif PLANET_3_WOODLESS
+		if PLANET_4_WOODLESS
+			#define LOW_WOOD
+		endif	
+	endif
+
+elseif PLANET_2_WOODLESS
+	if PLANET_3_WOODLESS
+		if PLANET_4_WOODLESS
+			#define LOW_WOOD
+		endif
+	endif
+endif
+if LOW_WOOD /* normally 125 wood. TODO see if there's a way to prevent it from being lamed via mule cart. */
 	create_object TREE_J { /* TODO check to see if there's a forest zone (and disable in that case), or increase if I ever make 4 different woodless biomes - also check to ensure this wasn't broken by an update. */
 		number_of_objects 9320
 		temp_min_distance_group_placement 1
 		terrain_to_place_on DLC_ROCK
 		place_on_specific_land_id 1
+		if NO_WOOD
+			resource_delta rnd(175,1875) /* 300-2000 wood/pile TODO think I can improve this system so that it also scales with map size. */
+		endif
 	}
 else
 endif

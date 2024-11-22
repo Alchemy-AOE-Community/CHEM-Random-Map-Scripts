@@ -430,31 +430,31 @@ TMS: 37.0656
     if MAPSIZE_MINI /* map width * 0.15, plus additional...  */
         spacing_to_other_terrain_types 8 
     elseif MAPSIZE_TINY
-        spacing_to_other_terrain_types 19 
+        spacing_to_other_terrain_types 20 
     elseif MAPSIZE_SMALL
-        spacing_to_other_terrain_types 28
+        spacing_to_other_terrain_types 29
     elseif MAPSIZE_MEDIUM
-        spacing_to_other_terrain_types 33
+        spacing_to_other_terrain_types 34
     elseif MAPSIZE_NORMAL
-        spacing_to_other_terrain_types 40
+        spacing_to_other_terrain_types 41
     elseif MAPSIZE_LARGE
-        spacing_to_other_terrain_types 45
+        spacing_to_other_terrain_types 46
     elseif MAPSIZE_HUGE
-        spacing_to_other_terrain_types 49
+        spacing_to_other_terrain_types 50
     elseif MAPSIZE_GIANT
-        spacing_to_other_terrain_types 52
+        spacing_to_other_terrain_types 53
     elseif MAPSIZE_MASSIVE
-        spacing_to_other_terrain_types 57
+        spacing_to_other_terrain_types 58
     elseif MAPSIZE_ENORMOUS
-        spacing_to_other_terrain_types 64
+        spacing_to_other_terrain_types 65
     elseif MAPSIZE_COLOSSAL
-        spacing_to_other_terrain_types 67
+        spacing_to_other_terrain_types 68
     elseif MAPSIZE_INCREDIBLE
-        spacing_to_other_terrain_types 76
+        spacing_to_other_terrain_types 77
     elseif MAPSIZE_MONSTROUS
-        spacing_to_other_terrain_types 85
+        spacing_to_other_terrain_types 86
     else /* MAPSIZE_LUDICROUS */
-        spacing_to_other_terrain_types 103 /* It appears that this is a bit slow to generate */
+        spacing_to_other_terrain_types 104 /* It appears that this is a bit slow to generate */
     endif
 }
 create_terrain DLC_MANGROVEFOREST {
@@ -465,42 +465,12 @@ create_terrain DLC_MANGROVEFOREST {
 create_terrain DLC_DIRT4 {
     base_terrain DLC_MANGROVEFOREST
     land_percent 100
+        spacing_to_other_terrain_types 4 /* downside of having a spacing of 4 is sometimes you can find a line of 4 unforested tiles (allowing a player to skip most of the chopping). There will always be the reeds at least.
     if MAPSIZE_MINI
         spacing_to_other_terrain_types 4 
     else
-        spacing_to_other_terrain_types 5
-    endif
-    /*
-    if MAPSIZE_MINI /* map width * 0.15  */
-        spacing_to_other_terrain_types 4 /* needed to shrink for reasons */
-    elseif MAPSIZE_TINY
-        spacing_to_other_terrain_types 8 /* also shrank a little due to altered inner circle */
-    elseif MAPSIZE_SMALL
-        spacing_to_other_terrain_types 11
-    elseif MAPSIZE_MEDIUM
-        spacing_to_other_terrain_types 13 /* / 10 * 1.5 */
-    elseif MAPSIZE_NORMAL
-        spacing_to_other_terrain_types 15
-    elseif MAPSIZE_LARGE
-        spacing_to_other_terrain_types 17
-    elseif MAPSIZE_HUGE
-        spacing_to_other_terrain_types 18
-    elseif MAPSIZE_GIANT
-        spacing_to_other_terrain_types 19
-    elseif MAPSIZE_MASSIVE
-        spacing_to_other_terrain_types 21
-    elseif MAPSIZE_ENORMOUS
-        spacing_to_other_terrain_types 23
-    elseif MAPSIZE_COLOSSAL
-        spacing_to_other_terrain_types 24
-    elseif MAPSIZE_INCREDIBLE
-        spacing_to_other_terrain_types 27
-    elseif MAPSIZE_MONSTROUS
-        spacing_to_other_terrain_types 30
-    else /* MAPSIZE_LUDICROUS */
-        spacing_to_other_terrain_types 36 /* It appears that this is a bit slow to generate */
-    endif
-    */
+        spacing_to_other_terrain_types 5 
+    endif */
 }
 create_terrain DLC_BOGLAND {
     base_terrain DLC_DIRT4
@@ -598,10 +568,11 @@ create_object TOWN_CENTER {
     set_place_for_every_player
     max_distance_to_players 0
 }
-create_object ON_GRID { /* playtest - consider having the outer barrier be ge gold with a layer of stone afterwards on the dirt4 placed within an actor area of size 1.
+create_object ON_GRID { /* playtest:
 for reference, base stone miner work rate is 21.6 - with 3 villagers gathering from a single time, it takes about 1:40 to gather 100 stone. Takes almost 5.5 minutes to do so with 350 stone. I think I will want to reduce the inner stone piles to 100 stone each. Outer stone piles can remain unchanged.
 Full upgrades is 28.57 stone miner work rate - about 3.5 minutes for one vil to gather 100 stone - ~12.25 minutes to gather 350 stone
  */
+    resource_delta -175 
     second_object STONE
     number_of_objects 9320
     set_scaling_to_map_size

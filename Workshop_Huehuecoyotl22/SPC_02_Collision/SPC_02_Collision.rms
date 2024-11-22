@@ -2,8 +2,9 @@
 /* A Random Map Script by TechChariot and Huehuecoyotl22 */
 /* Original Release 2024-02-19 - land generation by TechChariot */
 /* Update 2024-02-25 - terrain modification and objects generation by Huehuecoyotl22 */
-/* Consent is given for this map to be used in Alchemy League, Season 2, and Content Creation by Alchemy AOE Community Members */
-/* Component Specification: https://github.com/TechnicalChariot/Alchemy-AOE-Published-Specifications/blob/main/CHEM-CSRM-HVN-08.pdf */
+/* Update 2024-11-22 - updated some aspects to follow the updated specifications
+/* Consent is given for this map to be used in Alchemy League Season 5, and Content Creation by Alchemy AOE Community Members */
+/* Component Specification: https://github.com/Alchemy-AOE-Community/CHEM-Published-Specifications/blob/download-to-click-links/SCRIPTING/SPACE/CHEM-CSRM-SPC-01 */
 
 
 /* Description 
@@ -57,7 +58,7 @@ effect_amount SET_ATTRIBUTE DEER ATTR_ICON_ID 157
 effect_amount SET_ATTRIBUTE KOMODO_DRAGON ATTR_NAME_ID 5702
 
 /* Sheep to wolf graphics and sharkatzor name. Optional for low resources start. */
-if LOW_RESOURCES
+/* if LOW_RESOURCES
 effect_amount GAIA_SET_ATTRIBUTE SHEEP ATTR_STANDING_GRAPHIC 1388
 effect_amount GAIA_SET_ATTRIBUTE SHEEP ATTR_WALKING_GRAPHIC 1392
 effect_amount GAIA_SET_ATTRIBUTE SHEEP ATTR_RUNNING_GRAPHIC 1608
@@ -80,9 +81,12 @@ effect_amount SET_ATTRIBUTE SHEEPXD ATTR_DEAD_GRAPHIC 1389
 effect_amount SET_ATTRIBUTE SHEEPXD ATTR_STANDING_GRAPHIC 1389
 effect_amount SET_ATTRIBUTE SHEEP ATTR_ICON_ID 7
 endif
+*/
 effect_amount SET_ATTRIBUTE SHEEP ATTR_NAME_ID 5285
 
+
 /* Boar to flaming camel graphics and Zakare name. Optional for low resources start. */
+/*
 if LOW_RESOURCES
 effect_amount GAIA_SET_ATTRIBUTE BOAR ATTR_STANDING_GRAPHIC 10498
 effect_amount GAIA_SET_ATTRIBUTE BOAR ATTR_WALKING_GRAPHIC 10501
@@ -99,6 +103,7 @@ effect_amount GAIA_SET_ATTRIBUTE BOAR ATTR_ATTACK 1040
 effect_percent GAIA_SET_ATTRIBUTE BOAR ATTR_MOVE_SPEED 88
 effect_percent GAIA_SET_ATTRIBUTE BOAR ATTR_RELOAD_TIME 58
 endif
+*/
 effect_amount SET_ATTRIBUTE BOAR ATTR_NAME_ID 5748
 
 /* Trees and disabling trees from original forest terrains */
@@ -226,15 +231,13 @@ effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_WALKING_GRAPHIC 1918
 effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_RUNNING_GRAPHIC 1918
 effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_NAME_ID 5043
 effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_ICON_ID 300
-effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_LINE_OF_SIGHT 5
-effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_SEARCH_RADIUS 5
+
+effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_LINE_OF_SIGHT 6
 effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_HITPOINTS 45
 effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_MOVE_SPEED 1
-effect_percent ADD_ATTRIBUTE PHOTON_MAN ATTR_MOVE_SPEED 10
 
-/* Disable trade for matches with more than 2 teams or FFA */
-if 2_TEAM_GAME
-else
+/* Disable trade for Low Resource Configuration */
+if LOW_RESOURCES
     #const TRADE_CART_ENABLER 161
     #const TRADE_COG_ENABLER 180
     #const TRADE_CARAVAN_ENABLER 48
@@ -247,6 +250,7 @@ else
     effect_amount DISABLE_TECH HINDU_CARAVANSERAI_ENABLER ATTR_DISABLE 518
     effect_amount DISABLE_TECH PERSIAN_CARAVANSERAI_ENABLER ATTR_DISABLE 552
     effect_amount DISABLE_TECH SILK_ROAD ATTR_DISABLE 499
+else
 endif
 
 /* Attacking fire or lava */

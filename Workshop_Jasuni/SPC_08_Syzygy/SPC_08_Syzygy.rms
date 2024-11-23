@@ -67,6 +67,7 @@ resulting tweaks: added a little more deep fish (slightly reduced temp_min_dista
 Reduce villagers a little for the city biome, also forced them (and houses) away from the planetary villagers.
 Force villagers to have a little separation from each other? (perhaps an actor area to avoid - will need to stress-test with the smallest map size)
 
+TODO: update to match my current version of Syzygy better - this will include adding the new biomes (really copy-paste the objects generation section, large portions of the terrain and elevation generation section, etc). Also will want to get rid of the outer islands (which if they were included would need to be rock terrain anyways)
  */
   /* TODO this would make a fine map idea: a map that is nothing but BAOBOB_FOREST. I could place a TC in the closest spot for each player, and then use actor areas to place villagers, scouts, starting res, etc. Would make for a very unusual map. tentative title: Baobob maze */
 /* date:  */
@@ -78,11 +79,17 @@ nomad_resources
 force_nomad_treaty
 direct_placement
 
+if MAPSIZE_TINY
+	override_map_size 121 /* needed to keep smallest planet from ramming into the edge of the map on one side */
+endif
+
 #define TOURNAMENT_VERSION
 if 2_TEAM_GAME
 elseif 2_PLAYER_GAME
 elseif TOURNAMENT_VERSION
-    #define DISABLE_TRADE /* TODO figure out a better solution for FFAs */
+	if LOW_RESOURCES
+    	#define DISABLE_TRADE /* TODO figure out a better solution for FFAs */
+	endif
 endif
 if DISABLE_TRADE
 /* Removing Trade for Multi-team Games, as per Alchemy requirements.  */
@@ -100,47 +107,229 @@ if DISABLE_TRADE
   effect_amount DISABLE_TECH SILK_ROAD ATTR_DISABLE 499    
 endif
 
-#define SNOWMAN_PLANET_SHAPE
+/* wood piles */
+effect_amount GAIA_SET_ATTRIBUTE TREE_J ATTR_STANDING_GRAPHIC 8244
+effect_amount GAIA_SET_ATTRIBUTE TREE_J ATTR_WALKING_GRAPHIC 8244
+effect_amount GAIA_SET_ATTRIBUTE TREE_J ATTR_DYING_GRAPHIC 8244
+effect_amount GAIA_SET_ATTRIBUTE TREE_J ATTR_DEAD_GRAPHIC 8244
+effect_amount SET_ATTRIBUTE TREE_J ATTR_NAME_ID 5323
+effect_amount SET_ATTRIBUTE TREE_J ATTR_ICON_ID 32
+effect_amount SET_ATTRIBUTE TREE_J ATTR_DEAD_ID -1 /* remove stump */
+effect_amount SET_ATTRIBUTE TREE_J ATTR_HITPOINTS 10 /* remove stump */
+effect_amount SET_ATTRIBUTE TREE_J ATTR_TERRAIN_ID 31 /* all - water, wheel track */
 
-/* AT_LEAST_TINY is currently unused. */
-if TINY_MAP
-	#define AT_LEAST_TINY
-elseif SMALL_MAP
-	#define AT_LEAST_TINY
+if MAPSIZE_MINI
+    /* AT_MOST_MINI can simply use MAPSIZE_MINI */
+    #define AT_MOST_TINY
+    #define AT_MOST_SMALL
+    #define AT_MOST_MEDIUM
+    #define AT_MOST_NORMAL
+    #define AT_MOST_LARGE
+    #define AT_MOST_HUGE
+    #define AT_MOST_GIANT
+    #define AT_MOST_MASSIVE
+    #define AT_MOST_ENORMOUS
+    #define AT_MOST_COLOSSAL
+    #define AT_MOST_INCREDIBLE
+    #define AT_MOST_MONSTROUS
+    /* and AT_MOST_LUDCROUS is always true */
+elseif MAPSIZE_TINY
+    #define AT_LEAST_TINY
+    
+    #define AT_MOST_TINY
+    #define AT_MOST_SMALL
+    #define AT_MOST_MEDIUM
+    #define AT_MOST_NORMAL
+    #define AT_MOST_LARGE
+    #define AT_MOST_HUGE
+    #define AT_MOST_GIANT
+    #define AT_MOST_MASSIVE
+    #define AT_MOST_ENORMOUS
+    #define AT_MOST_COLOSSAL
+    #define AT_MOST_INCREDIBLE
+    #define AT_MOST_MONSTROUS
+elseif MAPSIZE_SMALL
+    #define AT_LEAST_TINY
     #define AT_LEAST_SMALL
-elseif MEDIUM_MAP
-	#define AT_LEAST_TINY
+    
+    #define AT_MOST_SMALL
+    #define AT_MOST_MEDIUM
+    #define AT_MOST_NORMAL
+    #define AT_MOST_LARGE
+    #define AT_MOST_HUGE
+    #define AT_MOST_GIANT
+    #define AT_MOST_MASSIVE
+    #define AT_MOST_ENORMOUS
+    #define AT_MOST_COLOSSAL
+    #define AT_MOST_INCREDIBLE
+    #define AT_MOST_MONSTROUS
+elseif MAPSIZE_MEDIUM
+    #define AT_LEAST_TINY
     #define AT_LEAST_SMALL
     #define AT_LEAST_MEDIUM
-elseif LARGE_MAP
-	#define AT_LEAST_TINY
+    
+    #define AT_MOST_MEDIUM
+    #define AT_MOST_NORMAL
+    #define AT_MOST_LARGE
+    #define AT_MOST_HUGE
+    #define AT_MOST_GIANT
+    #define AT_MOST_MASSIVE
+    #define AT_MOST_ENORMOUS
+    #define AT_MOST_COLOSSAL
+    #define AT_MOST_INCREDIBLE
+    #define AT_MOST_MONSTROUS
+elseif MAPSIZE_NORMAL
+    #define AT_LEAST_TINY
     #define AT_LEAST_SMALL
     #define AT_LEAST_MEDIUM
+    #define AT_LEAST_NORMAL
+    
+    #define AT_MOST_NORMAL
+    #define AT_MOST_LARGE
+    #define AT_MOST_HUGE
+    #define AT_MOST_GIANT
+    #define AT_MOST_MASSIVE
+    #define AT_MOST_ENORMOUS
+    #define AT_MOST_COLOSSAL
+    #define AT_MOST_INCREDIBLE
+    #define AT_MOST_MONSTROUS
+elseif MAPSIZE_LARGE
+    #define AT_LEAST_TINY
+    #define AT_LEAST_SMALL
+    #define AT_LEAST_MEDIUM
+    #define AT_LEAST_NORMAL
     #define AT_LEAST_LARGE
-elseif HUGE_MAP
-	#define AT_LEAST_TINY
+    
+    #define AT_MOST_LARGE
+    #define AT_MOST_HUGE
+    #define AT_MOST_GIANT
+    #define AT_MOST_MASSIVE
+    #define AT_MOST_ENORMOUS
+    #define AT_MOST_COLOSSAL
+    #define AT_MOST_INCREDIBLE
+    #define AT_MOST_MONSTROUS
+elseif MAPSIZE_HUGE
+    #define AT_LEAST_TINY
     #define AT_LEAST_SMALL
     #define AT_LEAST_MEDIUM
+    #define AT_LEAST_NORMAL
     #define AT_LEAST_LARGE
     #define AT_LEAST_HUGE
-elseif GIGANTIC_MAP
-	#define AT_LEAST_TINY
+    
+    #define AT_MOST_HUGE
+    #define AT_MOST_GIANT
+    #define AT_MOST_MASSIVE
+    #define AT_MOST_ENORMOUS
+    #define AT_MOST_COLOSSAL
+    #define AT_MOST_INCREDIBLE
+    #define AT_MOST_MONSTROUS
+elseif MAPSIZE_GIANT
+    #define AT_LEAST_TINY
     #define AT_LEAST_SMALL
     #define AT_LEAST_MEDIUM
+    #define AT_LEAST_NORMAL
     #define AT_LEAST_LARGE
     #define AT_LEAST_HUGE
-    #define AT_LEAST_GIGANTIC
-elseif LUDIKRIS_MAP
-	#define AT_LEAST_TINY
+    #define AT_LEAST_GIANT
+    
+    #define AT_MOST_GIANT
+    #define AT_MOST_MASSIVE
+    #define AT_MOST_ENORMOUS
+    #define AT_MOST_COLOSSAL
+    #define AT_MOST_INCREDIBLE
+    #define AT_MOST_MONSTROUS
+elseif MAPSIZE_MASSIVE
+    #define AT_LEAST_TINY
     #define AT_LEAST_SMALL
     #define AT_LEAST_MEDIUM
+    #define AT_LEAST_NORMAL
     #define AT_LEAST_LARGE
     #define AT_LEAST_HUGE
-    #define AT_LEAST_GIGANTIC
-    /* LUDIKRIS_MAP */
+    #define AT_LEAST_GIANT
+    #define AT_LEAST_MASSIVE
+    
+    #define AT_MOST_MASSIVE
+    #define AT_MOST_ENORMOUS
+    #define AT_MOST_COLOSSAL
+    #define AT_MOST_INCREDIBLE
+    #define AT_MOST_MONSTROUS
+elseif MAPSIZE_ENORMOUS
+    #define AT_LEAST_TINY
+    #define AT_LEAST_SMALL
+    #define AT_LEAST_MEDIUM
+    #define AT_LEAST_NORMAL
+    #define AT_LEAST_LARGE
+    #define AT_LEAST_HUGE
+    #define AT_LEAST_GIANT
+    #define AT_LEAST_MASSIVE
+    #define AT_LEAST_ENORMOUS
+    
+    #define AT_MOST_ENORMOUS
+    #define AT_MOST_COLOSSAL
+    #define AT_MOST_INCREDIBLE
+    #define AT_MOST_MONSTROUS
+elseif MAPSIZE_COLOSSAL
+    #define AT_LEAST_TINY
+    #define AT_LEAST_SMALL
+    #define AT_LEAST_MEDIUM
+    #define AT_LEAST_NORMAL
+    #define AT_LEAST_LARGE
+    #define AT_LEAST_HUGE
+    #define AT_LEAST_GIANT
+    #define AT_LEAST_MASSIVE
+    #define AT_LEAST_ENORMOUS
+    #define AT_LEAST_COLOSSAL
+    
+    #define AT_MOST_COLOSSAL
+    #define AT_MOST_INCREDIBLE
+    #define AT_MOST_MONSTROUS
+elseif MAPSIZE_INCREDIBLE
+    #define AT_LEAST_TINY
+    #define AT_LEAST_SMALL
+    #define AT_LEAST_MEDIUM
+    #define AT_LEAST_NORMAL
+    #define AT_LEAST_LARGE
+    #define AT_LEAST_HUGE
+    #define AT_LEAST_GIANT
+    #define AT_LEAST_MASSIVE
+    #define AT_LEAST_ENORMOUS
+    #define AT_LEAST_COLOSSAL
+    #define AT_LEAST_INCREDIBLE
+    
+    #define AT_MOST_INCREDIBLE
+    #define AT_MOST_MONSTROUS
+elseif MAPSIZE_MONSTROUS
+    #define AT_LEAST_TINY
+    #define AT_LEAST_SMALL
+    #define AT_LEAST_MEDIUM
+    #define AT_LEAST_NORMAL
+    #define AT_LEAST_LARGE
+    #define AT_LEAST_HUGE
+    #define AT_LEAST_GIANT
+    #define AT_LEAST_MASSIVE
+    #define AT_LEAST_ENORMOUS
+    #define AT_LEAST_COLOSSAL
+    #define AT_LEAST_INCREDIBLE
+    #define AT_LEAST_MONSTROUS
+    
+    #define AT_MOST_MONSTROUS
+elseif MAPSIZE_LUDICROUS
+    /* AT_LEAST_MINI is always true */
+    #define AT_LEAST_TINY
+    #define AT_LEAST_SMALL
+    #define AT_LEAST_MEDIUM
+    #define AT_LEAST_NORMAL
+    #define AT_LEAST_LARGE
+    #define AT_LEAST_HUGE
+    #define AT_LEAST_GIANT
+    #define AT_LEAST_MASSIVE
+    #define AT_LEAST_ENORMOUS
+    #define AT_LEAST_COLOSSAL
+    #define AT_LEAST_INCREDIBLE
+    #define AT_LEAST_MONSTROUS
+    /* and AT_LEAST_LUDCROUS - can simply use MAP_SIZE_LUDICROUS */
 endif
 
-direct_placement
 #const L 32
 /* Defining Terrains */
 #const ICE_NAVIGABLE 26
@@ -168,6 +357,7 @@ direct_placement
 #const FOREST_REEDS 92
 #const WATER_GREEN 95
 #const WATER_BROWN 96
+#const FOREST_PALM_GRASS 112
 
 #const G 0 /* GRASS */
 #const WNI  15 /* Water 2D, shoreless */
@@ -180,11 +370,8 @@ direct_placement
 #const B3 52 /* DLC_BEACH3 */
 #const WRB 109 /* DLC_WETROCKBEACH */
 
-/*
-#const PHOTON_MAN 430  Joan the maid */
-
 #const PHOTON_MAN 1292 /* queen 
-The photon man is practically a requirement of the torunament, therefore players will start with a photon scout. The photon scout will prioritize placement on radioactive terrain. If there is no radioactive planet, it will place on the barren planet instead. Finally, if neither planet is available, it will place on the rock terrain between planets. May change after tournament, but that is how it will be for now. */
+The photon man is practically a requirement of the tournament, therefore players will start with a photon scout. The photon scout will prioritize placement on radioactive terrain. If there is no radioactive planet, it will place on the barren planet instead. Finally, if neither planet is available, it will place on the rock terrain between planets. May change after tournament, but that is how it will be for now. */
 effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_TRAITS 16
 effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_ATTACK_GRAPHIC 1908
 effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_STANDING_GRAPHIC 1913
@@ -195,12 +382,18 @@ effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_WALKING_GRAPHIC 1918
 effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_RUNNING_GRAPHIC 1918
 effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_NAME_ID 5043
 effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_ICON_ID 300
-effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_LINE_OF_SIGHT 5
-effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_SEARCH_RADIUS 5
-effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_HITPOINTS 45
-effect_percent SET_ATTRIBUTE PHOTON_MAN ATTR_MOVE_SPEED 110
 effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_HERO_STATUS 66
-
+if TOURNAMENT_VERSION
+	effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_LINE_OF_SIGHT 1
+	effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_SEARCH_RADIUS 1
+	effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_HITPOINTS 130
+	effect_percent SET_ATTRIBUTE PHOTON_MAN ATTR_MOVE_SPEED 130
+else
+	effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_LINE_OF_SIGHT 5
+	effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_SEARCH_RADIUS 5
+	effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_HITPOINTS 45
+	effect_percent SET_ATTRIBUTE PHOTON_MAN ATTR_MOVE_SPEED 110
+endif
 /* TODO A tree option for certain planets: Barren, city
 
 #const RUBBLE_AQUEDUCT 1522
@@ -226,39 +419,63 @@ effect_amount GAIA_SET_ATTRIBUTE ON_GRID ATTR_STORAGE_VALUE 0
 #const CHURCH_RUINS 1838
 #const TEMPLE_RUIN 1566
 
+#const NUBIAN_PYRAMID 1563
+
 /* set berry bushes land id to all land - needed for farmland terrain, I think. */
 effect_amount SET_ATTRIBUTE FORAGE ATTR_TERRAIN_ID 4
 effect_amount SET_ATTRIBUTE DLC_ORANGEBUSH ATTR_TERRAIN_ID 4
 effect_amount SET_ATTRIBUTE CASTLE_RUINS ATTR_TERRAIN_ID 4 /* why they can normally be placed on water is a mystery - I guess they may want sunken cities. */
 effect_amount SET_ATTRIBUTE CHURCH_RUINS ATTR_TERRAIN_ID 4 
 effect_amount SET_ATTRIBUTE TEMPLE_RUIN ATTR_TERRAIN_ID 4 
+effect_amount SET_ATTRIBUTE NUBIAN_PYRAMID ATTR_TERRAIN_ID 4 /* why it can be placed on all terrains instead of land terrains is a mystery, but a fixable one */
 
 /* Defining Planet Terrains
 #define NONRANDOM_PLANETS
 RADIOACTIVE_PLANET, DESERT_PLANET, DIRT4_PLANET, CITY_PLANET, SNOW_PLANET, LEAVES_PLANET, DIRT_MUD_MANGROVE_MAZE_PLANET, BOGLAND_MANGROVE_PLANET, SAVANNAH_PLANET, DIRT_PLANET, FARMLAND_PLANET, SNOW_HEAVY_PLANET, BARREN_PLANET
 no jungle
 add a const for gold added to one of the planets, and once I've done so, add an if-else at the end that adds gold onto the rocks when no gold has appeared. Stone doesn't need this sort of treatment.
+
+biomes to add: finish jungle biomes
+
+how to add biomes:
+1. add the biome to random statement for each planet (with adjusted random chances)
+2. add it to the if-else chain (copy and modify)
+3. If woodless, add PLANET_X_WOODLESS
+4. create elevation generation, terrain generation, and objects generation sections
  */
 #define FULL_RANDOM_BIOMES
 if FULL_RANDOM_BIOMES 
-	start_random
-		percent_chance 8 #define RADIOACTIVE_PLANET_1
-		percent_chance 8 #define DESERT_PLANET_1 
-		percent_chance 8 #define DIRT4_PLANET_1 
-		percent_chance 8 #define CITY_PLANET_1 
-		percent_chance 8 #define SNOW_PLANET_1 
-		percent_chance 8 #define LEAVES_PLANET_1 
-		percent_chance 8 #define DIRT_MUD_MANGROVE_MAZE_PLANET_1 
-		percent_chance 8 #define BOGLAND_MANGROVE_PLANET_1 
-		percent_chance 8 #define SAVANNAH_PLANET_1 
-		percent_chance 7 #define DIRT_PLANET_1 
-		percent_chance 7 #define FARMLAND_PLANET_1
-		percent_chance 7 #define SNOW_HEAVY_PLANET_1 
-		percent_chance 7 #define BARREN_PLANET_1 
-	end_random
+	/*
+	#define DEBUG_MODE 
+	*/
+	if DEBUG_MODE
+		#define DIRT_MUD_MANGROVE_MAZE_PLANET_1 
+		#define ANTIQUITY_MODE
+		
+	else
+		start_random
+			percent_chance 7 #define RADIOACTIVE_PLANET_1
+			percent_chance 7 #define DESERT_PLANET_1 
+			percent_chance 7 #define DIRT4_PLANET_1 
+			percent_chance 7 #define CITY_PLANET_1 
+			percent_chance 6 #define SNOW_PLANET_1 
+			percent_chance 6 #define LEAVES_PLANET_1 
+			percent_chance 6 #define DIRT_MUD_MANGROVE_MAZE_PLANET_1 
+			percent_chance 6 #define BOGLAND_MANGROVE_PLANET_1 
+			percent_chance 6 #define SAVANNAH_PLANET_1 
+			percent_chance 6 #define DIRT_PLANET_1 
+			percent_chance 6 #define FARMLAND_PLANET_1
+			percent_chance 6 #define SNOW_HEAVY_PLANET_1 
+			percent_chance 6 #define BARREN_PLANET_1 
+			percent_chance 6 #define GREAT_PLAINS_PLANET_1
+			percent_chance 6 #define LAKES_PLANET_1
+			percent_chance 6 #define CRACKED_PLANET_1	
+		end_random
+	endif
 	if RADIOACTIVE_PLANET_1
 		#const PN1 69 /* Corruption */
 		#define RADIOACTIVE_PLANET
+		#define PLANET_1_WOODLESS
 		#const PN1B 109 /* DLC_WETROCKBEACH */
 	elseif DESERT_PLANET_1
 		#const PN1 14  /* DESERT */
@@ -307,26 +524,48 @@ if FULL_RANDOM_BIOMES
 	elseif BARREN_PLANET_1
 		#const PN1  70  /* GRAVEL  */
 		#define BARREN_PLANET
+		#define PLANET_1_WOODLESS
+		#const PN1B 108 /* DLC_GRAVELBEACH */
+	elseif GREAT_PLAINS_PLANET_1
+		#const PN1 0 /* GRASS */
+		#define GREAT_PLAINS_PLANET
+		#define PLANET_1_WOODLESS
+		#const PN1B 108 /* DLC_GRAVELBEACH */
+	elseif LAKES_PLANET_1
+		#const PN1 12 /* GRASS2 - a very green grass, with a forest terrain placed on it. GREAT_PLAINS_PLANET, LAKES_PLANET, CRACKED_PLANET */
+		#define LAKES_PLANET
+		#const PN1B 108 /* DLC_GRAVELBEACH */
+	elseif CRACKED_PLANET_1
+		#const PN1 45 /* DLC_CRACKED */
+		#define CRACKED_PLANET
+		#define PLANET_1_WOODLESS
 		#const PN1B 108 /* DLC_GRAVELBEACH */
 	else /* bugged generation - minimize damage by activating an unused terrain */
 		#const PN1 71 /* UNDERBRUSH_JUNGLE is 77, UNDERBRUSH_LEAVES is 71 - 71 was used as a terrain mask */
 		#define JUNGLE_PLANET
 		#const PN1B 108 /* DLC_GRAVELBEACH */
 	endif
+	/* grass terrains: grass2 is greenest - good for the lakes planet most likely - or maybe I can have more terrain mixing with the lakes grass - perhaps try with boglands?
+	grass 1 has patches of dirt
+	grass3 is most mixed with dirt (excluding dry-grass)
+	dry grass  */
 
 	start_random
-		percent_chance 9 #define RADIOACTIVE_PLANET_2
-		percent_chance 9 #define DESERT_PLANET_2 
-		percent_chance 9 #define DIRT4_PLANET_2 
-		percent_chance 9 #define CITY_PLANET_2 
-		percent_chance 8 #define SNOW_PLANET_2 
-		percent_chance 8 #define LEAVES_PLANET_2 
-		percent_chance 8 #define DIRT_MUD_MANGROVE_MAZE_PLANET_2 
-		percent_chance 8 #define BOGLAND_MANGROVE_PLANET_2 
-		percent_chance 8 #define SAVANNAH_PLANET_2 
-		percent_chance 8 #define DIRT_PLANET_2 
-		percent_chance 8 #define FARMLAND_PLANET_2
-		percent_chance 8 #define SNOW_HEAVY_PLANET_2 
+		percent_chance 7 #define RADIOACTIVE_PLANET_2
+		percent_chance 7 #define DESERT_PLANET_2 
+		percent_chance 7 #define DIRT4_PLANET_2 
+		percent_chance 7 #define CITY_PLANET_2 
+		percent_chance 7 #define SNOW_PLANET_2 
+		percent_chance 7 #define LEAVES_PLANET_2 
+		percent_chance 7 #define DIRT_MUD_MANGROVE_MAZE_PLANET_2 
+		percent_chance 7 #define BOGLAND_MANGROVE_PLANET_2 
+		percent_chance 7 #define SAVANNAH_PLANET_2 
+		percent_chance 7 #define DIRT_PLANET_2 
+		percent_chance 6 #define FARMLAND_PLANET_2
+		percent_chance 6 #define SNOW_HEAVY_PLANET_2 
+		percent_chance 6 #define GREAT_PLAINS_PLANET_2
+		percent_chance 6 #define LAKES_PLANET_2
+		percent_chance 6 #define CRACKED_PLANET_2	
 		/* percent_chance 0 #define BARREN_PLANET_2  */
 	end_random
 	if RADIOACTIVE_PLANET_2
@@ -335,6 +574,7 @@ if FULL_RANDOM_BIOMES
 		else
 			#const PN2 69 /* Corruption */
 			#define RADIOACTIVE_PLANET
+			#define PLANET_2_WOODLESS
 			#const PN2B 109 /* DLC_WETROCKBEACH */
 		endif
 	elseif DESERT_PLANET_2
@@ -425,38 +665,71 @@ if FULL_RANDOM_BIOMES
 			#define SNOW_HEAVY_PLANET
 			#const PN2B 108 /* DLC_GRAVELBEACH */
 		endif
-	else /*  BARREN_PLANET_2 - bug in random, didn't select an option */
-		#define BARREN_PLANET_2
+	elseif GREAT_PLAINS_PLANET_2
+		if GREAT_PLAINS_PLANET_1
+			#define BARREN_PLANET_2
+		else
+			#const PN2 0 /* GRASS */
+			#define GREAT_PLAINS_PLANET
+			#const PN2B 108 /* DLC_GRAVELBEACH */
+			#define PLANET_2_WOODLESS
+		endif
+	elseif LAKES_PLANET_2
+		if LAKES_PLANET_1
+			#define BARREN_PLANET_2
+		else
+			#const PN2 12 /* GRASS2 - a very green grass */
+			#define LAKES_PLANET
+			#const PN2B 108 /* DLC_GRAVELBEACH */
+		endif
+	elseif CRACKED_PLANET_2
+		if CRACKED_PLANET_1
+			#define BARREN_PLANET_2
+		else
+			#const PN2 45 /* DLC_CRACKED */
+			#define CRACKED_PLANET
+			#const PN2B 108 /* DLC_GRAVELBEACH */
+			#define PLANET_2_WOODLESS
+		endif
+	else /* bugged generation - minimize damage by activating an unused terrain */
+		#const PN2 71 /* UNDERBRUSH_JUNGLE is 77, UNDERBRUSH_LEAVES is 71 - 71 was used as a terrain mask */
+		#define JUNGLE_PLANET
+		#const PN2B 108 /* DLC_GRAVELBEACH */
 	endif
 	if BARREN_PLANET_2
 		#const PN2  70  /* GRAVEL  */
 		#define BARREN_PLANET
+		#define PLANET_2_WOODLESS
 		#const PN2B 108 /* DLC_GRAVELBEACH */
 	endif
 
 	start_random
-		percent_chance 10 #define RADIOACTIVE_PLANET_3
-		percent_chance 9 #define DESERT_PLANET_3 
-		percent_chance 9 #define DIRT4_PLANET_3 
-		percent_chance 9 #define CITY_PLANET_3 
-		percent_chance 9 #define SNOW_PLANET_3 
-		percent_chance 9 #define LEAVES_PLANET_3 
-		percent_chance 9 #define DIRT_MUD_MANGROVE_MAZE_PLANET_3 
-		percent_chance 9 #define BOGLAND_MANGROVE_PLANET_3 
-		percent_chance 9 #define SAVANNAH_PLANET_3 
-		percent_chance 9 #define DIRT_PLANET_3 
-		percent_chance 9 #define FARMLAND_PLANET_3
+		percent_chance 8 #define RADIOACTIVE_PLANET_3
+		percent_chance 8 #define DESERT_PLANET_3 
+		percent_chance 7 #define DIRT4_PLANET_3 
+		percent_chance 7 #define CITY_PLANET_3 
+		percent_chance 7 #define SNOW_PLANET_3 
+		percent_chance 7 #define LEAVES_PLANET_3 
+		percent_chance 7 #define DIRT_MUD_MANGROVE_MAZE_PLANET_3 
+		percent_chance 7 #define BOGLAND_MANGROVE_PLANET_3 
+		percent_chance 7 #define SAVANNAH_PLANET_3 
+		percent_chance 7 #define DIRT_PLANET_3 
+		percent_chance 7 #define FARMLAND_PLANET_3
+		percent_chance 7 #define GREAT_PLAINS_PLANET_3
+		percent_chance 7 #define LAKES_PLANET_3
+		percent_chance 7 #define CRACKED_PLANET_3
 		/* percent_chance 0 #define SNOW_HEAVY_PLANET_3  */
 		/* percent_chance 0 #define BARREN_PLANET_3  */
 	end_random
 	if RADIOACTIVE_PLANET_3
-		if RADIOACTIVE_PLANET_1 /* check 1 first - if both were selected, then it would be planet 1 TODO breaks when both selected */
+		if RADIOACTIVE_PLANET_1 /* check 1 first - if both were selected, then it would be planet 1 TODO breaks when both selected - check if this is still the case */
 			#define SNOW_HEAVY_PLANET_3
 		elseif RADIOACTIVE_PLANET_2
 			#define BARREN_PLANET_3 /* barren needs to represent the previous planet selection */
 		else
 			#const PN3 69 /* Corruption */
 			#define RADIOACTIVE_PLANET
+			#define PLANET_3_WOODLESS
 			#const PN3B 109 /* DLC_WETROCKBEACH */
 		endif
 	elseif DESERT_PLANET_3
@@ -559,15 +832,53 @@ if FULL_RANDOM_BIOMES
 			#define FARMLAND_PLANET
 			#const PN3B 108 /* DLC_GRAVELBEACH */
 		endif
-	else /*  BARREN_PLANET_3 or SNOW_HEAVY_PLANET_3 - bug in random, didn't select an option */
-		#define BARREN_PLANET_3
+	elseif GREAT_PLAINS_PLANET_3
+		if GREAT_PLAINS_PLANET_1
+			#define SNOW_HEAVY_PLANET_3
+		elseif GREAT_PLAINS_PLANET_2
+			#define BARREN_PLANET_3
+		else
+			#const PN3 0 /* GRASS */
+			#define GREAT_PLAINS_PLANET
+			#const PN3B 108 /* DLC_GRAVELBEACH */
+			#define PLANET_3_WOODLESS
+		endif
+	elseif LAKES_PLANET_3
+		if LAKES_PLANET_1
+			#define SNOW_HEAVY_PLANET_3
+		elseif LAKES_PLANET_2
+			#define BARREN_PLANET_3
+		else
+			#const PN3 12 /* GRASS2 - a very green grass */
+			#define LAKES_PLANET
+			#const PN3B 108 /* DLC_GRAVELBEACH */
+		endif
+	elseif CRACKED_PLANET_3
+		if CRACKED_PLANET_1
+			#define SNOW_HEAVY_PLANET_3
+		elseif CRACKED_PLANET_2
+			#define BARREN_PLANET_3
+		else
+			#const PN3 45 /* DLC_CRACKED */
+			#define CRACKED_PLANET
+			#const PN3B 108 /* DLC_GRAVELBEACH */
+			#define PLANET_3_WOODLESS 
+		endif
+	else /* bugged generation - minimize damage by activating an unused terrain */
+		#const PN3 71 /* UNDERBRUSH_JUNGLE is 77, UNDERBRUSH_LEAVES is 71 - 71 was used as a terrain mask */
+		#define JUNGLE_PLANET
+		#const PN3B 108 /* DLC_GRAVELBEACH */
 	endif
+
 	if BARREN_PLANET_3 /* previous planet, #2, selected again */
-		if BARREN_PLANET_2 /* Only occurs if P1 == P2, in which case as P3 == P2, P3 == P1. Therefore, in the case, the selection cannot be Snow heavy because snow heavy can't be selected for P3, and by the established equalities, snow heavy isn't P1 or P2 either */
+		if BARREN_PLANET_1
+			#define SNOW_HEAVY_PLANET_3
+		elseif BARREN_PLANET_2 /* Only occurs if P1 == P2, in which case as P3 == P2, P3 == P1. Therefore, in the case, the selection cannot be Snow heavy because snow heavy can't be selected for P3, and by the established equalities, snow heavy isn't P1 or P2 either */
 			#define SNOW_HEAVY_PLANET_3
 		else
 			#const PN3  70  /* GRAVEL  */
 			#define BARREN_PLANET
+			#define PLANET_3_WOODLESS
 			#const PN3B 108 /* DLC_GRAVELBEACH */
 		endif
 	endif
@@ -576,6 +887,7 @@ if FULL_RANDOM_BIOMES
 			#define BARREN_PLANET_3 /* need to include remainder here since the barren check has already been passed */
 			#const PN3  70  /* GRAVEL  */
 			#define BARREN_PLANET
+			#define PLANET_3_WOODLESS
 			#const PN3B 108 /* DLC_GRAVELBEACH */
 		else
 			#const PN3  74  /* SNOW_HEAVY  */
@@ -586,16 +898,19 @@ if FULL_RANDOM_BIOMES
 
 	/* Start choose planet 4 */
 	start_random
-		percent_chance 10 #define RADIOACTIVE_PLANET_4
-		percent_chance 10 #define DESERT_PLANET_4 
-		percent_chance 10 #define DIRT4_PLANET_4 
-		percent_chance 10 #define CITY_PLANET_4 
-		percent_chance 10 #define SNOW_PLANET_4 
-		percent_chance 10 #define LEAVES_PLANET_4 
-		percent_chance 10 #define DIRT_MUD_MANGROVE_MAZE_PLANET_4 
-		percent_chance 10 #define BOGLAND_MANGROVE_PLANET_4 
-		percent_chance 10 #define SAVANNAH_PLANET_4 
-		percent_chance 10 #define DIRT_PLANET_4 
+		percent_chance 8 #define RADIOACTIVE_PLANET_4
+		percent_chance 8 #define DESERT_PLANET_4 
+		percent_chance 8 #define DIRT4_PLANET_4 
+		percent_chance 8 #define CITY_PLANET_4 
+		percent_chance 8 #define SNOW_PLANET_4 
+		percent_chance 8 #define LEAVES_PLANET_4 
+		percent_chance 8 #define DIRT_MUD_MANGROVE_MAZE_PLANET_4 
+		percent_chance 8 #define BOGLAND_MANGROVE_PLANET_4 
+		percent_chance 8 #define SAVANNAH_PLANET_4 
+		percent_chance 7 #define DIRT_PLANET_4 
+		percent_chance 7 #define GREAT_PLAINS_PLANET_4
+		percent_chance 7 #define LAKES_PLANET_4
+		percent_chance 7 #define CRACKED_PLANET_4
 		/* percent_chance 0 #define FARMLAND_PLANET_4 */
 		/* percent_chance 0 #define SNOW_HEAVY_PLANET_4  */
 		/* percent_chance 0 #define BARREN_PLANET_4  */
@@ -610,6 +925,7 @@ if FULL_RANDOM_BIOMES
 		else
 			#const PN4 69 /* Corruption */
 			#define RADIOACTIVE_PLANET
+			#define PLANET_4_WOODLESS
 			#const PN4B 109 /* DLC_WETROCKBEACH */
 		endif
 	elseif DESERT_PLANET_4
@@ -720,11 +1036,51 @@ if FULL_RANDOM_BIOMES
 			#define DIRT_PLANET
 			#const PN4B 108 /* DLC_GRAVELBEACH */
 		endif
-	else /*  BARREN_PLANET_4 or SNOW_HEAVY_PLANET_4 or FARMLAND_PLANET_4 - bug in random, didn't select an option */
-		#define BARREN_PLANET_4
+	elseif GREAT_PLAINS_PLANET_4
+		if GREAT_PLAINS_PLANET_1
+			#define FARMLAND_PLANET_4
+		elseif GREAT_PLAINS_PLANET_2
+			#define SNOW_HEAVY_PLANET_4
+		elseif GREAT_PLAINS_PLANET_3
+			#define BARREN_PLANET_4
+		else
+			#const PN4 0 /* GRASS */
+			#define GREAT_PLAINS_PLANET
+			#const PN4B 108 /* DLC_GRAVELBEACH */
+			#define PLANET_4_WOODLESS
+		endif
+	elseif LAKES_PLANET_4
+		if LAKES_PLANET_1
+			#define FARMLAND_PLANET_4
+		elseif LAKES_PLANET_2
+			#define SNOW_HEAVY_PLANET_4
+		elseif LAKES_PLANET_3
+			#define BARREN_PLANET_4
+		else
+			#const PN4 12 /* GRASS2 - a very green grass */
+			#define LAKES_PLANET
+			#const PN4B 108 /* DLC_GRAVELBEACH */
+		endif
+	elseif CRACKED_PLANET_4
+		if CRACKED_PLANET_1
+			#define FARMLAND_PLANET_4
+		elseif CRACKED_PLANET_2
+			#define SNOW_HEAVY_PLANET_4
+		elseif CRACKED_PLANET_3
+			#define BARREN_PLANET_4
+		else
+			#const PN4 45 /* DLC_CRACKED */
+			#define CRACKED_PLANET
+			#const PN4B 108 /* DLC_GRAVELBEACH */
+			#define PLANET_4_WOODLESS
+		endif
+	else /* bugged generation - minimize damage by activating an unused terrain */
+		#const PN4 71 /* UNDERBRUSH_JUNGLE is 77, UNDERBRUSH_LEAVES is 71 - 71 was used as a terrain mask */
+		#define JUNGLE_PLANET
+		#const PN4B 108 /* DLC_GRAVELBEACH */
 	endif
 
-	/* TODO change to planet 4  TODO seed: -1788767322 on small size - barren planet on both 1 and 4 */
+	/* TODO change to planet 4  TODO seed: -1788767322 on small size - barren planet on both 1 and 4 - is this still an issue: the seed is almost certainly invalid be now. */
 	if FARMLAND_PLANET_4 /* planet 1 selected again */
 		if FARMLAND_PLANET_1 /* impossible - farmland can't be selected for P4 */
 			#const PN4 71 /* UNDERBRUSH_JUNGLE is 77, UNDERBRUSH_LEAVES is 71 - 71 was used as a terrain mask */
@@ -797,36 +1153,43 @@ if FULL_RANDOM_BIOMES
 		else
 			#const PN4  70  /* GRAVEL  */
 			#define BARREN_PLANET
+			#define PLANET_4_WOODLESS
 			#const PN4B 108 /* DLC_GRAVELBEACH */
 		endif
 	endif
-
-elseif NONRANDOM_PLANETS /* TODO should be able to remove now, but may want for testing purposes. See older versions for other planetary biomes. */
-
-	#const PN1  29 /* Farmland, 0%, aka FARMLAND1 */
-	#define FARMLAND_PLANET
-	#define FARMLAND_PLANET_1
-	#const PN1B 2 /* beach */
-
-	#const PN2  70  /* GRAVEL  */
-	#define BARREN_PLANET
-	#define BARREN_PLANET_2
-	#const PN2B 107 /* DLC_WETBEACH */
-
-	#const PN3  69 /* Corruption */
-	#define RADIOACTIVE_PLANET
-	#define RADIOACTIVE_PLANET_3
-	#const PN3B 108 /* DLC_GRAVELBEACH */
-
-	#const PN4  24  /* ROAD */
-	#define CITY_PLANET
-	#define CITY_PLANET_4
-	#const PN4B 109 /* DLC_WETROCKBEACH */
-
 endif
 
 
 <ELEVATION_GENERATION>
+if GREAT_PLAINS_PLANET	
+	start_random
+		percent_chance 2 create_elevation 3 { /* actually a little below 2% in practice */
+			base_terrain GRASS
+			number_of_clumps rnd(0,10) /* can potentially end up looking like a single platue - and doesn't appear to generate when it randoms 0 clumps */
+			number_of_tiles rnd(20,300)
+			set_scale_by_size
+			enable_balanced_elevation
+			spacing 3 
+		}
+		percent_chance 38 create_elevation 3 {  /* should get all of it elevated, like a plateu. */
+			base_terrain GRASS
+			number_of_tiles 9320
+			set_scale_by_size
+			enable_balanced_elevation
+		}
+	end_random
+endif
+if LAKES_PLANET
+	start_random
+		percent_chance 25 create_elevation 3 { /* higher than average chance of elevation, but otherwise a little on the skimpy side */
+			base_terrain GRASS2
+			number_of_tiles rnd(10,180)
+			number_of_clumps rnd(5,45)
+			set_scale_by_size
+			enable_balanced_elevation
+		}
+	end_random
+endif
 if SNOW_HEAVY_PLANET
 	create_elevation 5 {
 		base_terrain SNOW_HEAVY
@@ -923,6 +1286,18 @@ if SNOW_PLANET
 	start_random
 		percent_chance 15 create_elevation 3 {
 			base_terrain SNOW
+			number_of_clumps rnd(3,32)
+			number_of_tiles rnd(30,300)
+			set_scale_by_size
+			enable_balanced_elevation
+			spacing 3 
+		}
+	end_random
+endif
+if CRACKED_PLANET
+	start_random
+		percent_chance 50 create_elevation 3 {
+			base_terrain DLC_CRACKED
 			number_of_clumps rnd(3,32)
 			number_of_tiles rnd(30,300)
 			set_scale_by_size

@@ -1391,7 +1391,7 @@ if DIRT4_PLANET
 		}
 	end_random
 endif
-<TERRAIN_GENERATION>
+<TERRAIN_GENERATION> /* TODO for merge: check if the pre-biome sections need updating. */
 #define BORDER_CLEANUP
 if BORDER_CLEANUP
 	/* PLANET 1 */
@@ -1870,6 +1870,173 @@ if PLANET_TO_ELEVATION_0 /* downside: transitions between planets becomes ugly, 
 endif
 
 /* Begin terrains for individual planets. */
+if GREAT_PLAINS_PLANET 
+	start_random
+		percent_chance 10 create_terrain DLC_DRYGRASS { /* not really liking how it looks */
+			base_terrain GRASS
+			land_percent 20
+			number_of_clumps 9320
+			terrain_mask 1
+		}
+		percent_chance 10 create_terrain DLC_BOGLAND {
+			base_terrain GRASS
+			land_percent 20
+			number_of_clumps 9320
+			terrain_mask 1
+		}
+		percent_chance 25 create_terrain SNOW {
+			base_terrain GRASS
+			land_percent 20
+			number_of_clumps 9320
+			terrain_mask 1
+		}
+		percent_chance 5 create_terrain SNOW_HEAVY {
+			base_terrain GRASS
+			land_percent 20
+			number_of_clumps 9320
+			terrain_mask 1
+		}
+		percent_chance 45 create_terrain GRASS2 {
+			base_terrain GRASS
+			land_percent 20
+			number_of_clumps 9320
+			terrain_mask 1
+		}
+		/* and 5% chance of no terrain mask */
+	end_random
+endif 
+if LAKES_PLANET
+	/* forest terrain is palm trees */
+	create_terrain DLC_WATER5 { /* lighter than water, which is fine - can't/shouldn't use water as that would be the same terrain as outer space */
+		base_terrain GRASS2
+		number_of_clumps rnd(1,25) /* TODO can improve, but works fine. */
+		/* 100 tiles == 1 land_percent with set_scale_by_size */
+		number_of_tiles rnd(10,125) /* 0.1-1.25% */
+		set_scale_by_size
+		/* rnd(1,5) */
+		set_flat_terrain_only
+		spacing_to_other_terrain_types 1
+		height_limits 2 2
+	}
+	start_random
+		percent_chance 100 #const LAKES_MASK 111 
+	end_random
+	create_terrain LAKES_MASK {
+		base_terrain GRASS2
+		number_of_clumps rnd(1,25)
+		number_of_tiles rnd(10,100) /* 0.1-1% */
+		set_scale_by_size
+		set_flat_terrain_only
+		spacing_to_other_terrain_types 2
+		terrain_mask 1
+		height_limits 2 2
+	}
+	create_terrain DLC_WATER5 {
+		base_terrain GRASS2
+		base_layer LAKES_MASK
+		number_of_clumps 999
+		land_percent 15
+		height_limits 2 2
+
+	}
+	create_terrain FOREST_PALM_GRASS {
+		base_terrain GRASS2
+		number_of_clumps rnd(3,40)
+		/*
+		land_percent rnd(1,2) */
+		
+		number_of_tiles rnd(100,450) /* 1-4.5% */ 
+		set_scale_by_size
+		/* rnd(1,5) */
+	}
+	/* TODO add more terrain masking
+	*/
+endif
+if CRACKED_PLANET
+	/* may be a woodless biome - could make alien-looking by adding a terrain mask. 40, 10 */
+	start_random
+		percent_chance 40 #define ALIEN_CRACKED_TERRAIN
+		percent_chance 10 #define SANDY_CRACKED_TERRAIN
+
+	/*
+		percent_chance 5 #const CRACKED_MASK 101 /* DLC_BOGLAND - somewhat alien-looking - could support life */
+		percent_chance 0 #const CRACKED_MASK 100 /* DLC_DRYGRASS - looks like it barely supports life */
+		percent_chance 5 #const CRACKED_MASK 6 /* DIRT - harder to see the cracked terrain base. Would probably be fine in small amounts */
+		percent_chance 5 #const CRACKED_MASK 14 /* DESERT - like desert, harder to see the cracked terrain */
+		percent_chance 10 #const CRACKED_MASK 46 /* DLC_QUICKSAND - liking, but again harder to see the cracked terrain */
+		percent_chance 10 #const CRACKED_MASK 102 /* DLC_DESERTGRAVEL - liking */
+		percent_chance 10 #const CRACKED_MASK 111 /* MUDDY_SHALLOW - might mix well with bogland, but needs to avoid outside terrains (like the "outer space" water) */
+		percent_chance 100 #const CRACKED_MASK 45 /* DLC_CRACKED */
+		*/
+	end_random
+	/* options: bogland with muddy shallow;
+	dirt, desert, quicksand, desert gravel, plain cracked
+	
+	 */
+	if ALIEN_CRACKED_TERRAIN
+		create_terrain MUDDY_SHALLOW {
+			base_terrain DLC_CRACKED
+			land_percent rnd(1,8)
+			number_of_clumps rnd(10,100)
+			terrain_mask 1
+			spacing_to_other_terrain_types 1
+		}
+		create_terrain DLC_BOGLAND {
+			base_terrain DLC_CRACKED
+			land_percent 15
+			number_of_clumps 999
+			terrain_mask 1
+		}
+	elseif SANDY_CRACKED_TERRAIN
+		create_terrain DLC_QUICKSAND {
+			base_terrain DLC_CRACKED
+			land_percent 15
+			number_of_clumps 99
+			terrain_mask 1
+		}
+	else
+		create_terrain DLC_DESERTGRAVEL {
+			base_terrain DLC_CRACKED
+			number_of_tiles rnd(50,300)
+			set_scaling_to_map_size
+			number_of_clumps rnd(8,50)
+			terrain_mask 1
+			spacing_to_other_terrain_types 5
+		}
+		create_terrain DIRT {
+			base_terrain DLC_CRACKED
+			number_of_tiles rnd(0,200)
+			set_scaling_to_map_size
+			number_of_clumps rnd(3,30)
+			terrain_mask 1
+			spacing_to_other_terrain_types 1
+		}
+		create_terrain DESERT {
+			base_terrain DLC_CRACKED
+			number_of_tiles rnd(0,300)
+			set_scaling_to_map_size
+			number_of_clumps rnd(4,30)
+			terrain_mask 1
+			spacing_to_other_terrain_types 1
+		}
+		create_terrain DLC_DESERTGRAVEL {
+			base_terrain DLC_CRACKED
+			number_of_tiles rnd(50,100)
+			set_scaling_to_map_size
+			number_of_clumps rnd(4,15)
+			terrain_mask 1
+			spacing_to_other_terrain_types 5
+		}
+		create_terrain DLC_QUICKSAND {
+			base_terrain DLC_CRACKED
+			number_of_tiles rnd(0,350)
+			set_scaling_to_map_size
+			number_of_clumps rnd(4,35)
+			terrain_mask 1
+		}
+	endif
+endif
+
 if SNOW_HEAVY_PLANET
 	create_terrain SNOW { /* for placing mountains */
 		base_terrain SNOW_HEAVY
@@ -1910,20 +2077,20 @@ endif
 if BARREN_PLANET
 	create_terrain DLC_ROCK {
 		base_terrain GRAVEL
-		land_percent rnd(2,4) /* TODO do full test for this */
+		land_percent rnd(2,4) 
 		number_of_clumps 9320
 		terrain_mask 1
 		spacing_to_other_terrain_types 2 /* reduce spillover effect by forcing placement on a terrain mask as well. */
 	}
 	create_terrain DLC_DESERTGRAVEL {
 		base_terrain GRAVEL
-		land_percent rnd(2,4) /* TODO do full test for this */
+		land_percent rnd(2,4) 
 		number_of_clumps 9320
 		terrain_mask 1
 	}
 endif
 if CITY_PLANET
-/*	road terrains: ROAD, ROAD2, road_snow (38), road_fungus (39), DLC_DRYROAD, DLC_JUNGLEROAD (many of the preceeding are obsolete and can't be layered)
+	/*	road terrains: ROAD, ROAD2, road_snow (38), road_fungus (39), DLC_DRYROAD, DLC_JUNGLEROAD (many of the preceeding are obsolete and can't be layered)
 
 	another road_fungus (75), road gravel (78), DLC_ROADGRAVEL (obsolete, cannot have resources on it)
 
@@ -2007,46 +2174,6 @@ if FARMLAND_PLANET /* May need to check that this biome doesn't have trapped vil
 		number_of_clumps 40
 		terrain_mask 1
 	} 
-	/* these are the terrains that berries are placed on.
-	create_terrain FARMLAND_FULL {
-		base_terrain FARMLAND1
-		land_percent rnd(1,2)
-		number_of_clumps 40
-		terrain_mask 1
-		spacing_to_other_terrain_types 1
-	}
-	create_terrain FARMLAND3 {
-		base_terrain FARMLAND1
-		land_percent rnd(1,2)
-		number_of_clumps 40
-		terrain_mask 1
-	} */
-	/*
-	create_terrain MEDITERRANEAN_FOREST {
-		base_terrain FARMLAND1
-		land_percent rnd(1,2)
-		number_of_clumps 6
-		terrain_mask 1
-	}
-	create_terrain FARMLAND_FULL {
-		base_terrain FARMLAND1
-		land_percent rnd(2,3)
-		number_of_clumps 40
-		terrain_mask 1
-		spacing_to_other_terrain_types 1
-	}
-	create_terrain FARMLAND3 {
-		base_terrain FARMLAND1
-		land_percent rnd(2,3)
-		number_of_clumps 40
-		terrain_mask 1
-	}
-	create_terrain FARMLAND2 {
-		base_terrain FARMLAND1
-		land_percent rnd(1,2)
-		number_of_clumps 40
-		terrain_mask 1
-	}  */
 	create_terrain MEDITERRANEAN_FOREST {
 		base_terrain FARMLAND1
 		land_percent 100
@@ -2343,15 +2470,16 @@ if JUNGLE_PLANET /* TODO double check that this works as expected when adding el
 endif
 if LEAVES_PLANET
 	start_random
-		percent_chance 11 #const LEAVES_FOREST_TERRAIN 10 /* FOREST */
-		percent_chance 11 #const LEAVES_FOREST_TERRAIN 17  /* JUNGLE */
-		percent_chance 11 #const LEAVES_FOREST_TERRAIN 18 /* BAMBOO */
-		percent_chance 11 #const LEAVES_FOREST_TERRAIN 19 /* PINE_FOREST */
-		percent_chance 11 #const LEAVES_FOREST_TERRAIN 104 /* DLC_FORESTAUTUMN */
-		percent_chance 11 #const LEAVES_FOREST_TERRAIN 110 /* BIRCH_FOREST */
-		percent_chance 11 #const LEAVES_FOREST_TERRAIN 20 /* FOREST_OAK_BUSH */
-		percent_chance 11 #const LEAVES_FOREST_TERRAIN 89 /* FOREST_BUSH - would be a good one to combine with an increase berry bush chance. */
-		percent_chance 12 #const LEAVES_FOREST_TERRAIN 92 /* FOREST_REEDS - has less wood, so favored as a result of that bias. */
+		percent_chance 10 #const LEAVES_FOREST_TERRAIN 10 /* FOREST */
+		percent_chance 10 #const LEAVES_FOREST_TERRAIN 17  /* JUNGLE */
+		percent_chance 10 #const LEAVES_FOREST_TERRAIN 18 /* BAMBOO */
+		percent_chance 10 #const LEAVES_FOREST_TERRAIN 19 /* PINE_FOREST */
+		percent_chance 10 #const LEAVES_FOREST_TERRAIN 104 /* DLC_FORESTAUTUMN */
+		percent_chance 10 #const LEAVES_FOREST_TERRAIN 110 /* BIRCH_FOREST */
+		percent_chance 10 #const LEAVES_FOREST_TERRAIN 20 /* FOREST_OAK_BUSH */
+		percent_chance 10 #const LEAVES_FOREST_TERRAIN 89 /* FOREST_BUSH - would be a good one to combine with an increase berry bush chance. */
+		percent_chance 10 #const LEAVES_FOREST_TERRAIN 88 /* MEDITERRANEAN_FOREST */
+		percent_chance 10 #const LEAVES_FOREST_TERRAIN 92 /* FOREST_REEDS - has less wood, so favored as a result of that bias. */
 	end_random
 	create_terrain UNDERBRUSH_LEAVES {
 		base_terrain LEAVES

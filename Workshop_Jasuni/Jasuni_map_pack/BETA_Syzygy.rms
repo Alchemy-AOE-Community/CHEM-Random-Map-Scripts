@@ -4,8 +4,10 @@
 Title: Syzygy
 Authors: Jasuni (primary), BPDrej (started script, secondary)
 Date: March 2024
-Notice: Map developed for Alchemy League Season 2 at their request and may be used for it (and any other tournaments that wish to use it may do so, but I request a notification from any doing so).
-Spec: https://github.com/TechnicalChariot/Alchemy-AOE-Published-Specifications/blob/main/CHEM-CSRM-HVN-07.pdf
+Notice: Map developed for Alchemy League Season 2 at their request. It may now be used for season 5 (space theme) of alchemy league (any other tournaments that wish to use it may do so after alchemy season 5 is finished, but I request a notification from any doing so).
+Spec: where is it now? Expect it to be something like https://github.com/Alchemy-AOE-Community/CHEM-Random-Map-Scripts/blob/Space_Maps/Space_Maps/SPC_08_Syzygy/SPC_08_CM_Syzygy.ods or https://github.com/Alchemy-AOE-Community/CHEM-Random-Map-Scripts/blob/Workshop_Jasuni/Workshop_Jasuni/SPC_08_Syzygy/SPC_08_CM_Syzygy.ods 
+OR
+https://github.com/Alchemy-AOE-Community/CHEM-Random-Map-Scripts/blob/Space_Maps/Space_Maps/SPC_09_Syzygy/SPC_09_CM_Syzygy.ods or https://github.com/Alchemy-AOE-Community/CHEM-Random-Map-Scripts/blob/Workshop_Jasuni/Workshop_Jasuni/SPC_09_Syzygy/SPC_09_CM_Syzygy.ods 
 
 idea: randomize the terrains for each planet so that players have to scout it out - nomad start, with 1 vil on top planet, 1 vil bottom planet, and 1 vil somewhere else (place via actor area?) Could also have players start with a fishing ship (good for scouting) in a map corner (either top/bottom or left/right: likely left/right)
 Syzygy randomizing: when selecting terrains, do a random chance for first 1, then random chance with one removed (remove last 1, check for duplicate) for second planet; 3rd planet remove last 2, if get duplicate check which planet it was (first removed if first planet, otherwise second); remove 3 for last planet (handle like 3rd planet)
@@ -93,7 +95,9 @@ direct_placement
 if 2_TEAM_GAME
 elseif 2_PLAYER_GAME
 elseif TOURNAMENT_VERSION
-    #define DISABLE_TRADE /* TODO figure out a better solution for FFAs */
+	if LOW_RESOURCES
+    	#define DISABLE_TRADE /* TODO figure out a better solution for FFAs */
+	endif
 endif
 if DISABLE_TRADE
 /* Removing Trade for Multi-team Games, as per Alchemy requirements.  */
@@ -333,22 +337,6 @@ elseif MAPSIZE_LUDICROUS
     #define AT_LEAST_MONSTROUS
     /* and AT_LEAST_LUDCROUS - can simply use MAP_SIZE_LUDICROUS */
 endif
-/* TODO: adjust the map sizes to use at-least-XXX rather than current values; best to avoid confusion by only using the new map sizes.
-if MAPSIZE_MINI
-elseif MAPSIZE_TINY
-elseif MAPSIZE_SMALL
-elseif MAPSIZE_MEDIUM
-elseif MAPSIZE_NORMAL
-elseif MAPSIZE_LARGE
-elseif MAPSIZE_HUGE
-elseif MAPSIZE_GIANT
-elseif MAPSIZE_MASSIVE
-elseif MAPSIZE_ENORMOUS
-elseif MAPSIZE_COLOSSAL
-elseif MAPSIZE_INCREDIBLE
-elseif MAPSIZE_MONSTROUS
-elseif MAPSIZE_LUDICROUS
-endif */
 
 direct_placement
 #const L 32
@@ -456,13 +444,13 @@ RADIOACTIVE_PLANET, DESERT_PLANET, DIRT4_PLANET, CITY_PLANET, SNOW_PLANET, LEAVE
 no jungle
 add a const for gold added to one of the planets, and once I've done so, add an if-else at the end that adds gold onto the rocks when no gold has appeared. Stone doesn't need this sort of treatment.
 
-TODO biomes to add: great plains, lake (would be some type of terrain - likely grass - mixed with small lakes on elevation 2 - lakes would need to avoid other planets by a small amount - 1 tile should suffice), cracked (needs definition)
-add GREAT_PLAINS_PLANET, LAKES_PLANET, CRACKED_PLANET (maybe rename to desolate planet?)
+biomes to add: 
 
 how to add biomes:
 1. add the biome to random statement for each planet (with adjusted random chances)
 2. add it to the if-else chain (copy and modify)
 3. If woodless, add PLANET_X_WOODLESS
+4. create elevation generation, terrain generation, and objects generation sections
  */
 #define FULL_RANDOM_BIOMES
 if FULL_RANDOM_BIOMES 
@@ -472,7 +460,7 @@ if FULL_RANDOM_BIOMES
 	if DEBUG_MODE
 		#define DIRT_MUD_MANGROVE_MAZE_PLANET_1 
 		#define ANTIQUITY_MODE
-		/* TODO test great plains planet in other positions, see that it doesn't have any issues on the larger planets. */
+		
 	else
 		start_random
 			percent_chance 7 #define RADIOACTIVE_PLANET_1
@@ -553,7 +541,7 @@ if FULL_RANDOM_BIOMES
 		#define PLANET_1_WOODLESS
 		#const PN1B 108 /* DLC_GRAVELBEACH */
 	elseif LAKES_PLANET_1
-		#const PN1 12 /* TODO determine which grass to use */ /* GRASS2 - a very green grass, with a forest terrain placed on it. GREAT_PLAINS_PLANET, LAKES_PLANET, CRACKED_PLANET */
+		#const PN1 12 /* GRASS2 - a very green grass, with a forest terrain placed on it. GREAT_PLAINS_PLANET, LAKES_PLANET, CRACKED_PLANET */
 		#define LAKES_PLANET
 		#const PN1B 108 /* DLC_GRAVELBEACH */
 	elseif CRACKED_PLANET_1
@@ -743,7 +731,7 @@ if FULL_RANDOM_BIOMES
 		/* percent_chance 0 #define BARREN_PLANET_3  */
 	end_random
 	if RADIOACTIVE_PLANET_3
-		if RADIOACTIVE_PLANET_1 /* check 1 first - if both were selected, then it would be planet 1 TODO breaks when both selected */
+		if RADIOACTIVE_PLANET_1 /* check 1 first - if both were selected, then it would be planet 1 TODO breaks when both selected - check if this is still the case */
 			#define SNOW_HEAVY_PLANET_3
 		elseif RADIOACTIVE_PLANET_2
 			#define BARREN_PLANET_3 /* barren needs to represent the previous planet selection */
@@ -1101,7 +1089,7 @@ if FULL_RANDOM_BIOMES
 		#const PN4B 108 /* DLC_GRAVELBEACH */
 	endif
 
-	/* TODO change to planet 4  TODO seed: -1788767322 on small size - barren planet on both 1 and 4 */
+	/* TODO change to planet 4  TODO seed: -1788767322 on small size - barren planet on both 1 and 4 - is this still an issue: the seed is almost certainly invalid be now. */
 	if FARMLAND_PLANET_4 /* planet 1 selected again */
 		if FARMLAND_PLANET_1 /* impossible - farmland can't be selected for P4 */
 			#const PN4 71 /* UNDERBRUSH_JUNGLE is 77, UNDERBRUSH_LEAVES is 71 - 71 was used as a terrain mask */
@@ -1179,7 +1167,7 @@ if FULL_RANDOM_BIOMES
 		endif
 	endif
 
-elseif NONRANDOM_PLANETS /* TODO should be able to remove now, but may want for testing purposes. See older versions for other planetary biomes. */
+elseif NONRANDOM_PLANETS /* TODO should be able to remove now, but may want for testing purposes. See older versions for other planetary biomes. Didn't work last time I tried to use it for a test. */
 
 	#const PN1 45 /* DLC_CRACKED */
 	#define CRACKED_PLANET
@@ -2148,14 +2136,14 @@ endif
 if BARREN_PLANET
 	create_terrain DLC_ROCK {
 		base_terrain GRAVEL
-		land_percent rnd(2,4) /* TODO do full test for this */
+		land_percent rnd(2,4) 
 		number_of_clumps 9320
 		terrain_mask 1
 		spacing_to_other_terrain_types 2 /* reduce spillover effect by forcing placement on a terrain mask as well. */
 	}
 	create_terrain DLC_DESERTGRAVEL {
 		base_terrain GRAVEL
-		land_percent rnd(2,4) /* TODO do full test for this */
+		land_percent rnd(2,4) 
 		number_of_clumps 9320
 		terrain_mask 1
 	}
@@ -2756,7 +2744,7 @@ Rules of object generation for this map (which may need updating):
 note that there may be a little overflow between planets
 
 standard gold/stone code - for planets that don't have any special reason to carry gold/stone, and for which I'd like a small-medium amount of gold/stone.
-TODO alter these so that gold is less common, but also add gold to rock if each biome rejects gold
+Could alter these so that gold is less common
 	start_random
 		percent_chance 25 #define NO_TERRAIN_GOLD
 		percent_chance 45 #define NO_TERRAIN_STONE
@@ -2992,7 +2980,7 @@ if CRACKED_PLANET /* "I am Ozymandias, king of kings. Look on my works, ye might
 		terrain_to_place_on DLC_CRACKED
 	}
 	if ALIEN_CRACKED_TERRAIN
-		/* TODO decide what other resources I want here - forage on muddy shallows, antiquity mode add oysters on the bogland mask; Perhaps add a guaranteed relic or two. Could also add some baobab straggler trees  */
+		/* resources: forage on muddy shallows, antiquity mode add oysters on the bogland mask; Perhaps add a guaranteed relic or two. Could also add some baobab straggler trees  */
 		#define NO_CRACKED_STONE
 		start_random
 			percent_chance 5 #define NO_ALIEN_CRACKED_FORAGE
@@ -3342,8 +3330,7 @@ if LAKES_PLANET /* resources: forage; sheep, cows, goats, geese*, water buffalo,
 		}
 	endif
 endif
-if GREAT_PLAINS_PLANET /* TODO finish this up, and finish testing.
-TODO also add wood piles when low wood - this is a woodless biome */
+if GREAT_PLAINS_PLANET 
 	start_random
 		percent_chance 20 #const PLAINS_HORSE 814 /* HORSE - HORSE_E in order */
 		percent_chance 20 #const PLAINS_HORSE 1356
@@ -3792,6 +3779,7 @@ if JUNGLE_PLANET /* not finished - do not include. */
 	/* UNDERBRUSH_JUNGLE on inside  UNDERBRUSH_LEAVES on outside
 	TODO finish this biome later - is only biome that can have predators, due to the enclosed nature of the UNDERBRUSH_JUNGLE
 	Should have lots of forage (inside and outside perhaps? - will need to avoid the water terrain a little to ensure a walking path for villagers), plenty of hunt buried in the forest, gold/stone buried in the forest, and possibly some predators buried in the forest also. Should be food rich, and could make generally resource rich.
+	I wonder if I could make a stone ruins that has been overtaken by plant life. It would have to be surrounded by plant life, but there's a forest trick to give those trees a forest terrain.
 	 */
 endif
 if LEAVES_PLANET
@@ -4350,7 +4338,7 @@ if SAVANNAH_PLANET
 			avoid_actor_area 4
 		}
 	endif
-	/* Giraffes would be an excelent addition here, but aren't an option. TODO decide on new huntables here. ostricth, zebra, gazelle  */
+	/* Giraffes would be an excelent addition here, but aren't an option. TODO decide on new huntables here. ostricth, zebra, gazelle - add mouflon? */
 	start_random
 		percent_chance 33 #const SAVANNAH_HUNTABLE 1019 /* DLC_ZEBRA */
 		percent_chance 33 #const SAVANNAH_HUNTABLE 1026 /* DLC_OSTRICH */
@@ -4705,7 +4693,7 @@ if SNOW_HEAVY_PLANET
 	}
 	start_random
 		percent_chance 60 #define SNOW_HEAVY_IBEX
-		percent_chance 20 #define SNOW_HEAVY_DEER
+		percent_chance 20 #define SNOW_HEAVY_DEER /* TODO add chance of mouflon */
 	end_random
 	if SNOW_HEAVY_DEER 
 		create_object DEER {
@@ -5131,7 +5119,7 @@ elseif PLANET_2_WOODLESS
 	endif
 endif
 if LOW_WOOD /* normally 125 wood. TODO see if there's a way to prevent it from being lamed via mule cart. */
-	create_object TREE_J { /* TODO check to see if there's a forest zone (and disable in that case), or increase if I ever make 4 different woodless biomes - also check to ensure this wasn't broken by an update. */
+	create_object TREE_J { /*  TODO check to see if there's a heavy-forest biome (and disable in that case) */
 		number_of_objects 9320
 		temp_min_distance_group_placement 1
 		terrain_to_place_on DLC_ROCK

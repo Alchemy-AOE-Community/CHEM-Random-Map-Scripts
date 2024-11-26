@@ -1,0 +1,120 @@
+/* Neuschwanstein */
+/* 11/25/2024 v0.1 */
+/* Random Map Script created by CookiePirate */
+
+/* Licensing Information:
+This map may not be used for any tournaments, showmatches, or other competitions except 
+for Alchemy League Season 6 without the express permission of the Author of the Map.
+This map may be downloaded and played for fun but shall remain unmodified without the express permission of the Author of the Map. 
+This map may not be uploaded to the AOE2 Mod Center under ANY circumstances without the Author's express permission.
+Component specification not yet created. Link to be added when spec published. */
+
+<PLAYER_SETUP>
+grouped_by_team /* change to direct placement */
+behavior_version 1
+
+#const NNB 81
+#const MONUMENT 826
+effect_amount MOD_RESOURCE AMOUNT_MONUMENT_TRICKLE_FOOD ATTR_SET 1
+effect_amount MOD_RESOURCE AMOUNT_MONUMENT_TRICKLE_WOOD ATTR_SET 1
+effect_amount MOD_RESOURCE AMOUNT_MONUMENT_TRICKLE_STONE ATTR_SET 1
+effect_amount MOD_RESOURCE AMOUNT_MONUMENT_TRICKLE_GOLD ATTR_SET 1
+effect_percent MOD_RESOURCE AMOUNT_MONUMENT_TRICKLE_FOOD ATTR_SET 100
+effect_percent MOD_RESOURCE AMOUNT_MONUMENT_TRICKLE_WOOD ATTR_SET 100
+effect_percent MOD_RESOURCE AMOUNT_MONUMENT_TRICKLE_STONE ATTR_SET 100
+effect_percent MOD_RESOURCE AMOUNT_MONUMENT_TRICKLE_GOLD ATTR_SET 100
+effect_amount SET_ATTRIBUTE MONUMENT ATTR_LINE_OF_SIGHT 1
+effect_amount SET_ATTRIBUTE MONUMENT ATTR_SEARCH_RADIUS 1
+
+start_random
+    percent_chance 25 #define WINTER
+    percent_chance 25 #define AUTUMNCOLD
+    percent_chance 25 #define AUTUMNWARM
+end_random
+
+if WINTER
+    #const LAND_A 32 /* Snow */
+    #const LAND_B 32 /* Snow */
+    #const FOREST_A 106 /* Dormant oak with bushes */
+    #const FOREST_B 21 /* Snow pine */
+    #const OBJTREE_A 1250 /* Oak */
+    #const OBJTREE_B 413 /* Snow pine */
+elseif AUTUMNCOLD
+    #const LAND_A 32 /* Snow */
+    #const LAND_B 72 /* Snowy leaves */
+    #const FOREST_A 105 /* Snow autumn oak */
+    #const FOREST_B 21 /* Snow pine */
+    #const OBJTREE_A 1249 /* Snow autumn oak */
+    #const OBJTREE_B 413 /* Snow pine */
+elseif AUTUMNWARM
+    #const LAND_A 0 /* Grass */
+    #const LAND_B 71 /* Autumn leaves */
+    #const FOREST_A 104 /* Autumn oak */
+    #const FOREST_B 19 /* Pine */
+    #const OBJTREE_A 1248 /* Autumn oak */
+    #const OBJTREE_B 350 /* Pine */
+else
+    #const LAND_A 0 /* Grass */
+    #const LAND_B 0 /* Grass */
+    #const FOREST_A 20 /* Oak with bushes */
+    #const FOREST_B 19 /* Pine */
+    #const OBJTREE_A 349 /* Oak */
+    #const OBJTREE_B 350 /* Pine */
+endif
+
+if 2_TEAM_GAME
+else
+    #const TRADE_CART_ENABLER 161
+    #const TRADE_COG_ENABLER 180
+    #const TRADE_CARAVAN_ENABLER 48
+    #const HINDU_CARAVANSERAI_ENABLER 518
+    #const PERSIAN_CARAVANSERAI_ENABLER 552  
+    effect_amount DISABLE_TECH TRADE_COG_ENABLER ATTR_DISABLE 180
+    effect_amount DISABLE_TECH TRADE_CART_ENABLER ATTR_DISABLE 161
+    effect_amount DISABLE_TECH TRADE_CARAVAN_ENABLER ATTR_DISABLE 48
+    effect_amount DISABLE_TECH HINDU_CARAVANSERAI_ENABLER ATTR_DISABLE 518
+    effect_amount DISABLE_TECH PERSIAN_CARAVANSERAI_ENABLER ATTR_DISABLE 552
+endif
+
+<LAND_GENERATION>
+base_terrain LAND_A
+
+create_player_lands { terrain_type LAND_A circle_radius 40 2 base_size 10 land_percent 40 clumping_factor 32 base_elevation 1 }
+
+
+
+<ELEVATION_GENERATION>
+
+create_elevation 1 { base_terrain LAND_A number_of_tiles 14400 number_of_clumps 8 set_scale_by_groups enable_balanced_elevation }
+
+
+<TERRAIN_GENERATION>
+
+/* SEASONAL_COLOR_CORRECTION */
+if WINTER color_correction CC_WINTER
+elseif AUTUMNCOLD start_random
+    percent_chance 50 color_correction CC_WINTER
+    percent_chance 50 color_correction CC_AUTUMN
+    end_random
+elseif AUTUMNWARM color_correction CC_AUTUMN
+endif
+
+create_terrain LAND_B { base_terrain LAND_A number_of_clumps 9320 land_percent 100 set_scale_by_groups height_limits 0 0 spacing_to_other_terrain_types 1 }
+
+<CONNECTION_GENERATION>
+
+<OBJECTS_GENERATION>
+
+create_object TOWN_CENTER { set_place_for_every_player find_closest }
+create_object VILLAGER { set_place_for_every_player min_distance_to_players 3 max_distance_to_players 6 }
+create_object SCOUT { set_place_for_every_player min_distance_to_players 3 max_distance_to_players 6 }
+if REGICIDE create_object KING { set_place_for_every_player find_closest } endif
+create_object SHEEP { set_place_for_every_player set_gaia_object_only number_of_objects 4 number_of_groups 1 set_tight_grouping min_distance_to_players 9 max_distance_to_players 9 set_circular_placement actor_area 40 actor_area_radius 6 }
+create_object SHEEP { set_place_for_every_player set_gaia_object_only number_of_objects 2 number_of_groups 1 set_tight_grouping min_distance_to_players 15 max_distance_to_players 15 set_circular_placement actor_area 41 actor_area_radius 6 avoid_actor_area 40 }
+create_object SHEEP { set_place_for_every_player set_gaia_object_only number_of_objects 2 number_of_groups 1 set_tight_grouping min_distance_to_players 17 max_distance_to_players 17 set_circular_placement avoid_actor_area 40 avoid_actor_area 41 }
+create_object BOAR { set_place_for_every_player set_gaia_object_only number_of_objects 2 min_distance_to_players 16 max_distance_to_players 18 set_circular_placement }
+create_object DEER { set_place_for_every_player set_gaia_object_only number_of_objects 4 min_distance_to_players 14 max_distance_to_players 18 set_circular_placement group_placement_radius 4 }
+create_object FORAGE { set_place_for_every_player set_gaia_object_only number_of_objects 6 set_tight_grouping number_of_groups 1 avoid_forest_zone 4 min_distance_to_players 10 max_distance_to_players 11 min_distance_group_placement 6 set_circular_placement }
+create_object GOLD { set_place_for_every_player set_gaia_object_only number_of_objects 7 set_tight_grouping number_of_groups 1 avoid_forest_zone 4 min_distance_to_players 10 max_distance_to_players 11 min_distance_group_placement 6 set_circular_placement }
+create_object GOLD { set_place_for_every_player set_gaia_object_only number_of_objects 4 set_tight_grouping number_of_groups 1 avoid_forest_zone 4 min_distance_to_players 18 max_distance_to_players 19 min_distance_group_placement 6 set_circular_placement }
+create_object STONE { set_place_for_every_player set_gaia_object_only number_of_objects 5 set_tight_grouping number_of_groups 1 avoid_forest_zone 4 min_distance_to_players 12 max_distance_to_players 13 min_distance_group_placement 6 set_circular_placement }

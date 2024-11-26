@@ -326,8 +326,9 @@ endif
 
 effect_amount SET_ATTRIBUTE STONE_MINE_CLASS ATTR_STORAGE_VALUE 100
 effect_amount SET_ATTRIBUTE TREE_CLASS ATTR_TERRAIN_ID 9
-effect_percent MUL_ATTRIBUTE SEA_TOWER ATTR_HITPOINTS 300 /*  add 1000 hp - multiplying allows it to interact with other bonuses better, like Byzntine HP bonus and handicap. Otherwise, the bonuses are applied before the extra 1000 hp is added.
-Chose to add 1000 to match guard tower hp (watch tower hp is 1020, guard tower 1500, keep 2250) Still has less armor than a tower, but is most comparable to a guard tower in damage output.
+effect_amount SET_ATTRIBUTE DLC_MANGROVE_TREE ATTR_TERRAIN_ID 1 /* reset mangrove tree TODO fully test for empire wars functionality? */
+effect_percent MUL_ATTRIBUTE SEA_TOWER ATTR_HITPOINTS 400 /*  add 1500 hp - multiplying allows it to interact with other bonuses better, like Byzntine HP bonus and handicap. Otherwise, the bonuses are applied before the extra hp is added.
+Chose to add 1500 to match guard tower hp (watch tower hp is 1020, guard tower 1500, keep 2250) Still has less armor than a tower, but is most comparable to a guard tower in damage output.
  */
 
 /*
@@ -379,18 +380,25 @@ From the map shoals: changes to consider
 	effect_amount SET_ATTRIBUTE SEA_TOWER ATTR_HIT_MODE 1 /* Will collide with anything damagable in its path */
 */
 
-start_random
-    percent_chance 20 #define THEME_OPTION_A
-    percent_chance 20 #define THEME_OPTION_B
-    percent_chance 20 #define THEME_OPTION_C
-    percent_chance 20 #define THEME_OPTION_D
-    percent_chance 20 #define THEME_OPTION_E
-end_random
-/*
+/* TODO randomize; and test empire wars more thoroughly
 #define THEME_DESERT
-*/
+#define EMPIRE_WARS
 #define THEME_BOGLAND
+*/
+start_random
+    percent_chance 50 #define THEME_BOGLAND
+    percent_chance 50 #define THEME_DESERT
+end_random
 if THEME_DESERT
+    start_random
+        percent_chance 20 #define THEME_OPTION_A
+        percent_chance 20 #define THEME_OPTION_B
+        percent_chance 20 #define THEME_OPTION_C
+        percent_chance 20 #define THEME_OPTION_D
+        percent_chance 20 #define THEME_OPTION_E
+    end_random
+    #const INNER_ROCK_TERRAIN 40 /* DLC_ROCK */
+    #const INNER_ROCK_BEACH 109 /* DLC_WETROCKBEACH */
     #const ORIG_TERRAIN 6 /* DIRT */
     #const TEMP_TERRAIN_A 14 /* Desert */
     #const WATER_TERRAIN 1 /* Water */
@@ -416,23 +424,29 @@ if THEME_DESERT
     #const SHALLOW_MASK 1 /* WATER - unused due to connection */
     #const ROCK_MASK 54
     #const FOREST_MASK 3 /* Dirt 3 */
-elseif THEME_BOGLAND
+
+    #const TREE_OBJECT 351 /* PALMTREE */
+    #const HUNTABLE 65 /* DEER */
+    #const LURABLE_A 48 /* BOAR */
+    #const LURABLE_B 1301 /* DLC_ELEPHANT */
+elseif THEME_BOGLAND /* doesn't really look like a bogland, but is at least a bit wetter-looking. More like a drying-out bogland. */
      /* 100 DLC_DRYGRASS
      17 jungle
      42 dlc dirt4
      49 DLC_BAOBABFOREST
      56 DLC_RAINFOREST
     etc
-    TODO needs further work: terrain is looking decent, but needs new forest, and possibly consider changing the rock terrain in the center of the map
       */
 
+    #const INNER_ROCK_TERRAIN 101 /* DLC_BOGLAND */
+    #const INNER_ROCK_BEACH 107 /* DLC_WETBEACH */
     #const ORIG_TERRAIN 6 /* DIRT */
     #const TEMP_TERRAIN_A 100 /* DLC_DRYGRASS */
     #const WATER_TERRAIN 1 /* Water */
     #const LAND_TERRAIN_A 11 /* Dirt 2 */
     #const LAND_TERRAIN_B 3 /* Dirt 3 */
     #const SHALLOW_TERRAIN 54 /* DLC_MANGROVESHALLOW */
-    #const FOREST_TERRAIN_A 48 /* PALM_DESERT */ /* TODO: add a tree variable, to indicate which type of tree I want to place */
+    #const FOREST_TERRAIN_A 48 /* PALM_DESERT */
     #const FOREST_TERRAIN_B 55 /* DLC_MANGROVEFOREST */
 
     
@@ -443,9 +457,18 @@ elseif THEME_BOGLAND
     #const WATER_MASK 54 /* DLC_MANGROVESHALLOW */
     #const SHALLOW_MASK 1 /* WATER - unused due to connection */
     #const ROCK_MASK 54
-    #const FOREST_MASK 3 /* Dirt 3 */
+    #const FOREST_MASK 44 /* DLC_MOORLAND - acceptable, but not great terrain choice imo. */
     /* note: inner island could use DLC_BOGLAND instead of DLC_ROCK */
+    
+    #const TREE_OBJECT 348 /* raintree 1146, bamboo 348 */
+    start_random
+        percent_chance 40 #const HUNTABLE 1019 /* DLC_ZEBRA */
+        percent_chance 60 #const HUNTABLE 1026 /* DLC_OSTRICH */
+    end_random
+    #const LURABLE_A 822 /* JAVELINA */
+    #const LURABLE_B 1139 /* DLC_RHINO */
 else
+    #const INNER_ROCK_TERRAIN 40 /* DLC_ROCK */
     #const ORIG_TERRAIN 0 /* Grass */
     #const TEMP_TERRAIN_A 32 /* Snow */
     #const WATER_TERRAIN 1 /* Water */
@@ -462,6 +485,11 @@ else
     #const SHALLOW_MASK 1 /* WATER */
     #const ROCK_MASK 54
     #const FOREST_MASK 11 /* Dirt 2 */
+    
+    #const TREE_OBJECT 351 /* PALMTREE */
+    #const HUNTABLE 65 /* DEER */
+    #const LURABLE_A 48 /* BOAR */
+    #const LURABLE_B 1301 /* DLC_ELEPHANT */
 endif
 
 /* TODO fold into theme - is a temporary tree for empire wars */
@@ -472,7 +500,9 @@ effect_amount SET_ATTRIBUTE OAKTREE ATTR_DEAD_ID -1
 <LAND_GENERATION>
 base_terrain ORIG_TERRAIN
 create_land {
-	terrain_type DLC_ROCK /* may decide to change
+    terrain_type INNER_ROCK_BEACH
+    /* 
+	terrain_type INNER_ROCK_TERRAIN may decide to change
 	land_percent 1 - replacing with number of tiles for 0.5% 
     if TINY_MAP
         number_of_tiles 72 
@@ -531,7 +561,18 @@ create_player_lands {
             circle_radius 25 0
         elseif MAPSIZE_HUGE
             circle_radius 22 0
-            /* TODO determine proper placements for giant-monstrous map sizes */
+        elseif MAPSIZE_GIANT 
+            circle_radius rnd(23,27) 0
+        elseif MAPSIZE_MASSIVE /* min:         max:           */
+            circle_radius rnd(21,26) 0
+        elseif MAPSIZE_ENORMOUS
+            circle_radius rnd(20,25) 0 
+        elseif MAPSIZE_COLOSSAL
+            circle_radius rnd(19,24) 0 
+        elseif MAPSIZE_INCREDIBLE
+            circle_radius rnd(18,23) 0 
+        elseif MAPSIZE_MONSTROUS
+            circle_radius rnd(16,22) 0 /* a bit close when it's 16, but 17 is a bit farther away than I'd like the min to be */
         else
             circle_radius 13 0
         endif
@@ -754,12 +795,18 @@ create_terrain FOREST_TERRAIN_A {
     land_percent 10
     number_of_clumps 60
 }
+create_terrain INNER_ROCK_TERRAIN {
+    base_terrain INNER_ROCK_BEACH
+    land_percent 100
+    number_of_clumps 10
+    spacing_to_other_terrain_types 1
+}
 /* An experiment, preferred what the rocky isle in the middle looked like from the land generation section
 create_terrain WATER_TERRAIN {
-    base_terrain DLC_ROCK
+    base_terrain INNER_ROCK_TERRAIN
     land_percent 100
 }
-create_terrain DLC_ROCK {
+create_terrain INNER_ROCK_TERRAIN {
     base_terrain WATER_TERRAIN
     land_percent 100
     height_limits 0 0
@@ -872,7 +919,7 @@ create_terrain WATER_MASK {
     terrain_mask 1
 }
 create_terrain ROCK_MASK {
-    base_terrain DLC_ROCK
+    base_terrain INNER_ROCK_TERRAIN
     land_percent 100
     terrain_mask 1
 }
@@ -1043,7 +1090,7 @@ else
         create_actor_area 478 478 4 0
     endif
 endif
-if CORNER_RELICS /* create relics in place of the markets TODO move the relics to be exactly in the corners rather than slightly biased.  */
+if CORNER_RELICS 
     create_object RELIC {
         actor_area_to_place_in 1 
         set_gaia_object_only
@@ -1126,7 +1173,7 @@ if EMPIRE_WARS
     }
 endif
 create_object TERRAIN_BLOCKER {
-    second_object PALMTREE
+    second_object TREE_OBJECT
     number_of_objects 9320
     number_of_clumps 9320
     set_gaia_object_only
@@ -1138,14 +1185,14 @@ create_object TERRAIN_BLOCKER {
 }
 if LUDIKRIS_MAP
     create_object TERRAIN_BLOCKER {
-        second_object PALMTREE
+        second_object TREE_OBJECT
         number_of_objects 9320
         number_of_clumps 9320
         set_gaia_object_only
         terrain_to_place_on FOREST_TERRAIN_A
     }
     create_object TERRAIN_BLOCKER { /* needs a third one to get it all. */
-        second_object PALMTREE
+        second_object TREE_OBJECT
         number_of_objects 9320
         number_of_clumps 9320
         set_gaia_object_only
@@ -1179,10 +1226,9 @@ else
 endif
 /* place reeds after wood villagers for empire wars - doesn't matter otherwise. */
 create_object TERRAIN_BLOCKER {
-    if THEME_BOGLAND
-        second_object DLC_MANGROVE_TREE /* TODO work on a better way of doing this - perhaps change mangrove trees to form on water, but not land? */
+    if THEME_BOGLAND 
     else
-        second_object REEDS 
+        second_object REEDS /* TODO fold into theme? */
     endif
     number_of_objects 9320
     number_of_clumps 9320
@@ -1204,19 +1250,22 @@ create_object SALMON {
 /* note: on some of the map sizes, it is possible for a few less relics to spawn. These sizes include tiny and small. I don't consider this a serious issue. */
 create_object RELIC { 
     temp_min_distance_group_placement 1
-    if LARGE_MAP
+    if MAPSIZE_NORMAL
         number_of_objects 7
-    elseif HUGE_MAP
+    elseif MAPSIZE_LARGE
         number_of_objects 8
-    elseif GIGANTIC_MAP
+    elseif MAPSIZE_HUGE
         number_of_objects 10
-    elseif LUDIKRIS_MAP
+    elseif MAPSIZE_LUDICROUS
         number_of_objects 20
         temp_min_distance_group_placement 3
+    elseif AT_LEAST_HUGE /* TODO could be improved, but is functional */
+        number_of_objects 16
+        temp_min_distance_group_placement 2
     else
         number_of_objects 5
     endif
-    terrain_to_place_on DLC_ROCK
+    terrain_to_place_on INNER_ROCK_TERRAIN
     min_distance_group_placement 1
     actor_area 5
     actor_area_radius 7
@@ -1567,7 +1616,7 @@ create_object GOLD {
 }
 if DEATH_MATCH
 else
-    create_object DEER { /* TODO change with the theme? */
+    create_object HUNTABLE {
         set_place_for_every_player
         set_gaia_object_only
         min_distance_group_placement 3
@@ -1583,7 +1632,7 @@ else
     }
     if EMPIRE_WARS
     else
-        create_object BOAR { /* TODO change with the theme? */
+        create_object LURABLE_A {
             set_place_for_every_player
             set_gaia_object_only
             min_distance_group_placement 3
@@ -1723,7 +1772,7 @@ create_object TERRAIN_BLOCKER {
     avoid_actor_area 107
 }
 create_object TERRAIN_BLOCKER {
-    second_object PALMTREE
+    second_object TREE_OBJECT
     number_of_objects 30
     set_gaia_object_only
     set_scaling_to_map_size
@@ -1736,8 +1785,7 @@ create_object TERRAIN_BLOCKER {
     avoid_actor_area 107
 }
 if AT_LEAST_NORMAL
-/* TODO fold into theme. */
-    create_object DLC_ELEPHANT {
+    create_object LURABLE_B {
         number_of_objects 30
         set_gaia_object_only
         set_scaling_to_map_size

@@ -1,0 +1,150 @@
+/* German Scout Test */
+/* TechChariot -- 2024-11-26 */
+
+<PLAYER_SETUP>
+random_placement
+behavior_version 1
+
+/* Defining Land Creation Command */
+#const L 32
+
+/* Remove Visual Effect of Dead Fish Trap */
+#const ON_GRID 278
+effect_amount GAIA_SET_ATTRIBUTE ON_GRID ATTR_STORAGE_VALUE 0
+
+/* Configuring Building Blocker */
+#const BLOCKER 1654
+effect_percent GAIA_SET_ATTRIBUTE BLOCKER ATTR_RADIUS_1 50
+effect_percent GAIA_SET_ATTRIBUTE BLOCKER ATTR_RADIUS_2 50
+effect_percent GAIA_MOD_RESOURCE AMOUNT_BUILDING_TRICKLE_WOOD  ATTR_SET 0
+effect_percent GAIA_MOD_RESOURCE AMOUNT_BUILDING_TRICKLE_FOOD  ATTR_SET 0
+effect_percent GAIA_MOD_RESOURCE AMOUNT_BUILDING_TRICKLE_GOLD  ATTR_SET 0
+effect_percent GAIA_MOD_RESOURCE AMOUNT_BUILDING_TRICKLE_STONE ATTR_SET 0
+
+/* Disabling Trade Carts and Cogs for Multi-team Games */
+if LOW_RESOURCES
+  #const TRADE_CART_ENABLER 161
+  #const TRADE_COG_ENABLER 180
+  #const TRADE_CARAVAN_ENABLER 48
+  #const HINDU_CARAVANSERAI_ENABLER 518
+  #const PERSIAN_CARAVANSERAI_ENABLER 552  
+  #const SILK_ROAD 499
+  effect_amount DISABLE_TECH TRADE_COG_ENABLER ATTR_DISABLE 180
+  effect_amount DISABLE_TECH TRADE_CART_ENABLER ATTR_DISABLE 161
+  effect_amount DISABLE_TECH TRADE_CARAVAN_ENABLER ATTR_DISABLE 48
+  effect_amount DISABLE_TECH HINDU_CARAVANSERAI_ENABLER ATTR_DISABLE 518
+  effect_amount DISABLE_TECH PERSIAN_CARAVANSERAI_ENABLER ATTR_DISABLE 552
+  effect_amount DISABLE_TECH SILK_ROAD ATTR_DISABLE 499    
+else
+endif
+
+/* Making Solid Eye-Candy Semi-Transparent */
+effect_amount GAIA_SET_ATTRIBUTE RIDGE_SEC1 ATTR_OCCLUSION_MODE 2
+effect_amount GAIA_SET_ATTRIBUTE RIDGE_SEC2 ATTR_OCCLUSION_MODE 2
+effect_amount GAIA_SET_ATTRIBUTE RIDGE_SEC3 ATTR_OCCLUSION_MODE 2
+effect_amount GAIA_SET_ATTRIBUTE RIDGE_TEC1 ATTR_OCCLUSION_MODE 2
+effect_amount GAIA_SET_ATTRIBUTE RIDGE_TEC2 ATTR_OCCLUSION_MODE 2
+
+
+#const PT1 6
+#const PT2 6
+#const PT3 6
+#const PT4 6
+#const PT5 6
+#const PT6 6
+#const PT7 6
+#const PT8 6
+
+#const BARBARIAN 2331
+effect_amount  SET_ATTRIBUTE BARBARIAN ATTR_TRAITS 16
+effect_amount  SET_ATTRIBUTE BARBARIAN ATTR_ATTACK_GRAPHIC 4140
+effect_amount  SET_ATTRIBUTE BARBARIAN ATTR_STANDING_GRAPHIC 4142
+effect_amount  SET_ATTRIBUTE BARBARIAN ATTR_STANDING2_GRAPHIC 4142
+effect_amount  SET_ATTRIBUTE BARBARIAN ATTR_DYING_GRAPHIC 4141
+effect_amount  SET_ATTRIBUTE BARBARIAN ATTR_UNDEAD_GRAPHIC 4141
+effect_amount  SET_ATTRIBUTE BARBARIAN ATTR_WALKING_GRAPHIC 4144
+effect_amount  SET_ATTRIBUTE BARBARIAN ATTR_RUNNING_GRAPHIC 4144
+effect_amount  SET_ATTRIBUTE BARBARIAN ATTR_NAME_ID 5564
+effect_amount  SET_ATTRIBUTE BARBARIAN ATTR_ICON_ID 257
+effect_amount  SET_ATTRIBUTE BARBARIAN ATTR_HERO_STATUS 64
+effect_amount  SET_ATTRIBUTE BARBARIAN ATTR_HITPOINTS 25
+effect_percent SET_ATTRIBUTE BARBARIAN ATTR_MOVE_SPEED 84
+effect_amount  SET_ATTRIBUTE BARBARIAN ATTR_LINE_OF_SIGHT 10
+
+
+#const GERMAN_SHEPHERD 700
+effect_amount SET_ATTRIBUTE GERMAN_SHEPHERD ATTR_TRAITS 16
+effect_amount SET_ATTRIBUTE GERMAN_SHEPHERD ATTR_NAME_ID 5582
+effect_amount SET_ATTRIBUTE GERMAN_SHEPHERD ATTR_ICON_ID 7
+effect_amount SET_ATTRIBUTE GERMAN_SHEPHERD ATTR_HERO_STATUS 64
+effect_amount SET_ATTRIBUTE GERMAN_SHEPHERD ATTR_BASE_ARMOR 100
+effect_amount SET_ATTRIBUTE GERMAN_SHEPHERD ATTR_HITPOINTS 15
+
+
+<ELEVATION_GENERATION>
+#define SIMPLE_ELEVATION
+if SIMPLE_ELEVATION
+    /* Elevation of Base Terrain */
+    create_elevation 3 { base_terrain GRASS if TINY_MAP number_of_tiles 1600 elseif SMALL_MAP number_of_tiles 2400 elseif MEDIUM_MAP number_of_tiles 3200 elseif LARGE_MAP number_of_tiles 4571 elseif HUGE_MAP number_of_tiles 5486 elseif GIGANTIC_MAP number_of_tiles 6629 endif number_of_clumps 100 set_scale_by_groups enable_balanced_elevation } 
+endif
+
+<TERRAIN_GENERATION>
+#define SIMPLE_TERRAINS
+if SIMPLE_TERRAINS
+  /* Reverting Player Land Terrain */
+  create_terrain GRASS  { base_terrain DIRT land_percent 100 number_of_clumps 9320 set_scale_by_groups }
+  /* Creation Simple Forests */
+  create_terrain FOREST { base_terrain GRASS land_percent 14 number_of_clumps 36 set_scale_by_groups set_avoid_player_start_areas 16 }
+  /* Simple Masking */
+  create_terrain LEAVES { base_terrain GRASS land_percent 100 number_of_clumps 9320 set_scale_by_groups terrain_mask 1 }
+
+endif
+
+<OBJECTS_GENERATION>
+#define PLAYER_OBJECT_PLACEMENT
+if PLAYER_OBJECT_PLACEMENT
+  /* Player Controlled */
+  create_object TOWN_CENTER { set_place_for_every_player find_closest }
+  create_object VILLAGER    { set_place_for_every_player min_distance_to_players 5 max_distance_to_players 5 }
+  create_object GERMAN_SHEPHERD { set_place_for_every_player min_distance_to_players 8 max_distance_to_players 8 }
+  create_object BARBARIAN       { set_place_for_every_player min_distance_to_players 8 max_distance_to_players 8 }
+
+  create_object SHEEP        { set_place_for_every_player set_circular_placement min_distance_to_players 7 max_distance_to_players 8 number_of_groups 1 number_of_objects 4 set_loose_grouping resource_delta 100 } 
+  if REGICIDE create_object KING { set_place_for_every_player find_closest } endif
+  /* Player-Assigned-Resources */
+  create_object DLC_AFRICANBUSH { set_place_for_every_player set_gaia_object_only set_circular_placement min_distance_to_players 3 max_distance_to_players 7 number_of_groups 5 temp_min_distance_group_placement 3 } 
+  create_object FORAGE { set_place_for_every_player set_gaia_object_only set_circular_placement min_distance_to_players 10 max_distance_to_players 12 number_of_groups 1 number_of_objects 5 set_tight_grouping group_placement_radius 1 avoid_forest_zone 3 min_distance_group_placement 6 } 
+  create_object GOLD   { set_place_for_every_player set_gaia_object_only set_circular_placement min_distance_to_players 10 max_distance_to_players 12 number_of_groups 1 number_of_objects 7 set_tight_grouping group_placement_radius 1 avoid_forest_zone 3 min_distance_group_placement 6 } 
+  create_object STONE  { set_place_for_every_player set_gaia_object_only set_circular_placement min_distance_to_players 14 max_distance_to_players 16 number_of_groups 1 number_of_objects 5 set_tight_grouping group_placement_radius 1 avoid_forest_zone 3 min_distance_group_placement 8 } 
+  create_object BOAR   { set_place_for_every_player set_gaia_object_only set_circular_placement min_distance_to_players 14 max_distance_to_players 24 number_of_groups 2 temp_min_distance_group_placement 12 avoid_forest_zone 3 min_distance_group_placement 6 } 
+  create_object DEER   { set_place_for_every_player set_gaia_object_only set_circular_placement min_distance_to_players 14 max_distance_to_players 24 number_of_groups 1 number_of_objects rnd(3,4) set_loose_grouping avoid_forest_zone 3 min_distance_group_placement 3 } 
+  create_object GOLD   { set_place_for_every_player set_gaia_object_only set_circular_placement min_distance_to_players 18 max_distance_to_players 21 number_of_groups 2 number_of_objects 4 set_tight_grouping group_placement_radius 1 avoid_forest_zone 3 min_distance_group_placement 6 } 
+  create_object STONE  { set_place_for_every_player set_gaia_object_only set_circular_placement min_distance_to_players 16 max_distance_to_players 18 number_of_groups 1 number_of_objects 4 set_tight_grouping group_placement_radius 1 avoid_forest_zone 3 min_distance_group_placement 6 } 
+
+endif
+
+
+#define NEUTRAL_OBJECTS
+if NEUTRAL_OBJECTS
+  /* Decoration */
+  create_object ROCK { set_gaia_object_only number_of_groups 10000 set_scaling_to_map_size temp_min_distance_group_placement 24 avoid_forest_zone 2 min_distance_to_players 20 }
+  #const ROCK2 1323
+  create_object ROCK2 { set_gaia_object_only number_of_groups 10000 set_scaling_to_map_size temp_min_distance_group_placement 24 avoid_forest_zone 2 min_distance_to_players 20 }
+  create_object DLC_FERN_PATCH { set_gaia_object_only number_of_groups 10000 set_scaling_to_map_size temp_min_distance_group_placement 12 avoid_forest_zone 2 min_distance_to_players 20 }
+  #const GRASS_PATCH 301
+  create_object GRASS_PATCH { set_gaia_object_only number_of_groups 10000 set_scaling_to_map_size temp_min_distance_group_placement 12 avoid_forest_zone 2 min_distance_to_players 20 }
+  /* Neutral Resources */
+  create_object RELIC  { set_gaia_object_only number_of_groups 10000 set_scaling_to_map_size temp_min_distance_group_placement 36 min_distance_group_placement 2 set_circular_placement min_distance_to_players 32 }
+  create_object FORAGE { set_gaia_object_only number_of_groups 10000 set_scaling_to_map_size number_of_objects 2 set_tight_grouping temp_min_distance_group_placement 24 min_distance_group_placement 8 set_circular_placement min_distance_to_players 32 }
+  create_object GOLD   { set_gaia_object_only number_of_groups 10000 set_scaling_to_map_size number_of_objects 2 set_tight_grouping temp_min_distance_group_placement 24 min_distance_group_placement 8 set_circular_placement min_distance_to_players 32 }
+  create_object STONE  { set_gaia_object_only number_of_groups 10000 set_scaling_to_map_size number_of_objects 2 set_tight_grouping temp_min_distance_group_placement 24 min_distance_group_placement 8 set_circular_placement min_distance_to_players 32 }
+endif
+
+
+/* BEGIN_OBJECTS_AUTOSCRIBE */
+/* END_OBJECTS_AUTOSCRIBE */
+
+<LAND_GENERATION>
+base_terrain GRASS
+create_player_lands { terrain_type GRASS land_percent 0 left_border 40 right_border 40 top_border 40 bottom_border 40 }
+/* LAND_AUTOSCRIBE */

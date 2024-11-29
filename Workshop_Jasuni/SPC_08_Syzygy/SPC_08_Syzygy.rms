@@ -1920,7 +1920,7 @@ if LAKES_PLANET
 		height_limits 2 2
 	}
 	start_random
-		percent_chance 100 #const LAKES_MASK 111 
+		percent_chance 100 #const LAKES_MASK 111  /* muddy shallow */
 	end_random
 	create_terrain LAKES_MASK {
 		base_terrain GRASS2
@@ -4946,7 +4946,7 @@ if CITY_PLANET /* moved to end, so that its ruins won't block more important obj
 		number_of_objects 9320
 		max_distance_to_other_zones 4
 	}
-endif
+endif /*
 if TOURNAMENT_VERSION 
 	if PHOTON_SCOUT_PLACED 
 	else
@@ -4957,7 +4957,7 @@ if TOURNAMENT_VERSION
 			min_distance_group_placement 1
 		} 
 	endif
-endif 
+endif */
 if GOLD_PLACED
 else
 	create_object GOLD { /* TODO scale amount of gold per pile for different map sizes */
@@ -5009,7 +5009,7 @@ endif
  */
 create_object RELIC {
 	if AT_MOST_MEDIUM
-		number_of_objects rnd(2,6)
+		number_of_objects rnd(2,8)
 		temp_min_distance_group_placement rnd(30,50) 
 	elseif AT_LEAST_HUGE /* TODO test the at least huge and else cases */
 		number_of_objects rnd(20,60)

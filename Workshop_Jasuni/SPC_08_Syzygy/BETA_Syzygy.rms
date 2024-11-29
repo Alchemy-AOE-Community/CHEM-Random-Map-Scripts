@@ -338,7 +338,6 @@ elseif MAPSIZE_LUDICROUS
     /* and AT_LEAST_LUDCROUS - can simply use MAP_SIZE_LUDICROUS */
 endif
 
-direct_placement
 #const L 32
 /* Defining Terrains */
 #const ICE_NAVIGABLE 26
@@ -444,7 +443,7 @@ RADIOACTIVE_PLANET, DESERT_PLANET, DIRT4_PLANET, CITY_PLANET, SNOW_PLANET, LEAVE
 no jungle
 add a const for gold added to one of the planets, and once I've done so, add an if-else at the end that adds gold onto the rocks when no gold has appeared. Stone doesn't need this sort of treatment.
 
-biomes to add: 
+biomes to add: finish Jungle Biome
 
 how to add biomes:
 1. add the biome to random statement for each planet (with adjusted random chances)
@@ -2719,7 +2718,9 @@ if DIRT4_PLANET  /* redo this one: note: may want to increase villager avoid_for
 		set_scale_by_size
 		number_of_clumps rnd(4,8)
 	}
-	/* create clearings - should make it easier to find TC spots, and villagers occasionally start in these clearings */
+	/* create clearings - should make it easier to find TC spots, and villagers occasionally start in these clearings
+	TODO add random terrain mask variations (can make alien terrain masks, like DLC_BOGLAND or some gravel terrains)
+	 */
 endif
 if RADIOACTIVE_PLANET
 	create_terrain DLC_DESERTGRAVEL {
@@ -5135,13 +5136,13 @@ endif
  */
 create_object RELIC {
 	if AT_MOST_MEDIUM
-		number_of_objects rnd(2,6)
+		number_of_objects rnd(2,8)
 		temp_min_distance_group_placement rnd(30,50) 
 	elseif AT_LEAST_HUGE /* TODO test the at least huge and else cases */
-		number_of_objects rnd(20,60)
+		number_of_objects rnd(20,70)
 		temp_min_distance_group_placement rnd(60,200) 
 	else /* normal or large map size */
-		number_of_objects /* 10 */ rnd(3,10)
+		number_of_objects /* 10 */ rnd(3,12)
 		temp_min_distance_group_placement rnd(35,80) 
 	endif
 	max_distance_to_other_zones 3

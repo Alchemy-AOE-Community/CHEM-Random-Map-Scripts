@@ -28,15 +28,35 @@ r = [13 20 24 28]; %Progressively Increasing Radial Size
 L = linspace(5,95,4)'; %Linear Distribution of Planet Centers
 L = flipud([L 50*ones(4,1)]);
 
+cpl = [];
+for PlayerNum = 1:8
+  cpl = [ cpl;
+                        {'L'};
+                         {'{'};
+                         {['terrain_type PT']}
+                         {['number_of_tiles 0']};
+                         {['assign_to_player ' num2str(PlayerNum)]};
+                         {['other_zone_avoidance_distance 10']};
+                         {'}'}];
+end
 
 ##c  = [80 80;
 ##      61 61;
 ##      41 41;
 ##      25 25]; %Planet Centers
 
-o = [-45 45];
+## looks like one of the .8 configurations is broken.
+##o = [-45];
+o = [-45 45 135 -135];
+##f = [1, 0.8];
+f = [1];
+K = 1;
 
 
+for i2 = 1:length(f)
+  L(:,1) = f(i2)*(L(:,1) - 50) + 50;
+##  L(:,1) = f(i2)*(L(:,1) - 50) + 50*f(i2);
+  ## to improve: use a static list above, and create a new list for use down below. Simplifies computations,
 for i1 = 1:length(o)
 
 
@@ -126,16 +146,42 @@ for i1 = 1:length(o)
 
   %% -- Player Land Construction -- %%
   BE = 0; BS = 1;
-  [cpl] = RMS_CPL_V10([{48}; {45}; {180}; {o(i1)}; {0.5}],[{BE}; {BS}]); %Player Land Declaration
+##  [cpl] = RMS_CPL_V10([{48}; {45}; {180}; {o(i1)}; {0.5}],[{BE}; {BS}]); %Player Land Declaration
 
-  COMMAND(i1).XY = [RMS_Processor_V6([LM_PR4; LM_PR3; LM_PR2; LM_PR1]); cpl];
 
+##  COMMAND(K).XY = [RMS_Processor_V6([LM_PR4; LM_PR3; LM_PR2; LM_PR1])];
+  COMMAND(K).XY = [RMS_Processor_V6([LM_PR4; LM_PR3; LM_PR2; LM_PR1]); cpl]; ## appears to apend cpl
+  K += 1;
   clear PR1 PR2 PR3 PR4
 
+
+
+##    create_player_lands = [{'L'};
+##                         {'{'};
+##                         {['terrain_type PT' num2str(j)]}
+##                         {['base_size ' num2str(BS)]};
+##                         {['base_elevation ' num2str(BE)]};
+##                         {['number_of_tiles ' num2str(NT)]};
+##                         {'clumping_factor 30'};
+##                         {['other_zone_avoidance_distance ' num2str(ZA(j,2))]};
+##                         {['zone ' num2str(ZA(j,1))]};
+##                         {border_string};
+##                         team_logical_V3(j);
+##                         {'if P2'};
+##                         LPC2;
+##                         {'elseif P4'};
+##                         LPC4;
+##                         {'elseif P6'};
+##                         LPC6;
+##                         {'else'};
+##                         LPC8;
+##                         {'endif'};
+##                         {'}'}];
+end
 end
 %
 
-[DynamicList] = RMS_RS_V3(o,{'C'},COMMAND);
+[DynamicList] = RMS_RS_V3(o,f,{'C'},COMMAND);
 ##DynamicList = [];
 
 ##StaticList = [RMS_Processor_V6([LM_MT1; LM_MT2])];

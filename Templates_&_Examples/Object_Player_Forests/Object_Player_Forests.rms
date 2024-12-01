@@ -1,0 +1,83 @@
+/* Object Player Forests */
+/* An Example Recorded (NOT Developed) by TechChariot */
+/* Copied From a Modified RMS Posted in Their Discord by Huehuecoyotl22 */
+
+<PLAYER_SETUP>
+
+#const L 32 /* Defining Land Creation Command */
+behavior_version 1
+random_placement
+
+/* Making units visible behind rocks */
+effect_amount GAIA_SET_ATTRIBUTE DLC_BOULDER_A ATTR_OCCLUSION_MODE 2
+effect_amount GAIA_SET_ATTRIBUTE DLC_BOULDER_B ATTR_OCCLUSION_MODE 2
+effect_amount GAIA_SET_ATTRIBUTE DLC_BOULDER_C ATTR_OCCLUSION_MODE 2
+effect_amount GAIA_SET_ATTRIBUTE ROCK_BROWN ATTR_OCCLUSION_MODE 2
+effect_amount GAIA_SET_ATTRIBUTE ROCK_BEACH ATTR_OCCLUSION_MODE 2
+effect_amount GAIA_SET_ATTRIBUTE ROCK_JUNGLE ATTR_OCCLUSION_MODE 2
+
+/* Remove Visual Effect of Dead Fish Trap */
+#const ON_GRID 278
+effect_amount GAIA_SET_ATTRIBUTE TEMP ATTR_STORAGE_VALUE 0
+
+/* Disable trade for Low Resource Configuration */
+if LOW_RESOURCES
+    #const TRADE_CART_ENABLER 161
+    #const TRADE_COG_ENABLER 180
+    #const TRADE_CARAVAN_ENABLER 48
+    #const HINDU_CARAVANSERAI_ENABLER 518
+    #const PERSIAN_CARAVANSERAI_ENABLER 552
+    #const SILK_ROAD 499
+    effect_amount DISABLE_TECH TRADE_COG_ENABLER ATTR_DISABLE 180
+    effect_amount DISABLE_TECH TRADE_CART_ENABLER ATTR_DISABLE 161
+    effect_amount DISABLE_TECH TRADE_CARAVAN_ENABLER ATTR_DISABLE 48
+    effect_amount DISABLE_TECH HINDU_CARAVANSERAI_ENABLER ATTR_DISABLE 518
+    effect_amount DISABLE_TECH PERSIAN_CARAVANSERAI_ENABLER ATTR_DISABLE 552
+    effect_amount DISABLE_TECH SILK_ROAD ATTR_DISABLE 499
+else
+endif
+
+/* Configuring Forests as Objects */
+#const FOREST_FOUNDATION 1639
+effect_percent SET_ATTRIBUTE FOREST_FOUNDATION ATTR_RADIUS_1 50
+effect_percent SET_ATTRIBUTE FOREST_FOUNDATION ATTR_RADIUS_2 50
+effect_amount SET_ATTRIBUTE FOREST_FOUNDATION ATTR_FOUNDATION_TERRAIN 10
+#const TREE 411
+
+#const BT 0
+
+<ELEVATION_GENERATION>
+/* Creating Small Rocky Outlying Islands */
+create_elevation 3 { base_terrain BT if TINY_MAP number_of_tiles 1600 elseif SMALL_MAP number_of_tiles 2400 elseif MEDIUM_MAP number_of_tiles 3200 elseif LARGE_MAP number_of_tiles 4571 elseif HUGE_MAP number_of_tiles 5486 elseif GIGANTIC_MAP number_of_tiles 6629 endif number_of_clumps 100 set_scale_by_groups enable_balanced_elevation } 
+
+<TERRAIN_GENERATION>
+
+<OBJECTS_GENERATION>
+/* Player Forests */
+create_object FOREST_FOUNDATION
+{
+	number_of_groups 3
+	number_of_objects 50
+	group_variance 0
+	set_place_for_every_player
+	min_distance_to_players 20
+	max_distance_to_players 25
+	group_placement_radius 4
+	set_tight_grouping
+	set_circular_placement
+	temp_min_distance_group_placement 20
+	set_gaia_object_only
+	set_gaia_unconvertible
+	min_distance_group_placement 5
+	avoid_forest_zone 10
+	second_object TREE
+}
+
+create_object TOWN_CENTER { set_place_for_every_player find_closest }
+
+/* BEGIN_OBJECTS_AUTOSCRIBE */
+/* END_OBJECTS_AUTOSCRIBE */
+<LAND_GENERATION>
+base_terrain BT
+create_player_lands { left_border 10 right_border 10 top_border 10 bottom_border 10 }
+/* LAND_AUTOSCRIBE */

@@ -1,6 +1,6 @@
-%Inverse Arabia
+%Inverse Arabia Land Generation
 %TechChariot
-%2024-11-09
+%2024-11-28
 
 clear all
 close all
@@ -8,90 +8,68 @@ clc
 
 
 tic
-
 disp(["Run Executed " datestr(clock) "..."])
-filestruc = dir; %Extract a structure of the files in this directory
-PATH = filestruc.folder; fi = strfind(PATH,'\'); PATH  = PATH(1:fi(end-2));
-addpath(genpath(PATH)) %Adding functions in main folder to the path
 
-filename = [mfilename '.rms'];
+filestruc = dir; %Extract a structure of the files in this directory
+path = filestruc.folder; path = path(1:89); addpath(genpath(path)) %Adding functions in main folder to the path
+files = {filestruc.name}; [filename] = RMS_GetLatest(files,'rms');
 
 [Preface,LPM_exp,~] = RMS_Manual_Land(filename);
 
-MLP = [];
+%% -- Section on Border -- %%
+R = 30;
 
-%% -- Section on Something -- %%
-##L.NT = [0 48 32 10000];
-##L.BS = [4 2 1 1];
-##L.BE = [1 1 1 0];
-##L.SS = [3 3 3 3];
-##L.CF = [35];
-##L.TT = [{'RT4'} {'RT3'} {'RT2'} {'RT1'}];
+Y = [-45 -22.5 0 22.5 45];
+o = -45;
 
+K = 1;
 
-%% -- Player Land Construction -- %%
-C = [{0}; {12}; {0}];
+for i2 = 1:length(Y)
 
+  O1 = [(Y(i2)+o):(Y(i2)+180-o)];
+  O2 = [(Y(i2)+180+o):(Y(i2)+360-o)];
+  O = [O1 O2]; dnO = length(O1);
 
-##C = [{BE}; {BS}; {NT}; {ZA}; {delta}];
+  sep = 58 + 12./cosd(Y(i2));
 
-##R    = [38 42];
-R    = [40];
-##off  = [41 49];
-off  = [45];
-##adc  = [160 200];
-adc  = [180];
-##b    = [0.3 0.4];
-b    = [0.35];
+    for i = 1:length(O)
 
-sep  = 50;
+      if i <= dnO
+  ##        cen(i,:)   = 50 + [cosd(Y(i2)) -sind(Y(i2)); sind(Y(i2)) cosd(Y(i2));]*[0; +sep/2];     %generic center
+        cenpl(i,:) = 50 + [cosd(Y(i2)) -sind(Y(i2)); sind(Y(i2)) cosd(Y(i2));]*[0; +sep/2+0.95*R/2]; %center of player lands
+      else
+  ##        cen(i,:)   = 50 + [cosd(Y(i2)) -sind(Y(i2)); sind(Y(i2)) cosd(Y(i2));]*[0; -sep/2];;     %generic center
+        cenpl(i,:) = 50 + [cosd(Y(i2)) -sind(Y(i2)); sind(Y(i2)) cosd(Y(i2));]*[0; -sep/2-0.95*R/2];; %center of player lands
+      end
+      %
 
-SA   = [0 45];
-##SA   = [45];
+    end
+    %
 
-for i = 1:length(SA)
+    b = [0.22 0.24] + 0.04*cosd(Y(i2));
+    f = 0.05 + 0.11*(1-cosd(Y(i2)));
+    adc = 180*[(1-f) (1-0.5*f) 1 (1+0.5*f) (1+f)];
 
-  RM = [cosd(SA(i)) -sind(SA(i)); sind(SA(i)) cosd(SA(i))];
+    G = [{R*[1.250 1.265 1.280]}; {[43 45 47]}; {adc}; {Y(i2)}; {b}; {[0 0.1]}; {[cenpl(1,1) cenpl(1,2); cenpl(end,1) cenpl(end,2)]}];
 
-  cent1 = [0 +sep]';
-  cent2 = [0 -sep]';
+    C = [{0}; {0}; {0}; {[1 6; 2 6; 3 6; 4 6; 5 6; 6 6; 7 6; 8 6]}; {[0]}; {[3; 3; 3; 3]}];
 
-  cent1n = RM*cent1;
-  cent2n = RM*cent2;
+    [PL] = RMS_CPL_V10(G,C);
 
-  centn(:,:,i) = [cent1n'; cent2n']+50;
+    [COMMAND(K).XY] = [PL];
 
-  G = [{R}; {off}; {adc}; {SA}; {b}; {[0]}; {centn(:,:,i)}];
-  [cpl] = RMS_CPL_V10(G,C,{['S' mat2str(i) '_']}); %Player Land Declaration
-
-  [COMMAND(i).XY] = [cpl];
-  clear cent1 cent2 cent1n cent2n G cpl
+    clear BORDER LM_BORDER FILL LM_FILL BLOCK LM_BLOCK LE LM_LE RE LM_RE OF LM_OF OB LM_OB
+    K += 1;
 end
 %
-[DynamicList] = RMS_RS_V2(SA,{'C'},COMMAND);
+Dynamic_List = [{'if INVERSION'};  RMS_RS_V2(Y,sep,{'C'},COMMAND); {'else'}; {'create_player_lands { circle_radius 25 5 terrain_type PT1 base_size 0 number_of_tiles 0 clumping_factor 30 other_zone_avoidance_distance 6 left_border 3 right_border 3 top_border 3 bottom_border 3 }'}; {'endif'}];
+Static_List  = [];
 
-
-
-
-
-##[OA1X,OA1Y] = function_to_points_V3([OA1f; {[50-sp/2*sind(Angle{i1}) 50+sp/2*cosd(Angle{i1})]}; Angle(i1)],[-a a],[-sp 0],[0.1 2; 7 7],[10 00],[{'edge'} {'left'}],4);
-##[OA2X,OA2Y] = SimpleRotate(OA1X,OA1Y,180,[50 50]);
-##[LM_SUR,SUR] = LandScribeV6(SUR,[1 1]);
-##[COMMAND(j).XY] = [RMS_Processor_V6([LM_OA1; LM_OA2; LM_SUR]); cpl];
-##
-
-
-
-##StaticList = [RMS_Processor_V6([LM_MT1; LM_MT2; LM_MT3; LM_MT4])];
-StaticList = [];
-
-##MLA = {['create_player_lands { base_size 12 terrain_type DIRT land_percent 0 circle_radius 30 0 }']};
-
-MLA = [];
-
-CODE = [Preface; MLP; StaticList; DynamicList; MLA]; %Adding Preface, Definitions, Random Statement to beginning of CODE
+CODE = [Preface; Dynamic_List; Static_List]; %Adding Preface, Definitions, Random Statement to beginning of CODE
 
 RMS_ForgeV4(filename,CODE);
 
 disp(["Run Completed " datestr(clock) "..."])
 toc
+
+%ObjectAutoscribeV9('Inverse_Arabia')

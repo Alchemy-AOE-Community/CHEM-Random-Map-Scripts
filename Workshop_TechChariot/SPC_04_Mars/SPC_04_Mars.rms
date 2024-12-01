@@ -36,7 +36,6 @@ ai_info_map_type CUSTOM 1 0 0
 #const NNRB 82 /* Non-Navigable Rock Beach  */
 #const RNW 825 /* Amazon 'Rapa Nui' warrior */
 #const RNA 850 /* Amazon 'Rapa Nui' archer */
-#const PHOTONMAN 430
 #const LSNOW 73
 #const HSNOW 74
 
@@ -610,20 +609,19 @@ endif
 #define NEUTRAL_FORESTS
 if NEUTRAL_FORESTS
     /* High Elevation Forests */
-    create_terrain DLC_BAOBABFOREST { base_terrain DIRT number_of_clumps 24 set_scale_by_groups land_percent 2 clumping_factor 30 set_avoid_player_start_areas 20 }
-
-    /* Low Elevation Forests */
-    create_terrain DLC_BAOBABFOREST { base_terrain DLC_DIRT4 set_avoid_player_start_areas 24 spacing_to_other_terrain_types 2 clumping_factor 30 set_scale_by_groups number_of_clumps 6 if TINY_MAP number_of_tiles 60 elseif SMALL_MAP number_of_tiles 70 elseif MEDIUM_MAP number_of_tiles 80 elseif LARGE_MAP number_of_tiles 80 elseif HUGE_MAP number_of_tiles 80 elseif GIGANTIC_MAP number_of_tiles 80 endif }
+    create_terrain DLC_BAOBABFOREST { base_terrain DIRT number_of_clumps 22 set_scale_by_groups land_percent 2 clumping_factor 30 set_avoid_player_start_areas 20 }
 
     /* Rock Forest Base */
-    create_terrain DLC_DESERTGRAVEL { base_terrain DLC_DIRT4 set_avoid_player_start_areas 24 spacing_to_other_terrain_types 4 clumping_factor 30 number_of_clumps 6 set_scale_by_groups land_percent 1 terrain_mask 2 }
+    create_terrain DLC_DESERTGRAVEL { base_terrain DLC_DIRT4 set_avoid_player_start_areas 20 spacing_to_other_terrain_types 2 clumping_factor 30 set_scale_by_groups number_of_clumps 48 land_percent 4 }
+
+    /* Low Elevation Forests */
+    create_terrain DLC_BAOBABFOREST { base_terrain DLC_DESERTGRAVEL clumping_factor 30 set_scale_by_groups number_of_clumps 24 land_percent 2 }
 
 endif
 
 
-<OBJECTS_GENERATION>
 
-/* PLAYER assigned objects */
+<OBJECTS_GENERATION>
 
 /* BEGIN_OBJECTS_AUTOSCRIBE */
 #const DOLPHIN 61

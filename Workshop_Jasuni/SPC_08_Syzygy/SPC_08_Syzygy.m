@@ -36,9 +36,15 @@ for PlayerNum = 1:8
                          {['terrain_type PT']}
                          {['number_of_tiles 0']};
                          {['assign_to_player ' num2str(PlayerNum)]};
-                         {['other_zone_avoidance_distance 10']};
+                         {['other_zone_avoidance_distance 9']};
                          {'}'}];
 end
+neutrelZones = [{'L { terrain_type PT number_of_tiles 0 zone 1 other_zone_avoidance_distance 4 } '};
+              {'L { terrain_type PT number_of_tiles 0 zone 4 other_zone_avoidance_distance 4 } '}];
+
+
+
+
 
 ##c  = [80 80;
 ##      61 61;

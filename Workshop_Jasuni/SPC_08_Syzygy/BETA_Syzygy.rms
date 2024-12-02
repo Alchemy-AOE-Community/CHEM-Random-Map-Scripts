@@ -5,9 +5,7 @@ Title: Syzygy
 Authors: Jasuni (primary), BPDrej (started script, secondary)
 Date: March 2024
 Notice: Map developed for Alchemy League Season 2 at their request. It may now be used for season 5 (space theme) of alchemy league (any other tournaments that wish to use it may do so after alchemy season 5 is finished, but I request a notification from any doing so).
-Spec: where is it now? Expect it to be something like https://github.com/Alchemy-AOE-Community/CHEM-Random-Map-Scripts/blob/Space_Maps/Space_Maps/SPC_08_Syzygy/SPC_08_CM_Syzygy.ods or https://github.com/Alchemy-AOE-Community/CHEM-Random-Map-Scripts/blob/Workshop_Jasuni/Workshop_Jasuni/SPC_08_Syzygy/SPC_08_CM_Syzygy.ods 
-OR
-https://github.com/Alchemy-AOE-Community/CHEM-Random-Map-Scripts/blob/Space_Maps/Space_Maps/SPC_09_Syzygy/SPC_09_CM_Syzygy.ods or https://github.com/Alchemy-AOE-Community/CHEM-Random-Map-Scripts/blob/Workshop_Jasuni/Workshop_Jasuni/SPC_09_Syzygy/SPC_09_CM_Syzygy.ods 
+Spec: https://github.com/Alchemy-AOE-Community/CHEM-Published-Specifications/blob/download-to-click-links/SCRIPTING/SPACE/CHEM-CSRM-SPC-08/CHEM-CSRM-SPC-08-R1.pdf
 
 idea: randomize the terrains for each planet so that players have to scout it out - nomad start, with 1 vil on top planet, 1 vil bottom planet, and 1 vil somewhere else (place via actor area?) Could also have players start with a fishing ship (good for scouting) in a map corner (either top/bottom or left/right: likely left/right)
 Syzygy randomizing: when selecting terrains, do a random chance for first 1, then random chance with one removed (remove last 1, check for duplicate) for second planet; 3rd planet remove last 2, if get duplicate check which planet it was (first removed if first planet, otherwise second); remove 3 for last planet (handle like 3rd planet)

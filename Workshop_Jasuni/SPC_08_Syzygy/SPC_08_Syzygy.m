@@ -28,21 +28,7 @@ r = [13 20 24 28]; %Progressively Increasing Radial Size
 L = linspace(5,95,4)'; %Linear Distribution of Planet Centers
 L = flipud([L 50*ones(4,1)]);
 
-cpl = [];
-for PlayerNum = 1:8
-  cpl = [ cpl;
-                        {'L'};
-                         {'{'};
-                         {['terrain_type PT']}
-                         {['number_of_tiles 0']};
-                         {['assign_to_player ' num2str(PlayerNum)]};
-                         {['other_zone_avoidance_distance 9']};
-                         {'}'}];
-end
-neutrelZones = [{'L { terrain_type PT number_of_tiles 0 zone 1 other_zone_avoidance_distance 4 } '};
-              {'L { terrain_type PT number_of_tiles 0 zone 4 other_zone_avoidance_distance 4 } '}];
-
-
+## TODO make sure that the neutral zones and player lands are away from the planets
 
 
 
@@ -64,6 +50,7 @@ for i2 = 1:length(f)
 ##  L(:,1) = f(i2)*(L(:,1) - 50) + 50*f(i2);
   ## to improve: use a static list above, and create a new list for use down below. Simplifies computations,
 for i1 = 1:length(o)
+
 
 
   [cx,cy] = SimpleRotate(L(:,1),L(:,2),o(i1),[50 50]); c = [cx cy];
@@ -154,9 +141,93 @@ for i1 = 1:length(o)
   BE = 0; BS = 1;
 ##  [cpl] = RMS_CPL_V10([{48}; {45}; {180}; {o(i1)}; {0.5}],[{BE}; {BS}]); %Player Land Declaration
 
+##  [cx,cy] = SimpleRotate(L(:,1),L(:,2),o(i1),[50 50]); c = [cx cy];
+
+## land_position 50 1 is in middle of top-left border; -45 degree rotation is straight up
+## so -45 and 135  can be 1 1; 45 and -135 can be 1 99
+  if o(i1) == 45 || o(i1) == -135
+    useLeftCorner = false;
+##    LandPositions = [1 99];
+  elseif o(i1) == -45 || o(i1) == 135
+    useLeftCorner = true;
+##    LandPositions = [1 1];
+  else
+##    LandPositions = [1 1]; ## not testing, but should work in most cases: places in left corner
+    useLeftCorner = true;
+  end
+##  neutrelZones = [{{'L { terrain_type PT number_of_tiles 0 zone 1 } '};
+##                           {['land_position ' num2str(LandPositions{1}) ' ' num2str(LandPositions{2})]}};
+##                {{'L { terrain_type PT number_of_tiles 0 zone 4 } '}};
+##                           {['land_position ' num2str(LandPositions{1}) ' ' num2str(LandPositions{2})]}];
+##    neutrelZones = [ {'L { terrain_type PT number_of_tiles 0 zone 1 '};
+##                          {'land_position ' num2str(LandPositions{1}) ' ' num2str(LandPositions{2}) }
+##                          {'L { terrain_type PT number_of_tiles 0 zone 4 '};
+##                          {'land_position ' num2str(LandPositions{1}) ' ' num2str(LandPositions{2}) }
+##                          ];
+
+  neutrelZones = [];
+  if useLeftCorner
+      neutrelZones = [neutrelZones;
+                            {'L'};
+                             {'{'};
+                             {['terrain_type PT ']}
+                             {['number_of_tiles 0 ']};
+                             {['land_id 1' ]};
+                             {['land_position 1 1 ']};
+                             {'}'}];
+      neutrelZones = [neutrelZones;
+                            {'L'};
+                             {'{'};
+                             {['terrain_type PT ']}
+                             {['number_of_tiles 0 ']};
+                             {['land_id 4' ]};
+                             {['land_position 1 1 ']};
+                             {'}'}];
+
+  else
+      neutrelZones = [neutrelZones;
+                            {'L'};
+                             {'{'};
+                             {['terrain_type PT']}
+                             {['number_of_tiles 0']};
+                             {['land_id 1' ]};
+                             {['land_position 1 99 ']};
+                             {'}'}];
+      neutrelZones = [neutrelZones;
+                            {'L'};
+                             {'{'};
+                             {['terrain_type PT']}
+                             {['number_of_tiles 0']};
+                             {['land_id 4' ]};
+                             {['land_position 1 99 ']};
+                             {'}'}];
+  endif
+
+
+  cpl = [];
+  for PlayerNum = 1:8
+    cpl = [ cpl;
+                          {'L'};
+                           {'{'};
+                           {['terrain_type PT']}
+                           {['number_of_tiles 0']};
+                           {['assign_to_player ' num2str(PlayerNum)]}];
+    if useLeftCorner
+      cpl = [ cpl;
+                           {['land_position 1 1 ']}];
+    else
+      cpl = [ cpl;
+                           {['land_position 1 99 ']}];
+    end
+    cpl = [ cpl;
+                           {'}'}];
+  end
+  ## ensure player lands and neutral zones are away from planets
+
+
 
 ##  COMMAND(K).XY = [RMS_Processor_V6([LM_PR4; LM_PR3; LM_PR2; LM_PR1])];
-  COMMAND(K).XY = [RMS_Processor_V6([LM_PR4; LM_PR3; LM_PR2; LM_PR1]); cpl]; ## appears to apend cpl
+  COMMAND(K).XY = [RMS_Processor_V6([LM_PR4; LM_PR3; LM_PR2; LM_PR1]); cpl; neutrelZones]; ## appears to apend cpl
   K += 1;
   clear PR1 PR2 PR3 PR4
 

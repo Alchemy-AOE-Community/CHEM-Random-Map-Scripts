@@ -4463,7 +4463,6 @@ if FARMLAND_PLANET
 		terrain_to_place_on FARMLAND1
 		layer_to_place_on FARMLAND_FULL
 		set_gaia_object_only
-		place_on_specific_land_id 4
 		max_distance_to_other_zones 3
 		avoid_forest_zone 1 /* to ensure that vils can escape */
 	}
@@ -4481,7 +4480,6 @@ if FARMLAND_PLANET
 		terrain_to_place_on FARMLAND1
 		layer_to_place_on FARMLAND3
 		set_gaia_object_only
-		place_on_specific_land_id 1
 		max_distance_to_other_zones 3
 		avoid_forest_zone 1 /* to ensure that vils can escape */
 
@@ -4869,7 +4867,7 @@ if CITY_PLANET /* moved to end, so that its ruins won't block more important obj
 	create_object HOUSE { /* broke on miniature map size stress test, passed tiny though. */
 		set_place_for_every_player
 		terrain_to_place_on ROAD
-		ignore_terrain_restrictions
+		ignore_terrain_restrictions /* somehow works without the land id */
 		avoid_actor_area 8
 		avoid_forest_zone 3
 		if CITY_MANY_VILS
@@ -5029,11 +5027,10 @@ elseif PLANET_2_WOODLESS
 	endif
 endif
 if LOW_WOOD /* normally 125 wood. TODO see if there's a way to prevent it from being lamed via mule cart. */
-	create_object TREE_J { /*  TODO check to see if there's a heavy-forest biome (and disable in that case) */
+	create_object TREE_J { /*  TODO check to see if there's a heavy-forest biome (and disable in that case); doesn't need ignore_terrain_restrictions due to change in terrain table */
 		number_of_objects 9320
 		temp_min_distance_group_placement 1
 		terrain_to_place_on DLC_ROCK
-		place_on_specific_land_id 1
 		if NO_WOOD
 			resource_delta rnd(175,1875) /* 300-2000 wood/pile TODO think I can improve this system so that it also scales with map size. */
 		endif

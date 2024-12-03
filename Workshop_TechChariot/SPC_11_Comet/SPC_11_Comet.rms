@@ -1,0 +1,3096 @@
+/* Comet */
+/* A Random Map Script by TechChariot, Original Concept by BPDrej */
+/* Released 2024-12-02 */
+/* Consent is given for this map to be used in Alchemy League Season 5, and Content Creation by Alchemy AOE Community Members */
+/* Component Specification: https://github.com/Alchemy-AOE-Community/CHEM-Published-Specifications/blob/download-to-click-links/SCRIPTING/SPACE/CHEM-CSRM-SPC-11 */
+
+<PLAYER_SETUP>
+direct_placement
+#const L 32
+/* Defining Terrains */
+#const G 0
+#const WNI  15
+#const URB  40
+#const GRAVEL 70
+#const BNN  79
+#const NNRB 82
+#const NNGB 81
+#const GW   95
+#const SOC 111
+#const ON_GRID 278
+
+#const SNOW_LIGHT  73
+#const SNOW_STRONG 74
+
+/* Defining Player Terrain Types */
+#const PT1 109
+#const PT2 109
+#const PT3 109
+#const PT4 109
+#const PT5 109
+#const PT6 109
+#const PT7 109
+#const PT8 109
+/* Remove Visual Effect of Dead Fish Trap */
+effect_amount GAIA_SET_ATTRIBUTE ON_GRID ATTR_STORAGE_VALUE 0
+
+/* Removing Trade Carts and Cogs for Multi-team Games */
+if LOW_RESOURCES
+    #const TRADE_CART_ENABLER 161
+    #const TRADE_COG_ENABLER 180
+    #const TRADE_CARAVAN_ENABLER 48
+    #const HINDU_CARAVANSERAI_ENABLER 518
+    #const PERSIAN_CARAVANSERAI_ENABLER 552
+	#const SILK_ROAD 499
+	effect_amount DISABLE_TECH SILK_ROAD ATTR_DISABLE 499
+    effect_amount DISABLE_TECH TRADE_COG_ENABLER ATTR_DISABLE 180
+    effect_amount DISABLE_TECH TRADE_CART_ENABLER ATTR_DISABLE 161
+    effect_amount DISABLE_TECH TRADE_CARAVAN_ENABLER ATTR_DISABLE 48
+    effect_amount DISABLE_TECH HINDU_CARAVANSERAI_ENABLER ATTR_DISABLE 518
+    effect_amount DISABLE_TECH PERSIAN_CARAVANSERAI_ENABLER ATTR_DISABLE 552
+else
+endif
+/* Photon Man */
+#const PHOTON_MAN 430
+effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_TRAITS 16
+effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_ATTACK_GRAPHIC 1908
+effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_STANDING_GRAPHIC 1913
+effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_STANDING2_GRAPHIC 1914
+effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_DYING_GRAPHIC 1911
+effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_UNDEAD_GRAPHIC 1911
+effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_WALKING_GRAPHIC 1918
+effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_RUNNING_GRAPHIC 1918
+effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_NAME_ID 5043
+effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_ICON_ID 300
+effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_HERO_STATUS 66
+
+effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_LINE_OF_SIGHT 6
+effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_HITPOINTS 45
+effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_MOVE_SPEED 1
+	 
+/* effect_amount GAIA_SET_ATTRIBUTE SNOWPINETREE ATTR_TERRAIN_ID 13 */
+
+
+#const RUBBLE_AQUEDUCT 1522
+effect_amount GAIA_SET_ATTRIBUTE SNOWPINETREE ATTR_STANDING_GRAPHIC 1704
+effect_amount GAIA_SET_ATTRIBUTE SNOWPINETREE ATTR_WALKING_GRAPHIC 1704
+effect_amount GAIA_SET_ATTRIBUTE SNOWPINETREE ATTR_DYING_GRAPHIC 7344
+effect_amount GAIA_SET_ATTRIBUTE SNOWPINETREE ATTR_DEAD_GRAPHIC 7344
+effect_amount GAIA_SET_ATTRIBUTE SNOWPINETREE ATTR_DEAD_ID 1522
+effect_amount GAIA_SET_ATTRIBUTE RUBBLE_AQUEDUCT ATTR_STORAGE_VALUE 99999999
+effect_amount GAIA_SET_ATTRIBUTE SNOWPINETREE ATTR_NAME_ID 5393
+effect_amount GAIA_SET_ATTRIBUTE SNOWPINETREE ATTR_ICON_ID 856
+effect_amount GAIA_SET_ATTRIBUTE SNOWPINETREE ATTR_STORAGE_VALUE 300
+
+
+<ELEVATION_GENERATION>
+create_elevation 1 { base_terrain DLC_GRAVELBEACH  number_of_clumps 8 set_scale_by_groups enable_balanced_elevation if TINY_MAP number_of_tiles 300 elseif SMALL_MAP number_of_tiles 400 elseif MEDIUM_MAP number_of_tiles 600 elseif LARGE_MAP number_of_tiles 900 elseif HUGE_MAP number_of_tiles 1100 else number_of_tiles 1300 endif }
+
+<TERRAIN_GENERATION>
+
+#define INITIAL_SPACE_LAYERING
+if INITIAL_SPACE_LAYERING
+	create_terrain DLC_WATER5 { base_terrain DLC_MANGROVESHALLOW land_percent 100 number_of_clumps 100 if TINY_MAP spacing_to_other_terrain_types 12 else spacing_to_other_terrain_types 16 endif }
+	create_terrain DEEP_WATER { base_terrain DLC_WATER5	land_percent 100 number_of_clumps 100 if TINY_MAP spacing_to_other_terrain_types 5 else spacing_to_other_terrain_types 6 endif }
+endif
+
+#define TAIL_UNIFICATION
+if TAIL_UNIFICATION
+	/* Converting Non-Elevated Tail Section to Gravel Beach Like the Rest */
+	create_terrain DLC_GRAVELBEACH { base_terrain ICYSHORE land_percent 100 number_of_clumps 9320 set_scale_by_groups }
+	create_terrain DLC_GRAVELBEACH { base_terrain ICYSHORE land_percent 100 number_of_clumps 9320 set_scale_by_groups }
+	create_terrain DLC_GRAVELBEACH { base_terrain ICYSHORE land_percent 100 number_of_clumps 9320 set_scale_by_groups }
+	create_terrain DLC_GRAVELBEACH { base_terrain ICYSHORE land_percent 100 number_of_clumps 9320 set_scale_by_groups }
+
+	create_terrain DLC_MANGROVESHALLOW { base_terrain DLC_GRAVELBEACH land_percent 100 number_of_clumps 9320 set_scale_by_groups }
+	create_terrain DLC_MANGROVESHALLOW { base_terrain DLC_GRAVELBEACH land_percent 100 number_of_clumps 9320 set_scale_by_groups }
+	create_terrain DLC_MANGROVESHALLOW { base_terrain DLC_GRAVELBEACH land_percent 100 number_of_clumps 9320 set_scale_by_groups }
+	create_terrain DLC_MANGROVESHALLOW { base_terrain DLC_GRAVELBEACH land_percent 100 number_of_clumps 9320 set_scale_by_groups }
+
+endif
+
+#define COMET_EXPANSION
+if COMET_EXPANSION
+	/* Placeholder Application */
+	create_terrain GW { base_terrain DLC_MANGROVESHALLOW land_percent 100 number_of_clumps 9320 set_scale_by_groups spacing_to_other_terrain_types 2 }
+	create_terrain GW { base_terrain DLC_MANGROVESHALLOW land_percent 100 number_of_clumps 9320 set_scale_by_groups spacing_to_other_terrain_types 2 }
+	create_terrain GW { base_terrain DLC_MANGROVESHALLOW land_percent 100 number_of_clumps 9320 set_scale_by_groups spacing_to_other_terrain_types 2 }
+	create_terrain GW { base_terrain DLC_MANGROVESHALLOW land_percent 100 number_of_clumps 9320 set_scale_by_groups spacing_to_other_terrain_types 2 }
+
+	/* Beach Expansion */
+	create_terrain DLC_WETROCKBEACH { base_terrain DLC_MANGROVESHALLOW land_percent 100 number_of_clumps 9320 set_scale_by_groups spacing_to_other_terrain_types 1 }
+	create_terrain DLC_WETROCKBEACH { base_terrain DLC_MANGROVESHALLOW land_percent 100 number_of_clumps 9320 set_scale_by_groups spacing_to_other_terrain_types 1 }
+	create_terrain DLC_WETROCKBEACH { base_terrain DLC_MANGROVESHALLOW land_percent 100 number_of_clumps 9320 set_scale_by_groups spacing_to_other_terrain_types 1 }
+	create_terrain DLC_WETROCKBEACH { base_terrain DLC_MANGROVESHALLOW land_percent 100 number_of_clumps 9320 set_scale_by_groups spacing_to_other_terrain_types 1 }
+
+	/* Reverting Placeholder */
+	create_terrain DLC_MANGROVESHALLOW { base_terrain GW land_percent 100 number_of_clumps 9320 set_scale_by_groups }
+	create_terrain DLC_MANGROVESHALLOW { base_terrain GW land_percent 100 number_of_clumps 9320 set_scale_by_groups }
+	create_terrain DLC_MANGROVESHALLOW { base_terrain GW land_percent 100 number_of_clumps 9320 set_scale_by_groups }
+	create_terrain DLC_MANGROVESHALLOW { base_terrain GW land_percent 100 number_of_clumps 9320 set_scale_by_groups }
+
+	/* Placeholder Application */
+	create_terrain GW { base_terrain DLC_MANGROVESHALLOW land_percent 100 number_of_clumps 9320 set_scale_by_groups spacing_to_other_terrain_types 2 }
+	create_terrain GW { base_terrain DLC_MANGROVESHALLOW land_percent 100 number_of_clumps 9320 set_scale_by_groups spacing_to_other_terrain_types 2 }
+	create_terrain GW { base_terrain DLC_MANGROVESHALLOW land_percent 100 number_of_clumps 9320 set_scale_by_groups spacing_to_other_terrain_types 2 }
+	create_terrain GW { base_terrain DLC_MANGROVESHALLOW land_percent 100 number_of_clumps 9320 set_scale_by_groups spacing_to_other_terrain_types 2 }
+
+	/* Beach Expansion */
+	create_terrain DLC_WETROCKBEACH { base_terrain DLC_MANGROVESHALLOW land_percent 100 number_of_clumps 9320 set_scale_by_groups spacing_to_other_terrain_types 1 }
+	create_terrain DLC_WETROCKBEACH { base_terrain DLC_MANGROVESHALLOW land_percent 100 number_of_clumps 9320 set_scale_by_groups spacing_to_other_terrain_types 1 }
+	create_terrain DLC_WETROCKBEACH { base_terrain DLC_MANGROVESHALLOW land_percent 100 number_of_clumps 9320 set_scale_by_groups spacing_to_other_terrain_types 1 }
+	create_terrain DLC_WETROCKBEACH { base_terrain DLC_MANGROVESHALLOW land_percent 100 number_of_clumps 9320 set_scale_by_groups spacing_to_other_terrain_types 1 }
+
+	/* Reverting Placeholder */
+	create_terrain DLC_MANGROVESHALLOW { base_terrain GW land_percent 100 number_of_clumps 9320 set_scale_by_groups }
+	create_terrain DLC_MANGROVESHALLOW { base_terrain GW land_percent 100 number_of_clumps 9320 set_scale_by_groups }
+	create_terrain DLC_MANGROVESHALLOW { base_terrain GW land_percent 100 number_of_clumps 9320 set_scale_by_groups }
+	create_terrain DLC_MANGROVESHALLOW { base_terrain GW land_percent 100 number_of_clumps 9320 set_scale_by_groups }
+
+	/* Placeholder Application */
+	create_terrain GW { base_terrain DLC_MANGROVESHALLOW land_percent 100 number_of_clumps 9320 set_scale_by_groups spacing_to_other_terrain_types 2 }
+	create_terrain GW { base_terrain DLC_MANGROVESHALLOW land_percent 100 number_of_clumps 9320 set_scale_by_groups spacing_to_other_terrain_types 2 }
+	create_terrain GW { base_terrain DLC_MANGROVESHALLOW land_percent 100 number_of_clumps 9320 set_scale_by_groups spacing_to_other_terrain_types 2 }
+	create_terrain GW { base_terrain DLC_MANGROVESHALLOW land_percent 100 number_of_clumps 9320 set_scale_by_groups spacing_to_other_terrain_types 2 }
+
+	/* Beach Expansion */
+	create_terrain DLC_WETROCKBEACH { base_terrain DLC_MANGROVESHALLOW land_percent 100 number_of_clumps 9320 set_scale_by_groups spacing_to_other_terrain_types 1 }
+	create_terrain DLC_WETROCKBEACH { base_terrain DLC_MANGROVESHALLOW land_percent 100 number_of_clumps 9320 set_scale_by_groups spacing_to_other_terrain_types 1 }
+	create_terrain DLC_WETROCKBEACH { base_terrain DLC_MANGROVESHALLOW land_percent 100 number_of_clumps 9320 set_scale_by_groups spacing_to_other_terrain_types 1 }
+	create_terrain DLC_WETROCKBEACH { base_terrain DLC_MANGROVESHALLOW land_percent 100 number_of_clumps 9320 set_scale_by_groups spacing_to_other_terrain_types 1 }
+
+	/* Reverting Placeholder */
+	create_terrain DLC_MANGROVESHALLOW { base_terrain GW land_percent 100 number_of_clumps 9320 set_scale_by_groups }
+	create_terrain DLC_MANGROVESHALLOW { base_terrain GW land_percent 100 number_of_clumps 9320 set_scale_by_groups }
+	create_terrain DLC_MANGROVESHALLOW { base_terrain GW land_percent 100 number_of_clumps 9320 set_scale_by_groups }
+	create_terrain DLC_MANGROVESHALLOW { base_terrain GW land_percent 100 number_of_clumps 9320 set_scale_by_groups }
+
+
+	/* Filling Elevation 0 With Rockbeach */
+	create_terrain DLC_WETROCKBEACH { base_terrain DLC_MANGROVESHALLOW land_percent 100 number_of_clumps 9320 set_scale_by_groups height_limits 0 0 spacing_to_other_terrain_types 1 set_flat_terrain_only }
+	create_terrain DLC_WETROCKBEACH { base_terrain DLC_MANGROVESHALLOW land_percent 100 number_of_clumps 9320 set_scale_by_groups height_limits 0 0 spacing_to_other_terrain_types 1 set_flat_terrain_only }
+	create_terrain DLC_WETROCKBEACH { base_terrain DLC_MANGROVESHALLOW land_percent 100 number_of_clumps 9320 set_scale_by_groups height_limits 0 0 spacing_to_other_terrain_types 1 set_flat_terrain_only }
+	create_terrain DLC_WETROCKBEACH { base_terrain DLC_MANGROVESHALLOW land_percent 100 number_of_clumps 9320 set_scale_by_groups height_limits 0 0 spacing_to_other_terrain_types 1 set_flat_terrain_only }
+
+	/* Filling Elevation 1 With Non-Navigable Rockbeach */
+	create_terrain NNRB { base_terrain DLC_WETROCKBEACH land_percent 100 number_of_clumps 9320 set_scale_by_groups height_limits 1 1 }
+	create_terrain NNRB { base_terrain DLC_WETROCKBEACH land_percent 100 number_of_clumps 9320 set_scale_by_groups height_limits 1 1 }
+	create_terrain NNRB { base_terrain DLC_WETROCKBEACH land_percent 100 number_of_clumps 9320 set_scale_by_groups height_limits 1 1 }
+	create_terrain NNRB { base_terrain DLC_WETROCKBEACH land_percent 100 number_of_clumps 9320 set_scale_by_groups height_limits 1 1 }
+
+	/* Reverting Beach on Elevation 0 */
+	create_terrain DLC_MANGROVESHALLOW { base_terrain DLC_WETROCKBEACH land_percent 100 number_of_clumps 9320 set_scale_by_groups height_limits 0 0 spacing_to_other_terrain_types 2 }
+	create_terrain DLC_MANGROVESHALLOW { base_terrain DLC_WETROCKBEACH land_percent 100 number_of_clumps 9320 set_scale_by_groups height_limits 0 0 spacing_to_other_terrain_types 2 }
+	create_terrain DLC_MANGROVESHALLOW { base_terrain DLC_WETROCKBEACH land_percent 100 number_of_clumps 9320 set_scale_by_groups height_limits 0 0 spacing_to_other_terrain_types 2 }
+	create_terrain DLC_MANGROVESHALLOW { base_terrain DLC_WETROCKBEACH land_percent 100 number_of_clumps 9320 set_scale_by_groups height_limits 0 0 spacing_to_other_terrain_types 2 }
+
+	/* Absorbing Final Bit of Border Wetrockbeach */
+	create_terrain NNRB { base_terrain DLC_WETROCKBEACH land_percent 100 number_of_clumps 9320 set_scale_by_groups spacing_to_other_terrain_types 1 }
+	create_terrain NNRB { base_terrain DLC_WETROCKBEACH land_percent 100 number_of_clumps 9320 set_scale_by_groups spacing_to_other_terrain_types 1 }
+	create_terrain NNRB { base_terrain DLC_WETROCKBEACH land_percent 100 number_of_clumps 9320 set_scale_by_groups spacing_to_other_terrain_types 1 }
+	create_terrain NNRB { base_terrain DLC_WETROCKBEACH land_percent 100 number_of_clumps 9320 set_scale_by_groups spacing_to_other_terrain_types 1 }
+
+
+	/* Converting Some of the Beach */
+	create_terrain ICYSHORE { base_terrain DLC_WETROCKBEACH land_percent 2 number_of_clumps 9320 set_scale_by_groups }
+
+
+endif
+
+#define TAIL_EXPANSION
+if TAIL_EXPANSION
+	/* Putting Down Some Non-Navigable Gravel */
+	create_terrain DLC_GRAVELBEACH { base_terrain DLC_MANGROVESHALLOW land_percent 100 number_of_clumps 9320 set_scale_by_groups height_limits 1 1 }
+	create_terrain DLC_GRAVELBEACH { base_terrain DLC_MANGROVESHALLOW land_percent 100 number_of_clumps 9320 set_scale_by_groups height_limits 1 1 }
+	create_terrain DLC_GRAVELBEACH { base_terrain DLC_MANGROVESHALLOW land_percent 100 number_of_clumps 9320 set_scale_by_groups height_limits 1 1 }
+	create_terrain DLC_GRAVELBEACH { base_terrain DLC_MANGROVESHALLOW land_percent 100 number_of_clumps 9320 set_scale_by_groups height_limits 1 1 }
+
+	/* Placeholder Terrain */
+	create_terrain GW { base_terrain DLC_MANGROVESHALLOW land_percent 100 number_of_clumps 9320 set_scale_by_groups spacing_to_other_terrain_types 2 }
+	create_terrain GW { base_terrain DLC_MANGROVESHALLOW land_percent 100 number_of_clumps 9320 set_scale_by_groups spacing_to_other_terrain_types 2 }
+	create_terrain GW { base_terrain DLC_MANGROVESHALLOW land_percent 100 number_of_clumps 9320 set_scale_by_groups spacing_to_other_terrain_types 2 }
+	create_terrain GW { base_terrain DLC_MANGROVESHALLOW land_percent 100 number_of_clumps 9320 set_scale_by_groups spacing_to_other_terrain_types 2 }
+
+	/* Expansion Beach Terrain */
+	create_terrain DLC_GRAVELBEACH { base_terrain DLC_MANGROVESHALLOW land_percent 100 number_of_clumps 9320 set_scale_by_groups spacing_to_other_terrain_types 1 }
+	create_terrain DLC_GRAVELBEACH { base_terrain DLC_MANGROVESHALLOW land_percent 100 number_of_clumps 9320 set_scale_by_groups spacing_to_other_terrain_types 1 }
+	create_terrain DLC_GRAVELBEACH { base_terrain DLC_MANGROVESHALLOW land_percent 100 number_of_clumps 9320 set_scale_by_groups spacing_to_other_terrain_types 1 }
+	create_terrain DLC_GRAVELBEACH { base_terrain DLC_MANGROVESHALLOW land_percent 100 number_of_clumps 9320 set_scale_by_groups spacing_to_other_terrain_types 1 }
+
+	/* Reverting Placeholder */
+	create_terrain DLC_MANGROVESHALLOW { base_terrain GW land_percent 100 number_of_clumps 9320 set_scale_by_groups }
+	create_terrain DLC_MANGROVESHALLOW { base_terrain GW land_percent 100 number_of_clumps 9320 set_scale_by_groups }
+	create_terrain DLC_MANGROVESHALLOW { base_terrain GW land_percent 100 number_of_clumps 9320 set_scale_by_groups }
+	create_terrain DLC_MANGROVESHALLOW { base_terrain GW land_percent 100 number_of_clumps 9320 set_scale_by_groups }
+
+
+	/* Placeholder Terrain */
+	create_terrain GW { base_terrain DLC_MANGROVESHALLOW land_percent 100 number_of_clumps 9320 set_scale_by_groups spacing_to_other_terrain_types 2 }
+	create_terrain GW { base_terrain DLC_MANGROVESHALLOW land_percent 100 number_of_clumps 9320 set_scale_by_groups spacing_to_other_terrain_types 2 }
+	create_terrain GW { base_terrain DLC_MANGROVESHALLOW land_percent 100 number_of_clumps 9320 set_scale_by_groups spacing_to_other_terrain_types 2 }
+	create_terrain GW { base_terrain DLC_MANGROVESHALLOW land_percent 100 number_of_clumps 9320 set_scale_by_groups spacing_to_other_terrain_types 2 }
+
+	/* Expansion Beach Terrain */
+	create_terrain DLC_GRAVELBEACH { base_terrain DLC_MANGROVESHALLOW land_percent 100 number_of_clumps 9320 set_scale_by_groups spacing_to_other_terrain_types 1 }
+	create_terrain DLC_GRAVELBEACH { base_terrain DLC_MANGROVESHALLOW land_percent 100 number_of_clumps 9320 set_scale_by_groups spacing_to_other_terrain_types 1 }
+	create_terrain DLC_GRAVELBEACH { base_terrain DLC_MANGROVESHALLOW land_percent 100 number_of_clumps 9320 set_scale_by_groups spacing_to_other_terrain_types 1 }
+	create_terrain DLC_GRAVELBEACH { base_terrain DLC_MANGROVESHALLOW land_percent 100 number_of_clumps 9320 set_scale_by_groups spacing_to_other_terrain_types 1 }
+
+	/* Reverting Placeholder */
+	create_terrain DLC_MANGROVESHALLOW { base_terrain GW land_percent 100 number_of_clumps 9320 set_scale_by_groups }
+	create_terrain DLC_MANGROVESHALLOW { base_terrain GW land_percent 100 number_of_clumps 9320 set_scale_by_groups }
+	create_terrain DLC_MANGROVESHALLOW { base_terrain GW land_percent 100 number_of_clumps 9320 set_scale_by_groups }
+	create_terrain DLC_MANGROVESHALLOW { base_terrain GW land_percent 100 number_of_clumps 9320 set_scale_by_groups }
+
+	/* Application Non-Navigable Gravel Beach */
+	create_terrain NNGB { base_terrain DLC_GRAVELBEACH land_percent 100 number_of_clumps 9320 set_scale_by_groups height_limits 1 1 }
+	create_terrain NNGB { base_terrain DLC_GRAVELBEACH land_percent 100 number_of_clumps 9320 set_scale_by_groups height_limits 1 1 }
+	create_terrain NNGB { base_terrain DLC_GRAVELBEACH land_percent 100 number_of_clumps 9320 set_scale_by_groups height_limits 1 1 }
+	create_terrain NNGB { base_terrain DLC_GRAVELBEACH land_percent 100 number_of_clumps 9320 set_scale_by_groups height_limits 1 1 }
+
+	/* Reverting Distant Gravelbeach */
+	create_terrain DLC_MANGROVESHALLOW { base_terrain DLC_GRAVELBEACH land_percent 100 number_of_clumps 9320 set_scale_by_groups spacing_to_other_terrain_types 2 }
+	create_terrain DLC_MANGROVESHALLOW { base_terrain DLC_GRAVELBEACH land_percent 100 number_of_clumps 9320 set_scale_by_groups spacing_to_other_terrain_types 2 }
+	create_terrain DLC_MANGROVESHALLOW { base_terrain DLC_GRAVELBEACH land_percent 100 number_of_clumps 9320 set_scale_by_groups spacing_to_other_terrain_types 2 }
+	create_terrain DLC_MANGROVESHALLOW { base_terrain DLC_GRAVELBEACH land_percent 100 number_of_clumps 9320 set_scale_by_groups spacing_to_other_terrain_types 2 }
+
+	/* Filling Out Remaining Gravel Beach with Non-Navigable Variant */
+	create_terrain NNGB { base_terrain DLC_GRAVELBEACH land_percent 100 number_of_clumps 9320 set_scale_by_groups spacing_to_other_terrain_types 1 }
+	create_terrain NNGB { base_terrain DLC_GRAVELBEACH land_percent 100 number_of_clumps 9320 set_scale_by_groups spacing_to_other_terrain_types 1 }
+	create_terrain NNGB { base_terrain DLC_GRAVELBEACH land_percent 100 number_of_clumps 9320 set_scale_by_groups spacing_to_other_terrain_types 1 }
+	create_terrain NNGB { base_terrain DLC_GRAVELBEACH land_percent 100 number_of_clumps 9320 set_scale_by_groups spacing_to_other_terrain_types 1 }
+
+	/* Converting Some of the Beach */
+	create_terrain ICYSHORE { base_terrain DLC_GRAVELBEACH land_percent 1 number_of_clumps 9320 set_scale_by_groups }
+
+endif
+
+#define TAIL_LAYERING
+if TAIL_LAYERING
+
+	/* First Masking */
+	create_terrain GRAVEL { base_terrain NNGB land_percent 2 number_of_clumps 9320 set_scale_by_groups height_limits 1 1 terrain_mask 1 }
+	create_terrain SNOW_LIGHT { base_terrain NNGB land_percent 2 number_of_clumps 9320 set_scale_by_groups terrain_mask 1 }
+	create_terrain ICE    { base_terrain NNGB land_percent 2 number_of_clumps 9320 set_scale_by_groups terrain_mask 1 }
+
+	/* Tail Forests */
+	create_terrain SNOW_FOREST { base_terrain NNGB land_percent 1 number_of_clumps 24 height_limits 1 1 }
+	create_terrain DLC_MANGROVEFOREST { base_terrain DLC_MANGROVESHALLOW land_percent 1 number_of_clumps 24 spacing_to_other_terrain_types 4 if TINY_MAP set_avoid_player_start_areas 36 elseif SMALL_MAP set_avoid_player_start_areas 48 elseif MEDIUM_MAP set_avoid_player_start_areas 48 elseif LARGE_MAP set_avoid_player_start_areas 52 elseif HUGE_MAP set_avoid_player_start_areas 56 else set_avoid_player_start_areas 60 endif }
+	create_terrain SNOW_LIGHT { base_terrain DLC_MANGROVEFOREST land_percent 1 number_of_clumps 9320 set_scale_by_groups terrain_mask 1 }
+
+	/* Second Masking */
+	create_terrain ICE { base_terrain DLC_MANGROVESHALLOW land_percent 10 number_of_clumps 9320 set_scale_by_groups terrain_mask 1 }
+	create_terrain SNOW_LIGHT { base_terrain DLC_MANGROVESHALLOW land_percent 10 number_of_clumps 9320 set_scale_by_groups terrain_mask 1 }
+
+
+
+endif
+
+#define COMET_LAYERING
+if COMET_LAYERING
+	/* Basic Mask */
+	create_terrain GRAVEL { base_terrain NNRB land_percent 100 number_of_clumps 9320 set_scale_by_groups terrain_mask 1 }
+	create_terrain GRAVEL { base_terrain NNRB land_percent 100 number_of_clumps 9320 set_scale_by_groups terrain_mask 1 }
+	create_terrain GRAVEL { base_terrain NNRB land_percent 100 number_of_clumps 9320 set_scale_by_groups terrain_mask 1 }
+	create_terrain GRAVEL { base_terrain NNRB land_percent 100 number_of_clumps 9320 set_scale_by_groups terrain_mask 1 }
+
+	/* Basic Layer */
+	create_terrain GRAVEL      { base_terrain NNRB   land_percent 100 number_of_clumps 9320 set_scale_by_groups spacing_to_other_terrain_types 1 }
+	create_terrain SNOW_STRONG { base_terrain GRAVEL land_percent 10  number_of_clumps 9320 set_scale_by_groups spacing_to_other_terrain_types 2 terrain_mask 1 }
+	create_terrain SNOW_STRONG { base_terrain GRAVEL land_percent 100 number_of_clumps 9320 set_scale_by_groups spacing_to_other_terrain_types 5 terrain_mask 1 }
+	create_terrain SNOW_LIGHT  { base_terrain GRAVEL land_percent 100 number_of_clumps 9320 set_scale_by_groups terrain_mask 1 }
+
+	/* Forests */
+	create_terrain SNOW_FOREST { base_terrain GRAVEL land_percent 4 set_scale_by_groups spacing_to_other_terrain_types 6 if TINY_MAP	set_avoid_player_start_areas 17	number_of_clumps 12	elseif SMALL_MAP set_avoid_player_start_areas 17		number_of_clumps 11	elseif MEDIUM_MAP set_avoid_player_start_areas 18 number_of_clumps 11 elseif LARGE_MAP set_avoid_player_start_areas 18 number_of_clumps 8 else set_avoid_player_start_areas 18 number_of_clumps 6 endif }
+
+endif
+
+#define SPACE_MASK
+if SPACE_MASK
+	/* SPACE MASK */
+	create_terrain DLC_BLACK { base_terrain DEEP_WATER land_percent 100 number_of_clumps 1000 terrain_mask 1 }
+	create_terrain DLC_BLACK { base_terrain DEEP_WATER land_percent 100 number_of_clumps 1000 terrain_mask 1 }
+	create_terrain DLC_BLACK { base_terrain DEEP_WATER land_percent 100 number_of_clumps 1000 terrain_mask 1 }
+
+	create_terrain DLC_BLACK { base_terrain DLC_WATER5 land_percent 100 number_of_clumps 1000 terrain_mask 1 }
+	create_terrain DLC_BLACK { base_terrain DLC_WATER5 land_percent 100 number_of_clumps 1000 terrain_mask 1 }
+	create_terrain DLC_BLACK { base_terrain DLC_WATER5 land_percent 100 number_of_clumps 1000 terrain_mask 1 }
+	create_terrain DLC_BLACK { base_terrain DLC_WATER5 land_percent 100 number_of_clumps 1000 terrain_mask 1 }
+	create_terrain DLC_BLACK { base_terrain DLC_WATER5 land_percent 100 number_of_clumps 1000 terrain_mask 1 }
+	create_terrain DLC_BLACK { base_terrain DLC_WATER5 land_percent 100 number_of_clumps 1000 terrain_mask 1 }
+	create_terrain DLC_BLACK { base_terrain DLC_WATER5 land_percent 100 number_of_clumps 1000 terrain_mask 1 }
+	create_terrain DLC_BLACK { base_terrain DLC_WATER5 land_percent 100 number_of_clumps 1000 terrain_mask 1 }
+	create_terrain DLC_BLACK { base_terrain DLC_WATER5 land_percent 100 number_of_clumps 1000 terrain_mask 1 }
+
+	create_terrain DLC_WATER4 { base_terrain DLC_MANGROVESHALLOW land_percent 100 number_of_clumps 1000 terrain_mask 1 }
+
+endif
+
+
+<OBJECTS_GENERATION>
+/* BEGIN_OBJECTS_AUTOSCRIBE */
+#const DOLPHIN 61
+#const ICE_FLOW 728
+#const OFF_GRID 647
+#const OG 647
+#const ROCK2 1323
+#const ROCK3 389
+#const ROCK4 396
+#const TRAP 278
+if TINY_MAP
+elseif SMALL_MAP
+elseif MEDIUM_MAP
+elseif LARGE_MAP
+elseif HUGE_MAP
+elseif GIGANTIC_MAP
+endif
+create_object OFF_GRID
+{
+set_place_for_every_player
+second_object TOWN_CENTER
+find_closest
+actor_area 1
+actor_area_radius 0
+}
+#const PH1_1 647
+create_object PH1_1
+{
+set_place_for_every_player
+actor_area 2
+actor_area_radius 4
+actor_area_to_place_in 1
+force_placement
+find_closest
+}
+#const PH2_1 647
+create_object PH2_1
+{
+set_place_for_every_player
+actor_area 3
+actor_area_radius 5
+actor_area_to_place_in 1
+force_placement
+find_closest
+}
+#const PH3_1 647
+create_object PH3_1
+{
+set_place_for_every_player
+actor_area 4
+actor_area_radius 6
+actor_area_to_place_in 1
+force_placement
+find_closest
+}
+#const PH4_1 647
+create_object PH4_1
+{
+set_place_for_every_player
+actor_area 5
+actor_area_radius 8
+actor_area_to_place_in 1
+force_placement
+find_closest
+}
+#const PH5_1 647
+create_object PH5_1
+{
+set_place_for_every_player
+actor_area 6
+actor_area_radius 7
+actor_area_to_place_in 1
+force_placement
+find_closest
+}
+#const PH6_1 647
+create_object PH6_1
+{
+set_place_for_every_player
+actor_area 7
+actor_area_radius 10
+actor_area_to_place_in 1
+force_placement
+find_closest
+}
+#const PH7_1 647
+create_object PH7_1
+{
+set_place_for_every_player
+actor_area 8
+actor_area_radius 12
+actor_area_to_place_in 1
+force_placement
+find_closest
+}
+#const PH8_1 647
+create_object PH8_1
+{
+set_place_for_every_player
+actor_area 9
+actor_area_radius 13
+actor_area_to_place_in 1
+force_placement
+find_closest
+}
+#const PH9_1 647
+create_object PH9_1
+{
+set_place_for_every_player
+actor_area 10
+actor_area_radius 18
+actor_area_to_place_in 1
+force_placement
+find_closest
+}
+#const PH10_1 647
+create_object PH10_1
+{
+set_place_for_every_player
+actor_area 11
+actor_area_radius 23
+actor_area_to_place_in 1
+force_placement
+find_closest
+}
+#const PH11_1 647
+create_object PH11_1
+{
+set_place_for_every_player
+actor_area 12
+actor_area_radius 24
+actor_area_to_place_in 1
+force_placement
+find_closest
+}
+#const PH12_1 647
+create_object PH12_1
+{
+set_place_for_every_player
+actor_area 13
+actor_area_radius 20
+actor_area_to_place_in 1
+force_placement
+find_closest
+}
+create_object ICE_FLOW
+{
+set_gaia_object_only
+number_of_groups 9320
+set_scaling_to_map_size
+terrain_to_place_on DLC_MANGROVESHALLOW
+temp_min_distance_group_placement 8
+}
+create_object DLC_AFRICANBUSH_2
+{
+set_gaia_object_only
+number_of_objects rnd(2,3)
+number_of_groups 9320
+set_tight_grouping
+set_scaling_to_map_size
+terrain_to_place_on DIRT_SNOW
+temp_min_distance_group_placement 8
+}
+create_object OG
+{
+set_gaia_object_only
+number_of_groups 9320
+set_scaling_to_map_size
+terrain_to_place_on DIRT
+temp_min_distance_group_placement 10
+actor_area 14
+actor_area_radius 20
+}
+create_object ROCK
+{
+set_gaia_object_only
+number_of_groups 9320
+set_scaling_to_map_size
+terrain_to_place_on DLC_MANGROVESHALLOW
+temp_min_distance_group_placement 15
+actor_area 15
+actor_area_radius 5
+avoid_actor_area 14
+find_closest
+}
+create_object ROCK2
+{
+set_gaia_object_only
+number_of_groups 9320
+set_scaling_to_map_size
+terrain_to_place_on DLC_MANGROVESHALLOW
+temp_min_distance_group_placement 15
+avoid_actor_area 14
+avoid_actor_area 15
+find_closest
+}
+create_object ROCK3
+{
+set_gaia_object_only
+number_of_groups 9320
+set_scaling_to_map_size
+terrain_to_place_on DLC_WATER5
+temp_min_distance_group_placement 30
+}
+create_object ROCK4
+{
+set_gaia_object_only
+number_of_groups 9320
+set_scaling_to_map_size
+terrain_to_place_on DLC_WATER5
+temp_min_distance_group_placement 30
+}
+create_object ROCK3
+{
+set_gaia_object_only
+number_of_groups 9320
+set_scaling_to_map_size
+terrain_to_place_on DEEP_WATER
+temp_min_distance_group_placement 30
+}
+create_object ROCK4
+{
+set_gaia_object_only
+number_of_groups 9320
+set_scaling_to_map_size
+terrain_to_place_on DEEP_WATER
+temp_min_distance_group_placement 30
+}
+create_object SNOWPINETREE
+{
+set_place_for_every_player
+set_gaia_object_only
+number_of_objects 2
+number_of_groups 1
+set_loose_grouping
+temp_min_distance_group_placement 2
+actor_area_to_place_in 3
+avoid_actor_area 2
+}
+create_object SNOWPINETREE
+{
+set_place_for_every_player
+set_gaia_object_only
+number_of_objects 3
+number_of_groups 1
+set_loose_grouping
+temp_min_distance_group_placement 2
+actor_area_to_place_in 5
+avoid_actor_area 4
+}
+create_object VILLAGER_BASE_F
+{
+set_place_for_every_player
+number_of_objects 2
+number_of_groups 1
+set_tight_grouping
+actor_area 16
+actor_area_radius 6
+avoid_actor_area 4
+find_closest
+}
+create_object VILLAGER_BASE_F
+{
+set_place_for_every_player
+number_of_groups 1
+actor_area 17
+actor_area_radius 6
+avoid_actor_area 4
+avoid_actor_area 16
+find_closest
+}
+create_object SCOUT
+{
+set_place_for_every_player
+number_of_groups 1
+avoid_actor_area 4
+avoid_actor_area 16
+avoid_actor_area 17
+find_closest
+}
+create_object DLC_GOOSE
+{
+set_place_for_every_player
+number_of_objects 4
+number_of_groups 1
+set_tight_grouping
+actor_area_to_place_in 6
+avoid_actor_area 4
+}
+create_object DLC_ORANGEBUSH
+{
+set_place_for_every_player
+set_gaia_object_only
+number_of_objects 6
+number_of_groups 1
+group_placement_radius 1
+set_tight_grouping
+max_distance_to_other_zones 2
+avoid_forest_zone 2
+actor_area 18
+actor_area_radius 7
+actor_area_to_place_in 8
+avoid_actor_area 7
+}
+create_object GOLD
+{
+set_place_for_every_player
+set_gaia_object_only
+number_of_objects 5
+number_of_groups 2
+group_placement_radius 1
+set_tight_grouping
+max_distance_to_other_zones 2
+avoid_forest_zone 2
+temp_min_distance_group_placement 10
+actor_area 19
+actor_area_radius 7
+actor_area_to_place_in 9
+avoid_actor_area 8
+avoid_actor_area 18
+}
+create_object STONE
+{
+set_place_for_every_player
+set_gaia_object_only
+number_of_objects 4
+number_of_groups 2
+group_placement_radius 1
+set_tight_grouping
+max_distance_to_other_zones 2
+avoid_forest_zone 2
+temp_min_distance_group_placement 10
+actor_area_to_place_in 9
+avoid_actor_area 8
+avoid_actor_area 18
+avoid_actor_area 19
+}
+create_object BOAR
+{
+set_place_for_every_player
+set_gaia_object_only
+number_of_objects 2
+number_of_groups 1
+set_loose_grouping
+avoid_forest_zone 1
+temp_min_distance_group_placement 8
+actor_area_to_place_in 10
+avoid_actor_area 8
+}
+create_object DLC_GOOSE
+{
+set_place_for_every_player
+set_gaia_object_only
+number_of_objects 2
+number_of_groups 2
+set_tight_grouping
+avoid_forest_zone 1
+temp_min_distance_group_placement 8
+actor_area_to_place_in 12
+avoid_actor_area 11
+}
+create_object GOLD
+{
+set_gaia_object_only
+number_of_objects 4
+number_of_groups 9320
+set_tight_grouping
+terrain_to_place_on DLC_MANGROVESHALLOW
+max_distance_to_other_zones 2
+avoid_forest_zone 2
+temp_min_distance_group_placement 28
+}
+create_object STONE
+{
+set_gaia_object_only
+number_of_objects 4
+number_of_groups 9320
+set_tight_grouping
+terrain_to_place_on DLC_MANGROVESHALLOW
+max_distance_to_other_zones 2
+avoid_forest_zone 2
+temp_min_distance_group_placement 30
+}
+create_object GOLD
+{
+set_gaia_object_only
+number_of_objects 3
+number_of_groups 9320
+set_tight_grouping
+terrain_to_place_on DIRT_SNOW
+max_distance_to_other_zones 2
+avoid_forest_zone 1
+temp_min_distance_group_placement 20
+}
+create_object TRAP
+{
+set_gaia_object_only
+number_of_objects 3
+number_of_groups 9320
+set_loose_grouping
+set_scaling_to_map_size
+terrain_to_place_on DLC_MANGROVESHALLOW
+max_distance_to_other_zones 1
+avoid_forest_zone 1
+temp_min_distance_group_placement 10
+second_object DLC_BOXTURTLE
+}
+create_object DOLPHIN
+{
+set_gaia_object_only
+number_of_groups 9320
+set_scaling_to_map_size
+terrain_to_place_on DEEP_WATER
+max_distance_to_other_zones 1
+temp_min_distance_group_placement 8
+}
+create_object RELIC
+{
+set_gaia_object_only
+number_of_groups 5
+set_scaling_to_map_size
+avoid_forest_zone 2
+temp_min_distance_group_placement 20
+avoid_actor_area 13
+find_closest
+}
+/* END_OBJECTS_AUTOSCRIBE */
+
+<LAND_GENERATION>
+base_terrain DLC_MANGROVESHALLOW
+/* LAND_AUTOSCRIBE */
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 44 34 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 40 87 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 14 45 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 58 29 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 32 29 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 25 40 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 39 38 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 26 40 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 16 49 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 56 95 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 42 87 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 28 59 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 80 37 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 91 77 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 66 30 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 34 28 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 36 4 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 88 84 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 8 37 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 41 23 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 82 36 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 60 27 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 19 48 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 24 44 base_size 1 }
+L { terrain_type ICYSHORE land_percent 0 land_position 55 24 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 22 42 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 57 94 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 37 25 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 37 82 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 43 36 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 30 59 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 44 24 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 38 6 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 95 60 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 27 58 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 24 41 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 16 47 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 8 42 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 41 10 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 48 18 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 66 29 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 92 52 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 50 18 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 18 49 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 8 39 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 50 92 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 14 46 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 58 27 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 1 33 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 32 72 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 30 57 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 24 56 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 34 42 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 40 8 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 28 58 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 31 49 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 35 81 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 68 29 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 51 20 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 53 94 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 73 31 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 73 32 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 13 44 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 30 56 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 24 39 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 45 14 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 43 13 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 30 60 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 1 30 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 22 52 base_size 1 }
+L { terrain_type ICYSHORE land_percent 0 land_position 22 55 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 45 21 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 23 39 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 31 30 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 37 5 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 32 31 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 40 11 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 59 30 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 24 54 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 74 31 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 29 59 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 9 40 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 28 35 base_size 1 }
+L { terrain_type ICYSHORE land_percent 0 land_position 21 53 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 31 2 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 32 48 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 52 22 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 33 48 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 0 30 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 5 39 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 15 48 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 39 39 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 95 68 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 74 93 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 69 94 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 29 52 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 92 75 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 33 32 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 52 30 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 25 38 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 43 10 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 16 50 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 94 73 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 64 30 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 53 24 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 90 82 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 35 80 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 32 45 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 32 71 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 20 49 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 0 34 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 42 25 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 76 93 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 50 20 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 61 94 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 47 22 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 59 29 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 91 47 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 89 43 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 49 20 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 80 90 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 39 86 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 33 1 base_size 1 }
+L { terrain_type ICYSHORE land_percent 0 land_position 56 23 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 79 91 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 68 95 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 25 42 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 50 93 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 44 20 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 4 37 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 56 25 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 31 74 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 48 17 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 30 61 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 46 13 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 56 93 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 0 29 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 54 24 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 83 89 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 23 40 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 67 94 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 44 12 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 56 29 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 24 43 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 61 95 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 43 12 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 74 32 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 54 92 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 53 31 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 33 77 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 32 74 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 52 23 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 37 39 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 63 94 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 93 72 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 38 7 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 41 8 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 48 33 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 49 16 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 33 4 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 89 82 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 93 53 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 70 32 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 12 46 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 53 93 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 95 58 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 32 73 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 31 51 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 30 55 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 21 45 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 43 35 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 35 42 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 52 31 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 81 36 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 38 25 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 28 60 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 51 23 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 31 72 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 41 25 base_size 1 }
+L { terrain_type ICYSHORE land_percent 0 land_position 23 55 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 17 51 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 30 34 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 30 70 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 58 30 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 25 55 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 31 73 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 36 28 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 79 90 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 36 25 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 65 29 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 51 93 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 95 55 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 42 22 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 33 3 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 29 36 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 70 95 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 53 25 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 92 51 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 44 88 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 93 76 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 56 30 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 90 47 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 34 30 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 50 32 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 46 14 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 87 44 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 54 30 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 32 33 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 34 76 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 58 95 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 19 53 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 36 8 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 3 33 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 80 36 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 82 38 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 31 54 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 88 42 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 27 38 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 95 72 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 62 29 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 37 4 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 45 90 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 44 33 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 46 16 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 39 85 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 53 30 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 77 92 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 50 17 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 94 60 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 6 40 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 95 66 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 60 29 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 83 37 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 94 56 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 51 31 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 31 3 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 24 58 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 31 53 base_elevation 1 base_size 1 }
+L { terrain_type ICYSHORE land_percent 0 land_position 54 21 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 38 39 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 41 9 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 38 5 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 85 39 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 37 27 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 42 10 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 94 57 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 95 69 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 47 91 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 34 44 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 48 31 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 14 47 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 3 37 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 94 55 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 62 94 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 79 34 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 55 93 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 40 9 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 93 75 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 89 80 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 74 92 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 0 33 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 41 24 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 34 4 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 63 30 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 6 38 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 29 69 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 32 32 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 22 47 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 85 40 base_elevation 1 base_size 1 }
+L { terrain_type ICYSHORE land_percent 0 land_position 55 23 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 81 35 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 36 80 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 94 54 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 81 37 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 92 76 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 37 84 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 90 83 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 29 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 58 28 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 38 10 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 29 65 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 35 30 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 54 93 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 55 95 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 26 37 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 33 75 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 33 2 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 1 34 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 36 82 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 23 43 base_size 1 }
+L { terrain_type ICYSHORE land_percent 0 land_position 23 56 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 13 47 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 93 71 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 86 40 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 30 67 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 21 46 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 33 27 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 38 38 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 55 29 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 66 94 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 69 95 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 36 27 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 7 39 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 34 6 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 48 19 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 86 86 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 34 27 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 93 70 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 84 39 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 1 32 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 71 93 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 4 38 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 33 74 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 26 35 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 35 6 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 50 19 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 44 87 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 88 81 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 26 38 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 34 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 29 57 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 25 56 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 43 14 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 32 28 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 44 23 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 77 91 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 34 78 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 90 79 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 30 52 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 35 44 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 22 51 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 31 71 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 37 7 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 85 86 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 93 77 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 34 3 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 52 93 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 62 95 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 35 26 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 40 37 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 32 49 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 72 31 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 39 8 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 29 55 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 20 47 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 46 20 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 94 67 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 39 37 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 31 50 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 71 31 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 91 76 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 29 33 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 39 24 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 77 34 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 33 45 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 47 18 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 51 18 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 56 26 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 40 86 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 76 91 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 50 21 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 11 41 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 94 74 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 70 94 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 38 9 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 28 37 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 54 26 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 45 13 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 59 95 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 32 0 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 31 52 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 90 46 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 37 9 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 16 46 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 27 36 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 39 11 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 92 79 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 18 52 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 33 5 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 57 28 base_size 1 }
+L { terrain_type ICYSHORE land_percent 0 land_position 53 20 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 77 33 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 39 83 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 27 37 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 24 40 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 80 34 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 29 56 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 42 11 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 32 30 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 29 58 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 74 33 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 6 39 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 61 29 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 42 14 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 94 65 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 15 45 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 40 12 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 28 0 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 36 43 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 17 47 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 76 92 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 27 35 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 46 32 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 40 36 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 64 95 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 90 81 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 87 43 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 36 7 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 55 26 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 76 32 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 55 94 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 36 40 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 20 54 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 43 11 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 47 32 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 84 89 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 35 4 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 78 34 base_elevation 1 base_size 1 }
+L { terrain_type ICYSHORE land_percent 0 land_position 22 53 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 91 80 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 25 37 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 20 51 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 38 83 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 85 38 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 89 84 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 4 36 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 36 29 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 49 91 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 38 85 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 45 20 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 5 38 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 46 89 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 92 78 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 18 50 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 64 29 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 21 47 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 0 31 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 94 72 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 13 42 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 41 85 base_elevation 1 base_size 1 }
+L { terrain_type ICYSHORE land_percent 0 land_position 55 22 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 25 36 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 31 0 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 37 6 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 30 50 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 32 70 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 44 14 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 30 62 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 57 30 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 23 42 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 69 30 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 32 76 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 34 80 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 42 35 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 46 21 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 32 2 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 94 62 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 83 90 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 78 35 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 90 48 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 26 60 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 69 29 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 94 70 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 52 24 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 47 16 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 58 94 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 31 69 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 72 32 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 15 49 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 94 64 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 25 54 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 35 40 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 44 11 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 34 77 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 47 17 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 30 68 base_elevation 1 base_size 1 }
+L { terrain_type ICYSHORE land_percent 0 land_position 54 22 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 21 50 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 22 46 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 86 42 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 42 12 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 95 56 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 59 94 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 48 15 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 59 27 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 31 70 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 54 31 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 49 31 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 43 22 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 2 36 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 92 77 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 56 24 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 82 90 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 92 53 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 73 93 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 94 63 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 45 89 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 43 89 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 2 33 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 52 92 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 71 30 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 74 94 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 48 92 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 12 42 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 33 30 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 6 36 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 75 33 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 28 34 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 42 23 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 80 35 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 29 60 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 29 32 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 77 93 base_elevation 1 base_size 1 }
+L { terrain_type ICYSHORE land_percent 0 land_position 20 53 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 93 57 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 48 20 base_size 1 }
+L { terrain_type ICYSHORE land_percent 0 land_position 54 23 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 34 43 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 88 43 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 13 46 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 11 44 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 49 19 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 35 7 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 95 70 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 67 30 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 51 92 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 31 32 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 29 64 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 73 94 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 46 90 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 31 34 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 82 89 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 38 84 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 44 13 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 83 38 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 42 88 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 34 79 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 22 43 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 83 87 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 19 51 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 60 95 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 93 50 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 94 59 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 45 17 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 46 18 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 10 44 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 92 54 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 83 39 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 56 27 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 68 30 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 38 26 base_size 1 }
+L { terrain_type ICYSHORE land_percent 0 land_position 23 54 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 87 41 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 55 27 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 34 2 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 22 45 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 35 5 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 87 85 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 41 12 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 68 31 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 6 37 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 58 25 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 9 41 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 38 24 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 64 94 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 33 28 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 86 39 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 54 94 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 25 57 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 48 91 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 63 29 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 81 88 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 78 91 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 24 57 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 33 47 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 39 84 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 30 31 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 87 83 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 41 36 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 87 84 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 22 44 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 81 89 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 45 34 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 31 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 39 7 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 52 20 base_size 1 }
+L { terrain_type ICYSHORE land_percent 0 land_position 21 54 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 21 51 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 43 21 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 37 41 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 49 17 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 31 47 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 44 21 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 29 34 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 48 16 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 10 42 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 11 43 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 47 33 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 53 23 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 54 25 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 94 61 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 29 0 base_size 1 }
+L { terrain_type ICYSHORE land_percent 0 land_position 22 54 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 27 57 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 35 3 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 65 95 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 57 93 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 57 29 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 32 46 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 50 30 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 85 41 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 29 35 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 8 40 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 45 32 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 57 27 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 3 35 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 23 53 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 30 71 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 91 50 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 95 65 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 25 39 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 39 9 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 95 61 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 45 15 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 19 49 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 8 38 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 1 31 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 55 30 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 5 36 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 89 83 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 55 25 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 63 95 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 85 87 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 54 29 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 15 46 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 41 37 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 3 32 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 32 4 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 70 31 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 9 39 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 30 63 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 7 38 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 75 92 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 85 85 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 60 94 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 27 34 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 76 33 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 21 49 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 17 50 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 71 32 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 73 92 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 26 39 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 58 26 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 31 29 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 18 48 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 56 28 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 42 9 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 78 92 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 21 43 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 79 35 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 30 30 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 46 15 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 43 15 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 30 2 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 76 34 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 38 27 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 60 28 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 31 67 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 5 37 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 32 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 93 74 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 60 30 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 34 29 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 39 6 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 45 23 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 20 50 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 1 35 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 39 25 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 14 48 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 67 95 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 36 41 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 43 88 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 42 24 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 94 66 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 23 45 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 35 29 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 37 24 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 94 58 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 17 49 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 30 54 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 30 64 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 34 31 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 37 81 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 52 29 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 67 31 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 10 41 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 21 48 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 16 48 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 51 21 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 36 81 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 29 31 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 44 16 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 9 42 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 93 51 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 41 22 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 44 15 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 39 23 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 35 27 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 41 11 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 40 23 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 26 58 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 10 43 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 88 44 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 28 36 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 42 13 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 10 40 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 5 34 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 91 79 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 24 38 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 21 44 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 35 78 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 87 42 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 91 48 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 27 56 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 83 88 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 18 51 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 27 59 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 24 42 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 33 46 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 51 19 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 40 85 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 11 42 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 30 35 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 33 76 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 32 75 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 10 39 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 26 59 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 93 56 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 45 33 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 41 86 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 31 33 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 42 34 base_elevation 1 base_size 1 }
+L { terrain_type ICYSHORE land_percent 0 land_position 24 55 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 40 84 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 40 25 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 23 44 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 7 37 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 4 34 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 62 30 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 37 28 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 35 79 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 86 85 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 49 92 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 41 13 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 44 89 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 40 10 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 41 34 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 48 21 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 84 37 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 27 61 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 45 16 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 47 21 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 29 66 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 31 31 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 20 52 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 49 32 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 12 45 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 56 94 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 29 68 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 9 43 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 71 94 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 15 47 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 92 73 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 39 27 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 95 62 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 94 53 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 69 31 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 95 63 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 93 55 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 87 40 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 79 92 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 31 48 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 21 55 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 84 40 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 37 83 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 12 43 base_size 1 }
+L { terrain_type ICYSHORE land_percent 0 land_position 21 52 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 2 32 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 92 49 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 26 36 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 19 50 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 33 44 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 25 59 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 23 41 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 91 78 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 47 19 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 49 18 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 35 41 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 48 90 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 90 45 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 30 51 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 89 45 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 93 54 base_elevation 1 base_size 1 }
+L { terrain_type ICYSHORE land_percent 0 land_position 52 21 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 32 50 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 15 44 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 29 62 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 30 69 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 5 35 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 65 94 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 30 0 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 2 34 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 89 44 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 72 93 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 46 33 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 44 35 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 26 57 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 72 95 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 88 83 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 84 87 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 43 87 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 43 24 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 50 31 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 27 39 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 25 41 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 7 40 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 29 63 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 37 26 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 44 90 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 92 50 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 43 23 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 80 91 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 90 44 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 61 30 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 13 43 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 42 86 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 44 22 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 81 90 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 13 45 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 25 58 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 20 48 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 91 49 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 38 23 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 39 10 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 37 80 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 59 28 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 32 3 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 95 59 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 30 53 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 70 30 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 33 31 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 33 29 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 4 35 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 68 94 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 17 46 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 37 8 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 26 56 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 75 32 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 23 38 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 29 61 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 46 22 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 47 20 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 89 46 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 94 71 base_elevation 1 base_size 1 }
+L { terrain_type ICYSHORE land_percent 0 land_position 53 22 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 0 32 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 46 17 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 43 34 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 50 22 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 65 30 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 2 35 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 92 74 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 34 5 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 95 67 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 57 26 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 72 94 base_elevation 1 base_size 1 }
+L { terrain_type ICYSHORE land_percent 0 land_position 53 21 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 12 44 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 66 95 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 45 22 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 38 8 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 52 19 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 30 58 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 93 52 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 30 65 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 20 45 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 27 60 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 30 66 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 29 54 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 93 73 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 39 26 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 40 24 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 22 56 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 94 68 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 40 35 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 36 3 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 80 89 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 92 48 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 35 43 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 38 82 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 36 5 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 20 46 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 90 80 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 86 41 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 19 52 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 36 6 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 19 47 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 41 35 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 27 33 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 11 45 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 95 64 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 32 51 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 28 33 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 75 93 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 3 34 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 89 81 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 51 32 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 17 48 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 30 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 14 44 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 84 38 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 28 32 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 36 26 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 47 31 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 30 32 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 34 41 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 20 44 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 23 57 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 84 88 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 31 68 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 41 87 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 3 36 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 53 92 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 22 41 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 51 22 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 70 93 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 35 28 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 82 37 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 49 21 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 24 37 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 32 47 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 47 90 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 57 25 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 51 30 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 40 26 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 48 32 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 37 40 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 7 41 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 50 91 base_elevation 1 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 47 15 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 30 33 base_size 1 }
+L { terrain_type DLC_GRAVELBEACH land_percent 0 land_position 8 41 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 94 69 base_elevation 1 base_size 1 }
+L { terrain_type DLC_WETROCKBEACH land_percent 0 land_position 34 45 base_elevation 1 base_size 1 }
+if 1_PLAYER_GAME
+#define P2
+elseif 2_PLAYER_GAME
+#define P2
+elseif 3_PLAYER_GAME
+#define P4
+elseif 4_PLAYER_GAME
+#define P4
+elseif 5_PLAYER_GAME
+#define P6
+if TEAM_POSITIONS
+#define TP_6PG
+endif
+elseif 6_PLAYER_GAME
+#define P6
+if TEAM_POSITIONS
+#define TP_6PG
+endif
+elseif 7_PLAYER_GAME
+#define P8
+if TEAM_POSITIONS
+#define TP_8PG
+endif
+elseif 8_PLAYER_GAME
+#define P8
+if TEAM_POSITIONS
+#define TP_8PG
+endif
+endif
+if TP_8PG
+start_random
+percent_chance 25 #define C8P1
+percent_chance 25 #define C8P2
+percent_chance 25 #define C8P3
+percent_chance 25 #define C8P4
+end_random
+elseif TP_6PG
+start_random
+percent_chance 25 #define C6P1
+percent_chance 25 #define C6P2
+percent_chance 25 #define C6P3
+percent_chance 25 #define C6P4
+end_random
+endif
+start_random
+percent_chance 6  #define S1
+percent_chance 7  #define S2
+percent_chance 7  #define S3
+percent_chance 6  #define S4
+percent_chance 7  #define S5
+percent_chance 7  #define S6
+percent_chance 6  #define S7
+percent_chance 7  #define S8
+percent_chance 7  #define S9
+percent_chance 6  #define S10
+percent_chance 7  #define S11
+percent_chance 7  #define S12
+percent_chance 6  #define S13
+percent_chance 7  #define S14
+percent_chance 7  #define S15
+end_random
+L
+{
+terrain_type PT1
+base_size 0
+base_elevation 1
+number_of_tiles 14400
+clumping_factor 30
+   
+if C8P1
+assign_to AT_COLOR 1 0 0
+elseif C8P2
+assign_to AT_COLOR 7 0 0
+elseif C8P3
+assign_to AT_COLOR 7 0 0
+elseif C8P4
+assign_to AT_COLOR 1 0 0
+elseif C6P1
+assign_to AT_COLOR 1 0 0
+elseif C6P2
+assign_to AT_COLOR 5 0 0
+elseif C6P3
+assign_to AT_COLOR 1 0 0
+elseif C6P4
+assign_to AT_COLOR 5 0 0
+else
+if 4_TEAM_GAME
+assign_to AT_TEAM 1 0 0
+elseif 3_TEAM_GAME
+assign_to AT_TEAM 1 0 0
+elseif 2_TEAM_GAME
+assign_to AT_TEAM 1 0 0
+elseif 1_TEAM_GAME
+assign_to AT_TEAM 1 0 0
+else
+assign_to AT_TEAM -10 0 0
+endif
+endif
+if P2
+if S1
+land_position rnd(44,44) rnd(70,70)
+elseif S2
+land_position rnd(43,43) rnd(71,71)
+elseif S3
+land_position rnd(42,42) rnd(71,71)
+elseif S4
+land_position rnd(46,46) rnd(73,73)
+elseif S5
+land_position rnd(45,45) rnd(74,74)
+elseif S6
+land_position rnd(44,44) rnd(75,75)
+elseif S7
+land_position rnd(48,48) rnd(76,76)
+elseif S8
+land_position rnd(47,47) rnd(77,77)
+elseif S9
+land_position rnd(46,46) rnd(78,78)
+elseif S10
+land_position rnd(51,51) rnd(78,78)
+elseif S11
+land_position rnd(50,50) rnd(79,79)
+elseif S12
+land_position rnd(49,49) rnd(80,80)
+elseif S13
+land_position rnd(54,54) rnd(80,80)
+elseif S14
+land_position rnd(53,53) rnd(81,81)
+elseif S15
+land_position rnd(53,53) rnd(82,82)
+endif
+elseif P4
+if S1
+land_position rnd(56,56) rnd(83,83)
+elseif S2
+land_position rnd(55,55) rnd(84,84)
+elseif S3
+land_position rnd(55,55) rnd(85,85)
+elseif S4
+land_position rnd(58,58) rnd(83,83)
+elseif S5
+land_position rnd(57,57) rnd(84,84)
+elseif S6
+land_position rnd(57,57) rnd(85,85)
+elseif S7
+land_position rnd(59,59) rnd(83,83)
+elseif S8
+land_position rnd(59,59) rnd(84,84)
+elseif S9
+land_position rnd(59,59) rnd(86,86)
+elseif S10
+land_position rnd(61,61) rnd(84,84)
+elseif S11
+land_position rnd(61,61) rnd(85,85)
+elseif S12
+land_position rnd(61,61) rnd(86,86)
+elseif S13
+land_position rnd(63,63) rnd(84,84)
+elseif S14
+land_position rnd(63,63) rnd(85,85)
+elseif S15
+land_position rnd(63,63) rnd(86,86)
+endif
+elseif P6
+if S1
+land_position rnd(62,62) rnd(85,85)
+elseif S2
+land_position rnd(62,62) rnd(86,86)
+elseif S3
+land_position rnd(62,62) rnd(87,87)
+elseif S4
+land_position rnd(63,63) rnd(85,85)
+elseif S5
+land_position rnd(63,63) rnd(86,86)
+elseif S6
+land_position rnd(63,63) rnd(87,87)
+elseif S7
+land_position rnd(64,64) rnd(84,84)
+elseif S8
+land_position rnd(64,64) rnd(86,86)
+elseif S9
+land_position rnd(65,65) rnd(87,87)
+elseif S10
+land_position rnd(66,66) rnd(84,84)
+elseif S11
+land_position rnd(66,66) rnd(85,85)
+elseif S12
+land_position rnd(66,66) rnd(87,87)
+elseif S13
+land_position rnd(67,67) rnd(84,84)
+elseif S14
+land_position rnd(67,67) rnd(85,85)
+elseif S15
+land_position rnd(67,67) rnd(86,86)
+endif
+else
+if S1
+land_position rnd(65,65) rnd(85,85)
+elseif S2
+land_position rnd(65,65) rnd(86,86)
+elseif S3
+land_position rnd(65,65) rnd(87,87)
+elseif S4
+land_position rnd(66,66) rnd(85,85)
+elseif S5
+land_position rnd(66,66) rnd(86,86)
+elseif S6
+land_position rnd(66,66) rnd(87,87)
+elseif S7
+land_position rnd(67,67) rnd(85,85)
+elseif S8
+land_position rnd(67,67) rnd(86,86)
+elseif S9
+land_position rnd(67,67) rnd(87,87)
+elseif S10
+land_position rnd(68,68) rnd(84,84)
+elseif S11
+land_position rnd(68,68) rnd(86,86)
+elseif S12
+land_position rnd(69,69) rnd(87,87)
+elseif S13
+land_position rnd(69,69) rnd(84,84)
+elseif S14
+land_position rnd(69,69) rnd(85,85)
+elseif S15
+land_position rnd(70,70) rnd(86,86)
+endif
+endif
+}
+L
+{
+terrain_type PT2
+base_size 0
+base_elevation 1
+number_of_tiles 14400
+clumping_factor 30
+   
+if C8P1
+assign_to AT_COLOR 2 0 0
+elseif C8P2
+assign_to AT_COLOR 2 0 0
+elseif C8P3
+assign_to AT_COLOR 8 0 0
+elseif C8P4
+assign_to AT_COLOR 8 0 0
+elseif C6P1
+assign_to AT_COLOR 4 0 0
+elseif C6P2
+assign_to AT_COLOR 4 0 0
+elseif C6P3
+assign_to AT_COLOR 4 0 0
+elseif C6P4
+assign_to AT_COLOR 4 0 0
+else
+if 4_TEAM_GAME
+assign_to AT_TEAM 2 0 0
+elseif 3_TEAM_GAME
+assign_to AT_TEAM 2 0 0
+elseif 2_TEAM_GAME
+assign_to AT_TEAM 2 0 0
+elseif 1_TEAM_GAME
+assign_to AT_TEAM -10 0 0
+else
+assign_to AT_TEAM -10 0 0
+endif
+endif
+if P2
+if S1
+land_position rnd(71,71) rnd(42,42)
+elseif S2
+land_position rnd(72,72) rnd(41,41)
+elseif S3
+land_position rnd(72,72) rnd(40,40)
+elseif S4
+land_position rnd(74,74) rnd(45,45)
+elseif S5
+land_position rnd(74,74) rnd(44,44)
+elseif S6
+land_position rnd(75,75) rnd(44,44)
+elseif S7
+land_position rnd(76,76) rnd(48,48)
+elseif S8
+land_position rnd(77,77) rnd(47,47)
+elseif S9
+land_position rnd(78,78) rnd(46,46)
+elseif S10
+land_position rnd(79,79) rnd(50,50)
+elseif S11
+land_position rnd(80,80) rnd(50,50)
+elseif S12
+land_position rnd(80,80) rnd(49,49)
+elseif S13
+land_position rnd(82,82) rnd(53,53)
+elseif S14
+land_position rnd(83,83) rnd(52,52)
+elseif S15
+land_position rnd(84,84) rnd(52,52)
+endif
+elseif P4
+if S1
+land_position rnd(61,61) rnd(39,39)
+elseif S2
+land_position rnd(61,61) rnd(38,38)
+elseif S3
+land_position rnd(61,61) rnd(36,36)
+elseif S4
+land_position rnd(63,63) rnd(40,40)
+elseif S5
+land_position rnd(63,63) rnd(39,39)
+elseif S6
+land_position rnd(63,63) rnd(37,37)
+elseif S7
+land_position rnd(65,65) rnd(41,41)
+elseif S8
+land_position rnd(65,65) rnd(40,40)
+elseif S9
+land_position rnd(65,65) rnd(38,38)
+elseif S10
+land_position rnd(66,66) rnd(42,42)
+elseif S11
+land_position rnd(66,66) rnd(41,41)
+elseif S12
+land_position rnd(67,67) rnd(40,40)
+elseif S13
+land_position rnd(68,68) rnd(43,43)
+elseif S14
+land_position rnd(68,68) rnd(42,42)
+elseif S15
+land_position rnd(68,68) rnd(41,41)
+endif
+elseif P6
+if S1
+land_position rnd(75,75) rnd(46,46)
+elseif S2
+land_position rnd(75,75) rnd(45,45)
+elseif S3
+land_position rnd(76,76) rnd(45,45)
+elseif S4
+land_position rnd(75,75) rnd(47,47)
+elseif S5
+land_position rnd(76,76) rnd(46,46)
+elseif S6
+land_position rnd(77,77) rnd(46,46)
+elseif S7
+land_position rnd(76,76) rnd(48,48)
+elseif S8
+land_position rnd(77,77) rnd(47,47)
+elseif S9
+land_position rnd(78,78) rnd(46,46)
+elseif S10
+land_position rnd(77,77) rnd(49,49)
+elseif S11
+land_position rnd(78,78) rnd(48,48)
+elseif S12
+land_position rnd(78,78) rnd(47,47)
+elseif S13
+land_position rnd(78,78) rnd(49,49)
+elseif S14
+land_position rnd(79,79) rnd(49,49)
+elseif S15
+land_position rnd(79,79) rnd(48,48)
+endif
+else
+if S1
+land_position rnd(55,55) rnd(39,39)
+elseif S2
+land_position rnd(54,54) rnd(38,38)
+elseif S3
+land_position rnd(54,54) rnd(37,37)
+elseif S4
+land_position rnd(56,56) rnd(39,39)
+elseif S5
+land_position rnd(56,56) rnd(38,38)
+elseif S6
+land_position rnd(55,55) rnd(37,37)
+elseif S7
+land_position rnd(57,57) rnd(39,39)
+elseif S8
+land_position rnd(57,57) rnd(38,38)
+elseif S9
+land_position rnd(57,57) rnd(37,37)
+elseif S10
+land_position rnd(58,58) rnd(40,40)
+elseif S11
+land_position rnd(58,58) rnd(38,38)
+elseif S12
+land_position rnd(58,58) rnd(37,37)
+elseif S13
+land_position rnd(59,59) rnd(40,40)
+elseif S14
+land_position rnd(59,59) rnd(39,39)
+elseif S15
+land_position rnd(59,59) rnd(38,38)
+endif
+endif
+}
+L
+{
+terrain_type PT3
+base_size 0
+base_elevation 1
+number_of_tiles 14400
+clumping_factor 30
+   
+if C8P1
+assign_to AT_COLOR 5 0 0
+elseif C8P2
+assign_to AT_COLOR 3 0 0
+elseif C8P3
+assign_to AT_COLOR 3 0 0
+elseif C8P4
+assign_to AT_COLOR 5 0 0
+elseif C6P1
+assign_to AT_COLOR 5 0 0
+elseif C6P2
+assign_to AT_COLOR 1 0 0
+elseif C6P3
+assign_to AT_COLOR 5 0 0
+elseif C6P4
+assign_to AT_COLOR 1 0 0
+else
+if 4_TEAM_GAME
+assign_to AT_TEAM 3 0 0
+elseif 3_TEAM_GAME
+assign_to AT_TEAM 3 0 0
+elseif 2_TEAM_GAME
+assign_to AT_TEAM 1 0 0
+elseif 1_TEAM_GAME
+assign_to AT_TEAM -10 0 0
+else
+assign_to AT_TEAM -10 0 0
+endif
+endif
+if P2
+if S1
+land_position rnd(71,71) rnd(42,42)
+elseif S2
+land_position rnd(72,72) rnd(41,41)
+elseif S3
+land_position rnd(72,72) rnd(40,40)
+elseif S4
+land_position rnd(74,74) rnd(45,45)
+elseif S5
+land_position rnd(74,74) rnd(44,44)
+elseif S6
+land_position rnd(75,75) rnd(44,44)
+elseif S7
+land_position rnd(76,76) rnd(48,48)
+elseif S8
+land_position rnd(77,77) rnd(47,47)
+elseif S9
+land_position rnd(78,78) rnd(46,46)
+elseif S10
+land_position rnd(79,79) rnd(50,50)
+elseif S11
+land_position rnd(80,80) rnd(50,50)
+elseif S12
+land_position rnd(80,80) rnd(49,49)
+elseif S13
+land_position rnd(82,82) rnd(53,53)
+elseif S14
+land_position rnd(83,83) rnd(52,52)
+elseif S15
+land_position rnd(84,84) rnd(52,52)
+endif
+elseif P4
+if S1
+land_position rnd(40,40) rnd(61,61)
+elseif S2
+land_position rnd(39,39) rnd(61,61)
+elseif S3
+land_position rnd(38,38) rnd(61,61)
+elseif S4
+land_position rnd(40,40) rnd(63,63)
+elseif S5
+land_position rnd(39,39) rnd(63,63)
+elseif S6
+land_position rnd(38,38) rnd(63,63)
+elseif S7
+land_position rnd(41,41) rnd(65,65)
+elseif S8
+land_position rnd(40,40) rnd(65,65)
+elseif S9
+land_position rnd(38,38) rnd(65,65)
+elseif S10
+land_position rnd(41,41) rnd(66,66)
+elseif S11
+land_position rnd(40,40) rnd(67,67)
+elseif S12
+land_position rnd(39,39) rnd(67,67)
+elseif S13
+land_position rnd(41,41) rnd(68,68)
+elseif S14
+land_position rnd(40,40) rnd(69,69)
+elseif S15
+land_position rnd(39,39) rnd(69,69)
+endif
+elseif P6
+if S1
+land_position rnd(40,40) rnd(57,57)
+elseif S2
+land_position rnd(39,39) rnd(57,57)
+elseif S3
+land_position rnd(38,38) rnd(57,57)
+elseif S4
+land_position rnd(40,40) rnd(58,58)
+elseif S5
+land_position rnd(39,39) rnd(58,58)
+elseif S6
+land_position rnd(37,37) rnd(58,58)
+elseif S7
+land_position rnd(40,40) rnd(60,60)
+elseif S8
+land_position rnd(38,38) rnd(60,60)
+elseif S9
+land_position rnd(37,37) rnd(59,59)
+elseif S10
+land_position rnd(39,39) rnd(61,61)
+elseif S11
+land_position rnd(38,38) rnd(61,61)
+elseif S12
+land_position rnd(37,37) rnd(61,61)
+elseif S13
+land_position rnd(39,39) rnd(62,62)
+elseif S14
+land_position rnd(38,38) rnd(62,62)
+elseif S15
+land_position rnd(37,37) rnd(62,62)
+endif
+else
+if S1
+land_position rnd(43,43) rnd(69,69)
+elseif S2
+land_position rnd(42,42) rnd(70,70)
+elseif S3
+land_position rnd(41,41) rnd(70,70)
+elseif S4
+land_position rnd(43,43) rnd(70,70)
+elseif S5
+land_position rnd(42,42) rnd(70,70)
+elseif S6
+land_position rnd(41,41) rnd(71,71)
+elseif S7
+land_position rnd(44,44) rnd(71,71)
+elseif S8
+land_position rnd(43,43) rnd(71,71)
+elseif S9
+land_position rnd(42,42) rnd(72,72)
+elseif S10
+land_position rnd(44,44) rnd(72,72)
+elseif S11
+land_position rnd(43,43) rnd(72,72)
+elseif S12
+land_position rnd(42,42) rnd(73,73)
+elseif S13
+land_position rnd(44,44) rnd(72,72)
+elseif S14
+land_position rnd(44,44) rnd(73,73)
+elseif S15
+land_position rnd(43,43) rnd(74,74)
+endif
+endif
+}
+L
+{
+terrain_type PT4
+base_size 0
+base_elevation 1
+number_of_tiles 14400
+clumping_factor 30
+   
+if C8P1
+assign_to AT_COLOR 6 0 0
+elseif C8P2
+assign_to AT_COLOR 6 0 0
+elseif C8P3
+assign_to AT_COLOR 4 0 0
+elseif C8P4
+assign_to AT_COLOR 4 0 0
+elseif C6P1
+assign_to AT_COLOR 2 0 0
+elseif C6P2
+assign_to AT_COLOR 2 0 0
+elseif C6P3
+assign_to AT_COLOR 6 0 0
+elseif C6P4
+assign_to AT_COLOR 6 0 0
+else
+if 4_TEAM_GAME
+assign_to AT_TEAM 4 0 0
+elseif 3_TEAM_GAME
+assign_to AT_TEAM 2 0 0
+elseif 2_TEAM_GAME
+assign_to AT_TEAM 2 0 0
+elseif 1_TEAM_GAME
+assign_to AT_TEAM -10 0 0
+else
+assign_to AT_TEAM -10 0 0
+endif
+endif
+if P2
+if S1
+land_position rnd(71,71) rnd(42,42)
+elseif S2
+land_position rnd(72,72) rnd(41,41)
+elseif S3
+land_position rnd(72,72) rnd(40,40)
+elseif S4
+land_position rnd(74,74) rnd(45,45)
+elseif S5
+land_position rnd(74,74) rnd(44,44)
+elseif S6
+land_position rnd(75,75) rnd(44,44)
+elseif S7
+land_position rnd(76,76) rnd(48,48)
+elseif S8
+land_position rnd(77,77) rnd(47,47)
+elseif S9
+land_position rnd(78,78) rnd(46,46)
+elseif S10
+land_position rnd(79,79) rnd(50,50)
+elseif S11
+land_position rnd(80,80) rnd(50,50)
+elseif S12
+land_position rnd(80,80) rnd(49,49)
+elseif S13
+land_position rnd(82,82) rnd(53,53)
+elseif S14
+land_position rnd(83,83) rnd(52,52)
+elseif S15
+land_position rnd(84,84) rnd(52,52)
+endif
+elseif P4
+if S1
+land_position rnd(81,81) rnd(56,56)
+elseif S2
+land_position rnd(82,82) rnd(56,56)
+elseif S3
+land_position rnd(83,83) rnd(56,56)
+elseif S4
+land_position rnd(82,82) rnd(58,58)
+elseif S5
+land_position rnd(83,83) rnd(58,58)
+elseif S6
+land_position rnd(84,84) rnd(57,57)
+elseif S7
+land_position rnd(83,83) rnd(59,59)
+elseif S8
+land_position rnd(84,84) rnd(59,59)
+elseif S9
+land_position rnd(86,86) rnd(59,59)
+elseif S10
+land_position rnd(84,84) rnd(61,61)
+elseif S11
+land_position rnd(85,85) rnd(61,61)
+elseif S12
+land_position rnd(87,87) rnd(61,61)
+elseif S13
+land_position rnd(85,85) rnd(63,63)
+elseif S14
+land_position rnd(86,86) rnd(63,63)
+elseif S15
+land_position rnd(88,88) rnd(63,63)
+endif
+elseif P6
+if S1
+land_position rnd(57,57) rnd(39,39)
+elseif S2
+land_position rnd(57,57) rnd(38,38)
+elseif S3
+land_position rnd(56,56) rnd(36,36)
+elseif S4
+land_position rnd(58,58) rnd(39,39)
+elseif S5
+land_position rnd(58,58) rnd(38,38)
+elseif S6
+land_position rnd(58,58) rnd(37,37)
+elseif S7
+land_position rnd(60,60) rnd(40,40)
+elseif S8
+land_position rnd(60,60) rnd(38,38)
+elseif S9
+land_position rnd(59,59) rnd(37,37)
+elseif S10
+land_position rnd(61,61) rnd(40,40)
+elseif S11
+land_position rnd(61,61) rnd(39,39)
+elseif S12
+land_position rnd(61,61) rnd(38,38)
+elseif S13
+land_position rnd(62,62) rnd(41,41)
+elseif S14
+land_position rnd(62,62) rnd(39,39)
+elseif S15
+land_position rnd(62,62) rnd(38,38)
+endif
+else
+if S1
+land_position rnd(79,79) rnd(52,52)
+elseif S2
+land_position rnd(80,80) rnd(51,51)
+elseif S3
+land_position rnd(81,81) rnd(51,51)
+elseif S4
+land_position rnd(80,80) rnd(52,52)
+elseif S5
+land_position rnd(81,81) rnd(52,52)
+elseif S6
+land_position rnd(82,82) rnd(51,51)
+elseif S7
+land_position rnd(80,80) rnd(53,53)
+elseif S8
+land_position rnd(81,81) rnd(53,53)
+elseif S9
+land_position rnd(82,82) rnd(52,52)
+elseif S10
+land_position rnd(81,81) rnd(54,54)
+elseif S11
+land_position rnd(82,82) rnd(53,53)
+elseif S12
+land_position rnd(83,83) rnd(53,53)
+elseif S13
+land_position rnd(82,82) rnd(55,55)
+elseif S14
+land_position rnd(83,83) rnd(54,54)
+elseif S15
+land_position rnd(83,83) rnd(54,54)
+endif
+endif
+}
+L
+{
+terrain_type PT5
+base_size 0
+base_elevation 1
+number_of_tiles 14400
+clumping_factor 30
+   
+if C8P1
+assign_to AT_COLOR 3 0 0
+elseif C8P2
+assign_to AT_COLOR 5 0 0
+elseif C8P3
+assign_to AT_COLOR 5 0 0
+elseif C8P4
+assign_to AT_COLOR 3 0 0
+elseif C6P1
+assign_to AT_COLOR 3 0 0
+elseif C6P2
+assign_to AT_COLOR 3 0 0
+elseif C6P3
+assign_to AT_COLOR 3 0 0
+elseif C6P4
+assign_to AT_COLOR 3 0 0
+else
+if 4_TEAM_GAME
+assign_to AT_TEAM 1 0 0
+elseif 3_TEAM_GAME
+assign_to AT_TEAM 1 0 0
+elseif 2_TEAM_GAME
+assign_to AT_TEAM 1 0 0
+elseif 1_TEAM_GAME
+assign_to AT_TEAM 1 0 0
+else
+assign_to AT_TEAM -10 0 0
+endif
+endif
+if P2
+if S1
+land_position rnd(71,71) rnd(42,42)
+elseif S2
+land_position rnd(72,72) rnd(41,41)
+elseif S3
+land_position rnd(72,72) rnd(40,40)
+elseif S4
+land_position rnd(74,74) rnd(45,45)
+elseif S5
+land_position rnd(74,74) rnd(44,44)
+elseif S6
+land_position rnd(75,75) rnd(44,44)
+elseif S7
+land_position rnd(76,76) rnd(48,48)
+elseif S8
+land_position rnd(77,77) rnd(47,47)
+elseif S9
+land_position rnd(78,78) rnd(46,46)
+elseif S10
+land_position rnd(79,79) rnd(50,50)
+elseif S11
+land_position rnd(80,80) rnd(50,50)
+elseif S12
+land_position rnd(80,80) rnd(49,49)
+elseif S13
+land_position rnd(82,82) rnd(53,53)
+elseif S14
+land_position rnd(83,83) rnd(52,52)
+elseif S15
+land_position rnd(84,84) rnd(52,52)
+endif
+elseif P4
+if S1
+land_position rnd(81,81) rnd(56,56)
+elseif S2
+land_position rnd(82,82) rnd(56,56)
+elseif S3
+land_position rnd(83,83) rnd(56,56)
+elseif S4
+land_position rnd(82,82) rnd(58,58)
+elseif S5
+land_position rnd(83,83) rnd(58,58)
+elseif S6
+land_position rnd(84,84) rnd(57,57)
+elseif S7
+land_position rnd(83,83) rnd(59,59)
+elseif S8
+land_position rnd(84,84) rnd(59,59)
+elseif S9
+land_position rnd(86,86) rnd(59,59)
+elseif S10
+land_position rnd(84,84) rnd(61,61)
+elseif S11
+land_position rnd(85,85) rnd(61,61)
+elseif S12
+land_position rnd(87,87) rnd(61,61)
+elseif S13
+land_position rnd(85,85) rnd(63,63)
+elseif S14
+land_position rnd(86,86) rnd(63,63)
+elseif S15
+land_position rnd(88,88) rnd(63,63)
+endif
+elseif P6
+if S1
+land_position rnd(46,46) rnd(74,74)
+elseif S2
+land_position rnd(46,46) rnd(75,75)
+elseif S3
+land_position rnd(45,45) rnd(76,76)
+elseif S4
+land_position rnd(47,47) rnd(75,75)
+elseif S5
+land_position rnd(46,46) rnd(76,76)
+elseif S6
+land_position rnd(46,46) rnd(77,77)
+elseif S7
+land_position rnd(48,48) rnd(76,76)
+elseif S8
+land_position rnd(47,47) rnd(77,77)
+elseif S9
+land_position rnd(46,46) rnd(78,78)
+elseif S10
+land_position rnd(49,49) rnd(77,77)
+elseif S11
+land_position rnd(48,48) rnd(78,78)
+elseif S12
+land_position rnd(47,47) rnd(78,78)
+elseif S13
+land_position rnd(50,50) rnd(78,78)
+elseif S14
+land_position rnd(49,49) rnd(78,78)
+elseif S15
+land_position rnd(48,48) rnd(79,79)
+endif
+else
+if S1
+land_position rnd(52,52) rnd(80,80)
+elseif S2
+land_position rnd(51,51) rnd(80,80)
+elseif S3
+land_position rnd(50,50) rnd(81,81)
+elseif S4
+land_position rnd(52,52) rnd(80,80)
+elseif S5
+land_position rnd(52,52) rnd(81,81)
+elseif S6
+land_position rnd(51,51) rnd(82,82)
+elseif S7
+land_position rnd(53,53) rnd(80,80)
+elseif S8
+land_position rnd(53,53) rnd(81,81)
+elseif S9
+land_position rnd(52,52) rnd(82,82)
+elseif S10
+land_position rnd(54,54) rnd(81,81)
+elseif S11
+land_position rnd(54,54) rnd(82,82)
+elseif S12
+land_position rnd(53,53) rnd(83,83)
+elseif S13
+land_position rnd(55,55) rnd(81,81)
+elseif S14
+land_position rnd(54,54) rnd(82,82)
+elseif S15
+land_position rnd(54,54) rnd(83,83)
+endif
+endif
+}
+L
+{
+terrain_type PT6
+base_size 0
+base_elevation 1
+number_of_tiles 14400
+clumping_factor 30
+   
+if C8P1
+assign_to AT_COLOR 4 0 0
+elseif C8P2
+assign_to AT_COLOR 4 0 0
+elseif C8P3
+assign_to AT_COLOR 6 0 0
+elseif C8P4
+assign_to AT_COLOR 6 0 0
+elseif C6P1
+assign_to AT_COLOR 6 0 0
+elseif C6P2
+assign_to AT_COLOR 6 0 0
+elseif C6P3
+assign_to AT_COLOR 2 0 0
+elseif C6P4
+assign_to AT_COLOR 2 0 0
+else
+if 4_TEAM_GAME
+assign_to AT_TEAM 2 0 0
+elseif 3_TEAM_GAME
+assign_to AT_TEAM 2 0 0
+elseif 2_TEAM_GAME
+assign_to AT_TEAM 2 0 0
+elseif 1_TEAM_GAME
+assign_to AT_TEAM -10 0 0
+else
+assign_to AT_TEAM -10 0 0
+endif
+endif
+if P2
+if S1
+land_position rnd(71,71) rnd(42,42)
+elseif S2
+land_position rnd(72,72) rnd(41,41)
+elseif S3
+land_position rnd(72,72) rnd(40,40)
+elseif S4
+land_position rnd(74,74) rnd(45,45)
+elseif S5
+land_position rnd(74,74) rnd(44,44)
+elseif S6
+land_position rnd(75,75) rnd(44,44)
+elseif S7
+land_position rnd(76,76) rnd(48,48)
+elseif S8
+land_position rnd(77,77) rnd(47,47)
+elseif S9
+land_position rnd(78,78) rnd(46,46)
+elseif S10
+land_position rnd(79,79) rnd(50,50)
+elseif S11
+land_position rnd(80,80) rnd(50,50)
+elseif S12
+land_position rnd(80,80) rnd(49,49)
+elseif S13
+land_position rnd(82,82) rnd(53,53)
+elseif S14
+land_position rnd(83,83) rnd(52,52)
+elseif S15
+land_position rnd(84,84) rnd(52,52)
+endif
+elseif P4
+if S1
+land_position rnd(81,81) rnd(56,56)
+elseif S2
+land_position rnd(82,82) rnd(56,56)
+elseif S3
+land_position rnd(83,83) rnd(56,56)
+elseif S4
+land_position rnd(82,82) rnd(58,58)
+elseif S5
+land_position rnd(83,83) rnd(58,58)
+elseif S6
+land_position rnd(84,84) rnd(57,57)
+elseif S7
+land_position rnd(83,83) rnd(59,59)
+elseif S8
+land_position rnd(84,84) rnd(59,59)
+elseif S9
+land_position rnd(86,86) rnd(59,59)
+elseif S10
+land_position rnd(84,84) rnd(61,61)
+elseif S11
+land_position rnd(85,85) rnd(61,61)
+elseif S12
+land_position rnd(87,87) rnd(61,61)
+elseif S13
+land_position rnd(85,85) rnd(63,63)
+elseif S14
+land_position rnd(86,86) rnd(63,63)
+elseif S15
+land_position rnd(88,88) rnd(63,63)
+endif
+elseif P6
+if S1
+land_position rnd(83,83) rnd(62,62)
+elseif S2
+land_position rnd(85,85) rnd(62,62)
+elseif S3
+land_position rnd(86,86) rnd(62,62)
+elseif S4
+land_position rnd(84,84) rnd(63,63)
+elseif S5
+land_position rnd(85,85) rnd(63,63)
+elseif S6
+land_position rnd(86,86) rnd(63,63)
+elseif S7
+land_position rnd(84,84) rnd(64,64)
+elseif S8
+land_position rnd(86,86) rnd(64,64)
+elseif S9
+land_position rnd(87,87) rnd(65,65)
+elseif S10
+land_position rnd(85,85) rnd(66,66)
+elseif S11
+land_position rnd(86,86) rnd(66,66)
+elseif S12
+land_position rnd(87,87) rnd(66,66)
+elseif S13
+land_position rnd(85,85) rnd(67,67)
+elseif S14
+land_position rnd(86,86) rnd(67,67)
+elseif S15
+land_position rnd(88,88) rnd(68,68)
+endif
+else
+if S1
+land_position rnd(69,69) rnd(42,42)
+elseif S2
+land_position rnd(70,70) rnd(41,41)
+elseif S3
+land_position rnd(70,70) rnd(41,41)
+elseif S4
+land_position rnd(70,70) rnd(43,43)
+elseif S5
+land_position rnd(71,71) rnd(42,42)
+elseif S6
+land_position rnd(71,71) rnd(41,41)
+elseif S7
+land_position rnd(71,71) rnd(44,44)
+elseif S8
+land_position rnd(71,71) rnd(43,43)
+elseif S9
+land_position rnd(72,72) rnd(42,42)
+elseif S10
+land_position rnd(72,72) rnd(44,44)
+elseif S11
+land_position rnd(72,72) rnd(43,43)
+elseif S12
+land_position rnd(73,73) rnd(42,42)
+elseif S13
+land_position rnd(72,72) rnd(45,45)
+elseif S14
+land_position rnd(73,73) rnd(44,44)
+elseif S15
+land_position rnd(73,73) rnd(43,43)
+endif
+endif
+}
+L
+{
+terrain_type PT7
+base_size 0
+base_elevation 1
+number_of_tiles 14400
+clumping_factor 30
+   
+if C8P1
+assign_to AT_COLOR 7 0 0
+elseif C8P2
+assign_to AT_COLOR 1 0 0
+elseif C8P3
+assign_to AT_COLOR 1 0 0
+elseif C8P4
+assign_to AT_COLOR 7 0 0
+else
+if 4_TEAM_GAME
+assign_to AT_TEAM 3 0 0
+elseif 3_TEAM_GAME
+assign_to AT_TEAM 3 0 0
+elseif 2_TEAM_GAME
+assign_to AT_TEAM 1 0 0
+elseif 1_TEAM_GAME
+assign_to AT_TEAM 1 0 0
+else
+assign_to AT_TEAM -10 0 0
+endif
+endif
+if P2
+if S1
+land_position rnd(71,71) rnd(42,42)
+elseif S2
+land_position rnd(72,72) rnd(41,41)
+elseif S3
+land_position rnd(72,72) rnd(40,40)
+elseif S4
+land_position rnd(74,74) rnd(45,45)
+elseif S5
+land_position rnd(74,74) rnd(44,44)
+elseif S6
+land_position rnd(75,75) rnd(44,44)
+elseif S7
+land_position rnd(76,76) rnd(48,48)
+elseif S8
+land_position rnd(77,77) rnd(47,47)
+elseif S9
+land_position rnd(78,78) rnd(46,46)
+elseif S10
+land_position rnd(79,79) rnd(50,50)
+elseif S11
+land_position rnd(80,80) rnd(50,50)
+elseif S12
+land_position rnd(80,80) rnd(49,49)
+elseif S13
+land_position rnd(82,82) rnd(53,53)
+elseif S14
+land_position rnd(83,83) rnd(52,52)
+elseif S15
+land_position rnd(84,84) rnd(52,52)
+endif
+elseif P4
+if S1
+land_position rnd(81,81) rnd(56,56)
+elseif S2
+land_position rnd(82,82) rnd(56,56)
+elseif S3
+land_position rnd(83,83) rnd(56,56)
+elseif S4
+land_position rnd(82,82) rnd(58,58)
+elseif S5
+land_position rnd(83,83) rnd(58,58)
+elseif S6
+land_position rnd(84,84) rnd(57,57)
+elseif S7
+land_position rnd(83,83) rnd(59,59)
+elseif S8
+land_position rnd(84,84) rnd(59,59)
+elseif S9
+land_position rnd(86,86) rnd(59,59)
+elseif S10
+land_position rnd(84,84) rnd(61,61)
+elseif S11
+land_position rnd(85,85) rnd(61,61)
+elseif S12
+land_position rnd(87,87) rnd(61,61)
+elseif S13
+land_position rnd(85,85) rnd(63,63)
+elseif S14
+land_position rnd(86,86) rnd(63,63)
+elseif S15
+land_position rnd(88,88) rnd(63,63)
+endif
+elseif P6
+if S1
+land_position rnd(83,83) rnd(62,62)
+elseif S2
+land_position rnd(85,85) rnd(62,62)
+elseif S3
+land_position rnd(86,86) rnd(62,62)
+elseif S4
+land_position rnd(84,84) rnd(63,63)
+elseif S5
+land_position rnd(85,85) rnd(63,63)
+elseif S6
+land_position rnd(86,86) rnd(63,63)
+elseif S7
+land_position rnd(84,84) rnd(64,64)
+elseif S8
+land_position rnd(86,86) rnd(64,64)
+elseif S9
+land_position rnd(87,87) rnd(65,65)
+elseif S10
+land_position rnd(85,85) rnd(66,66)
+elseif S11
+land_position rnd(86,86) rnd(66,66)
+elseif S12
+land_position rnd(87,87) rnd(66,66)
+elseif S13
+land_position rnd(85,85) rnd(67,67)
+elseif S14
+land_position rnd(86,86) rnd(67,67)
+elseif S15
+land_position rnd(88,88) rnd(68,68)
+endif
+else
+if S1
+land_position rnd(40,40) rnd(55,55)
+elseif S2
+land_position rnd(39,39) rnd(55,55)
+elseif S3
+land_position rnd(38,38) rnd(54,54)
+elseif S4
+land_position rnd(40,40) rnd(56,56)
+elseif S5
+land_position rnd(38,38) rnd(56,56)
+elseif S6
+land_position rnd(37,37) rnd(55,55)
+elseif S7
+land_position rnd(39,39) rnd(57,57)
+elseif S8
+land_position rnd(38,38) rnd(57,57)
+elseif S9
+land_position rnd(37,37) rnd(57,57)
+elseif S10
+land_position rnd(39,39) rnd(58,58)
+elseif S11
+land_position rnd(38,38) rnd(58,58)
+elseif S12
+land_position rnd(37,37) rnd(58,58)
+elseif S13
+land_position rnd(39,39) rnd(59,59)
+elseif S14
+land_position rnd(38,38) rnd(59,59)
+elseif S15
+land_position rnd(37,37) rnd(59,59)
+endif
+endif
+}
+L
+{
+terrain_type PT8
+base_size 0
+base_elevation 1
+number_of_tiles 14400
+clumping_factor 30
+   
+if C8P1
+assign_to AT_COLOR 8 0 0
+elseif C8P2
+assign_to AT_COLOR 8 0 0
+elseif C8P3
+assign_to AT_COLOR 2 0 0
+elseif C8P4
+assign_to AT_COLOR 2 0 0
+else
+if 4_TEAM_GAME
+assign_to AT_TEAM 4 0 0
+elseif 3_TEAM_GAME
+assign_to AT_TEAM 2 0 0
+elseif 2_TEAM_GAME
+assign_to AT_TEAM 2 0 0
+elseif 1_TEAM_GAME
+assign_to AT_TEAM -10 0 0
+else
+assign_to AT_TEAM -10 0 0
+endif
+endif
+if P2
+if S1
+land_position rnd(71,71) rnd(42,42)
+elseif S2
+land_position rnd(72,72) rnd(41,41)
+elseif S3
+land_position rnd(72,72) rnd(40,40)
+elseif S4
+land_position rnd(74,74) rnd(45,45)
+elseif S5
+land_position rnd(74,74) rnd(44,44)
+elseif S6
+land_position rnd(75,75) rnd(44,44)
+elseif S7
+land_position rnd(76,76) rnd(48,48)
+elseif S8
+land_position rnd(77,77) rnd(47,47)
+elseif S9
+land_position rnd(78,78) rnd(46,46)
+elseif S10
+land_position rnd(79,79) rnd(50,50)
+elseif S11
+land_position rnd(80,80) rnd(50,50)
+elseif S12
+land_position rnd(80,80) rnd(49,49)
+elseif S13
+land_position rnd(82,82) rnd(53,53)
+elseif S14
+land_position rnd(83,83) rnd(52,52)
+elseif S15
+land_position rnd(84,84) rnd(52,52)
+endif
+elseif P4
+if S1
+land_position rnd(81,81) rnd(56,56)
+elseif S2
+land_position rnd(82,82) rnd(56,56)
+elseif S3
+land_position rnd(83,83) rnd(56,56)
+elseif S4
+land_position rnd(82,82) rnd(58,58)
+elseif S5
+land_position rnd(83,83) rnd(58,58)
+elseif S6
+land_position rnd(84,84) rnd(57,57)
+elseif S7
+land_position rnd(83,83) rnd(59,59)
+elseif S8
+land_position rnd(84,84) rnd(59,59)
+elseif S9
+land_position rnd(86,86) rnd(59,59)
+elseif S10
+land_position rnd(84,84) rnd(61,61)
+elseif S11
+land_position rnd(85,85) rnd(61,61)
+elseif S12
+land_position rnd(87,87) rnd(61,61)
+elseif S13
+land_position rnd(85,85) rnd(63,63)
+elseif S14
+land_position rnd(86,86) rnd(63,63)
+elseif S15
+land_position rnd(88,88) rnd(63,63)
+endif
+elseif P6
+if S1
+land_position rnd(83,83) rnd(62,62)
+elseif S2
+land_position rnd(85,85) rnd(62,62)
+elseif S3
+land_position rnd(86,86) rnd(62,62)
+elseif S4
+land_position rnd(84,84) rnd(63,63)
+elseif S5
+land_position rnd(85,85) rnd(63,63)
+elseif S6
+land_position rnd(86,86) rnd(63,63)
+elseif S7
+land_position rnd(84,84) rnd(64,64)
+elseif S8
+land_position rnd(86,86) rnd(64,64)
+elseif S9
+land_position rnd(87,87) rnd(65,65)
+elseif S10
+land_position rnd(85,85) rnd(66,66)
+elseif S11
+land_position rnd(86,86) rnd(66,66)
+elseif S12
+land_position rnd(87,87) rnd(66,66)
+elseif S13
+land_position rnd(85,85) rnd(67,67)
+elseif S14
+land_position rnd(86,86) rnd(67,67)
+elseif S15
+land_position rnd(88,88) rnd(68,68)
+endif
+else
+if S1
+land_position rnd(84,84) rnd(65,65)
+elseif S2
+land_position rnd(85,85) rnd(65,65)
+elseif S3
+land_position rnd(86,86) rnd(65,65)
+elseif S4
+land_position rnd(84,84) rnd(66,66)
+elseif S5
+land_position rnd(86,86) rnd(66,66)
+elseif S6
+land_position rnd(87,87) rnd(66,66)
+elseif S7
+land_position rnd(85,85) rnd(67,67)
+elseif S8
+land_position rnd(86,86) rnd(67,67)
+elseif S9
+land_position rnd(87,87) rnd(67,67)
+elseif S10
+land_position rnd(85,85) rnd(68,68)
+elseif S11
+land_position rnd(86,86) rnd(68,68)
+elseif S12
+land_position rnd(87,87) rnd(69,69)
+elseif S13
+land_position rnd(85,85) rnd(69,69)
+elseif S14
+land_position rnd(86,86) rnd(70,70)
+elseif S15
+land_position rnd(87,87) rnd(70,70)
+endif
+endif
+}
+L { terrain_type DLC_GRAVELBEACH land_position 1 1 base_size 0 number_of_tiles 12000 }

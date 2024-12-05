@@ -2934,6 +2934,9 @@ if CRACKED_PLANET /* "I am Ozymandias, king of kings. Look on my works, ye might
 			actor_area 11
 			actor_area_radius 3
 			max_distance_to_other_zones 2 
+			set_gaia_object_only
+			set_gaia_unconvertible
+			make_indestructible
 		} /* add a small chance of stone - still a fairly desolate landscape */
 		start_random
 			percent_chance 75 #define NO_CRACKED_STONE
@@ -2949,6 +2952,9 @@ if CRACKED_PLANET /* "I am Ozymandias, king of kings. Look on my works, ye might
 			actor_area_radius 5
 			min_distance_group_placement 4
 			max_distance_to_other_zones 4 /* TODO test to determine the right number for this, and check pyramid as well */
+			set_gaia_object_only
+			set_gaia_unconvertible
+			make_indestructible
 		}
 		create_object GOLD { /* a single layer of gold surrounding the pyramid */
 			number_of_objects 9320
@@ -2967,6 +2973,9 @@ if CRACKED_PLANET /* "I am Ozymandias, king of kings. Look on my works, ye might
 			actor_area 11
 			actor_area_radius 3
 			max_distance_to_other_zones 2 
+			set_gaia_object_only
+			set_gaia_unconvertible
+			make_indestructible
 		}
 		start_random
 			percent_chance 10 #define NO_CRACKED_STONE

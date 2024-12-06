@@ -27,9 +27,9 @@ M = [x y]; CC = [62 62];
 tail1 = LandScribeV5([{'DLC_GRAVELBEACH'}],[{0}],{[0 -22]},{45},{'0*x'},{1},{1},[-60 -9]);
 tail2 = LandScribeV5([{'DLC_GRAVELBEACH'}],[{0}],{[0 22]},{45},{'0*x'},{1},{1},[-60 -9]);
 tail3 = LandScribeV5([{'DLC_GRAVELBEACH'}],[{0}],{[0 26]},{135},{'-0.01*x.^2'},{1},{1},[-23 23]);
-tail4 = LandScribeV5([{'ICYSHORE'}],[{0}],{[0 22]},{135},{'-0.01*x.^2'},{1},{2},[+22 +23]);
-tail5 = LandScribeV5([{'ICYSHORE'}],[{0}],{[0 22]},{135},{'-0.01*x.^2'},{1},{2},[-23 -22]);
-tail5 = LandScribeV5([{'ICYSHORE'}],[{0}],{[0 22]},{135},{'-0.01*x.^2'},{1},{2},[-23 -22]);
+tail4 = LandScribeV5([{'ICYSHORE'}],[{0}],{[0 21]},{135},{'-0.01*x.^2'},{1},{2},[+22 +23]);
+tail5 = LandScribeV5([{'ICYSHORE'}],[{0}],{[0 21]},{135},{'-0.01*x.^2'},{1},{2},[-23 -22]);
+tail5 = LandScribeV5([{'ICYSHORE'}],[{0}],{[0 21]},{135},{'-0.01*x.^2'},{1},{2},[-23 -22]);
 
 
 TL = LandScribeV5([{'DLC_WETROCKBEACH'}],[{1}],{CC},{45},{M},{1});
@@ -65,7 +65,7 @@ COMMAND = [RMS_Processor_V4([TL; tail5; tail4; tail3; tail1; tail2],LPM_exp); cr
 MLA = [{'L { terrain_type DLC_GRAVELBEACH land_position 1 1 base_size 0 number_of_tiles 12000 }'}];
 
 
-##%ObjectAutoscribeV8('Comet.ods')
+%ObjectAutoscribeV10('SPC_11_Comet.ods')
 CODE = [Preface; COMMAND; MLA]; %Adding Preface, Definitions, Random Statement to beginning of CODE
 RMS_ForgeV4(filename,CODE);
 

@@ -28,6 +28,13 @@ feedback from shiXo: have since made changes
 gold spawns inconsistent and sometimes unfair (gold for blue far away, green almost in range) - now guarantee one gold pile close to player
 berries/deer close to starting mining camp can be unfair - now guaranteed to start away from mining camp (but can still spawn close to river)
 
+TODO: make/test wanted changes:
+
+wanted changes: add oysters for antiquity mode, reduce player golds, and increase freqency of river golds (but reduce amount of gold/pile to match oysters - or alternatively increase oysters gold/pile to match gold piles)
+change bears to be regular boars rather than iron boars.
+test the hunting wolf changes: ideally want it to lose 1-v-1 against a villager, 
+
+sea walls? test with the new antiquity civs, but I suspect I'll have to pass on this.
 */
 
 <PLAYER_SETUP>
@@ -309,6 +316,8 @@ endif
 if TOURNAMENT_VERSION
     effect_amount SET_ATTRIBUTE HUNTING_WOLF ATTR_SHOWN_ATTACK 0
     effect_amount ADD_ATTRIBUTE HUNTING_WOLF ATTR_ATTACK -1032 /* -(4*256 + 8) : subtracts 8 melee damage from its base of 8 damage. */
+    effect_amount SET_ATTRIBUTE HUNTING_WOLF ATTR_BASE_ARMOR 255
+    #define SPECIAL_BEAR_DEFINED
 else
     effect_amount SET_ATTRIBUTE HUNTING_WOLF ATTR_SHOWN_ATTACK 4
     effect_amount ADD_ATTRIBUTE HUNTING_WOLF ATTR_ATTACK -1028 /* -(4*256 + 4) : subtracts 4 melee damage from its base of 8 damage. */
@@ -316,24 +325,36 @@ else
 endif
 
 /* Alaskan Bears */
-#define SPECIAL_BEAR_DEFINED
-#const ALASKAN_BEAR 810 /* IRON_BOAR */
 #const DEAD_BOAR 356
-effect_amount GAIA_SET_ATTRIBUTE DEAD_BOAR ATTR_STANDING_GRAPHIC 8239
-effect_amount GAIA_SET_ATTRIBUTE ALASKAN_BEAR ATTR_ATTACK_GRAPHIC 8236
-effect_amount GAIA_SET_ATTRIBUTE ALASKAN_BEAR ATTR_STANDING_GRAPHIC 8238
-effect_amount GAIA_SET_ATTRIBUTE ALASKAN_BEAR ATTR_STANDING2_GRAPHIC 8238
-effect_amount GAIA_SET_ATTRIBUTE ALASKAN_BEAR ATTR_DYING_GRAPHIC 8237
-effect_amount GAIA_SET_ATTRIBUTE ALASKAN_BEAR ATTR_UNDEAD_GRAPHIC 8237
-effect_amount GAIA_SET_ATTRIBUTE ALASKAN_BEAR ATTR_WALKING_GRAPHIC 8240
-effect_amount GAIA_SET_ATTRIBUTE ALASKAN_BEAR ATTR_RUNNING_GRAPHIC 8241
-effect_amount GAIA_SET_ATTRIBUTE ALASKAN_BEAR ATTR_NAME_ID 5713
-effect_amount GAIA_SET_ATTRIBUTE ALASKAN_BEAR ATTR_ICON_ID 151
-effect_amount GAIA_SET_ATTRIBUTE ALASKAN_BEAR ATTR_STORAGE_VALUE 510
-effect_amount GAIA_SET_ATTRIBUTE ALASKAN_BEAR ATTR_HERO_STATUS 66
-effect_amount GAIA_SET_ATTRIBUTE ALASKAN_BEAR ATTR_HITPOINTS 24
-effect_amount GAIA_SET_ATTRIBUTE ALASKAN_BEAR ATTR_LINE_OF_SIGHT 5
-effect_amount GAIA_SET_ATTRIBUTE ALASKAN_BEAR ATTR_SEARCH_RADIUS 5
+if SPECIAL_BEAR_DEFINED
+    effect_amount GAIA_SET_ATTRIBUTE DEAD_BOAR ATTR_STANDING_GRAPHIC 8239
+    effect_amount GAIA_SET_ATTRIBUTE BOAR ATTR_ATTACK_GRAPHIC 8236
+    effect_amount GAIA_SET_ATTRIBUTE BOAR ATTR_STANDING_GRAPHIC 8238
+    effect_amount GAIA_SET_ATTRIBUTE BOAR ATTR_STANDING2_GRAPHIC 8238
+    effect_amount GAIA_SET_ATTRIBUTE BOAR ATTR_DYING_GRAPHIC 8237
+    effect_amount GAIA_SET_ATTRIBUTE BOAR ATTR_UNDEAD_GRAPHIC 8237
+    effect_amount GAIA_SET_ATTRIBUTE BOAR ATTR_WALKING_GRAPHIC 8240
+    effect_amount GAIA_SET_ATTRIBUTE BOAR ATTR_RUNNING_GRAPHIC 8241
+    effect_amount GAIA_SET_ATTRIBUTE BOAR ATTR_NAME_ID 5713
+    effect_amount GAIA_SET_ATTRIBUTE BOAR ATTR_ICON_ID 151
+elseif IRON_BEAR_DEFINED
+    #const ALASKAN_BEAR 810 /* IRON_BOAR */
+    effect_amount GAIA_SET_ATTRIBUTE DEAD_BOAR ATTR_STANDING_GRAPHIC 8239
+    effect_amount GAIA_SET_ATTRIBUTE ALASKAN_BEAR ATTR_ATTACK_GRAPHIC 8236
+    effect_amount GAIA_SET_ATTRIBUTE ALASKAN_BEAR ATTR_STANDING_GRAPHIC 8238
+    effect_amount GAIA_SET_ATTRIBUTE ALASKAN_BEAR ATTR_STANDING2_GRAPHIC 8238
+    effect_amount GAIA_SET_ATTRIBUTE ALASKAN_BEAR ATTR_DYING_GRAPHIC 8237
+    effect_amount GAIA_SET_ATTRIBUTE ALASKAN_BEAR ATTR_UNDEAD_GRAPHIC 8237
+    effect_amount GAIA_SET_ATTRIBUTE ALASKAN_BEAR ATTR_WALKING_GRAPHIC 8240
+    effect_amount GAIA_SET_ATTRIBUTE ALASKAN_BEAR ATTR_RUNNING_GRAPHIC 8241
+    effect_amount GAIA_SET_ATTRIBUTE ALASKAN_BEAR ATTR_NAME_ID 5713
+    effect_amount GAIA_SET_ATTRIBUTE ALASKAN_BEAR ATTR_ICON_ID 151
+    effect_amount GAIA_SET_ATTRIBUTE ALASKAN_BEAR ATTR_STORAGE_VALUE 510
+    effect_amount GAIA_SET_ATTRIBUTE ALASKAN_BEAR ATTR_HERO_STATUS 66
+    effect_amount GAIA_SET_ATTRIBUTE ALASKAN_BEAR ATTR_HITPOINTS 24
+    effect_amount GAIA_SET_ATTRIBUTE ALASKAN_BEAR ATTR_LINE_OF_SIGHT 5
+    effect_amount GAIA_SET_ATTRIBUTE ALASKAN_BEAR ATTR_SEARCH_RADIUS 5
+endif
 
 /* TODO check what happens if I change the dead id for the iron boar? bear_dead is 489
 Looks like no bonus damage, so just 12-2 damage against the hunting wolf
@@ -419,15 +440,15 @@ create_elevation 3 {
 */
 create_elevation 3 {
     base_terrain SNOW_LIGHT
-    number_of_clumps 16
-    number_of_tiles 300
+    number_of_clumps 20
+    number_of_tiles 450
     set_scale_by_size
     enable_balanced_elevation
 }
 create_elevation 2 {
     base_terrain SNOW_LIGHT
-    number_of_clumps 16
-    number_of_tiles 300
+    number_of_clumps 24
+    number_of_tiles 600
     set_scale_by_size
     enable_balanced_elevation
 }
@@ -536,21 +557,12 @@ create_object SHARKATZOR {
 */
 /* TODO consider seeing if I can rename it White Fang
 */
-if TOURNAMENT_VERSION
-    create_object HORSE { 
-        set_place_for_every_player
-        min_distance_to_players 7
-        max_distance_to_players 9
-        set_circular_placement
-    }
-else
-    create_object HUNTING_WOLF { 
-        set_place_for_every_player
-        min_distance_to_players 7
-        max_distance_to_players 9
-        set_circular_placement
-    }
-endif
+create_object HUNTING_WOLF { 
+    set_place_for_every_player
+    min_distance_to_players 7
+    max_distance_to_players 9
+    set_circular_placement
+}
 create_object HOUSE {
     set_place_for_every_player
     min_distance_to_players 10
@@ -589,16 +601,25 @@ create_object DLC_PENGUIN { /* note: seed 984964488 tiny map size 4 players - pl
 }
 
 /* best method I can figure out: does risk the possibility of villagers starting seperate from the mining camp though. */
-
-create_object GOLD {
-    set_gaia_object_only
-    terrain_to_place_on DLC_NEWSHALLOW
-    ignore_terrain_restrictions /* optional: use rms effect instead to change terrain id of gold - would allow player gold piles to potentially end up across the river, so not the best option. */
-    temp_min_distance_group_placement 3
-    min_distance_group_placement 1
-    number_of_objects 9320
-    /* resource_delta -400 */
-} 
+if ANTIQUITY_MODE
+    create_object OYSTERS {
+        set_gaia_object_only
+        temp_min_distance_group_placement 2
+        min_distance_group_placement 1
+        number_of_objects 9320
+        /* resource_delta -400 */
+    } 
+else
+    create_object GOLD {
+        set_gaia_object_only
+        terrain_to_place_on DLC_NEWSHALLOW
+        ignore_terrain_restrictions /* optional: use rms effect instead to change terrain id of gold - would allow player gold piles to potentially end up across the river, so not the best option. */
+        temp_min_distance_group_placement 3
+        min_distance_group_placement 1
+        number_of_objects 9320
+        /* resource_delta -400 */
+    } 
+endif
 create_object ON_GRID {
     second_object SHORE_FISH
     number_of_objects 9320
@@ -606,30 +627,42 @@ create_object ON_GRID {
     min_distance_group_placement 1
     terrain_to_place_on DLC_NEWSHALLOW
 }
-create_object GOLD {
-    set_gaia_object_only
-    terrain_to_place_on DLC_NEWSHALLOW
-    ignore_terrain_restrictions 
-    temp_min_distance_group_placement 5
-    min_distance_group_placement 3
-    number_of_objects 9320
-    /* resource_delta -400 */
-} 
-create_object GOLD {
-    set_place_for_every_player
-    set_gaia_object_only
-    actor_area_to_place_in 10 /* mining camp */
-    terrain_to_place_on DLC_NEWSHALLOW
-    ignore_terrain_restrictions 
-    min_distance_group_placement 1
-    /* resource_delta -400 */
-    number_of_groups 99
-    temp_min_distance_group_placement 3
-}
+if ANTIQUITY_MODE
+    create_object OYSTERS {
+        set_place_for_every_player
+        set_gaia_object_only
+        actor_area_to_place_in 10 /* mining camp */
+        temp_min_distance_group_placement 4
+        min_distance_group_placement 2
+        number_of_objects 9320
+        /* resource_delta -400 */
+    } 
+else
+    create_object GOLD {
+        set_gaia_object_only
+        terrain_to_place_on DLC_NEWSHALLOW
+        ignore_terrain_restrictions 
+        temp_min_distance_group_placement 5
+        min_distance_group_placement 3
+        number_of_objects 9320
+        /* resource_delta -400 */
+    } 
+    create_object GOLD {
+        set_place_for_every_player
+        set_gaia_object_only
+        actor_area_to_place_in 10 /* mining camp */
+        terrain_to_place_on DLC_NEWSHALLOW
+        ignore_terrain_restrictions 
+        min_distance_group_placement 1
+        /* resource_delta -400 */
+        number_of_groups 99
+        temp_min_distance_group_placement 3
+    }
+endif
 /* create player resources 
  */
 create_object GOLD { 
-    number_of_objects 4
+    number_of_objects 3
     temp_min_distance_group_placement 6
     min_distance_group_placement 2
     group_placement_radius 1
@@ -676,7 +709,7 @@ create_object STONE {
     avoid_actor_area 103 /* gold mines */
 }
 create_object GOLD { 
-    number_of_objects 4
+    number_of_objects 2
     number_of_groups 2
     min_distance_group_placement 2
     group_placement_radius 1
@@ -829,20 +862,18 @@ if TOURNAMENT_VERSION
         create_actor_area 239 239 0 191
         create_actor_area 240 240 0 191
     endif
-    create_object ALASKAN_BEAR {
+    create_object BOAR {
         number_of_groups 99
         set_scaling_to_map_size
         set_loose_grouping
         set_gaia_object_only
-        set_gaia_unconvertible /* supposed to make it stay in place more - personally don't care for this behavior. TODO switch after tourney? */
         set_circular_placement
         min_distance_to_players 36
         temp_min_distance_group_placement 32
         avoid_forest_zone 1
         min_distance_group_placement 3
-        avoid_actor_area 0
-        avoid_actor_area 8
-        avoid_actor_area 10
+        avoid_actor_area 8 /* river villagers */
+        avoid_actor_area 10 /* mining camp */
         terrain_to_place_on SNOW_LIGHT
         actor_area 105
         actor_area_radius 12 /* as required by specs */
@@ -1015,7 +1046,7 @@ if TOURNAMENT_VERSION /* bears made earlier */
         avoid_actor_area 10
         terrain_to_place_on SNOW_LIGHT
     }
-elseif SPECIAL_BEAR_DEFINED
+elseif IRON_BEAR_DEFINED
     create_object ALASKAN_BEAR { /* TODO improve bear placement */
         number_of_groups 99
         set_scaling_to_map_size

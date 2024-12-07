@@ -6,6 +6,9 @@
 
 <PLAYER_SETUP>
 direct_placement
+nomad_resources
+ai_info_map_type MIGRATION 1 0 0
+behavior_version 1
 #const L 32
 /* Defining Terrains */
 #const G 0
@@ -78,9 +81,7 @@ effect_percent SET_ATTRIBUTE PHOTON_MAN ATTR_MOVE_SPEED 130
 
 effect_amount GAIA_SET_ATTRIBUTE OFT ATTR_TERRAIN_ID 13
 
-nomad_resources
-ai_info_map_type NOMAD 1 0 0
-behavior_version 1
+
   
 /* Lumber Piles */
 effect_amount GAIA_SET_ATTRIBUTE TREE_A ATTR_STANDING_GRAPHIC 10376
@@ -702,6 +703,16 @@ create_object DOLPHIN
 	temp_min_distance_group_placement 12
 	endif
 }
+create_object GOLD
+{
+	set_gaia_object_only
+	set_place_for_every_player
+	resource_delta -400
+	min_distance_to_players 4
+	max_distance_to_players 7	
+
+}
+
 /* ROMAN RUINS */
 /*
 create_object ROMAN_RUINS

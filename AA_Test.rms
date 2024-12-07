@@ -1,0 +1,48 @@
+
+if NONCOMBAT_VERSION
+    effect_amount SET_ATTRIBUTE HUNTING_WOLF ATTR_SHOWN_ATTACK 0
+    effect_amount ADD_ATTRIBUTE HUNTING_WOLF ATTR_ATTACK -1032 /* -(4*256 + 8) : subtracts 8 melee damage from its base of 8 damage. */
+    effect_amount ADD_ATTRIBUTE HUNTING_WOLF ATTR_ARMOR -1028 /* -(4*256 + 4) subtracts 4 melee armor */
+    effect_amount ADD_ATTRIBUTE HUNTING_WOLF ATTR_SHOWN_MELEE_ARMOR -4 /* should set melee armor to -2 */
+    effect_amount ADD_ATTRIBUTE HUNTING_WOLF ATTR_RELOAD_TIME 1 /* increase from 2 to 3 */
+    effect_amount SET_ATTRIBUTE HUNTING_WOLF ATTR_BASE_ARMOR 255
+    effect_amount SET_ATTRIBUTE HUNTING_WOLF ATTR_ARMOR 9472 /* should set heavy siege armor to 0 - not functional, likely because hunting wolf doesn't normally have heavy siege armor class. */
+else 
+    effect_amount SET_ATTRIBUTE HUNTING_WOLF ATTR_SHOWN_ATTACK 4 
+    effect_amount SET_ATTRIBUTE HUNTING_WOLF ATTR_HITPOINTS 50
+    effect_amount ADD_ATTRIBUTE HUNTING_WOLF ATTR_ATTACK -1028 /* -(4*256 + 8) : subtracts 8 melee damage from its base of 8 damage. */
+    effect_amount ADD_ATTRIBUTE HUNTING_WOLF ATTR_ARMOR -1028 /* -(4*256 + 4) subtracts 4 melee armor */
+    effect_amount ADD_ATTRIBUTE HUNTING_WOLF ATTR_SHOWN_MELEE_ARMOR -4 /* should set melee armor to -2 */
+    effect_amount SET_ATTRIBUTE HUNTING_WOLF ATTR_BASE_ARMOR 255
+    effect_amount SET_ATTRIBUTE HUNTING_WOLF ATTR_ARMOR 9472 /* should set heavy siege armor to 0 - not functional, likely because hunting wolf doesn't normally have heavy siege armor class. */
+endif 
+/* combat version should lose to a loomed vil, but beat an unloomed vil: with 4 damage, it needs 7 hits to kill an unloomed vil and 14 to kill a loomed vil (during which a vil theoretically gets 21 hits off). With 60 hp and -2 melee armor, a vil needs 12 hits to kill, not counting hp regen. With 100 hp and -2 melee armor, a vil needs 20 hits to kill, not counting hp regen. 20 hits take 40 seconds, during which the hunting wolf regens 20 hp (requiring 4 more hits, plus an additional 1 due to extra hp regen): so I assume 25 hits with the 2 engaging each other constantly. With 80 hp, a vil needs 16 hits to kill before hp regen, (which would be 16 hp over 32 seconds) - add in 4 hits and you get a total of 20 hits to kill.
+Based on testing and calculations, 80 hp on the hunting wolf is enough that a loomed vil and the hunting wolf would kill each other almost equally fast (assuming increased reload time and lowered melee armor on the hunting wolf). So I'm reducing to 70 hp
+ */
+
+<LAND_GENERATION>
+base_terrain WATER
+create_player_lands {
+    base_terrain GRASS2
+    land_percent 0
+    circle_radius 1 0
+    base_size 1
+}
+
+<OBJECTS_GENERATION>
+create_object VILLAGER {
+    temp_min_distance_group_placement 30
+    max_distance_to_players 1
+    set_place_for_every_player
+}
+
+create_object HUNTING_WOLF {
+    set_place_for_every_player
+    min_distance_to_players 0
+}
+create_object TRANSPORT_SHIP {
+    set_place_for_every_player
+    ignore_terrain_restrictions
+    find_closest
+    min_distance_to_players 5
+}

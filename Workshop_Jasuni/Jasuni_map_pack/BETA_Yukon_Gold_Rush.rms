@@ -316,7 +316,11 @@ endif
 if TOURNAMENT_VERSION
     effect_amount SET_ATTRIBUTE HUNTING_WOLF ATTR_SHOWN_ATTACK 0
     effect_amount ADD_ATTRIBUTE HUNTING_WOLF ATTR_ATTACK -1032 /* -(4*256 + 8) : subtracts 8 melee damage from its base of 8 damage. */
+    effect_amount ADD_ATTRIBUTE HUNTING_WOLF ATTR_ARMOR -1028 /* -(4*256 + 4) subtracts 4 melee armor */
+    effect_amount ADD_ATTRIBUTE HUNTING_WOLF ATTR_SHOWN_MELEE_ARMOR -4 /* should set melee armor to -2 */
+    effect_amount ADD_ATTRIBUTE HUNTING_WOLF ATTR_RELOAD_TIME 1 /* increase from 2 to 3 */
     effect_amount SET_ATTRIBUTE HUNTING_WOLF ATTR_BASE_ARMOR 255
+    effect_amount SET_ATTRIBUTE HUNTING_WOLF ATTR_ARMOR 9472 /* should set heavy siege armor to 0 - not functional, likely because hunting wolf doesn't normally have heavy siege armor class. */
     #define SPECIAL_BEAR_DEFINED
 else
     effect_amount SET_ATTRIBUTE HUNTING_WOLF ATTR_SHOWN_ATTACK 4

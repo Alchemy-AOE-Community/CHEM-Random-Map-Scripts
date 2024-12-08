@@ -81,28 +81,20 @@ effect_percent SET_ATTRIBUTE PHOTON_MAN ATTR_MOVE_SPEED 130
 
 effect_amount GAIA_SET_ATTRIBUTE OFT ATTR_TERRAIN_ID 13
 
-
-  
+ 
 /* Lumber Piles */
 effect_amount GAIA_SET_ATTRIBUTE TREE_A ATTR_STANDING_GRAPHIC 10376
 effect_amount GAIA_SET_ATTRIBUTE TREE_A ATTR_DYING_GRAPHIC    10376
 effect_amount GAIA_SET_ATTRIBUTE TREE_A ATTR_UNDEAD_GRAPHIC   10376
 effect_amount GAIA_SET_ATTRIBUTE TREE_A ATTR_DEAD_ID 0
 effect_amount GAIA_SET_ATTRIBUTE TREE_A ATTR_NAME_ID 5706
+effect_amount GAIA_SET_ATTRIBUTE TREE_A ATTR_STORAGE_VALUE rnd(50,150)
+
 
 <ELEVATION_GENERATION>
 create_elevation 1
 {
 	base_terrain GRASS
-	number_of_tiles 10000
-	number_of_clumps 3200
-	set_scale_by_size
-	enable_balanced_elevation
-}
-
-create_elevation 7
-{
-	base_terrain PT1
 	number_of_tiles 10000
 	number_of_clumps 3200
 	set_scale_by_size
@@ -361,6 +353,16 @@ create_object PHOTON_MAN
 	max_distance_to_players 6
 	terrain_to_place_on GRAVEL
 }
+create_object TRAP
+{
+	set_gaia_object_only
+	set_place_for_every_player
+	number_of_groups 5
+	terrain_to_place_on DLC_WETROCKBEACH
+	temp_min_distance_group_placement 6
+	find_closest
+	second_object DLC_BOXTURTLE
+}
 
 create_object TREE_A
 {
@@ -561,7 +563,7 @@ create_object DLC_GOAT
 	number_of_groups 999
 	set_loose_grouping
 	set_gaia_object_only
-	temp_min_distance_group_placement 20
+	temp_min_distance_group_placement 14
 	avoid_forest_zone 2
 	terrain_to_place_on GRASS
 	max_distance_to_other_zones 6
@@ -678,6 +680,7 @@ create_object TRAP
 	set_scaling_to_map_size
 	terrain_to_place_on DLC_WATER5
 	temp_min_distance_group_placement 7
+	min_distance_to_players 12
 	find_closest
 	actor_area 70
 	actor_area_radius 6
@@ -707,11 +710,14 @@ create_object GOLD
 {
 	set_gaia_object_only
 	set_place_for_every_player
-	resource_delta -400
+	resource_delta rnd(-600,-200)
 	min_distance_to_players 4
 	max_distance_to_players 7	
 
 }
+
+
+
 
 /* ROMAN RUINS */
 /*

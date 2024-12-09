@@ -2,7 +2,7 @@
 /* A Random Map Script by TechChariot and Huehuecoyotl22 */
 /* Original Release 2024-02-19 - land generation by TechChariot */
 /* Update 2024-02-25 - terrain modification and objects generation by Huehuecoyotl22 */
-/* Update 2024-11-22 - updated some aspects to follow the updated specifications
+/* Update 2024-11-22 - updated some aspects to follow the updated specifications */
 /* Consent is given for this map to be used in Alchemy League Season 5, and Content Creation by Alchemy AOE Community Members */
 /* Component Specification: https://github.com/Alchemy-AOE-Community/CHEM-Published-Specifications/blob/download-to-click-links/SCRIPTING/SPACE/CHEM-CSRM-SPC-01 */
 
@@ -31,6 +31,16 @@ endif
 #const SMOKE_B 654
 #const SMOKE_C 902
 #const SMOKE_D 1308
+#const MESOPGARDEN 2252
+#const SMCLIFF1 2190
+#const SMCLIFF2 2199
+#const SMCLIFF3 2217
+#const SMCLIFF4 2193
+#const SMCLIFF5 2194
+#const SMCLIFF6 2195
+#const SMCLIFF7 2196
+#const SMCLIFF8 2197
+#const SMCLIFF9 2198
 
 /* Trees with rock graphics */
 effect_amount GAIA_SET_ATTRIBUTE PALMTREE ATTR_STANDING_GRAPHIC 10186
@@ -39,6 +49,12 @@ effect_amount GAIA_SET_ATTRIBUTE JUNGLETREE ATTR_STANDING_GRAPHIC 8479
 effect_amount GAIA_SET_ATTRIBUTE PALMTREE ATTR_DYING_GRAPHIC 10186
 effect_amount GAIA_SET_ATTRIBUTE OAKTREE ATTR_DYING_GRAPHIC 10188
 effect_amount GAIA_SET_ATTRIBUTE JUNGLETREE ATTR_DYING_GRAPHIC 8479
+effect_amount GAIA_SET_ATTRIBUTE TREE_D ATTR_STANDING_GRAPHIC 15336
+effect_amount GAIA_SET_ATTRIBUTE TREE_D ATTR_STANDING2_GRAPHIC 15336
+effect_amount GAIA_SET_ATTRIBUTE TREE_D ATTR_DYING_GRAPHIC 15336
+effect_amount GAIA_SET_ATTRIBUTE DLC_ORANGEBUSH ATTR_STANDING_GRAPHIC 15690
+effect_amount GAIA_SET_ATTRIBUTE DLC_ORANGEBUSH ATTR_STANDING2_GRAPHIC 15690
+effect_amount GAIA_SET_ATTRIBUTE DLC_ORANGEBUSH ATTR_DYING_GRAPHIC 15690
 
 effect_amount GAIA_SET_ATTRIBUTE RUBBLE1 ATTR_STORAGE_VALUE 30000
 effect_amount GAIA_SET_ATTRIBUTE BOARXD ATTR_STORAGE_VALUE 300
@@ -180,11 +196,14 @@ behavior_version 1
 direct_placement
 
 /* Defining Terrains */
+/*
 if LOW_RESOURCES
 #const BT 1
 else
 #const BT 54
 endif
+*/
+#const BT 54
 
 /* Defining Player Terrains */
 #const PT1 108
@@ -686,6 +705,7 @@ endif
 	#const BEACH_ROCK_UNSAILABLE 82
 if TOUCHUP_MASKING
     /* Base Terrain */
+	/*
 	if LOW_RESOURCES
 	create_terrain DLC_ROCKBEACH  { base_terrain BT land_percent 100 number_of_clumps 9320 set_scale_by_groups terrain_mask 1 }
     create_terrain DLC_ROCKBEACH  { base_terrain BT land_percent 100 number_of_clumps 9320 set_scale_by_groups terrain_mask 1 }
@@ -697,6 +717,11 @@ if TOUCHUP_MASKING
     create_terrain EVIL_FOG  { base_terrain BT land_percent 100 number_of_clumps 9320 set_scale_by_groups terrain_mask 1 }
     create_terrain EVIL_FOG  { base_terrain BT land_percent 100 number_of_clumps 9320 set_scale_by_groups terrain_mask 1 }
 	endif
+	*/
+	create_terrain EVIL_FOG  { base_terrain BT land_percent 100 number_of_clumps 9320 set_scale_by_groups terrain_mask 1 }
+    create_terrain EVIL_FOG  { base_terrain BT land_percent 100 number_of_clumps 9320 set_scale_by_groups terrain_mask 1 }
+    create_terrain EVIL_FOG  { base_terrain BT land_percent 100 number_of_clumps 9320 set_scale_by_groups terrain_mask 1 }
+    create_terrain EVIL_FOG  { base_terrain BT land_percent 100 number_of_clumps 9320 set_scale_by_groups terrain_mask 1 }
     /* Mangrove Forest */
     create_terrain DLC_BLACK { base_terrain DLC_MANGROVEFOREST land_percent 100 number_of_clumps 9320 set_scale_by_groups terrain_mask 1 }
     create_terrain DLC_BLACK { base_terrain DLC_MANGROVEFOREST land_percent 100 number_of_clumps 9320 set_scale_by_groups terrain_mask 1 }
@@ -1119,6 +1144,36 @@ create_object TEMP
 	second_object MANGROVETREE
 	set_facet 18
 }
+create_object TEMP
+{
+	number_of_groups 9320
+	number_of_objects 1
+	set_loose_grouping
+	temp_min_distance_group_placement 1
+	set_gaia_object_only
+	set_gaia_unconvertible
+	ignore_terrain_restrictions
+	actor_area 9567
+	actor_area_radius 1
+	terrain_to_place_on NNB3
+	second_object MANGROVETREE
+	set_facet 18
+}
+create_object TEMP
+{
+	number_of_groups 9320
+	number_of_objects 1
+	set_loose_grouping
+	temp_min_distance_group_placement 1
+	set_gaia_object_only
+	set_gaia_unconvertible
+	ignore_terrain_restrictions
+	actor_area 9567
+	actor_area_radius 1
+	terrain_to_place_on NNB3
+	second_object MANGROVETREE
+	set_facet 18
+}
 create_object SMOKE_D
 {
   number_of_objects 1
@@ -1340,6 +1395,17 @@ create_object TEMP
 	second_object CACTUS
 
 }
+create_object TEMP
+{
+	number_of_objects 2
+	number_of_groups 999
+	set_scaling_to_map_size
+	terrain_to_place_on DLC_WETBEACH
+	temp_min_distance_group_placement 15
+	min_distance_to_players 42
+	second_object DLC_ORANGEBUSH
+
+}
 create_object ROCK_BEACH {
 	number_of_objects 1
 	number_of_groups 999
@@ -1387,6 +1453,18 @@ create_object SEA_ROCKS_1 {
 	group_placement_radius 3
 	terrain_to_place_on DLC_BLACK
 }
+
+if ANTIQUITY_MODE
+#const OYSTERS 2170
+create_object SEA_ROCKS_1 {
+	number_of_objects 1
+	number_of_groups 9999
+    temp_min_distance_group_placement 2
+	second_object OYSTERS
+	group_placement_radius 3
+	terrain_to_place_on DLC_BLACK
+}
+else
 create_object SEA_ROCKS_1 {
 	number_of_objects 1
 	number_of_groups 9999
@@ -1395,6 +1473,7 @@ create_object SEA_ROCKS_1 {
 	group_placement_radius 3
 	terrain_to_place_on DLC_BLACK
 }
+endif
 create_object DLC_VULTURE
 {
      number_of_objects 4
@@ -1430,7 +1509,7 @@ create_object ROCK_BEACH
 
 }
 /* STRAGGLER TREES */
-  create_object OAKTREE
+  create_object TREE_D
   { 
     number_of_objects             3
     set_gaia_object_only
@@ -1440,9 +1519,8 @@ create_object ROCK_BEACH
     min_distance_group_placement  4
 	terrain_to_place_on SNOW
 	set_circular_placement
-	second_object DLC_RAINTREE
   }
-    create_object OAKTREE
+    create_object TREE_D
   { 
     number_of_objects             2
     set_gaia_object_only
@@ -1452,9 +1530,8 @@ create_object ROCK_BEACH
     min_distance_group_placement  4
 	terrain_to_place_on SNOW
 	set_circular_placement
-	second_object DLC_RAINTREE
   }
-  create_object DLC_BAOBABTREE
+  create_object TREE_D
   { 
     number_of_objects             3
     set_gaia_object_only
@@ -1464,11 +1541,8 @@ create_object ROCK_BEACH
     min_distance_group_placement  4
 	terrain_to_place_on DLC_SAVANNAH
 	set_circular_placement
-	set_facet 40
-	resource_delta -100
-	second_object JUNGLETREE
   }
-    create_object DLC_BAOBABTREE
+    create_object TREE_D
   { 
     number_of_objects             2
     set_gaia_object_only
@@ -1478,9 +1552,7 @@ create_object ROCK_BEACH
     min_distance_group_placement  4
 	terrain_to_place_on DLC_SAVANNAH
 	set_circular_placement
-	set_facet 40
-	resource_delta -100
-	second_object JUNGLETREE
+
   }
 
 /* Stone and penguins on small bodies */
@@ -1796,6 +1868,66 @@ create_object TEMP
   avoid_actor_area 14
   max_distance_to_other_zones 4
 }
+
+create_object SMCLIFF1
+{
+  number_of_objects          1
+  group_variance 1
+  group_placement_radius 4
+  set_gaia_object_only
+  avoid_forest_zone 2
+  min_distance_to_players 35
+  number_of_groups 62
+  temp_min_distance_group_placement 34
+  terrain_to_place_on DLC_MANGROVESHALLOW
+  actor_area 633
+  actor_area_radius 6
+}
+create_object SMCLIFF2
+{
+  number_of_objects          1
+  group_variance 1
+  group_placement_radius 4
+  set_gaia_object_only
+  avoid_forest_zone 2
+  min_distance_to_players 35
+  number_of_groups 62
+  temp_min_distance_group_placement 34
+  terrain_to_place_on DLC_MANGROVESHALLOW
+  actor_area 634
+  actor_area_radius 6
+  avoid_actor_area 633
+}
+create_object SMCLIFF3
+{
+  number_of_objects          1
+  group_variance 1
+  group_placement_radius 4
+  set_gaia_object_only
+  avoid_forest_zone 2
+  min_distance_to_players 35
+  number_of_groups 62
+  temp_min_distance_group_placement 34
+  terrain_to_place_on DLC_MANGROVESHALLOW
+  actor_area 635
+  actor_area_radius 6
+  avoid_actor_area 633
+  avoid_actor_area 634
+}
+
+create_object DLC_ORANGEBUSH
+{
+  number_of_objects          4
+  group_variance 1
+  group_placement_radius 4
+  set_gaia_object_only
+  avoid_forest_zone 2
+  min_distance_to_players 35
+  number_of_groups 62
+  temp_min_distance_group_placement 34
+  terrain_to_place_on DLC_WETBEACH
+}
+
 /* ***************************************** */
 
 /* BEGIN_OBJECTS_AUTOSCRIBE */

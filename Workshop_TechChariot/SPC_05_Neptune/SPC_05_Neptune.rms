@@ -55,6 +55,7 @@ effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_RUNNING_GRAPHIC 1918
 effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_NAME_ID 5043
 effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_ICON_ID 300
 effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_HERO_STATUS 66
+effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_DEAD_ID 1578
 
 effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_LINE_OF_SIGHT 6
 effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_HITPOINTS 45
@@ -126,7 +127,7 @@ create_terrain DLC_WATER5 { base_terrain WATER land_percent 4 number_of_clumps 1
 
 <OBJECTS_GENERATION>
 #const OG 647
-
+#const STORMY_DOG 862
 create_object OG { set_place_for_every_player max_distance_to_players 0 actor_area 6 actor_area_radius 5 }
 create_object OG { set_place_for_every_player max_distance_to_players 0 actor_area 7 actor_area_radius 6 }
 create_object OG { set_place_for_every_player max_distance_to_players 0 actor_area 8 actor_area_radius 7 }
@@ -466,6 +467,9 @@ create_object ROCK4
 	temp_min_distance_group_placement 15
 	terrain_to_place_on DEEP_WATER
 }
+
+create_object STORMY_DOG { set_place_for_every_player set_gaia_object_only number_of_objects 2 }
+
 <LAND_GENERATION>
 enable_waves 0
 

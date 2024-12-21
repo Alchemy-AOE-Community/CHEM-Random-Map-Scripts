@@ -51,6 +51,8 @@ effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_RUNNING_GRAPHIC 1918
 effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_NAME_ID 5043
 effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_ICON_ID 300
 effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_HERO_STATUS 66
+effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_DEAD_ID 1578
+
 
 effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_LINE_OF_SIGHT 1
 effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_HITPOINTS 130
@@ -288,6 +290,8 @@ endif
 
 <OBJECTS_GENERATION>
 
+#const STORMY_DOG 862
+
 #define FOREST_OBJECTS
 if FOREST_OBJECTS
 
@@ -387,6 +391,9 @@ if PLAYER_OBJECTS
 		avoid_forest_zone 4
 		avoid_actor_area 120
 	}
+
+	create_object STORMY_DOG { set_place_for_every_player set_gaia_object_only number_of_objects 2 }
+
 endif
 
 #define STAR_RESOURCES

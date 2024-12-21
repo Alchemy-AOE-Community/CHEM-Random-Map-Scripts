@@ -68,6 +68,7 @@ effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_RUNNING_GRAPHIC 1918
 effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_NAME_ID 5043
 effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_ICON_ID 300
 effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_HERO_STATUS 66
+effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_DEAD_ID 1578
 
 effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_LINE_OF_SIGHT 6
 effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_HITPOINTS 45
@@ -400,6 +401,7 @@ endif
 <OBJECTS_GENERATION>
 /* BEGIN_OBJECTS_AUTOSCRIBE */
 #const OFF_GRID 647
+#const STORMY_DOG 862
 #const SMOKE 1308
 #const TREE_REED 1350
 create_object OFF_GRID
@@ -672,7 +674,7 @@ terrain_to_place_on DIRT
 temp_min_distance_group_placement 2
 actor_area_to_place_in 18
 }
-create_object DLC_VULTURE
+create_object STORMY_DOG
 {
 set_gaia_object_only
 number_of_groups 4

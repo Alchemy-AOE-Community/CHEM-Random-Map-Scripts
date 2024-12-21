@@ -399,6 +399,7 @@ effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_RUNNING_GRAPHIC 1918
 effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_NAME_ID 5043
 effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_ICON_ID 300
 effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_HERO_STATUS 66
+effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_DEAD_ID 1578
 if TOURNAMENT_VERSION
 	effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_LINE_OF_SIGHT 1
 	effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_SEARCH_RADIUS 1
@@ -2724,6 +2725,9 @@ Could alter these so that gold is less common
 		}
 	endif
 	 */
+#const STORMY_DOG 862
+create_object STORMY_DOG { set_place_for_every_player set_gaia_object_only number_of_objects 2 }
+
 /* Corruption terrain is placed first, because it is the only terrain that should affect other terrains - two parts, so that kings can generate before the resources. */
 if RADIOACTIVE_PLANET
 	create_object ON_GRID {

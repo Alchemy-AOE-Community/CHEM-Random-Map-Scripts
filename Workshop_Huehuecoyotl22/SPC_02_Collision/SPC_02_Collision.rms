@@ -250,6 +250,8 @@ effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_WALKING_GRAPHIC 1918
 effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_RUNNING_GRAPHIC 1918
 effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_NAME_ID 5043
 effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_ICON_ID 300
+effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_HERO_STATUS 66
+effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_DEAD_ID 1578
 
 effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_LINE_OF_SIGHT 6
 effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_HITPOINTS 45
@@ -806,6 +808,7 @@ create_terrain UNDERBRUSH_JUNGLE  { base_terrain GRASS land_percent 100 number_o
 
 
 <OBJECTS_GENERATION>
+#const STORMY_DOG 862
 #const IPH 647
 create_object IPH { set_place_for_every_player find_closest second_object TOWN_CENTER 	actor_area 11 actor_area_radius 4 }
 
@@ -1474,7 +1477,7 @@ create_object SEA_ROCKS_1 {
 	terrain_to_place_on DLC_BLACK
 }
 endif
-create_object DLC_VULTURE
+create_object STORMY_DOG
 {
      number_of_objects 4
      set_scaling_to_map_size

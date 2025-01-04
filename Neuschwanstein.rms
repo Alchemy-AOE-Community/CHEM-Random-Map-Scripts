@@ -23,6 +23,7 @@ effect_percent MOD_RESOURCE AMOUNT_MONUMENT_TRICKLE_FOOD ATTR_SET 100
 effect_percent MOD_RESOURCE AMOUNT_MONUMENT_TRICKLE_WOOD ATTR_SET 100
 effect_percent MOD_RESOURCE AMOUNT_MONUMENT_TRICKLE_STONE ATTR_SET 100
 effect_percent MOD_RESOURCE AMOUNT_MONUMENT_TRICKLE_GOLD ATTR_SET 100
+effect_amount SET_ATTRIBUTE MONUMENT ATTR_STANDING_GRAPHIC 12370
 effect_amount SET_ATTRIBUTE MONUMENT ATTR_LINE_OF_SIGHT 1
 effect_amount SET_ATTRIBUTE MONUMENT ATTR_SEARCH_RADIUS 1
 
@@ -30,6 +31,11 @@ start_random
     percent_chance 25 #define WINTER
     percent_chance 25 #define AUTUMNCOLD
     percent_chance 25 #define AUTUMNWARM
+end_random
+
+start_random
+    percent_chance 50 #define LEFTRIDGE
+    percent_chance 50 #define RIGHTRIDGE
 end_random
 
 if WINTER
@@ -77,15 +83,25 @@ else
 endif
 
 <LAND_GENERATION>
+
 base_terrain LAND_A
 
-create_player_lands { terrain_type LAND_A circle_radius 40 2 base_size 10 land_percent 40 clumping_factor 32 base_elevation 1 }
+create_player_lands { terrain_type LAND_A circle_radius 15 0 base_size 10 land_percent 40 clumping_factor 32 base_elevation 1 }
 
+if LEFTRIDGE
+    create_land { terrain_type DIRT land_position 50 1 bottom_border 80 border_fuzziness 3 land_percent 100 base_size 1 clumping_factor 30 base_elevation 2 }
+    create_land { terrain_type DESERT land_position 50 20 bottom_border 75 border_fuzziness 3 number_of_tiles 50 base_size 1 clumping_factor 30 base_elevation 5 }
+endif
+
+if RIGHTRIDGE
+    create_land { terrain_type DIRT land_position 99 50 left_border 80 border_fuzziness 3 land_percent 100 base_size 1 clumping_factor 30 base_elevation 2 }
+    create_land { terrain_type DESERT land_position 80 50 left_border 75 border_fuzziness 3 number_of_tiles 50 base_size 1 clumping_factor 30 base_elevation 5 }
+endif
 
 
 <ELEVATION_GENERATION>
 
-create_elevation 1 { base_terrain LAND_A number_of_tiles 14400 number_of_clumps 8 set_scale_by_groups enable_balanced_elevation }
+create_elevation 7 { base_terrain DIRT number_of_tiles 1200 number_of_clumps 100 set_scale_by_groups enable_balanced_elevation }
 
 
 <TERRAIN_GENERATION>
@@ -104,6 +120,7 @@ create_terrain LAND_B { base_terrain LAND_A number_of_clumps 9320 land_percent 1
 <CONNECTION_GENERATION>
 
 <OBJECTS_GENERATION>
+create_object MONUMENT { set_gaia_object_only set_building_capturable terrain_to_place_on DESERT }
 
 create_object TOWN_CENTER { set_place_for_every_player find_closest }
 create_object VILLAGER { set_place_for_every_player min_distance_to_players 3 max_distance_to_players 6 }

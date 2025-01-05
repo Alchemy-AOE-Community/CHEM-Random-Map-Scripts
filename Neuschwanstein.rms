@@ -86,23 +86,24 @@ endif
 
 base_terrain LAND_A
 
-create_player_lands { terrain_type LAND_A circle_radius 15 0 base_size 10 land_percent 40 clumping_factor 32 base_elevation 1 }
+create_player_lands { terrain_type LAND_A circle_radius 15 0 base_size 10 land_percent 40 clumping_factor 32 base_elevation 0 }
 
 if LEFTRIDGE
     create_land { terrain_type DIRT land_position 50 1 bottom_border 80 border_fuzziness 3 land_percent 100 base_size 1 clumping_factor 30 base_elevation 2 }
-    create_land { terrain_type DESERT land_position 50 20 bottom_border 75 border_fuzziness 3 number_of_tiles 50 base_size 1 clumping_factor 30 base_elevation 5 }
+    create_land { terrain_type DESERT land_position 50 20 bottom_border 75 border_fuzziness 3 number_of_tiles 50 base_size 1 clumping_factor 30 base_elevation 3 }
 endif
 
 if RIGHTRIDGE
     create_land { terrain_type DIRT land_position 99 50 left_border 80 border_fuzziness 3 land_percent 100 base_size 1 clumping_factor 30 base_elevation 2 }
-    create_land { terrain_type DESERT land_position 80 50 left_border 75 border_fuzziness 3 number_of_tiles 50 base_size 1 clumping_factor 30 base_elevation 5 }
+    create_land { terrain_type DESERT land_position 80 50 left_border 75 border_fuzziness 3 number_of_tiles 50 base_size 1 clumping_factor 30 base_elevation 3 }
 endif
 
 
 <ELEVATION_GENERATION>
 
-create_elevation 7 { base_terrain DIRT number_of_tiles 1200 number_of_clumps 100 set_scale_by_groups enable_balanced_elevation }
+create_elevation 7 { base_terrain DIRT number_of_tiles 1400 number_of_clumps 100 set_scale_by_groups enable_balanced_elevation }
 
+create_elevation 1 { base_terrain LAND_A number_of_tiles 250 number_of_clumps 25 set_scale_by_groups enable_balanced_elevation }
 
 <TERRAIN_GENERATION>
 
@@ -115,7 +116,7 @@ elseif AUTUMNCOLD start_random
 elseif AUTUMNWARM color_correction CC_AUTUMN
 endif
 
-create_terrain LAND_B { base_terrain LAND_A number_of_clumps 9320 land_percent 100 set_scale_by_groups height_limits 0 0 spacing_to_other_terrain_types 1 }
+/* create_terrain LAND_B { base_terrain LAND_A number_of_clumps 9320 land_percent 100 set_scale_by_groups height_limits 0 0 spacing_to_other_terrain_types 1 } */
 
 <CONNECTION_GENERATION>
 

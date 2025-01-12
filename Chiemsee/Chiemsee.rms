@@ -154,7 +154,7 @@ if PLAYER_ASSIGNED_FORESTS
     /* Creating forests for player 1 */
     create_terrain DLC_BLACK { base_terrain DLC_DIRT4 number_of_clumps 1 land_percent 100 }
     create_terrain FOREST { base_terrain DLC_BLACK number_of_clumps 1 number_of_tiles 20 clumping_factor 20 set_avoid_player_start_areas 11 }
-    create_terrain PINE_FOREST { base_terrain DLC_BLACK number_of_clumps 1 number_of_tiles 20 clumping_factor 20 set_avoid_player_start_areas 11 spacing_to_other_terrain_types 2s }
+    create_terrain PINE_FOREST { base_terrain DLC_BLACK number_of_clumps 1 number_of_tiles 20 clumping_factor 20 set_avoid_player_start_areas 11 spacing_to_other_terrain_types 2 }
     /* create_terrain DIRT { base_terrain DLC_BLACK number_of_clumps 9320 land_percent 100 set_scale_by_groups }
     create_terrain DIRT { base_terrain DLC_BLACK number_of_clumps 9320 land_percent 100 set_scale_by_groups }
     create_terrain DIRT { base_terrain DLC_BLACK number_of_clumps 9320 land_percent 100 set_scale_by_groups }

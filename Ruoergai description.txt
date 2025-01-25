@@ -1,0 +1,6 @@
+Ruoergai description
+
+Players start on hills with a relatively normal Regicide Fortress-style start with king, 10 villagers, castle, barracks, some houses (meant to be played as Regicide). The middle lowland is a mosaic of reeds and indestructible farms. You can harvest the farms with multiple villagers at the same time, but they only have 190 food on them.
+More gold and stone are spread evenly across the map. The shallow swamp channels have some turtles, but no big fish and are not all connected, so water warfare is not that relevant.
+The Gaia camps are just decoration and don't interact with player units.
+The wild waterbuffalos behave like deer, but have more HP, so you can push them a bit by shooting at them if you want [can be changed to just be normal deer for the tournament if you prefer that].

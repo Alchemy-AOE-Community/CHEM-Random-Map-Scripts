@@ -65,7 +65,7 @@ COMMAND = [RMS_Processor_V4([TL; tail5; tail4; tail3; tail1; tail2],LPM_exp); cr
 MLA = [{'L { terrain_type DLC_GRAVELBEACH land_position 1 1 base_size 0 number_of_tiles 12000 }'}];
 
 
-%ObjectAutoscribeV10('SPC_11_Comet.ods')
+%ObjectAutoscribeV10('SPC_11_Comet_V1.ods')
 CODE = [Preface; COMMAND; MLA]; %Adding Preface, Definitions, Random Statement to beginning of CODE
 RMS_ForgeV4(filename,CODE);
 

@@ -612,7 +612,7 @@ avoid_actor_area 4
 avoid_actor_area 16
 find_closest
 }
-create_object SCOUT
+create_object PHOTON_MAN
 {
 set_place_for_every_player
 number_of_groups 1

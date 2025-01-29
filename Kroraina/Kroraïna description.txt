@@ -1,0 +1,8 @@
+Kroraïna description
+
+Players start in small bases surrounded by fortified palisades and some rocks. No gates, so you have to delete a piece of wall to get out.
+Inside the walls you have a few stragglers, 4 sheep, 2x4 fruit bushes, 3 huts (5 population space each), your starting villagers (currently 6, but any other number would also work) and scout.
+Boars, ibex and the extra 2+2 sheep and stone are outside of the walls.
+All gold is behind the walls of scattered ruins. However, the wall only have 600 HP and you can get villagers and other units that can garrison in towers through towers into the ruins. So be careful if you use the walls to protect yourself, because your enemy can also hop through.
+The map center has more wood (reeds [100 wood], birches [500 wood]) and 4 Gaia monuments. When destroyed, the rubble of the monuments leaves a relic behind.
+The Gaia camps are just decoration and don't interact with player units.

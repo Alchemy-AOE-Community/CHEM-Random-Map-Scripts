@@ -1,0 +1,1012 @@
+/* Alpsv0.1 submitted to Alchemy League */
+/* Map script initialized 25 November 2024 */
+/* Created by Biscuits/Mighty Space Fruit */
+
+
+
+
+
+#const ON_GRID 1613
+#const BLANK_FOREST 71
+
+#const OUTER_RING 92
+/* elevation 4 */
+#const EL4_PLACEHOLDER 27
+#const EL2_PLACEHOLDER 66
+#const VALLEY_PLACEHOLDER 36
+#const GRAVEL_ROAD 78
+#const PEAK_PLACEHOLDER 94
+
+/* same as above, but for south side */
+#const SEL4_PLACEHOLDER 15
+#const SEL2_PLACEHOLDER 31
+
+/* for ruined monasteries w relics on sides */
+#const MON_PLACEHOLDER 76
+
+
+
+#const SNOW_UNDERB 72
+#const SNOW_LIGHT 73
+#const SNOW_STRONG 74
+
+#const PLAYER_PLACEHOLDER 26
+
+#const BASE_TERRAIN 29
+
+#const MON_RUBBLE 1421
+#const RUINED_MON 1838
+
+#const CENTER_FIND 28
+
+/* Reducing Radius of Mountains and Rock Formation */
+/* credit to Tech chariot, pulled from Denali */
+#const SNOWY_MOUNTAIN_1 1045
+#const SNOWY_MOUNTAIN_2 1046
+#const SNOWY_MOUNTAIN_3 1047
+#const SNOWY_CLIFF 1858
+effect_amount GAIA_SET_ATTRIBUTE SNOWY_MOUNTAIN_1 ATTR_RADIUS_1 1
+effect_amount GAIA_SET_ATTRIBUTE SNOWY_MOUNTAIN_1 ATTR_RADIUS_2 1
+effect_amount GAIA_SET_ATTRIBUTE SNOWY_MOUNTAIN_2 ATTR_RADIUS_1 1
+effect_amount GAIA_SET_ATTRIBUTE SNOWY_MOUNTAIN_2 ATTR_RADIUS_2 1
+effect_amount GAIA_SET_ATTRIBUTE SNOWY_MOUNTAIN_3 ATTR_RADIUS_1 1
+effect_amount GAIA_SET_ATTRIBUTE SNOWY_MOUNTAIN_3 ATTR_RADIUS_2 1
+effect_amount GAIA_SET_ATTRIBUTE SNOWY_CLIFF ATTR_RADIUS_1 1
+effect_amount GAIA_SET_ATTRIBUTE SNOWY_CLIFF ATTR_RADIUS_2 1
+
+/* german hunting wolf starting scout */
+
+effect_amount SET_ATTRIBUTE HUNTING_WOLF ATTR_SHOWN_ATTACK 4 
+effect_amount SET_ATTRIBUTE HUNTING_WOLF ATTR_HITPOINTS 50
+effect_amount ADD_ATTRIBUTE HUNTING_WOLF ATTR_ATTACK -1028 /* -(4*256 + 4) : subtracts 4 melee damage from its base of 8 damage. */
+effect_amount ADD_ATTRIBUTE HUNTING_WOLF ATTR_ARMOR -1028 /* -(4*256 + 4) subtracts 4 melee armor */
+effect_amount ADD_ATTRIBUTE HUNTING_WOLF ATTR_SHOWN_MELEE_ARMOR -4 /* reduces melee armor to -2 */
+effect_amount SET_ATTRIBUTE HUNTING_WOLF ATTR_BASE_ARMOR 255
+effect_amount SET_ATTRIBUTE HUNTING_WOLF ATTR_ARMOR 9472 /* should set heavy siege armor to 0 - not functional, likely because hunting wolf doesn't normally have heavy siege armor class. */
+effect_amount ADD_ATTRIBUTE HUNTING_WOLF ATTR_TRAITS 16 /* add auto-scout to it */
+
+<PLAYER_SETUP>
+direct_placement
+
+/* set civ to romans */
+set_gaia_civilization 43
+
+<LAND_GENERATION>
+base_terrain BASE_TERRAIN
+
+
+/* for debugging, making sure things are actually aligned in the center */
+
+/* create_land { terrain_type CENTER_FIND land_position 55 5 land_percent 1 base_size 2 zone 5 base_elevation 0 bottom_border 60 left_border 60 right_border 60 top_border 60 } */
+/* create_land { terrain_type CENTER_FIND land_position 60 10 land_percent 1 base_size 2 zone 5 base_elevation 0 bottom_border 60 left_border 60 right_border 60 top_border 60	} */
+/* create_land { terrain_type CENTER_FIND land_position 65 15 land_percent 1 base_size 2 zone 5 base_elevation 0 bottom_border 60 left_border 60 right_border 60 top_border 60 } */
+/* create_land { terrain_type CENTER_FIND land_position 70 20 land_percent 1 base_size 2 zone 5 base_elevation 0 bottom_border 60 left_border 60 right_border 60 top_border 60 } */
+/* create_land { terrain_type CENTER_FIND land_position 75 25 land_percent 1 base_size 2 zone 5 base_elevation 0 bottom_border 60 left_border 60 right_border 60 top_border 60 } */
+/* create_land { terrain_type CENTER_FIND land_position 80 30 land_percent 1 base_size 2 zone 5 base_elevation 0 bottom_border 60 left_border 60 right_border 60 top_border 60 } */
+/* create_land { terrain_type CENTER_FIND land_position 85 35 land_percent 1 base_size 2 zone 5 base_elevation 0 bottom_border 60 left_border 60 right_border 60 top_border 60 } */
+/* create_land { terrain_type CENTER_FIND land_position 90 40 land_percent 1 base_size 2 zone 5 base_elevation 0 bottom_border 60 left_border 60 right_border 60 top_border 60 } */
+/* create_land { terrain_type CENTER_FIND land_position 95 44 land_percent 1 base_size 2 zone 5 base_elevation 0 bottom_border 60 left_border 60 right_border 60 top_border 60 } */
+
+/* top to bottom */
+
+/* create_land { terrain_type CENTER_FIND land_position 49 49 land_percent 1 base_size 4 zone 5 base_elevation 0 bottom_border 60 left_border 60 right_border 60 top_border 60 } */
+/* create_land { terrain_type CENTER_FIND land_position 5 49 land_percent 1 base_size 2 zone 5 base_elevation 0 bottom_border 60 left_border 60 right_border 60 top_border 60 } */
+/* create_land { terrain_type CENTER_FIND land_position 10 49 land_percent 1 base_size 2 zone 5 base_elevation 0 bottom_border 60 left_border 60 right_border 60 top_border 60 } */
+/* create_land { terrain_type CENTER_FIND land_position 15 49 land_percent 1 base_size 2 zone 5 base_elevation 0 bottom_border 60 left_border 60 right_border 60 top_border 60 } */
+/* create_land { terrain_type CENTER_FIND land_position 20 49 land_percent 1 base_size 2 zone 5 base_elevation 0 bottom_border 60 left_border 60 right_border 60 top_border 60 } */
+/* create_land { terrain_type CENTER_FIND land_position 25 49 land_percent 1 base_size 2 zone 5 base_elevation 0 bottom_border 60 left_border 60 right_border 60 top_border 60 } */
+/* create_land { terrain_type CENTER_FIND land_position 30 49 land_percent 1 base_size 2 zone 5 base_elevation 0 bottom_border 60 left_border 60 right_border 60 top_border 60 } */
+/* create_land { terrain_type CENTER_FIND land_position 35 49 land_percent 1 base_size 2 zone 5 base_elevation 0 bottom_border 60 left_border 60 right_border 60 top_border 60 } */
+/* create_land { terrain_type CENTER_FIND land_position 40 49 land_percent 1 base_size 2 zone 5 base_elevation 0 bottom_border 60 left_border 60 right_border 60 top_border 60 } */
+/* create_land { terrain_type CENTER_FIND land_position 44 49 land_percent 1 base_size 2 zone 5 base_elevation 0 bottom_border 60 left_border 60 right_border 60 top_border 60 } */
+/* create_land { terrain_type CENTER_FIND land_position 49 49 land_percent 1 base_size 4 zone 5 base_elevation 0 bottom_border 60 left_border 60 right_border 60 top_border 60 } */
+/* create_land { terrain_type CENTER_FIND land_position 55 49 land_percent 1 base_size 2 zone 5 base_elevation 0 bottom_border 60 left_border 60 right_border 60 top_border 60 } */
+
+
+/* create_land { terrain_type CENTER_FIND land_position 60 49 land_percent 1 base_size 2 zone 5 base_elevation 0 bottom_border 60 left_border 60 right_border 60 top_border 60 } */
+/* create_land { terrain_type CENTER_FIND land_position 65 49 land_percent 1 base_size 2 zone 5 base_elevation 0 bottom_border 60 left_border 60 right_border 60 top_border 60 } */
+/* create_land { terrain_type CENTER_FIND land_position 70 49 land_percent 1 base_size 2 zone 5 base_elevation 0 bottom_border 60 left_border 60 right_border 60 top_border 60 } */
+/* create_land { terrain_type CENTER_FIND land_position 75 49 land_percent 1 base_size 2 zone 5 base_elevation 0 bottom_border 60 left_border 60 right_border 60 top_border 60 } */
+/* create_land { terrain_type CENTER_FIND land_position 80 49 land_percent 1 base_size 2 zone 5 base_elevation 0 bottom_border 60 left_border 60 right_border 60 top_border 60 } */
+/* create_land { terrain_type CENTER_FIND land_position 85 49 land_percent 1 base_size 2 zone 5 base_elevation 0 bottom_border 60 left_border 60 right_border 60 top_border 60 } */
+/* create_land { terrain_type CENTER_FIND land_position 90 49 land_percent 1 base_size 2 zone 5 base_elevation 0 bottom_border 60 left_border 60 right_border 60 top_border 60 } */
+/* create_land { terrain_type CENTER_FIND land_position 95 49 land_percent 1 base_size 2 zone 5 base_elevation 0 bottom_border 60 left_border 60 right_border 60 top_border 60 } */
+
+/* left to right */
+
+/* create_land { terrain_type CENTER_FIND land_position 49 45 land_percent 1 base_size 2 zone 5 base_elevation 0 bottom_border 60 left_border 60 right_border 60 top_border 60 } */
+/* create_land { terrain_type CENTER_FIND land_position 5 40 land_percent 1 base_size 2 zone 5 base_elevation 0 bottom_border 60 left_border 60 right_border 60 top_border 60 } */
+/* create_land { terrain_type CENTER_FIND land_position 10 35 land_percent 1 base_size 2 zone 5 base_elevation 0 bottom_border 60 left_border 60 right_border 60 top_border 60 } */
+/* create_land { terrain_type CENTER_FIND land_position 15 30 land_percent 1 base_size 2 zone 5 base_elevation 0 bottom_border 60 left_border 60 right_border 60 top_border 60 } */
+/* create_land { terrain_type CENTER_FIND land_position 20 25 land_percent 1 base_size 2 zone 5 base_elevation 0 bottom_border 60 left_border 60 right_border 60 top_border 60 } */
+/* create_land { terrain_type CENTER_FIND land_position 25 20 land_percent 1 base_size 2 zone 5 base_elevation 0 bottom_border 60 left_border 60 right_border 60 top_border 60 } */
+/* create_land { terrain_type CENTER_FIND land_position 30 15 land_percent 1 base_size 2 zone 5 base_elevation 0 bottom_border 60 left_border 60 right_border 60 top_border 60 } */
+/* create_land { terrain_type CENTER_FIND land_position 35 10 land_percent 1 base_size 2 zone 5 base_elevation 0 bottom_border 60 left_border 60 right_border 60 top_border 60 } */
+/* create_land { terrain_type CENTER_FIND land_position 40 5 land_percent 1 base_size 2 zone 5 base_elevation 0 bottom_border 60 left_border 60 right_border 60 top_border 60 } */
+/* create_land { terrain_type CENTER_FIND land_position 44 49 land_percent 1 base_size 2 zone 5 base_elevation 0 bottom_border 60 left_border 60 right_border 60 top_border 60 } */
+/* create_land { terrain_type CENTER_FIND land_position 49 49 land_percent 1 base_size 4 zone 5 base_elevation 0 bottom_border 60 left_border 60 right_border 60 top_border 60 } */
+/* create_land { terrain_type CENTER_FIND land_position 55 49 land_percent 1 base_size 2 zone 5 base_elevation 0 bottom_border 60 left_border 60 right_border 60 top_border 60 } */
+/* create_land { terrain_type CENTER_FIND land_position 60 49 land_percent 1 base_size 2 zone 5 base_elevation 0 bottom_border 60 left_border 60 right_border 60 top_border 60 } */
+/* create_land { terrain_type CENTER_FIND land_position 65 49 land_percent 1 base_size 2 zone 5 base_elevation 0 bottom_border 60 left_border 60 right_border 60 top_border 60 } */
+/* create_land { terrain_type CENTER_FIND land_position 70 49 land_percent 1 base_size 2 zone 5 base_elevation 0 bottom_border 60 left_border 60 right_border 60 top_border 60 } */
+/* create_land { terrain_type CENTER_FIND land_position 75 49 land_percent 1 base_size 2 zone 5 base_elevation 0 bottom_border 60 left_border 60 right_border 60 top_border 60 } */
+/* create_land { terrain_type CENTER_FIND land_position 80 49 land_percent 1 base_size 2 zone 5 base_elevation 0 bottom_border 60 left_border 60 right_border 60 top_border 60 } */
+/* create_land { terrain_type CENTER_FIND land_position 85 49 land_percent 1 base_size 2 zone 5 base_elevation 0 bottom_border 60 left_border 60 right_border 60 top_border 60 } */
+/* create_land { terrain_type CENTER_FIND land_position 90 49 land_percent 1 base_size 2 zone 5 base_elevation 0 bottom_border 60 left_border 60 right_border 60 top_border 60 } */
+/* create_land { terrain_type CENTER_FIND land_position 95 49 land_percent 1 base_size 2 zone 5 base_elevation 0 bottom_border 60 left_border 60 right_border 60 top_border 60 } */
+
+/* left to right */
+
+/* create_land { terrain_type CENTER_FIND land_position 49 95 land_percent 1 base_size 2 zone 5 base_elevation 0 bottom_border 60 left_border 60 right_border 60 top_border 60 } */
+/* create_land { terrain_type CENTER_FIND land_position 49 90 land_percent 1 base_size 2 zone 5 base_elevation 0 bottom_border 60 left_border 60 right_border 60 top_border 60 } */
+/* create_land { terrain_type CENTER_FIND land_position 49 85 land_percent 1 base_size 2 zone 5 base_elevation 0 bottom_border 60 left_border 60 right_border 60 top_border 60 } */
+/* create_land { terrain_type CENTER_FIND land_position 49 80 land_percent 1 base_size 2 zone 5 base_elevation 0 bottom_border 60 left_border 60 right_border 60 top_border 60 } */
+/* create_land { terrain_type CENTER_FIND land_position 49 75 land_percent 1 base_size 2 zone 5 base_elevation 0 bottom_border 60 left_border 60 right_border 60 top_border 60 } */
+/* create_land { terrain_type CENTER_FIND land_position 49 70 land_percent 1 base_size 2 zone 5 base_elevation 0 bottom_border 60 left_border 60 right_border 60 top_border 60 } */
+/* create_land { terrain_type CENTER_FIND land_position 49 65 land_percent 1 base_size 2 zone 5 base_elevation 0 bottom_border 60 left_border 60 right_border 60 top_border 60 } */
+/* create_land { terrain_type CENTER_FIND land_position 49 60 land_percent 1 base_size 2 zone 5 base_elevation 0 bottom_border 60 left_border 60 right_border 60 top_border 60 } */
+/* create_land { terrain_type CENTER_FIND land_position 49 55 land_percent 1 base_size 4 zone 5 base_elevation 0 bottom_border 60 left_border 60 right_border 60 top_border 60 } */
+/* create_land { terrain_type CENTER_FIND land_position 49 5 land_percent 1 base_size 2 zone 5 base_elevation 0 bottom_border 60 left_border 60 right_border 60 top_border 60 } */
+/* create_land { terrain_type CENTER_FIND land_position 49 10 land_percent 1 base_size 2 zone 5 base_elevation 0 bottom_border 60 left_border 60 right_border 60 top_border 60 } */
+/* create_land { terrain_type CENTER_FIND land_position 49 15 land_percent 1 base_size 2 zone 5 base_elevation 0 bottom_border 60 left_border 60 right_border 60 top_border 60 } */
+/* create_land { terrain_type CENTER_FIND land_position 49 20 land_percent 1 base_size 2 zone 5 base_elevation 0 bottom_border 60 left_border 60 right_border 60 top_border 60 } */
+/* create_land { terrain_type CENTER_FIND land_position 49 25 land_percent 1 base_size 2 zone 5 base_elevation 0 bottom_border 60 left_border 60 right_border 60 top_border 60 } */
+/* create_land { terrain_type CENTER_FIND land_position 49 30 land_percent 1 base_size 2 zone 5 base_elevation 0 bottom_border 60 left_border 60 right_border 60 top_border 60 } */
+/* create_land { terrain_type CENTER_FIND land_position 49 35 land_percent 1 base_size 2 zone 5 base_elevation 0 bottom_border 60 left_border 60 right_border 60 top_border 60 } */
+/* create_land { terrain_type CENTER_FIND land_position 49 40 land_percent 1 base_size 2 zone 5 base_elevation 0 bottom_border 60 left_border 60 right_border 60 top_border 60 } */
+/* create_land { terrain_type CENTER_FIND land_position 49 45 land_percent 1 base_size 2 zone 5 base_elevation 0 bottom_border 60 left_border 60 right_border 60 top_border 60 } */
+
+
+/* middle flat land section where TC's will be placed */
+
+/* create_land */
+/* { */
+	/* terrain_type VALLEY_PLACEHOLDER */
+	/* land_percent 4 */
+	/* land_position 80 50 */
+	/* base_size 10 */
+	/* base_elevation 0 */
+	/* other_zone_avoidance_distance 0 */
+	/* zone 10 */
+	/* land_id 1 */
+/* } */
+
+
+/* create_land */
+/* { */
+	/* terrain_type VALLEY_PLACEHOLDER */
+	/* land_percent 4 */
+	/* land_position 50 50 */
+	/* base_size 10 */
+	/* base_elevation 0 */
+	/* other_zone_avoidance_distance 0 */
+	/* zone 10 */
+	/* land_id 2 */
+/* } */
+
+/* create_land */
+/* { */
+	/* terrain_type VALLEY_PLACEHOLDER */
+	/* land_percent 4 */
+	/* land_position 30 50 */
+	/* base_size 10 */
+	/* base_elevation 0 */
+	/* other_zone_avoidance_distance 0 */
+	/* zone 10 */
+	/* land_id 3 */
+/* } */
+
+/* /* shore up the space to the next elevation to make it more sheer */ */
+/* create_land */
+/* { */
+	/* terrain_type VALLEY_PLACEHOLDER */
+	/* land_percent 4 */
+	/* land_position 30 40 */
+	/* base_size 6 */
+	/* base_elevation 0 */
+	/* other_zone_avoidance_distance 0 */
+	/* zone 10 */
+	/* land_id 4 */
+/* } */
+
+/* create_land */
+/* { */
+	/* terrain_type VALLEY_PLACEHOLDER */
+	/* land_percent 4 */
+	/* land_position 40 40 */
+	/* base_size 6 */
+	/* base_elevation 0 */
+	/* other_zone_avoidance_distance 0 */
+	/* zone 10 */
+	/* land_id 4 */
+/* } */
+
+/* create_land */
+/* { */
+	/* terrain_type VALLEY_PLACEHOLDER */
+	/* land_percent 4 */
+	/* land_position 50 40 */
+	/* base_size 6 */
+	/* base_elevation 0 */
+	/* other_zone_avoidance_distance 0 */
+	/* zone 10 */
+	/* land_id 4 */
+/* } */
+
+/* create_land */
+/* { */
+	/* terrain_type VALLEY_PLACEHOLDER */
+	/* land_percent 4 */
+	/* land_position 60 40 */
+	/* base_size 6 */
+	/* base_elevation 0 */
+	/* other_zone_avoidance_distance 0 */
+	/* zone 10 */
+	/* land_id 4 */
+/* } */
+
+
+/* create_land */
+/* { */
+	/* terrain_type MON_PLACEHOLDER */
+	/* land_percent 4 */
+	/* land_position 90 50 */
+	/* base_size 7 */
+	/* base_elevation 2 */
+	/* other_zone_avoidance_distance 0 */
+	/* top_border 60 */
+	/* right_border 20 */
+	/* left_border 20 */
+	/* zone 20 */
+	/* land_id 12 */
+/* } */
+
+/* create_land */
+/* { */
+	/* terrain_type MON_PLACEHOLDER */
+	/* land_percent 4 */
+	/* land_position 99 50 */
+	/* base_size 7 */
+	/* base_elevation 2 */
+	/* other_zone_avoidance_distance 0 */
+	/* top_border 60 */
+	/* right_border -20 */
+	/* left_border -20 */
+	/* zone 20 */
+/* } */
+
+
+/* create_land */
+/* { */
+	/* terrain_type MON_PLACEHOLDER */
+	/* land_percent 4 */
+	/* land_position 10 50 */
+	/* base_size 7 */
+	/* base_elevation 2 */
+	/* other_zone_avoidance_distance 0 */
+	/* top_border 60 */
+	/* right_border 20 */
+	/* left_border 20 */
+	/* zone 20 */
+	/* land_id 16 */
+/* } */
+
+/* create_land */
+/* { */
+	/* terrain_type MON_PLACEHOLDER */
+	/* land_percent 4 */
+	/* land_position 1 50 */
+	/* base_size 7 */
+	/* base_elevation 2 */
+	/* other_zone_avoidance_distance 0 */
+	/* top_border 60 */
+	/* right_border -20 */
+	/* left_border -20 */
+	/* zone 20 */
+/* } */
+
+/* create a line for the peak */
+create_land { terrain_type PEAK_PLACEHOLDER land_percent 4 land_position 99 1 base_size 5 base_elevation 7 other_zone_avoidance_distance 0 zone 50 land_id 40 bottom_border 40 top_border 40 left_border 40 right_border 40 }
+create_land { terrain_type PEAK_PLACEHOLDER land_percent 4 land_position 95 1 base_size 5 base_elevation 7 other_zone_avoidance_distance 0 zone 50 land_id 40 bottom_border 40 top_border 40 left_border 40 right_border 40 }
+create_land { terrain_type PEAK_PLACEHOLDER land_percent 4 land_position 90 1 base_size 5 base_elevation 7 other_zone_avoidance_distance 0 zone 50 land_id 40 bottom_border 40 top_border 40 left_border 40 right_border 40 }
+create_land { terrain_type PEAK_PLACEHOLDER land_percent 4 land_position 85 1 base_size 5 base_elevation 7 other_zone_avoidance_distance 0 zone 50 land_id 40 bottom_border 40 top_border 40 left_border 40 right_border 40 }
+create_land { terrain_type PEAK_PLACEHOLDER land_percent 4 land_position 80 1 base_size 5 base_elevation 7 other_zone_avoidance_distance 0 zone 50 land_id 40 bottom_border 40 top_border 40 left_border 40 right_border 40 }
+create_land { terrain_type PEAK_PLACEHOLDER land_percent 4 land_position 75 1 base_size 5 base_elevation 7 other_zone_avoidance_distance 0 zone 50 land_id 40 bottom_border 40 top_border 40 left_border 40 right_border 40 }
+create_land { terrain_type PEAK_PLACEHOLDER land_percent 4 land_position 70 1 base_size 5 base_elevation 7 other_zone_avoidance_distance 0 zone 50 land_id 40 bottom_border 40 top_border 40 left_border 40 right_border 40 }
+create_land { terrain_type PEAK_PLACEHOLDER land_percent 4 land_position 65 1 base_size 5 base_elevation 7 other_zone_avoidance_distance 0 zone 50 land_id 40 bottom_border 40 top_border 40 left_border 40 right_border 40 }
+create_land { terrain_type PEAK_PLACEHOLDER land_percent 4 land_position 60 1 base_size 5 base_elevation 7 other_zone_avoidance_distance 0 zone 50 land_id 40 bottom_border 40 top_border 40 left_border 40 right_border 40 }
+create_land { terrain_type PEAK_PLACEHOLDER land_percent 4 land_position 55 1 base_size 5 base_elevation 7 other_zone_avoidance_distance 0 zone 50 land_id 40 bottom_border 40 top_border 40 left_border 40 right_border 40 }
+create_land { terrain_type PEAK_PLACEHOLDER land_percent 4 land_position 50 1 base_size 5 base_elevation 7 other_zone_avoidance_distance 0 zone 50 land_id 40 bottom_border 40 top_border 40 left_border 40 right_border 40 }
+create_land { terrain_type PEAK_PLACEHOLDER land_percent 4 land_position 45 1 base_size 5 base_elevation 7 other_zone_avoidance_distance 0 zone 50 land_id 40 bottom_border 40 top_border 40 left_border 40 right_border 40 }
+create_land { terrain_type PEAK_PLACEHOLDER land_percent 4 land_position 40 1 base_size 5 base_elevation 7 other_zone_avoidance_distance 0 zone 50 land_id 40 bottom_border 40 top_border 40 left_border 40 right_border 40 }
+create_land { terrain_type PEAK_PLACEHOLDER land_percent 4 land_position 35 1 base_size 5 base_elevation 7 other_zone_avoidance_distance 0 zone 50 land_id 40 bottom_border 40 top_border 40 left_border 40 right_border 40 }
+create_land { terrain_type PEAK_PLACEHOLDER land_percent 4 land_position 30 1 base_size 5 base_elevation 7 other_zone_avoidance_distance 0 zone 50 land_id 40 bottom_border 40 top_border 40 left_border 40 right_border 40 }
+create_land { terrain_type PEAK_PLACEHOLDER land_percent 4 land_position 25 1 base_size 5 base_elevation 7 other_zone_avoidance_distance 0 zone 50 land_id 40 bottom_border 40 top_border 40 left_border 40 right_border 40 }
+create_land { terrain_type PEAK_PLACEHOLDER land_percent 4 land_position 20 1 base_size 5 base_elevation 7 other_zone_avoidance_distance 0 zone 50 land_id 40 bottom_border 40 top_border 40 left_border 40 right_border 40 }
+create_land { terrain_type PEAK_PLACEHOLDER land_percent 4 land_position 15 1 base_size 5 base_elevation 7 other_zone_avoidance_distance 0 zone 50 land_id 40 bottom_border 40 top_border 40 left_border 40 right_border 40 }
+create_land { terrain_type PEAK_PLACEHOLDER land_percent 4 land_position 10 1 base_size 5 base_elevation 7 other_zone_avoidance_distance 0 zone 50 land_id 40 bottom_border 40 top_border 40 left_border 40 right_border 40 }
+create_land { terrain_type PEAK_PLACEHOLDER land_percent 4 land_position 5 1 base_size 5 base_elevation 7 other_zone_avoidance_distance 0 zone 50 land_id 40 bottom_border 40 top_border 40 left_border 40 right_border 40 }
+create_land { terrain_type PEAK_PLACEHOLDER land_percent 4 land_position 1 1 base_size 5 base_elevation 7 other_zone_avoidance_distance 0 zone 50 land_id 40 bottom_border 40 top_border 40 left_border 40 right_border 40 }
+
+
+/* next layer down from peak, folds in the direct center for stones */
+/* burgeons out on the sides */
+create_land { terrain_type EL4_PLACEHOLDER land_percent 4 land_position 95 10 base_size 5 base_elevation 6 other_zone_avoidance_distance 0 zone 30 land_id 40 bottom_border 40 top_border 40 left_border 40 right_border 40 }
+/* extra large landing on map edge */
+create_land { terrain_type EL4_PLACEHOLDER land_percent 4 land_position 95 15 base_size 10 base_elevation 6 other_zone_avoidance_distance 0 zone 30 land_id 40 bottom_border 40 top_border 40 left_border 40 right_border 40 }
+create_land { terrain_type EL4_PLACEHOLDER land_percent 4 land_position 5 15 base_size 10 base_elevation 6 other_zone_avoidance_distance 0 zone 30 land_id 40 bottom_border 40 top_border 40 left_border 40 right_border 40 }
+
+create_land { terrain_type EL4_PLACEHOLDER land_percent 4 land_position 99 10 base_size 5 base_elevation 6 other_zone_avoidance_distance 0 zone 30 land_id 40 bottom_border 40 top_border 40 left_border 40 right_border 40 }
+create_land { terrain_type EL4_PLACEHOLDER land_percent 4 land_position 90 10 base_size 5 base_elevation 6 other_zone_avoidance_distance 0 zone 30 land_id 40 bottom_border 40 top_border 40 left_border 40 right_border 40 }
+create_land { terrain_type EL4_PLACEHOLDER land_percent 4 land_position 85 10 base_size 5 base_elevation 6 other_zone_avoidance_distance 0 zone 30 land_id 40 bottom_border 40 top_border 40 left_border 40 right_border 40 }
+create_land { terrain_type EL4_PLACEHOLDER land_percent 4 land_position 80 10 base_size 5 base_elevation 6 other_zone_avoidance_distance 0 zone 30 land_id 40 bottom_border 40 top_border 40 left_border 40 right_border 40 }
+create_land { terrain_type EL4_PLACEHOLDER land_percent 4 land_position 75 10 base_size 5 base_elevation 6 other_zone_avoidance_distance 0 zone 30 land_id 40 bottom_border 40 top_border 40 left_border 40 right_border 40 }
+create_land { terrain_type EL4_PLACEHOLDER land_percent 4 land_position 70 10 base_size 5 base_elevation 6 other_zone_avoidance_distance 0 zone 30 land_id 40 bottom_border 40 top_border 40 left_border 40 right_border 40 }
+create_land { terrain_type EL4_PLACEHOLDER land_percent 4 land_position 65 10 base_size 5 base_elevation 6 other_zone_avoidance_distance 0 zone 30 land_id 40 bottom_border 40 top_border 40 left_border 40 right_border 40 }
+create_land { terrain_type EL4_PLACEHOLDER land_percent 4 land_position 59 10 base_size 5 base_elevation 6 other_zone_avoidance_distance 0 zone 30 land_id 40 bottom_border 40 top_border 40 left_border 40 right_border 40 }
+create_land { terrain_type EL4_PLACEHOLDER land_percent 4 land_position 59 20 base_size 3 base_elevation 6 other_zone_avoidance_distance 0 zone 30 land_id 40 bottom_border 40 top_border 40 left_border 40 right_border 40 }
+create_land { terrain_type EL4_PLACEHOLDER land_percent 4 land_position 59 15 base_size 3 base_elevation 6 other_zone_avoidance_distance 0 zone 30 land_id 40 bottom_border 40 top_border 40 left_border 40 right_border 40 }
+create_land { terrain_type EL4_PLACEHOLDER land_percent 4 land_position 39 20 base_size 3 base_elevation 6 other_zone_avoidance_distance 0 zone 30 land_id 40 bottom_border 40 top_border 40 left_border 40 right_border 40 }
+create_land { terrain_type EL4_PLACEHOLDER land_percent 4 land_position 39 10 base_size 3 base_elevation 6 other_zone_avoidance_distance 0 zone 30 land_id 40 bottom_border 40 top_border 40 left_border 40 right_border 40 }
+create_land { terrain_type EL4_PLACEHOLDER land_percent 4 land_position 39 15 base_size 3 base_elevation 6 other_zone_avoidance_distance 0 zone 30 land_id 40 bottom_border 40 top_border 40 left_border 40 right_border 40 }
+create_land { terrain_type EL4_PLACEHOLDER land_percent 4 land_position 35 10 base_size 5 base_elevation 6 other_zone_avoidance_distance 0 zone 30 land_id 40 bottom_border 40 top_border 40 left_border 40 right_border 40 }
+create_land { terrain_type EL4_PLACEHOLDER land_percent 4 land_position 30 10 base_size 5 base_elevation 6 other_zone_avoidance_distance 0 zone 30 land_id 40 bottom_border 40 top_border 40 left_border 40 right_border 40 }
+create_land { terrain_type EL4_PLACEHOLDER land_percent 4 land_position 25 10 base_size 5 base_elevation 6 other_zone_avoidance_distance 0 zone 30 land_id 40 bottom_border 40 top_border 40 left_border 40 right_border 40 }
+create_land { terrain_type EL4_PLACEHOLDER land_percent 4 land_position 20 10 base_size 5 base_elevation 6 other_zone_avoidance_distance 0 zone 30 land_id 40 bottom_border 40 top_border 40 left_border 40 right_border 40 }
+create_land { terrain_type EL4_PLACEHOLDER land_percent 4 land_position 15 10 base_size 5 base_elevation 6 other_zone_avoidance_distance 0 zone 30 land_id 40 bottom_border 40 top_border 40 left_border 40 right_border 40 }
+create_land { terrain_type EL4_PLACEHOLDER land_percent 4 land_position 10 10 base_size 5 base_elevation 6 other_zone_avoidance_distance 0 zone 30 land_id 40 bottom_border 40 top_border 40 left_border 40 right_border 40 }
+create_land { terrain_type EL4_PLACEHOLDER land_percent 4 land_position 5 15 base_size 10 base_elevation 6 other_zone_avoidance_distance 0 zone 30 land_id 40 bottom_border 40 top_border 40 left_border 40 right_border 40 }
+
+/* duplicate everything for south side */
+create_land { terrain_type PEAK_PLACEHOLDER land_percent 4 land_position 1 99 base_size 5 base_elevation 7 other_zone_avoidance_distance 0 zone 50 land_id 40 bottom_border 40 top_border 40 left_border 40 right_border 40 }
+create_land { terrain_type PEAK_PLACEHOLDER land_percent 4 land_position 5 99 base_size 5 base_elevation 7 other_zone_avoidance_distance 0 zone 50 land_id 40 bottom_border 40 top_border 40 left_border 40 right_border 40 }
+create_land { terrain_type PEAK_PLACEHOLDER land_percent 4 land_position 10 99 base_size 5 base_elevation 7 other_zone_avoidance_distance 0 zone 50 land_id 40 bottom_border 40 top_border 40 left_border 40 right_border 40 }
+create_land { terrain_type PEAK_PLACEHOLDER land_percent 4 land_position 15 99 base_size 5 base_elevation 7 other_zone_avoidance_distance 0 zone 50 land_id 40 bottom_border 40 top_border 40 left_border 40 right_border 40 }
+create_land { terrain_type PEAK_PLACEHOLDER land_percent 4 land_position 20 99 base_size 5 base_elevation 7 other_zone_avoidance_distance 0 zone 50 land_id 40 bottom_border 40 top_border 40 left_border 40 right_border 40 }
+create_land { terrain_type PEAK_PLACEHOLDER land_percent 4 land_position 25 99 base_size 5 base_elevation 7 other_zone_avoidance_distance 0 zone 50 land_id 40 bottom_border 40 top_border 40 left_border 40 right_border 40 }
+create_land { terrain_type PEAK_PLACEHOLDER land_percent 4 land_position 30 99 base_size 5 base_elevation 7 other_zone_avoidance_distance 0 zone 50 land_id 40 bottom_border 40 top_border 40 left_border 40 right_border 40 }
+create_land { terrain_type PEAK_PLACEHOLDER land_percent 4 land_position 35 99 base_size 5 base_elevation 7 other_zone_avoidance_distance 0 zone 50 land_id 40 bottom_border 40 top_border 40 left_border 40 right_border 40 }
+create_land { terrain_type PEAK_PLACEHOLDER land_percent 4 land_position 40 99 base_size 5 base_elevation 7 other_zone_avoidance_distance 0 zone 50 land_id 40 bottom_border 40 top_border 40 left_border 40 right_border 40 }
+create_land { terrain_type PEAK_PLACEHOLDER land_percent 4 land_position 45 99 base_size 5 base_elevation 7 other_zone_avoidance_distance 0 zone 50 land_id 40 bottom_border 40 top_border 40 left_border 40 right_border 40 }
+create_land { terrain_type PEAK_PLACEHOLDER land_percent 4 land_position 50 99 base_size 5 base_elevation 7 other_zone_avoidance_distance 0 zone 50 land_id 40 bottom_border 40 top_border 40 left_border 40 right_border 40 }
+create_land { terrain_type PEAK_PLACEHOLDER land_percent 4 land_position 55 99 base_size 5 base_elevation 7 other_zone_avoidance_distance 0 zone 50 land_id 40 bottom_border 40 top_border 40 left_border 40 right_border 40 }
+create_land { terrain_type PEAK_PLACEHOLDER land_percent 4 land_position 60 99 base_size 5 base_elevation 7 other_zone_avoidance_distance 0 zone 50 land_id 40 bottom_border 40 top_border 40 left_border 40 right_border 40 }
+create_land { terrain_type PEAK_PLACEHOLDER land_percent 4 land_position 65 99 base_size 5 base_elevation 7 other_zone_avoidance_distance 0 zone 50 land_id 40 bottom_border 40 top_border 40 left_border 40 right_border 40 }
+create_land { terrain_type PEAK_PLACEHOLDER land_percent 4 land_position 70 99 base_size 5 base_elevation 7 other_zone_avoidance_distance 0 zone 50 land_id 40 bottom_border 40 top_border 40 left_border 40 right_border 40 }
+create_land { terrain_type PEAK_PLACEHOLDER land_percent 4 land_position 75 99 base_size 5 base_elevation 7 other_zone_avoidance_distance 0 zone 50 land_id 40 bottom_border 40 top_border 40 left_border 40 right_border 40 }
+create_land { terrain_type PEAK_PLACEHOLDER land_percent 4 land_position 80 99 base_size 5 base_elevation 7 other_zone_avoidance_distance 0 zone 50 land_id 40 bottom_border 40 top_border 40 left_border 40 right_border 40 }
+create_land { terrain_type PEAK_PLACEHOLDER land_percent 4 land_position 85 99 base_size 5 base_elevation 7 other_zone_avoidance_distance 0 zone 50 land_id 40 bottom_border 40 top_border 40 left_border 40 right_border 40 }
+create_land { terrain_type PEAK_PLACEHOLDER land_percent 4 land_position 90 99 base_size 5 base_elevation 7 other_zone_avoidance_distance 0 zone 50 land_id 40 bottom_border 40 top_border 40 left_border 40 right_border 40 }
+create_land { terrain_type PEAK_PLACEHOLDER land_percent 4 land_position 95 99 base_size 5 base_elevation 7 other_zone_avoidance_distance 0 zone 50 land_id 40 bottom_border 40 top_border 40 left_border 40 right_border 40 }
+create_land { terrain_type PEAK_PLACEHOLDER land_percent 4 land_position 99 99 base_size 5 base_elevation 7 other_zone_avoidance_distance 0 zone 50 land_id 40 bottom_border 40 top_border 40 left_border 40 right_border 40 }
+
+
+create_land { terrain_type EL4_PLACEHOLDER land_percent 4 land_position 95 90 base_size 5 base_elevation 6 other_zone_avoidance_distance 0 zone 30 land_id 40 bottom_border 40 top_border 40 left_border 40 right_border 40 }
+
+create_land { terrain_type EL4_PLACEHOLDER land_percent 4 land_position 95 85 base_size 10 base_elevation 6 other_zone_avoidance_distance 0 zone 30 land_id 40 bottom_border 40 top_border 40 left_border 40 right_border 40 }
+create_land { terrain_type EL4_PLACEHOLDER land_percent 4 land_position 5 85 base_size 10 base_elevation 6 other_zone_avoidance_distance 0 zone 30 land_id 40 bottom_border 40 top_border 40 left_border 40 right_border 40 }
+
+create_land { terrain_type EL4_PLACEHOLDER land_percent 4 land_position 99 90 base_size 5 base_elevation 6 other_zone_avoidance_distance 0 zone 30 land_id 40 bottom_border 40 top_border 40 left_border 40 right_border 40 }
+create_land { terrain_type EL4_PLACEHOLDER land_percent 4 land_position 90 90 base_size 5 base_elevation 6 other_zone_avoidance_distance 0 zone 30 land_id 40 bottom_border 40 top_border 40 left_border 40 right_border 40 }
+create_land { terrain_type EL4_PLACEHOLDER land_percent 4 land_position 85 90 base_size 5 base_elevation 6 other_zone_avoidance_distance 0 zone 30 land_id 40 bottom_border 40 top_border 40 left_border 40 right_border 40 }
+create_land { terrain_type EL4_PLACEHOLDER land_percent 4 land_position 80 90 base_size 5 base_elevation 6 other_zone_avoidance_distance 0 zone 30 land_id 40 bottom_border 40 top_border 40 left_border 40 right_border 40 }
+create_land { terrain_type EL4_PLACEHOLDER land_percent 4 land_position 75 90 base_size 5 base_elevation 6 other_zone_avoidance_distance 0 zone 30 land_id 40 bottom_border 40 top_border 40 left_border 40 right_border 40 }
+create_land { terrain_type EL4_PLACEHOLDER land_percent 4 land_position 70 90 base_size 5 base_elevation 6 other_zone_avoidance_distance 0 zone 30 land_id 40 bottom_border 40 top_border 40 left_border 40 right_border 40 }
+create_land { terrain_type EL4_PLACEHOLDER land_percent 4 land_position 65 90 base_size 5 base_elevation 6 other_zone_avoidance_distance 0 zone 30 land_id 40 bottom_border 40 top_border 40 left_border 40 right_border 40 }
+create_land { terrain_type EL4_PLACEHOLDER land_percent 4 land_position 59 90 base_size 5 base_elevation 6 other_zone_avoidance_distance 0 zone 30 land_id 40 bottom_border 40 top_border 40 left_border 40 right_border 40 }
+create_land { terrain_type EL4_PLACEHOLDER land_percent 4 land_position 59 80 base_size 3 base_elevation 6 other_zone_avoidance_distance 0 zone 30 land_id 40 bottom_border 40 top_border 40 left_border 40 right_border 40 }
+create_land { terrain_type EL4_PLACEHOLDER land_percent 4 land_position 59 75 base_size 3 base_elevation 6 other_zone_avoidance_distance 0 zone 30 land_id 40 bottom_border 40 top_border 40 left_border 40 right_border 40 }
+create_land { terrain_type EL4_PLACEHOLDER land_percent 4 land_position 39 70 base_size 3 base_elevation 6 other_zone_avoidance_distance 0 zone 30 land_id 40 bottom_border 40 top_border 40 left_border 40 right_border 40 }
+create_land { terrain_type EL4_PLACEHOLDER land_percent 4 land_position 39 90 base_size 3 base_elevation 6 other_zone_avoidance_distance 0 zone 30 land_id 40 bottom_border 40 top_border 40 left_border 40 right_border 40 }
+create_land { terrain_type EL4_PLACEHOLDER land_percent 4 land_position 39 85 base_size 3 base_elevation 6 other_zone_avoidance_distance 0 zone 30 land_id 40 bottom_border 40 top_border 40 left_border 40 right_border 40 }
+create_land { terrain_type EL4_PLACEHOLDER land_percent 4 land_position 35 90 base_size 5 base_elevation 6 other_zone_avoidance_distance 0 zone 30 land_id 40 bottom_border 40 top_border 40 left_border 40 right_border 40 }
+create_land { terrain_type EL4_PLACEHOLDER land_percent 4 land_position 30 90 base_size 5 base_elevation 6 other_zone_avoidance_distance 0 zone 30 land_id 40 bottom_border 40 top_border 40 left_border 40 right_border 40 }
+create_land { terrain_type EL4_PLACEHOLDER land_percent 4 land_position 25 90 base_size 5 base_elevation 6 other_zone_avoidance_distance 0 zone 30 land_id 40 bottom_border 40 top_border 40 left_border 40 right_border 40 }
+create_land { terrain_type EL4_PLACEHOLDER land_percent 4 land_position 20 90 base_size 5 base_elevation 6 other_zone_avoidance_distance 0 zone 30 land_id 40 bottom_border 40 top_border 40 left_border 40 right_border 40 }
+create_land { terrain_type EL4_PLACEHOLDER land_percent 4 land_position 15 90 base_size 5 base_elevation 6 other_zone_avoidance_distance 0 zone 30 land_id 40 bottom_border 40 top_border 40 left_border 40 right_border 40 }
+create_land { terrain_type EL4_PLACEHOLDER land_percent 4 land_position 10 90 base_size 5 base_elevation 6 other_zone_avoidance_distance 0 zone 30 land_id 40 bottom_border 40 top_border 40 left_border 40 right_border 40 }
+create_land { terrain_type EL4_PLACEHOLDER land_percent 4 land_position 5 85 base_size 10 base_elevation 6 other_zone_avoidance_distance 0 zone 30 land_id 40 bottom_border 40 top_border 40 left_border 40 right_border 40 }
+
+
+
+/* create_land */
+/* { */
+	/* terrain_type EL2_PLACEHOLDER */
+	/* land_percent 10 */
+	/* land_position 90 30 */
+	/* base_size 10 */
+	/* base_elevation 3 */
+	/* other_zone_avoidance_distance 0 */
+	/* bottom_border 30 */
+	/* zone 60 */
+	/* land_id 30 */
+/* } */
+
+
+/* create_land */
+/* { */
+	/* terrain_type EL2_PLACEHOLDER */
+	/* land_percent 10 */
+	/* land_position 80 30 */
+	/* base_size 10 */
+	/* base_elevation 3 */
+	/* other_zone_avoidance_distance 5 */
+	/* zone 60 */
+	/* land_id 30 */
+/* } */
+
+/* create_land */
+/* { */
+	/* terrain_type EL2_PLACEHOLDER */
+	/* land_percent 10 */
+	/* land_position 50 40 */
+	/* base_size 6 */
+	/* base_elevation 3 */
+	/* other_zone_avoidance_distance 5 */
+	/* zone 60 */
+	/* land_id 30 */
+/* } */
+
+
+/* create_land */
+/* { */
+	/* terrain_type EL2_PLACEHOLDER */
+	/* land_percent 10 */
+	/* land_position 30 30 */
+	/* base_size 10 */
+	/* base_elevation 3 */
+	/* other_zone_avoidance_distance 5 */
+	/* zone 60 */
+	/* land_id 30 */
+/* } */
+
+
+/* create_land */
+/* { */
+	/* terrain_type EL2_PLACEHOLDER */
+	/* land_percent 10 */
+	/* land_position 10 20 */
+	/* base_size 10 */
+	/* base_elevation 3 */
+	/* other_zone_avoidance_distance 0 */
+	/* zone 60 */
+	/* land_id 30 */
+	/* bottom_border 30 */
+/* } */
+
+/* create_land */
+/* { */
+	/* terrain_type EL2_PLACEHOLDER */
+	/* land_percent 4 */
+	/* land_position 50 18 */
+	/* base_size 4 */
+	/* base_elevation 3 */
+	/* other_zone_avoidance_distance 5 */
+	/* zone 60 */
+	/* land_id 30 */
+/* } */
+
+/* create_land */
+/* { */
+	/* terrain_type EL2_PLACEHOLDER */
+	/* land_percent 4 */
+	/* land_position 50 15 */
+	/* base_size 4 */
+	/* base_elevation 3 */
+	/* other_zone_avoidance_distance 5 */
+	/* zone 60 */
+	/* land_id 30 */
+/* } */
+
+/* low lying valley region where players start and the wood largely is */
+create_land VALLEY_PLACEHOLDER { land_position 1 50 base_size 10 zone 10 base_elevation 0 land_id 4 right_border 50 left_border 50 top_border 50 bottom_border 50 other_zone_avoidance_distance 0 }
+create_land VALLEY_PLACEHOLDER { land_position 6 50 base_size 10 zone 10 base_elevation 0 land_id 4 right_border 50 left_border 50 top_border 50 bottom_border 50 other_zone_avoidance_distance 0 }
+
+create_land VALLEY_PLACEHOLDER { land_position 34 50 base_size 10 zone 10 base_elevation 0 land_id 4 right_border 50 left_border 50 top_border 50 bottom_border 50 other_zone_avoidance_distance 0 }
+create_land VALLEY_PLACEHOLDER { land_position 50 50 base_size 10 zone 10 base_elevation 0 land_id 4 right_border 50 left_border 50 top_border 50 bottom_border 50 other_zone_avoidance_distance 0 }
+create_land VALLEY_PLACEHOLDER { land_position 60 50 base_size 10 zone 10 base_elevation 0 land_id 4 right_border 50 left_border 50 top_border 50 bottom_border 50 other_zone_avoidance_distance 0 }
+create_land VALLEY_PLACEHOLDER { land_position 66 50 base_size 10 zone 10 base_elevation 0 land_id 4 right_border 50 left_border 50 top_border 50 bottom_border 50 other_zone_avoidance_distance 0 }
+
+
+
+create_land VALLEY_PLACEHOLDER { land_position 50 40 base_size 8 zone 10 base_elevation 0 land_id 4 right_border 80 left_border 80 top_border 10 bottom_border 10 other_zone_avoidance_distance 0 }
+
+create_land VALLEY_PLACEHOLDER { land_position 99 50 base_size 10 zone 10 base_elevation 0 land_id 4 right_border 50 left_border 50 top_border 50 bottom_border 50 other_zone_avoidance_distance 0 }
+create_land VALLEY_PLACEHOLDER { land_position 93 50 base_size 10 zone 10 base_elevation 0 land_id 4 right_border 50 left_border 50 top_border 50 bottom_border 50 other_zone_avoidance_distance 0 }
+
+create_land PLAYER_PLACEHOLDER
+{
+	land_position 20 50
+	base_size 6
+	zone 5
+	base_elevation 0
+	assign_to_player 2
+	left_border 50
+	right_border 50
+	top_border 50
+	bottom_border 50
+}
+
+
+create_land PLAYER_PLACEHOLDER
+{
+	land_position 80 50
+	base_size 6
+	zone 5
+	base_elevation 0
+	assign_to_player 1
+	left_border 50
+	right_border 50
+	top_border 50
+	bottom_border 50
+}
+
+
+
+create_land
+{
+	terrain_type EL2_PLACEHOLDER
+	land_percent 4
+	land_position 90 22
+	base_size 4
+	base_elevation 3
+	other_zone_avoidance_distance 5
+	zone 60
+	land_id 30
+}
+
+create_land
+{
+	terrain_type EL2_PLACEHOLDER
+	land_percent 4
+	land_position 70 22
+	base_size 4
+	base_elevation 3
+	other_zone_avoidance_distance 5
+	zone 60
+	land_id 30
+}
+
+create_land
+{
+	terrain_type EL2_PLACEHOLDER
+	land_percent 4
+	land_position 10 22
+	base_size 4
+	base_elevation 3
+	other_zone_avoidance_distance 5
+	zone 60
+	land_id 30
+}
+
+create_land
+{
+	terrain_type EL2_PLACEHOLDER
+	land_percent 4
+	land_position 30 22
+	base_size 4
+	base_elevation 3
+	other_zone_avoidance_distance 5
+	zone 60
+	land_id 30
+}
+
+/* mirror for south side */ 
+
+
+
+create_land
+{
+	terrain_type EL2_PLACEHOLDER
+	land_percent 4
+	land_position 90 88
+	base_size 4
+	base_elevation 3
+	other_zone_avoidance_distance 5
+	zone 60
+	land_id 30
+}
+
+create_land
+{
+	terrain_type EL2_PLACEHOLDER
+	land_percent 4
+	land_position 70 88
+	base_size 4
+	base_elevation 3
+	other_zone_avoidance_distance 5
+	zone 60
+	land_id 30
+}
+
+create_land
+{
+	terrain_type EL2_PLACEHOLDER
+	land_percent 4
+	land_position 10 88
+	base_size 4
+	base_elevation 3
+	other_zone_avoidance_distance 5
+	zone 60
+	land_id 30
+}
+
+create_land
+{
+	terrain_type EL2_PLACEHOLDER
+	land_percent 4
+	land_position 30 88
+	base_size 4
+	base_elevation 3
+	other_zone_avoidance_distance 5
+	zone 60
+	land_id 30
+}
+
+/* add in variety after main sections are all blocked in */
+create_land VALLEY_PLACEHOLDER { land_position 50 40 base_size 8 zone 10 base_elevation 0 land_id 4 right_border 80 left_border 80 top_border 10 bottom_border 10 other_zone_avoidance_distance 0 }
+
+<ELEVATION_GENERATION>
+
+/* create_elevation 5 */
+/* { */
+	/* base_terrain EL2_PLACEHOLDER */
+	/* number_of_tiles 200 */
+	/* number_of_clumps 20 */
+	/* set_scale_by_size  */
+	/* enable_balanced_elevation */
+/* } */
+
+/* create_elevation 7 */
+/* { */
+	/* base_terrain EL4_PLACEHOLDER */
+	/* number_of_tiles 200 */
+	/* number_of_clumps 5 */
+	/* set_scale_by_size  */
+	/* enable_balanced_elevation */
+/* } */
+
+
+<TERRAIN_GENERATION>
+
+
+/* replace first parts of elevation, so that it can be blended with valley */
+/* then add what will actually be dirt_snow afterwards */
+/* repeat same for full snow */
+
+
+create_terrain GRASS2 {
+	base_terrain BASE_TERRAIN
+	land_percent 100
+	number_of_clumps 1000
+	set_scale_by_size
+	height_limits 0 2
+
+}
+
+create_terrain SNOW_LIGHT {
+	base_terrain GRASS2
+	land_percent 90
+	number_of_clumps 30
+	set_scale_by_size
+	height_limits 1 3
+	terrain_mask 1
+
+}
+
+create_terrain GRASS2 {
+	base_terrain EL2_PLACEHOLDER
+	land_percent 90
+	number_of_clumps 1000
+	set_scale_by_size
+
+}
+
+create_terrain SNOW_LIGHT {
+	base_terrain GRASS2
+	land_percent 90
+	number_of_clumps 100
+	set_scale_by_size
+	terrain_mask 1
+	height_limits 3 5
+	
+
+}
+
+
+
+create_terrain SNOW_STRONG {
+	base_terrain GRASS2
+	land_percent 5
+	number_of_clumps 5
+	set_scale_by_size
+	terrain_mask 2
+	height_limits 3 5
+
+}
+
+
+
+create_terrain SNOW {
+	base_terrain BASE_TERRAIN
+	land_percent 10
+	number_of_clumps 9000
+	set_scale_by_size
+	height_limits 3 6
+
+}
+
+create_terrain GRASS2 {
+	base_terrain SNOW
+	land_percent 10
+	number_of_clumps 9000
+	set_scale_by_size
+	height_limits 3 6
+	terrain_mask 2
+
+}
+
+create_terrain SNOW_LIGHT {
+	base_terrain EL4_PLACEHOLDER
+	land_percent 10
+	number_of_clumps 9000
+	set_scale_by_size
+	height_limits 6 6
+
+}
+
+create_terrain SNOW {
+	base_terrain PEAK_PLACEHOLDER
+	land_percent 10
+	number_of_clumps 9000
+	set_scale_by_size
+
+}
+
+create_terrain SNOW_FOREST {
+	base_terrain GRASS2
+	land_percent 5
+	number_of_clumps 65
+	set_scale_by_size
+	clumping_factor 25
+	height_limits 1 5
+	terrain_mask 2
+}
+
+create_terrain SNOW_LIGHT {
+	base_terrain GRASS
+	land_percent 10
+	number_of_clumps 20
+	set_scale_by_size
+	height_limits 0 0
+	terrain_mask 1
+	set_flat_terrain_only
+
+}
+
+create_terrain SNOW_LIGHT {
+	base_terrain GRASS2
+	land_percent 10
+	number_of_clumps 20
+	set_scale_by_size
+	height_limits 0 0
+	terrain_mask 1
+	set_flat_terrain_only
+
+}
+
+/* create_terrain DIRT_SNOW { */
+	/* base_terrain BASE_TERRAIN */
+	/* land_percent 100 */
+	/* number_of_clumps 30 */
+	/* set_scale_by_size */
+	/* height_limits 2 6 */
+/* } */
+
+/* create_terrain SNOW { */
+	/* base_terrain DIRT_SNOW */
+	/* land_percent 60 */
+	/* number_of_clumps 18 */
+	/* set_scale_by_size */
+	/* terrain_mask 1 */
+/* } */
+
+/* create_terrain DIRT_SNOW { */
+	/* base_terrain EL2_PLACEHOLDER */
+	/* land_percent 100 */
+	/* number_of_clumps 30 */
+	/* set_scale_by_size */
+/* } */
+
+/* create_terrain SNOW { */
+	/* base_terrain PEAK_PLACEHOLDER */
+	/* land_percent 100 */
+	/* number_of_clumps 30 */
+	/* set_scale_by_size */
+/* } */
+
+
+/* create_terrain FOREST */
+/* { */
+	/* base_terrain GRASS */
+	/* land_percent 6 */
+	/* number_of_clumps 10 */
+	/* set_scale_by_size */
+	/* clumping_factor 4 */
+	/* height_limits 1 4 */
+	
+/* } */
+
+
+create_terrain GRAVEL_ROAD
+{
+	base_terrain MON_PLACEHOLDER
+	land_percent 100
+	number_of_clumps 10
+	set_scale_by_size
+	clumping_factor 4
+	
+	
+}
+
+
+create_terrain GRAVEL_ROAD
+{
+	base_terrain MON_PLACEHOLDER
+	land_percent 100
+	number_of_clumps 10
+	set_scale_by_size
+	clumping_factor 4
+	
+	
+}
+
+<OBJECTS_GENERATION>
+
+create_object TOWN_CENTER
+{
+	set_place_for_every_player
+	max_distance_to_players 0
+}
+
+/* starting res for each player */
+/* no stone */
+
+create_object GOLD { set_place_for_every_player set_gaia_object_only number_of_objects 3 set_tight_grouping temp_min_distance_group_placement 5 min_distance_to_players 8 max_distance_to_players 15 } 
+create_object FORAGE { set_place_for_every_player set_gaia_object_only number_of_objects 3 set_tight_grouping temp_min_distance_group_placement 5 min_distance_to_players 6 max_distance_to_players 15 } 
+
+create_object HUNTING_WOLF { set_place_for_every_player set_tight_grouping temp_min_distance_group_placement 5 min_distance_to_players 6 max_distance_to_players 15 } 
+create_object VILLAGER { set_place_for_every_player set_tight_grouping temp_min_distance_group_placement 5 number_of_groups 1 number_of_objects 2 min_distance_to_players 6 max_distance_to_players 8 } 
+
+
+
+
+/* herdables brought along with the villagers */
+create_object SHEEP { set_place_for_every_player set_gaia_object_only number_of_objects 2 number_of_groups 2 set_tight_grouping temp_min_distance_group_placement 4 min_distance_to_players 5 max_distance_to_players 8 } 
+create_object DLC_IBEX { set_place_for_every_player set_gaia_object_only number_of_objects 4 number_of_groups 1 set_tight_grouping temp_min_distance_group_placement 4 min_distance_to_players 10 max_distance_to_players 20 } 
+
+
+create_object STONE { set_gaia_object_only number_of_groups 4 number_of_objects 3 set_tight_grouping temp_min_distance_group_placement 5 max_distance_to_players 30 terrain_to_place_on SNOW_LIGHT } 
+
+
+create_object GOLD { set_gaia_object_only number_of_groups 6 number_of_objects 2 set_tight_grouping temp_min_distance_group_placement 10 max_distance_to_players 30 terrain_to_place_on SNOW_LIGHT } 
+
+create_object ON_GRID { set_gaia_object_only number_of_objects 1 number_of_groups 1  place_on_specific_land_id 40 terrain_to_place_on SNOW second_object SNOWY_MOUNTAIN_1 } 
+create_object ON_GRID { set_gaia_object_only number_of_objects 1 number_of_groups 1  place_on_specific_land_id 40 terrain_to_place_on SNOW second_object SNOWY_MOUNTAIN_2 } 
+create_object ON_GRID { set_gaia_object_only number_of_objects 1 number_of_groups 1  place_on_specific_land_id 40 terrain_to_place_on SNOW second_object SNOWY_MOUNTAIN_3 } 
+
+create_object DLC_IBEX { set_gaia_object_only number_of_objects 3 number_of_groups 20 set_loose_grouping temp_min_distance_group_placement 4 terrain_to_place_on  GRASS2 } 
+
+
+create_object HOUSE_F { find_closest set_gaia_object_only number_of_objects 1 number_of_groups 10 set_loose_grouping temp_min_distance_group_placement 5  terrain_to_place_on SNOW_LIGHT actor_area 10 actor_area_radius 2 set_gaia_unconvertible } 
+create_object ON_GRID { set_gaia_object_only number_of_objects 1 number_of_groups 9000 set_loose_grouping temp_min_distance_group_placement 20 actor_area_to_place_in 10 second_object RELIC } 
+
+
+create_object FORAGE { set_gaia_object_only number_of_objects 5 set_tight_grouping temp_min_distance_group_placement 5 terrain_to_place_on GRASS } 
+
+/* create_object SNOWY_MOUNTAIN_1 */
+/* { */
+	/* terrain_to_place_on SNOW */
+	/* place_on_specific_land_id 20 */
+	/* number_of_objects 1 */
+	/* number_of_groups 1 */
+	/* find_closest_to_map_edge  */
+	/* set_tight_grouping */
+/* } */
+
+/* create_object SNOWY_MOUNTAIN_2 */
+/* { */
+	/* terrain_to_place_on SNOW */
+	/* place_on_specific_land_id 20 */
+	/* number_of_objects 1 */
+	/* number_of_groups 1 */
+	/* find_closest_to_map_edge  */
+	/* set_tight_grouping */
+/* } */
+
+/* create_object SNOWY_MOUNTAIN_3 */
+/* { */
+	/* terrain_to_place_on SNOW */
+	/* place_on_specific_land_id 20 */
+	/* number_of_objects 1 */
+	/* number_of_groups 1 */
+	/* find_closest_to_map_edge  */
+	/* set_tight_grouping */
+/* } */
+
+/* /* remnants of Roman control */ */
+/* /* left side */ */
+
+/* create_object RUINED_MON */
+/* { */
+	/* terrain_to_place_on DIRT_SNOW */
+	/* place_on_specific_land_id 16 */
+	/* number_of_groups 1 */
+	/* set_gaia_object_only */
+	/* set_gaia_unconvertible */
+	/* find_closest */
+	/* actor_area 200 */
+	/* actor_area_radius 5 */
+/* } */
+/* /* right side */ */
+
+/* create_object RUINED_MON */
+/* { */
+	/* terrain_to_place_on DIRT_SNOW */
+	/* place_on_specific_land_id 12 */
+	/* number_of_groups 1 */
+	/* set_gaia_object_only */
+	/* set_gaia_unconvertible */
+	/* find_closest */
+	/* actor_area 100 */
+	/* actor_area_radius 5 */
+
+/* } */
+
+/* create_object RELIC */
+/* { */
+	/* terrain_to_place_on DIRT_SNOW */
+	/* actor_area_to_place_in 100 */
+	/* number_of_groups 1 */
+	/* number_of_objects 3 */
+	/* set_loose_grouping */
+	/* set_gaia_object_only */
+	/* set_gaia_unconvertible */
+
+
+/* } */
+
+/* create_object RELIC */
+/* { */
+	/* terrain_to_place_on DIRT_SNOW */
+	/* actor_area_to_place_in 200 */
+	/* number_of_groups 1 */
+	/* number_of_objects 3 */
+	/* set_loose_grouping */
+	/* set_gaia_object_only */
+	/* set_gaia_unconvertible */
+
+
+/* } */
+
+/* create_object HOUSE_F */
+/* { */
+	/* terrain_to_place_on DIRT_SNOW */
+	/* place_on_specific_land_id 16 */
+	/* number_of_groups 3 */
+	/* set_gaia_object_only */
+	/* set_gaia_unconvertible */
+	/* find_closest */
+	/* temp_min_distance_group_placement 5 */
+/* } */
+
+/* create_object HOUSE_F */
+/* { */
+	/* terrain_to_place_on DIRT_SNOW */
+	/* place_on_specific_land_id 12 */
+	/* number_of_groups 3 */
+	/* set_gaia_object_only */
+	/* set_gaia_unconvertible */
+	/* find_closest */
+	/* temp_min_distance_group_placement 5 */
+/* } */

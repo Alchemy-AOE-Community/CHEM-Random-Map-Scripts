@@ -244,6 +244,17 @@ create_object SCOUT {
 	max_distance_to_players 10
 }
 
+if REGICIDE
+
+create_object KING {
+	set_place_for_every_player
+	min_distance_to_players 5
+	max_distance_to_players 12
+}
+
+
+endif
+
 /* /* starting res */ */
 
 create_object FORAGE { set_place_for_every_player min_distance_to_players 10 max_distance_to_players 15 find_closest number_of_objects 4 number_of_groups 1 set_tight_grouping set_gaia_object_only }

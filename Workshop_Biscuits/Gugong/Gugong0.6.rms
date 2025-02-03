@@ -6,6 +6,7 @@ direct_placement
 set_gaia_civilization 6
 
 #const STONE_GATE 78
+#const SMALL_PAGODA 1203
 
 #const NGARDEN_PLACEHOLDER 7
 #const SGARDEN_PLACEHOLDER 26
@@ -76,10 +77,10 @@ create_land { terrain_type FOREST land_position 79 59 base_size 4 bottom_border 
 
 
 /* small housing sections */
-create_land { terrain_type HOUSE_PLACEHOLDER land_position 30 20 base_size 8 bottom_border 50 top_border 50 right_border 50 left_border 50 land_id 40 }
-create_land { terrain_type HOUSE_PLACEHOLDER land_position 70 20 base_size 8 bottom_border 50 top_border 50 right_border 50 left_border 50 land_id 40 }
-create_land { terrain_type HOUSE_PLACEHOLDER land_position 70 80 base_size 8 bottom_border 50 top_border 50 right_border 50 left_border 50 land_id 40 }
-create_land { terrain_type HOUSE_PLACEHOLDER land_position 30 80 base_size 8 bottom_border 50 top_border 50 right_border 50 left_border 50 land_id 40 }
+create_land { terrain_type HOUSE_PLACEHOLDER land_position 20 20 base_size 8 bottom_border 50 top_border 50 right_border 50 left_border 50 land_id 40 }
+create_land { terrain_type HOUSE_PLACEHOLDER land_position 80 20 base_size 8 bottom_border 50 top_border 50 right_border 50 left_border 50 land_id 40 }
+create_land { terrain_type HOUSE_PLACEHOLDER land_position 80 80 base_size 8 bottom_border 50 top_border 50 right_border 50 left_border 50 land_id 40 }
+create_land { terrain_type HOUSE_PLACEHOLDER land_position 20 80 base_size 8 bottom_border 50 top_border 50 right_border 50 left_border 50 land_id 40 }
 
 create_land { terrain_type SGARDEN_PLACEHOLDER land_position 50 80 base_size 10 bottom_border 50 top_border 50 right_border 50 left_border 50 land_id 30 }
 
@@ -152,7 +153,7 @@ create_land { terrain_type FOREST land_position 79 59 base_size 4 bottom_border 
 /* small housing sections */
 create_land { terrain_type HOUSE_PLACEHOLDER land_position 70 50 base_size 8 bottom_border 50 top_border 50 right_border 50 left_border 50 land_id 40 }
 create_land { terrain_type HOUSE_PLACEHOLDER land_position 50 80 base_size 8 bottom_border 50 top_border 50 right_border 50 left_border 50 land_id 40 }
-create_land { terrain_type HOUSE_PLACEHOLDER land_position 30 50 base_size 8 bottom_border 50 top_border 50 right_border 50 left_border 50 land_id 40 }
+create_land { terrain_type HOUSE_PLACEHOLDER land_position 30 30 base_size 8 bottom_border 50 top_border 50 right_border 50 left_border 50 land_id 40 }
 create_land { terrain_type HOUSE_PLACEHOLDER land_position 50 20 base_size 8 bottom_border 50 top_border 50 right_border 50 left_border 50 land_id 40 }
 
 create_land { terrain_type SGARDEN_PLACEHOLDER land_position 30 20 base_size 10 bottom_border 50 top_border 50 right_border 50 left_border 50 land_id 30 }
@@ -336,13 +337,14 @@ create_object DLC_AFRICANBUSH
 
 /* /* food garden in south */ */
 
-create_object DEER { terrain_to_place_on GRASS2 find_closest number_of_objects 3 number_of_groups 3 set_loose_grouping place_on_specific_land_id 30 set_gaia_object_only }
-create_object FORAGE { terrain_to_place_on GRASS2 find_closest number_of_objects 4 number_of_groups 3 set_tight_grouping place_on_specific_land_id 30 set_gaia_object_only }
-create_object BOAR { terrain_to_place_on GRASS2 find_closest number_of_objects 1 number_of_groups 4 place_on_specific_land_id 30 set_gaia_object_only temp_min_distance_group_placement 5 }
+create_object FORAGE { terrain_to_place_on GRASS2 find_closest number_of_objects 4 number_of_groups 2 set_tight_grouping place_on_specific_land_id 30 set_gaia_object_only min_distance_group_placement 4 }
+create_object DEER { terrain_to_place_on GRASS2 find_closest number_of_objects 3 number_of_groups 3 set_loose_grouping place_on_specific_land_id 30 set_gaia_object_only temp_min_distance_group_placement 4 }
+create_object BOAR { terrain_to_place_on GRASS2 number_of_objects 1 number_of_groups 4 place_on_specific_land_id 30 set_gaia_object_only min_distance_group_placement 3 }
+create_object DLC_DRAGONTREE { terrain_to_place_on GRASS2 number_of_objects 5 number_of_groups 9000  temp_min_distance_group_placement 5 set_tight_grouping set_gaia_object_only }
 
 /* /* mineral garden in north */ */
 
-create_object STONE { terrain_to_place_on ROCK1 find_closest number_of_objects 3 number_of_groups 5 set_tight_grouping place_on_specific_land_id 35 set_gaia_object_only temp_min_distance_group_placement 3 }
+create_object STONE { terrain_to_place_on ROCK1 find_closest number_of_objects 3 number_of_groups 5 set_tight_grouping place_on_specific_land_id 35 set_gaia_object_only temp_min_distance_group_placement 6 }
 
 /* /* neutral gold patches in the middle of house clusters */ */
 
@@ -358,9 +360,11 @@ create_object HOUSE_C { terrain_to_place_on DIRT3 find_closest number_of_objects
 create_object GOLD { terrain_to_place_on GRASS find_closest number_of_objects 1 number_of_groups 100 set_gaia_object_only temp_min_distance_group_placement 10 avoid_actor_area 300 }
 
 /* small neutral woodlines */
-create_object DLC_DRAGONTREE { terrain_to_place_on GRASS number_of_objects 10 number_of_groups 9000  temp_min_distance_group_placement 5 avoid_actor_area 300 avoid_actor_area 400 set_tight_grouping set_gaia_object_only temp_min_distance_group_placement 10 }
+/* create_object DLC_DRAGONTREE { terrain_to_place_on DIRT3 number_of_objects 10 number_of_groups 9000  temp_min_distance_group_placement 5 avoid_actor_area 300 avoid_actor_area 400 set_tight_grouping set_gaia_object_only } */
+create_object SMALL_PAGODA { terrain_to_place_on GRASS find_closest set_gaia_object_only place_on_specific_land_id 120 actor_area 500 actor_area_radius 2 }
+create_object FLAG_A { terrain_to_place_on GRASS find_closest actor_area_to_place_in 500 second_object RELIC number_of_groups 2 }
 
-create_object FLAG_A { place_on_specific_land_id 120 set_tight_grouping set_gaia_object_only second_object RELIC find_closest }
 
 /* relics */
-create_object FLAG_A { terrain_to_place_on ROCK1 find_closest set_gaia_object_only place_on_specific_land_id 35 second_object RELIC }
+
+create_object FLAG_A { terrain_to_place_on ROCK1 find_closest second_object RELIC place_on_specific_land_id 35 }

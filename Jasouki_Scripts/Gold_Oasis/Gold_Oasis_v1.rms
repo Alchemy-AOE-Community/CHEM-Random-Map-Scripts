@@ -1,0 +1,518 @@
+/* *** Gold Oasis *** */
+
+/* ************ Made by jasouki ************ */
+/* Special Thanks to Marintho, Zetnus, Jasuni & Thire7 for their help to address issues during scripting */
+
+
+
+<PLAYER_SETUP>
+random_placement
+
+
+#define PH_TROPHICALEAST
+
+
+
+#include_drs F_seasons.inc
+
+<LAND_GENERATION>
+
+base_terrain DIRT2	
+
+
+
+create_player_lands 
+{
+  terrain_type DIRT3
+  land_percent 4
+  base_size 12
+  base_elevation 0
+  border_fuzziness                 20
+  circle_radius 31 0
+  clumping_factor 20
+}
+
+create_land
+{
+  terrain_type DLC_MOORLAND
+  land_percent 100
+	top_border 35 /* 28 */
+	bottom_border 35
+	right_border 35
+	left_border 35
+  base_elevation 0
+  land_id        70
+}
+
+<TERRAIN_GENERATION>
+
+create_terrain DLC_JUNGLEGRASS
+{
+
+  base_terrain DLC_MOORLAND
+  land_percent 100
+  number_of_clumps 1000
+  spacing_to_other_terrain_types 3
+ 
+
+}
+
+create_terrain WOODIES
+{
+  base_terrain DIRT2
+  land_percent 12
+  number_of_clumps 24
+  set_scale_by_groups
+  spacing_to_other_terrain_types 3
+  set_avoid_player_start_areas
+}
+
+create_terrain WOODIES
+{
+  base_terrain DLC_MOORLAND
+  land_percent 100
+  number_of_clumps 24
+  set_scale_by_groups
+  spacing_to_other_terrain_types 0
+  set_avoid_player_start_areas
+}
+
+create_terrain DLC_JUNGLELEAVES
+{
+  base_terrain DLC_JUNGLEGRASS
+  land_percent 100
+  number_of_clumps 1000
+  spacing_to_other_terrain_types 6
+}
+
+create_terrain DLC_JUNGLELEAVES
+{
+  base_terrain DLC_JUNGLEGRASS
+  land_percent 100
+  number_of_clumps 1000
+  spacing_to_other_terrain_types 4
+  terrain_mask 2
+}
+
+create_terrain DLC_JUNGLEGRASS
+{
+  base_terrain DLC_JUNGLELEAVES
+  number_of_tiles 100
+  number_of_clumps 1000
+  spacing_to_other_terrain_types 2
+  terrain_mask 2
+}
+
+create_terrain DLC_DRYGRASS
+{
+  base_terrain DIRT3
+  land_percent 100
+  number_of_clumps 1000
+  spacing_to_other_terrain_types 2
+}
+
+create_terrain DLC_DRYGRASS
+{
+  base_terrain DIRT3
+  land_percent 100
+  number_of_clumps 1000
+  spacing_to_other_terrain_types 2
+}
+
+create_terrain DIRT2
+{
+  base_terrain DIRT3
+  land_percent 100
+  number_of_clumps 1000
+}
+
+create_terrain DIRT2
+{
+  base_terrain DIRT3
+  land_percent 100
+  number_of_clumps 1000
+}
+
+create_terrain DIRT3
+{
+  base_terrain DLC_DRYGRASS
+  land_percent 100
+  number_of_clumps 1000
+  spacing_to_other_terrain_types 2
+}
+
+create_terrain DIRT3
+{
+  base_terrain DLC_DRYGRASS
+  land_percent 100
+  number_of_clumps 1000
+  spacing_to_other_terrain_types 2
+}
+
+create_terrain DIRT2
+{
+  base_terrain DLC_DRYGRASS
+  land_percent 100
+  number_of_clumps 1000
+  spacing_to_other_terrain_types 0
+  terrain_mask 1
+}
+
+create_terrain DIRT2
+{
+  base_terrain DLC_DRYGRASS
+  land_percent 100
+  number_of_clumps 1000
+  spacing_to_other_terrain_types 0
+  terrain_mask 1
+}
+
+create_terrain DLC_DRYGRASS
+{
+  base_terrain DIRT2
+  land_percent 100
+  number_of_clumps 1000
+}
+
+create_terrain DLC_DRYGRASS
+{
+  base_terrain DIRT2
+  land_percent 100
+  number_of_clumps 1000
+}
+
+create_terrain DLC_DRYGRASS
+{
+  base_terrain DIRT2
+  land_percent 100
+  number_of_clumps 1000
+}
+
+create_terrain DLC_DRYGRASS
+{
+  base_terrain DIRT2
+  land_percent 100
+  number_of_clumps 1000
+}
+
+create_terrain DIRT2
+{
+  base_terrain DIRT3
+  land_percent 100
+  number_of_clumps 34
+  spacing_to_other_terrain_types 0
+  terrain_mask 1
+}
+
+<ELEVATION_GENERATION>
+
+create_elevation 7 
+{
+  base_terrain DIRT2
+  number_of_clumps 999
+  number_of_tiles 99999
+  set_scale_by_groups
+  set_scale_by_size
+  spacing 3
+}
+
+
+<OBJECTS_GENERATION>
+
+#define GNR_NORMALTC
+#define GNR_STARTVILLS
+#define GNR_CLASSICSCOUT
+
+
+if TINY_MAP
+#define GNR_RELIC_EXTRAONE
+#const LAYER_D 102
+#define GNR_RELIC_EXTRA_LAYERD
+else
+#define GNR_GIVERELICS
+#define GNR_RELICMODERN_MEDIUM
+endif
+
+#define GNR_REGICIDETOWER
+
+#define GNR_GIVEHERD_A
+#define GNR_GIVEHERD_B
+
+#define GNR_HERD4CLASSIC_A
+#define GNR_HERD33_B
+#define GNR_HERD_B_TIGHTGROUPING
+
+#define GNR_RESCLOSE
+
+#define GNR_GIVEHUNT
+
+/* forage bush added */
+#define GNR_4KER
+
+#define GNR_HUNT3OR4CLASSIC
+
+#define GNR_GIVELURES
+#define GNR_GROUPEDLURES_TWO
+
+#define GNR_STARTINGGOLD
+#define GNR_STARTINGSTONE
+
+#define GNR_STARTGOLD43M
+#define GNR_STARTSTONE44M
+#define GNR_STARTGS_3WBLOCK
+
+/* EXTRA STONE */
+
+if TINY_MAP
+create_object STONE
+{
+     number_of_groups           7
+     number_of_objects          2
+     group_variance             0
+     group_placement_radius     2
+     set_tight_grouping
+     set_gaia_object_only
+     min_distance_to_players       40
+     min_distance_group_placement  9
+	 terrain_to_place_on DLC_DRYGRASS
+}
+endif
+
+if SMALL_MAP
+create_object STONE
+{
+     number_of_groups           10
+     number_of_objects          2
+     group_variance             0
+     group_placement_radius     2
+     set_tight_grouping
+     set_gaia_object_only
+     min_distance_to_players       40
+     min_distance_group_placement  9
+	 terrain_to_place_on DLC_DRYGRASS
+}
+endif
+
+if MEDIUM_MAP
+create_object STONE
+{
+     number_of_groups           13
+     number_of_objects          2
+     group_variance             0
+     group_placement_radius     2
+     set_tight_grouping
+     set_gaia_object_only
+     min_distance_to_players       40
+     min_distance_group_placement  9
+	 terrain_to_place_on DLC_DRYGRASS
+}
+endif
+
+if LARGE_MAP
+create_object STONE
+{
+     number_of_groups           25
+     number_of_objects          2
+     group_variance             0
+     group_placement_radius     2
+     set_tight_grouping
+     set_gaia_object_only
+     min_distance_to_players       40
+     min_distance_group_placement  9
+	 terrain_to_place_on DLC_DRYGRASS
+}
+endif
+
+if HUGE_MAP
+create_object STONE
+{
+     number_of_groups           30
+     number_of_objects          2
+     group_variance             0
+     group_placement_radius     2
+     set_tight_grouping
+     set_gaia_object_only
+     min_distance_to_players       40
+     min_distance_group_placement  9
+	 terrain_to_place_on DLC_DRYGRASS
+}
+endif
+
+if GIGANTIC_MAP
+create_object STONE
+{
+     number_of_groups           35
+     number_of_objects          2
+     group_variance             0
+     group_placement_radius     2
+     set_tight_grouping
+     set_gaia_object_only
+     min_distance_to_players       40
+     min_distance_group_placement  9
+	
+	 terrain_to_place_on DLC_DRYGRASS
+}
+endif
+#define GNR_NORMALBIRDS
+
+#include_drs GeneratingObjects.inc
+
+if EMPIRE_WARS
+elseif DEATH_MATCH
+else
+create_object DLC_RAINTREE 
+{
+  number_of_objects             2
+  set_gaia_object_only
+  set_place_for_every_player
+  min_distance_to_players       4
+  max_distance_to_players       5
+  min_distance_group_placement  2
+  avoid_actor_area 14
+}
+create_object DLC_RAINTREE 
+{
+  number_of_objects             3
+  set_gaia_object_only
+  set_place_for_every_player
+  min_distance_to_players       6
+  max_distance_to_players       8
+  min_distance_group_placement  2
+  avoid_actor_area 14
+}
+endif
+
+create_object GOLD
+{
+number_of_objects 4
+number_of_groups 999
+set_tight_grouping
+group_placement_radius 3
+set_gaia_object_only
+temp_min_distance_group_placement 5
+terrain_to_place_on DLC_JUNGLEGRASS
+}
+
+create_object GOLD
+{
+number_of_objects 5
+number_of_groups 999
+set_tight_grouping
+group_placement_radius 3
+set_gaia_object_only
+temp_min_distance_group_placement 5
+terrain_to_place_on DLC_JUNGLELEAVES
+}
+
+
+
+if TINY_MAP
+
+create_object RELIC
+{
+
+   number_of_objects            1
+   number_of_groups 		2
+   temp_min_distance_group_placement 21
+   min_distance_group_placement 1
+   set_place_for_every_player 
+   set_gaia_object_only
+   min_distance_to_players     28
+   max_distance_to_players     36
+   terrain_to_place_on DLC_DRYGRASS
+}
+
+endif
+
+
+
+
+
+create_object DLC_MANGROVE_TREE 
+{
+  number_of_objects          3
+  number_of_groups 	     999
+  temp_min_distance_group_placement 16
+  set_tight_grouping
+  set_gaia_object_only
+  set_scaling_to_map_size
+	if EMPIRE_WARS
+  min_distance_to_players    35
+	else
+  min_distance_to_players    8
+	endif
+  avoid_actor_area 12
+  avoid_actor_area 14
+  avoid_actor_area 149
+  avoid_actor_area 61
+  avoid_actor_area 62
+  avoid_actor_area 63
+  avoid_actor_area 65
+  avoid_actor_area 66
+  avoid_actor_area 67
+  terrain_to_place_on DLC_MANGROVESHALLOW
+  
+  avoid_forest_zone 2
+
+}
+
+create_object DLC_RAINTREE
+{
+  number_of_objects          34
+  set_gaia_object_only
+  set_scaling_to_map_size
+	if EMPIRE_WARS
+  min_distance_to_players    35
+	else
+  min_distance_to_players    10
+  max_distance_to_players   40
+	endif
+	
+	set_circular_placement
+	set_tight_grouping
+	set_place_for_every_player
+  avoid_actor_area 12
+  avoid_actor_area 14
+  avoid_actor_area 149
+  avoid_actor_area 61
+  avoid_actor_area 62
+  avoid_actor_area 63
+  avoid_actor_area 65
+  avoid_actor_area 66
+  avoid_actor_area 67
+  terrain_to_place_on DIRT3
+  
+  avoid_forest_zone 2
+
+}
+
+
+/* bombard towers */
+
+create_object BOMBARD_TOWER
+{
+second_object
+number_of_objects 1
+number_of_groups 999
+set_tight_grouping
+group_placement_radius 8
+set_gaia_object_only
+temp_min_distance_group_placement 10
+set_building_capturable
+terrain_to_place_on DLC_JUNGLEGRASS
+}
+
+create_object BOMBARD_TOWER
+{
+second_object
+number_of_objects 1
+number_of_groups 999
+set_tight_grouping
+group_placement_radius 8
+set_gaia_object_only
+temp_min_distance_group_placement 10
+set_building_capturable
+terrain_to_place_on DLC_JUNGLELEAVES
+}
+
+

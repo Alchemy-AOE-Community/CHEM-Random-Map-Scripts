@@ -11,6 +11,10 @@ random_placement
 
 #define PH_TROPHICALEAST
 
+#const  MOUFLON  2340
+#const OUTLW 158
+#const SVANTOWER 1807
+
 
 
 #include_drs F_seasons.inc
@@ -516,3 +520,411 @@ terrain_to_place_on DLC_JUNGLELEAVES
 }
 
 
+/*random animals */
+if TINY_MAP
+create_object MOUFLON
+{
+     number_of_objects          4
+     number_of_groups         5
+	 group_variance             2
+     group_placement_radius     3
+     set_loose_grouping
+     set_gaia_object_only
+     min_distance_to_players    30 
+	 temp_min_distance_group_placement 10
+	 terrain_to_place_on DLC_DRYGRASS
+	 	 } 
+	 
+	 create_object DEER
+{
+     number_of_objects          4
+     number_of_groups         5
+	 group_variance             2
+     group_placement_radius     3
+     set_loose_grouping
+     set_gaia_object_only
+     min_distance_to_players    30 
+	 temp_min_distance_group_placement 10
+	 terrain_to_place_on DLC_DRYGRASS
+	} 
+		
+	create_object DLC_LION
+{
+     number_of_objects          2
+     number_of_groups         10
+	 group_variance            0
+     
+     set_gaia_object_only
+     min_distance_to_players    35
+	 temp_min_distance_group_placement 10
+	 terrain_to_place_on DLC_DRYGRASS
+	 }
+	 
+endif
+
+if SMALL_MAP
+create_object MOUFLON
+{
+     number_of_objects          4
+     number_of_groups         7
+	 group_variance             2
+     group_placement_radius     3
+     set_loose_grouping
+     set_gaia_object_only
+     min_distance_to_players    30 
+	 temp_min_distance_group_placement 10
+	 terrain_to_place_on DLC_DRYGRASS
+	 	 } 
+	 
+	 create_object DEER
+{
+     number_of_objects          4
+     number_of_groups         7
+	 group_variance             2
+     group_placement_radius     3
+     set_loose_grouping
+     set_gaia_object_only
+     min_distance_to_players    30 
+	 temp_min_distance_group_placement 10
+	 terrain_to_place_on DLC_DRYGRASS
+	} 
+		
+	create_object DLC_LION
+{
+     number_of_objects          2
+     number_of_groups         14
+	 group_variance            0
+     
+     set_gaia_object_only
+     min_distance_to_players    35
+	 temp_min_distance_group_placement 10
+	 terrain_to_place_on DLC_DRYGRASS
+	 }
+	 
+endif
+
+
+if MEDIUM_MAP
+create_object MOUFLON
+{
+     number_of_objects          4
+     number_of_groups         9
+	 group_variance             2
+     group_placement_radius     3
+     set_loose_grouping
+     set_gaia_object_only
+     min_distance_to_players    30 
+	 temp_min_distance_group_placement 10
+	 terrain_to_place_on DLC_DRYGRASS
+	 	 } 
+	 
+	 create_object DEER
+{
+     number_of_objects          4
+     number_of_groups         9
+	 group_variance             2
+     group_placement_radius     3
+     set_loose_grouping
+     set_gaia_object_only
+     min_distance_to_players    30 
+	 temp_min_distance_group_placement 10
+	 terrain_to_place_on DLC_DRYGRASS
+	} 
+		
+	create_object DLC_LION
+{
+     number_of_objects          2
+     number_of_groups         18
+	 group_variance            0
+     
+     set_gaia_object_only
+     min_distance_to_players    35
+	 temp_min_distance_group_placement 10
+	 terrain_to_place_on DLC_DRYGRASS
+	 }
+	 
+endif
+ 
+ if LARGE_MAP
+ 
+ create_object MOUFLON
+{
+     number_of_objects          4
+     number_of_groups         11
+	 group_variance             2
+     group_placement_radius     3
+     set_loose_grouping
+     set_gaia_object_only
+     min_distance_to_players    30 
+	 temp_min_distance_group_placement 10
+	 terrain_to_place_on DLC_DRYGRASS
+	 	 } 
+	 
+	 create_object DEER
+{
+     number_of_objects          4
+     number_of_groups         11
+	 group_variance             2
+     group_placement_radius     3
+     set_loose_grouping
+     set_gaia_object_only
+     min_distance_to_players    30 
+	 temp_min_distance_group_placement 10
+	 terrain_to_place_on DLC_DRYGRASS
+	} 
+		
+	create_object DLC_LION
+{
+     number_of_objects          2
+     number_of_groups         22
+	 group_variance            0
+     
+     set_gaia_object_only
+     min_distance_to_players    35
+	 temp_min_distance_group_placement 10
+	 terrain_to_place_on DLC_DRYGRASS
+	 }
+	 
+endif
+
+if HUGE_MAP
+
+create_object MOUFLON
+{
+     number_of_objects          4
+     number_of_groups         13
+	 group_variance             2
+     group_placement_radius     3
+     set_loose_grouping
+     set_gaia_object_only
+     min_distance_to_players    30 
+	 temp_min_distance_group_placement 10
+	 terrain_to_place_on DLC_DRYGRASS
+	 	 } 
+	 
+	 create_object DEER
+{
+     number_of_objects          4
+     number_of_groups         13
+	 group_variance             2
+     group_placement_radius     3
+     set_loose_grouping
+     set_gaia_object_only
+     min_distance_to_players    30 
+	 temp_min_distance_group_placement 10
+	 terrain_to_place_on DLC_DRYGRASS
+	} 
+		
+	create_object DLC_LION
+{
+     number_of_objects          2
+     number_of_groups         26
+	 group_variance            0
+     
+     set_gaia_object_only
+     min_distance_to_players    35
+	 temp_min_distance_group_placement 10
+	 terrain_to_place_on DLC_DRYGRASS
+	 }
+	 
+endif
+
+if GIGANTIC_MAP
+
+create_object MOUFLON
+{
+     number_of_objects          4
+     number_of_groups         16
+	 group_variance             2
+     group_placement_radius     3
+     set_loose_grouping
+     set_gaia_object_only
+     min_distance_to_players    30 
+	 temp_min_distance_group_placement 10
+	 terrain_to_place_on DLC_DRYGRASS
+	 	 } 
+	 
+	 create_object DEER
+{
+     number_of_objects          4
+     number_of_groups         16
+	 group_variance             2
+     group_placement_radius     3
+     set_loose_grouping
+     set_gaia_object_only
+     min_distance_to_players    30 
+	 temp_min_distance_group_placement 10
+	 terrain_to_place_on DLC_DRYGRASS
+	} 
+		
+	create_object DLC_LION
+{
+     number_of_objects          2
+     number_of_groups         32
+	 group_variance            0
+     
+     set_gaia_object_only
+     min_distance_to_players    35
+	 temp_min_distance_group_placement 10
+	 terrain_to_place_on DLC_DRYGRASS
+	 }
+	 
+endif
+/* decorations */
+
+	 
+	 create_object SKELETON
+{
+number_of_objects 5
+number_of_groups 999
+group_variance            2
+set_tight_grouping
+set_gaia_object_only
+temp_min_distance_group_placement 2
+terrain_to_place_on DLC_JUNGLELEAVES
+}
+if TINY_MAP
+	 create_object SVANTOWER
+{
+number_of_objects 1
+number_of_groups 3
+group_variance            0
+set_gaia_object_only
+min_distance_to_players    35
+terrain_to_place_on DLC_DRYGRASS
+}
+
+	 create_object DLC_ROCKJUNGLE
+{
+number_of_objects 2
+number_of_groups 10
+group_variance            2
+set_gaia_object_only
+min_distance_to_players    35
+temp_min_distance_group_placement 10
+terrain_to_place_on DLC_DRYGRASS
+}
+endif
+
+if SMALL_MAP
+
+
+	 create_object SVANTOWER
+{
+number_of_objects 1
+number_of_groups 4
+group_variance            0
+set_gaia_object_only
+min_distance_to_players    35
+terrain_to_place_on DLC_DRYGRASS
+}
+
+	 create_object DLC_ROCKJUNGLE
+{
+number_of_objects 2
+number_of_groups 13
+group_variance            2
+set_gaia_object_only
+min_distance_to_players    35
+temp_min_distance_group_placement 10
+terrain_to_place_on DLC_DRYGRASS
+}
+endif
+
+if MEDIUM_MAP
+
+
+	 create_object SVANTOWER
+{
+number_of_objects 1
+number_of_groups 5
+group_variance            0
+set_gaia_object_only
+min_distance_to_players    35
+terrain_to_place_on DLC_DRYGRASS
+}
+
+	 create_object DLC_ROCKJUNGLE
+{
+number_of_objects 2
+number_of_groups 16
+group_variance            2
+set_gaia_object_only
+min_distance_to_players    35
+temp_min_distance_group_placement 10
+terrain_to_place_on DLC_DRYGRASS
+}
+endif
+
+if LARGE_MAP
+
+
+	 create_object SVANTOWER
+{
+number_of_objects 1
+number_of_groups 6
+group_variance            0
+set_gaia_object_only
+min_distance_to_players    35
+terrain_to_place_on DLC_DRYGRASS
+}
+
+	 create_object DLC_ROCKJUNGLE
+{
+number_of_objects 2
+number_of_groups 18
+group_variance            2
+set_gaia_object_only
+min_distance_to_players    35
+temp_min_distance_group_placement 10
+terrain_to_place_on DLC_DRYGRASS
+}
+endif
+
+if HUGE_MAP
+
+	 create_object SVANTOWER
+{
+number_of_objects 1
+number_of_groups 7
+group_variance            0
+set_gaia_object_only
+min_distance_to_players    35
+terrain_to_place_on DLC_DRYGRASS
+}
+
+	 create_object DLC_ROCKJUNGLE
+{
+number_of_objects 2
+number_of_groups 20
+group_variance            2
+set_gaia_object_only
+min_distance_to_players    35
+temp_min_distance_group_placement 10
+terrain_to_place_on DLC_DRYGRASS
+}
+endif
+
+if GIGANTIC_MAP
+
+	 create_object SVANTOWER
+{
+number_of_objects 1
+number_of_groups 9
+group_variance            0
+set_gaia_object_only
+min_distance_to_players    35
+terrain_to_place_on DLC_DRYGRASS
+}
+
+	 create_object DLC_ROCKJUNGLE
+{
+number_of_objects 2
+number_of_groups 24
+group_variance            2
+set_gaia_object_only
+min_distance_to_players    35
+temp_min_distance_group_placement 10
+terrain_to_place_on DLC_DRYGRASS
+}
+endif

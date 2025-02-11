@@ -1,0 +1,941 @@
+/* Based on The Way of Kings by Brandon Sanderson
+Players have retreated to warcamps at the edge of The Shattered Plains, in search of the riches there.
+Two chasmfiends occupy the ravines of the Plains. When killed, they drop a valuable rock to be mined. 
+Besides mineral riches, the Plains are barren. Rain however seeps down into the crevices below, making the ravines
+a surprisingly fertile ground, with little creatures and edible plants teeming about.
+
+By welcometorapture with feedback from chanchilaru and general scripting help by Marintho
+February 2024
+
+This map can be used in Alchemy competitions and for any content creation related to it, as well as anywhere else, although a discord message is always appreciated.
+ */
+ /* eyecandy and terrains */
+#const FLAGX 162
+#const DIRTMUD 76
+#const BROWNWATER 96
+#const DEADPLANT 1365
+#const DEADOXCART 1272
+#const DEADSIEGETOWER 1107
+#const ONGRID 1613
+<PLAYER_SETUP>
+behavior_version 1
+ai_info_map_type ARENA 0 0 0
+#const FOREST_FOUNDATION 1639
+#const DRAGONTREE 1051
+#const ACACIATREE 1063
+effect_percent SET_ATTRIBUTE FOREST_FOUNDATION ATTR_RADIUS_1 50 /* make it a 1x1 object */
+effect_percent SET_ATTRIBUTE FOREST_FOUNDATION ATTR_RADIUS_2 50 /* make it a 1x1 object */
+effect_amount SET_ATTRIBUTE FLAG_A ATTR_HITPOINTS 0
+effect_amount SET_ATTRIBUTE FLAG_A ATTR_BLOOD_ID 119
+effect_amount SET_ATTRIBUTE FLAG_B ATTR_HITPOINTS 0
+effect_amount SET_ATTRIBUTE FLAG_B ATTR_BLOOD_ID 119
+/* credit to TechChariot */
+if LOW_RESOURCES
+  #const TRADE_CART_ENABLER 161
+  #const TRADE_COG_ENABLER 180
+  #const TRADE_CARAVAN_ENABLER 48
+  #const HINDU_CARAVANSERAI_ENABLER 518
+  #const PERSIAN_CARAVANSERAI_ENABLER 552  
+  #const SILK_ROAD 499
+  effect_amount DISABLE_TECH TRADE_COG_ENABLER ATTR_DISABLE 180
+  effect_amount DISABLE_TECH TRADE_CART_ENABLER ATTR_DISABLE 161
+  effect_amount DISABLE_TECH TRADE_CARAVAN_ENABLER ATTR_DISABLE 48
+  effect_amount DISABLE_TECH HINDU_CARAVANSERAI_ENABLER ATTR_DISABLE 518
+  effect_amount DISABLE_TECH PERSIAN_CARAVANSERAI_ENABLER ATTR_DISABLE 552
+  effect_amount DISABLE_TECH SILK_ROAD ATTR_DISABLE 499    
+else
+endif
+
+<LAND_GENERATION>
+base_terrain DIRT
+create_player_lands {
+	terrain_type DIRT2
+base_size 11
+number_of_tiles 0
+circle_radius 43
+base_elevation 2
+zone 18
+}
+
+create_land {
+	terrain_type DLC_CRACKED
+	base_size 1
+	number_of_tiles 70
+other_zone_avoidance_distance 5
+clumping_factor 30
+top_border 27  bottom_border 27 right_border 27 left_border 27
+	zone 1
+	base_elevation 2
+}
+
+create_land {
+	terrain_type DESERT
+	base_size 1
+	number_of_tiles 75
+other_zone_avoidance_distance 5
+clumping_factor 10
+top_border 27  bottom_border 27 right_border 27 left_border 27
+	zone 2
+	base_elevation 2
+}
+create_land {
+	terrain_type DESERT
+	base_size 1
+	number_of_tiles 50
+other_zone_avoidance_distance 5
+clumping_factor 10
+top_border 27  bottom_border 27 right_border 27 left_border 27
+	zone 3
+	base_elevation 2
+}
+create_land {
+	terrain_type DESERT
+	base_size 1
+	number_of_tiles 50
+other_zone_avoidance_distance 5
+clumping_factor 10
+top_border 27  bottom_border 27 right_border 27 left_border 27
+	zone 4
+	base_elevation 2
+}
+create_land {
+	terrain_type DESERT
+	base_size 1
+	number_of_tiles 75
+other_zone_avoidance_distance 5
+clumping_factor 10
+top_border 27  bottom_border 27 right_border 27 left_border 27
+	zone 5
+	base_elevation 2
+}
+create_land {
+	terrain_type DESERT
+	base_size 1
+	number_of_tiles 75
+other_zone_avoidance_distance 5
+clumping_factor 10
+top_border 27  bottom_border 27 right_border 27 left_border 27
+	zone 6
+	base_elevation 2
+}
+create_land {
+	terrain_type DESERT
+	base_size 1
+	number_of_tiles 75
+other_zone_avoidance_distance 5
+clumping_factor 10
+top_border 27  bottom_border 27 right_border 27 left_border 27
+	zone 7
+	base_elevation 2
+}
+create_land {
+	terrain_type DESERT
+	base_size 1
+	number_of_tiles 75
+other_zone_avoidance_distance 5
+clumping_factor 10
+top_border 27  bottom_border 27 right_border 27 left_border 27
+	zone 8
+	base_elevation 2
+}
+create_land {
+	terrain_type DESERT
+	base_size 1
+	number_of_tiles 50
+other_zone_avoidance_distance 5
+clumping_factor 10
+top_border 27  bottom_border 27 right_border 27 left_border 27
+	zone 9
+	base_elevation 2
+}
+create_land {
+	terrain_type DESERT
+	base_size 1
+	number_of_tiles 50
+other_zone_avoidance_distance 5
+clumping_factor 10
+top_border 27  bottom_border 27 right_border 27 left_border 27
+	zone 10
+	base_elevation 2
+}
+create_land {
+	terrain_type DLC_CRACKED
+	base_size 3
+	number_of_tiles 150
+other_zone_avoidance_distance 5
+clumping_factor 30
+top_border 27  bottom_border 27 right_border 27 left_border 27
+	zone 11
+	base_elevation 2
+}
+create_land {
+	terrain_type DLC_CRACKED
+	base_size 1
+	number_of_tiles 75
+other_zone_avoidance_distance 5
+clumping_factor 10
+top_border 27  bottom_border 27 right_border 27 left_border 27
+	zone 12
+	base_elevation 2
+}
+create_land {
+	terrain_type DLC_CRACKED
+	base_size 1
+	number_of_tiles 50
+other_zone_avoidance_distance 5
+clumping_factor 10
+top_border 27  bottom_border 27 right_border 27 left_border 27
+	zone 13
+	base_elevation 2
+}
+create_land {
+	terrain_type DLC_CRACKED
+	base_size 1
+	number_of_tiles 50
+other_zone_avoidance_distance 5
+clumping_factor 10
+top_border 27  bottom_border 27 right_border 27 left_border 27
+	zone 14
+	base_elevation 2
+}
+create_land {
+	terrain_type DESERT
+	base_size 1
+	number_of_tiles 75
+other_zone_avoidance_distance 5
+clumping_factor 10
+top_border 27  bottom_border 27 right_border 27 left_border 27
+	zone 15
+	base_elevation 2
+}
+create_land {
+	terrain_type DESERT
+	base_size 1
+	number_of_tiles 75
+other_zone_avoidance_distance 5
+clumping_factor 10
+top_border 27  bottom_border 27 right_border 27 left_border 27
+	zone 16
+	base_elevation 2
+}
+create_land {
+	terrain_type DESERT
+	base_size 1
+	number_of_tiles 75
+other_zone_avoidance_distance 5
+clumping_factor 10
+top_border 27  bottom_border 27 right_border 27 left_border 27
+	zone 17
+	base_elevation 2
+}
+create_land {
+	terrain_type DIRTMUD
+land_percent 100
+top_border 29  bottom_border 29 right_border 29 left_border 29
+}
+create_land {
+	terrain_type ROCK1
+	base_size 3
+	number_of_tiles 150
+	clumping_factor 20
+left_border 3 right_border 3 top_border 3 bottom_border 3
+zone 19
+other_zone_avoidance_distance 10
+
+}
+create_land {
+	terrain_type ROCK1
+	base_size 3
+	number_of_tiles 150
+	clumping_factor 20
+left_border 3 right_border 3 top_border 3 bottom_border 3
+zone 20
+other_zone_avoidance_distance 10
+}
+create_land {
+	terrain_type ROCK1
+	base_size 3
+	number_of_tiles 150
+	clumping_factor 20
+left_border 3 right_border 3 top_border 3 bottom_border 3
+zone 21
+other_zone_avoidance_distance 10
+}
+create_land {
+	terrain_type ROCK1
+	base_size 3
+	number_of_tiles 150
+	clumping_factor 20
+left_border 3 right_border 3 top_border 3 bottom_border 3
+zone 22
+other_zone_avoidance_distance 10
+}
+create_land {
+	terrain_type ROCK1
+	base_size 3
+	number_of_tiles 150
+	clumping_factor 20
+left_border 3 right_border 3 top_border 3 bottom_border 3
+zone 23
+other_zone_avoidance_distance 10
+}
+create_land {
+	terrain_type ROCK1
+	base_size 3
+	number_of_tiles 150
+	clumping_factor 20
+left_border 3 right_border 3 top_border 3 bottom_border 3
+zone 24
+other_zone_avoidance_distance 10
+}
+
+
+<ELEVATION_GENERATION>
+	create_elevation 2
+	{
+	base_terrain DIRT
+	number_of_tiles 9999
+	number_of_clumps 3699
+	}
+	create_elevation 2
+	{
+	base_terrain ROCK1
+	number_of_tiles 9999
+	number_of_clumps 3699
+	}
+	create_elevation 2
+	{
+	base_terrain ROCK1
+	number_of_tiles 9999
+	number_of_clumps 3699
+	}
+<TERRAIN_GENERATION>
+
+	/* outer shattered plains */
+	create_terrain DLC_SAVANNAH
+	{
+	base_terrain ROCK1
+	land_percent 100
+	number_of_clumps 10000
+	spacing_to_other_terrain_types 1
+	}
+	create_terrain DIRTMUD
+	{
+	base_terrain ROCK1
+	land_percent 100
+	number_of_clumps 10000
+	}
+	create_terrain DIRT
+	{
+	base_terrain DLC_SAVANNAH
+	number_of_tiles 250
+	number_of_clumps 10
+	terrain_mask 1
+	}
+	/* masking the upper edges of the shattered plains */
+	create_terrain DESERT
+	{
+	base_terrain DIRTMUD
+	land_percent 100
+	number_of_clumps 10000
+	height_limits 1	2
+	}
+	create_terrain DESERT
+	{
+	base_terrain DIRTMUD
+	land_percent 100
+	number_of_clumps 10000
+	height_limits 1	2
+	}
+
+	 /* player terrain blending  */
+	create_terrain DIRT
+	{
+	base_terrain DIRT2
+	land_percent 100
+	number_of_clumps 3699
+    terrain_mask 2
+	} 
+	/* blending the edge of the dirt and Shattered Plains */
+	create_terrain SNOW
+	{
+	base_terrain DIRT
+	land_percent 100
+	number_of_clumps 3699
+	spacing_to_other_terrain_types 1
+	}
+	create_terrain DIRTMUD
+	{
+	base_terrain DIRT
+	land_percent 100
+	number_of_clumps 3699
+	terrain_mask 1
+	}
+	create_terrain DIRT
+	{
+	base_terrain SNOW
+	land_percent 100
+	number_of_clumps 3699
+	}
+	create_terrain DIRT
+	{
+	base_terrain SNOW
+	land_percent 100
+	number_of_clumps 3699
+	}
+	/* mud shallows and gravel beach in the crevices and ravines */
+	create_terrain MUDDY_SHALLOW
+	{
+	base_terrain DIRTMUD
+	number_of_tiles 2
+	number_of_clumps 25
+	height_limits 0 0
+	set_scaling_to_player_number
+	terrain_mask 1
+	}
+		create_terrain DLC_GRAVELBEACH
+	{
+	base_terrain DIRTMUD
+	number_of_tiles 150
+	number_of_clumps 25
+	height_limits 0 0
+	set_scaling_to_player_number
+	terrain_mask 1
+	}
+	create_terrain DLC_GRAVELBEACH
+	{
+	base_terrain DIRTMUD
+	number_of_tiles 50
+	number_of_clumps 25
+	height_limits 1 2
+	set_scaling_to_player_number
+	terrain_mask 1
+	}
+	/*  base land and player land masking  */ 
+	create_terrain DLC_QUICKSAND
+	{
+	base_terrain DIRT
+	number_of_tiles 1000
+	number_of_clumps 20
+	set_scaling_to_player_number
+	terrain_mask 1
+	}
+	create_terrain DESERT
+	{
+	base_terrain DIRT
+	number_of_tiles 1000
+	number_of_clumps 20
+	set_scaling_to_player_number
+	terrain_mask 1
+	}
+
+	create_terrain DLC_SAVANNAH
+	{
+	base_terrain DIRT
+	number_of_tiles 350
+	number_of_clumps 25
+	set_scaling_to_player_number
+	terrain_mask 1
+	}
+	create_terrain DIRTMUD
+	{
+	base_terrain DIRT
+	number_of_tiles 350
+	number_of_clumps 25
+	set_scaling_to_player_number
+	terrain_mask 1
+	set_avoid_player_start_areas
+	}
+	/* gravel for visual appeal, fish and eyecandy */
+		create_terrain DLC_GRAVELBEACH
+	{
+	base_terrain DIRTMUD
+	number_of_tiles 50
+	number_of_clumps 2
+	height_limits 0 0
+	set_scaling_to_player_number
+	terrain_mask 2
+	spacing_to_other_terrain_types 1
+	set_flat_terrain_only
+	set_avoid_player_start_areas 35
+	}
+	/* woodlines */
+	create_terrain DLC_ACACIAFOREST
+	{
+	base_terrain DIRT
+	land_percent 5
+	number_of_clumps 15
+	set_scaling_to_player_number
+	set_avoid_player_start_areas 30
+	}
+	create_terrain DLC_DRAGONFOREST
+	{
+	base_terrain DIRT
+	land_percent 2
+	number_of_clumps 10
+	set_scaling_to_player_number
+	spacing_to_other_terrain_types 3
+	set_avoid_player_start_areas 30
+	} 
+	
+<OBJECTS_GENERATION>
+/* player objects */
+create_object TOWN_CENTER
+{
+number_of_objects 1 
+set_place_for_every_player
+max_distance_to_players 0
+actor_area 1
+actor_area_radius 2
+
+} 
+
+/* object woodlines */
+
+create_object FOREST_FOUNDATION
+{
+	number_of_groups 2
+	number_of_objects 30
+	temp_min_distance_group_placement 15
+	set_place_for_every_player
+	min_distance_to_players 16
+	max_distance_to_players 17
+	set_gaia_object_only
+	set_circular_placement
+	second_object DRAGONTREE
+	actor_area 11111
+	actor_area_radius 0
+	group_variance 0
+	group_placement_radius 3
+	set_tight_grouping
+}
+create_object FOREST_FOUNDATION
+{
+	number_of_groups 1
+	number_of_objects 75
+	group_variance 0
+	set_place_for_every_player
+	min_distance_to_players 22
+	max_distance_to_players 25
+	set_gaia_object_only
+	set_circular_placement
+	second_object DRAGONTREE
+	actor_area 11112
+	actor_area_radius 10
+	group_placement_radius 7
+}
+create_object FOREST_FOUNDATION
+{
+	number_of_groups 1
+	number_of_objects 75
+	group_variance 0
+	set_place_for_every_player
+	min_distance_to_players 22
+	max_distance_to_players 25
+	set_gaia_object_only
+	set_circular_placement
+	second_object ACACIATREE
+	group_placement_radius 7
+	avoid_actor_area 11112
+} 
+create_object WALL
+{
+set_place_for_every_player
+min_distance_to_players 15
+max_distance_to_players 15
+actor_area 2
+actor_area_radius 2
+avoid_actor_area 11111
+} 
+
+create_object VILLAGER
+{
+set_place_for_every_player
+set_tight_grouping
+max_distance_to_players 6
+min_distance_to_players 5
+}
+create_object SCOUT
+{
+set_place_for_every_player
+set_tight_grouping
+max_distance_to_players 6
+min_distance_to_players 5
+}
+create_object DLC_GOAT
+{
+number_of_objects 1
+set_place_for_every_player
+actor_area_to_place_in 1
+}
+create_object DLC_GOAT
+{
+number_of_objects 3
+set_place_for_every_player
+min_distance_to_players 12
+max_distance_to_players 13
+set_gaia_object_only
+set_tight_grouping
+actor_area 8
+actor_area_radius 10
+}
+create_object DLC_GOAT
+{
+number_of_objects 2
+set_place_for_every_player
+min_distance_to_players 12
+max_distance_to_players 13
+set_gaia_object_only
+set_tight_grouping
+avoid_actor_area 8
+}
+create_object DLC_GOAT
+{
+number_of_objects 2
+set_place_for_every_player
+min_distance_to_players 20
+max_distance_to_players 21
+set_gaia_object_only
+set_tight_grouping
+avoid_forest_zone 2
+}
+	create_object DLC_ELEPHANT
+{
+number_of_objects 1
+set_place_for_every_player
+min_distance_to_players 12
+max_distance_to_players 13
+set_gaia_object_only
+temp_min_distance_group_placement 7
+avoid_forest_zone 1
+actor_area 10
+actor_area_radius 7
+} 
+	create_object DLC_RHINO
+{
+number_of_objects 1
+set_place_for_every_player
+min_distance_to_players 12
+max_distance_to_players 13
+set_gaia_object_only
+avoid_forest_zone 1
+avoid_actor_area 10
+} 
+create_object FORAGE
+{
+	number_of_objects 6
+	set_tight_grouping
+	group_placement_radius 2
+	set_gaia_object_only
+	set_place_for_every_player
+	min_distance_to_players 10
+	max_distance_to_players 12
+	avoid_forest_zone 2
+	actor_area 123456
+	actor_area_radius 5
+	avoid_actor_area 2
+}
+/* stragglers */
+create_object OLIVE_TREE
+{
+  number_of_objects             4
+  set_gaia_object_only
+  set_place_for_every_player
+  min_distance_to_players       7
+  max_distance_to_players       8
+  temp_min_distance_group_placement  2
+  place_on_specific_land_id 1
+  set_circular_placement
+  actor_area 1214
+  actor_area_radius 3
+}
+
+/* primary gold */
+
+create_object GOLD
+{
+set_place_for_every_player
+number_of_objects 5
+group_placement_radius 2
+set_gaia_object_only
+set_tight_grouping
+avoid_forest_zone 2
+min_distance_to_players 10
+max_distance_to_players 12
+avoid_actor_area 123456
+avoid_actor_area 2
+actor_area 9
+actor_area_radius 4
+}
+/* secondary gold */
+create_object GOLD
+{
+terrain_to_place_on DIRT
+set_place_for_every_player
+number_of_objects 3
+group_placement_radius 2
+set_gaia_object_only
+set_tight_grouping
+avoid_forest_zone 4
+min_distance_to_players 20
+max_distance_to_players 22
+actor_area 12
+actor_area_radius 4
+}
+/* primary */
+
+create_object STONE
+{
+set_place_for_every_player
+number_of_objects 4
+group_placement_radius 2
+set_gaia_object_only
+set_tight_grouping
+avoid_forest_zone 2
+min_distance_to_players 9
+max_distance_to_players 10
+avoid_actor_area 123456
+avoid_actor_area 2
+avoid_actor_area 9
+actor_area 11
+actor_area_radius 4
+}
+/* deer */
+create_object DEER
+{
+	start_random
+	percent_chance 50
+	number_of_objects 4
+	percent_chance 50
+	number_of_objects 3
+	end_random
+	set_place_for_every_player
+	set_gaia_object_only
+	set_loose_grouping
+	min_distance_to_players 10
+	max_distance_to_players 11
+	avoid_forest_zone 1
+	avoid_actor_area 123456
+	avoid_actor_area 9
+	min_distance_to_map_edge 3
+}
+/* crevice objects */
+create_object FLAG_A
+{
+terrain_to_place_on DESERT
+number_of_objects 25000
+actor_area 999
+actor_area_radius 1
+} 
+create_object FLAG_A
+{
+terrain_to_place_on DLC_CRACKED
+number_of_objects 25000
+actor_area 998
+actor_area_radius 1
+} 
+create_object FLAG_B
+{
+terrain_to_place_on DIRTMUD
+number_of_objects 25000
+actor_area 997
+actor_area_radius 2
+} 
+create_object DLC_ORANGEBUSH
+{
+terrain_to_place_on DIRTMUD
+number_of_objects 3
+number_of_groups 16
+temp_min_distance_group_placement 15
+set_tight_grouping
+actor_area 4
+actor_area_radius 3
+min_distance_to_players 40
+avoid_actor_area 999
+avoid_actor_area 998
+set_scaling_to_map_size
+} 
+create_object SKELETON
+{
+number_of_objects 15
+terrain_to_place_on DIRTMUD
+temp_min_distance_group_placement 15
+} 
+create_object DEADSIEGETOWER
+{
+number_of_objects 2
+terrain_to_place_on DLC_GRAVELBEACH
+temp_min_distance_group_placement 10
+} 
+create_object DEADOXCART
+{
+number_of_objects 2
+terrain_to_place_on DLC_GRAVELBEACH
+temp_min_distance_group_placement 10
+} 
+create_object ONGRID
+{
+terrain_to_place_on DLC_GRAVELBEACH
+number_of_objects 10
+temp_min_distance_group_placement 10
+set_scaling_to_map_size
+actor_area 
+actor_area_radius
+second_object DLC_BOXTURTLE
+avoid_actor_area 999
+avoid_actor_area 998
+}
+create_object ONGRID
+{
+terrain_to_place_on DIRTMUD
+number_of_objects 2
+number_of_groups 15
+temp_min_distance_group_placement 10
+set_scaling_to_map_size
+actor_area 
+actor_area_radius
+second_object DLC_BOXTURTLE
+avoid_actor_area 999
+avoid_actor_area 998
+max_distance_to_players 30
+}
+create_object ONGRID
+{
+terrain_to_place_on DIRTMUD
+number_of_objects 15
+temp_min_distance_group_placement 10
+set_scaling_to_map_size
+actor_area 
+actor_area_radius
+second_object DLC_BOXTURTLE
+avoid_actor_area 999
+avoid_actor_area 998
+}
+/* Shattered Plains objects */
+create_object DLC_DEADTREE
+{
+terrain_to_place_on DESERT
+number_of_objects 20
+temp_min_distance_group_placement 8
+set_scaling_to_map_size
+actor_area 5
+actor_area_radius 3
+}
+create_object DLC_DEADTREE
+{
+terrain_to_place_on DESERT
+number_of_objects 20
+temp_min_distance_group_placement 8
+set_scaling_to_map_size
+avoid_actor_area 5
+
+}
+create_object DLC_DEADTREE
+{
+terrain_to_place_on DLC_CRACKED
+number_of_objects 10
+temp_min_distance_group_placement 5
+set_scaling_to_map_size
+actor_area 
+actor_area_radius
+}
+create_object DEADPLANT
+{
+terrain_to_place_on DESERT
+number_of_objects 5
+temp_min_distance_group_placement 5
+set_scaling_to_map_size
+actor_area 
+actor_area_radius
+set_gaia_object_only
+}
+create_object STONE
+{
+terrain_to_place_on DLC_CRACKED
+number_of_objects 4
+number_of_groups 3
+temp_min_distance_group_placement 15
+set_scaling_to_map_size
+actor_area 7
+actor_area_radius 5
+set_gaia_object_only
+set_tight_grouping
+min_distance_to_players 35
+avoid_actor_area 4
+avoid_actor_area 997
+group_placement_radius 3
+}
+create_object GOLD
+{
+terrain_to_place_on DESERT
+number_of_objects 5
+number_of_groups 4
+temp_min_distance_group_placement 15
+set_scaling_to_map_size
+actor_area 6
+actor_area_radius 5
+set_gaia_object_only
+set_tight_grouping
+avoid_actor_area 4
+avoid_actor_area 997
+avoid_actor_area 7
+group_placement_radius 3
+min_distance_to_players 30
+}
+
+/* outer plains */
+create_object RELIC
+{
+terrain_to_place_on DLC_SAVANNAH
+number_of_objects 2
+temp_min_distance_group_placement 15
+min_distance_to_players 35
+set_gaia_object_only
+avoid_actor_area 997
+}
+create_object RELIC
+{
+terrain_to_place_on DESERT
+number_of_objects 4
+temp_min_distance_group_placement 15
+min_distance_to_players 35
+set_gaia_object_only
+avoid_actor_area 997
+}
+create_object GOLD
+{
+terrain_to_place_on DLC_SAVANNAH
+number_of_objects 3
+number_of_groups 2
+temp_min_distance_group_placement 30
+set_gaia_object_only
+set_tight_grouping
+min_distance_to_players 45
+avoid_actor_area 997
+}
+
+/* regicide */
+if REGICIDE
+	create_object KING {
+		set_place_for_every_player
+		min_distance_to_players 6
+		set_circular_placement
+		find_closest
+		min_distance_group_placement 1
+	}
+	create_object VILLAGER {
+		number_of_objects 7
+		set_place_for_every_player
+		min_distance_to_players 6
+		max_distance_to_players 8
+		set_circular_placement
+	}
+	create_object CASTLE {
+		set_place_for_every_player
+		min_distance_to_players 9
+		max_distance_to_players 11
+		set_circular_placement
+		min_distance_group_placement 2
+		find_closest_to_map_center
+	}
+endif

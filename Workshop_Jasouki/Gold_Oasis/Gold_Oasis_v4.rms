@@ -1,7 +1,9 @@
 /* *** Gold Oasis *** */
+/* This Script was made by Jasouki */ 
+/*Made December 2024 */
+/*Thanks to Flying Mouse and DjSapsan  for the feedback and sugestions when creating the map & to Marintho, Zetnus, Jasuni & Thire7 for their help to address issues during scripting */
+/*This map can be used in Alchemy League AOE Competitions */
 
-/* ************ Made by jasouki ************ */
-/* Special Thanks to Marintho, Zetnus, Jasuni & Thire7 for their help to address issues during scripting */
 
 
 
@@ -61,7 +63,7 @@ create_terrain DLC_JUNGLEGRASS
 
 }
 
-create_terrain WOODIES
+create_terrain MEDITERRANEAN_FOREST
 {
   base_terrain DIRT2
   land_percent 12
@@ -71,7 +73,7 @@ create_terrain WOODIES
   set_avoid_player_start_areas
 }
 
-create_terrain WOODIES
+create_terrain DLC_RAINFOREST
 {
   base_terrain DLC_MOORLAND
   land_percent 100
@@ -228,15 +230,6 @@ create_elevation 7
 #define GNR_CLASSICSCOUT
 
 
-if TINY_MAP
-#define GNR_RELIC_EXTRAONE
-#const LAYER_D 102
-#define GNR_RELIC_EXTRA_LAYERD
-else
-#define GNR_GIVERELICS
-#define GNR_RELICMODERN_MEDIUM
-endif
-
 #define GNR_REGICIDETOWER
 
 #define GNR_GIVEHERD_A
@@ -265,6 +258,53 @@ endif
 #define GNR_STARTSTONE44M
 #define GNR_STARTGS_3WBLOCK
 
+
+create_object RELIC
+
+if TINY_MAP
+{
+     number_of_objects 7
+      min_distance_to_players 25
+     temp_min_distance_group_placement 25
+	 terrain_to_place_on DLC_DRYGRASS
+}
+endif
+
+if SMALL_MAP
+{
+     number_of_objects 10
+      min_distance_to_players 25
+     temp_min_distance_group_placement 25
+	 terrain_to_place_on DLC_DRYGRASS
+}
+endif
+
+if MEDIUM_MAP
+{
+     number_of_objects 13
+      min_distance_to_players 25
+     temp_min_distance_group_placement 25
+	 terrain_to_place_on DLC_DRYGRASS
+}
+endif
+
+if LARGE_MAP
+{
+     number_of_objects 16
+      min_distance_to_players 25
+     temp_min_distance_group_placement 25
+	 terrain_to_place_on DLC_DRYGRASS
+}
+endif
+
+if HUGE_MAP
+{
+     number_of_objects 25
+      min_distance_to_players 25
+     temp_min_distance_group_placement 25
+	 terrain_to_place_on DLC_DRYGRASS
+}
+endif
 /* EXTRA STONE */
 
 if TINY_MAP
@@ -410,23 +450,7 @@ terrain_to_place_on DLC_JUNGLELEAVES
 
 
 
-if TINY_MAP
 
-create_object RELIC
-{
-
-   number_of_objects            1
-   number_of_groups 		2
-   temp_min_distance_group_placement 21
-   min_distance_group_placement 1
-   set_place_for_every_player 
-   set_gaia_object_only
-   min_distance_to_players     28
-   max_distance_to_players     36
-   terrain_to_place_on DLC_DRYGRASS
-}
-
-endif
 
 
 
@@ -492,7 +516,7 @@ create_object DLC_RAINTREE
 
 
 /* bombard towers */
-
+/*
 create_object BOMBARD_TOWER
 {
 second_object
@@ -505,16 +529,16 @@ temp_min_distance_group_placement 10
 set_building_capturable
 terrain_to_place_on DLC_JUNGLEGRASS
 }
-
+*/
 create_object BOMBARD_TOWER
 {
 second_object
 number_of_objects 1
 number_of_groups 999
 set_tight_grouping
-group_placement_radius 8
+group_placement_radius 7
 set_gaia_object_only
-temp_min_distance_group_placement 10
+temp_min_distance_group_placement 8
 set_building_capturable
 terrain_to_place_on DLC_JUNGLELEAVES
 }
@@ -927,4 +951,4 @@ min_distance_to_players    35
 temp_min_distance_group_placement 10
 terrain_to_place_on DLC_DRYGRASS
 }
-endif
+endif	

@@ -1,7 +1,10 @@
 /* Isolated Lakes */
-/* 7/12/22 */
+/* Originally Made 2022-07-12 */
 /* A Random Map Concept by C-Zu */
 /* Scripted by TechChariot */
+/* Remastered 2025-02-11 */
+/* Permission Granted to Use in Alchemy League */
+
 <PLAYER_SETUP>
 #const L 32
 #const GRAVEL 70

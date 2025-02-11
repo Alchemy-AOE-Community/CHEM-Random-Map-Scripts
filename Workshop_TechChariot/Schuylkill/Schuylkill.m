@@ -9,8 +9,8 @@ clc
 tic
 disp(["Run Executed " datestr(clock) "..."])
 filestruc = dir; %Extract a structure of the files in this directory
-path = filestruc.folder; path = path(1:102); addpath(path) %Adding functions in main folder to the path
-files = {filestruc.name}; [filename] = RMS_GetLatest(files,'rms');
+path = filestruc.folder; path = path(1:89); addpath(genpath(path)) %Adding functions in main folder to the path
+filename = [mfilename '.rms'];
 
 %Terrain Painting --River
 Span = [{1}];
@@ -58,7 +58,7 @@ CODE = [Preface; List]; %Adding Preface, Definitions, Random Statement to beginn
 RMS_ForgeV4(filename,CODE);
 
 
-%ObjectAutoscribeV8('ObjectDatabase.ods')
+%ObjectAutoscribeV10('Schuylkill.ods')
 
 disp(["Run Completed " datestr(clock) "..."])
 toc

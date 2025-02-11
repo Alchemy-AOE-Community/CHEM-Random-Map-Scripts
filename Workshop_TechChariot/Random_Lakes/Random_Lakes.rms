@@ -1,7 +1,9 @@
 /* Lakes Megarandom */
-/* 12/18/22 */
+/* 2022-12-18 */
 /* Originated as A ScriptChat Lesson */
 /* Created by TechChariot */
+/* Permission Granted for Use in Alchemy League */
+
 <PLAYER_SETUP>
 behavior_version 1
 #const MUD 76

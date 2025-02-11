@@ -1,5 +1,7 @@
 /* Shimmerpool */
-/* A Random Map Script by TechChariot -- 11/09/2023 */
+/* A Random Map Script by TechChariot */
+/* 2023/09/11 */
+/* License Granted for Use in Alchemy League */
 
 /*  --- Reincarnated from popular map "Kharga", originally developed 3/30/2021 ---
     The sandy dunes of southern Egypt are rumored to be rich in gold, lost and forgotten from another era. 
@@ -15,7 +17,6 @@
 <PLAYER_SETUP>
 direct_placement
 behavior_version 1
-
 
 /* Defining Land Creation Command */
 #const L 32
@@ -47,43 +48,6 @@ if LOW_RESOURCES
   effect_amount DISABLE_TECH HINDU_CARAVANSERAI_ENABLER ATTR_DISABLE 518
   effect_amount DISABLE_TECH PERSIAN_CARAVANSERAI_ENABLER ATTR_DISABLE 552
   effect_amount DISABLE_TECH SILK_ROAD ATTR_DISABLE 499    
-else
-endif
-
-/* Configuring Unit Spawn From Hero Trade Cart */
-#const OX_WAGON 1273
-effect_amount SET_ATTRIBUTE OX_WAGON ATTR_DEAD_ID 1142 /* Setting Dead Object of Ox Wagon to Water Buffalo */
-effect_amount SET_ATTRIBUTE OX_WAGON ATTR_BLOOD_ID 198 /* Setting Blood ID of Ox Wagon to El Cid */
-effect_amount SET_ATTRIBUTE EL_CID ATTR_DEAD_ID 293 /* Setting Dead Object of El Cid to Villager_Base_F */
-effect_amount SET_ATTRIBUTE EL_CID ATTR_BLOOD_ID 838 /* Setting Blood ID of El Cid to King Sancho */
-effect_amount SET_ATTRIBUTE KING_SANCHO ATTR_DEAD_ID 293 /* Setting Dead Object of King Sancho to Villager_Base_F */
-effect_amount SET_ATTRIBUTE KING_SANCHO ATTR_BLOOD_ID 840 /* Setting Blood ID of King Sancho to King Alfonso */
-effect_amount SET_ATTRIBUTE KING_ALFONSO ATTR_DEAD_ID 293 /* Setting Dead Object of King Alfonso to Villager_Base_F */
-effect_amount SET_ATTRIBUTE EL_CID ATTR_HITPOINTS 0 /* Setting Hitpoints of El Cid to Zero */
-effect_amount SET_ATTRIBUTE KING_SANCHO ATTR_HITPOINTS 0 /* Setting Hitpoints of King Sancho to Zero */
-effect_amount SET_ATTRIBUTE KING_ALFONSO ATTR_HITPOINTS 0 /* Setting Hitpoints of King Alfonso to Zero */
-/* Configuring the Speed of the Ox Wagon for Nomad Starts */
-effect_amount SET_ATTRIBUTE DLC_WATERBUFFALO ATTR_LINE_OF_SIGHT 0
-effect_amount SET_ATTRIBUTE OX_WAGON ATTR_MOVE_SPEED 1
-effect_amount SET_ATTRIBUTE DLC_WATERBUFFALO ATTR_MOVE_SPEED 1
-if TINY_MAP
-    effect_percent MUL_ATTRIBUTE OX_WAGON ATTR_MOVE_SPEED 115
-    effect_percent MUL_ATTRIBUTE DLC_WATERBUFFALO ATTR_MOVE_SPEED 115
-elseif SMALL_MAP
-    effect_percent MUL_ATTRIBUTE OX_WAGON ATTR_MOVE_SPEED 139
-    effect_percent MUL_ATTRIBUTE DLC_WATERBUFFALO ATTR_MOVE_SPEED 139
-elseif MEDIUM_MAP
-    effect_percent MUL_ATTRIBUTE OX_WAGON ATTR_MOVE_SPEED 162
-    effect_percent MUL_ATTRIBUTE DLC_WATERBUFFALO ATTR_MOVE_SPEED 162
-elseif LARGE_MAP
-    effect_percent MUL_ATTRIBUTE OX_WAGON ATTR_MOVE_SPEED 193
-    effect_percent MUL_ATTRIBUTE DLC_WATERBUFFALO ATTR_MOVE_SPEED 193
-elseif HUGE_MAP
-    effect_percent MUL_ATTRIBUTE OX_WAGON ATTR_MOVE_SPEED 212
-    effect_percent MUL_ATTRIBUTE DLC_WATERBUFFALO ATTR_MOVE_SPEED 212
-elseif GIGANTIC_MAP
-    effect_percent MUL_ATTRIBUTE OX_WAGON ATTR_MOVE_SPEED 231
-    effect_percent MUL_ATTRIBUTE DLC_WATERBUFFALO ATTR_MOVE_SPEED 231
 else
 endif
 

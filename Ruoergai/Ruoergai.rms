@@ -1,7 +1,9 @@
 /* Ruoergai by XINGXING */
 /* December 2024 */
-/* Currently only balanced for 2 players, tiny map */
+
 /* Submitted to Wallhalla 2 map contest */
+/* Consent is given for this map to be used in Alchemy League Season 6, and Content Creation by Alchemy AOE Community Members */
+
 
 
 start_random
@@ -131,6 +133,22 @@ end_random
 
 
 <PLAYER_SETUP>
+
+if LOW_RESOURCES
+  #const TRADE_CART_ENABLER 161
+  #const TRADE_COG_ENABLER 180
+  #const TRADE_CARAVAN_ENABLER 48
+  #const HINDU_CARAVANSERAI_ENABLER 518
+  #const PERSIAN_CARAVANSERAI_ENABLER 552  
+  #const SILK_ROAD 499
+  effect_amount DISABLE_TECH TRADE_COG_ENABLER ATTR_DISABLE 180
+  effect_amount DISABLE_TECH TRADE_CART_ENABLER ATTR_DISABLE 161
+  effect_amount DISABLE_TECH TRADE_CARAVAN_ENABLER ATTR_DISABLE 48
+  effect_amount DISABLE_TECH HINDU_CARAVANSERAI_ENABLER ATTR_DISABLE 518
+  effect_amount DISABLE_TECH PERSIAN_CARAVANSERAI_ENABLER ATTR_DISABLE 552
+  effect_amount DISABLE_TECH SILK_ROAD ATTR_DISABLE 499    
+else
+endif
 
 #const BUILDING 1639
 effect_amount SET_ATTRIBUTE BUILDING ATTR_FOUNDATION_TERRAIN 17
@@ -1779,11 +1797,13 @@ create_object YURTRUBBLE4
 create_object DLC_VULTURE
 {
 	number_of_objects 11
+	set_scaling_to_map_size
 }
 
 create_object DLC_STORK
 {
 	number_of_objects 11
+	set_scaling_to_map_size
 }
 #const HORSW 1247
 
@@ -1806,6 +1826,7 @@ create_object BUILDING
 	actor_area 111
 	avoid_actor_area 110
 	actor_area_radius 5
+	set_scaling_to_map_size
 }
 
 create_object BUILDING
@@ -1824,6 +1845,7 @@ create_object BUILDING
 	avoid_actor_area 111
 	avoid_actor_area 110
 	actor_area_radius 7
+	set_scaling_to_map_size
 }
 
 create_object BUILDING
@@ -1844,6 +1866,7 @@ create_object BUILDING
 	avoid_actor_area 112
 	avoid_actor_area 110
 	actor_area_radius 7
+	set_scaling_to_map_size
 }
 
 create_object SHEEP /* secondary */
@@ -1879,6 +1902,7 @@ create_object STONE
 	avoid_actor_area 111
 	avoid_actor_area 110
 	avoid_actor_area 112
+	set_scaling_to_map_size
 }
 
 create_object PINETREE
@@ -1894,6 +1918,7 @@ create_object PINETREE
 	avoid_forest_zone 2
 	terrain_to_place_on DLC_DRYGRASS
 	avoid_actor_area 111
+	set_scaling_to_map_size
 }
 /*
 create_object GAZELLE {
@@ -1936,6 +1961,7 @@ create_object TREE_REEDS
             temp_min_distance_group_placement 6
 			terrain_to_place_on SWAMP
 			ignore_terrain_restrictions
+			set_scaling_to_map_size
         }
 
 create_object TEMP
@@ -1948,6 +1974,7 @@ create_object TEMP
 			set_gaia_object_only
 			terrain_to_place_on SWAMP
 			second_object DLC_BOXTURTLE
+			set_scaling_to_map_size
         }
 
 
@@ -1964,6 +1991,7 @@ create_object DLC_ZEBRA {
 	avoid_actor_area 111
 	avoid_actor_area 112
 	avoid_actor_area 113
+	set_scaling_to_map_size
 }
 
 
@@ -2037,7 +2065,8 @@ create_object MT6
 	min_distance_to_players 30
 	terrain_to_place_on DLC_DRYGRASS
 	layer_to_place_on GRAVEL
-	temp_min_distance_group_placement 12
+	temp_min_distance_group_placement 15
+	set_scaling_to_map_size
 }
 create_object MT7
 {
@@ -2046,7 +2075,8 @@ create_object MT7
 	min_distance_to_players 30
 	terrain_to_place_on DLC_DRYGRASS
 	layer_to_place_on GRAVEL
-	temp_min_distance_group_placement 12
+	temp_min_distance_group_placement 15
+	set_scaling_to_map_size
 }
 create_object MT8
 {
@@ -2055,7 +2085,8 @@ create_object MT8
 	min_distance_to_players 30
 	terrain_to_place_on DLC_DRYGRASS
 	layer_to_place_on GRAVEL
-	temp_min_distance_group_placement 12
+	temp_min_distance_group_placement 15
+	set_scaling_to_map_size
 }
 endif
 if SUMMER
@@ -2066,7 +2097,8 @@ create_object MT1
 	min_distance_to_players 30
 	terrain_to_place_on DLC_DRYGRASS
 	layer_to_place_on GRAVEL
-	temp_min_distance_group_placement 12
+	temp_min_distance_group_placement 15
+	set_scaling_to_map_size
 }
 create_object MT2
 {
@@ -2075,7 +2107,8 @@ create_object MT2
 	min_distance_to_players 30
 	terrain_to_place_on DLC_DRYGRASS
 	layer_to_place_on GRAVEL
-	temp_min_distance_group_placement 12
+	temp_min_distance_group_placement 15
+	set_scaling_to_map_size
 }
 create_object MT1
 {
@@ -2084,7 +2117,8 @@ create_object MT1
 	min_distance_to_players 30
 	terrain_to_place_on DLC_DRYGRASS
 	layer_to_place_on GRAVEL
-	temp_min_distance_group_placement 12
+	temp_min_distance_group_placement 15
+	set_scaling_to_map_size
 }
 create_object MT2
 {
@@ -2093,7 +2127,8 @@ create_object MT2
 	min_distance_to_players 30
 	terrain_to_place_on DLC_DRYGRASS
 	layer_to_place_on GRAVEL
-	temp_min_distance_group_placement 12
+	temp_min_distance_group_placement 15
+	set_scaling_to_map_size
 }
 endif
 
@@ -2117,6 +2152,7 @@ create_object SMCLIFF1
 	terrain_to_place_on DLC_DRYGRASS
 	layer_to_place_on GRAVEL
 	temp_min_distance_group_placement 12
+	set_scaling_to_map_size
 }
 create_object SMCLIFF2
 {
@@ -2126,6 +2162,7 @@ create_object SMCLIFF2
 	terrain_to_place_on DLC_DRYGRASS
 	layer_to_place_on GRAVEL
 	temp_min_distance_group_placement 12
+	set_scaling_to_map_size
 }
 create_object SMCLIFF3
 {
@@ -2135,6 +2172,7 @@ create_object SMCLIFF3
 	terrain_to_place_on DLC_DRYGRASS
 	layer_to_place_on GRAVEL
 	temp_min_distance_group_placement 12
+	set_scaling_to_map_size
 }
 endif
 if WINTER
@@ -2146,6 +2184,7 @@ create_object SMCLIFF4
 	terrain_to_place_on DLC_DRYGRASS
 	layer_to_place_on GRAVEL
 	temp_min_distance_group_placement 12
+	set_scaling_to_map_size
 }
 create_object SMCLIFF5
 {
@@ -2155,6 +2194,7 @@ create_object SMCLIFF5
 	terrain_to_place_on DLC_DRYGRASS
 	layer_to_place_on GRAVEL
 	temp_min_distance_group_placement 12
+	set_scaling_to_map_size
 }
 create_object SMCLIFF6
 {
@@ -2164,6 +2204,7 @@ create_object SMCLIFF6
 	terrain_to_place_on DLC_DRYGRASS
 	layer_to_place_on GRAVEL
 	temp_min_distance_group_placement 12
+	set_scaling_to_map_size
 }
 create_object SMCLIFF7
 {
@@ -2173,6 +2214,7 @@ create_object SMCLIFF7
 	terrain_to_place_on DLC_DRYGRASS
 	layer_to_place_on GRAVEL
 	temp_min_distance_group_placement 12
+	set_scaling_to_map_size
 }
 endif
 
@@ -2233,6 +2275,7 @@ create_object GOLD {
 	avoid_actor_area 768
 	min_distance_group_placement 4
 	terrain_to_place_on DLC_DRYGRASS
+	set_scaling_to_map_size
 }
 
 create_object STONE {
@@ -2252,6 +2295,7 @@ create_object STONE {
 	avoid_actor_area 768
 	min_distance_group_placement 4
 	terrain_to_place_on DLC_DRYGRASS
+	set_scaling_to_map_size
 }
 
 <ELEVATION_GENERATION>

@@ -144,93 +144,79 @@ create_land { terrain_type ROCK1 land_percent 4 base_size 11 land_position 30 1 
 /* should be parallel to river */
 /* delinate line where shallows begin, from forest */
 /* neutral minerals will be placed here later */
-create_land { terrain_type DESERT land_percent 4 base_size 10 land_position 69 50 base_elevation 2 bottom_border 70 left_border 70 top_border 90 right_border 70 zone 20 other_zone_avoidance_distance 0 }
-create_land { terrain_type DLC_GRAVELBEACH land_percent 6 number_of_tiles 40 land_position 62 50 base_elevation 1 zone 20 other_zone_avoidance_distance 0 left_border 60 land_id 402 }
 
+create_land { terrain_type DESERT land_percent 4 base_size 10 land_position 69 50 base_elevation 4 bottom_border 70 left_border 70 top_border 90 right_border 70 zone 20 other_zone_avoidance_distance 0 }
+create_land { terrain_type DLC_GRAVELBEACH land_percent 6 number_of_tiles 40 land_position 60 50 base_elevation 1 zone 20 other_zone_avoidance_distance 0 left_border 60 land_id 402 }
 
-create_land { terrain_type DESERT land_percent 4 base_size 10 land_position 69 55 base_elevation 2 bottom_border 70 left_border 70 top_border 90 right_border 70 zone 20 other_zone_avoidance_distance 0 }
-create_land { terrain_type DLC_GRAVELBEACH land_percent 6 number_of_tiles 40 land_position 62 55 base_elevation 1 zone 20 other_zone_avoidance_distance 0 left_border 60 }
+create_land { terrain_type DESERT land_percent 4 base_size 4 land_position 63 45 base_elevation 2 bottom_border 90 left_border 90 top_border 90 right_border 90 zone 20 other_zone_avoidance_distance 0 }
+create_land { terrain_type DLC_GRAVELBEACH land_percent 6 number_of_tiles 40 land_position 58 45 base_elevation 1 zone 20 other_zone_avoidance_distance 0 left_border 60 }
 
-create_land { terrain_type DESERT land_percent 4 base_size 8 land_position 68 60 base_elevation 2 bottom_border 70 left_border 70 top_border 90 right_border 70 zone 20 other_zone_avoidance_distance 0 }
-create_land { terrain_type DLC_GRAVELBEACH land_percent 6 number_of_tiles 50 land_position 62 60 base_elevation 1 zone 20 other_zone_avoidance_distance 0 left_border 60 }
+create_land { terrain_type DESERT land_percent 4 base_size 4 land_position 65 40 base_elevation 2 bottom_border 90 left_border 90 top_border 90 right_border 90 zone 20 other_zone_avoidance_distance 0 }
+create_land { terrain_type DLC_GRAVELBEACH land_percent 6 number_of_tiles 40 land_position 60 45 base_elevation 1 zone 20 other_zone_avoidance_distance 0 left_border 60 }
 
-create_land { terrain_type DESERT land_percent 4 base_size 8 land_position 68 65 base_elevation 2 bottom_border 70 left_border 70 top_border 90 right_border 70 zone 20 other_zone_avoidance_distance 0 }
-create_land { terrain_type DLC_GRAVELBEACH land_percent 6 number_of_tiles 50 land_position 63 65 base_elevation 1 zone 20 other_zone_avoidance_distance 0 left_border 60 }
+create_land { terrain_type DESERT land_percent 4 base_size 4 land_position 63 35 base_elevation 2 bottom_border 90 left_border 90 top_border 90 right_border 90 zone 20 other_zone_avoidance_distance 0 }
+create_land { terrain_type DLC_GRAVELBEACH land_percent 6 number_of_tiles 40 land_position 58 35 base_elevation 1 zone 20 other_zone_avoidance_distance 0 left_border 60 }
 
+create_land { terrain_type DESERT land_percent 4 base_size 4 land_position 65 30 base_elevation 2 bottom_border 90 left_border 90 top_border 90 right_border 90 zone 20 other_zone_avoidance_distance 0 }
+create_land { terrain_type DLC_GRAVELBEACH land_percent 6 number_of_tiles 40 land_position 60 30 base_elevation 1 zone 20 other_zone_avoidance_distance 0 left_border 60 }
 
-/* create_land { terrain_type SNOW land_percent 4 base_size 6 land_position 50 65 base_elevation 2 bottom_border 70 left_border 70 top_border 90 right_border 70 zone 20 other_zone_avoidance_distance 0 } */
+create_land { terrain_type DESERT land_percent 4 base_size 4 land_position 63 25 base_elevation 2 bottom_border 90 left_border 90 top_border 90 right_border 90 zone 20 other_zone_avoidance_distance 0 }
+create_land { terrain_type DLC_GRAVELBEACH land_percent 6 number_of_tiles 40 land_position 58 25 base_elevation 1 zone 20 other_zone_avoidance_distance 0 left_border 60 }
 
-create_land { terrain_type DESERT land_percent 4 base_size 6 land_position 67 70 base_elevation 2 bottom_border 70 left_border 70 top_border 90 right_border 70 zone 20 other_zone_avoidance_distance 0 }
-create_land { terrain_type DLC_GRAVELBEACH land_percent 6 number_of_tiles 40 land_position 60 70 base_elevation 1 zone 20 other_zone_avoidance_distance 0 left_border 60 land_id 401 }
+create_land { terrain_type DESERT land_percent 4 base_size 4 land_position 65 20 base_elevation 2 bottom_border 90 left_border 90 top_border 90 right_border 90 zone 20 other_zone_avoidance_distance 0 }
+create_land { terrain_type DLC_GRAVELBEACH land_percent 6 number_of_tiles 40 land_position 60 20 base_elevation 1 zone 20 other_zone_avoidance_distance 0 left_border 60 }
 
+create_land { terrain_type DESERT land_percent 4 base_size 4 land_position 63 15 base_elevation 2 bottom_border 90 left_border 90 top_border 90 right_border 90 zone 20 other_zone_avoidance_distance 0 }
+create_land { terrain_type DLC_GRAVELBEACH land_percent 6 number_of_tiles 40 land_position 58 15 base_elevation 1 zone 20 other_zone_avoidance_distance 0 left_border 60 }
 
-create_land { terrain_type DESERT land_percent 4 base_size 5 land_position 64 75 base_elevation 2 bottom_border 70 left_border 70 top_border 90 right_border 70 zone 20 other_zone_avoidance_distance 0 }
-create_land { terrain_type DLC_GRAVELBEACH land_percent 6 number_of_tiles 40 land_position 58 70 base_elevation 1 zone 20 other_zone_avoidance_distance 0  left_border 60 }
-/* create_land { terrain_type DLC_GRAVELBEACH land_percent 6 number_of_tiles 30 land_position 56 75 base_elevation 1 zone 20 other_zone_avoidance_distance 0 } */
+create_land { terrain_type DESERT land_percent 4 base_size 4 land_position 63 10 base_elevation 2 bottom_border 90 left_border 90 top_border 90 right_border 90 zone 20 other_zone_avoidance_distance 0 }
+create_land { terrain_type DLC_GRAVELBEACH land_percent 6 number_of_tiles 40 land_position 58 10 base_elevation 1 zone 20 other_zone_avoidance_distance 0 left_border 60 }
 
-create_land { terrain_type DESERT land_percent 4 base_size 6 land_position 62 80 base_elevation 2 bottom_border 70 left_border 70 top_border 90 right_border 70 zone 20 other_zone_avoidance_distance 0 }
-create_land { terrain_type DLC_GRAVELBEACH land_percent 6 number_of_tiles 50 land_position 58 80 base_elevation 1 zone 20 other_zone_avoidance_distance 0 left_border 55 }
+create_land { terrain_type DESERT land_percent 4 base_size 4 land_position 63 5 base_elevation 2 bottom_border 90 left_border 90 top_border 90 right_border 90 zone 20 other_zone_avoidance_distance 0 }
+create_land { terrain_type DLC_GRAVELBEACH land_percent 6 number_of_tiles 40 land_position 58 5 base_elevation 1 zone 20 other_zone_avoidance_distance 0 left_border 60 land_id 401 }
 
-
-create_land { terrain_type DESERT land_percent 4 base_size 5 land_position 62 85 base_elevation 2 bottom_border 70 left_border 70 top_border 90 right_border 70 zone 20 other_zone_avoidance_distance 0 }
-create_land { terrain_type DLC_GRAVELBEACH land_percent 6 number_of_tiles 50 land_position 58 85 base_elevation 1 zone 20 other_zone_avoidance_distance 0 left_border 55 }
-
-create_land { terrain_type DESERT land_percent 4 base_size 6 land_position 62 90 base_elevation 2 bottom_border 70 left_border 70 top_border 90 right_border 70 zone 20 other_zone_avoidance_distance 0 }
-create_land { terrain_type DLC_GRAVELBEACH land_percent 6 number_of_tiles 30 land_position 56 90 base_elevation 1 zone 20 other_zone_avoidance_distance 0 left_border 55 land_id 401 }
-
-
-create_land { terrain_type DESERT land_percent 4 base_size 8 land_position 62 95 base_elevation 2 bottom_border 70 left_border 70 top_border 90 right_border 70 zone 20 other_zone_avoidance_distance 0 }
-create_land { terrain_type DLC_GRAVELBEACH land_percent 6 number_of_tiles 30 land_position 56 95 base_elevation 1 zone 20 other_zone_avoidance_distance 0 left_border 55 }
-
-create_land { terrain_type DESERT land_percent 4 base_size 8 land_position 62 99 base_elevation 2 bottom_border 70 left_border 70 top_border 90 right_border 70 zone 20 other_zone_avoidance_distance 0 }
-create_land { terrain_type DLC_GRAVELBEACH land_percent 6 number_of_tiles 30 land_position 54 99 base_elevation 1 zone 20 other_zone_avoidance_distance 0 left_border 55 }
-
-
-
+create_land { terrain_type DESERT land_percent 4 base_size 4 land_position 61 1 base_elevation 2 bottom_border 90 left_border 90 top_border 90 right_border 90 zone 20 other_zone_avoidance_distance 0 }
+create_land { terrain_type DLC_GRAVELBEACH land_percent 6 number_of_tiles 40 land_position 58 1 base_elevation 1 zone 20 other_zone_avoidance_distance 0 left_border 60 }
 
 /* mirror sandbank to other side */
-create_land { terrain_type DESERT land_percent 4 base_size 10 land_position 68 50 base_elevation 2 bottom_border 70 left_border 70 top_border 90 right_border 70 zone 20 other_zone_avoidance_distance 0 }
-create_land { terrain_type DLC_GRAVELBEACH land_percent 6 number_of_tiles 40 land_position 62 50 base_elevation 1 zone 20 other_zone_avoidance_distance 0 }
+create_land { terrain_type DESERT land_percent 4 base_size 10 land_position 69 50 base_elevation 4 bottom_border 70 left_border 70 top_border 90 right_border 70 zone 20 other_zone_avoidance_distance 0 }
+create_land { terrain_type DLC_GRAVELBEACH land_percent 6 number_of_tiles 40 land_position 60 50 base_elevation 1 zone 20 other_zone_avoidance_distance 0 left_border 60 land_id 402 }
+create_land { terrain_type DESERT land_percent 4 base_size 8 land_position 67 55 base_elevation 2 bottom_border 90 left_border 90 top_border 90 right_border 90 zone 20 other_zone_avoidance_distance 0 }
+create_land { terrain_type DLC_GRAVELBEACH land_percent 6 number_of_tiles 40 land_position 62 55 base_elevation 1 zone 20 other_zone_avoidance_distance 0 left_border 60 }
+
+create_land { terrain_type DESERT land_percent 4 base_size 4 land_position 65 50 base_elevation 2 bottom_border 90 left_border 90 top_border 90 right_border 90 zone 20 other_zone_avoidance_distance 0 }
+create_land { terrain_type DLC_GRAVELBEACH land_percent 6 number_of_tiles 40 land_position 60 50 base_elevation 1 zone 20 other_zone_avoidance_distance 0 left_border 60 }
+
+create_land { terrain_type DESERT land_percent 4 base_size 4 land_position 65 60 base_elevation 2 bottom_border 90 left_border 90 top_border 90 right_border 90 zone 20 other_zone_avoidance_distance 0 }
+create_land { terrain_type DLC_GRAVELBEACH land_percent 6 number_of_tiles 40 land_position 60 60 base_elevation 1 zone 20 other_zone_avoidance_distance 0 left_border 60 }
+
+create_land { terrain_type DESERT land_percent 4 base_size 4 land_position 63 65 base_elevation 2 bottom_border 90 left_border 90 top_border 90 right_border 90 zone 20 other_zone_avoidance_distance 0 }
+create_land { terrain_type DLC_GRAVELBEACH land_percent 6 number_of_tiles 40 land_position 58 65 base_elevation 1 zone 20 other_zone_avoidance_distance 0 left_border 60 }
+
+create_land { terrain_type DESERT land_percent 4 base_size 4 land_position 65 70 base_elevation 2 bottom_border 90 left_border 90 top_border 90 right_border 90 zone 20 other_zone_avoidance_distance 0 }
+create_land { terrain_type DLC_GRAVELBEACH land_percent 6 number_of_tiles 40 land_position 60 70 base_elevation 1 zone 20 other_zone_avoidance_distance 0 left_border 60 }
+
+create_land { terrain_type DESERT land_percent 4 base_size 4 land_position 63 75 base_elevation 2 bottom_border 90 left_border 90 top_border 90 right_border 90 zone 20 other_zone_avoidance_distance 0 }
+create_land { terrain_type DLC_GRAVELBEACH land_percent 6 number_of_tiles 40 land_position 60 50 base_elevation 1 zone 20 other_zone_avoidance_distance 0 left_border 60 }
 
 
-create_land { terrain_type DESERT land_percent 4 base_size 4 land_position 68 42 base_elevation 2 bottom_border 70 left_border 70 top_border 90 right_border 70 zone 20 other_zone_avoidance_distance 0 }
-create_land { terrain_type DLC_GRAVELBEACH land_percent 6 number_of_tiles 50 land_position 62 40 base_elevation 1 zone 20 other_zone_avoidance_distance 0 }
+create_land { terrain_type DESERT land_percent 4 base_size 4 land_position 65 80 base_elevation 2 bottom_border 90 left_border 90 top_border 90 right_border 90 zone 20 other_zone_avoidance_distance 0 }
+create_land { terrain_type DLC_GRAVELBEACH land_percent 6 number_of_tiles 40 land_position 62 80 base_elevation 1 zone 20 other_zone_avoidance_distance 0 left_border 60 }
 
-create_land { terrain_type DESERT land_percent 4 base_size 8 land_position 65 35 base_elevation 2 bottom_border 70 left_border 70 top_border 90 right_border 70 zone 20 other_zone_avoidance_distance 0 }
-create_land { terrain_type DLC_GRAVELBEACH land_percent 6 number_of_tiles 50 land_position 61 35 base_elevation 1 zone 20 other_zone_avoidance_distance 0 }
+create_land { terrain_type DESERT land_percent 4 base_size 4 land_position 63 85 base_elevation 2 bottom_border 90 left_border 90 top_border 90 right_border 90 zone 20 other_zone_avoidance_distance 0 }
+create_land { terrain_type DLC_GRAVELBEACH land_percent 6 number_of_tiles 40 land_position 60 85 base_elevation 1 zone 20 other_zone_avoidance_distance 0 left_border 60 }
 
+create_land { terrain_type DESERT land_percent 4 base_size 4 land_position 63 90 base_elevation 2 bottom_border 90 left_border 90 top_border 90 right_border 90 zone 20 other_zone_avoidance_distance 0 }
+create_land { terrain_type DLC_GRAVELBEACH land_percent 6 number_of_tiles 40 land_position 60 90 base_elevation 1 zone 20 other_zone_avoidance_distance 0 left_border 60 }
 
-create_land { terrain_type DESERT land_percent 4 base_size 6 land_position 65 30 base_elevation 2 bottom_border 70 left_border 70 top_border 90 right_border 70 zone 20 other_zone_avoidance_distance 0 }
-create_land { terrain_type DLC_GRAVELBEACH land_percent 6 number_of_tiles 50 land_position 60 30 base_elevation 1 zone 20 other_zone_avoidance_distance 0 land_id 401 }
+create_land { terrain_type DESERT land_percent 4 base_size 4 land_position 63 95 base_elevation 2 bottom_border 90 left_border 90 top_border 90 right_border 90 zone 20 other_zone_avoidance_distance 0 }
+create_land { terrain_type DLC_GRAVELBEACH land_percent 6 number_of_tiles 40 land_position 60 95 base_elevation 1 zone 20 other_zone_avoidance_distance 0 left_border 60 land_id 401 }
 
-
-create_land { terrain_type DESERT land_percent 4 base_size 5 land_position 62 25 base_elevation 2 bottom_border 70 left_border 70 top_border 90 right_border 70 zone 20 other_zone_avoidance_distance 0 }
-create_land { terrain_type DLC_GRAVELBEACH land_percent 6 number_of_tiles 40 land_position 58 25 base_elevation 1 zone 20 other_zone_avoidance_distance 0 }
-
-
-create_land { terrain_type DESERT land_percent 4 base_size 6 land_position 62 20 base_elevation 2 bottom_border 70 left_border 70 top_border 90 right_border 70 zone 20 other_zone_avoidance_distance 0 }
-create_land { terrain_type DLC_GRAVELBEACH land_percent 6 number_of_tiles 50 land_position 58 20 base_elevation 1 zone 20 other_zone_avoidance_distance 0 }
-
-create_land { terrain_type DESERT land_percent 4 base_size 5 land_position 62 15 base_elevation 2 bottom_border 70 left_border 70 top_border 90 right_border 70 zone 20 other_zone_avoidance_distance 0 }
-create_land { terrain_type DLC_GRAVELBEACH land_percent 6 number_of_tiles 50 land_position 58 15 base_elevation 1 zone 20 other_zone_avoidance_distance 0 }
-
-
-create_land { terrain_type DESERT land_percent 4 base_size 6 land_position 62 10 base_elevation 2 bottom_border 70 left_border 70 top_border 90 right_border 70 zone 20 other_zone_avoidance_distance 0 }
-create_land { terrain_type DLC_GRAVELBEACH land_percent 6 number_of_tiles 30 land_position 56 10 base_elevation 1 zone 20 other_zone_avoidance_distance 0 land_id 401 }
-
-create_land { terrain_type DESERT land_percent 4 base_size 8 land_position 62 5 base_elevation 2 bottom_border 70 left_border 70 top_border 90 right_border 70 zone 20 other_zone_avoidance_distance 0 }
-create_land { terrain_type DLC_GRAVELBEACH land_percent 6 number_of_tiles 30 land_position 56 5 base_elevation 1 zone 20 other_zone_avoidance_distance 0 }
-
-
-create_land { terrain_type DESERT land_percent 4 base_size 8 land_position 62 1 base_elevation 2 bottom_border 70 left_border 70 top_border 90 right_border 70 zone 20 other_zone_avoidance_distance 0 }
-create_land { terrain_type DLC_GRAVELBEACH land_percent 6 number_of_tiles 30 land_position 54 1 base_elevation 1 zone 20 other_zone_avoidance_distance 0 }
-
-/* make elevation a little more balanced, add some to the center of sandbank and sides */
-create_land { terrain_type DESERT land_percent 4 base_size 4 land_position 62 1 base_elevation 4 bottom_border 70 left_border 70 top_border 90 right_border 70 zone 20 other_zone_avoidance_distance 0 }
-create_land { terrain_type DESERT land_percent 4 base_size 5 land_position 68 50 base_elevation 5 bottom_border 70 left_border 70 top_border 90 right_border 70 zone 20 other_zone_avoidance_distance 0 }
-create_land { terrain_type DESERT land_percent 4 base_size 4 land_position 61 99 base_elevation 4 bottom_border 70 left_border 70 top_border 90 right_border 70 zone 20 other_zone_avoidance_distance 0 }
+create_land { terrain_type DESERT land_percent 4 base_size 4 land_position 61 99 base_elevation 2 bottom_border 90 left_border 90 top_border 90 right_border 90 zone 20 other_zone_avoidance_distance 0 }
+create_land { terrain_type DLC_GRAVELBEACH land_percent 6 number_of_tiles 40 land_position 58 99 base_elevation 1 zone 20 other_zone_avoidance_distance 0 left_border 60 }
 
 /* fill in space in between 'lines' */
+create_land {  terrain_type GRASS land_percent 10 base_size 5 land_position 75 66 base_elevation 2 zone 30 other_zone_avoidance_distance 1 }
 create_land {  terrain_type GRASS land_percent 10 base_size 10 land_position 80 20 base_elevation 2 zone 30 other_zone_avoidance_distance 1 }
 create_land {  terrain_type GRASS land_percent 10 base_size 10 land_position 80 55 base_elevation 2 zone 30 other_zone_avoidance_distance 1 land_id 45 }
 create_land {  terrain_type GRASS land_percent 10 base_size 10 land_position 80 50 base_elevation 2 zone 30 other_zone_avoidance_distance 1 land_id 45 }
@@ -262,283 +248,7 @@ create_land { terrain_type FOREST land_percent 4 number_of_tiles 500 land_positi
 /* 5,6,7,8 are water spawns */
 /* 1,2,3,4 are land/forest spawns */ 
 
-
-/* find out what teams are being used */
-if 4_PLAYER_GAME
-	
-	
-	if TEAM0_SIZE2 #define USING_TEAM0
-	endif
-	if TEAM1_SIZE2 #define USING_TEAM1
-	endif
-	if TEAM2_SIZE2 #define USING_TEAM2
-	endif
-	if TEAM3_SIZE2 #define USING_TEAM3
-	endif
-	if TEAM4_SIZE2 #define USING_TEAM4
-	endif
-	
-	if TEAM0_SIZE2
-		if TEAM1_SIZE2
-			#define EVEN_TEAMS
-		elseif TEAM2_SIZE2
-			#define EVEN_TEAMS
-		elseif TEAM3_SIZE2
-			#define EVEN_TEAMS
-		elseif TEAM4_SIZE2
-			#define EVEN_TEAMS
-		else
-			#define UNEVEN_TEAMS
-		endif
-	elseif TEAM1_SIZE2
-		if TEAM2_SIZE2
-			#define EVEN_TEAMS
-		elseif TEAM3_SIZE2
-			#define EVEN_TEAMS
-		elseif TEAM4_SIZE2
-			#define EVEN_TEAMS
-		else
-			#define UNEVEN_TEAMS
-		endif
-	elseif TEAM2_SIZE2
-		if TEAM3_SIZE2
-			#define EVEN_TEAMS
-		elseif TEAM4_SIZE2
-			#define EVEN_TEAMS
-		else
-			#define UNEVEN_TEAMS
-		endif
-	endif
-	
-	
-	if TEAM_POSITIONS
-		if EVEN_TEAMS
-			create_land { 
-			terrain_type DESERT
-			land_position 27 10
-			number_of_tiles 20
-			base_elevation 0
-			assign_to AT_COLOR 8 0 0 }
-			
-			create_land { 
-			terrain_type DESERT
-			land_position 27 10
-			number_of_tiles 20
-			base_elevation 0
-			assign_to AT_COLOR 6 0 0 }
-				
-			create_land {
-			terrain_type GRASS
-			land_position 80 20
-			number_of_tiles 20
-			base_elevation 2
-			assign_to AT_COLOR 4 0 0 }
-			
-			create_land {
-			terrain_type GRASS
-			land_position 80 20
-			number_of_tiles 20
-			base_elevation 2
-			assign_to AT_COLOR 2 0 0 }
-			
-			
-			create_land { 
-			terrain_type DESERT
-			land_position 27 90
-			number_of_tiles 20
-			base_elevation 0
-			assign_to AT_COLOR 7 0 0 }
-			
-			create_land { 
-			terrain_type DESERT
-			land_position 27 90
-			number_of_tiles 20
-			base_elevation 0
-			assign_to AT_COLOR 5 0 0 }
-				
-				
-			create_land {
-			terrain_type GRASS
-			land_position 27 80
-			number_of_tiles 20
-			base_elevation 2
-			assign_to AT_COLOR 3 0 0 }
-			
-			create_land {
-			terrain_type GRASS
-			land_position 80 80
-			number_of_tiles 20
-			base_elevation 2
-			assign_to AT_COLOR 1 0 0 }
-			
-		else
-			create_land { 
-			terrain_type DESERT
-			land_position 27 10
-			number_of_tiles 20
-			base_elevation 0
-			assign_to AT_TEAM -10 0 0 }
-				
-			create_land {
-			terrain_type GRASS
-			land_position 80 20
-			number_of_tiles 20
-			base_elevation 2
-			assign_to AT_TEAM -10 0 0 }
-			
-			create_land { 
-			terrain_type DESERT
-			land_position 27 90
-			number_of_tiles 20
-			base_elevation 0
-			assign_to AT_TEAM -10 0 0 }
-				
-			create_land {
-			terrain_type GRASS
-			land_position 80 80
-			number_of_tiles 20
-			base_elevation 2
-			assign_to AT_TEAM -10 0 0 }
-		endif
-	elseif EVEN_TEAMS
-		if USING_TEAM0 create_land {
-			terrain_type DESERT
-			land_position 27 10
-			number_of_tiles 20
-			base_elevation 0
-			assign_to AT_TEAM 0 0 0 }
-			
-			create_land {
-			terrain_type GRASS
-			land_position 80 20
-			number_of_tiles 20
-			base_elevation 2
-			assign_to AT_TEAM 0 0 0 }
-			
-			create_land {
-			terrain_type DESERT
-			land_position 27 80
-			number_of_tiles 20
-			base_elevation 0
-			assign_to AT_TEAM -10 0 0 }
-			
-			create_land {
-			terrain_type GRASS
-			land_position 80 80
-			number_of_tiles 20
-			base_elevation 2
-			assign_to AT_TEAM -10 0 0 }
-		elseif USING_TEAM1 create_land {
-			terrain_type DESERT
-			land_position 27 10
-			number_of_tiles 20
-			base_elevation 0
-			assign_to AT_TEAM 1 0 0 }
-			
-			create_land {
-			terrain_type GRASS
-			land_position 80 20
-			number_of_tiles 20
-			base_elevation 2
-			assign_to AT_TEAM 1 0 0 }
-			
-			create_land {
-			terrain_type DESERT
-			land_position 27 80
-			number_of_tiles 20
-			base_elevation 0
-			assign_to AT_TEAM -1 0 0 }
-			
-			create_land {
-			terrain_type GRASS
-			land_position 80 80
-			number_of_tiles 20
-			base_elevation 2
-			assign_to AT_TEAM -1 0 0 }
-		
-		elseif USING_TEAM2 create_land {
-			terrain_type DESERT
-			land_position 27 10
-			number_of_tiles 20
-			base_elevation 0
-			assign_to AT_TEAM 2 0 0 }
-			
-			create_land {
-			terrain_type GRASS
-			land_position 80 20
-			number_of_tiles 20
-			base_elevation 2
-			assign_to AT_TEAM 2 0 0 }
-			
-			create_land {
-			terrain_type DESERT
-			land_position 27 80
-			number_of_tiles 20
-			base_elevation 0
-			assign_to AT_TEAM -2 0 0 }
-			
-			create_land {
-			terrain_type GRASS
-			land_position 80 80
-			number_of_tiles 20
-			base_elevation 2
-			assign_to AT_TEAM -2 0 0 }
-		elseif USING_TEAM3 create_land {
-			terrain_type DESERT
-			land_position 27 10
-			number_of_tiles 20
-			base_elevation 0
-			assign_to AT_TEAM 3 0 0 }
-			
-			create_land {
-			terrain_type GRASS
-			land_position 80 20
-			number_of_tiles 20
-			base_elevation 2
-			assign_to AT_TEAM 3 0 0 }
-			
-			create_land {
-			terrain_type DESERT
-			land_position 27 80
-			number_of_tiles 20
-			base_elevation 0
-			assign_to AT_TEAM -3 0 0 }
-			
-			create_land {
-			terrain_type GRASS
-			land_position 80 80
-			number_of_tiles 20
-			base_elevation 2
-			assign_to AT_TEAM -3 0 0 }
-		elseif USING_TEAM4 create_land {
-			terrain_type DESERT
-			land_position 27 10
-			number_of_tiles 20
-			base_elevation 0
-			assign_to AT_TEAM 4 0 0 }
-			
-			create_land {
-			terrain_type GRASS
-			land_position 80 20
-			number_of_tiles 20
-			base_elevation 2
-			assign_to AT_TEAM 4 0 0 }
-			
-			create_land {
-			terrain_type DESERT
-			land_position 27 80
-			number_of_tiles 20
-			base_elevation 0
-			assign_to AT_TEAM -4 0 0 }
-			
-			create_land {
-			terrain_type GRASS
-			land_position 80 80
-			number_of_tiles 20
-			base_elevation 2
-			assign_to AT_TEAM -4 0 0 }
-		endif
-	endif
+if
 	
 elseif 2_PLAYER_GAME
 	start_random
@@ -568,12 +278,17 @@ if TIDAL_START
 		create_land { terrain_type DESERT land_position 35 90 number_of_tiles 20 base_elevation 0 assign_to_player 2 }
 	
 	elseif LAYOUT_C
-		create_land { terrain_type DESERT land_position 27 18 number_of_tiles 20 base_elevation 0 assign_to_player 1 }
-		create_land { terrain_type DESERT land_position 27 82 number_of_tiles 20 base_elevation 0 assign_to_player 2 }
+		create_land { terrain_type DESERT land_position 30 14 number_of_tiles 20 base_elevation 0 assign_to_player 1 }
+		create_land { terrain_type DESERT land_position 30 86 number_of_tiles 20 base_elevation 0 assign_to_player 2 }
 		
 	elseif LAYOUT_D
 		create_land { terrain_type DESERT land_position 27 8 number_of_tiles 20 base_elevation 0 assign_to_player 1 }
 		create_land { terrain_type DESERT land_position 27 92 number_of_tiles 20 base_elevation 0 assign_to_player 2 }
+		
+	else
+		create_land { terrain_type DESERT land_position 25 10 number_of_tiles 20 base_elevation 0 assign_to_player 1 }
+		create_land { terrain_type DESERT land_position 25 90 number_of_tiles 20 base_elevation 0 assign_to_player 2 }
+	
 	endif
 		
 
@@ -599,13 +314,16 @@ elseif FOREST_START
 	create_land { terrain_type DIRT2 land_position 80 30 number_of_tiles 20 base_elevation 2 assign_to_player 1 }
 	create_land { terrain_type DIRT2 land_position 80 70 number_of_tiles 20 base_elevation 2 assign_to_player 2 }
 	
+	else
+	create_land { terrain_type DIRT2 land_position 80 20 number_of_tiles 20 base_elevation 2 assign_to_player 1 }
+	create_land { terrain_type DIRT2 land_position 80 80 number_of_tiles 20 base_elevation 2 assign_to_player 2 }
+	
 	endif
 endif
 
 
 
 /* if tidal start, add some more res to the forest region, or if forest start add more res to tidal part */
-/* create_land {  terrain_type GRASS land_percent 10 base_size 10 land_position 80 50 base_elevation 2 zone 30 other_zone_avoidance_distance 1 land_id 45 } */
 
 if TIDAL_START
 create_land {  terrain_type GRASS land_percent 10 base_size 10 land_position 80 20 base_elevation 2 zone 30 other_zone_avoidance_distance 1 land_id 45 }
@@ -649,25 +367,6 @@ create_land
 
 }
 
-
-/* locate main pocket of neutral minerals in tidal plain */
-/* create_land { terrain_type RB_PLACEHOLDER land_percent 20 land_position 44 52 number_of_tiles 100 base_elevation 0 clumping_factor 50 zone 12 other_zone_avoidance_distance 0 top_border 30 bottom_border 40 left_border 20 right_border 20 } */
-/* create_land { terrain_type RB_PLACEHOLDER land_percent 20 land_position 44 50 number_of_tiles 100 base_elevation 0 clumping_factor 50 zone 12 other_zone_avoidance_distance 0 top_border 30 bottom_border 40 left_border 20 right_border 20 } */
-/* create_land { terrain_type RB_PLACEHOLDER land_percent 20 land_position 44 48 number_of_tiles 100 base_elevation 0 clumping_factor 50 zone 12 other_zone_avoidance_distance 0 top_border 30 bottom_border 40 left_border 20 right_border 20 } */
-
-
-/* create 'pockets' of water to later add shorefish to. Should be 3 per side */
-/* top 2 ponds are connected to eachother and edge of map */
-
-
-/* /* 'proper' part of ponds */ */
-/* create_land { terrain_type POND_PLACEHOLDER land_position 47 15 number_of_tiles 10 base_elevation 0 clumping_factor 30 zone 100 other_zone_avoidance_distance 1 land_id 64 } */
-/* create_land { terrain_type POND_PLACEHOLDER land_position 50 90 number_of_tiles 175 base_elevation 0 clumping_factor 30 zone 100 other_zone_avoidance_distance 1 land_id 65 } */
-/* create_land { terrain_type POND_PLACEHOLDER land_position 50 70 number_of_tiles 175 base_elevation 0 clumping_factor 30 zone 100 other_zone_avoidance_distance 1 land_id 66 } */
-/* create_land { terrain_type BASE_TERRAIN land_position 35 70 number_of_tiles 175 base_elevation 0 clumping_factor 30 zone 100 other_zone_avoidance_distance 1 land_id 67 } */
-/* create_land { terrain_type POND_PLACEHOLDER land_position 50 5	number_of_tiles 175 base_elevation 0 clumping_factor 30 zone 100 other_zone_avoidance_distance 1 land_id 68 } */
-/* create_land { terrain_type POND_PLACEHOLDER land_position 50 25 number_of_tiles 175 base_elevation 0 clumping_factor 30 zone 50 other_zone_avoidance_distance 1 land_id 69 } */
-/* create_land { terrain_type BASE_TERRAIN land_position 35 30 number_of_tiles 175 base_elevation 0 clumping_factor 30 zone 50 other_zone_avoidance_distance 1 land_id 64 } */
 
 /* fill in rest of 'pond' region */
 /* /* left side */ */
@@ -907,8 +606,6 @@ create_terrain DLC_GRAVELBEACH { base_terrain DESERT land_percent 2 number_of_cl
 create_terrain DESERT { base_terrain DLC_GRAVELBEACH land_percent 90 number_of_clumps 100 clumping_factor 10 set_scale_by_size height_limits 0 1 terrain_mask 2 } 
 
 
-
-/* 64-69 are land id's for 'ponds' */
 create_terrain LAND_DLC_BEACH { base_terrain POND_PLACEHOLDER land_percent 100 number_of_clumps 1000 clumping_factor 10 set_scale_by_size spacing_to_other_terrain_types 2 }
 create_terrain MUDDY_SHALLOW { base_terrain LAND_DLC_BEACH land_percent 100 number_of_clumps 1000 clumping_factor 10 set_scale_by_size }
 create_terrain LAND_DLC_BEACH { base_terrain POND_PLACEHOLDER land_percent 100 number_of_clumps 1000 clumping_factor 10 set_scale_by_size }
@@ -960,17 +657,6 @@ create_terrain GREEN_WATER { base_terrain R_S_PLACEHOLDER land_percent 100 numbe
 
 create_object ON_GRID { terrain_to_place_on MUDDY_SHALLOW find_closest place_on_specific_land_id 100 second_object TREE_REED ignore_terrain_restrictions number_of_objects 90 actor_area 80 actor_area_radius 5 }
 
-/* /* actor area to place the forage + deer in the center */ */
-/* if TINY_MAP */
-/* elseif SMALL_MAP */
-/* elseif MEDIUM_MAP create_actor_area 110 80 30 35 */
-/* elseif LARGE_MAP  create_actor_area 142 112 30 45 */
-/* elseif HUGE_MAP   create_actor_area 152 122 30 48 */
-/* elseif GIGANTIC_MAP	create_actor_area 166 140 30 52 */
-/* elseif LUDIKRIS_MAP create_actor_area 440 400 30 70 */
-/* endif */
-
-
 
 /* give each player their starting resources */
 create_object TOWN_CENTER
@@ -1000,7 +686,7 @@ create_object DLC_GOOSE
 	number_of_objects 2
 	number_of_groups 2
 	set_tight_grouping
-	min_distance_to_players 10
+	min_distance_to_players 8
 	max_distance_to_players 14
 	set_circular_placement
 	avoid_forest_zone 1
@@ -1020,18 +706,18 @@ create_object GOLD
 	avoid_forest_zone 4
 }
 
-/* create_object STONE */
-/* { */
-	/* set_place_for_every_player */
-	/* set_gaia_object_only */
-	/* number_of_objects 2 */
-	/* set_tight_grouping */
-	/* min_distance_to_players 8 */
-	/* max_distance_to_players 15 */
-	/* min_distance_group_placement 5 */
-	/* set_circular_placement */
-	/* avoid_forest_zone 2 */
-/* } */
+create_object STONE
+{
+	set_place_for_every_player
+	set_gaia_object_only
+	number_of_objects 2
+	set_tight_grouping
+	min_distance_to_players 8
+	max_distance_to_players 15
+	min_distance_group_placement 5
+	set_circular_placement
+	avoid_forest_zone 2
+}
 
 
 create_object VILLAGER
@@ -1055,7 +741,7 @@ create_object JAVELINA
 {
 	set_place_for_every_player
 	set_gaia_object_only
-	temp_min_distance_group_placement 6
+	temp_min_distance_group_placement 4
 	number_of_groups 2
 	min_distance_to_players 8
 	max_distance_to_players 15
@@ -1069,16 +755,31 @@ if REGICIDE create_object KING { set_place_for_every_player temp_min_distance_gr
 /* stragglers */
 if TIDAL_START
 
-create_object TREE_REED
+	create_object TREE_REED
+		{
+			set_place_for_every_player
+			set_gaia_object_only
+			number_of_groups 5
+			min_distance_to_players 5
+			max_distance_to_players 8
+			set_circular_placement
+			temp_min_distance_group_placement 3
+			resource_delta 50
+		}
+
+
+	/* 2 Guaranteed oysters per water player, and push away neutral ones */
+	create_object ON_GRID
 	{
-		set_place_for_every_player
 		set_gaia_object_only
-		number_of_groups 5
-		min_distance_to_players 5
-		max_distance_to_players 8
-		set_circular_placement
-		temp_min_distance_group_placement 3
-		resource_delta 50
+		set_place_for_every_player
+		min_distance_to_players 10
+		temp_min_distance_group_placement 5
+		number_of_groups 2
+		terrain_to_place_on BEACH
+		second_object OYSTERS
+		actor_area 1000
+		actor_area_radius 10
 	}
 
 
@@ -1119,58 +820,6 @@ create_object FORAGE { find_closest set_tight_grouping place_on_specific_land_id
 create_object DEER { find_closest set_loose_grouping actor_area_to_place_in 55 terrain_to_place_on GRASS number_of_objects 3 number_of_groups 6 temp_min_distance_group_placement 5 }
 
 /* 2 Guaranteed oysters per water player, and push away neutral ones */
-create_object ON_GRID
-{
-	set_gaia_object_only
-	temp_min_distance_group_placement 5
-	number_of_groups 2
-	terrain_to_place_on BEACH
-	place_on_specific_land_id 1
-	second_object OYSTERS
-	actor_area 1000
-	actor_area_radius 10
-}
-
-create_object ON_GRID
-{
-	set_gaia_object_only
-	temp_min_distance_group_placement 5
-	number_of_groups 2
-	terrain_to_place_on BEACH
-	place_on_specific_land_id 2
-	second_object OYSTERS
-	actor_area 1000
-	actor_area_radius 10
-}
-
-
-/* create_object FORAGE */
-/* { */
-	/* set_gaia_object_only */
-	/* set_place_for_every_player */
-	/* number_of_objects 5 */
-	/* set_scaling_to_map_size */
-	/* set_tight_grouping */
-	/* temp_min_distance_group_placement 2 */
-	/* min_distance_to_players 14 */
-	/* max_distance_to_players 18 */
-	/* find_closest */
-/* } */
-
-/* create_object DEER */
-/* { */
-	/* set_gaia_object_only */
-	/* set_tight_grouping */
-	/* number_of_objects 3 */
-	/* number_of_groups 5 */
-	/* min_distance_to_players 20 */
-	/* temp_min_distance_group_placement 10 */
-	/* terrain_to_place_on GRASS */
-	/* avoid_forest_zone 12 */
-	/* actor_area_to_place_in 30 */
-	/* find_closest */
-
-/* } */
 
 
 create_object FISH_SALMON
@@ -1189,6 +838,7 @@ create_object ON_GRID
 	temp_min_distance_group_placement 5
 	number_of_groups 20
 	terrain_to_place_on BEACH
+	number_of_objects 1
 	second_object OYSTERS
 	avoid_actor_area 1000
 }
@@ -1198,6 +848,7 @@ create_object ON_GRID
 	set_gaia_object_only
 	temp_min_distance_group_placement 5
 	number_of_groups 20
+	number_of_objects 3
 	terrain_to_place_on DIRT3
 	place_on_forest_zone
 	second_object OYSTERS
@@ -1217,6 +868,8 @@ create_object ON_GRID
 	place_on_specific_land_id 64
 	find_closest
 	second_object SHORE_FISH
+	actor_area 501
+	actor_area_radius 5
 }
 
 
@@ -1243,17 +896,13 @@ create_object ON_GRID
 	place_on_specific_land_id 76
 	find_closest
 	second_object SHORE_FISH
+	actor_area 501
+	actor_area_radius 5
 }
 
 create_object ON_GRID { set_gaia_object_only set_tight_grouping temp_min_distance_group_placement 12 number_of_groups 1000 number_of_objects 1 find_closest place_on_forest_zone terrain_to_place_on DIRT3 second_object SHORE_FISH }
-/* create_object ON_GRID { set_gaia_object_only set_tight_grouping min_distance_group_placement 12 number_of_groups 4 number_of_objects 3 find_closest min_distance_to_players 15 avoid_forest_zone 5 terrain_to_place_on DESERT second_object STONE } */
-/* create_object ON_GRID { set_gaia_object_only set_tight_grouping min_distance_group_placement 12 number_of_groups 1000 number_of_objects 3 find_closest min_distance_to_players 15 avoid_forest_zone 5 terrain_to_place_on DESERT second_object GOLD } */
-create_object ON_GRID { set_gaia_object_only set_tight_grouping min_distance_group_placement 12 number_of_groups 1 number_of_objects 3 find_closest min_distance_to_players 15 avoid_forest_zone 5 terrain_to_place_on DLC_GRAVELBEACH second_object STONE land_id 401 }
-create_object ON_GRID { set_gaia_object_only set_tight_grouping min_distance_group_placement 12 number_of_groups 1 number_of_objects 4 find_closest min_distance_to_players 15 avoid_forest_zone 5 terrain_to_place_on DLC_GRAVELBEACH second_object STONE land_id 402 }
-/* create_object ON_GRID { set_gaia_object_only set_tight_grouping min_distance_group_placement 5 number_of_groups 2 number_of_objects 3 find_closest min_distance_to_players 15 avoid_forest_zone 5 terrain_to_place_on DESERT second_object STONE actor_area_to_place_in 402 } */
-/* create_object ON_GRID { set_gaia_object_only set_tight_grouping min_distance_group_placement 12 number_of_groups 4 number_of_objects 3 find_closest min_distance_to_players 15 avoid_forest_zone 5 terrain_to_place_on DLC_GRAVELBEACH second_object STONE } */
-/* create_object ON_GRID { set_gaia_object_only set_tight_grouping min_distance_group_placement 12 number_of_groups 1000 number_of_objects 3 find_closest min_distance_to_players 15 avoid_forest_zone 5 terrain_to_place_on DLC_GRAVELBEACH second_object GOLD } */
 
+create_object ON_GRID { set_gaia_object_only set_tight_grouping min_distance_group_placement 8 number_of_groups 6 number_of_objects 3 find_closest min_distance_to_players 15 avoid_forest_zone 5 terrain_to_place_on LAND_DLC_BEACH place_on_forest_zone second_object STONE actor_area_to_place_in 80 avoid_actor_area 501 group_placement_radius 1 }
 /* eye candy */
 
 create_object GREEN_GRASS
@@ -1286,8 +935,9 @@ create_object DRY_GRASS
 
 /* extra res on forest start by the river */
 /* 61 is right side, 62 left side */
-create_object FORAGE { set_gaia_object_only set_tight_grouping find_closest place_on_specific_land_id 61 number_of_objects 5 number_of_groups 3 temp_min_distance_group_placement 5 actor_area 501 actor_area_radius 6 }
-create_object FORAGE { set_gaia_object_only set_tight_grouping find_closest place_on_specific_land_id 62 number_of_objects 5 number_of_groups 3 temp_min_distance_group_placement 5 actor_area 502 actor_area_radius 6 }
-create_object JAVELINA { actor_area_to_place_in 501 set_gaia_object_only set_tight_grouping number_of_groups 2 temp_min_distance_group_placement 8 }
-create_object JAVELINA { actor_area_to_place_in 502 set_gaia_object_only set_tight_grouping number_of_groups 2 temp_min_distance_group_placement 8 }
-
+if FOREST_START
+	create_object FORAGE { set_gaia_object_only set_tight_grouping find_closest place_on_specific_land_id 61 number_of_objects 5 number_of_groups 3 temp_min_distance_group_placement 5 actor_area 501 actor_area_radius 2 }
+	create_object FORAGE { set_gaia_object_only set_tight_grouping find_closest place_on_specific_land_id 62 number_of_objects 5 number_of_groups 3 temp_min_distance_group_placement 5 actor_area 502 actor_area_radius 2 }
+	create_object JAVELINA { actor_area_to_place_in 501 set_gaia_object_only set_tight_grouping number_of_groups 1 temp_min_distance_group_placement 6 find_closest terrain_to_place_on ROCK1 }
+	create_object JAVELINA { actor_area_to_place_in 502 set_gaia_object_only set_tight_grouping number_of_groups 1 temp_min_distance_group_placement 6 find_closest terrain_to_place_on ROCK1 }
+endif

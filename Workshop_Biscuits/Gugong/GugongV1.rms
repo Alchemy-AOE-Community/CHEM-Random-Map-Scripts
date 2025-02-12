@@ -1,0 +1,960 @@
+/* Map initialized by Biscuits/ Mighty Space Fruit 28 December for Walhalla 2 */
+/* Gugongv1 created 11 February 2025 */
+/* thanks to Javisty for playtesting and offering feedback on how to improve the map */
+/* Licensed for Exclusive Competitive Use in Alchemy League Season 6 */
+
+<PLAYER_SETUP>
+direct_placement
+
+ai_info_map_type ARENA 0 0 0 
+
+set_gaia_civilization 6
+
+#const STONE_GATE 78
+#const SMALL_PAGODA 1203
+
+#const NGARDEN_PLACEHOLDER 7
+#const SGARDEN_PLACEHOLDER 26
+#const HOUSE_PLACEHOLDER 95
+#const EXIT_PLACEHOLDER 8
+
+#const FOREST_BUSH 20
+#const GRAVEL 70
+#const LIGHT_SNOW 73
+#const DARK_GRAVEL 78
+#const VDARK_GRAVEL 81
+#const PLACEHOLDER_GRASS 84
+
+#const IND_MARKET 1646
+
+#const ON_GRID 1613
+
+if TINY_MAP #define 1V1 endif
+
+/* FFA settings */
+if 3_PLAYER_GAME #define UNEVEN_TEAMS endif
+if 5_PLAYER_GAME #define UNEVEN_TEAMS endif 
+if 7_PLAYER_GAME #define UNEVEN_TEAMS endif
+
+if 4_PLAYER_GAME if 1_TEAM_GAME #define UNEVEN_TEAMS endif endif
+
+if 6_PLAYER_GAME if 1_TEAM_GAME #define UNEVEN_TEAMS endif endif
+
+if 8_PLAYER_GAME if 1_TEAM_GAME #define UNEVEN_TEAMS endif endif
+
+if 1V1
+
+	start_random
+
+		percent_chance 24 #define LAYOUT_A
+		percent_chance 25 #define LAYOUT_B
+		percent_chance 25 #define LAYOUT_C
+		percent_chance 25 #define LAYOUT_D
+
+	end_random
+
+	provide slight extra variation in player spawns
+	start_random
+
+		percent_chance 50 #define ALT_LAYOUT
+
+	end_random
+
+endif
+
+effect_amount GAIA_SET_ATTRIBUTE IND_MARKET ATTR_STANDING_GRAPHIC 409
+effect_amount GAIA_SET_ATTRIBUTE IND_MARKET ATTR_DYING_GRAPHIC 405
+
+
+if LOW_RESOURCES
+  #const TRADE_CART_ENABLER 161
+  #const TRADE_COG_ENABLER 180
+  #const TRADE_CARAVAN_ENABLER 48
+  #const HINDU_CARAVANSERAI_ENABLER 518
+  #const PERSIAN_CARAVANSERAI_ENABLER 552  
+  #const SILK_ROAD 499
+  effect_amount DISABLE_TECH TRADE_COG_ENABLER ATTR_DISABLE 180
+  effect_amount DISABLE_TECH TRADE_CART_ENABLER ATTR_DISABLE 161
+  effect_amount DISABLE_TECH TRADE_CARAVAN_ENABLER ATTR_DISABLE 48
+  effect_amount DISABLE_TECH HINDU_CARAVANSERAI_ENABLER ATTR_DISABLE 518
+  effect_amount DISABLE_TECH PERSIAN_CARAVANSERAI_ENABLER ATTR_DISABLE 552
+  effect_amount DISABLE_TECH SILK_ROAD ATTR_DISABLE 499    
+else
+endif
+
+<LAND_GENERATION>
+base_terrain DARK_GRAVEL
+
+/* this layer is visual only, so the road can still be built on */
+base_layer GRAVEL
+
+
+/* placeholder land for outside walls */
+create_land { terrain_type DESERT land_position 50 50 land_percent 90 base_size 50 left_border 20 right_border 20 bottom_border 20 top_border 20 }
+create_land { terrain_type DESERT land_position 49 49 land_percent 90 base_size 50 left_border 20 right_border 20 bottom_border 20 top_border 20 }
+create_land { terrain_type DESERT land_position 51 51 land_percent 90 base_size 50 left_border 20 right_border 20 bottom_border 20 top_border 20 }
+create_land { terrain_type DESERT land_position 8 92 land_percent 0 base_size 1 left_border 80 right_border 80 bottom_border 80 top_border 80 }
+create_land { terrain_type DESERT land_position 92 8 land_percent 0 base_size 1 left_border 80 right_border 80 bottom_border 80 top_border 80 }
+create_land { terrain_type ROCK1 land_position 50 50 land_percent 90 base_size 48 left_border 20 right_border 20 bottom_border 20 top_border 20 }
+create_land { terrain_type ROCK1 land_position 49 49 land_percent 90 base_size 47 left_border 20 right_border 20 bottom_border 20 top_border 20 }
+create_land { terrain_type ROCK1 land_position 88 12 land_percent 0 number_of_tiles 1 left_border 90 right_border 90 bottom_border 90 top_border 90 }
+create_land { terrain_type ROCK1 land_position 12 88 land_percent 0 number_of_tiles 1 left_border 90 right_border 90 bottom_border 90 top_border 90 }
+
+if MEDIUM_MAP
+
+	create_land { terrain_type DESERT land_position 49 49 land_percent 90 base_size 70 left_border 20 right_border 20 bottom_border 20 top_border 20 }
+	create_land { terrain_type DESERT land_position 51 51 land_percent 90 base_size 70 left_border 20 right_border 20 bottom_border 20 top_border 20 }
+	create_land { terrain_type ROCK1 land_position 50 50 land_percent 90 base_size 68 left_border 20 right_border 20 bottom_border 20 top_border 20 }
+	create_land { terrain_type ROCK1 land_position 49 49 land_percent 90 base_size 67 left_border 20 right_border 20 bottom_border 20 top_border 20 }
+	create_land { terrain_type ROCK1 land_position 89 11 land_percent 0 number_of_tiles 1 left_border 90 right_border 90 bottom_border 90 top_border 90 }
+	create_land { terrain_type ROCK1 land_position 11 89 land_percent 0 number_of_tiles 1 left_border 90 right_border 90 bottom_border 90 top_border 90 }
+
+
+elseif LARGE_MAP
+
+	create_land { terrain_type DESERT land_position 50 50 land_percent 90 base_size 82 left_border 20 right_border 20 bottom_border 20 top_border 20 }
+	create_land { terrain_type ROCK1 land_position 50 50 land_percent 90 base_size 80 left_border 20 right_border 20 bottom_border 20 top_border 20 }
+	
+	create_land { terrain_type DESERT land_position 49 49 land_percent 90 base_size 82 left_border 20 right_border 20 bottom_border 20 top_border 20 }
+	create_land { terrain_type DESERT land_position 51 51 land_percent 90 base_size 82 left_border 20 right_border 20 bottom_border 20 top_border 20 }
+	create_land { terrain_type ROCK1 land_position 50 50 land_percent 90 base_size 80 left_border 20 right_border 20 bottom_border 20 top_border 20 }
+	create_land { terrain_type ROCK1 land_position 49 49 land_percent 90 base_size 79 left_border 20 right_border 20 bottom_border 20 top_border 20 }
+	create_land { terrain_type ROCK1 land_position 88 11 land_percent 0 number_of_tiles 1 left_border 90 right_border 90 bottom_border 90 top_border 90 }
+	create_land { terrain_type ROCK1 land_position 11 88 land_percent 0 number_of_tiles 1 left_border 90 right_border 90 bottom_border 90 top_border 90 }
+
+elseif HUGE_MAP
+
+	create_land { terrain_type DESERT land_position 50 50 land_percent 90 base_size 92 left_border 20 right_border 20 bottom_border 20 top_border 20 }
+	create_land { terrain_type ROCK1 land_position 50 50 land_percent 90 base_size 90 left_border 20 right_border 20 bottom_border 20 top_border 20 }
+	
+	create_land { terrain_type DESERT land_position 49 49 land_percent 90 base_size 92 left_border 20 right_border 20 bottom_border 20 top_border 20 }
+	create_land { terrain_type DESERT land_position 51 51 land_percent 90 base_size 92 left_border 20 right_border 20 bottom_border 20 top_border 20 }
+	create_land { terrain_type ROCK1 land_position 50 50 land_percent 90 base_size 90 left_border 20 right_border 20 bottom_border 20 top_border 20 }
+	create_land { terrain_type ROCK1 land_position 49 49 land_percent 90 base_size 89 left_border 20 right_border 20 bottom_border 20 top_border 20 }
+	create_land { terrain_type ROCK1 land_position 51 51 land_percent 90 base_size 89 left_border 20 right_border 20 bottom_border 20 top_border 20 }
+	
+	create_land { terrain_type ROCK1 land_position 90 10 land_percent 0 number_of_tiles 1 left_border 90 right_border 90 bottom_border 90 top_border 90 }
+	create_land { terrain_type ROCK1 land_position 10 90 land_percent 0 number_of_tiles 1 left_border 90 right_border 90 bottom_border 90 top_border 90 }
+	
+
+endif
+
+
+if LAYOUT_A
+
+	if ALT_LAYOUT
+
+		create_land { terrain_type SNOW land_position 22 50 land_percent 10 base_size 17 assign_to_player 1 }
+		create_land { terrain_type SNOW land_position 78 50 land_percent 10 base_size 17 assign_to_player 2 }
+
+		/* woodlines for players */
+		create_land { terrain_type FOREST land_position 31 59 base_size 4 bottom_border 50 top_border 50 right_border 50 left_border 50 }
+		create_land { terrain_type FOREST land_position 31 41 base_size 4 bottom_border 50 top_border 50 right_border 50 left_border 50 }
+
+		create_land { terrain_type FOREST land_position 69 41 base_size 4 bottom_border 50 top_border 50 right_border 50 left_border 50 }
+		create_land { terrain_type FOREST land_position 69 59 base_size 4 bottom_border 50 top_border 50 right_border 50 left_border 50 }
+		
+	
+		
+
+	else
+
+		create_land { terrain_type SNOW land_position 30 50 land_percent 10 base_size 18 assign_to_player 1 }
+		create_land { terrain_type SNOW land_position 70 50 land_percent 10 base_size 18 assign_to_player 2 }
+
+		/* woodlines for players */
+		create_land { terrain_type FOREST land_position 21 59 base_size 4 bottom_border 50 top_border 50 right_border 50 left_border 50 }
+		create_land { terrain_type FOREST land_position 21 41 base_size 4 bottom_border 50 top_border 50 right_border 50 left_border 50 }
+
+		create_land { terrain_type FOREST land_position 79 41 base_size 4 bottom_border 50 top_border 50 right_border 50 left_border 50 }
+		create_land { terrain_type FOREST land_position 79 59 base_size 4 bottom_border 50 top_border 50 right_border 50 left_border 50 }
+		
+		/* exit points from city */
+
+		create_land { terrain_type EXIT_PLACEHOLDER land_position 9 50 land_percent 0 base_size 1 left_border 20 right_border 20 bottom_border 20 top_border 20 land_id 56 }
+		create_land { terrain_type EXIT_PLACEHOLDER land_position 91 50 land_percent 0 base_size 1 left_border 20 right_border 20 bottom_border 20 top_border 20 land_id 54 }
+
+
+	
+	endif
+	
+	/* clear out some space behind the player's base to expand past outer walls */
+	create_land { terrain_type DARK_GRAVEL base_size 2 land_percent 0 land_position 1 35 land_id 202 }
+	create_land { terrain_type DARK_GRAVEL base_size 2 land_percent 0 land_position 1 30 land_id 202 }
+	
+	create_land { terrain_type DARK_GRAVEL base_size 2 land_percent 0 land_position 2 35 land_id 202 }
+	create_land { terrain_type DARK_GRAVEL base_size 2 land_percent 0 land_position 3 40 land_id 202 }
+	create_land { terrain_type DARK_GRAVEL base_size 2 land_percent 0 land_position 5 45 land_id 202 }
+	create_land { terrain_type DARK_GRAVEL base_size 2 land_percent 0 land_position 5 50 land_id 202 }
+	create_land { terrain_type DARK_GRAVEL base_size 2 land_percent 0 land_position 5 55 land_id 202 }
+	create_land { terrain_type DARK_GRAVEL base_size 2 land_percent 0 land_position 3 60 land_id 202 }
+	create_land { terrain_type DARK_GRAVEL base_size 2 land_percent 0 land_position 2 65 land_id 202 }
+	
+	create_land { terrain_type DARK_GRAVEL base_size 2 land_percent 0 land_position 1 55 land_id 202 }
+	create_land { terrain_type DARK_GRAVEL base_size 2 land_percent 0 land_position 1 45 land_id 202 }
+	create_land { terrain_type DARK_GRAVEL base_size 2 land_percent 0 land_position 1 40 land_id 202 }
+	create_land { terrain_type DARK_GRAVEL base_size 2 land_percent 0 land_position 1 50 land_id 202 }
+	create_land { terrain_type DARK_GRAVEL base_size 2 land_percent 0 land_position 1 65 land_id 202 }
+	create_land { terrain_type DARK_GRAVEL base_size 2 land_percent 0 land_position 1 70 land_id 202 }
+
+	
+	create_land { terrain_type DARK_GRAVEL base_size 2 land_percent 0 land_position 99 35 land_id 202 }
+	create_land { terrain_type DARK_GRAVEL base_size 2 land_percent 0 land_position 99 30 land_id 202 }
+	
+	create_land { terrain_type DARK_GRAVEL base_size 2 land_percent 0 land_position 97 35 land_id 202 }
+	create_land { terrain_type DARK_GRAVEL base_size 2 land_percent 0 land_position 96 40 land_id 202 }
+	create_land { terrain_type DARK_GRAVEL base_size 2 land_percent 0 land_position 95 45 land_id 202 }
+	create_land { terrain_type DARK_GRAVEL base_size 2 land_percent 0 land_position 95 50 land_id 202 }
+	create_land { terrain_type DARK_GRAVEL base_size 2 land_percent 0 land_position 95 55 land_id 202 }
+	create_land { terrain_type DARK_GRAVEL base_size 2 land_percent 0 land_position 97 60 land_id 202 }
+	create_land { terrain_type DARK_GRAVEL base_size 2 land_percent 0 land_position 98 65 land_id 202 }
+	
+	create_land { terrain_type DARK_GRAVEL base_size 2 land_percent 0 land_position 99 55 land_id 202 }
+	create_land { terrain_type DARK_GRAVEL base_size 2 land_percent 0 land_position 99 45 land_id 202 }
+	create_land { terrain_type DARK_GRAVEL base_size 2 land_percent 0 land_position 99 40 land_id 202 }
+	create_land { terrain_type DARK_GRAVEL base_size 2 land_percent 0 land_position 99 50 land_id 202 }
+	create_land { terrain_type DARK_GRAVEL base_size 2 land_percent 0 land_position 99 65 land_id 202 }
+	create_land { terrain_type DARK_GRAVEL base_size 2 land_percent 0 land_position 99 70 land_id 202 }
+
+	
+	
+	
+	
+	/* small housing sections */
+
+	create_land { terrain_type HOUSE_PLACEHOLDER land_position 20 20 base_size 8 bottom_border 50 top_border 50 right_border 50 left_border 50 land_id 40 }
+	create_land { terrain_type HOUSE_PLACEHOLDER land_position 80 20 base_size 8 bottom_border 50 top_border 50 right_border 50 left_border 50 land_id 40 }
+	create_land { terrain_type HOUSE_PLACEHOLDER land_position 80 80 base_size 8 bottom_border 50 top_border 50 right_border 50 left_border 50 land_id 40 }
+	create_land { terrain_type HOUSE_PLACEHOLDER land_position 20 80 base_size 8 bottom_border 50 top_border 50 right_border 50 left_border 50 land_id 40 }
+
+
+	create_land { terrain_type SGARDEN_PLACEHOLDER land_position 50 80 base_size 10 bottom_border 50 top_border 50 right_border 50 left_border 50 land_id 30 }
+	create_land { terrain_type NGARDEN_PLACEHOLDER land_position 50 20 base_size 10 bottom_border 50 top_border 50 right_border 50 left_border 50 land_id 35 }
+	
+	
+	/* exit points from city */
+	create_land { terrain_type EXIT_PLACEHOLDER land_position 50 8 land_percent 0 base_size 1 left_border 20 right_border 20 bottom_border 20 top_border 20 land_id 50 }
+	create_land { terrain_type EXIT_PLACEHOLDER land_position 50 92 land_percent 0 base_size 1 left_border 20 right_border 20 bottom_border 20 top_border 20 land_id 52 }
+
+
+elseif LAYOUT_B
+
+	if ALT_LAYOUT
+		create_land { terrain_type SNOW land_position 25 25 land_percent 10 base_size 18 assign_to_player 1 }
+		create_land { terrain_type SNOW land_position 75 75 land_percent 10 base_size 18 assign_to_player 2 }
+
+		/* woodlines for players */
+		create_land { terrain_type FOREST land_position 16 34 base_size 4 bottom_border 50 top_border 50 right_border 50 left_border 50 }
+		create_land { terrain_type FOREST land_position 16 16 base_size 4 bottom_border 50 top_border 50 right_border 50 left_border 50 }
+
+		create_land { terrain_type FOREST land_position 84 66 base_size 4 bottom_border 50 top_border 50 right_border 50 left_border 50 }
+		create_land { terrain_type FOREST land_position 84 84 base_size 4 bottom_border 50 top_border 50 right_border 50 left_border 50 }
+
+	else
+		create_land { terrain_type SNOW land_position 30 30 land_percent 10 base_size 18 assign_to_player 1 }
+		create_land { terrain_type SNOW land_position 70 70 land_percent 10 base_size 18 assign_to_player 2 }
+
+
+		/* woodlines for players */
+		create_land { terrain_type FOREST land_position 21 39 base_size 4 bottom_border 50 top_border 50 right_border 50 left_border 50 }
+		create_land { terrain_type FOREST land_position 21 21 base_size 4 bottom_border 50 top_border 50 right_border 50 left_border 50 }
+
+		create_land { terrain_type FOREST land_position 79 62 base_size 4 bottom_border 50 top_border 50 right_border 50 left_border 50 }
+		create_land { terrain_type FOREST land_position 79 79 base_size 4 bottom_border 50 top_border 50 right_border 50 left_border 50 }
+
+	endif
+
+	
+	/* exit points from city */
+	create_land { terrain_type EXIT_PLACEHOLDER land_position 50 8 land_percent 0 base_size 1 left_border 20 right_border 20 bottom_border 20 top_border 20 land_id 50 }
+	create_land { terrain_type EXIT_PLACEHOLDER land_position 50 92 land_percent 0 base_size 1 left_border 20 right_border 20 bottom_border 20 top_border 20 land_id 52 }
+	create_land { terrain_type EXIT_PLACEHOLDER land_position 9 50 land_percent 0 base_size 1 left_border 20 right_border 20 bottom_border 20 top_border 20 land_id 56 }
+	create_land { terrain_type EXIT_PLACEHOLDER land_position 91 50 land_percent 0 base_size 1 left_border 20 right_border 20 bottom_border 20 top_border 20 land_id 54 }
+
+
+	create_land { terrain_type HOUSE_PLACEHOLDER land_position 80 20 base_size 8 bottom_border 50 top_border 50 right_border 50 left_border 50 land_id 40 }
+	create_land { terrain_type HOUSE_PLACEHOLDER land_position 20 80 base_size 8 bottom_border 50 top_border 50 right_border 50 left_border 50 land_id 40 }
+
+	create_land { terrain_type NGARDEN_PLACEHOLDER land_position 60 40 base_size 10 bottom_border 50 top_border 50 right_border 50 left_border 50 land_id 35 }
+	create_land { terrain_type SGARDEN_PLACEHOLDER land_position 40 60 base_size 10 bottom_border 50 top_border 50 right_border 50 left_border 50 land_id 30 }
+
+
+elseif LAYOUT_C
+	if ALT_LAYOUT
+
+		create_land { terrain_type SNOW land_position 50 22 land_percent 10 base_size 17 assign_to_player 1 }
+		create_land { terrain_type SNOW land_position 50 78 land_percent 10 base_size 17 assign_to_player 2 }
+
+		/* woodlines for players */
+		create_land { terrain_type FOREST land_position 41 29 base_size 4 bottom_border 50 top_border 50 right_border 50 left_border 50 }
+		create_land { terrain_type FOREST land_position 59 29 base_size 4 bottom_border 50 top_border 50 right_border 50 left_border 50 }
+
+		create_land { terrain_type FOREST land_position 41 72 base_size 4 bottom_border 50 top_border 50 right_border 50 left_border 50 }
+		create_land { terrain_type FOREST land_position 59 72 base_size 4 bottom_border 50 top_border 50 right_border 50 left_border 50 }
+		
+		create_land { terrain_type EXIT_PLACEHOLDER land_position 9 50 land_percent 0 base_size 1 left_border 20 right_border 20 bottom_border 20 top_border 20 land_id 56 }
+		create_land { terrain_type EXIT_PLACEHOLDER land_position 91 50 land_percent 0 base_size 1 left_border 20 right_border 20 bottom_border 20 top_border 20 land_id 54 }
+
+
+
+	else
+		create_land { terrain_type SNOW land_position 50 30 land_percent 10 base_size 18 assign_to_player 1 }
+		create_land { terrain_type SNOW land_position 50 70 land_percent 10 base_size 18 assign_to_player 2 }
+
+
+		/* woodlines for players */
+		create_land { terrain_type FOREST land_position 41 21 base_size 4 bottom_border 50 top_border 50 right_border 50 left_border 50 }
+		create_land { terrain_type FOREST land_position 59 21 base_size 4 bottom_border 50 top_border 50 right_border 50 left_border 50 }
+
+		create_land { terrain_type FOREST land_position 41 79 base_size 4 bottom_border 50 top_border 50 right_border 50 left_border 50 }
+		create_land { terrain_type FOREST land_position 59 79 base_size 4 bottom_border 50 top_border 50 right_border 50 left_border 50 }
+		
+		/* exit points from city */
+		create_land { terrain_type EXIT_PLACEHOLDER land_position 50 8 land_percent 0 base_size 1 left_border 20 right_border 20 bottom_border 20 top_border 20 land_id 50 }
+		create_land { terrain_type EXIT_PLACEHOLDER land_position 50 92 land_percent 0 base_size 1 left_border 20 right_border 20 bottom_border 20 top_border 20 land_id 52 }
+		create_land { terrain_type EXIT_PLACEHOLDER land_position 9 50 land_percent 0 base_size 1 left_border 20 right_border 20 bottom_border 20 top_border 20 land_id 56 }
+		create_land { terrain_type EXIT_PLACEHOLDER land_position 91 50 land_percent 0 base_size 1 left_border 20 right_border 20 bottom_border 20 top_border 20 land_id 54 }
+
+
+	endif
+	
+	
+	/* small housing sections */
+	create_land { terrain_type HOUSE_PLACEHOLDER land_position 20 20 base_size 8 bottom_border 50 top_border 50 right_border 50 left_border 50 land_id 40 }
+	create_land { terrain_type HOUSE_PLACEHOLDER land_position 80 20 base_size 8 bottom_border 50 top_border 50 right_border 50 left_border 50 land_id 40 }
+	create_land { terrain_type HOUSE_PLACEHOLDER land_position 80 80 base_size 8 bottom_border 50 top_border 50 right_border 50 left_border 50 land_id 40 }
+	create_land { terrain_type HOUSE_PLACEHOLDER land_position 20 80 base_size 8 bottom_border 50 top_border 50 right_border 50 left_border 50 land_id 40 }
+
+
+
+	create_land { terrain_type SGARDEN_PLACEHOLDER land_position 20 50 base_size 10 bottom_border 50 top_border 50 right_border 50 left_border 50 land_id 30 }
+	create_land { terrain_type NGARDEN_PLACEHOLDER land_position 80 50 base_size 10 bottom_border 50 top_border 50 right_border 50 left_border 50 land_id 35 }
+
+
+elseif LAYOUT_D
+
+	if ALT_LAYOUT
+		create_land { terrain_type SNOW land_position 75 25 land_percent 10 base_size 18 assign_to_player 1 }
+		create_land { terrain_type SNOW land_position 25 75 land_percent 10 base_size 18 assign_to_player 2 }
+
+		/* woodlines for players */
+		create_land { terrain_type FOREST land_position 16 84 base_size 4 bottom_border 50 top_border 50 right_border 50 left_border 50 }
+		create_land { terrain_type FOREST land_position 16 66 base_size 4 bottom_border 50 top_border 50 right_border 50 left_border 50 }
+
+		create_land { terrain_type FOREST land_position 84 16 base_size 4 bottom_border 50 top_border 50 right_border 50 left_border 50 }
+		create_land { terrain_type FOREST land_position 84 34 base_size 4 bottom_border 50 top_border 50 right_border 50 left_border 50 }
+
+
+
+	else
+		create_land { terrain_type SNOW land_position 70 30 land_percent 10 base_size 18 assign_to_player 1 }
+		create_land { terrain_type SNOW land_position 30 70 land_percent 10 base_size 18 assign_to_player 2 }
+
+
+
+		/* woodlines for players */
+		create_land { terrain_type FOREST land_position 21 79 base_size 4 bottom_border 50 top_border 50 right_border 50 left_border 50 }
+		create_land { terrain_type FOREST land_position 21 61 base_size 4 bottom_border 50 top_border 50 right_border 50 left_border 50 }
+
+		create_land { terrain_type FOREST land_position 79 21 base_size 4 bottom_border 50 top_border 50 right_border 50 left_border 50 }
+		create_land { terrain_type FOREST land_position 79 39 base_size 4 bottom_border 50 top_border 50 right_border 50 left_border 50 }
+		
+	endif
+
+		
+	/* exit points from city */
+	create_land { terrain_type EXIT_PLACEHOLDER land_position 50 8 land_percent 0 base_size 1 left_border 20 right_border 20 bottom_border 20 top_border 20 land_id 50 }
+	create_land { terrain_type EXIT_PLACEHOLDER land_position 50 92 land_percent 0 base_size 1 left_border 20 right_border 20 bottom_border 20 top_border 20 land_id 52 }
+	create_land { terrain_type EXIT_PLACEHOLDER land_position 9 50 land_percent 0 base_size 1 left_border 20 right_border 20 bottom_border 20 top_border 20 land_id 56 }
+	create_land { terrain_type EXIT_PLACEHOLDER land_position 91 50 land_percent 0 base_size 1 left_border 20 right_border 20 bottom_border 20 top_border 20 land_id 54 }
+	
+	create_land { terrain_type HOUSE_PLACEHOLDER land_position 45 20 base_size 8 bottom_border 50 top_border 50 right_border 50 left_border 50 land_id 40 }
+	create_land { terrain_type HOUSE_PLACEHOLDER land_position 55 80 base_size 8 bottom_border 50 top_border 50 right_border 50 left_border 50 land_id 40 }
+	
+	create_land { terrain_type HOUSE_PLACEHOLDER land_position 25 45 base_size 8 bottom_border 50 top_border 50 right_border 50 left_border 50 land_id 40 }
+	create_land { terrain_type HOUSE_PLACEHOLDER land_position 75 55 base_size 8 bottom_border 50 top_border 50 right_border 50 left_border 50 land_id 40 }
+
+	create_land { terrain_type SGARDEN_PLACEHOLDER land_position 23 23 base_size 10 bottom_border 50 top_border 50 right_border 50 left_border 50 land_id 30 }
+	create_land { terrain_type NGARDEN_PLACEHOLDER land_position 75 75 base_size 10 bottom_border 50 top_border 50 right_border 50 left_border 50 land_id 35 }
+
+
+
+/* setups for anything that isnt a 1v1 */
+else
+/* exit points from city */
+create_land { terrain_type EXIT_PLACEHOLDER land_position 50 8 land_percent 0 base_size 1 left_border 20 right_border 20 bottom_border 20 top_border 20 land_id 50 }
+create_land { terrain_type EXIT_PLACEHOLDER land_position 50 92 land_percent 0 base_size 1 left_border 20 right_border 20 bottom_border 20 top_border 20 land_id 52 }
+create_land { terrain_type EXIT_PLACEHOLDER land_position 91 50 land_percent 0 base_size 1 left_border 20 right_border 20 bottom_border 20 top_border 20 land_id 54 }
+create_land { terrain_type EXIT_PLACEHOLDER land_position 9 50 land_percent 0 base_size 1 left_border 20 right_border 20 bottom_border 20 top_border 20 land_id 56 }
+
+
+	if 4_PLAYER_GAME
+		
+		start_random
+		
+		percent_chance 50
+		
+			create_land { terrain_type SNOW land_position 22 50 land_percent 10 base_size 18 assign_to AT_TEAM 1 0 0 }
+			create_land { terrain_type SNOW land_position 50 78 land_percent 10 base_size 18 assign_to AT_TEAM 1 0 0 }
+
+			create_land { terrain_type SNOW land_position 50 22 land_percent 10 base_size 18 assign_to AT_TEAM -1 0 0 }
+			create_land { terrain_type SNOW land_position 78 50 land_percent 10 base_size 18 assign_to AT_TEAM -1 0 0 }
+
+			/* woodlines for players */
+			create_land { terrain_type FOREST land_position 16 44 base_size 4 bottom_border 50 top_border 50 right_border 50 left_border 50 }
+			create_land { terrain_type FOREST land_position 16 57 base_size 4 bottom_border 50 top_border 50 right_border 50 left_border 50 }
+
+			create_land { terrain_type FOREST land_position 84 44 base_size 4 bottom_border 50 top_border 50 right_border 50 left_border 50 }
+			create_land { terrain_type FOREST land_position 84 57 base_size 4 bottom_border 50 top_border 50 right_border 50 left_border 50 }
+			
+			
+			create_land { terrain_type FOREST land_position 44 84 base_size 4 bottom_border 50 top_border 50 right_border 50 left_border 50 }
+			create_land { terrain_type FOREST land_position 57 84 base_size 4 bottom_border 50 top_border 50 right_border 50 left_border 50 }
+
+			create_land { terrain_type FOREST land_position 44 16 base_size 4 bottom_border 50 top_border 50 right_border 50 left_border 50 }
+			create_land { terrain_type FOREST land_position 57 16 base_size 4 bottom_border 50 top_border 50 right_border 50 left_border 50 }
+			
+		percent_chance 50
+			
+			create_land { terrain_type SNOW land_position 28 50 land_percent 10 base_size 18 assign_to AT_TEAM 1 0 0 }
+			create_land { terrain_type SNOW land_position 50 72 land_percent 10 base_size 18 assign_to AT_TEAM 1 0 0 }
+
+			create_land { terrain_type SNOW land_position 50 28 land_percent 10 base_size 18 assign_to AT_TEAM -1 0 0 }
+			create_land { terrain_type SNOW land_position 72 50 land_percent 10 base_size 18 assign_to AT_TEAM -1 0 0 }
+
+			/* woodlines for players */
+			create_land { terrain_type FOREST land_position 22 44 base_size 4 bottom_border 50 top_border 50 right_border 50 left_border 50 }
+			create_land { terrain_type FOREST land_position 22 57 base_size 4 bottom_border 50 top_border 50 right_border 50 left_border 50 }
+
+			create_land { terrain_type FOREST land_position 78 44 base_size 4 bottom_border 50 top_border 50 right_border 50 left_border 50 }
+			create_land { terrain_type FOREST land_position 78 57 base_size 4 bottom_border 50 top_border 50 right_border 50 left_border 50 }
+			
+			
+			create_land { terrain_type FOREST land_position 44 78 base_size 4 bottom_border 50 top_border 50 right_border 50 left_border 50 }
+			create_land { terrain_type FOREST land_position 57 78 base_size 4 bottom_border 50 top_border 50 right_border 50 left_border 50 }
+
+			create_land { terrain_type FOREST land_position 44 22 base_size 4 bottom_border 50 top_border 50 right_border 50 left_border 50 }
+			create_land { terrain_type FOREST land_position 57 22 base_size 4 bottom_border 50 top_border 50 right_border 50 left_border 50 }
+		
+
+		end_random
+
+		create_land { terrain_type SGARDEN_PLACEHOLDER land_position 50 50 base_size 14 bottom_border 50 top_border 50 right_border 50 left_border 50 land_id 30 }
+		/* create_land { terrain_type NGARDEN_PLACEHOLDER land_position 80 20 base_size 10 bottom_border 50 top_border 50 right_border 50 left_border 50 land_id 35 } */
+		/* create_land { terrain_type NGARDEN_PLACEHOLDER land_position 20 80 base_size 10 bottom_border 50 top_border 50 right_border 50 left_border 50 land_id 35 } */
+		create_land { terrain_type HOUSE_PLACEHOLDER land_position 80 20 base_size 8 bottom_border 50 top_border 50 right_border 50 left_border 50 land_id 40 }
+		create_land { terrain_type HOUSE_PLACEHOLDER land_position 20 80 base_size 8 bottom_border 50 top_border 50 right_border 50 left_border 50 land_id 40 }
+		
+		create_land { terrain_type HOUSE_PLACEHOLDER land_position 20 20 base_size 8 bottom_border 50 top_border 50 right_border 50 left_border 50 land_id 40 }
+		create_land { terrain_type HOUSE_PLACEHOLDER land_position 80 80 base_size 8 bottom_border 50 top_border 50 right_border 50 left_border 50 land_id 40 }
+
+
+
+	elseif 6_PLAYER_GAME
+		if TEAM_POSITIONS
+		/* team 1 */
+		create_land { terrain_type SNOW land_position 70 30 land_percent 10 base_size 18 assign_to AT_COLOR 1 0 0 }
+		create_land { terrain_type SNOW land_position 70 50 land_percent 10 base_size 18 assign_to AT_COLOR 3 0 0 }
+		create_land { terrain_type SNOW land_position 70 70 land_percent 10 base_size 18 assign_to AT_COLOR 5 0 0 }
+
+		/* team 2 */
+		create_land { terrain_type SNOW land_position 30 30 land_percent 10 base_size 18 assign_to AT_COLOR 2 0 0 }
+		create_land { terrain_type SNOW land_position 30 50 land_percent 10 base_size 18 assign_to AT_COLOR 4 0 0 }
+		create_land { terrain_type SNOW land_position 30 70 land_percent 10 base_size 18 assign_to AT_COLOR 6 0 0 }
+
+		else
+
+		/* assign at random if no team positions */
+		create_land { terrain_type SNOW land_position 70 20 land_percent 10 base_size 18 assign_to AT_TEAM -10 0 0 }
+		create_land { terrain_type SNOW land_position 70 50 land_percent 10 base_size 18 assign_to AT_TEAM -10 0 0 }
+		create_land { terrain_type SNOW land_position 70 70 land_percent 10 base_size 18 assign_to AT_TEAM -10 0 0 }
+		create_land { terrain_type SNOW land_position 30 20 land_percent 10 base_size 18 assign_to AT_TEAM -10 0 0 }
+		create_land { terrain_type SNOW land_position 30 50 land_percent 10 base_size 18 assign_to AT_TEAM -10 0 0 }
+		create_land { terrain_type SNOW land_position 30 70 land_percent 10 base_size 18 assign_to AT_TEAM -10 0 0 }
+
+		endif
+
+		create_land { terrain_type SGARDEN_PLACEHOLDER land_position 50 60 base_size 14 bottom_border 50 top_border 50 right_border 50 left_border 50 land_id 30 }
+		create_land { terrain_type NGARDEN_PLACEHOLDER land_position 50 40 base_size 14 bottom_border 50 top_border 50 right_border 50 left_border 50 land_id 35 }
+		
+		create_land { terrain_type HOUSE_PLACEHOLDER land_position 50 80 base_size 8 bottom_border 50 top_border 50 right_border 50 left_border 50 land_id 40 }
+		create_land { terrain_type HOUSE_PLACEHOLDER land_position 50 20 base_size 8 bottom_border 50 top_border 50 right_border 50 left_border 50 land_id 40 }
+
+
+		/* woodlines for players */
+		create_land { terrain_type FOREST land_position 25 35 base_size 4 bottom_border 50 top_border 50 right_border 50 left_border 50 }
+		create_land { terrain_type FOREST land_position 25 25 base_size 4 bottom_border 50 top_border 50 right_border 50 left_border 50 }
+		
+		create_land { terrain_type FOREST land_position 25 55 base_size 4 bottom_border 50 top_border 50 right_border 50 left_border 50 }
+		create_land { terrain_type FOREST land_position 25 45 base_size 4 bottom_border 50 top_border 50 right_border 50 left_border 50 }
+		
+		create_land { terrain_type FOREST land_position 25 65 base_size 4 bottom_border 50 top_border 50 right_border 50 left_border 50 }
+		create_land { terrain_type FOREST land_position 25 75 base_size 4 bottom_border 50 top_border 50 right_border 50 left_border 50 }
+
+		create_land { terrain_type FOREST land_position 75 45 base_size 4 bottom_border 50 top_border 50 right_border 50 left_border 50 }
+		create_land { terrain_type FOREST land_position 75 55 base_size 4 bottom_border 50 top_border 50 right_border 50 left_border 50 }
+		
+		create_land { terrain_type FOREST land_position 75 25 base_size 4 bottom_border 50 top_border 50 right_border 50 left_border 50 }
+		create_land { terrain_type FOREST land_position 75 35 base_size 4 bottom_border 50 top_border 50 right_border 50 left_border 50 }
+		
+		create_land { terrain_type FOREST land_position 75 65 base_size 4 bottom_border 50 top_border 50 right_border 50 left_border 50 }
+		create_land { terrain_type FOREST land_position 75 75 base_size 4 bottom_border 50 top_border 50 right_border 50 left_border 50 }
+
+
+
+	elseif 8_PLAYER_GAME
+		
+		/*2v2v2v2 setup */
+		if 4_TEAM_GAME
+		
+			create_land { terrain_type SNOW land_position 70 20 land_percent 10 base_size 18 assign_to AT_TEAM 1 0 0 }
+			create_land { terrain_type SNOW land_position 70 40 land_percent 10 base_size 18 assign_to AT_TEAM 1 0 0 }
+			create_land { terrain_type SNOW land_position 70 60 land_percent 10 base_size 18 assign_to AT_TEAM 2 0 0 }
+			create_land { terrain_type SNOW land_position 70 80 land_percent 10 base_size 18 assign_to AT_TEAM 2 0 0 }
+			create_land { terrain_type SNOW land_position 30 20 land_percent 10 base_size 18 assign_to AT_TEAM 3 0 0 }
+			create_land { terrain_type SNOW land_position 30 40 land_percent 10 base_size 18 assign_to AT_TEAM 3 0 0 }
+			create_land { terrain_type SNOW land_position 30 60 land_percent 10 base_size 18 assign_to AT_TEAM 4 0 0 }
+			create_land { terrain_type SNOW land_position 30 80 land_percent 10 base_size 18 assign_to AT_TEAM 4 0 0 }
+		
+		
+		/* assign at random for uneven teams, ffa settings */
+
+		elseif UNEVEN_TEAMS
+			create_land { terrain_type SNOW land_position 70 20 land_percent 10 base_size 18 assign_to AT_TEAM -10 0 0 }
+			create_land { terrain_type SNOW land_position 70 50 land_percent 10 base_size 18 assign_to AT_TEAM -10 0 0 }
+			create_land { terrain_type SNOW land_position 70 70 land_percent 10 base_size 18 assign_to AT_TEAM -10 0 0 }
+			create_land { terrain_type SNOW land_position 70 80 land_percent 10 base_size 18 assign_to AT_TEAM -10 0 0 }
+			create_land { terrain_type SNOW land_position 30 20 land_percent 10 base_size 18 assign_to AT_TEAM -10 0 0 }
+			create_land { terrain_type SNOW land_position 30 50 land_percent 10 base_size 18 assign_to AT_TEAM -10 0 0 }
+			create_land { terrain_type SNOW land_position 30 70 land_percent 10 base_size 18 assign_to AT_TEAM -10 0 0 }
+			create_land { terrain_type SNOW land_position 30 80 land_percent 10 base_size 18 assign_to AT_TEAM -10 0 0 }
+
+		else
+
+				if TEAM_POSITIONS
+
+					/* team 1 */
+					create_land { terrain_type SNOW land_position 70 20 land_percent 10 base_size 18 assign_to AT_COLOR 1 0 0 }
+					create_land { terrain_type SNOW land_position 70 40 land_percent 10 base_size 18 assign_to AT_COLOR 3 0 0 }
+					create_land { terrain_type SNOW land_position 70 60 land_percent 10 base_size 18 assign_to AT_COLOR 5 0 0 }
+					create_land { terrain_type SNOW land_position 70 80 land_percent 10 base_size 18 assign_to AT_COLOR 7 0 0 }
+
+					/* team 2 */
+					create_land { terrain_type SNOW land_position 30 20 land_percent 10 base_size 18 assign_to AT_COLOR 2 0 0 }
+					create_land { terrain_type SNOW land_position 30 40 land_percent 10 base_size 18 assign_to AT_COLOR 4 0 0 }
+					create_land { terrain_type SNOW land_position 30 60 land_percent 10 base_size 18 assign_to AT_COLOR 6 0 0 }
+					create_land { terrain_type SNOW land_position 30 80 land_percent 10 base_size 18 assign_to AT_COLOR 8 0 0 }
+
+					/* assign at random if no team positions */
+				else
+					create_land { terrain_type SNOW land_position 70 20 land_percent 10 base_size 18 assign_to AT_TEAM -10 0 0 }
+					create_land { terrain_type SNOW land_position 70 50 land_percent 10 base_size 18 assign_to AT_TEAM -10 0 0 }
+					create_land { terrain_type SNOW land_position 70 70 land_percent 10 base_size 18 assign_to AT_TEAM -10 0 0 }
+					create_land { terrain_type SNOW land_position 70 80 land_percent 10 base_size 18 assign_to AT_TEAM -10 0 0 }
+					create_land { terrain_type SNOW land_position 30 20 land_percent 10 base_size 18 assign_to AT_TEAM -10 0 0 }
+					create_land { terrain_type SNOW land_position 30 50 land_percent 10 base_size 18 assign_to AT_TEAM -10 0 0 }
+					create_land { terrain_type SNOW land_position 30 70 land_percent 10 base_size 18 assign_to AT_TEAM -10 0 0 }
+					create_land { terrain_type SNOW land_position 30 80 land_percent 10 base_size 18 assign_to AT_TEAM -10 0 0 }
+
+				endif
+		endif
+	
+	create_land { terrain_type SGARDEN_PLACEHOLDER land_position 50 60 base_size 16 bottom_border 50 top_border 50 right_border 50 left_border 50 land_id 30 }
+	create_land { terrain_type NGARDEN_PLACEHOLDER land_position 50 40 base_size 16 bottom_border 50 top_border 50 right_border 50 left_border 50 land_id 35 }
+	
+	create_land { terrain_type HOUSE_PLACEHOLDER land_position 50 20 base_size 8 bottom_border 50 top_border 50 right_border 50 left_border 50 land_id 40 }
+	create_land { terrain_type HOUSE_PLACEHOLDER land_position 50 80 base_size 8 bottom_border 50 top_border 50 right_border 50 left_border 50 land_id 40 }
+
+	/* woodlines for players */
+	create_land { terrain_type FOREST land_position 25 85 base_size 4 bottom_border 50 top_border 50 right_border 50 left_border 50 }
+	create_land { terrain_type FOREST land_position 25 75 base_size 4 bottom_border 50 top_border 50 right_border 50 left_border 50 }
+	
+	create_land { terrain_type FOREST land_position 25 55 base_size 4 bottom_border 50 top_border 50 right_border 50 left_border 50 }
+	create_land { terrain_type FOREST land_position 25 65 base_size 4 bottom_border 50 top_border 50 right_border 50 left_border 50 }
+	
+	create_land { terrain_type FOREST land_position 25 45 base_size 4 bottom_border 50 top_border 50 right_border 50 left_border 50 }
+	create_land { terrain_type FOREST land_position 25 35 base_size 4 bottom_border 50 top_border 50 right_border 50 left_border 50 }
+	
+	create_land { terrain_type FOREST land_position 25 25 base_size 4 bottom_border 50 top_border 50 right_border 50 left_border 50 }
+	create_land { terrain_type FOREST land_position 25 15 base_size 4 bottom_border 50 top_border 50 right_border 50 left_border 50 }
+	
+	create_land { terrain_type FOREST land_position 75 25 base_size 4 bottom_border 50 top_border 50 right_border 50 left_border 50 }
+	create_land { terrain_type FOREST land_position 75 15 base_size 4 bottom_border 50 top_border 50 right_border 50 left_border 50 }
+	
+	create_land { terrain_type FOREST land_position 75 45 base_size 4 bottom_border 50 top_border 50 right_border 50 left_border 50 }
+	create_land { terrain_type FOREST land_position 75 35 base_size 4 bottom_border 50 top_border 50 right_border 50 left_border 50 }
+	
+	create_land { terrain_type FOREST land_position 75 55 base_size 4 bottom_border 50 top_border 50 right_border 50 left_border 50 }
+	create_land { terrain_type FOREST land_position 75 65 base_size 4 bottom_border 50 top_border 50 right_border 50 left_border 50 }
+	
+	create_land { terrain_type FOREST land_position 75 85 base_size 4 bottom_border 50 top_border 50 right_border 50 left_border 50 }
+	create_land { terrain_type FOREST land_position 75 75 base_size 4 bottom_border 50 top_border 50 right_border 50 left_border 50 }
+	
+	endif
+endif
+
+
+
+/* for markets */
+ 
+create_land { terrain_type GRASS land_position 1 1 base_size 3 land_percent 0 land_id 99 }
+create_land { terrain_type GRASS land_position 99 99 base_size 3 land_percent 0 land_id 99 }
+create_land { terrain_type GRASS land_position 1 99 base_size 3 land_percent 0 land_id 99 }
+create_land { terrain_type GRASS land_position 99 1 base_size 3 land_percent 0 land_id 99 }
+
+
+
+/* for random city buildings outside the outer walls */
+
+/* universities */
+create_land { terrain_type DARK_GRAVEL base_size 4 land_percent 0 land_position rnd(50,90) 99 land_id 101 }
+create_land { terrain_type DARK_GRAVEL base_size 4 land_percent 0 land_position rnd(10,30) 99 land_id 101 }
+create_land { terrain_type DARK_GRAVEL base_size 4 land_percent 0 land_position rnd(10,30) 1 land_id 101 }
+create_land { terrain_type DARK_GRAVEL base_size 4 land_percent 0 land_position rnd(50,90) 1 land_id 101 }
+
+
+/* blacksmiths */
+create_land { terrain_type DARK_GRAVEL base_size 3 land_percent 0 land_position 99 rnd(10,40) land_id 102 }
+create_land { terrain_type DARK_GRAVEL base_size 3 land_percent 0 land_position 1 rnd(60,90) land_id 102 }
+create_land { terrain_type DARK_GRAVEL base_size 3 land_percent 0 land_position 99 rnd(60,90) land_id 102 }
+create_land { terrain_type DARK_GRAVEL base_size 3 land_percent 0 land_position 1 rnd(10,40) land_id 102 }
+
+/* monasteries */
+create_land { terrain_type DARK_GRAVEL base_size 3 land_percent 0 land_position 99 rnd(60,90) land_id 103 }
+create_land { terrain_type DARK_GRAVEL base_size 3 land_percent 0 land_position 1 rnd(10,60) land_id 103 }
+
+
+if 1V1
+/* for center between 2 players */
+create_land { terrain_type DIRT_SNOW land_position 50 50 base_size 1 land_percent 0 land_id 120 }
+
+endif
+
+
+
+<TERRAIN_GENERATION>
+
+create_terrain DIRT2 { base_terrain NGARDEN_PLACEHOLDER  land_percent 100 spacing_to_other_terrain_types 1 }
+create_terrain GRASS3 { base_terrain DIRT2 land_percent 10 terrain_mask 2 number_of_clumps 10 set_scale_by_size }
+create_terrain DLC_ROCK { base_terrain NGARDEN_PLACEHOLDER land_percent 10 number_of_clumps 20 set_scale_by_size }
+
+create_terrain GRASS2 { base_terrain SGARDEN_PLACEHOLDER spacing_to_other_terrain_types 1 land_percent 100 }
+create_terrain DIRT { base_terrain GRASS2 land_percent 10 terrain_mask 1 number_of_clumps 10 set_scale_by_size }
+create_terrain DLC_ROCK { base_terrain SGARDEN_PLACEHOLDER land_percent 10 number_of_clumps 100 set_scale_by_size }
+
+
+create_terrain ROCK1 {
+	base_terrain DESERT
+	terrain_mask 1
+	land_percent 100
+	number_of_clumps 500
+}
+
+create_terrain DIRT3 { base_terrain HOUSE_PLACEHOLDER land_percent 100 number_of_clumps 500 set_scale_by_size }
+create_terrain ROAD2 { base_terrain DIRT3 land_percent 10 number_of_clumps 10 terrain_mask 1 set_scale_by_size }
+
+
+create_terrain GRASS3 { base_terrain ROAD spacing_to_other_terrain_types 2 land_percent 100 }
+
+
+
+create_terrain VDARK_GRAVEL { base_terrain SNOW land_percent 50 number_of_clumps 9000 spacing_to_other_terrain_types 1 }
+/* create_terrain ROAD2 { base_terrain VDARK_GRAVEL land_percent 10 number_of_clumps 100 terrain_mask 1 } */
+create_terrain DLC_DRYGRASS { base_terrain SNOW land_percent 70 number_of_clumps 9000 }
+create_terrain DLC_DRYGRASS { base_terrain SNOW land_percent 70 number_of_clumps 9000 }
+/* create_terrain GRASS2 { base_terrain VDARK_GRAVEL land_percent 8 number_of_clumps 10 terrain_mask 1 clumping_factor 5 } */
+
+create_terrain GRASS3 { base_terrain ROAD2 land_percent 10 number_of_clumps 500 terrain_mask 2 }
+
+create_terrain ROAD { base_terrain ROCK1 land_percent 20 number_of_clumps 400 spacing_to_other_terrain_types 4 }
+create_terrain GRASS { base_terrain ROCK1 land_percent 20 number_of_clumps 400 }
+create_terrain ROCK1 { base_terrain ROAD land_percent 20 number_of_clumps 400 terrain_mask 2 }
+
+create_terrain GRAVEL { base_terrain ROCK1 land_percent 20 terrain_mask 1 number_of_clumps 30 clumping_factor 20  }
+
+create_terrain GRAVEL { base_terrain EXIT_PLACEHOLDER land_percent 20 number_of_clumps 500 }
+
+
+create_terrain GRAVEL { base_terrain DIRT_SNOW land_percent 20 number_of_clumps 500 }
+
+<OBJECTS_GENERATION>
+
+create_object TOWN_CENTER 
+{
+	set_place_for_every_player
+	max_distance_to_players 0
+}
+
+create_object VILLAGER {
+	set_place_for_every_player
+	set_loose_grouping
+	min_distance_to_players 5
+	max_distance_to_players 10
+}
+
+create_object SCOUT {
+	set_place_for_every_player
+	set_loose_grouping
+	min_distance_to_players 5
+	max_distance_to_players 10
+}
+/* stragglers */
+create_object DLC_AFRICANBUSH
+{
+	set_place_for_every_player
+	min_distance_to_players 5
+	max_distance_to_players 8
+	number_of_groups 4
+	set_gaia_object_only
+	set_circular_placement
+	
+}
+
+if REGICIDE
+
+create_object KING {
+	set_place_for_every_player
+	min_distance_to_players 5
+	max_distance_to_players 12
+}
+
+
+endif
+
+/* starting res */
+
+create_object FORAGE { set_place_for_every_player min_distance_to_players 10 max_distance_to_players 15 find_closest number_of_objects 6 number_of_groups 1 set_tight_grouping set_gaia_object_only group_placement_radius 1 }
+create_object STONE { set_place_for_every_player min_distance_to_players 10 max_distance_to_players 15 find_closest number_of_objects 4 number_of_groups 1 set_tight_grouping set_gaia_object_only min_distance_group_placement 2 }
+create_object GOLD { set_place_for_every_player min_distance_to_players 10 max_distance_to_players 15 find_closest number_of_objects 4 number_of_groups 2 set_tight_grouping set_gaia_object_only min_distance_group_placement 2 }
+create_object SHEEP { set_place_for_every_player min_distance_to_players 5 max_distance_to_players 10 find_closest number_of_objects 2 number_of_groups 4 set_tight_grouping set_gaia_object_only temp_min_distance_group_placement 8 }
+create_object DEER { set_place_for_every_player min_distance_to_players 10 max_distance_to_players 18 find_closest number_of_objects 3 number_of_groups 1 set_loose_grouping set_gaia_object_only temp_min_distance_group_placement 5 avoid_forest_zone 4 }
+create_object BOAR { set_place_for_every_player min_distance_to_players 10 max_distance_to_players 15 find_closest number_of_objects 1 number_of_groups 2 set_loose_grouping set_gaia_object_only temp_min_distance_group_placement 5 }
+
+
+create_object WALL	{
+	min_distance_to_players 16
+	max_distance_to_players 16
+	set_place_for_every_player
+	actor_area 200
+	actor_area_radius 2
+}
+create_object ON_GRID { find_closest set_tight_grouping set_gaia_object_only actor_area 100 actor_area_radius 5 place_on_specific_land_id 50 }
+create_object ON_GRID { find_closest set_tight_grouping set_gaia_object_only actor_area 100 actor_area_radius 5 place_on_specific_land_id 52 }
+create_object ON_GRID { find_closest set_tight_grouping set_gaia_object_only actor_area 100 actor_area_radius 5 place_on_specific_land_id 54 }
+create_object ON_GRID { find_closest set_tight_grouping set_gaia_object_only actor_area 100 actor_area_radius 5 place_on_specific_land_id 56 }
+
+create_object IND_MARKET { set_gaia_object_only set_gaia_unconvertible place_on_specific_land_id 99 find_closest actor_area 701 actor_area_radius 4 }
+
+
+if 1V1
+	create_object WALL
+	{
+		terrain_to_place_on DESERT
+		number_of_objects 9999
+		set_scaling_to_map_size
+		set_gaia_object_only
+		set_gaia_unconvertible
+		actor_area 300
+		actor_area_radius 2
+		avoid_actor_area 100
+		min_distance_to_map_edge 10
+	}
+
+	/* bushes curated by the imperial palace, extra wood on them */
+	create_object DLC_AFRICANBUSH
+	{
+		terrain_to_place_on DESERT
+		number_of_objects 9999
+		set_scaling_to_map_size
+		set_gaia_object_only
+		actor_area_to_place_in 300
+		actor_area 300
+		actor_area_radius 2
+		avoid_actor_area 100
+		resource_delta 200
+		actor_area 601
+		actor_area_radius 4
+		
+	}
+
+
+	create_object WALL
+	{
+		terrain_to_place_on DESERT
+		number_of_objects 9999
+		set_scaling_to_map_size
+		set_gaia_object_only
+		set_gaia_unconvertible
+		actor_area 300
+		actor_area_radius 2
+		avoid_actor_area 100
+		min_distance_to_map_edge 9
+	}
+elseif MAPSIZE_MEDIUM
+	create_object WALL
+	{
+		terrain_to_place_on DESERT
+		number_of_objects 9999
+		set_scaling_to_map_size
+		set_gaia_object_only
+		set_gaia_unconvertible
+		actor_area 300
+		actor_area_radius 2
+		avoid_actor_area 100
+		min_distance_to_map_edge 14
+	}
+
+	/* bushes curated by the imperial palace, extra wood on them */
+	create_object DLC_AFRICANBUSH
+	{
+		terrain_to_place_on DESERT
+		number_of_objects 9999
+		set_scaling_to_map_size
+		set_gaia_object_only
+		actor_area_to_place_in 300
+		actor_area 300
+		actor_area_radius 2
+		avoid_actor_area 100
+		resource_delta 200
+		actor_area 601
+		actor_area_radius 4
+		
+	}
+
+elseif MAPSIZE_NORMAL
+
+	create_object WALL
+	{
+		terrain_to_place_on DESERT
+		number_of_objects 9999
+		set_scaling_to_map_size
+		set_gaia_object_only
+		set_gaia_unconvertible
+		actor_area 300
+		actor_area_radius 2
+		avoid_actor_area 100
+		min_distance_to_map_edge 18
+	}
+
+	/* bushes curated by the imperial palace, extra wood on them */
+	create_object DLC_AFRICANBUSH
+	{
+		terrain_to_place_on DESERT
+		number_of_objects 9999
+		set_scaling_to_map_size
+		set_gaia_object_only
+		actor_area_to_place_in 300
+		actor_area 300
+		actor_area_radius 2
+		avoid_actor_area 100
+		resource_delta 200
+		actor_area 601
+		actor_area_radius 4
+		
+	}
+
+elseif MAPSIZE_LARGE
+	create_object WALL
+	{
+		terrain_to_place_on DESERT
+		number_of_objects 9999
+		set_scaling_to_map_size
+		set_gaia_object_only
+		set_gaia_unconvertible
+		actor_area 300
+		actor_area_radius 2
+		avoid_actor_area 100
+		min_distance_to_map_edge 17
+	}
+
+	/* bushes curated by the imperial palace, extra wood on them */
+	create_object DLC_AFRICANBUSH
+	{
+		terrain_to_place_on DESERT
+		number_of_objects 9999
+		set_scaling_to_map_size
+		set_gaia_object_only
+		actor_area_to_place_in 300
+		actor_area 300
+		actor_area_radius 2
+		avoid_actor_area 100
+		resource_delta 200
+		actor_area 601
+		actor_area_radius 4
+		
+	}
+
+
+endif
+
+/* food garden in south */
+if 1V1
+create_object FORAGE { terrain_to_place_on GRASS2 find_closest number_of_objects 4 number_of_groups 2 set_tight_grouping place_on_specific_land_id 30 set_gaia_object_only min_distance_group_placement 4 }
+create_object DEER { terrain_to_place_on GRASS2 find_closest number_of_objects 3 number_of_groups 3 set_loose_grouping place_on_specific_land_id 30 set_gaia_object_only temp_min_distance_group_placement 4 }
+create_object BOAR { terrain_to_place_on GRASS2 number_of_objects 1 number_of_groups 4 place_on_specific_land_id 30 set_gaia_object_only min_distance_group_placement 3 }
+create_object DLC_DRAGONTREE { terrain_to_place_on GRASS2 number_of_objects 5 number_of_groups 9000  temp_min_distance_group_placement 5 set_tight_grouping set_gaia_object_only }
+
+
+/* mineral garden in north */
+create_object STONE { terrain_to_place_on GRASS3 find_closest number_of_objects 3 number_of_groups 5 set_tight_grouping place_on_specific_land_id 35 set_gaia_object_only temp_min_distance_group_placement 6 }
+
+else
+
+create_object FORAGE { terrain_to_place_on GRASS2 find_closest number_of_objects 4 number_of_groups 2 set_tight_grouping place_on_specific_land_id 30 set_gaia_object_only min_distance_group_placement 4 set_scaling_to_player_number }
+create_object DEER { terrain_to_place_on GRASS2 find_closest number_of_objects 3 number_of_groups 3 set_loose_grouping place_on_specific_land_id 30 set_gaia_object_only temp_min_distance_group_placement 4 set_scaling_to_player_number }
+create_object BOAR { terrain_to_place_on GRASS2 number_of_objects 1 number_of_groups 4 place_on_specific_land_id 30 set_gaia_object_only min_distance_group_placement 3 set_scaling_to_player_number }
+create_object DLC_DRAGONTREE { terrain_to_place_on GRASS2 number_of_objects 5 number_of_groups 9000  temp_min_distance_group_placement 5 set_tight_grouping set_gaia_object_only set_scaling_to_player_number }
+
+/* mineral garden in north */
+create_object STONE { terrain_to_place_on GRASS3 find_closest number_of_objects 3 number_of_groups 5 set_tight_grouping place_on_specific_land_id 35 set_gaia_object_only temp_min_distance_group_placement 6 set_scaling_to_player_number }
+
+endif
+
+create_object SMALL_PAGODA { terrain_to_place_on GRAVEL find_closest set_gaia_object_only place_on_specific_land_id 120 actor_area 501 actor_area_radius 1 }
+create_object ON_GRID { terrain_to_place_on GRAVEL find_closest actor_area_to_place_in 501 second_object RELIC number_of_groups 2 }
+create_object ON_GRID { terrain_to_place_on GRAVEL find_closest actor_area 500 place_on_specific_land_id 120 actor_area_radius 5 }
+
+
+/* neutral gold patches in the middle of house clusters */
+
+create_object ON_GRID { terrain_to_place_on DIRT3 find_closest set_gaia_object_only place_on_specific_land_id 40 second_object RELIC actor_area 500 actor_area_radius 2 }
+
+
+/* additional golds in housing sections to compensate for fewer housing sections */
+if LAYOUT_B
+create_object GOLD { terrain_to_place_on DIRT3 find_closest number_of_objects 4 number_of_groups 2 set_tight_grouping set_gaia_object_only actor_area 400 actor_area_radius 3 place_on_specific_land_id 40 temp_min_distance_group_placement 2 }
+
+	if 2_PLAYER_GAME
+	else
+		/* add stone in gens where north garden doesn't exist */
+		create_object STONE { terrain_to_place_on DIRT3 find_closest number_of_objects 4 set_tight_grouping set_gaia_object_only actor_area_to_place_in 400 place_on_specific_land_id 40 }
+	endif
+
+else
+/* neutral golds in housing sections */
+create_object GOLD { terrain_to_place_on DIRT3 find_closest number_of_objects 4 set_tight_grouping set_gaia_object_only actor_area 400 actor_area_radius 3 place_on_specific_land_id 40 min_distance_group_placement 2 }
+
+
+endif
+
+create_object HOUSE_C { terrain_to_place_on DIRT3 find_closest number_of_objects 9000 set_gaia_object_only temp_min_distance_group_placement 2 set_gaia_unconvertible avoid_actor_area 300 avoid_actor_area 400 avoid_actor_area 500 actor_area 10 actor_area_radius 4 }
+
+/* some small neutral golds */
+create_object GOLD { terrain_to_place_on ROCK1 find_closest number_of_objects 1 number_of_groups 100 set_gaia_object_only temp_min_distance_group_placement 10 avoid_actor_area 300 avoid_actor_area 10 min_distance_to_players 30 }
+
+
+/* add a few extra neutral woodlines */
+create_object FOREST_TREE { terrain_to_place_on GRASS set_gaia_object_only set_tight_grouping number_of_objects 6 number_of_groups 9000 temp_min_distance_group_placement 7 resource_delta 100 avoid_all_actor_areas group_placement_radius 1 }
+
+/* relics */
+
+create_object ON_GRID { terrain_to_place_on GRASS3 find_closest second_object RELIC place_on_specific_land_id 35 }
+
+
+create_object ON_GRID { terrain_to_place_on DARK_GRAVEL place_on_specific_land_id 202 find_closest actor_area 601 actor_area_radius 20 }
+
+/* misc gaia building on outside */
+create_object UNIVERSITY {  terrain_to_place_on DARK_GRAVEL find_closest place_on_specific_land_id 101 set_gaia_object_only set_gaia_unconvertible min_distance_group_placement 3 avoid_actor_area 601 }
+create_object BLACKSMITH { terrain_to_place_on DARK_GRAVEL find_closest place_on_specific_land_id 102 set_gaia_object_only set_gaia_unconvertible min_distance_group_placement 3 avoid_actor_area 601 }
+create_object MONASTERY { terrain_to_place_on DARK_GRAVEL find_closest place_on_specific_land_id 103 set_gaia_object_only set_gaia_unconvertible min_distance_group_placement 3 avoid_actor_area 601 }
+create_object HOUSE_C { terrain_to_place_on DARK_GRAVEL find_closest_to_map_edge number_of_objects 9000 set_gaia_object_only temp_min_distance_group_placement 3 set_gaia_unconvertible avoid_actor_area 300 avoid_actor_area 400 avoid_actor_area 500 avoid_actor_area 601 avoid_actor_area 100 avoid_actor_area 701 }

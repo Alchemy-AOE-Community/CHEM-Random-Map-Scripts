@@ -1,13 +1,13 @@
 /* Based on The Way of Kings by Brandon Sanderson
 Players have retreated to warcamps at the edge of The Shattered Plains, in search of the riches there.
-Two chasmfiends occupy the ravines of the Plains. When killed, they drop a valuable rock to be mined. 
+Two chasmfiends occupy the ravines of the Plains. When killed, they drop a valuable rock to be mined. (not implemented yet)
 Besides mineral riches, the Plains are barren. Rain however seeps down into the crevices below, making the ravines
 a surprisingly fertile ground, with little creatures and edible plants teeming about.
 
 By welcometorapture with feedback from chanchilaru and general scripting help by Marintho
-February 2024
+February 2025
 
-This map can be used in Alchemy competitions and for any content creation related to it, as well as anywhere else, although a discord message is always appreciated.
+This map can be used in Alchemy competitions and for any content creation related to it, as well as anywhere else after season 6, although a discord message is always appreciated.
  */
  /* eyecandy and terrains */
 #const FLAGX 162
@@ -19,16 +19,20 @@ This map can be used in Alchemy competitions and for any content creation relate
 #const ONGRID 1613
 <PLAYER_SETUP>
 behavior_version 1
+random_placement
 ai_info_map_type ARENA 0 0 0
 #const FOREST_FOUNDATION 1639
 #const DRAGONTREE 1051
 #const ACACIATREE 1063
+#const PLACEHOLDERGOLD 647
+#const PLACEHOLDERFOOD 278
 effect_percent SET_ATTRIBUTE FOREST_FOUNDATION ATTR_RADIUS_1 50 /* make it a 1x1 object */
 effect_percent SET_ATTRIBUTE FOREST_FOUNDATION ATTR_RADIUS_2 50 /* make it a 1x1 object */
 effect_amount SET_ATTRIBUTE FLAG_A ATTR_HITPOINTS 0
 effect_amount SET_ATTRIBUTE FLAG_A ATTR_BLOOD_ID 119
 effect_amount SET_ATTRIBUTE FLAG_B ATTR_HITPOINTS 0
 effect_amount SET_ATTRIBUTE FLAG_B ATTR_BLOOD_ID 119
+effect_amount SET_ATTRIBUTE PLACEHOLDERFOOD ATTR_STORAGE_VALUE 0
 /* credit to TechChariot */
 if LOW_RESOURCES
   #const TRADE_CART_ENABLER 161
@@ -50,11 +54,17 @@ endif
 base_terrain DIRT
 create_player_lands {
 	terrain_type DIRT2
-base_size 11
-number_of_tiles 0
-circle_radius 43
+base_size 15
+number_of_tiles 1500
+if 2_PLAYER_GAME
+circle_radius 44 0
+else
+circle_radius 40 0
+endif
 base_elevation 2
 zone 18
+left_border 3 right_border 3 top_border 3 bottom_border 3
+border_fuzziness 0
 }
 
 create_land {
@@ -229,6 +239,16 @@ top_border 27  bottom_border 27 right_border 27 left_border 27
 	base_elevation 2
 }
 create_land {
+	terrain_type DESERT
+	base_size 1
+	number_of_tiles 30
+other_zone_avoidance_distance 5
+clumping_factor 10
+top_border 27  bottom_border 27 right_border 27 left_border 27
+	zone 25
+	base_elevation 2
+}
+create_land {
 	terrain_type DIRTMUD
 land_percent 100
 top_border 29  bottom_border 29 right_border 29 left_border 29
@@ -310,7 +330,146 @@ other_zone_avoidance_distance 10
 	number_of_clumps 3699
 	}
 <TERRAIN_GENERATION>
-
+	/* player woodlines */
+	create_terrain DIRT3
+	{
+	base_terrain DIRT2
+	land_percent 100
+	number_of_clumps 1
+	}
+	create_terrain DLC_DRAGONFOREST
+	{
+	base_terrain DIRT3
+	number_of_tiles 150
+	number_of_clumps 3
+	set_avoid_player_start_areas 15
+	}
+		create_terrain DLC_ACACIAFOREST
+	{
+	base_terrain DIRT3
+	number_of_tiles 75
+	number_of_clumps 1
+	set_avoid_player_start_areas 18
+	}
+	create_terrain DLC_DIRT4 
+	{
+	base_terrain DIRT3
+	land_percent 100
+	number_of_clumps 3699
+	}
+		create_terrain DIRT3
+	{
+	base_terrain DIRT2
+	land_percent 100
+	number_of_clumps 1
+	}
+	create_terrain DLC_DRAGONFOREST
+	{
+	base_terrain DIRT3
+	number_of_tiles 170
+	number_of_clumps 3
+	set_avoid_player_start_areas 16
+	}
+		create_terrain DLC_ACACIAFOREST
+	{
+	base_terrain DIRT3
+	number_of_tiles 75
+	number_of_clumps 1
+	set_avoid_player_start_areas 17
+	}
+		create_terrain DLC_DIRT4 
+	{
+	base_terrain DIRT3
+	land_percent 100
+	number_of_clumps 3699
+	}
+	/* 3-8 player support */
+			create_terrain DIRT3
+	{
+	base_terrain DIRT2
+	land_percent 100
+	number_of_clumps 1
+	}
+	create_terrain DLC_DRAGONFOREST
+	{
+	base_terrain DIRT3
+	number_of_tiles 170
+	number_of_clumps 3
+	set_avoid_player_start_areas 16
+	}
+		create_terrain DLC_ACACIAFOREST
+	{
+	base_terrain DIRT3
+	number_of_tiles 75
+	number_of_clumps 1
+	set_avoid_player_start_areas 17
+	}
+		create_terrain DLC_DIRT4 
+	{
+	base_terrain DIRT3
+	land_percent 100
+	number_of_clumps 3699
+	}
+			create_terrain DIRT3
+	{
+	base_terrain DIRT2
+	land_percent 100
+	number_of_clumps 1
+	}
+	create_terrain DLC_DRAGONFOREST
+	{
+	base_terrain DIRT3
+	number_of_tiles 170
+	number_of_clumps 3
+	set_avoid_player_start_areas 16
+	}
+		create_terrain DLC_ACACIAFOREST
+	{
+	base_terrain DIRT3
+	number_of_tiles 75
+	number_of_clumps 1
+	set_avoid_player_start_areas 17
+	}
+		create_terrain DLC_DIRT4 
+	{
+	base_terrain DIRT3
+	land_percent 100
+	number_of_clumps 3699
+	}
+			create_terrain DIRT3
+	{
+	base_terrain DIRT2
+	land_percent 100
+	number_of_clumps 1
+	}
+	create_terrain DLC_DRAGONFOREST
+	{
+	base_terrain DIRT3
+	number_of_tiles 170
+	number_of_clumps 3
+	set_avoid_player_start_areas 16
+	}
+		create_terrain DLC_ACACIAFOREST
+	{
+	base_terrain DIRT3
+	number_of_tiles 75
+	number_of_clumps 1
+	set_avoid_player_start_areas 17
+	}
+		create_terrain DLC_DIRT4 
+	{
+	base_terrain DIRT3
+	land_percent 100
+	number_of_clumps 3699
+	}
+		/* player terrain  */
+	create_terrain DIRT
+	{
+	base_terrain DLC_DIRT4
+	land_percent 100
+	number_of_clumps 3699
+    terrain_mask 2
+	}
 	/* outer shattered plains */
 	create_terrain DLC_SAVANNAH
 	{
@@ -332,6 +491,7 @@ other_zone_avoidance_distance 10
 	number_of_clumps 10
 	terrain_mask 1
 	}
+
 	/* masking the upper edges of the shattered plains */
 	create_terrain DESERT
 	{
@@ -348,14 +508,7 @@ other_zone_avoidance_distance 10
 	height_limits 1	2
 	}
 
-	 /* player terrain blending  */
-	create_terrain DIRT
-	{
-	base_terrain DIRT2
-	land_percent 100
-	number_of_clumps 3699
-    terrain_mask 2
-	} 
+
 	/* blending the edge of the dirt and Shattered Plains */
 	create_terrain SNOW
 	{
@@ -396,7 +549,7 @@ other_zone_avoidance_distance 10
 		create_terrain DLC_GRAVELBEACH
 	{
 	base_terrain DIRTMUD
-	number_of_tiles 150
+	number_of_tiles 200
 	number_of_clumps 25
 	height_limits 0 0
 	set_scaling_to_player_number
@@ -405,7 +558,7 @@ other_zone_avoidance_distance 10
 	create_terrain DLC_GRAVELBEACH
 	{
 	base_terrain DIRTMUD
-	number_of_tiles 50
+	number_of_tiles 75
 	number_of_clumps 25
 	height_limits 1 2
 	set_scaling_to_player_number
@@ -432,7 +585,7 @@ other_zone_avoidance_distance 10
 	create_terrain DLC_SAVANNAH
 	{
 	base_terrain DIRT
-	number_of_tiles 350
+	number_of_tiles 1000
 	number_of_clumps 25
 	set_scaling_to_player_number
 	terrain_mask 1
@@ -477,6 +630,14 @@ other_zone_avoidance_distance 10
 	spacing_to_other_terrain_types 3
 	set_avoid_player_start_areas 30
 	} 
+	create_terrain DLC_SAVANNAH
+	{
+	base_terrain DESERT
+	land_percent 1
+	number_of_clumps 15
+	set_scaling_to_player_number
+	terrain_mask 1
+	} 
 	
 <OBJECTS_GENERATION>
 /* player objects */
@@ -488,55 +649,6 @@ max_distance_to_players 0
 actor_area 1
 actor_area_radius 2
 
-} 
-
-/* object woodlines */
-
-create_object FOREST_FOUNDATION
-{
-	number_of_groups 2
-	number_of_objects 30
-	temp_min_distance_group_placement 15
-	set_place_for_every_player
-	min_distance_to_players 16
-	max_distance_to_players 17
-	set_gaia_object_only
-	set_circular_placement
-	second_object DRAGONTREE
-	actor_area 11111
-	actor_area_radius 0
-	group_variance 0
-	group_placement_radius 3
-	set_tight_grouping
-}
-create_object FOREST_FOUNDATION
-{
-	number_of_groups 1
-	number_of_objects 75
-	group_variance 0
-	set_place_for_every_player
-	min_distance_to_players 22
-	max_distance_to_players 25
-	set_gaia_object_only
-	set_circular_placement
-	second_object DRAGONTREE
-	actor_area 11112
-	actor_area_radius 10
-	group_placement_radius 7
-}
-create_object FOREST_FOUNDATION
-{
-	number_of_groups 1
-	number_of_objects 75
-	group_variance 0
-	set_place_for_every_player
-	min_distance_to_players 22
-	max_distance_to_players 25
-	set_gaia_object_only
-	set_circular_placement
-	second_object ACACIATREE
-	group_placement_radius 7
-	avoid_actor_area 11112
 } 
 create_object WALL
 {
@@ -638,18 +750,27 @@ create_object FORAGE
 /* stragglers */
 create_object OLIVE_TREE
 {
-  number_of_objects             4
+  number_of_objects             2
   set_gaia_object_only
   set_place_for_every_player
   min_distance_to_players       7
   max_distance_to_players       8
   temp_min_distance_group_placement  2
-  place_on_specific_land_id 1
   set_circular_placement
   actor_area 1214
   actor_area_radius 3
 }
-
+create_object DRAGONTREE
+{
+  number_of_objects             2
+  set_gaia_object_only
+  set_place_for_every_player
+  min_distance_to_players       7
+  max_distance_to_players       8
+  temp_min_distance_group_placement  2
+  set_circular_placement
+  avoid_actor_area 1214
+}
 /* primary gold */
 
 create_object GOLD
@@ -681,6 +802,7 @@ min_distance_to_players 20
 max_distance_to_players 22
 actor_area 12
 actor_area_radius 4
+avoid_forest_zone 2
 }
 /* primary */
 
@@ -720,26 +842,29 @@ create_object DEER
 	min_distance_to_map_edge 3
 }
 /* crevice objects */
-create_object FLAG_A
+create_object PLACEHOLDERFOOD
 {
 terrain_to_place_on DESERT
 number_of_objects 25000
 actor_area 999
 actor_area_radius 1
+temp_min_distance_group_placement 0
 } 
-create_object FLAG_A
+create_object PLACEHOLDERFOOD
 {
 terrain_to_place_on DLC_CRACKED
 number_of_objects 25000
 actor_area 998
 actor_area_radius 1
+temp_min_distance_group_placement 0
 } 
-create_object FLAG_B
+create_object PLACEHOLDERGOLD
 {
 terrain_to_place_on DIRTMUD
 number_of_objects 25000
 actor_area 997
 actor_area_radius 2
+temp_min_distance_group_placement 0
 } 
 create_object DLC_ORANGEBUSH
 {
@@ -815,7 +940,7 @@ avoid_actor_area 998
 create_object DLC_DEADTREE
 {
 terrain_to_place_on DESERT
-number_of_objects 20
+number_of_objects 10
 temp_min_distance_group_placement 8
 set_scaling_to_map_size
 actor_area 5
@@ -824,7 +949,7 @@ actor_area_radius 3
 create_object DLC_DEADTREE
 {
 terrain_to_place_on DESERT
-number_of_objects 20
+number_of_objects 10
 temp_min_distance_group_placement 8
 set_scaling_to_map_size
 avoid_actor_area 5
@@ -854,7 +979,7 @@ create_object STONE
 terrain_to_place_on DLC_CRACKED
 number_of_objects 4
 number_of_groups 3
-temp_min_distance_group_placement 15
+temp_min_distance_group_placement 10
 set_scaling_to_map_size
 actor_area 7
 actor_area_radius 5
@@ -910,7 +1035,7 @@ number_of_groups 2
 temp_min_distance_group_placement 30
 set_gaia_object_only
 set_tight_grouping
-min_distance_to_players 45
+min_distance_to_players 40
 avoid_actor_area 997
 }
 

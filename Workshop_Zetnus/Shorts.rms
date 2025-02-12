@@ -1,0 +1,1072 @@
+/* shorts map */
+
+/*
+by Zetnus
+zetnus@outlook.com
+zetnus on Discord
+
+Most recent update: 25 January 2025
+
+Learn about random map scripting: https://tinyurl.com/7xteyu58
+*/
+
+#define ALCHEMY_LEAUGE_STUFF /* consent to use in Alchemy Leauge */
+
+#const OAK_BUSH_FOREST 20
+#const BUSH_FOREST 89
+
+#const MERCHANT 1572
+
+/* =================================================================================================== */
+<PLAYER_SETUP>
+
+direct_placement
+behavior_version 2
+
+if ALCHEMY_LEAUGE_STUFF
+
+if LOW_RESOURCES #define DISABLE_TRADE endif
+
+if DISABLE_TRADE
+  #const TRADE_CART_ENABLER 161
+  #const TRADE_COG_ENABLER 180
+  #const TRADE_CARAVAN_ENABLER 48
+  #const HINDU_CARAVANSERAI_ENABLER 518
+  #const PERSIAN_CARAVANSERAI_ENABLER 552  
+  #const SILK_ROAD 499
+  effect_amount DISABLE_TECH TRADE_COG_ENABLER ATTR_DISABLE 180
+  effect_amount DISABLE_TECH TRADE_CART_ENABLER ATTR_DISABLE 161
+  effect_amount DISABLE_TECH TRADE_CARAVAN_ENABLER ATTR_DISABLE 48
+  effect_amount DISABLE_TECH HINDU_CARAVANSERAI_ENABLER ATTR_DISABLE 518
+  effect_amount DISABLE_TECH PERSIAN_CARAVANSERAI_ENABLER ATTR_DISABLE 552
+  effect_amount DISABLE_TECH SILK_ROAD ATTR_DISABLE 499    
+endif
+
+else
+/* Heavy Swordsman Configuration */
+#const HEAVY_SWORDSMAN 76
+effect_amount SET_ATTRIBUTE HEAVY_SWORDSMAN ATTR_TRAITS 16
+effect_amount SET_ATTRIBUTE HEAVY_SWORDSMAN ATTR_LINE_OF_SIGHT 8
+effect_amount SET_ATTRIBUTE HEAVY_SWORDSMAN ATTR_SEARCH_RADIUS 6
+effect_amount SET_ATTRIBUTE HEAVY_SWORDSMAN ATTR_HITPOINTS 15
+effect_percent SET_ATTRIBUTE HEAVY_SWORDSMAN ATTR_MOVE_SPEED 90
+effect_amount SET_ATTRIBUTE HEAVY_SWORDSMAN ATTR_HERO_STATUS 66
+effect_amount SET_ATTRIBUTE HEAVY_SWORDSMAN ATTR_RELOAD_TIME 4
+endif
+
+
+effect_amount GAIA_SET_ATTRIBUTE DOCK ATTR_NAME_ID 5319	/* port */
+effect_amount GAIA_SET_ATTRIBUTE DOCK ATTR_SHOWN_MELEE_ARMOR 1000
+effect_amount GAIA_SET_ATTRIBUTE DOCK ATTR_SHOWN_PIERCE_ARMOR 1000
+
+effect_amount GAIA_SET_ATTRIBUTE DOCK_F ATTR_NAME_ID 5319	/* port */
+effect_amount GAIA_SET_ATTRIBUTE DOCK_F ATTR_SHOWN_MELEE_ARMOR 1000
+effect_amount GAIA_SET_ATTRIBUTE DOCK_F ATTR_SHOWN_PIERCE_ARMOR 1000
+
+effect_amount GAIA_SET_ATTRIBUTE DOCK_C ATTR_NAME_ID 5319	/* port */
+effect_amount GAIA_SET_ATTRIBUTE DOCK_C ATTR_SHOWN_MELEE_ARMOR 1000
+effect_amount GAIA_SET_ATTRIBUTE DOCK_C ATTR_SHOWN_PIERCE_ARMOR 1000
+
+effect_amount GAIA_SET_ATTRIBUTE DOCK_I ATTR_NAME_ID 5319	/* port */
+effect_amount GAIA_SET_ATTRIBUTE DOCK_I ATTR_SHOWN_MELEE_ARMOR 1000
+effect_amount GAIA_SET_ATTRIBUTE DOCK_I ATTR_SHOWN_PIERCE_ARMOR 1000
+
+/* =================================================================================================== */
+<LAND_GENERATION>
+
+base_terrain GRASS3
+
+create_land {
+	terrain_type WATER
+	left_border 70
+	land_position 95 50
+	land_percent 100
+}
+
+create_land {
+	terrain_type DLC_ROCK
+	land_position 10 50
+	bottom_border 38
+	top_border 38
+	right_border 73
+	left_border -20
+	border_fuzziness 20
+	land_percent 100
+	land_id 1
+	base_elevation 16
+}
+
+if 2_TEAM_GAME 
+	start_random 
+		percent_chance 50 #define T1_UP
+		percent_chance 50 #define T1_DOWN
+	end_random
+	if FIXED_POSITIONS
+		if 4_PLAYER_GAME
+			if TEAM1_SIZE2
+				#define 2v2
+			endif
+		elseif 6_PLAYER_GAME
+			if TEAM1_SIZE3
+				if TEAM2_SIZE3
+					#define 3v3
+				endif
+			endif
+		elseif 8_PLAYER_GAME
+			if TEAM1_SIZE4
+				if TEAM2_SIZE4
+					#define 4v4
+				endif
+			endif
+		endif
+	endif
+endif
+
+if 2_PLAYER_GAME
+create_land {
+	terrain_type GRASS2
+	land_position 40 20
+	base_size 14
+	number_of_tiles 1200
+	assign_to AT_TEAM 0 0 0
+}
+
+create_land {
+	terrain_type GRASS
+	land_position 40 80
+	base_size 14
+	number_of_tiles 1200
+	assign_to AT_TEAM 0 0 0
+}
+elseif 2v2
+create_land {
+	terrain_type GRASS3
+	land_position 55 20
+	base_size 1
+	number_of_tiles 0
+	if T1_UP
+		assign_to AT_TEAM 1 0 0
+	elseif T1_DOWN
+		assign_to AT_TEAM 2 0 0
+	endif	
+}
+create_land {
+	terrain_type GRASS3
+	land_position 25 20
+	base_size 1
+	number_of_tiles 0
+	if T1_UP
+		assign_to AT_TEAM 1 0 0
+	elseif T1_DOWN
+		assign_to AT_TEAM 2 0 0
+	endif	
+}
+create_land {
+	terrain_type GRASS3
+	land_position 55 80
+	base_size 1
+	number_of_tiles 0
+	if T1_UP
+		assign_to AT_TEAM 2 0 0
+	elseif T1_DOWN
+		assign_to AT_TEAM 1 0 0
+	endif
+}
+create_land {
+	terrain_type GRASS3
+	land_position 25 80
+	base_size 1
+	number_of_tiles 0
+	if T1_UP
+		assign_to AT_TEAM 2 0 0
+	elseif T1_DOWN
+		assign_to AT_TEAM 1 0 0
+	endif
+}
+
+elseif 3v3
+create_land {
+	terrain_type GRASS3
+	land_position 60 20
+	base_size 1
+	number_of_tiles 0
+	if T1_UP
+		assign_to AT_TEAM 1 0 0
+	elseif T1_DOWN
+		assign_to AT_TEAM 2 0 0
+	endif	
+}
+create_land {
+	terrain_type GRASS3
+	land_position 40 20
+	base_size 1
+	number_of_tiles 0
+	if T1_UP
+		assign_to AT_TEAM 1 0 0
+	elseif T1_DOWN
+		assign_to AT_TEAM 2 0 0
+	endif	
+}
+create_land {
+	terrain_type GRASS3
+	land_position 20 20
+	base_size 1
+	number_of_tiles 0
+	if T1_UP
+		assign_to AT_TEAM 1 0 0
+	elseif T1_DOWN
+		assign_to AT_TEAM 2 0 0
+	endif	
+}
+create_land {
+	terrain_type GRASS3
+	land_position 60 80
+	base_size 1
+	number_of_tiles 0
+	if T1_UP
+		assign_to AT_TEAM 2 0 0
+	elseif T1_DOWN
+		assign_to AT_TEAM 1 0 0
+	endif
+}
+create_land {
+	terrain_type GRASS3
+	land_position 40 80
+	base_size 1
+	number_of_tiles 0
+	if T1_UP
+		assign_to AT_TEAM 2 0 0
+	elseif T1_DOWN
+		assign_to AT_TEAM 1 0 0
+	endif
+}
+create_land {
+	terrain_type GRASS3
+	land_position 20 80
+	base_size 1
+	number_of_tiles 0
+	if T1_UP
+		assign_to AT_TEAM 2 0 0
+	elseif T1_DOWN
+		assign_to AT_TEAM 1 0 0
+	endif
+}
+
+elseif 4v4
+create_land {
+	terrain_type GRASS3
+	land_position 60 20
+	base_size 1
+	number_of_tiles 0
+	if T1_UP
+		assign_to AT_TEAM 1 0 0
+	elseif T1_DOWN
+		assign_to AT_TEAM 2 0 0
+	endif	
+}
+create_land {
+	terrain_type GRASS3
+	land_position 45 20
+	base_size 1
+	number_of_tiles 0
+	if T1_UP
+		assign_to AT_TEAM 1 0 0
+	elseif T1_DOWN
+		assign_to AT_TEAM 2 0 0
+	endif	
+}
+create_land {
+	terrain_type GRASS3
+	land_position 30 20
+	base_size 1
+	number_of_tiles 0
+	if T1_UP
+		assign_to AT_TEAM 1 0 0
+	elseif T1_DOWN
+		assign_to AT_TEAM 2 0 0
+	endif	
+}
+create_land {
+	terrain_type GRASS3
+	land_position 15 20
+	base_size 1
+	number_of_tiles 0
+	if T1_UP
+		assign_to AT_TEAM 1 0 0
+	elseif T1_DOWN
+		assign_to AT_TEAM 2 0 0
+	endif	
+}
+create_land {
+	terrain_type GRASS3
+	land_position 60 80
+	base_size 1
+	number_of_tiles 0
+	if T1_UP
+		assign_to AT_TEAM 2 0 0
+	elseif T1_DOWN
+		assign_to AT_TEAM 1 0 0
+	endif
+}
+create_land {
+	terrain_type GRASS3
+	land_position 45 80
+	base_size 1
+	number_of_tiles 0
+	if T1_UP
+		assign_to AT_TEAM 2 0 0
+	elseif T1_DOWN
+		assign_to AT_TEAM 1 0 0
+	endif
+}
+create_land {
+	terrain_type GRASS3
+	land_position 30 80
+	base_size 1
+	number_of_tiles 0
+	if T1_UP
+		assign_to AT_TEAM 2 0 0
+	elseif T1_DOWN
+		assign_to AT_TEAM 1 0 0
+	endif
+}
+create_land {
+	terrain_type GRASS3
+	land_position 15 80
+	base_size 1
+	number_of_tiles 0
+	if T1_UP
+		assign_to AT_TEAM 2 0 0
+	elseif T1_DOWN
+		assign_to AT_TEAM 1 0 0
+	endif
+}
+
+else
+create_land {
+	terrain_type GRASS3
+	land_position 60 20
+	base_size 1
+	number_of_tiles 0
+	assign_to AT_TEAM 0 0 0
+}
+create_land {
+	terrain_type GRASS3
+	land_position 60 80
+	base_size 1
+	number_of_tiles 0
+	assign_to AT_TEAM 0 0 0
+}
+create_land {
+	terrain_type GRASS3
+	land_position 30 20
+	base_size 1
+	number_of_tiles 0
+	assign_to AT_TEAM 0 0 0
+}
+create_land {
+	terrain_type GRASS3
+	land_position 30 80
+	base_size 1
+	number_of_tiles 0
+	assign_to AT_TEAM 0 0 0
+}
+create_land {
+	terrain_type GRASS3
+	land_position 45 20
+	base_size 1
+	number_of_tiles 0
+	assign_to AT_TEAM 0 0 0
+}
+create_land {
+	terrain_type GRASS3
+	land_position 45 80
+	base_size 1
+	number_of_tiles 0
+	assign_to AT_TEAM 0 0 0
+}
+create_land {
+	terrain_type GRASS3
+	land_position 15 20
+	base_size 1
+	number_of_tiles 0
+	assign_to AT_TEAM 0 0 0
+}
+create_land {
+	terrain_type GRASS3
+	land_position 15 80
+	base_size 1
+	number_of_tiles 0
+	assign_to AT_TEAM 0 0 0
+}
+
+endif
+
+
+/* =================================================================================================== */
+<ELEVATION_GENERATION> 
+
+/* required section for base elevation to work */
+
+/* =================================================================================================== */
+<TERRAIN_GENERATION>
+
+create_terrain DLC_ROCK { base_terrain GRASS3 height_limits 1 17 land_percent 100 number_of_clumps 9320 }
+create_terrain DLC_ROCK { base_terrain GRASS3 height_limits 1 17 land_percent 100 number_of_clumps 9320 }
+create_terrain DLC_ROCK { base_terrain GRASS3 height_limits 1 17 land_percent 100 number_of_clumps 9320 }
+create_terrain DLC_ROCK { base_terrain GRASS3 height_limits 1 17 land_percent 100 number_of_clumps 9320 }
+create_terrain DLC_ROCK { base_terrain GRASS3 height_limits 1 17 land_percent 100 number_of_clumps 9320 }
+
+create_terrain LEAVES { base_terrain DLC_ROCK spacing_to_other_terrain_types 1 land_percent 100 number_of_clumps 9320 }
+create_terrain LEAVES { base_terrain DLC_ROCK spacing_to_other_terrain_types 1 land_percent 100 number_of_clumps 9320 }
+create_terrain LEAVES { base_terrain DLC_ROCK spacing_to_other_terrain_types 1 land_percent 100 number_of_clumps 9320 }
+create_terrain LEAVES { base_terrain DLC_ROCK spacing_to_other_terrain_types 1 land_percent 100 number_of_clumps 9320 }
+create_terrain LEAVES { base_terrain DLC_ROCK spacing_to_other_terrain_types 1 land_percent 100 number_of_clumps 9320 }
+
+create_terrain FOREST { base_terrain LEAVES spacing_to_other_terrain_types 2 land_percent 100 number_of_clumps 9320 }
+create_terrain FOREST { base_terrain LEAVES spacing_to_other_terrain_types 2 land_percent 100 number_of_clumps 9320 }
+create_terrain FOREST { base_terrain LEAVES spacing_to_other_terrain_types 2 land_percent 100 number_of_clumps 9320 }
+create_terrain FOREST { base_terrain LEAVES spacing_to_other_terrain_types 2 land_percent 100 number_of_clumps 9320 }
+create_terrain FOREST { base_terrain LEAVES spacing_to_other_terrain_types 2 land_percent 100 number_of_clumps 9320 }
+
+create_terrain DIRT { base_terrain FOREST spacing_to_other_terrain_types 3 land_percent 100 number_of_clumps 9320 }
+create_terrain DIRT { base_terrain FOREST spacing_to_other_terrain_types 3 land_percent 100 number_of_clumps 9320 }
+create_terrain DIRT { base_terrain FOREST spacing_to_other_terrain_types 3 land_percent 100 number_of_clumps 9320 }
+create_terrain DIRT { base_terrain FOREST spacing_to_other_terrain_types 3 land_percent 100 number_of_clumps 9320 }
+create_terrain DIRT { base_terrain FOREST spacing_to_other_terrain_types 3 land_percent 100 number_of_clumps 9320 }
+
+
+create_terrain DLC_DESERTGRAVEL { base_terrain DIRT height_limits 13 14 land_percent 100 number_of_clumps 9320 terrain_mask 1 }
+
+create_terrain DLC_DESERTGRAVEL { base_terrain DIRT height_limits 14 15 land_percent 100 number_of_clumps 9320 terrain_mask 2 }
+
+create_terrain DLC_DESERTGRAVEL { base_terrain DIRT height_limits 16 16 land_percent 100 number_of_clumps 9320 }
+
+
+
+
+/* player starting forests */
+create_terrain OAK_BUSH_FOREST { base_terrain GRASS2 number_of_tiles 200 number_of_clumps 3 set_avoid_player_start_areas 14 }
+create_terrain OAK_BUSH_FOREST { base_terrain GRASS number_of_tiles 200 number_of_clumps 3 set_avoid_player_start_areas 14 }
+
+/* neutral forests */
+create_terrain FOREST
+{
+	base_terrain GRASS3
+	spacing_to_other_terrain_types 5
+	if 2_PLAYER_GAME
+		land_percent 3
+		number_of_clumps 18
+		set_avoid_player_start_areas 22
+	else
+		land_percent 8
+		number_of_clumps 25
+		set_avoid_player_start_areas 14
+	endif
+	set_scale_by_size
+}
+
+/* clean up */
+create_terrain GRASS3 { base_terrain GRASS2 land_percent 100 number_of_clumps 9320 }
+create_terrain GRASS3 { base_terrain GRASS2 land_percent 100 number_of_clumps 9320 }
+create_terrain GRASS3 { base_terrain GRASS2 land_percent 100 number_of_clumps 9320 }
+create_terrain GRASS3 { base_terrain GRASS2 land_percent 100 number_of_clumps 9320 }
+create_terrain GRASS3 { base_terrain GRASS2 land_percent 100 number_of_clumps 9320 }
+
+create_terrain GRASS3 { base_terrain GRASS land_percent 100 number_of_clumps 9320 }
+create_terrain GRASS3 { base_terrain GRASS land_percent 100 number_of_clumps 9320 }
+create_terrain GRASS3 { base_terrain GRASS land_percent 100 number_of_clumps 9320 }
+create_terrain GRASS3 { base_terrain GRASS land_percent 100 number_of_clumps 9320 }
+create_terrain GRASS3 { base_terrain GRASS land_percent 100 number_of_clumps 9320 }
+
+
+/* perfect water */
+create_terrain WATER {
+	base_terrain DLC_WATER5
+	land_percent 100
+	number_of_clumps 9320
+	terrain_mask 1
+	spacing_to_other_terrain_types 1
+}
+create_terrain WATER {
+	base_terrain DLC_WATER5
+	land_percent 100
+	number_of_clumps 9320
+	spacing_to_other_terrain_types 2
+}
+create_terrain MED_WATER {
+	base_terrain WATER
+	land_percent 100
+	number_of_clumps 9320
+	terrain_mask 1
+	spacing_to_other_terrain_types 1
+}
+create_terrain MED_WATER {
+	base_terrain WATER
+	land_percent 100
+	number_of_clumps 9320
+	spacing_to_other_terrain_types 2
+}
+create_terrain DEEP_WATER {
+	base_terrain MED_WATER
+	land_percent 100
+	number_of_clumps 9320
+	spacing_to_other_terrain_types 3
+	terrain_mask 1
+}
+create_terrain DEEP_WATER {
+	base_terrain MED_WATER
+	land_percent 100
+	number_of_clumps 9320
+	spacing_to_other_terrain_types 4
+}
+create_terrain DLC_WATER4 {
+	base_terrain DEEP_WATER
+	land_percent 100
+	number_of_clumps 9320
+	spacing_to_other_terrain_types 2
+	terrain_mask 1
+}
+create_terrain DLC_WATER4 {
+	base_terrain DEEP_WATER
+	land_percent 100
+	number_of_clumps 9320
+	spacing_to_other_terrain_types 4
+}	
+
+/* forest mixing */
+
+create_terrain MEDITERRANEAN_FOREST { base_terrain FOREST land_percent 100 number_of_clumps 9320 }
+create_terrain MEDITERRANEAN_FOREST { base_terrain FOREST land_percent 100 number_of_clumps 9320 }
+create_terrain MEDITERRANEAN_FOREST { base_terrain FOREST land_percent 100 number_of_clumps 9320 }
+create_terrain MEDITERRANEAN_FOREST { base_terrain FOREST land_percent 100 number_of_clumps 9320 }
+create_terrain MEDITERRANEAN_FOREST { base_terrain FOREST land_percent 100 number_of_clumps 9320 }
+
+create_terrain MEDITERRANEAN_FOREST { base_terrain OAK_BUSH_FOREST land_percent 100 number_of_clumps 9320 }
+create_terrain MEDITERRANEAN_FOREST { base_terrain OAK_BUSH_FOREST land_percent 100 number_of_clumps 9320 }
+create_terrain MEDITERRANEAN_FOREST { base_terrain OAK_BUSH_FOREST land_percent 100 number_of_clumps 9320 }
+create_terrain MEDITERRANEAN_FOREST { base_terrain OAK_BUSH_FOREST land_percent 100 number_of_clumps 9320 }
+create_terrain MEDITERRANEAN_FOREST { base_terrain OAK_BUSH_FOREST land_percent 100 number_of_clumps 9320 }
+
+create_terrain FOREST { base_terrain MEDITERRANEAN_FOREST land_percent 100 number_of_clumps 9320 set_scale_by_groups spacing_to_other_terrain_types 1 }
+create_terrain BUSH_FOREST { base_terrain MEDITERRANEAN_FOREST land_percent 2 number_of_clumps 9320 set_scale_by_groups }
+create_terrain DLC_DRAGONFOREST { base_terrain MEDITERRANEAN_FOREST land_percent 2 number_of_clumps 9320 set_scale_by_groups }
+create_terrain MEDITERRANEAN_FOREST { base_terrain FOREST land_percent 1 number_of_clumps 9320 set_scale_by_groups }
+
+
+/* terrain mixing */
+create_terrain DLC_DRYGRASS { base_terrain GRASS3 land_percent 7 number_of_clumps 15 set_scale_by_groups clumping_factor 30 terrain_mask 1 }
+create_terrain DIRT3 { base_terrain GRASS3 land_percent 7 number_of_clumps 15 set_scale_by_groups clumping_factor 30 terrain_mask 1 }
+create_terrain LEAVES { base_terrain GRASS3 land_percent 10 number_of_clumps 9320 set_scale_by_groups clumping_factor 30 terrain_mask 1 }
+create_terrain DIRT { base_terrain GRASS3 land_percent 7 number_of_clumps 9320 set_scale_by_groups clumping_factor 30 terrain_mask 1 }
+create_terrain DIRT2 { base_terrain GRASS3 land_percent 5 number_of_clumps 9320 set_scale_by_groups clumping_factor 30 terrain_mask 1 }
+create_terrain DLC_DESERTGRAVEL { base_terrain GRASS3 land_percent 5 number_of_clumps 9320 set_scale_by_groups clumping_factor 30 terrain_mask 1 }
+
+
+/* =================================================================================================== */
+<OBJECTS_GENERATION>
+
+create_object RELIC { place_on_specific_land_id 1 find_closest_to_map_center }
+
+create_actor_area 1 1 1 0	create_actor_area 1 1 11 10
+if TINY_MAP
+	create_actor_area 118 1 2 0	create_actor_area 118 1 12 10
+	create_actor_area 1 118 3 0	create_actor_area 1 118 13 10
+	create_actor_area 118 118 4 0	create_actor_area 118 118 14 10
+elseif SMALL_MAP
+	create_actor_area 142 1 2 0	create_actor_area 142 1 12 10
+	create_actor_area 1 142 3 0	create_actor_area 1 142 13 10
+	create_actor_area 142 142 4 0	create_actor_area 142 142 14 10
+elseif MEDIUM_MAP
+	create_actor_area 166 1 2 0	create_actor_area 166 1 12 10
+	create_actor_area 1 166 3 0	create_actor_area 1 166 13 10
+	create_actor_area 166 166 4 0	create_actor_area 166 166 14 10
+elseif LARGE_MAP
+	create_actor_area 198 1 2 0	create_actor_area 198 1 12 12
+	create_actor_area 1 198 3 0	create_actor_area 1 198 13 12
+	create_actor_area 198 198 4 0	create_actor_area 198 198 14 12
+elseif HUGE_MAP
+	create_actor_area 218 1 2 0	create_actor_area 218 1 12 15
+	create_actor_area 1 218 3 0	create_actor_area 1 218 13 15
+	create_actor_area 218 218 4 0	create_actor_area 218 218 14 15
+elseif GIGANTIC_MAP
+	create_actor_area 238 1 2 0	create_actor_area 238 1 12 20
+	create_actor_area 1 238 3 0	create_actor_area 1 238 3 20
+	create_actor_area 238 238 4 0	create_actor_area 238 238 14 20
+elseif LUDIKRIS_MAP
+	create_actor_area 478 1 2 0	create_actor_area 478 1 2 25
+	create_actor_area 1 478 3 0	create_actor_area 1 478 3 25
+	create_actor_area 478 478 4 0	create_actor_area 478 478 4 25
+endif
+
+
+create_object DOCK {
+	set_place_for_every_player
+	set_gaia_object_only
+	set_gaia_unconvertible
+	make_indestructible 
+	actor_area_to_place_in 2
+	ignore_terrain_restrictions
+	actor_area 10
+	actor_area_radius 18
+}
+create_object MERCHANT {
+	set_place_for_every_player
+	set_gaia_object_only
+	set_gaia_unconvertible
+	actor_area_to_place_in 2
+	ignore_terrain_restrictions
+}
+create_object DOCK {
+	set_place_for_every_player
+	set_gaia_object_only
+	set_gaia_unconvertible
+	make_indestructible 
+	actor_area_to_place_in 4
+	ignore_terrain_restrictions
+	actor_area 10
+	actor_area_radius 18
+}
+create_object MERCHANT {
+	set_place_for_every_player
+	set_gaia_object_only
+	set_gaia_unconvertible
+	actor_area_to_place_in 4
+	ignore_terrain_restrictions
+}
+
+create_object GOLD {
+	number_of_objects 6
+	group_variance 2
+	group_placement_radius 2
+	number_of_groups 9320
+	set_tight_grouping
+	terrain_to_place_on DLC_DESERTGRAVEL
+	temp_min_distance_group_placement 8
+	min_distance_group_placement 3
+	avoid_forest_zone 3
+}
+
+create_object STONE {
+	number_of_objects 5
+	group_variance 2
+	group_placement_radius 2
+	number_of_groups 9320
+	set_tight_grouping
+	terrain_to_place_on DLC_DESERTGRAVEL
+	temp_min_distance_group_placement 8
+	min_distance_group_placement 3
+	avoid_forest_zone 3
+}
+
+create_object GOLD {
+	number_of_objects 6
+	group_variance 2
+	group_placement_radius 2
+	number_of_groups 9320
+	set_tight_grouping
+	terrain_to_place_on DIRT
+	temp_min_distance_group_placement 10
+	min_distance_group_placement 5
+	avoid_forest_zone 3
+}
+
+create_object STONE {
+	number_of_objects 5
+	group_variance 2
+	group_placement_radius 2
+	number_of_groups 9320
+	set_tight_grouping
+	terrain_to_place_on DIRT
+	temp_min_distance_group_placement 10
+	min_distance_group_placement 5
+	avoid_forest_zone 3
+}
+
+create_object TOWN_CENTER {
+	set_place_for_every_player
+	max_distance_to_players 0
+}
+
+create_object VILLAGER {
+	set_place_for_every_player
+	min_distance_to_players 6
+	max_distance_to_players 7
+	set_circular_placement
+	min_distance_group_placement 2
+}
+if ALCHEMY_LEAUGE_STUFF
+create_object SCOUT
+else
+create_object HEAVY_SWORDSMAN
+endif
+{
+	set_place_for_every_player
+	min_distance_to_players 7
+	max_distance_to_players 9
+	set_circular_placement
+	min_distance_group_placement 2
+}
+
+if REGICIDE
+	create_object KING {
+		set_place_for_every_player
+		min_distance_to_players 6
+		set_circular_placement
+		find_closest
+		min_distance_group_placement 1
+	}
+	create_object VILLAGER {
+		number_of_objects 7
+		set_place_for_every_player
+		min_distance_to_players 6
+		max_distance_to_players 8
+		set_circular_placement
+	}
+	create_object CASTLE {
+		set_place_for_every_player
+		min_distance_to_players 9
+		max_distance_to_players 11
+		set_circular_placement
+		min_distance_group_placement 2
+	}
+endif
+
+create_object SHEEP {
+	number_of_objects 4
+	set_loose_grouping
+	set_place_for_every_player
+	min_distance_to_players 7
+	find_closest
+	avoid_forest_zone 2
+}
+
+create_object GOLD {
+	number_of_objects 3
+	group_placement_radius 3
+	set_tight_grouping
+	number_of_groups 2
+	set_gaia_object_only
+	set_place_for_every_player
+	min_distance_to_players 11
+	max_distance_to_players 14
+	set_circular_placement
+	max_distance_to_other_zones 7
+	avoid_forest_zone 2
+	actor_area 12
+	actor_area_radius 5
+	min_distance_group_placement 2
+	temp_min_distance_group_placement 14
+}
+
+create_object STONE {
+	number_of_objects 4
+	group_placement_radius 3
+	set_tight_grouping
+	set_gaia_object_only
+	set_place_for_every_player
+	min_distance_to_players 11
+	max_distance_to_players 14
+	set_circular_placement
+	max_distance_to_other_zones 7
+	avoid_forest_zone 2
+	actor_area 13
+	actor_area_radius 5
+	min_distance_group_placement 2
+	avoid_actor_area 12
+}
+
+create_object BOAR
+{
+	number_of_groups 2
+	set_gaia_object_only
+	set_place_for_every_player
+	min_distance_to_players 16
+	max_distance_to_players 18
+	set_circular_placement
+	temp_min_distance_group_placement 4
+	avoid_forest_zone 2
+	max_distance_to_other_zones 2
+	min_distance_group_placement 1
+}
+
+create_object SHEEP {
+	number_of_objects 2
+	number_of_groups 2
+	temp_min_distance_group_placement 8
+	set_loose_grouping
+	set_gaia_object_only
+	set_place_for_every_player
+	min_distance_to_players 16
+	max_distance_to_players 22
+	set_circular_placement
+	avoid_forest_zone 3
+	max_distance_to_other_zones 3
+	min_distance_group_placement 2
+}
+
+create_object DEER
+{
+	start_random
+		percent_chance 50	number_of_objects 4
+		percent_chance 50	number_of_objects 3
+	end_random
+	number_of_groups 1
+	group_placement_radius 3
+	set_loose_grouping
+	set_gaia_object_only
+	set_place_for_every_player
+	start_random
+		percent_chance 20
+			min_distance_to_players 14
+			max_distance_to_players 16
+		percent_chance 20
+			min_distance_to_players 16
+			max_distance_to_players 18
+		percent_chance 20
+			min_distance_to_players 18
+			max_distance_to_players 21
+		percent_chance 20
+			min_distance_to_players 21
+			max_distance_to_players 24
+		percent_chance 20
+			min_distance_to_players 24
+			max_distance_to_players 27
+	end_random
+	avoid_forest_zone 2
+	max_distance_to_other_zones 2
+	min_distance_group_placement 2
+}
+
+create_object OAKTREE
+{
+	number_of_objects 2
+	set_gaia_object_only
+	set_place_for_every_player
+	min_distance_to_players 4
+	max_distance_to_players 5
+	set_circular_placement
+	min_distance_group_placement 2
+}
+create_object OAKTREE
+{
+	number_of_objects 3
+	set_gaia_object_only
+	set_place_for_every_player
+	min_distance_to_players 6
+	max_distance_to_players 8
+	set_circular_placement
+	min_distance_group_placement 2
+}
+
+create_object OAKTREE {
+	number_of_objects 5
+	set_scaling_to_map_size
+	set_gaia_object_only
+	min_distance_group_placement 1
+	temp_min_distance_group_placement 7
+	terrain_to_place_on GRASS
+	min_distance_to_players 22
+	set_circular_placement
+}
+
+create_object SHORE_FISH {
+	number_of_objects 9320
+	set_gaia_object_only
+	min_distance_group_placement  3
+	temp_min_distance_group_placement 7
+}
+
+create_object MARLIN1 {
+	number_of_objects 9320
+	set_gaia_object_only
+	min_distance_group_placement 4 
+	temp_min_distance_group_placement 12
+	max_distance_to_other_zones 7
+	terrain_to_place_on DLC_WATER4
+} 
+
+create_object SALMON {
+	number_of_objects 9320
+	set_gaia_object_only
+	max_distance_to_other_zones 4
+	min_distance_group_placement 4
+	temp_min_distance_group_placement 8
+}
+
+/* birds */
+create_object DLC_STORK {
+	number_of_objects 6
+	set_scaling_to_map_size
+}
+
+
+#const OFF_GRID 647
+#const BUSH_GREEN 1360
+#const GRASS_PATCH 301
+#const OFF_GRID 647
+#const ON_GRID95_OUT 278
+#const SHRUB_GREEN 1362
+#const STATUE_COLUMN 1322
+#const TEMPLE_RUIN 1566
+#const WEEDS 1364
+
+create_object GRASS_PATCH
+{
+set_gaia_object_only
+number_of_groups 10000
+set_scaling_to_map_size
+temp_min_distance_group_placement 14
+actor_area 62
+actor_area_radius 2
+min_distance_to_players 8
+terrain_to_place_on GRASS3
+}
+create_object FLOWER_BED
+{
+set_gaia_object_only
+number_of_groups 10000
+set_scaling_to_map_size
+temp_min_distance_group_placement 14
+actor_area 63
+actor_area_radius 2
+min_distance_to_players 8
+avoid_actor_area 62
+terrain_to_place_on GRASS3
+}
+create_object WEEDS
+{
+set_gaia_object_only
+number_of_groups 10000
+set_scaling_to_map_size
+temp_min_distance_group_placement 14
+actor_area 64
+actor_area_radius 2
+min_distance_to_players 8
+avoid_actor_area 62
+avoid_actor_area 63
+terrain_to_place_on GRASS3
+}
+create_object DLC_SAVANNAHPATCH
+{
+set_gaia_object_only
+number_of_groups 10000
+set_scaling_to_map_size
+temp_min_distance_group_placement 14
+actor_area 65
+actor_area_radius 2
+min_distance_to_players 8
+avoid_actor_area 62
+avoid_actor_area 63
+avoid_actor_area 64
+terrain_to_place_on GRASS3
+}
+create_object BUSH_GREEN
+{
+set_gaia_object_only
+number_of_groups 10000
+set_scaling_to_map_size
+temp_min_distance_group_placement 14
+actor_area 66
+actor_area_radius 2
+min_distance_to_players 8
+avoid_actor_area 62
+avoid_actor_area 63
+avoid_actor_area 64
+avoid_actor_area 65
+terrain_to_place_on GRASS3
+}
+create_object SHRUB_GREEN
+{
+set_gaia_object_only
+number_of_groups 10000
+set_scaling_to_map_size
+temp_min_distance_group_placement 14
+actor_area 67
+actor_area_radius 2
+min_distance_to_players 8
+avoid_actor_area 62
+avoid_actor_area 63
+avoid_actor_area 64
+avoid_actor_area 65
+avoid_actor_area 66
+terrain_to_place_on GRASS3
+}
+create_object PLANT
+{
+set_gaia_object_only
+number_of_groups 10000
+set_scaling_to_map_size
+temp_min_distance_group_placement 14
+min_distance_to_players 8
+avoid_actor_area 62
+avoid_actor_area 63
+avoid_actor_area 64
+avoid_actor_area 65
+avoid_actor_area 66
+avoid_actor_area 67
+terrain_to_place_on GRASS3
+}
+create_object TEMPLE_RUIN
+{
+set_gaia_object_only
+number_of_groups 10000
+set_scaling_to_map_size
+temp_min_distance_group_placement 72
+actor_area 68
+actor_area_radius 24
+min_distance_to_players 25
+terrain_to_place_on GRASS3
+}
+create_object ON_GRID
+{
+set_gaia_object_only
+number_of_groups 10000
+set_scaling_to_map_size
+temp_min_distance_group_placement 72
+second_object ROMAN_RUINS
+actor_area 69
+actor_area_radius 24
+min_distance_to_players 25
+avoid_actor_area 68
+terrain_to_place_on GRASS3
+}
+create_object STATUE_COLUMN
+{
+set_gaia_object_only
+number_of_objects 3
+number_of_groups 10000
+set_tight_grouping
+set_scaling_to_map_size
+temp_min_distance_group_placement 72
+min_distance_to_players 25
+avoid_actor_area 68
+avoid_actor_area 69
+terrain_to_place_on GRASS3
+}
+create_object ROCK
+{
+set_gaia_object_only
+number_of_groups 10000
+set_scaling_to_map_size
+avoid_forest_zone 1
+temp_min_distance_group_placement 16
+actor_area 70
+actor_area_radius 8
+min_distance_to_players 23
+terrain_to_place_on GRASS3
+}
+
+/*
+create_object ROCK2
+{
+set_gaia_object_only
+number_of_groups 10000
+set_scaling_to_map_size
+avoid_forest_zone 1
+temp_min_distance_group_placement 16
+min_distance_to_players 23
+avoid_actor_area 70
+terrain_to_place_on GRASS3
+}
+*/

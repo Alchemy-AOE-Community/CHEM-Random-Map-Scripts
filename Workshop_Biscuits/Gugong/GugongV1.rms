@@ -53,7 +53,7 @@ if 1V1
 
 	end_random
 
-	provide slight extra variation in player spawns
+	/* provide slight extra variation in player spawns */
 	start_random
 
 		percent_chance 50 #define ALT_LAYOUT
@@ -504,7 +504,7 @@ create_land { terrain_type EXIT_PLACEHOLDER land_position 9 50 land_percent 0 ba
 
 	elseif 8_PLAYER_GAME
 		
-		/*2v2v2v2 setup */
+		/* 2v2v2v2 setup */
 		if 4_TEAM_GAME
 		
 			create_land { terrain_type SNOW land_position 70 20 land_percent 10 base_size 18 assign_to AT_TEAM 1 0 0 }

@@ -1,23 +1,17 @@
 /* *** Gold Oasis *** */
 /* This Script was made by Jasouki */ 
-/*Made December 2024 */
-/*Thanks to Flying Mouse and DjSapsan  for the feedback and sugestions when creating the map & to Marintho, Zetnus, Jasuni & Thire7 for their help to address issues during scripting */
-/*This map can be used in Alchemy League AOE Competitions */
-
-
-
+/* Made December 2024 */
+/* Thanks to Flying Mouse and DjSapsan  for the feedback and sugestions when creating the map & to Marintho, Zetnus, Jasuni & Thire7 for their help to address issues during scripting */
+/* This map can be used in Alchemy League AOE Competitions */
 
 <PLAYER_SETUP>
 random_placement
-
 
 #define PH_TROPHICALEAST
 
 #const  MOUFLON  2340
 #const OUTLW 158
 #const SVANTOWER 1807
-
-
 
 #include_drs F_seasons.inc
 
@@ -41,8 +35,6 @@ endif
 <LAND_GENERATION>
 
 base_terrain DIRT2	
-
-
 
 create_player_lands 
 {
@@ -465,14 +457,6 @@ temp_min_distance_group_placement 5
 terrain_to_place_on DLC_JUNGLELEAVES
 }
 
-
-
-
-
-
-
-
-
 create_object DLC_MANGROVE_TREE 
 {
   number_of_objects          3
@@ -549,7 +533,6 @@ terrain_to_place_on DLC_JUNGLEGRASS
 */
 create_object BOMBARD_TOWER
 {
-second_object
 number_of_objects 1
 number_of_groups 999
 set_tight_grouping

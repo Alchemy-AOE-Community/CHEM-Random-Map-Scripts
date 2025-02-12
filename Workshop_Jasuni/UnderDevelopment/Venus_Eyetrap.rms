@@ -1,4 +1,8 @@
 /*
+Map: Venus Eyetrap
+creator: Jasuni
+description (for BCC2): players start with 2 bases: a TC placed inside the center "eye-trap" and a base on the outside. The inside is mangrove shallows, with oysters, water buffalo, fish, and mangroves. The outside is more grassy, with deer, sheep, gold, and forests. In between the areas is a double-triple layer of neutral fortified walls. And within these stone walls are hostile archers, cracked terrain, stone, and gold.
+
 basically a possible map intended for "wallhalla" - idea is players start partly in a center area and partly in their own area. Different areas are separated by fortified walls, which are possibly guarded by neutral units. The center area will have some kind of reward for players to fight over (like all the relics and lots of gold, or some such). Stone would be on the outside.
 
 I wonder if it would be possible to do part direct-placement (for center area), part random-placement (for outer ring). I think that maybe the center area could be mangrove shallows, and the walls could be on the beach terrains seperating players. 
@@ -6,6 +10,10 @@ I wonder if it would be possible to do part direct-placement (for center area), 
 Walls on beach terrain, center area is mangrove shallows, areas separating player areas could consist of wall in center, a layer of mangrove shallows, which would then have neutral walls surrounding them (due to beach terrain). Neutral units could then be placed on mangrove shallows, but avoid an actor area in the center.
 
 note: likely will need two different themes: one with mangrove terrain, the other with cracked terrain.
+
+TODO add more terrain mixing
+TODO: remove outer gold? and maybe replace with a small amount of stone?
+TODO an option to change things up: have a player TC only on the inside. Outside can still be a free boom, but would be different
 */
 <PLAYER_SETUP>
 grouped_by_team
@@ -232,20 +240,22 @@ endif
 #const OUTLAW 158 /* outlaw stats: 5 LOS, 4 search radisu, 4 range, 4 pierce, 50% acc, no armor stats: do test in game - perhaps alter to have +1 range, +1 atk, +30 hp - comparable to an archer with fletching, but 15 more hp - also take all bonus damage, so still not a particularly healthy unit: maybe up it to 60 hp, and and an additional +1 range/damage (to 6), and increase LOS/search radius.
 other option would be to use amazon warriors/archers (825/850)
 
-TODO playtest notes: with inner cracked terrain, the player's villagers quickly exhaust food sources (so they end up needing to do something else or be idle) - result is that they end up be used for other things, like long distance tree chopping. Maybe add a mule cart to cracked inner terrain to assist with this?
+TODO playtest notes: with inner cracked terrain, the player's villagers quickly exhaust food sources (so they end up needing to do something else or be idle) - result is that they end up be used for other things, like long distance tree chopping. Added a mule cart to cracked inner terrain to assist with this. Add boars (since the map is missing those, and it provides something for the inner cracked villagers to feast on).
+Since added some boars to middle area
   */
 
 #const ON_GRID 278 /* dead fish trap */
 effect_amount GAIA_SET_ATTRIBUTE ON_GRID ATTR_STORAGE_VALUE 0
 effect_amount GAIA_SET_ATTRIBUTE FISH_FOOD ATTR_TERRAIN_ID 21 /* shallow water: same as sea walls/towers */
-effect_amount GAIA_ADD_ATTRIBUTE AMAZON_ARCHER ATTR_MAX_RANGE 2
-effect_amount GAIA_ADD_ATTRIBUTE AMAZON_ARCHER ATTR_SHOWN_RANGE 2
 /*
+effect_amount GAIA_ADD_ATTRIBUTE AMAZON_ARCHER ATTR_MAX_RANGE 1
+effect_amount GAIA_ADD_ATTRIBUTE AMAZON_ARCHER ATTR_SHOWN_RANGE 1 */ /*
 effect_amount GAIA_ADD_ATTRIBUTE AMAZON_ARCHER ATTR_SEARCH_RADIUS 2 - commented out because the amazon archers were a little too aggresive - hopefully this keeps them dangerous while being a little less prone to attack, but not any easier to deal with. Appears that this line is having little to no effect */
-effect_amount GAIA_ADD_ATTRIBUTE AMAZON_ARCHER ATTR_LINE_OF_SIGHT 2
+/*
+effect_amount GAIA_ADD_ATTRIBUTE AMAZON_ARCHER ATTR_LINE_OF_SIGHT 1
 effect_amount GAIA_ADD_ATTRIBUTE AMAZON_ARCHER ATTR_SHOWN_ATTACK 2
 effect_amount GAIA_ADD_ATTRIBUTE AMAZON_ARCHER ATTR_ATTACK 770 /* 3 * 256 + 2 : should add 2 pierce attack */
-
+*/
 effect_amount GAIA_ADD_ATTRIBUTE OUTLAW ATTR_MAX_RANGE 2
 effect_amount GAIA_ADD_ATTRIBUTE OUTLAW ATTR_SEARCH_RADIUS 2
 effect_amount GAIA_ADD_ATTRIBUTE OUTLAW ATTR_LINE_OF_SIGHT 2
@@ -261,7 +271,7 @@ classes to reset: 1 (infantry), 2 (turtle ship), 5 (elephant), 6 (cav), 16 (ship
 
 and 33 (set to 10,000)
  */
-
+effect_amount GAIA_SET_ATTRIBUTE STONE_WALL ATTR_HITPOINTS 1800 /* modify to set to castle age statistics */
 
 effect_percent MOD_RESOURCE AMOUNT_STARTING_STONE ATTR_ADD 99 /* adds .99 stone: apparently makes it possible for players to build 2 TCs with starting stone even if they tap a gaia wall with a villager. */
 
@@ -269,6 +279,9 @@ effect_percent MOD_RESOURCE AMOUNT_STARTING_STONE ATTR_ADD 99 /* adds .99 stone:
 start_random
     percent_chance 50 #define INNER_SHALLOWS
 end_random
+/*
+#define INNER_SHALLOWS
+*/
 if INNER_SHALLOWS /* works properly */
     #define OUTER_CRACKED
     #const TEMP_TERRAIN 55 /* DLC_CRACKED */
@@ -577,16 +590,26 @@ if INNER_SHALLOWS
     create_terrain DLC_MANGROVEFOREST {
         base_terrain DLC_MANGROVESHALLOW
         land_percent 3
-        number_of_clumps 24
+        number_of_clumps 12
     }
 else 
     create_terrain DLC_MANGROVEFOREST {
         base_terrain DLC_MANGROVESHALLOW
-        land_percent 3
+        land_percent 3 /* consider reducing */
         number_of_clumps 240 /* only difference is in this, so could combine */
     }
 endif
-/* TODO may want to take steps to ensure fairness when map is inner cracked. */
+/* TODO may want to take steps to ensure fairness when map is inner cracked.
+#define BLUE_CARBON_CUP
+ */
+if OUTER_CRACKED
+    create_terrain DLC_BOGLAND {
+        base_terrain DLC_CRACKED
+        land_percent 100
+        number_of_clumps 932
+        terrain_mask 1
+    }
+endif
 create_terrain FOREST {
     base_terrain GRASS2
     land_percent 10
@@ -594,19 +617,34 @@ create_terrain FOREST {
     set_avoid_player_start_areas
     terrain_mask 2
 }
+create_terrain DLC_BOGLAND {
+    base_terrain GRASS2
+    land_percent 30
+    number_of_clumps 932
+    terrain_mask 1
+}
 /* current result is messy but functional: sometimes the inner terrain will stretch to the outside of the map, but only if the boundary area between players is straight
  */
 /*
-
+TODO add a terrain mask mixing for inner cracked terrain
 goal: have an inner circle, have a wall between player "halves" of the outer circle, and a wall on the outside of the circle. Ideally, every wall would be just 1 tile wide, but this hasn't happened in practice.
 
+#define INCLUDE_OUTER_TOWN_CENTER
 */
 
 <OBJECTS_GENERATION>
-create_object TOWN_CENTER {
-    set_place_for_every_player
-    max_distance_to_players 0
-}
+#define INCLUDE_OUTER_TOWN_CENTER
+if INCLUDE_OUTER_TOWN_CENTER
+    create_object TOWN_CENTER {
+        set_place_for_every_player
+        max_distance_to_players 0
+    }
+else
+    create_object MILL {
+        set_place_for_every_player
+        max_distance_to_players 0
+    }
+endif
 create_object VILLAGER {
     set_place_for_every_player
     min_distance_to_players 6
@@ -623,18 +661,18 @@ create_object SCOUT {
 }
 /* note: no scout in the outer area - might make it harder to detect breaches in the wall */
 /* allows easy removal for testing/creation purposes 
-
+TODO changed from fortified wall to stone walls - could change to use a randomized wall selection.
 */
 #define CREATE_WALLS 
 if CREATE_WALLS
-create_object FORTIFIED_WALL {
+create_object STONE_WALL {
     set_gaia_object_only
     set_gaia_unconvertible
     number_of_objects 9320
     set_scaling_to_map_size
     terrain_to_place_on BEACH
 }
-create_object FORTIFIED_WALL {
+create_object STONE_WALL {
     set_gaia_object_only
     set_gaia_unconvertible
     number_of_objects 9320
@@ -651,7 +689,7 @@ create_object ON_GRID {
     temp_min_distance_group_placement 1
     terrain_to_place_on OUTER_TERRAIN
     actor_area 1000
-    actor_area_radius 15
+    actor_area_radius 11
 }
 /* inner tc placement: pretty consistent when the inner terrain is cracked terrain. When inner terrain is mangrove, sometimes a player will have a more forward TC spot. */
 create_object TOWN_CENTER {
@@ -663,7 +701,7 @@ create_object TOWN_CENTER {
     ignore_terrain_restrictions
     avoid_actor_area 1000
     actor_area 6
-    actor_area_radius 7
+    actor_area_radius 8
     avoid_actor_area 6
     avoid_forest_zone 4 /*  consider adjusting */
     min_distance_group_placement 5 /* useful for ensuring that villagers and scouts spawn a decent distance from the TC. */
@@ -703,26 +741,29 @@ create_object VILLAGER {
     set_circular_placement
     avoid_forest_zone 2
 }
-/* OUTLAW - issue: doesn't seem to attack very much: have to get very close before it attacks. */
-create_object AMAZON_ARCHER {
-    set_gaia_object_only
-    set_gaia_unconvertible
-    number_of_objects 3
-    set_loose_grouping
-    number_of_groups 9320
-    if OUTER_SHALLOWS
-        temp_min_distance_group_placement 8
-    else
-        temp_min_distance_group_placement 12
-    endif
-    terrain_to_place_on OUTER_TERRAIN
-}
-if INNER_SHALLOWS 
-    create_object FISH_FOOD { /* TODO change fish */
-        terrain_to_place_on DLC_MANGROVESHALLOW
-        actor_area_to_place_in 6
-        min_distance_group_placement 3
+/* OUTLAW - issue: doesn't seem to attack very much: have to get very close before it attacks.
+*/
+if TOURNAMENT_MODE
+    create_object AMAZON_ARCHER {
+        set_gaia_object_only
+        set_gaia_unconvertible
         number_of_objects 3
+        set_loose_grouping
+        number_of_groups 9320
+        if OUTER_SHALLOWS
+            temp_min_distance_group_placement 8
+        else
+            temp_min_distance_group_placement 12
+        endif
+        terrain_to_place_on OUTER_TERRAIN
+    }
+endif 
+if INNER_SHALLOWS 
+    create_object FISH_FOOD {
+        actor_area_to_place_in 6
+        min_distance_group_placement 1
+        temp_min_distance_group_placement 1
+        number_of_objects 4
         set_place_for_every_player
         ignore_terrain_restrictions
         set_gaia_object_only
@@ -768,7 +809,7 @@ if INNER_SHALLOWS
         }
     endif
 elseif OUTER_SHALLOWS
-    create_object FISH_FOOD { /* TODO change fish */
+    create_object FISH_FOOD { 
         terrain_to_place_on DLC_MANGROVESHALLOW
         temp_min_distance_group_placement 8
         number_of_objects 9320
@@ -783,13 +824,13 @@ if INNER_CRACKED
         number_of_objects 2
         set_loose_grouping
         terrain_to_place_on DLC_CRACKED
-        temp_min_distance_group_placement 22
+        temp_min_distance_group_placement 20
         min_distance_group_placement 2
         avoid_actor_area 6
     }
     create_object DLC_GOAT {
         set_place_for_every_player
-        number_of_objects 2
+        number_of_objects 4
         terrain_to_place_on DLC_CRACKED
         temp_min_distance_group_placement 2
         actor_area_to_place_in 6
@@ -817,7 +858,25 @@ if INNER_CRACKED
         temp_min_distance_group_placement 2
         actor_area_to_place_in 6
     }
-    /* TODO could use more food resources - probably hunt - very inefficient gathering from straggler trees, and goats don't scale too well. A player mule cart I think isn't really needed with the straggler trees added in, but still helpful 
+    create_object BOAR {
+        number_of_objects 3
+        set_place_for_every_player
+        terrain_to_place_on DLC_CRACKED
+        temp_min_distance_group_placement 9
+        min_distance_group_placement 5 /* TODO may need to test how this works with multiple players on a team */
+        actor_area_to_place_in 6
+        set_gaia_object_only
+    }
+    /*
+    create_object BOAR {
+        number_of_groups 9320
+        terrain_to_place_on DLC_CRACKED
+        min_distance_group_placement 2 
+        temp_min_distance_group_placement 25
+        avoid_actor_area 6
+        set_gaia_object_only
+    } */
+    /* TODO test food resources on inner cracked - very inefficient gathering from straggler trees, and goats don't scale too well. A player mule cart I think isn't really needed with the straggler trees added in, but still helpful 
     consider whether to keep or remove the mule cart from inner cracked terrain generations. */
 endif
 /*  make player and neutral resources */
@@ -861,73 +920,159 @@ In tournament  maps, 1 or all of these often start under control of the player.
 2 individual trees at 4-5 tiles away
 3 individual trees at 6-8 tiles away
 
-TODO add player straggler trees to outer base.
 */
 
-create_object FORAGE {
-    set_place_for_every_player
-    number_of_objects 5
-    number_of_groups 2
-    min_distance_to_players 10
-    max_distance_to_players 14
-    set_circular_placement
-    set_tight_grouping
-    set_gaia_object_only
-    min_distance_group_placement 2
-    temp_min_distance_group_placement 16
-    avoid_forest_zone 2
-    terrain_to_place_on GRASS2
-    actor_area 101
-    actor_area_radius 8
-    avoid_actor_area 101
-
-}
-create_object GOLD {
-    set_place_for_every_player
-    number_of_objects 4
-    number_of_groups 2
-    min_distance_to_players 16
-    max_distance_to_players 22
-    set_circular_placement
-    set_tight_grouping
-    set_gaia_object_only
-    min_distance_group_placement 2
-    temp_min_distance_group_placement 22
-    avoid_forest_zone 2
-    terrain_to_place_on GRASS2
-}
-create_object DEER {
-    set_place_for_every_player
-    number_of_objects rnd(3,4)
-    min_distance_to_players 12
-    max_distance_to_players 20
-    set_circular_placement
-    set_loose_grouping
-    set_gaia_object_only
-    min_distance_group_placement 2
-    temp_min_distance_group_placement 16
-    avoid_forest_zone 2
-    terrain_to_place_on GRASS2
-    actor_area 101
-    actor_area_radius 8
-    avoid_actor_area 101
-}
-create_object SHEEP {
-    set_place_for_every_player
-    number_of_groups 4
-    number_of_objects 2
-    min_distance_to_players 7
-    max_distance_to_players 15
-    set_circular_placement
-    set_loose_grouping
-    set_gaia_object_only
-    min_distance_group_placement 1
-    temp_min_distance_group_placement 6
-    avoid_forest_zone 2
-    terrain_to_place_on GRASS2
-}
+if INCLUDE_OUTER_TOWN_CENTER
+    create_object FORAGE {
+        set_place_for_every_player
+        number_of_objects 5
+        number_of_groups 2
+        min_distance_to_players 10
+        max_distance_to_players 14
+        set_circular_placement
+        set_tight_grouping
+        set_gaia_object_only
+        min_distance_group_placement 2
+        temp_min_distance_group_placement 16
+        avoid_forest_zone 2
+        terrain_to_place_on GRASS2
+        actor_area 101
+        actor_area_radius 6
+        avoid_actor_area 101
+    }
+    create_object GOLD {
+        set_place_for_every_player
+        number_of_objects 4
+        number_of_groups 2
+        min_distance_to_players 16
+        max_distance_to_players 22
+        set_circular_placement
+        set_tight_grouping
+        set_gaia_object_only
+        min_distance_group_placement 2
+        temp_min_distance_group_placement 22
+        avoid_forest_zone 2
+        terrain_to_place_on GRASS2
+    }
+    create_object DEER {
+        set_place_for_every_player
+        number_of_objects rnd(4,5)
+        min_distance_to_players 11
+        max_distance_to_players 20
+        set_circular_placement
+        set_loose_grouping
+        set_gaia_object_only
+        min_distance_group_placement 2
+        avoid_forest_zone 1
+        terrain_to_place_on GRASS2
+        actor_area 101
+        actor_area_radius 7
+        avoid_actor_area 101
+        max_distance_to_other_zones 5
+    }
+    create_object SHEEP {
+        set_place_for_every_player
+        number_of_groups 4
+        number_of_objects 2
+        min_distance_to_players 7
+        max_distance_to_players 15
+        set_circular_placement
+        set_loose_grouping
+        set_gaia_object_only
+        min_distance_group_placement 1
+        temp_min_distance_group_placement 6
+        avoid_forest_zone 2
+        terrain_to_place_on GRASS2
+    }
+    create_object DEER {
+        set_place_for_every_player
+        number_of_objects rnd(3,4)
+        number_of_groups 2
+        min_distance_to_players 12
+        max_distance_to_players 28
+        set_circular_placement
+        set_loose_grouping
+        set_gaia_object_only
+        min_distance_group_placement 2
+        temp_min_distance_group_placement 12
+        avoid_forest_zone 1
+        terrain_to_place_on GRASS2
+        actor_area 101
+        actor_area_radius 8
+        avoid_actor_area 101
+        max_distance_to_other_zones 5
+    }
+    create_object OAKTREE {
+        set_place_for_every_player
+        set_gaia_object_only
+        number_of_objects 5
+        min_distance_to_players 5
+        max_distance_to_players 8
+        set_circular_placement
+    }
+else
+    create_object FORAGE {
+        set_place_for_every_player
+        number_of_objects rnd(2,6)
+        number_of_groups 1
+        find_closest
+        set_tight_grouping
+        set_gaia_object_only
+        min_distance_group_placement 2
+        avoid_forest_zone 2
+        terrain_to_place_on GRASS2
+        actor_area 101
+        actor_area_radius 6
+    }
+    create_object DEER {
+        set_place_for_every_player
+        number_of_objects rnd(2,5)
+        number_of_groups rnd(1,2)
+        min_distance_to_players 6
+        set_circular_placement
+        set_loose_grouping
+        find_closest
+        set_gaia_object_only
+        min_distance_group_placement 2
+        avoid_forest_zone 1
+        terrain_to_place_on GRASS2
+        actor_area 101
+        actor_area_radius 7
+        avoid_actor_area 101
+        max_distance_to_other_zones 5
+    }
+    create_object SHEEP {
+        set_place_for_every_player
+        number_of_groups rnd(1,4)
+        number_of_objects rnd(1,3)
+        min_distance_to_players 6
+        max_distance_to_players 15
+        set_circular_placement
+        set_loose_grouping
+        set_gaia_object_only
+        min_distance_group_placement 1
+        temp_min_distance_group_placement 6
+        avoid_forest_zone 2
+        terrain_to_place_on GRASS2
+    }
+    create_object GOLD {
+        set_place_for_every_player
+        number_of_objects 4
+        number_of_groups 2
+        min_distance_to_players 12
+        max_distance_to_players 26
+        set_circular_placement
+        set_tight_grouping
+        set_gaia_object_only
+        min_distance_group_placement 2
+        temp_min_distance_group_placement 22
+        avoid_forest_zone 2
+        terrain_to_place_on GRASS2
+    }
+endif
 /*
 make some neutral forage on the grass2 terrain
+note: boars only occur on inner cracked terrain.
 */
 create_object FORAGE {
     avoid_forest_zone 3

@@ -12,11 +12,16 @@ idea for randomization: have 8 locations for each of the lands, and randomly sel
 idea: no deer on starting islands, but some on the neutral lands. Have berries scattered throughout the forest (or make theme dependent)
 
 TODO
-scattered gold on neutral island, oysters in river, normal-ish stone, (one per island), low gold in base, decent food
+add hills on the land
 */
 <PLAYER_SETUP>
 direct_placement
 behavior_version 2
+if 2_PLAYER_GAME
+    #define STANDARD_MAP_GENERATION
+elseif 2_TEAM_GAME
+    #define STANDARD_MAP_GENERATION
+endif
 
 if MAPSIZE_MINI
     /* AT_MOST_MINI can simply use MAPSIZE_MINI */
@@ -236,6 +241,8 @@ else /* default theme */
     #const FOREST_TERRAIN 10 /* FOREST */
     #const TERRAIN_MASK 5 /* LEAVES */
     /* could add WATER_TERRAIN 1 */
+
+    #const TREE 349 /* OAKTREE */
 endif
 
 #const ON_GRID 278 /* dead fish trap */
@@ -246,10 +253,11 @@ create_land {
     terrain_type BASE_TERRAIN
     assign_to_player 1
     zone 1
+    /* land_id 1 */
     land_position 20 80
     base_elevation 1
     other_zone_avoidance_distance 13
-    land_percent 35
+    land_percent 45
     clumping_factor 35
 }
 create_land {
@@ -288,10 +296,11 @@ create_land { /* might be worthwhile to surround this with a square of lands wit
     terrain_type BASE_TERRAIN
     assign_to_player 2
     zone 2
+    /* land_id 2 */
     land_position 80 80
     base_elevation 1
     other_zone_avoidance_distance 13
-    land_percent 35
+    land_percent 45
     clumping_factor 35
 }
 create_land {
@@ -329,10 +338,11 @@ create_land {
 create_land {
     terrain_type BASE_TERRAIN
     zone 11
+    land_id 11
     land_position 50 10
     base_elevation 1
     other_zone_avoidance_distance 9
-    land_percent 35
+    land_percent 45
     clumping_factor 35
 }
 /*
@@ -617,6 +627,12 @@ create_object ON_GRID {
     actor_area 20
     actor_area_radius 20
 }
+create_object ON_GRID {
+    set_place_for_every_player
+    max_distance_to_players 0
+    actor_area 26
+    actor_area_radius 26
+}
 create_object TOWN_CENTER {
     set_place_for_every_player
     max_distance_to_players 0
@@ -669,7 +685,7 @@ In tournament  maps, 1 or all of these often start under control of the player.
 2 individual trees at 4-5 tiles away
 3 individual trees at 6-8 tiles away
 
-TODO modify to not use min_distance_to_players
+ modify to not use min_distance_to_players - should be done
 TODO map breaks on miniature map size
 5, 6, 7, 9, 13, 16
  */
@@ -746,9 +762,7 @@ create_object BOAR {
     avoid_forest_zone 2
     
 }
-/* TODO correct tree
-*/
-create_object TREE_A {
+create_object TREE {
     set_place_for_every_player
     min_distance_to_players 4
     max_distance_to_players 8
@@ -769,7 +783,6 @@ if AT_LEAST_LARGE
         min_distance_group_placement 2
         set_tight_grouping
         avoid_forest_zone 1
-        avoid_cliff_zone 1
     }
 endif
 /* 
@@ -796,180 +809,282 @@ create_object FLAG_A {
 }
 For relics, placement is very tight in 8-player stress tests for mini/tiny map sizes, but does seem to generate consistently. Generations may be a bit unbalanced (especially if a relic is placed behind a corner base), but is probably as good as I'm going to get. 
 */
-create_object RELIC {
-    temp_min_distance_group_placement 40
-    avoid_forest_zone 1
-    avoid_cliff_zone 1
-    set_gaia_object_only
-    min_distance_to_players 30
-    set_circular_placement
-    if MAPSIZE_MINI
-        number_of_objects 4
-        temp_min_distance_group_placement 30 /* these are about as high as I can get while passing the 8 player stress test */
-        min_distance_to_players 20 
-    elseif MAPSIZE_TINY
-        number_of_objects 5
-    elseif MAPSIZE_SMALL
-        number_of_objects 5
-    elseif MAPSIZE_MEDIUM
-        number_of_objects 5
-    elseif MAPSIZE_NORMAL
-        number_of_objects 7
-    elseif MAPSIZE_LARGE
-        number_of_objects 8
-    elseif MAPSIZE_HUGE
-        number_of_objects 20
-        temp_min_distance_group_placement 60
-    elseif MAPSIZE_GIANT
-        number_of_objects 20
-        temp_min_distance_group_placement 64
-    elseif MAPSIZE_MASSIVE
-        number_of_objects 20
-        temp_min_distance_group_placement 65
-    elseif MAPSIZE_ENORMOUS
-        number_of_objects 20
-        temp_min_distance_group_placement 68
-    elseif MAPSIZE_COLOSSAL
-        number_of_objects 20
-        temp_min_distance_group_placement 70
-    elseif MAPSIZE_INCREDIBLE
-        number_of_objects 25
-        temp_min_distance_group_placement 75
-    elseif MAPSIZE_MONSTROUS
-        number_of_objects 25
-        temp_min_distance_group_placement 80
-    elseif MAPSIZE_LUDICROUS
-        number_of_objects 30
-        temp_min_distance_group_placement 90
-    endif
+create_object SHORE_FISH {
+    temp_min_distance_group_placement 6
+    number_of_objects 9320
+    min_distance_group_placement 3
 }
-create_object GOLD {
-    temp_min_distance_group_placement 40
-    min_distance_group_placement 10
-    set_circular_placement
-    if MAPSIZE_MINI
+if STANDARD_MAP_GENERATION
+    create_object FORAGE {
+        resource_delta -125
+        second_object RELIC
+        set_place_for_every_player
         min_distance_to_players 20
-    elseif MAPSIZE_TINY
-        min_distance_to_players 26
-    elseif MAPSIZE_SMALL
-        min_distance_to_players 30
-    else
-        min_distance_to_players   44
-    endif
-    set_tight_grouping
-    avoid_forest_zone 1
-    avoid_cliff_zone 1
-    actor_area 100
-    actor_area_radius 16
-    avoid_actor_area   100
-    if AT_MOST_NORMAL
+        set_circular_placement
+        set_gaia_object_only
+        avoid_forest_zone 2
+    }
+    create_object FORAGE {
+        resource_delta -125
+        second_object RELIC
         number_of_objects 3
-    else
-        number_of_objects 4
+        temp_min_distance_group_placement 20
+        set_circular_placement
+        avoid_forest_zone 2
+        place_on_specific_land_id 11
+    }
+    create_object STONE {
+        number_of_objects 3
+        number_of_groups 9320
+        temp_min_distance_group_placement rnd(26,38)
+        set_circular_placement
+        avoid_forest_zone 1
+        place_on_specific_land_id 11
+        set_tight_grouping
+        min_distance_group_placement 6
+        max_distance_to_other_zones 2
+    }
+    if ANTIQUITY_MODE
+        create_object OYSTERS {
+            number_of_objects 9320
+            temp_min_distance_group_placement rnd(5,10)
+            max_distance_to_other_zones 1
+            min_distance_group_placement 3
+        } /* TODO remove
+    else 
+        create_object OYSTERS {
+            number_of_objects 9320
+            temp_min_distance_group_placement rnd(5,10)
+            max_distance_to_other_zones 1
+            min_distance_group_placement 3
+        } */
     endif
-    if MAPSIZE_MINI
-        number_of_groups 2
-        temp_min_distance_group_placement 30
-    elseif MAPSIZE_TINY
-        number_of_groups 2
-        temp_min_distance_group_placement 36
-    elseif MAPSIZE_SMALL
-        number_of_groups 2
-    elseif MAPSIZE_MEDIUM
-        number_of_groups 3
-    elseif MAPSIZE_NORMAL
-        number_of_groups 3
-    elseif MAPSIZE_LARGE
-        number_of_groups 4
-    elseif MAPSIZE_HUGE
-        number_of_groups 5
-        temp_min_distance_group_placement 60
-    elseif MAPSIZE_GIANT
-        number_of_groups 6
-        temp_min_distance_group_placement 64
-    elseif MAPSIZE_MASSIVE
-        number_of_groups 7
-        temp_min_distance_group_placement 65
-    elseif MAPSIZE_ENORMOUS
-        number_of_groups 9
-        temp_min_distance_group_placement 68
-    elseif MAPSIZE_COLOSSAL
-        number_of_groups 11
-        temp_min_distance_group_placement 70
-    elseif MAPSIZE_INCREDIBLE
-        number_of_groups 14
-        temp_min_distance_group_placement 75
-    elseif MAPSIZE_MONSTROUS
-        number_of_groups 18
-        temp_min_distance_group_placement 80
-    elseif MAPSIZE_LUDICROUS
-        number_of_groups 26
-        temp_min_distance_group_placement 90
-    endif
-}
-create_object STONE {
-    temp_min_distance_group_placement 40
-    min_distance_group_placement 10
-    set_circular_placement
-    if MAPSIZE_MINI
-        min_distance_to_players 20
-    elseif MAPSIZE_TINY
-        min_distance_to_players 26
-    elseif MAPSIZE_SMALL
+    create_object SALMON {
+        number_of_objects 9320
+        if ANTIQUITY_MODE
+            temp_min_distance_group_placement 7
+        else
+            temp_min_distance_group_placement 5
+        endif
+        max_distance_to_other_zones 2
+    }
+    create_object GOLD {
+        if ANTIQUITY_MODE
+            resource_delta -350 /* reduce to match oysters */
+        endif
+        number_of_groups 9320
+        temp_min_distance_group_placement rnd(10,23) /* 20 is a decent amount from an eyeball */
+        set_circular_placement
+        avoid_forest_zone 1
+        place_on_specific_land_id 11
+        max_distance_to_other_zones 2
+    }
+    create_object GOLD {
+        if ANTIQUITY_MODE
+            resource_delta -350
+        endif
+        number_of_groups 9320
+        temp_min_distance_group_placement rnd(10,23) /* 20 is a decent amount from an eyeball */
+        set_gaia_object_only
+        set_place_for_every_player
+        min_distance_to_players 25
+        set_circular_placement
+        max_distance_to_other_zones 2
+        avoid_forest_zone 1
+    }
+    
+else
+    create_object RELIC {
+        temp_min_distance_group_placement 40
+        avoid_forest_zone 1
+        avoid_cliff_zone 1
+        set_gaia_object_only
         min_distance_to_players 30
-    else
-        min_distance_to_players   44
-    endif
-    set_tight_grouping
+        set_circular_placement
+        if MAPSIZE_MINI
+            number_of_objects 4
+            temp_min_distance_group_placement 30 /* these are about as high as I can get while passing the 8 player stress test */
+            min_distance_to_players 20 
+        elseif MAPSIZE_TINY
+            number_of_objects 5
+        elseif MAPSIZE_SMALL
+            number_of_objects 5
+        elseif MAPSIZE_MEDIUM
+            number_of_objects 5
+        elseif MAPSIZE_NORMAL
+            number_of_objects 7
+        elseif MAPSIZE_LARGE
+            number_of_objects 8
+        elseif MAPSIZE_HUGE
+            number_of_objects 20
+            temp_min_distance_group_placement 60
+        elseif MAPSIZE_GIANT
+            number_of_objects 20
+            temp_min_distance_group_placement 64
+        elseif MAPSIZE_MASSIVE
+            number_of_objects 20
+            temp_min_distance_group_placement 65
+        elseif MAPSIZE_ENORMOUS
+            number_of_objects 20
+            temp_min_distance_group_placement 68
+        elseif MAPSIZE_COLOSSAL
+            number_of_objects 20
+            temp_min_distance_group_placement 70
+        elseif MAPSIZE_INCREDIBLE
+            number_of_objects 25
+            temp_min_distance_group_placement 75
+        elseif MAPSIZE_MONSTROUS
+            number_of_objects 25
+            temp_min_distance_group_placement 80
+        elseif MAPSIZE_LUDICROUS
+            number_of_objects 30
+            temp_min_distance_group_placement 90
+        endif
+    }
+    create_object GOLD {
+        temp_min_distance_group_placement 40
+        min_distance_group_placement 10
+        set_circular_placement
+        if MAPSIZE_MINI
+            min_distance_to_players 20
+        elseif MAPSIZE_TINY
+            min_distance_to_players 26
+        elseif MAPSIZE_SMALL
+            min_distance_to_players 30
+        else
+            min_distance_to_players   44
+        endif
+        set_tight_grouping
+        avoid_forest_zone 1
+        avoid_cliff_zone 1
+        actor_area 100
+        actor_area_radius 16
+        avoid_actor_area   100
+        if AT_MOST_NORMAL
+            number_of_objects 3
+        else
+            number_of_objects 4
+        endif
+        if MAPSIZE_MINI
+            number_of_groups 2
+            temp_min_distance_group_placement 30
+        elseif MAPSIZE_TINY
+            number_of_groups 2
+            temp_min_distance_group_placement 36
+        elseif MAPSIZE_SMALL
+            number_of_groups 2
+        elseif MAPSIZE_MEDIUM
+            number_of_groups 3
+        elseif MAPSIZE_NORMAL
+            number_of_groups 3
+        elseif MAPSIZE_LARGE
+            number_of_groups 4
+        elseif MAPSIZE_HUGE
+            number_of_groups 5
+            temp_min_distance_group_placement 60
+        elseif MAPSIZE_GIANT
+            number_of_groups 6
+            temp_min_distance_group_placement 64
+        elseif MAPSIZE_MASSIVE
+            number_of_groups 7
+            temp_min_distance_group_placement 65
+        elseif MAPSIZE_ENORMOUS
+            number_of_groups 9
+            temp_min_distance_group_placement 68
+        elseif MAPSIZE_COLOSSAL
+            number_of_groups 11
+            temp_min_distance_group_placement 70
+        elseif MAPSIZE_INCREDIBLE
+            number_of_groups 14
+            temp_min_distance_group_placement 75
+        elseif MAPSIZE_MONSTROUS
+            number_of_groups 18
+            temp_min_distance_group_placement 80
+        elseif MAPSIZE_LUDICROUS
+            number_of_groups 26
+            temp_min_distance_group_placement 90
+        endif
+    }
+    create_object STONE {
+        temp_min_distance_group_placement 40
+        min_distance_group_placement 10
+        set_circular_placement
+        if MAPSIZE_MINI
+            min_distance_to_players 20
+        elseif MAPSIZE_TINY
+            min_distance_to_players 26
+        elseif MAPSIZE_SMALL
+            min_distance_to_players 30
+        else
+            min_distance_to_players   44
+        endif
+        set_tight_grouping
+        avoid_forest_zone 1
+        avoid_cliff_zone 1
+        actor_area 100
+        actor_area_radius 16
+        avoid_actor_area   100
+        if AT_MOST_SMALL
+            number_of_objects 2
+        elseif AT_LEAST_NORMAL
+            number_of_objects 4
+        else
+            number_of_objects 3 /* should be medium map size */
+        endif
+        if MAPSIZE_MINI
+            number_of_groups 2
+            temp_min_distance_group_placement 30
+        elseif MAPSIZE_TINY
+            number_of_groups 2
+            temp_min_distance_group_placement 36
+        elseif MAPSIZE_SMALL
+            number_of_groups 2
+        elseif MAPSIZE_MEDIUM
+            number_of_groups 3
+        elseif MAPSIZE_NORMAL
+            number_of_groups 3
+        elseif MAPSIZE_LARGE
+            number_of_groups 4
+        elseif MAPSIZE_HUGE
+            number_of_groups 6 /* start of infinite stone groups for standard resources */
+            temp_min_distance_group_placement 60
+        elseif MAPSIZE_GIANT
+            number_of_groups 7
+            temp_min_distance_group_placement 64
+        elseif MAPSIZE_MASSIVE
+            number_of_groups 8
+            temp_min_distance_group_placement 65
+        elseif MAPSIZE_ENORMOUS
+            number_of_groups 10
+            temp_min_distance_group_placement 68
+        elseif MAPSIZE_COLOSSAL
+            number_of_groups 12
+            temp_min_distance_group_placement 70
+        elseif MAPSIZE_INCREDIBLE
+            number_of_groups 16
+            temp_min_distance_group_placement 75
+        elseif MAPSIZE_MONSTROUS
+            number_of_groups 20
+            temp_min_distance_group_placement 80
+        elseif MAPSIZE_LUDICROUS
+            number_of_groups 29
+            temp_min_distance_group_placement 90
+        endif
+    }
+endif
+create_object DEER {
+    avoid_actor_area 26
+    number_of_groups 932
+    number_of_objects rnd(2,4)
+    set_loose_grouping
+    temp_min_distance_group_placement rnd(20,40)
     avoid_forest_zone 1
-    avoid_cliff_zone 1
-    actor_area 100
-    actor_area_radius 16
-    avoid_actor_area   100
-    if AT_MOST_SMALL
-        number_of_objects 2
-    elseif AT_LEAST_NORMAL
-        number_of_objects 4
-    else
-        number_of_objects 3 /* should be medium map size */
-    endif
-    if MAPSIZE_MINI
-        number_of_groups 2
-        temp_min_distance_group_placement 30
-    elseif MAPSIZE_TINY
-        number_of_groups 2
-        temp_min_distance_group_placement 36
-    elseif MAPSIZE_SMALL
-        number_of_groups 2
-    elseif MAPSIZE_MEDIUM
-        number_of_groups 3
-    elseif MAPSIZE_NORMAL
-        number_of_groups 3
-    elseif MAPSIZE_LARGE
-        number_of_groups 4
-    elseif MAPSIZE_HUGE
-        number_of_groups 6 /* start of infinite stone groups for standard resources */
-        temp_min_distance_group_placement 60
-    elseif MAPSIZE_GIANT
-        number_of_groups 7
-        temp_min_distance_group_placement 64
-    elseif MAPSIZE_MASSIVE
-        number_of_groups 8
-        temp_min_distance_group_placement 65
-    elseif MAPSIZE_ENORMOUS
-        number_of_groups 10
-        temp_min_distance_group_placement 68
-    elseif MAPSIZE_COLOSSAL
-        number_of_groups 12
-        temp_min_distance_group_placement 70
-    elseif MAPSIZE_INCREDIBLE
-        number_of_groups 16
-        temp_min_distance_group_placement 75
-    elseif MAPSIZE_MONSTROUS
-        number_of_groups 20
-        temp_min_distance_group_placement 80
-    elseif MAPSIZE_LUDICROUS
-        number_of_groups 29
-        temp_min_distance_group_placement 90
-    endif
+    max_distance_to_other_zones 2
+    terrain_to_place_on BASE_TERRAIN /* otherwise can place on shallows */
 }
+create_object TREE { 
+    set_scaling_to_map_size
+    number_of_objects 30
+    min_distance_to_players 10
+}
+

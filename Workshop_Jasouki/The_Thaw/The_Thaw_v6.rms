@@ -1,8 +1,8 @@
 /* The Thaw */
 /* This Script was made by Jasouki */ 
-/* Made December 2024 */
-/* Thanks to Flying Mouse for the feedback and sugestions when creating the map */
-/* This map can be used in Alchemy League AOE Competitions */
+/*Made December 2024 */
+/*Thanks to Flying Mouse for the feedback and sugestions when creating the map */
+/*This map can be used in Alchemy League AOE Competitions */
 
 <PLAYER_SETUP>
  random_placement  
@@ -43,13 +43,13 @@ create_player_lands
      land_percent 10
 
 
-     base_size 10
+     base_size 13
 
 
      border_fuzziness 1
 
  
-     clumping_factor 2
+     clumping_factor 10
 
 
      left_border 10
@@ -59,7 +59,7 @@ create_player_lands
 
      set_zone_by_team
 
-     other_zone_avoidance_distance 1
+     other_zone_avoidance_distance 10
 }
 
 
@@ -431,12 +431,11 @@ create_terrain DLC_FORESTDEAD
 {
    base_terrain ROAD
      number_of_clumps 2
-	 number_of_tiles 50
-     	 spacing_to_other_terrain_types 1
+	 number_of_tiles 60
+     	 spacing_to_other_terrain_types 4
     
 	 clumping_factor 20
-	 spacing_to_other_terrain_types 1
-	 set_avoid_player_start_areas 12
+	 set_avoid_player_start_areas 13
 	  
 }
 
@@ -463,14 +462,13 @@ land_percent 100
 
 create_terrain DLC_FORESTDEAD
 {
-    base_terrain ROAD
+base_terrain ROAD
      number_of_clumps 2
-	 number_of_tiles 50
-     	 spacing_to_other_terrain_types 1
+	 number_of_tiles 60
+     	 spacing_to_other_terrain_types 4
     
 	 clumping_factor 20
-	 spacing_to_other_terrain_types 1
-	 set_avoid_player_start_areas 12
+	 set_avoid_player_start_areas 13
 	 
 }
 
@@ -499,14 +497,13 @@ land_percent 100
 
 create_terrain DLC_FORESTDEAD
 {
-     base_terrain ROAD
+   base_terrain ROAD
      number_of_clumps 2
-	 number_of_tiles 50
-     	 spacing_to_other_terrain_types 1
+	 number_of_tiles 60
+     	 spacing_to_other_terrain_types 4
     
 	 clumping_factor 20
-	 spacing_to_other_terrain_types 1
-	 set_avoid_player_start_areas 12
+	 set_avoid_player_start_areas 13
 	 
 }
 
@@ -536,12 +533,11 @@ create_terrain DLC_FORESTDEAD
 {
    base_terrain ROAD
      number_of_clumps 2
-	 number_of_tiles 50
-     	 spacing_to_other_terrain_types 1
+	 number_of_tiles 60
+     	 spacing_to_other_terrain_types 4
     
 	 clumping_factor 20
-	 spacing_to_other_terrain_types 1
-	 set_avoid_player_start_areas 12
+	 set_avoid_player_start_areas 13
 }
 
 
@@ -568,14 +564,13 @@ land_percent 100
 
 create_terrain DLC_FORESTDEAD
 {
-    base_terrain ROAD
+base_terrain ROAD
      number_of_clumps 2
-	 number_of_tiles 50
-     	 spacing_to_other_terrain_types 1
+	 number_of_tiles 60
+     	 spacing_to_other_terrain_types 4
     
 	 clumping_factor 20
-	 spacing_to_other_terrain_types 1
-	 set_avoid_player_start_areas 12
+	 set_avoid_player_start_areas 13
 }
 
 
@@ -602,14 +597,13 @@ land_percent 100
 
 create_terrain DLC_FORESTDEAD
 {
-    base_terrain ROAD
+  base_terrain ROAD
      number_of_clumps 2
-	 number_of_tiles 50
-     	 spacing_to_other_terrain_types 1
+	 number_of_tiles 60
+     	 spacing_to_other_terrain_types 4
     
 	 clumping_factor 20
-	 spacing_to_other_terrain_types 1
-	 set_avoid_player_start_areas 12
+	 set_avoid_player_start_areas 13
 }
 
 
@@ -636,14 +630,13 @@ land_percent 100
 
 create_terrain DLC_FORESTDEAD
 {
-    base_terrain ROAD
+ base_terrain ROAD
      number_of_clumps 2
-	 number_of_tiles 50
-     	 spacing_to_other_terrain_types 1
+	 number_of_tiles 60
+     	 spacing_to_other_terrain_types 4
     
 	 clumping_factor 20
-	 spacing_to_other_terrain_types 1
-	 set_avoid_player_start_areas 12
+	 set_avoid_player_start_areas 13
 }
 
 
@@ -670,14 +663,13 @@ land_percent 100
 
 create_terrain DLC_FORESTDEAD
 {
-    base_terrain ROAD
+  base_terrain ROAD
      number_of_clumps 2
-	 number_of_tiles 50
-     	 spacing_to_other_terrain_types 1
+	 number_of_tiles 60
+     	 spacing_to_other_terrain_types 4
     
 	 clumping_factor 20
-	 spacing_to_other_terrain_types 1
-	 set_avoid_player_start_areas 12
+	 set_avoid_player_start_areas 13
 	
 	 
 }
@@ -784,6 +776,7 @@ create_object FORAGE
 	max_distance_to_players 13
 	avoid_forest_zone 4
 	avoid_cliff_zone 3
+set_circular_placement
 	actor_area 14
 	actor_area_radius 4
 	min_distance_group_placement 2
@@ -795,12 +788,14 @@ create_object GOLD
 	number_of_objects  7
 	group_placement_radius 3
 	set_tight_grouping
+	set_circular_placement
 	set_gaia_object_only
 	set_place_for_every_player
 	min_distance_to_players 12
 	max_distance_to_players 16
 	max_distance_to_other_zones 7
 	avoid_cliff_zone 3
+	 avoid_forest_zone 2
 	actor_area 12
 	actor_area_radius 5
 	avoid_actor_area 14 /* berries */
@@ -813,6 +808,7 @@ create_object GOLD
 	number_of_objects 4
 	group_placement_radius 3
 	set_tight_grouping
+	set_circular_placement
 	set_gaia_object_only
 	set_place_for_every_player
 	min_distance_to_players 17
@@ -832,13 +828,14 @@ create_object GOLD
 	number_of_objects 4
 	group_placement_radius 3
 	set_tight_grouping
+	set_circular_placement
 	set_gaia_object_only
 	set_place_for_every_player
 	min_distance_to_players 23
 	max_distance_to_players 27
 	min_distance_group_placement 3
 	max_distance_to_other_zones 7
-	avoid_forest_zone 2
+ avoid_forest_zone 2
 	avoid_cliff_zone 3
 	actor_area 62
 	actor_area_radius 5
@@ -854,14 +851,17 @@ create_object STONE
      number_of_objects 2
      group_placement_radius 2
      set_tight_grouping
+	 set_circular_placement
      set_gaia_object_only
      set_place_for_every_player
      min_distance_to_players 17
      max_distance_to_players 20
      min_distance_group_placement 7
      max_distance_to_other_zones 7
+	 avoid_forest_zone 2
 	 actor_area 63
 	 	avoid_actor_area 61 /* medium gold */
+		avoid_actor_area 62 /* far gold */
 	avoid_actor_area 14 /* berries */
 	avoid_actor_area 12 /* close gold */
 }
@@ -873,14 +873,18 @@ create_object STONE
      number_of_objects 2
      group_placement_radius 2
      set_tight_grouping
+	 set_circular_placement
      set_gaia_object_only
      set_place_for_every_player
      min_distance_to_players 21
      max_distance_to_players 24
      min_distance_group_placement 7
      max_distance_to_other_zones 7
+	 avoid_forest_zone 2
 	 actor_area 65
 	 	avoid_actor_area 61 /* medium gold */
+		avoid_actor_area 62 /* far gold */
+		avoid_actor_area 63 /* near stone */
 	avoid_actor_area 14 /* berries */
 	avoid_actor_area 12 /* close gold */
 }
@@ -940,6 +944,7 @@ create_object DEER
      set_place_for_every_player
      min_distance_to_players    30
      max_distance_to_players    34
+	 set_circular_placement
 }
 
 create_object BOAR 
@@ -963,9 +968,9 @@ create_object BOAR
 	 set_circular_placement
 }
 
-/* TREES NEAR PLAYER STARTS */
+/* STRAGLER TREES */
 
-create_object OAKTREE
+create_object DLC_DEADTREE
 {
      number_of_objects             1
      set_gaia_object_only
@@ -975,7 +980,7 @@ create_object OAKTREE
      min_distance_group_placement  1
 	 set_circular_placement
 }
-create_object OAKTREE
+create_object DLC_DEADTREE
 {
      number_of_objects             1
      set_gaia_object_only
@@ -985,7 +990,7 @@ create_object OAKTREE
      min_distance_group_placement  1
 	 set_circular_placement
 }
-create_object OAKTREE
+create_object DLC_DEADTREE
 {
      number_of_objects             1
      set_gaia_object_only
@@ -995,7 +1000,7 @@ create_object OAKTREE
      min_distance_group_placement  1
 	 set_circular_placement
 }
-create_object OAKTREE
+create_object DLC_DEADTREE
 {
      number_of_objects             1
      set_gaia_object_only
@@ -1005,7 +1010,7 @@ create_object OAKTREE
      min_distance_group_placement  1
 	 set_circular_placement
 }
-create_object OAKTREE
+create_object DLC_DEADTREE
 {
      number_of_objects             1
      set_gaia_object_only
@@ -1015,7 +1020,7 @@ create_object OAKTREE
      min_distance_group_placement  1
 	 set_circular_placement
 }
-create_object OAKTREE
+create_object DLC_DEADTREE
 {
      number_of_objects             1
      set_gaia_object_only
@@ -1029,46 +1034,6 @@ create_object OAKTREE
 
 /* *****EXTRA RESOURCES BY MAP***** */
 
-if LARGE_MAP
-create_object FORAGE
-{
-     number_of_groups           1
-     number_of_objects          5
-     group_placement_radius     3
-     set_tight_grouping
-     set_gaia_object_only
-     min_distance_to_players       40
-     max_distance_to_players       120
-     min_distance_group_placement  9
-}
-endif
-
-if HUGE_MAP
-create_object FORAGE
-{
-     number_of_groups           2
-     number_of_objects          5
-     group_placement_radius     3
-     set_tight_grouping
-     set_gaia_object_only
-     min_distance_to_players       40
-     max_distance_to_players       120
-     min_distance_group_placement  9
-}
-endif
-if GIGANTIC_MAP
-create_object FORAGE
-{
-     number_of_groups           3
-     number_of_objects          5
-     group_placement_radius     3
-     set_tight_grouping
-     set_gaia_object_only
-     min_distance_to_players       40
-     max_distance_to_players       120
-     min_distance_group_placement  9
-}
-endif
 
 /* EXTRA GOLD */
 

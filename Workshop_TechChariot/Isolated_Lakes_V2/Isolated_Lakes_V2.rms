@@ -75,6 +75,17 @@ effect_amount GAIA_SET_ATTRIBUTE TREE_D ATTR_DEAD_ID 0
 effect_amount GAIA_SET_ATTRIBUTE TREE_D ATTR_NAME_ID 5706
 
 
+/* Setting Lumbercamps to Be Buildable on Beach */
+/* #const LUMBER_CAMP   562  */
+/* #const LUMBER_CAMP_F 563 */
+/* #const LUMBER_CAMP_C 564 */
+/* #const LUMBER_CAMP_I 565 */
+effect_amount SET_ATTRIBUTE LUMBER_CAMP   ATTR_TERRAIN_ID 10
+effect_amount SET_ATTRIBUTE LUMBER_CAMP_F ATTR_TERRAIN_ID 10
+effect_amount SET_ATTRIBUTE LUMBER_CAMP_C ATTR_TERRAIN_ID 10
+effect_amount SET_ATTRIBUTE LUMBER_CAMP_I ATTR_TERRAIN_ID 10
+
+
 /* Upgrading Mangrove Tree to Flooded Bamboo Tree */
 #const MT 1144
 #const FT 348

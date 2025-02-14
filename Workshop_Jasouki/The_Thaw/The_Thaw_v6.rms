@@ -1,8 +1,8 @@
 /* The Thaw */
 /* This Script was made by Jasouki */ 
-/*Made December 2024 */
-/*Thanks to Flying Mouse for the feedback and sugestions when creating the map */
-/*This map can be used in Alchemy League AOE Competitions */
+/* Made December 2024 */
+/* Thanks to Flying Mouse for the feedback and sugestions when creating the map */
+/* This map can be used in Alchemy League AOE Competitions */
 
 <PLAYER_SETUP>
  random_placement  
@@ -24,6 +24,8 @@ if LOW_RESOURCES
 else
 endif
 
+#const BEACH_ICE 37
+#const NNGB 81
 /* ************************************ */
 <LAND_GENERATION>
 
@@ -75,7 +77,6 @@ set_scale_by_groups
 enable_balanced_elevation 
 }
 
-
 create_elevation 1
 {
 
@@ -88,615 +89,718 @@ enable_balanced_elevation
 
 <TERRAIN_GENERATION>
 
-create_terrain SNOW
-{
+#define PLAYER_FORESTS
+if PLAYER_FORESTS
+     /* Defining Outer Boundary */
+    create_terrain GRASS2 { base_terrain ROAD2 number_of_clumps 9320 land_percent 100 set_scale_by_groups set_avoid_player_start_areas 20 }
+    create_terrain GRASS2 { base_terrain ROAD2 number_of_clumps 9320 land_percent 100 set_scale_by_groups set_avoid_player_start_areas 20 }
+    create_terrain GRASS2 { base_terrain ROAD2 number_of_clumps 9320 land_percent 100 set_scale_by_groups set_avoid_player_start_areas 20 }
+    create_terrain GRASS2 { base_terrain ROAD2 number_of_clumps 9320 land_percent 100 set_scale_by_groups set_avoid_player_start_areas 20 }
 
-base_terrain DIRT_SNOW
-number_of_clumps 1000
-spacing_to_other_terrain_types 3
-land_percent 100
-set_scale_by_groups
-}
+    create_terrain DIRT { base_terrain ROAD2 number_of_clumps 9320 land_percent 100 set_scale_by_groups spacing_to_other_terrain_types 1 }
+    create_terrain DIRT { base_terrain ROAD2 number_of_clumps 9320 land_percent 100 set_scale_by_groups spacing_to_other_terrain_types 1 }
+    create_terrain DIRT { base_terrain ROAD2 number_of_clumps 9320 land_percent 100 set_scale_by_groups spacing_to_other_terrain_types 1 }
+    create_terrain DIRT { base_terrain ROAD2 number_of_clumps 9320 land_percent 100 set_scale_by_groups spacing_to_other_terrain_types 1 }
+
+    create_terrain GRASS2 { base_terrain ROAD2 number_of_clumps 9320 land_percent 100 set_scale_by_groups }
+    create_terrain GRASS2 { base_terrain ROAD2 number_of_clumps 9320 land_percent 100 set_scale_by_groups }
+    create_terrain GRASS2 { base_terrain ROAD2 number_of_clumps 9320 land_percent 100 set_scale_by_groups }
+    create_terrain GRASS2 { base_terrain ROAD2 number_of_clumps 9320 land_percent 100 set_scale_by_groups }
+
+     /* Player 1 Forest */
+    create_terrain DLC_BLACK { base_terrain DIRT number_of_clumps 1 land_percent 100 }
+    create_terrain DLC_FORESTDEAD { base_terrain DLC_BLACK number_of_clumps 2 number_of_tiles 60 clumping_factor 20 set_avoid_player_start_areas 13 }
+    create_terrain GRASS2 { base_terrain DLC_BLACK number_of_clumps 9320 land_percent 100 set_scale_by_groups }
+    create_terrain GRASS2 { base_terrain DLC_BLACK number_of_clumps 9320 land_percent 100 set_scale_by_groups }
+    create_terrain GRASS2 { base_terrain DLC_BLACK number_of_clumps 9320 land_percent 100 set_scale_by_groups }
+    create_terrain GRASS2 { base_terrain DLC_BLACK number_of_clumps 9320 land_percent 100 set_scale_by_groups }
+
+     /* Player 2 Forest */
+    create_terrain DLC_BLACK { base_terrain DIRT number_of_clumps 1 land_percent 100 }
+    create_terrain DLC_FORESTDEAD { base_terrain DLC_BLACK number_of_clumps 2 number_of_tiles 60 clumping_factor 20 set_avoid_player_start_areas 13 }
+    create_terrain GRASS2 { base_terrain DLC_BLACK number_of_clumps 9320 land_percent 100 set_scale_by_groups }
+    create_terrain GRASS2 { base_terrain DLC_BLACK number_of_clumps 9320 land_percent 100 set_scale_by_groups }
+    create_terrain GRASS2 { base_terrain DLC_BLACK number_of_clumps 9320 land_percent 100 set_scale_by_groups }
+    create_terrain GRASS2 { base_terrain DLC_BLACK number_of_clumps 9320 land_percent 100 set_scale_by_groups }
+
+     /* Player 3 Forest */
+    create_terrain DLC_BLACK { base_terrain DIRT number_of_clumps 1 land_percent 100 }
+    create_terrain DLC_FORESTDEAD { base_terrain DLC_BLACK number_of_clumps 2 number_of_tiles 60 clumping_factor 20 set_avoid_player_start_areas 13 }
+    create_terrain GRASS2 { base_terrain DLC_BLACK number_of_clumps 9320 land_percent 100 set_scale_by_groups }
+    create_terrain GRASS2 { base_terrain DLC_BLACK number_of_clumps 9320 land_percent 100 set_scale_by_groups }
+    create_terrain GRASS2 { base_terrain DLC_BLACK number_of_clumps 9320 land_percent 100 set_scale_by_groups }
+    create_terrain GRASS2 { base_terrain DLC_BLACK number_of_clumps 9320 land_percent 100 set_scale_by_groups }
+
+     /* Player 4 Forest */
+    create_terrain DLC_BLACK { base_terrain DIRT number_of_clumps 1 land_percent 100 }
+    create_terrain DLC_FORESTDEAD { base_terrain DLC_BLACK number_of_clumps 2 number_of_tiles 60 clumping_factor 20 set_avoid_player_start_areas 13 }
+    create_terrain GRASS2 { base_terrain DLC_BLACK number_of_clumps 9320 land_percent 100 set_scale_by_groups }
+    create_terrain GRASS2 { base_terrain DLC_BLACK number_of_clumps 9320 land_percent 100 set_scale_by_groups }
+    create_terrain GRASS2 { base_terrain DLC_BLACK number_of_clumps 9320 land_percent 100 set_scale_by_groups }
+    create_terrain GRASS2 { base_terrain DLC_BLACK number_of_clumps 9320 land_percent 100 set_scale_by_groups }
+
+     /* Player 5 Forest */
+    create_terrain DLC_BLACK { base_terrain DIRT number_of_clumps 1 land_percent 100 }
+    create_terrain DLC_FORESTDEAD { base_terrain DLC_BLACK number_of_clumps 2 number_of_tiles 60 clumping_factor 20 set_avoid_player_start_areas 13 }
+    create_terrain GRASS2 { base_terrain DLC_BLACK number_of_clumps 9320 land_percent 100 set_scale_by_groups }
+    create_terrain GRASS2 { base_terrain DLC_BLACK number_of_clumps 9320 land_percent 100 set_scale_by_groups }
+    create_terrain GRASS2 { base_terrain DLC_BLACK number_of_clumps 9320 land_percent 100 set_scale_by_groups }
+    create_terrain GRASS2 { base_terrain DLC_BLACK number_of_clumps 9320 land_percent 100 set_scale_by_groups }
+
+     /* Player 6 Forest */
+    create_terrain DLC_BLACK { base_terrain DIRT number_of_clumps 1 land_percent 100 }
+    create_terrain DLC_FORESTDEAD { base_terrain DLC_BLACK number_of_clumps 2 number_of_tiles 60 clumping_factor 20 set_avoid_player_start_areas 13 }
+    create_terrain GRASS2 { base_terrain DLC_BLACK number_of_clumps 9320 land_percent 100 set_scale_by_groups }
+    create_terrain GRASS2 { base_terrain DLC_BLACK number_of_clumps 9320 land_percent 100 set_scale_by_groups }
+    create_terrain GRASS2 { base_terrain DLC_BLACK number_of_clumps 9320 land_percent 100 set_scale_by_groups }
+    create_terrain GRASS2 { base_terrain DLC_BLACK number_of_clumps 9320 land_percent 100 set_scale_by_groups }
+
+     /* Player 7 Forest */
+    create_terrain DLC_BLACK { base_terrain DIRT number_of_clumps 1 land_percent 100 }
+    create_terrain DLC_FORESTDEAD { base_terrain DLC_BLACK number_of_clumps 2 number_of_tiles 60 clumping_factor 20 set_avoid_player_start_areas 13 }
+    create_terrain GRASS2 { base_terrain DLC_BLACK number_of_clumps 9320 land_percent 100 set_scale_by_groups }
+    create_terrain GRASS2 { base_terrain DLC_BLACK number_of_clumps 9320 land_percent 100 set_scale_by_groups }
+    create_terrain GRASS2 { base_terrain DLC_BLACK number_of_clumps 9320 land_percent 100 set_scale_by_groups }
+    create_terrain GRASS2 { base_terrain DLC_BLACK number_of_clumps 9320 land_percent 100 set_scale_by_groups }
+
+     /* Player 8 Forest */
+    create_terrain DLC_BLACK { base_terrain DIRT number_of_clumps 1 land_percent 100 }
+    create_terrain DLC_FORESTDEAD { base_terrain DLC_BLACK number_of_clumps 2 number_of_tiles 60 clumping_factor 20 set_avoid_player_start_areas 13 }
+    create_terrain GRASS2 { base_terrain DLC_BLACK number_of_clumps 9320 land_percent 100 set_scale_by_groups }
+    create_terrain GRASS2 { base_terrain DLC_BLACK number_of_clumps 9320 land_percent 100 set_scale_by_groups }
+    create_terrain GRASS2 { base_terrain DLC_BLACK number_of_clumps 9320 land_percent 100 set_scale_by_groups }
+    create_terrain GRASS2 { base_terrain DLC_BLACK number_of_clumps 9320 land_percent 100 set_scale_by_groups }
+
+     /* Reverting Placeholder */
+    create_terrain ROAD2 { base_terrain GRASS2 number_of_clumps 9320 land_percent 100 set_scale_by_groups }
+    create_terrain ROAD2 { base_terrain GRASS2 number_of_clumps 9320 land_percent 100 set_scale_by_groups }
+    create_terrain ROAD2 { base_terrain GRASS2 number_of_clumps 9320 land_percent 100 set_scale_by_groups }
+    create_terrain ROAD2 { base_terrain GRASS2 number_of_clumps 9320 land_percent 100 set_scale_by_groups }
 
 
-/* FOREST */
+
+endif
+
+/* Random Ponds Sprinked In */
+create_terrain WATER { base_terrain ROAD2 number_of_clumps 40 number_of_tiles 1 set_scale_by_groups set_avoid_player_start_areas 15 height_limits 0 0 spacing_to_other_terrain_types 1 set_flat_terrain_only }
+create_terrain NNGB  { base_terrain ROAD2 number_of_clumps 9320 land_percent 100 set_scale_by_groups set_avoid_player_start_areas 15 terrain_mask 1 }
 
 
 
-create_terrain SNOW_FOREST
-{
-     base_terrain SNOW
-     spacing_to_other_terrain_types 5
-     land_percent 15
-     number_of_clumps 30
-     set_avoid_player_start_areas
+#define OTHER_TERRAIN_OPERATIONS
+if OTHER_TERRAIN_OPERATIONS
+
+     create_terrain SNOW
+     {
+
+     base_terrain DIRT_SNOW
+     number_of_clumps 1000
+     spacing_to_other_terrain_types 3
+     land_percent 100
      set_scale_by_groups
-}
+     }
 
-/*Neutral ponds */
-create_terrain WATER
-{
-     base_terrain SNOW
-     number_of_clumps 30
-     set_scale_by_groups
-	 spacing_to_other_terrain_types 1
-     land_percent 1
-	 clumping_factor 25
-	 spacing_to_other_terrain_types 1
-}
+     /* Neutral Forests */
+     create_terrain SNOW_FOREST
+     {
+          base_terrain SNOW
+          spacing_to_other_terrain_types 5
+          land_percent 15
+          number_of_clumps 30
+          set_avoid_player_start_areas
+          set_scale_by_groups
+     }
 
-/*Player POnds */
+     /* Neutral Ponds */
+     create_terrain WATER
+     {
+          base_terrain SNOW
+          number_of_clumps 30
+          set_scale_by_groups
+          spacing_to_other_terrain_types 1
+          land_percent 1
+          clumping_factor 25
+          spacing_to_other_terrain_types 1
+     }
 
-/*PLayer 1 Pond */
-create_terrain ROAD
+endif
 
-{
-base_terrain ROAD2
-number_of_clumps 1
-land_percent 100
+/* #define UNDEFINED */
+if UNDEFINED
+
+     /* Player POnds */
+
+     /* PLayer 1 Pond */
+     create_terrain ROAD
+
+     {
+     base_terrain ROAD2
+     number_of_clumps 1
+     land_percent 100
 
 
-}
+     }
 
-create_terrain WATER
-{
+     create_terrain WATER
+     {
+          base_terrain ROAD
+          number_of_clumps 5
+          number_of_tiles 15
+          set_scale_by_groups
+          spacing_to_other_terrain_types 1
+     
+          clumping_factor 25
+          spacing_to_other_terrain_types 1
+          set_avoid_player_start_areas 13
+     }
+
+     create_terrain DLC_DIRT4
+
+     {
      base_terrain ROAD
-     number_of_clumps 5
-	 number_of_tiles 15
+     number_of_clumps 9320
      set_scale_by_groups
-	 spacing_to_other_terrain_types 1
-    
-	 clumping_factor 25
-	 spacing_to_other_terrain_types 1
-	 set_avoid_player_start_areas 13
-}
+     land_percent 100
 
-create_terrain DLC_DIRT4
+     }
 
-{
-base_terrain ROAD
-number_of_clumps 9320
-set_scale_by_groups
-land_percent 100
+     /* PLayer 2 Pond */
 
-}
+     create_terrain ROAD
 
-/*PLayer 2 Pond */
-
-create_terrain ROAD
-
-{
-base_terrain ROAD2
-number_of_clumps 1
-land_percent 100
+     {
+     base_terrain ROAD2
+     number_of_clumps 1
+     land_percent 100
 
 
-}
+     }
 
-create_terrain WATER
-{
+     create_terrain WATER
+     {
+          base_terrain ROAD
+          number_of_clumps 5
+          number_of_tiles 15
+          set_scale_by_groups
+          spacing_to_other_terrain_types 1
+     
+          clumping_factor 25
+          spacing_to_other_terrain_types 1
+          set_avoid_player_start_areas 13
+     }
+
+     create_terrain DLC_DIRT4
+
+     {
      base_terrain ROAD
-     number_of_clumps 5
-	 number_of_tiles 15
+     number_of_clumps 9320
      set_scale_by_groups
-	 spacing_to_other_terrain_types 1
-    
-	 clumping_factor 25
-	 spacing_to_other_terrain_types 1
-	 set_avoid_player_start_areas 13
-}
+     land_percent 100
 
-create_terrain DLC_DIRT4
+     }
 
-{
-base_terrain ROAD
-number_of_clumps 9320
-set_scale_by_groups
-land_percent 100
+     /* PLayer 3 Pond */
+     create_terrain ROAD
 
-}
-
-/*PLayer 3 Pond */
-create_terrain ROAD
-
-{
-base_terrain ROAD2
-number_of_clumps 1
-land_percent 100
+     {
+     base_terrain ROAD2
+     number_of_clumps 1
+     land_percent 100
 
 
-}
+     }
 
-create_terrain WATER
-{
+     create_terrain WATER
+     {
+          base_terrain ROAD
+          number_of_clumps 5
+          number_of_tiles 15
+          set_scale_by_groups
+          spacing_to_other_terrain_types 1
+     
+          clumping_factor 25
+          spacing_to_other_terrain_types 1
+          set_avoid_player_start_areas 13
+     }
+
+     create_terrain DLC_DIRT4
+
+     {
      base_terrain ROAD
-     number_of_clumps 5
-	 number_of_tiles 15
+     number_of_clumps 9320
      set_scale_by_groups
-	 spacing_to_other_terrain_types 1
-    
-	 clumping_factor 25
-	 spacing_to_other_terrain_types 1
-	 set_avoid_player_start_areas 13
-}
+     land_percent 100
 
-create_terrain DLC_DIRT4
+     }
 
-{
-base_terrain ROAD
-number_of_clumps 9320
-set_scale_by_groups
-land_percent 100
+     /* PLayer 4 Pond */
 
-}
+     create_terrain ROAD
 
-/*PLayer 4 Pond */
-
-create_terrain ROAD
-
-{
-base_terrain ROAD2
-number_of_clumps 1
-land_percent 100
+     {
+     base_terrain ROAD2
+     number_of_clumps 1
+     land_percent 100
 
 
-}
+     }
 
-create_terrain WATER
-{
+     create_terrain WATER
+     {
+          base_terrain ROAD
+          number_of_clumps 5
+          number_of_tiles 15
+          set_scale_by_groups
+          spacing_to_other_terrain_types 1
+     
+          clumping_factor 25
+          spacing_to_other_terrain_types 1
+          set_avoid_player_start_areas 13
+     }
+
+     create_terrain DLC_DIRT4
+
+     {
      base_terrain ROAD
-     number_of_clumps 5
-	 number_of_tiles 15
+     number_of_clumps 9320
      set_scale_by_groups
-	 spacing_to_other_terrain_types 1
-    
-	 clumping_factor 25
-	 spacing_to_other_terrain_types 1
-	 set_avoid_player_start_areas 13
-}
+     land_percent 100
 
-create_terrain DLC_DIRT4
+     }
 
-{
-base_terrain ROAD
-number_of_clumps 9320
-set_scale_by_groups
-land_percent 100
+     /* PLayer 5 Pond */
+     create_terrain ROAD
 
-}
-
-/*PLayer 5 Pond */
-create_terrain ROAD
-
-{
-base_terrain ROAD2
-number_of_clumps 1
-land_percent 100
+     {
+     base_terrain ROAD2
+     number_of_clumps 1
+     land_percent 100
 
 
-}
+     }
 
-create_terrain WATER
-{
+     create_terrain WATER
+     {
+          base_terrain ROAD
+          number_of_clumps 5
+          number_of_tiles 15
+          set_scale_by_groups
+          spacing_to_other_terrain_types 1
+     
+          clumping_factor 25
+          spacing_to_other_terrain_types 1
+          set_avoid_player_start_areas 13
+     }
+
+     create_terrain DLC_DIRT4
+
+     {
      base_terrain ROAD
-     number_of_clumps 5
-	 number_of_tiles 15
+     number_of_clumps 9320
      set_scale_by_groups
-	 spacing_to_other_terrain_types 1
-    
-	 clumping_factor 25
-	 spacing_to_other_terrain_types 1
-	 set_avoid_player_start_areas 13
-}
+     land_percent 100
 
-create_terrain DLC_DIRT4
+     }
 
-{
-base_terrain ROAD
-number_of_clumps 9320
-set_scale_by_groups
-land_percent 100
+     /* PLayer 6 Pond */
 
-}
+     create_terrain ROAD
 
-/*PLayer 6 Pond */
-
-create_terrain ROAD
-
-{
-base_terrain ROAD2
-number_of_clumps 1
-land_percent 100
+     {
+     base_terrain ROAD2
+     number_of_clumps 1
+     land_percent 100
 
 
-}
+     }
 
-create_terrain WATER
-{
+     create_terrain WATER
+     {
+          base_terrain ROAD
+          number_of_clumps 5
+          number_of_tiles 15
+          set_scale_by_groups
+          spacing_to_other_terrain_types 1
+     
+          clumping_factor 25
+          spacing_to_other_terrain_types 1
+          set_avoid_player_start_areas 13
+     }
+
+     create_terrain DLC_DIRT4
+
+     {
      base_terrain ROAD
-     number_of_clumps 5
-	 number_of_tiles 15
+     number_of_clumps 9320
      set_scale_by_groups
-	 spacing_to_other_terrain_types 1
-    
-	 clumping_factor 25
-	 spacing_to_other_terrain_types 1
-	 set_avoid_player_start_areas 13
-}
+     land_percent 100
 
-create_terrain DLC_DIRT4
+     }
 
-{
-base_terrain ROAD
-number_of_clumps 9320
-set_scale_by_groups
-land_percent 100
+     /* PLayer 7 Pond */
+     create_terrain ROAD
 
-}
-
-/*PLayer 7 Pond */
-create_terrain ROAD
-
-{
-base_terrain ROAD2
-number_of_clumps 1
-land_percent 100
+     {
+     base_terrain ROAD2
+     number_of_clumps 1
+     land_percent 100
 
 
-}
+     }
 
-create_terrain WATER
-{
+     create_terrain WATER
+     {
+          base_terrain ROAD
+          number_of_clumps 5
+          number_of_tiles 15
+          set_scale_by_groups
+          spacing_to_other_terrain_types 1
+     
+          clumping_factor 25
+          spacing_to_other_terrain_types 1
+          set_avoid_player_start_areas 13
+     }
+
+     create_terrain DLC_DIRT4
+
+     {
      base_terrain ROAD
-     number_of_clumps 5
-	 number_of_tiles 15
+     number_of_clumps 9320
      set_scale_by_groups
-	 spacing_to_other_terrain_types 1
-    
-	 clumping_factor 25
-	 spacing_to_other_terrain_types 1
-	 set_avoid_player_start_areas 13
-}
+     land_percent 100
 
-create_terrain DLC_DIRT4
+     }
 
-{
-base_terrain ROAD
-number_of_clumps 9320
-set_scale_by_groups
-land_percent 100
+     /* PLayer 8 Pond */
 
-}
+     create_terrain ROAD
 
-/*PLayer 8 Pond */
-
-create_terrain ROAD
-
-{
-base_terrain ROAD2
-number_of_clumps 1
-land_percent 100
+     {
+     base_terrain ROAD2
+     number_of_clumps 1
+     land_percent 100
 
 
-}
+     }
 
-create_terrain WATER
-{
+     create_terrain WATER
+     {
+          base_terrain ROAD
+          number_of_clumps 5
+          number_of_tiles 15
+          set_scale_by_groups
+          spacing_to_other_terrain_types 1
+     
+          clumping_factor 25
+          spacing_to_other_terrain_types 1
+          set_avoid_player_start_areas 13
+     }
+
+     create_terrain DLC_DIRT4
+
+     {
      base_terrain ROAD
-     number_of_clumps 5
-	 number_of_tiles 15
+     number_of_clumps 9320
      set_scale_by_groups
-	 spacing_to_other_terrain_types 1
-    
-	 clumping_factor 25
-	 spacing_to_other_terrain_types 1
-	 set_avoid_player_start_areas 13
-}
+     land_percent 100
 
-create_terrain DLC_DIRT4
+     }
 
-{
-base_terrain ROAD
-number_of_clumps 9320
-set_scale_by_groups
-land_percent 100
+     create_terrain ROAD2
 
-}
+     {
+     base_terrain DLC_DIRT4
+     number_of_clumps 9320
+     set_scale_by_groups
+     land_percent 100
 
-create_terrain ROAD2
+     }
 
-{
-base_terrain DLC_DIRT4
-number_of_clumps 9320
-set_scale_by_groups
-land_percent 100
+     /* Create Player Woods */
 
-}
 
-/*Create Player Woods*/
+     /* player 1 woods */
+     create_terrain ROAD
 
+     {
+     base_terrain ROAD2
+     number_of_clumps 1
+     land_percent 100
 
-/*player 1 woods */
-create_terrain ROAD
 
-{
-base_terrain ROAD2
-number_of_clumps 1
-land_percent 100
+     }
 
+     create_terrain DLC_DIRT4
 
-}
+     {
+     base_terrain ROAD
+     number_of_clumps 9320
+     set_scale_by_groups
+     land_percent 100
 
-create_terrain DLC_FORESTDEAD
-{
-   base_terrain ROAD
-     number_of_clumps 2
-	 number_of_tiles 60
-     	 spacing_to_other_terrain_types 4
-    
-	 clumping_factor 20
-	 set_avoid_player_start_areas 13
-	  
-}
+     }
 
-create_terrain DLC_DIRT4
+     /* player 2 woods */
+     create_terrain ROAD
 
-{
-base_terrain ROAD
-number_of_clumps 9320
-set_scale_by_groups
-land_percent 100
+     {
+     base_terrain ROAD2
+     number_of_clumps 1
+     land_percent 100
 
-}
 
-/*player 2 woods */
-create_terrain ROAD
+     }
 
-{
-base_terrain ROAD2
-number_of_clumps 1
-land_percent 100
+     create_terrain DLC_FORESTDEAD
+     {
+     base_terrain ROAD
+          number_of_clumps 2
+          number_of_tiles 60
+               spacing_to_other_terrain_types 4
+     
+          clumping_factor 20
+          set_avoid_player_start_areas 13
+          
+     }
 
 
-}
+     create_terrain DLC_DIRT4
 
-create_terrain DLC_FORESTDEAD
-{
-base_terrain ROAD
-     number_of_clumps 2
-	 number_of_tiles 60
-     	 spacing_to_other_terrain_types 4
-    
-	 clumping_factor 20
-	 set_avoid_player_start_areas 13
-	 
-}
+     {
+     base_terrain ROAD
+     number_of_clumps 9320
+     set_scale_by_groups
+     land_percent 100
 
+     }
 
-create_terrain DLC_DIRT4
 
-{
-base_terrain ROAD
-number_of_clumps 9320
-set_scale_by_groups
-land_percent 100
+     /* player 3 woods */
+     create_terrain ROAD
 
-}
+     {
+     base_terrain ROAD2
+     number_of_clumps 1
+     land_percent 100
 
 
-/*player 3 woods */
-create_terrain ROAD
+     }
 
-{
-base_terrain ROAD2
-number_of_clumps 1
-land_percent 100
+     create_terrain DLC_FORESTDEAD
+     {
+     base_terrain ROAD
+          number_of_clumps 2
+          number_of_tiles 60
+               spacing_to_other_terrain_types 4
+     
+          clumping_factor 20
+          set_avoid_player_start_areas 13
+          
+     }
 
 
-}
+     create_terrain DLC_DIRT4
 
-create_terrain DLC_FORESTDEAD
-{
-   base_terrain ROAD
-     number_of_clumps 2
-	 number_of_tiles 60
-     	 spacing_to_other_terrain_types 4
-    
-	 clumping_factor 20
-	 set_avoid_player_start_areas 13
-	 
-}
+     {
+     base_terrain ROAD
+     number_of_clumps 9320
+     set_scale_by_groups
+     land_percent 100
 
+     }
 
-create_terrain DLC_DIRT4
+     /* player 4 woods */
+     create_terrain ROAD
 
-{
-base_terrain ROAD
-number_of_clumps 9320
-set_scale_by_groups
-land_percent 100
+     {
+     base_terrain ROAD2
+     number_of_clumps 1
+     land_percent 100
 
-}
 
-/*player 4 woods */
-create_terrain ROAD
+     }
 
-{
-base_terrain ROAD2
-number_of_clumps 1
-land_percent 100
+     create_terrain DLC_FORESTDEAD
+     {
+     base_terrain ROAD
+          number_of_clumps 2
+          number_of_tiles 60
+               spacing_to_other_terrain_types 4
+     
+          clumping_factor 20
+          set_avoid_player_start_areas 13
+     }
 
 
-}
+     create_terrain DLC_DIRT4
 
-create_terrain DLC_FORESTDEAD
-{
-   base_terrain ROAD
-     number_of_clumps 2
-	 number_of_tiles 60
-     	 spacing_to_other_terrain_types 4
-    
-	 clumping_factor 20
-	 set_avoid_player_start_areas 13
-}
+     {
+     base_terrain ROAD
+     number_of_clumps 9320
+     set_scale_by_groups
+     land_percent 100
 
+     }
 
-create_terrain DLC_DIRT4
+     /* player 5 woods */
+     create_terrain ROAD
 
-{
-base_terrain ROAD
-number_of_clumps 9320
-set_scale_by_groups
-land_percent 100
+     {
+     base_terrain ROAD2
+     number_of_clumps 1
+     land_percent 100
 
-}
 
-/*player 5 woods */
-create_terrain ROAD
+     }
 
-{
-base_terrain ROAD2
-number_of_clumps 1
-land_percent 100
+     create_terrain DLC_FORESTDEAD
+     {
+     base_terrain ROAD
+          number_of_clumps 2
+          number_of_tiles 60
+               spacing_to_other_terrain_types 4
+     
+          clumping_factor 20
+          set_avoid_player_start_areas 13
+     }
 
 
-}
+     create_terrain DLC_DIRT4
 
-create_terrain DLC_FORESTDEAD
-{
-base_terrain ROAD
-     number_of_clumps 2
-	 number_of_tiles 60
-     	 spacing_to_other_terrain_types 4
-    
-	 clumping_factor 20
-	 set_avoid_player_start_areas 13
-}
+     {
+     base_terrain ROAD
+     number_of_clumps 9320
+     set_scale_by_groups
+     land_percent 100
 
+     }
 
-create_terrain DLC_DIRT4
+     /* player 6 woods */
+     create_terrain ROAD
 
-{
-base_terrain ROAD
-number_of_clumps 9320
-set_scale_by_groups
-land_percent 100
+     {
+     base_terrain ROAD2
+     number_of_clumps 1
+     land_percent 100
 
-}
 
-/*player 6 woods */
-create_terrain ROAD
+     }
 
-{
-base_terrain ROAD2
-number_of_clumps 1
-land_percent 100
+     create_terrain DLC_FORESTDEAD
+     {
+     base_terrain ROAD
+          number_of_clumps 2
+          number_of_tiles 60
+               spacing_to_other_terrain_types 4
+     
+          clumping_factor 20
+          set_avoid_player_start_areas 13
+     }
 
 
-}
+     create_terrain DLC_DIRT4
 
-create_terrain DLC_FORESTDEAD
-{
-  base_terrain ROAD
-     number_of_clumps 2
-	 number_of_tiles 60
-     	 spacing_to_other_terrain_types 4
-    
-	 clumping_factor 20
-	 set_avoid_player_start_areas 13
-}
+     {
+     base_terrain ROAD
+     number_of_clumps 9320
+     set_scale_by_groups
+     land_percent 100
 
+     }
 
-create_terrain DLC_DIRT4
+     /* player 7 woods */
+     create_terrain ROAD
 
-{
-base_terrain ROAD
-number_of_clumps 9320
-set_scale_by_groups
-land_percent 100
+     {
+     base_terrain ROAD2
+     number_of_clumps 1
+     land_percent 100
 
-}
 
-/*player 7 woods */
-create_terrain ROAD
+     }
 
-{
-base_terrain ROAD2
-number_of_clumps 1
-land_percent 100
+     create_terrain DLC_FORESTDEAD
+     {
+     base_terrain ROAD
+          number_of_clumps 2
+          number_of_tiles 60
+               spacing_to_other_terrain_types 4
+     
+          clumping_factor 20
+          set_avoid_player_start_areas 13
+     }
 
 
-}
+     create_terrain DLC_DIRT4
 
-create_terrain DLC_FORESTDEAD
-{
- base_terrain ROAD
-     number_of_clumps 2
-	 number_of_tiles 60
-     	 spacing_to_other_terrain_types 4
-    
-	 clumping_factor 20
-	 set_avoid_player_start_areas 13
-}
+     {
+     base_terrain ROAD
+     number_of_clumps 9320
+     set_scale_by_groups
+     land_percent 100
 
+     }
 
-create_terrain DLC_DIRT4
+     /* player 8 woods */
+     create_terrain ROAD
 
-{
-base_terrain ROAD
-number_of_clumps 9320
-set_scale_by_groups
-land_percent 100
+     {
+     base_terrain ROAD2
+     number_of_clumps 1
+     land_percent 100
 
-}
 
-/*player 8 woods */
-create_terrain ROAD
+     }
 
-{
-base_terrain ROAD2
-number_of_clumps 1
-land_percent 100
+     create_terrain DLC_FORESTDEAD
+     {
+     base_terrain ROAD
+          number_of_clumps 2
+          number_of_tiles 60
+               spacing_to_other_terrain_types 4
+     
+          clumping_factor 20
+          set_avoid_player_start_areas 13
+          
+          
+     }
 
 
-}
+     create_terrain DLC_DIRT4
 
-create_terrain DLC_FORESTDEAD
-{
-  base_terrain ROAD
-     number_of_clumps 2
-	 number_of_tiles 60
-     	 spacing_to_other_terrain_types 4
-    
-	 clumping_factor 20
-	 set_avoid_player_start_areas 13
-	
-	 
-}
+     {
+     base_terrain ROAD
+     number_of_clumps 9320
+     set_scale_by_groups
+     land_percent 100
 
+     }
 
-create_terrain DLC_DIRT4
 
-{
-base_terrain ROAD
-number_of_clumps 9320
-set_scale_by_groups
-land_percent 100
+     create_terrain ROAD2
 
-}
+     {
+     base_terrain DLC_DIRT4
+     number_of_clumps 9320
+     set_scale_by_groups
+     land_percent 100
 
+     }
 
-create_terrain ROAD2
+endif
 
-{
-base_terrain DLC_DIRT4
-number_of_clumps 9320
-set_scale_by_groups
-land_percent 100
 
-}
 
-/* **************************************** */
+<CONNECTION_GENERATION>
+
+#define OPTION_FOR_DIFFERENT_BEACH
+if OPTION_FOR_DIFFERENT_BEACH
+     accumulate_connections  
+     /* create_connect_all_players_land { replace_terrain BEACH BEACH_ICE terrain_size BEACH 960 0 } */
+     create_connect_all_players_land { replace_terrain BEACH DLC_GRAVELBEACH terrain_size BEACH 960 0 }
+
+endif
+
 <OBJECTS_GENERATION>
 
 
@@ -707,11 +811,9 @@ create_object TOWN_CENTER
      group_placement_radius 18
      min_distance_to_players 0
      max_distance_to_players 0
-	 actor_area 25
-actor_area_radius 25
+	actor_area 25
+     actor_area_radius 25
 }
-
-
 
 create_object VILLAGER
 {
@@ -727,8 +829,6 @@ create_object SCOUT
      min_distance_to_players 7
      max_distance_to_players 9
 }
-
-
 
 if REGICIDE
 
@@ -756,15 +856,7 @@ create_object CASTLE
 
 endif
 
-
-
-
-
-
 /* NEAR FORAGE */
-
-
-
 create_object FORAGE
 {
 	number_of_objects 6
@@ -776,7 +868,7 @@ create_object FORAGE
 	max_distance_to_players 13
 	avoid_forest_zone 4
 	avoid_cliff_zone 3
-set_circular_placement
+     set_circular_placement
 	actor_area 14
 	actor_area_radius 4
 	min_distance_group_placement 2

@@ -1,4 +1,11 @@
 /*
+
+Title: Confluence
+Author: Jasuni
+date: 14 Feb 2025
+map info: 
+This map may be used for Alchemy League
+
 Black Forest: Right now my basic idea for how to make it is use other_zone_avoidance distance to form the river (in a direct placement map with multiple configurations). I'd use neutral lands to create the splits (potentially with smaller other_zone_avoidance distance than the player lands). The neutral lands would need to be placed on/near the edge of the map.
 
 River will be at elevation 0, while the lands may be elevation 1. Hills will generated on the land to create hilly terrain (and as the river is water, will automatically avoid the river).
@@ -21,8 +28,25 @@ if 2_PLAYER_GAME
     #define STANDARD_MAP_GENERATION
 elseif 2_TEAM_GAME
     #define STANDARD_MAP_GENERATION
+elseif LOW_RESOURCES
+    #define DISABLE_TRADE
 endif
 
+if DISABLE_TRADE
+/* Removing Trade for Multi-team Games, as per Alchemy requirements.  */
+  #const TRADE_CART_ENABLER 161
+  #const TRADE_COG_ENABLER 180
+  #const TRADE_CARAVAN_ENABLER 48
+  #const HINDU_CARAVANSERAI_ENABLER 518
+  #const PERSIAN_CARAVANSERAI_ENABLER 552  
+  #const SILK_ROAD 499
+  effect_amount DISABLE_TECH TRADE_COG_ENABLER ATTR_DISABLE 180
+  effect_amount DISABLE_TECH TRADE_CART_ENABLER ATTR_DISABLE 161
+  effect_amount DISABLE_TECH TRADE_CARAVAN_ENABLER ATTR_DISABLE 48
+  effect_amount DISABLE_TECH HINDU_CARAVANSERAI_ENABLER ATTR_DISABLE 518
+  effect_amount DISABLE_TECH PERSIAN_CARAVANSERAI_ENABLER ATTR_DISABLE 552
+  effect_amount DISABLE_TECH SILK_ROAD ATTR_DISABLE 499    
+endif
 if MAPSIZE_MINI
     /* AT_MOST_MINI can simply use MAPSIZE_MINI */
     #define AT_MOST_TINY
@@ -244,11 +268,22 @@ else /* default theme */
 
     #const TREE 349 /* OAKTREE */
 endif
-
+start_random
+    percent_chance 50 #define PLAYER_CONFIG_A
+end_random
+start_random
+    percent_chance 17 #define CORNER_CONFIG_A
+    percent_chance 17 #define CORNER_CONFIG_B
+    percent_chance 17 #define CORNER_CONFIG_C
+    percent_chance 17 #define CORNER_CONFIG_D
+    percent_chance 16 #define CORNER_CONFIG_E
+    /* percent_chance 16 #define CORNER_CONFIG_F */
+end_random
 #const ON_GRID 278 /* dead fish trap */
 effect_amount GAIA_SET_ATTRIBUTE ON_GRID ATTR_STORAGE_VALUE 0
 <LAND_GENERATION> /* potential issue: one player may start closer to the river than the other */
 base_terrain BASE_TERRAIN
+
 create_land {
     terrain_type BASE_TERRAIN
     assign_to_player 1
@@ -263,7 +298,7 @@ create_land {
 create_land {
     terrain_type BASE_TERRAIN
     zone 1
-    land_position 15 75
+    land_position 10 70
     base_elevation 1
     other_zone_avoidance_distance 13
     land_percent 0
@@ -271,7 +306,7 @@ create_land {
 create_land {
     terrain_type BASE_TERRAIN
     zone 1
-    land_position 25 75
+    land_position 30 70
     base_elevation 1
     other_zone_avoidance_distance 13
     land_percent 0
@@ -279,7 +314,7 @@ create_land {
 create_land {
     terrain_type BASE_TERRAIN
     zone 1
-    land_position 15 85
+    land_position 10 90
     base_elevation 1
     other_zone_avoidance_distance 13
     land_percent 0
@@ -287,11 +322,12 @@ create_land {
 create_land {
     terrain_type BASE_TERRAIN
     zone 1
-    land_position 25 85
+    land_position 30 90
     base_elevation 1
     other_zone_avoidance_distance 13
     land_percent 0
 }
+
 create_land { /* might be worthwhile to surround this with a square of lands with the same zone, perhaps 5 percentage points away. */
     terrain_type BASE_TERRAIN
     assign_to_player 2
@@ -306,7 +342,7 @@ create_land { /* might be worthwhile to surround this with a square of lands wit
 create_land {
     terrain_type BASE_TERRAIN
     zone 2
-    land_position 75 75
+    land_position 70 70
     base_elevation 1
     other_zone_avoidance_distance 13
     land_percent 0
@@ -314,7 +350,7 @@ create_land {
 create_land {
     terrain_type BASE_TERRAIN
     zone 2
-    land_position 85 75
+    land_position 90 70
     base_elevation 1
     other_zone_avoidance_distance 13
     land_percent 0
@@ -322,7 +358,7 @@ create_land {
 create_land {
     terrain_type BASE_TERRAIN
     zone 2
-    land_position 75 85
+    land_position 70 90
     base_elevation 1
     other_zone_avoidance_distance 13
     land_percent 0
@@ -330,7 +366,7 @@ create_land {
 create_land {
     terrain_type BASE_TERRAIN
     zone 2
-    land_position 85 85
+    land_position 90 90
     base_elevation 1
     other_zone_avoidance_distance 13
     land_percent 0
@@ -584,6 +620,15 @@ create_terrain TERRAIN_MASK {
 }
 
 <OBJECTS_GENERATION>
+/*
+create_object FLAG_A {
+    min_distance_to_players 3
+    number_of_objects 9320
+    set_place_for_every_player
+    find_closest
+} 
+
+*/
 
 create_object ON_GRID {
     set_place_for_every_player

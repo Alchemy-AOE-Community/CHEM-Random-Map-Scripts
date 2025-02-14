@@ -1,15 +1,10 @@
 /*
 Map: Venus Eyetrap
 creator: Jasuni
-description (for BCC2): players start with 2 bases: a TC placed inside the center "eye-trap" and a base on the outside. The inside is mangrove shallows, with oysters, water buffalo, fish, and mangroves. The outside is more grassy, with deer, sheep, gold, and forests. In between the areas is a double-triple layer of neutral fortified walls. And within these stone walls are hostile archers, cracked terrain, stone, and gold.
+created: late 2024
+description (for BCC2): players start with 2 bases: a TC placed inside the center "eye-trap" and a base on the outside. The inside is either Mangrove shallows (ith oysters, water buffalo, fish, and mangroves) surrounded by creacked terrain, or Cracked terrain (with boar, straggler trees, gold, stone, and player mule carts) surrounded by mangrove shallows. Separating the different areas is a layer of neutral stone walls.
 
-basically a possible map intended for "wallhalla" - idea is players start partly in a center area and partly in their own area. Different areas are separated by fortified walls, which are possibly guarded by neutral units. The center area will have some kind of reward for players to fight over (like all the relics and lots of gold, or some such). Stone would be on the outside.
-
-I wonder if it would be possible to do part direct-placement (for center area), part random-placement (for outer ring). I think that maybe the center area could be mangrove shallows, and the walls could be on the beach terrains seperating players. 
-
-Walls on beach terrain, center area is mangrove shallows, areas separating player areas could consist of wall in center, a layer of mangrove shallows, which would then have neutral walls surrounding them (due to beach terrain). Neutral units could then be placed on mangrove shallows, but avoid an actor area in the center.
-
-note: likely will need two different themes: one with mangrove terrain, the other with cracked terrain.
+Map may be used for Alchemy League
 
 TODO add more terrain mixing
 TODO: remove outer gold? and maybe replace with a small amount of stone?
@@ -18,6 +13,26 @@ TODO an option to change things up: have a player TC only on the inside. Outside
 <PLAYER_SETUP>
 grouped_by_team
 behavior_version 2
+if 2_PLAYER_GAME
+elseif 2_TEAM_GAME
+elseif LOW_RESOURCES
+    #define DISABLE_TRADE
+endif
+if DISABLE_TRADE
+/* Removing Trade for Multi-team Games, as per Alchemy requirements.  */
+  #const TRADE_CART_ENABLER 161
+  #const TRADE_COG_ENABLER 180
+  #const TRADE_CARAVAN_ENABLER 48
+  #const HINDU_CARAVANSERAI_ENABLER 518
+  #const PERSIAN_CARAVANSERAI_ENABLER 552  
+  #const SILK_ROAD 499
+  effect_amount DISABLE_TECH TRADE_COG_ENABLER ATTR_DISABLE 180
+  effect_amount DISABLE_TECH TRADE_CART_ENABLER ATTR_DISABLE 161
+  effect_amount DISABLE_TECH TRADE_CARAVAN_ENABLER ATTR_DISABLE 48
+  effect_amount DISABLE_TECH HINDU_CARAVANSERAI_ENABLER ATTR_DISABLE 518
+  effect_amount DISABLE_TECH PERSIAN_CARAVANSERAI_ENABLER ATTR_DISABLE 552
+  effect_amount DISABLE_TECH SILK_ROAD ATTR_DISABLE 499    
+endif
 
 if MAPSIZE_MINI
     /* AT_MOST_MINI can simply use MAPSIZE_MINI */
@@ -284,7 +299,7 @@ end_random
 */
 if INNER_SHALLOWS /* works properly */
     #define OUTER_CRACKED
-    #const TEMP_TERRAIN 55 /* DLC_CRACKED */
+    #const TEMP_TERRAIN 55 /*  */
     #const INNER_TERRAIN 54 /* DLC_MANGROVESHALLOW */
     #const OUTER_TERRAIN 45 /* DLC_CRACKED */
 else /* INNER_CRACKED */
@@ -553,11 +568,25 @@ create_terrain DIRT {
     elseif MAPSIZE_MEDIUM
         spacing_to_other_terrain_types 4
     elseif MAPSIZE_NORMAL
-        spacing_to_other_terrain_types 5
+        spacing_to_other_terrain_types 4
     else
-        spacing_to_other_terrain_types 6 /* TODO scale based on map size, along with zone avoidance in lands above */
+        spacing_to_other_terrain_types 5 /* TODO scale based on map size, along with zone avoidance in lands above */
     endif
 }
+/*
+    if MAPSIZE_MINI 
+        other_zone_avoidance_distance 5
+    elseif MAPSIZE_TINY
+        other_zone_avoidance_distance 7
+    elseif MAPSIZE_SMALL
+        other_zone_avoidance_distance 9
+    elseif MAPSIZE_MEDIUM
+        other_zone_avoidance_distance 11
+    elseif MAPSIZE_NORMAL
+        other_zone_avoidance_distance 13
+    else
+        other_zone_avoidance_distance 15 /* TODO scale based on map size */
+    endif */
 create_terrain INNER_TERRAIN {
     base_terrain DIRT
     land_percent 100
@@ -645,24 +674,6 @@ else
         max_distance_to_players 0
     }
 endif
-create_object VILLAGER {
-    set_place_for_every_player
-    min_distance_to_players 6
-    max_distance_to_players 7
-    set_circular_placement
-    min_distance_group_placement 1
-}
-create_object SCOUT {
-    set_place_for_every_player
-    min_distance_to_players 7
-    max_distance_to_players 9
-    set_circular_placement
-    avoid_forest_zone 2
-}
-/* note: no scout in the outer area - might make it harder to detect breaches in the wall */
-/* allows easy removal for testing/creation purposes 
-TODO changed from fortified wall to stone walls - could change to use a randomized wall selection.
-*/
 #define CREATE_WALLS 
 if CREATE_WALLS
 create_object STONE_WALL {
@@ -680,6 +691,26 @@ create_object STONE_WALL {
     terrain_to_place_on DIRT
 }
 endif
+create_object VILLAGER {
+    set_place_for_every_player
+    min_distance_to_players 6
+    max_distance_to_players 7
+    set_circular_placement
+    min_distance_group_placement 1
+    terrain_to_place_on GRASS2
+}
+create_object SCOUT {
+    set_place_for_every_player
+    min_distance_to_players 7
+    max_distance_to_players 9
+    set_circular_placement
+    avoid_forest_zone 2
+    terrain_to_place_on GRASS2
+}
+/* note: no scout in the outer area - might make it harder to detect breaches in the wall */
+/* allows easy removal for testing/creation purposes 
+TODO changed from fortified wall to stone walls - could change to use a randomized wall selection.
+*/
 /* 
  add second TC in middle of map: create an actor area to avoid the outer terrain ring, then place TCs with find_closest while avoiding each other.
 */

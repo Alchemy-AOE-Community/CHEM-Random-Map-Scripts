@@ -1460,7 +1460,6 @@ create_object BUILDING
 	min_distance_to_players 13
 	max_distance_to_players 14
 	find_closest
-	set_gaia_object_only
 	set_circular_placement
 	second_object FORTIFIED_PALISADE_WALL
 }

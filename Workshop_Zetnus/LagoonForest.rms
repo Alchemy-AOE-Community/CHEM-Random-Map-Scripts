@@ -4,14 +4,15 @@ by Zetnus
 zetnus@outlook.com
 zetnus on Discord
 
-Most recent update: 16 Nov 2024
+Most recent update: 14 Feb 2024
 
 Learn about random map scripting: https://tinyurl.com/7xteyu58
 */
 
-/* #define FAST_GENERATION */  /* reduced connections for faster map generation when testing */
+#define ALCHEMY_LEAUGE_STUFF /* consent given to use in Alchemy Leauge */
 
-#define ALCHEMY_LEAUGE_STUFF /* consent to use in Alchemy Leauge */
+/* #define FAST_GENERATION	*/  /* reduced connections for faster map generation when testing */
+
 
 /* terrains */
 #const DIRT_MUD 76
@@ -92,7 +93,7 @@ create_player_lands {
 	terrain_type RAINFOREST_GRASS
 	number_of_tiles 300
 	base_size 7
-	if 5+PLAYERS	left_border 12 right_border 12 top_border 12 bottom_border 12
+	if 5+PLAYERS	left_border 12 right_border 12 top_border 12 bottom_border 12	circle_radius 33 5
 	elseif 4_PLAYER_GAME	left_border 15 right_border 15 top_border 15 bottom_border 15
 	else	left_border 18 right_border 18 top_border 18 bottom_border 18
 	endif

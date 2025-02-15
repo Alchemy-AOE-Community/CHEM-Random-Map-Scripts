@@ -19,7 +19,9 @@ idea for randomization: have 8 locations for each of the lands, and randomly sel
 idea: no deer on starting islands, but some on the neutral lands. Have berries scattered throughout the forest (or make theme dependent)
 
 TODO
-add hills on the land
+add hills on the land?
+add more configs (need to have 2v2,3v3,4v4,2v2v2v2,FFA)
+add variation on start locations
 */
 <PLAYER_SETUP>
 direct_placement
@@ -269,6 +271,9 @@ else /* default theme */
     #const TREE 349 /* OAKTREE */
 endif
 start_random
+    percent_chance 50 #define CORNER_START
+end_random
+start_random
     percent_chance 50 #define PLAYER_CONFIG_A
 end_random
 start_random
@@ -281,106 +286,207 @@ start_random
 end_random
 #const ON_GRID 278 /* dead fish trap */
 effect_amount GAIA_SET_ATTRIBUTE ON_GRID ATTR_STORAGE_VALUE 0
-<LAND_GENERATION> /* potential issue: one player may start closer to the river than the other */
+<LAND_GENERATION>
+/* potential issue: one player may start closer to the river than the other */
 base_terrain BASE_TERRAIN
+if CORNER_START
+    create_land {
+        terrain_type BASE_TERRAIN
+        assign_to_player 1
+        zone 1
+        /* land_id 1 */
+        land_position 20 80
+        base_elevation 1
+        other_zone_avoidance_distance 13
+        land_percent 45
+        clumping_factor 35
+    }
+    create_land {
+        terrain_type BASE_TERRAIN
+        zone 1
+        land_position 10 70
+        base_elevation 1
+        other_zone_avoidance_distance 13
+        land_percent 0
+    }
+    create_land {
+        terrain_type BASE_TERRAIN
+        zone 1
+        land_position 30 70
+        base_elevation 1
+        other_zone_avoidance_distance 13
+        land_percent 0
+    }
+    create_land {
+        terrain_type BASE_TERRAIN
+        zone 1
+        land_position 10 90
+        base_elevation 1
+        other_zone_avoidance_distance 13
+        land_percent 0
+    }
+    create_land {
+        terrain_type BASE_TERRAIN
+        zone 1
+        land_position 30 90
+        base_elevation 1
+        other_zone_avoidance_distance 13
+        land_percent 0
+    }
 
-create_land {
-    terrain_type BASE_TERRAIN
-    assign_to_player 1
-    zone 1
-    /* land_id 1 */
-    land_position 20 80
-    base_elevation 1
-    other_zone_avoidance_distance 13
-    land_percent 45
-    clumping_factor 35
-}
-create_land {
-    terrain_type BASE_TERRAIN
-    zone 1
-    land_position 10 70
-    base_elevation 1
-    other_zone_avoidance_distance 13
-    land_percent 0
-}
-create_land {
-    terrain_type BASE_TERRAIN
-    zone 1
-    land_position 30 70
-    base_elevation 1
-    other_zone_avoidance_distance 13
-    land_percent 0
-}
-create_land {
-    terrain_type BASE_TERRAIN
-    zone 1
-    land_position 10 90
-    base_elevation 1
-    other_zone_avoidance_distance 13
-    land_percent 0
-}
-create_land {
-    terrain_type BASE_TERRAIN
-    zone 1
-    land_position 30 90
-    base_elevation 1
-    other_zone_avoidance_distance 13
-    land_percent 0
-}
+    create_land { /* might be worthwhile to surround this with a square of lands with the same zone, perhaps 5 percentage points away. */
+        terrain_type BASE_TERRAIN
+        assign_to_player 2
+        zone 2
+        /* land_id 2 */
+        land_position 80 80
+        base_elevation 1
+        other_zone_avoidance_distance 13
+        land_percent 45
+        clumping_factor 35
+    }
+    create_land {
+        terrain_type BASE_TERRAIN
+        zone 2
+        land_position 70 70
+        base_elevation 1
+        other_zone_avoidance_distance 13
+        land_percent 0
+    }
+    create_land {
+        terrain_type BASE_TERRAIN
+        zone 2
+        land_position 90 70
+        base_elevation 1
+        other_zone_avoidance_distance 13
+        land_percent 0
+    }
+    create_land {
+        terrain_type BASE_TERRAIN
+        zone 2
+        land_position 70 90
+        base_elevation 1
+        other_zone_avoidance_distance 13
+        land_percent 0
+    }
+    create_land {
+        terrain_type BASE_TERRAIN
+        zone 2
+        land_position 90 90
+        base_elevation 1
+        other_zone_avoidance_distance 13
+        land_percent 0
+    }
+    create_land {
+        terrain_type BASE_TERRAIN
+        zone 11
+        land_id 11
+        land_position 50 10
+        base_elevation 1
+        other_zone_avoidance_distance 9
+        land_percent 45
+        clumping_factor 35
+    }
+else /* SIDE_START */
+    create_land {
+        terrain_type BASE_TERRAIN
+        assign_to_player 1
+        zone 1
+        /* land_id 1 */
+        land_position 20 50
+        base_elevation 1
+        other_zone_avoidance_distance 13
+        land_percent 45
+        clumping_factor 35
+    }
+    create_land {
+        terrain_type BASE_TERRAIN
+        zone 1
+        land_position 20 40
+        base_elevation 1
+        other_zone_avoidance_distance 13
+        land_percent 0
+    }
+    create_land {
+        terrain_type BASE_TERRAIN
+        zone 1
+        land_position 20 60
+        base_elevation 1
+        other_zone_avoidance_distance 13
+        land_percent 0
+    }
+    create_land {
+        terrain_type BASE_TERRAIN
+        zone 1
+        land_position 10 50
+        base_elevation 1
+        other_zone_avoidance_distance 13
+        land_percent 0
+    }
+    create_land {
+        terrain_type BASE_TERRAIN
+        zone 1
+        land_position 30 50
+        base_elevation 1
+        other_zone_avoidance_distance 13
+        land_percent 0
+    }
 
-create_land { /* might be worthwhile to surround this with a square of lands with the same zone, perhaps 5 percentage points away. */
-    terrain_type BASE_TERRAIN
-    assign_to_player 2
-    zone 2
-    /* land_id 2 */
-    land_position 80 80
-    base_elevation 1
-    other_zone_avoidance_distance 13
-    land_percent 45
-    clumping_factor 35
-}
-create_land {
-    terrain_type BASE_TERRAIN
-    zone 2
-    land_position 70 70
-    base_elevation 1
-    other_zone_avoidance_distance 13
-    land_percent 0
-}
-create_land {
-    terrain_type BASE_TERRAIN
-    zone 2
-    land_position 90 70
-    base_elevation 1
-    other_zone_avoidance_distance 13
-    land_percent 0
-}
-create_land {
-    terrain_type BASE_TERRAIN
-    zone 2
-    land_position 70 90
-    base_elevation 1
-    other_zone_avoidance_distance 13
-    land_percent 0
-}
-create_land {
-    terrain_type BASE_TERRAIN
-    zone 2
-    land_position 90 90
-    base_elevation 1
-    other_zone_avoidance_distance 13
-    land_percent 0
-}
-create_land {
-    terrain_type BASE_TERRAIN
-    zone 11
-    land_id 11
-    land_position 50 10
-    base_elevation 1
-    other_zone_avoidance_distance 9
-    land_percent 45
-    clumping_factor 35
-}
+    create_land { /* might be worthwhile to surround this with a square of lands with the same zone, perhaps 5 percentage points away. */
+        terrain_type BASE_TERRAIN
+        assign_to_player 2
+        zone 2
+        /* land_id 2 */
+        land_position 50 80
+        base_elevation 1
+        other_zone_avoidance_distance 13
+        land_percent 45
+        clumping_factor 35
+    }
+    create_land {
+        terrain_type BASE_TERRAIN
+        zone 2
+        land_position 50 70
+        base_elevation 1
+        other_zone_avoidance_distance 13
+        land_percent 0
+    }
+    create_land {
+        terrain_type BASE_TERRAIN
+        zone 2
+        land_position 50 90
+        base_elevation 1
+        other_zone_avoidance_distance 13
+        land_percent 0
+    }
+    create_land {
+        terrain_type BASE_TERRAIN
+        zone 2
+        land_position 40 80
+        base_elevation 1
+        other_zone_avoidance_distance 13
+        land_percent 0
+    }
+    create_land {
+        terrain_type BASE_TERRAIN
+        zone 2
+        land_position 60 80
+        base_elevation 1
+        other_zone_avoidance_distance 13
+        land_percent 0
+    }
+    create_land {
+        terrain_type BASE_TERRAIN
+        zone 11
+        land_id 11
+        land_position 65 35
+        base_elevation 1
+        other_zone_avoidance_distance 9
+        land_percent 45
+        clumping_factor 35
+    }
+endif
+
 /*
 create_land {
     terrain_type BASE_TERRAIN
@@ -437,7 +543,7 @@ create_terrain GRASS2 {
     terrain_mask 1
  }
 create_terrain FOREST_TERRAIN {
-    land_percent 100
+    land_percent 99
     number_of_clumps 999
     base_terrain BASE_TERRAIN
     base_layer TERRAIN_MASK
@@ -460,7 +566,7 @@ create_terrain FOREST_TERRAIN {
     set_avoid_player_start_areas 15
 }
 create_terrain WATER {
-    land_percent 100
+    land_percent 99
     number_of_clumps 9320
     base_terrain BASE_TERRAIN
     base_layer TERRAIN_MASK
@@ -621,13 +727,13 @@ create_terrain TERRAIN_MASK {
 
 <OBJECTS_GENERATION>
 /*
+
 create_object FLAG_A {
     min_distance_to_players 3
     number_of_objects 9320
     set_place_for_every_player
     find_closest
 } 
-
 */
 
 create_object ON_GRID {
